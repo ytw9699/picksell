@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+
+<tiles-definitions>
+
+	<!-- 테스트용 타일즈 레이아웃-->
+	<definition name="default" template="/WEB-INF/views/layout/client/layout.jsp">
+		<put-attribute name="header" value="/WEB-INF/views/layout/client/header.jsp" />
+		<put-attribute name="footer" value="/WEB-INF/views/layout/client/footer.jsp" />
+	</definition>
+	
+	<!-- 테스트용 타일즈 페이지 -->
+	<definition name="testForm" extends="default">
+		<put-attribute name="body" value="/WEB-INF/views/testTiles.jsp" />
+	</definition>
+	
+
+</tiles-definitions>
+	
+	
