@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-public class CommandMap2 {
+public class CommandMap2 {///////
 	
 	Map<String, Object> map = new HashMap<String, Object>();
 	
