@@ -1,5 +1,5 @@
 package com.mycom.config;
 
-public class test {////
+public class test {//
 
 }
