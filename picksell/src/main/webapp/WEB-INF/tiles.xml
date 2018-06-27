@@ -6,15 +6,19 @@
 
 <tiles-definitions>
 
-	<!-- 테스트용 타일즈 레이아웃-->
+	<!-- 클라이언트 타일즈 레이아웃 -->
 	<definition name="default" template="/WEB-INF/views/layout/client/layout.jsp">
 		<put-attribute name="header" value="/WEB-INF/views/layout/client/header.jsp" />
 		<put-attribute name="footer" value="/WEB-INF/views/layout/client/footer.jsp" />
 	</definition>
 	
-	<!-- 테스트용 타일즈 페이지 -->
+	<!-- 테스트용 -->
 	<definition name="testForm" extends="default">
 		<put-attribute name="body" value="/WEB-INF/views/testTiles.jsp" />
+	</definition>
+	
+	<definition name="howtosell" extends="default">
+		<put-attribute name="body" value="/WEB-INF/views/client_product/howtosell.jsp" />
 	</definition>
 	
 

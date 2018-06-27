@@ -1,6 +1,8 @@
 package com.mycom.client_product;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class ProductController {
@@ -19,7 +21,27 @@ public class ProductController {
 	카테고리별 
 	DD
 	*/
+	//등록폼: 판매방식확인 -> 등록폼 -> 확인 
 	
+	@RequestMapping("/sell/howto")
+	public String howtosell() {
+		return "howtosell";
+	}
+	
+	@RequestMapping("/sell")
+	public String sellForm() {
+		return "";
+	}
+	
+	@RequestMapping("/sellPlus")
+	public String sellPlusForm() {
+		return "";
+	}
+	
+	@RequestMapping(value="/sellProc", method=RequestMethod.POST)
+	public String sellProc() {
+		return "";
+	}
 	
 	
 
