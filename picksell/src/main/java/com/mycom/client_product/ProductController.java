@@ -28,7 +28,7 @@ public class ProductController {
 		return "howtosell";
 	}
 	
-	@RequestMapping("/sell")
+	/*@RequestMapping("/sell")
 	public String sellForm() {
 		return "";
 	}
@@ -42,7 +42,7 @@ public class ProductController {
 	public String sellProc() {
 		return "";
 	}
-	
+	*/
 	
 
 	
