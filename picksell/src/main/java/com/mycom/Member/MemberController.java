@@ -3,6 +3,7 @@ package com.mycom.Member;
 import java.io.File;
 import java.io.IOException;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -38,8 +39,13 @@ public class MemberController {
 		
 		MemberService.insertMember(map.getMap());
 		
-		return "redirect:/joinForm";
+		return "redirect:/login";
 	}
+	@RequestMapping(value="/loginForm", method=RequestMethod.GET)
+	public String loginForm() {
+		return "login/loginForm";
+	}
+
 	
 	
 }
