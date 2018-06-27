@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="board"> 
+
+	<insert id="insertMember" parameterType="hashmap">
+		insert into PS_MEMBER(id,
+							password,
+							name,
+							email,
+							address,
+							kind,
+							account,
+							account_name,
+							bank,
+							regdate) values(#{id},
+									#{password},
+									#{name},
+									#{email},
+									#{address},
+									#{kind},
+									#{account},
+									#{account_name},
+									#{bank},
+									sysdate )
+	</insert>
+	
+</mapper>
