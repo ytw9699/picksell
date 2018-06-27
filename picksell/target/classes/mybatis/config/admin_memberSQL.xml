@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC " - //mybatis.org//DTD Config 3.0//EN"
+	   " http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	  
+<mapper namespace="admin_member">
+
+	<resultMap type="adminMember" id="admin_memberRes">
+		<result property="id" column="ID" />
+		<result property="password" column="PASSWORD"/>
+		<result property="name" column="NAME"/>
+		<result property="email" column="EMAIL"/>
+		<result property="address" column="ADDRESS"/>
+		<result property="kind" column="KIND"/>
+		<result property="status" column="STATUS"/>
+		<result property="account" column="ACCOUNT"/>
+		<result property="account_name" column="ACCOUNT_NAME"/>
+		<result property="bank" column="BANK"/>
+		<result property="profile_img" column="PROFILE_IMG"/>
+		<result property="alarm_consent" column="ALARM_CONSENT"/>
+		<result property="business_number" column="BUSINESS_NUMBER"/>
+		<result property="business_name" column="BUSINESS_NAME"/>
+		<result property="regdate" column="REGDATE"/>
+	</resultMap>
+</mapper>
+
+	
