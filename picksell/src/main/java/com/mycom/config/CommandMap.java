@@ -7,7 +7,7 @@ import java.util.Set;
 
 public class CommandMap {//1
 	
-	Map<String, Object> map = new HashMap<String, Object>();
+	Map<String, Object> map = new HashMap<String, Object>();//3
 	
 	public Object get(String key) {
 		return map.get(key);
