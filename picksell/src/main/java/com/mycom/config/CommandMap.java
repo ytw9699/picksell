@@ -6,9 +6,7 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 public class CommandMap {//1
-	
-	//현우의 주석
-	
+
 	Map<String, Object> map = new HashMap<String, Object>();//3
 	//yeh
 	public Object get(String key) {
