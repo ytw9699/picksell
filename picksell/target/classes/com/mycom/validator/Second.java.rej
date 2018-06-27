@@ -1,7 +1,0 @@
-diff a/picksell/src/main/java/com/mycom/validator/Second.java b/picksell/src/main/java/com/mycom/validator/Second.java	(rejected hunks)
-@@ -2,4 +2,5 @@
- 
- public class Second {
- //second
-+	//commit1
- }

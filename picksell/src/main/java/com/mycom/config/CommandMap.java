@@ -5,9 +5,10 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-public class CommandMap {
-	
+public class CommandMap {//1
+
 	Map<String, Object> map = new HashMap<String, Object>();//4
+
 	
 	public Object get(String key) {
 		return map.get(key);
