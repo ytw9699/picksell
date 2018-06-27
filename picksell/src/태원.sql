@@ -16,28 +16,6 @@ CREATE TABLE PS_MEMBER (
     REGDATE DATE NOT NULL--가입일
 );
 
-insert into PS_MEMBER(id,
-							password,
-							name,
-							email,
-							address,
-							kind,
-							account,
-							account_name,
-							bank,
-							regdate
-							) values('2',
-									'2',
-									'2',
-									'2',
-									'2',
-									'0',
-									'2',
-									'2',
-									'2',
-									sysdate
-										)
-
 DROP TABLE PS_MEMBER PURGE;
 
 CREATE TABLE PS_CATEGORY (
