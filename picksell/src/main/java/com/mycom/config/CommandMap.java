@@ -6,9 +6,9 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 public class CommandMap {//1
-	//hyemin
+
 	Map<String, Object> map = new HashMap<String, Object>();//3
-	
+	//yeh
 	public Object get(String key) {
 		return map.get(key);
 	}
