@@ -4,7 +4,8 @@ PUBLIC " - //mybatis.org//DTD Config 3.0//EN"
 	   " http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 	  
 <mapper namespace="admin_member">
-	<resultMap type="AdminMemberModel" id="admin_memberRes">
+
+	<resultMap type="adminMember" id="admin_memberRes">
 		<result property="id" column="ID" />
 		<result property="password" column="PASSWORD"/>
 		<result property="name" column="NAME"/>

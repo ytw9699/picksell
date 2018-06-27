@@ -15,7 +15,9 @@ PUBLIC " - //mybatis.org//DTD Config 3.0//EN"
 		        <setting name="defaultStatementTimeout"   value="25000"/>  
 			</settings>
 	
-	   
+	   <typeAliases>
+	  <typeAlias alias="adminMember" type="com.mycom.admin_member"/>
+	   </typeAliases>
 	   <!-- SQL 정의한 xml문서 Mapping -->
 	<mappers>
 		<mapper resource="mybatis/config/testSQL.xml" />
@@ -23,6 +25,7 @@ PUBLIC " - //mybatis.org//DTD Config 3.0//EN"
 		<mapper resource="mybatis/config/adminOrderSQL.xml"/>
 		<mapper resource="mybatis/config/adminProductsSQL.xml"/>
 		<mapper resource="mybatis/config/adminSingoSQL.xml"/>   
+		<mapper resource="mybatis/config/admin_memberSQL.xml"/>
 	</mappers>
 	
 	</configuration>
