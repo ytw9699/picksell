@@ -19,7 +19,9 @@ PUBLIC " - //mybatis.org//DTD Config 3.0//EN"
 	   <!-- SQL 정의한 xml문서 Mapping -->
 	<mappers>
 		<mapper resource="mybatis/config/testSQL.xml" />
-		   
+		<mapper resource="mybatis/config/adminOrderSQL.xml"/>
+		<mapper resource="mybatis/config/adminProductsSQL.xml"/>
+		<mapper resource="mybatis/config/adminSingoSQL.xml"/>   
 	</mappers>
 	
 	</configuration>
