@@ -10,26 +10,35 @@
 </head>
 <body>
 <script>
-function mberValiCheck(){
-	   var userId = document.getElementById("userId").value;
-	   var password = document.getElementById("password").value;
+function mberValiCheck(){//2.밸리데이터를 했을때 아이디와 비밀번호가 밀리지않게끔 못할까?
+   var userId = document.getElementById("userId").value;
+   var password = document.getElementById("password").value;
 
-	   if(userId == ""){
-	      document.getElementById("userIdCheckText").innerHTML = "<b><font color=red size=2pt> 아이디를 입력해주세요. </font></b>"
-	   if( password == ""){
-	   	  document.getElementById("passwordCheckText").innerHTML = "<b><font color = red size=2pt> 비밀번호를 입력해주세요. </font></b>"
-	   	  return false;
-	   	 }
-	      return false;
+   if(userId != ""){
+		 document.getElementById("userIdCheckText").innerHTML = ""
+	   }
+   if(password != ""){
+		 document.getElementById("passwordCheckText").innerHTML = ""
 	   }
 	   
-	   if( password == ""){
-		   document.getElementById("passwordCheckText").innerHTML = "<b><font color = red size=2pt> 비밀번호를 입력해주세요. </font></b>"
-	 	return false;
-	   }
-	}
+   if(userId == ""){
+      document.getElementById("userIdCheckText").innerHTML = 
+    	  "<b><font color=red size=2pt> 아이디를 입력해주세요. </font></b>"
+   if( password == ""){
+   	  document.getElementById("passwordCheckText").innerHTML = 
+   		  "<b><font color = red size=2pt> 비밀번호를 입력해주세요. </font></b>"
+   	  return false;
+   	 }
+      return false;
+   }
+   if( password == ""){
+	   document.getElementById("passwordCheckText").innerHTML = 
+		   "<b><font color = red size=2pt> 비밀번호를 입력해주세요. </font></b>"
+ 	return false;
+   }
+}
 </script>
-<!-- function mberValiCheck(){//1. 왜 이로직은 안될까? 2.밸리데이터를 했을때 아이디와 비밀번호가 밀리지않게끔 못할까?
+<!-- function mberValiCheck(){//1. 왜 이로직은 안될까? 
 	userIdCheck();
 	passwordCheck();
 }
