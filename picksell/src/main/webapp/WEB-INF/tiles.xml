@@ -17,8 +17,18 @@
 		<put-attribute name="body" value="/WEB-INF/views/testTiles.jsp" />
 	</definition>
 	
+	<!-- 판매하기(판매방식선택) -->
 	<definition name="howtosell" extends="default">
 		<put-attribute name="body" value="/WEB-INF/views/client_product/howtosell.jsp" />
+	</definition>
+	
+	<!-- 판매하기폼(일반) -->
+	<definition name="sellForm" extends="default">
+		<put-attribute name="body" value="/WEB-INF/views/client_product/sellForm.jsp" />
+	</definition>
+	<!-- 판매하기폼(사업자) -->
+	<definition name="sellPlusForm" extends="default">
+		<put-attribute name="body" value="/WEB-INF/views/client_product/sellPlusForm.jsp" />
 	</definition>
 	
 

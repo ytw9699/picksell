@@ -5,11 +5,34 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<link href="/picksell/resources/img/pavicon_ps.png" rel="icon" type="image/x-icon" />
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<title>PICKSELL</title>
+<style>
+@font-face{font-family:'NotoSansBold'; src:url('/resources/clientcss/font/NotoSansCJKkr-Bold.otf')}
+@font-face{font-family:'NotoSansLight'; src:url('/resources/clientcss/font/NotoSansCJKkr-DemiLight.otf')}
+body, table, div, p {font-family:'NotoSansLight';}
+body{margin:0;}
+.headerWrap{width:100%;}
+.bodyWrap {width: 80%;margin: 0 auto;/* display: inline-block; */}
+.footerWrap {
+    border-top: 2px solid #dbdbdb;
+    width: 80%;
+    margin: 0 auto;
+    margin-top: 2%;
+    padding-top: 2%;
+}
+</style>
 </head>
 <body>
-	<tiles:insertAttribute name="header"/><!-- // header -->
-	<tiles:insertAttribute name="body"/><!-- // container -->
-	<tiles:insertAttribute name="footer"/><!-- // footer -->
+	<div class="headerWrap">
+		<tiles:insertAttribute name="header"/><!-- // header -->
+	</div>
+	<div class="bodyWrap">
+		<tiles:insertAttribute name="body"/><!-- // container -->
+	</div>
+	<div class="footerWrap">
+		<tiles:insertAttribute name="footer"/><!-- // footer -->
+	</div>
 </body>
 </html>
