@@ -1,6 +1,7 @@
 package com.mycom.client_product;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -28,10 +29,18 @@ public class ProductController {
 		return "howtosell";
 	}
 	
-	/*@RequestMapping("/sell")
-	public String sellForm() {
-		return "";
+	@RequestMapping("/sell/{level}")
+	public String sellForm(
+			@PathVariable("level") String howtosell) {
+		return "sellForm";
 	}
+	
+	@RequestMapping("/sellPlus")
+	public String sellPlusForm() {
+		return "sellPlusForm";
+	}
+	
+	/*
 	
 	@RequestMapping("/sellPlus")
 	public String sellPlusForm() {

@@ -9,10 +9,19 @@
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <title>PICKSELL</title>
 <style>
+@font-face{font-family:'NotoSansBold'; src:url('/resources/clientcss/font/NotoSansCJKkr-Bold.otf')}
+@font-face{font-family:'NotoSansLight'; src:url('/resources/clientcss/font/NotoSansCJKkr-DemiLight.otf')}
+body, table, div, p {font-family:'NotoSansLight';}
 body{margin:0;}
 .headerWrap{width:100%;}
 .bodyWrap {width: 80%;margin: 0 auto;/* display: inline-block; */}
-.footerWrap {width: 80%;margin: 0 auto;}
+.footerWrap {
+    border-top: 2px solid #dbdbdb;
+    width: 80%;
+    margin: 0 auto;
+    margin-top: 10%;
+    padding-top: 2%;
+}
 </style>
 </head>
 <body>
