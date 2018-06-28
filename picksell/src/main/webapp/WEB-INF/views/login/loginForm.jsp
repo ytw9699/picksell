@@ -62,7 +62,7 @@ function userIdCheck(){
 	} -->
 <center>
 	로그인 하기
-	<form method="post" onsubmit="return mberValiCheck()">
+	<form action="login" method="post" onsubmit="return mberValiCheck()">
 		<p>아이디 <input type="text" name="userId" id="userId" />&nbsp;<span id="userIdCheckText"></span>
 		<p>비밀번호 <input type="password" name="password" id="password"/>&nbsp;<span id="passwordCheckText"></span>
 		<p><input type="submit" value="로그인" />
