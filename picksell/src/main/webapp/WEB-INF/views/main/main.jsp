@@ -14,7 +14,7 @@
 
 <center>
 
-	picksell 메인입니다
+	picksell 메인
 	<br/>
 	<c:if test="${sessionId == null}">
 		 로그인을 해주시기 바랍니다.
@@ -23,7 +23,7 @@
 	</c:if>
 	
 	<c:if test="${sessionId != null}">
-	${sessionId} <!-- 아이디로 로그인 되어있습니다. -->
+	아이디 ${sessionId} 
 	<br/>
 	<input type="button" value="LogOut" onClick="javascript:location.href='/picksell/logout'"/>	 
 	</c:if>
