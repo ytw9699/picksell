@@ -6,8 +6,20 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 </head>
 <body>
+${howtosell }
 	<form>
-	상품제목:
+	카테고리등록:
+	<select name="category_num">
+		<option></option>
+		<option></option>
+		<option></option>
+		<option></option>
+		<option></option>
+		<option></option>
+		<option></option>
+		<option></option>
+	</select>
+	상품제목: <input type="text" name="" />
 	</form>
 </body>
 </html>

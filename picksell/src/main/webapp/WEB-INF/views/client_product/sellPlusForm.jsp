@@ -6,6 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 </head>
 <body>
+${howtosell }
 사업자판매폼
 </body>
 </html>

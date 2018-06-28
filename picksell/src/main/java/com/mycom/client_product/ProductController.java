@@ -50,18 +50,7 @@ public class ProductController {
 		return "sellPlusForm";
 	}
 	
-	/*
 	
-	@RequestMapping("/sellPlus")
-	public String sellPlusForm() {
-		return "";
-	}
-	
-	@RequestMapping(value="/sellProc", method=RequestMethod.POST)
-	public String sellProc() {
-		return "";
-	}
-	*/
 	
 
 	
