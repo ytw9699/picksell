@@ -27,8 +27,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 									sysdate )
 	</insert>
 	
-	<select id="userCheck" resultType="hashmap" parameterType="hashmap">
-		SELECT ID,PASSWORD,NAME FROM PS_MEMBER WHERE ID = #{ID}
+	<select id="userCheck" parameterType="hashmap" resultType="hashmap">
+			SELECT ID,PASSWORD,NAME FROM PS_MEMBER WHERE ID = #{ID}
 	</select>
 	
 </mapper>
