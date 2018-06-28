@@ -13,7 +13,6 @@ public class MemberService implements MemberDao {
 
 	@Resource(name="sqlSessionTemplate")
 	private SqlSessionTemplate sqlMapper;
-	
 
 	public void insertMember(Map<String, Object> map) {
 		sqlMapper.insert("member.insertMember", map);
@@ -21,5 +20,8 @@ public class MemberService implements MemberDao {
 	public Map<String, Object> userCheck(Map<String, Object> map) {
 		return sqlMapper.selectOne("member.userCheck", map);
 	}
+	/*public Map<String, Object> userCheck(String id) {
+		return sqlMapper.selectOne("member.userCheck", id);
+	}*/
 	
 }
