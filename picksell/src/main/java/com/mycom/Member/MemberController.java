@@ -51,6 +51,7 @@ public class MemberController {
 	
 	@RequestMapping(value="/login", method=RequestMethod.POST)
 	public String login(CommandMap map) {
+		System.out.println(map.get("id"));
 		resultMap = MemberService.userCheck(map.getMap());
 		if(resultMap != null) {
 			System.out.println("계정있음");
