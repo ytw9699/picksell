@@ -9,6 +9,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -21,12 +22,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartRequest;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.mycom.config.CommandMap;
 import com.mycom.utils.FileUpload;
 
-@Controller
-public class MemberController {
+	@Controller
+	public class MemberController {
 	Map<String, Object> resultMap = new HashMap<String, Object>();//공통사용
 	
 	@Resource(name="memberService")
@@ -46,24 +48,36 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="/loginForm", method=RequestMethod.GET)
-	public String loginForm() {
+	public String loginForm(HttpServletRequest request, Model model) throws IOException{
+		
+		CookieBox CookieBox = new CookieBox(request);
+		
+		String ID = CookieBox.getValue("ID");
+		
+		model.addAttribute("cookieID", ID);
+		
 		return "login/loginForm";
 	}
 	
 	@RequestMapping(value="/login", method=RequestMethod.POST)
-	public String login(CommandMap map, HttpSession session) {
+	public String login(CommandMap map, HttpSession session, HttpServletResponse response)throws IOException{
 		
 		resultMap = MemberService.userCheck(map.getMap());
 		if(resultMap != null) {
-		session.setAttribute("sessionId", resultMap.get("ID"));
+			String ID = (String)resultMap.get("ID");
+			
+		session.setAttribute("sessionId", ID);//세션에 값저장
+		
+		response.addCookie(CookieBox.createCookie("ID",ID));//ID 쿠키 생성
+				
 		}
 		return "redirect:/main";
-}
-	@RequestMapping("/logout")
+	}
+		@RequestMapping("/logout")
 	public String logout(HttpSession session) {
 		session.invalidate();
 		return "redirect:/loginForm";
 		}
 	}
-
-
+	
+	
