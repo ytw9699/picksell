@@ -93,7 +93,6 @@ import com.mycom.utils.FileUpload;
 		response.addCookie(CookieBox.createCookie("ID",ID));//ID 쿠키 생성
 		
 		}
-		
 		return "redirect:/main";
 	}
 		@RequestMapping("/logout")
