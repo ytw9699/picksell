@@ -53,8 +53,9 @@ public class MemberController {
 	public String login(CommandMap map) {
 		System.out.println(map.get("id"));
 		resultMap = MemberService.userCheck(map.getMap());
+		//resultMap = MemberService.userCheck((String)map.get("id"));
 		if(resultMap != null) {
-			System.out.println("계정있음");
+			System.out.println("id에 해당하는 계정있음");
 		}
 		return "redirect:/main";
 }
