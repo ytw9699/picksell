@@ -59,22 +59,41 @@ import com.mycom.utils.FileUpload;
 		return "login/loginForm";
 	}
 	
+/*	if(resultMap == null) {
+		System.out.println("계정없음");
+		return "login/loginForm";
+	}else if(!resultMap.get("USERPW").equals(memberModel.getUserPw())) {
+		System.out.println("비번틀림");
+		return "login/loginForm";
+	}else {
+		request.getSession().setAttribute("logonID", memberModel.getUserId());
+		return "redirect:/board/main";
+	}
+	*/
 	@RequestMapping(value="/login", method=RequestMethod.POST)
-	public String login(CommandMap map, HttpSession session, HttpServletResponse response, Model model)throws IOException{
+	public String login(CommandMap map, HttpSession session, HttpServletResponse response, Model model, HttpServletRequest request)throws IOException{
 		
 		resultMap = MemberService.userCheck(map.getMap());
-		if(resultMap != null) {
-			String ID = (String)resultMap.get("ID");
-			
-		session.setAttribute("sessionId", ID);//세션에 값저장
+		String PASSWORD = request.getParameter("PASSWORD");
 		
-		response.addCookie(CookieBox.createCookie("ID",ID));//ID 쿠키 생성
-				
-		}else if (resultMap == null) {
+		if (resultMap == null) {
 			
 			model.addAttribute("resultID", "NO");
 			return "login/loginForm";
         }
+		if(resultMap != null) {
+		if(!resultMap.get("PASSWORD").equals(PASSWORD)){
+			model.addAttribute("resultID2", "NO");
+			return "login/loginForm";
+		}
+		String ID = (String)resultMap.get("ID");
+			
+		session.setAttribute("sessionId", ID);//세션에 값저장
+		
+		response.addCookie(CookieBox.createCookie("ID",ID));//ID 쿠키 생성
+		
+		}
+		
 		return "redirect:/main";
 	}
 		@RequestMapping("/logout")

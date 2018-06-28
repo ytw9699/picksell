@@ -51,6 +51,10 @@ function IdCheck(){
 	 document.getElementById("userIdCheckText").innerHTML = 
    	  "<b><font color=red size=2pt> 일치하는 아이디가 없습니다. </font></b>"
 }
+function passwordCheck(){
+	 document.getElementById("passwordCheckText").innerHTML = 
+  	  "<b><font color=red size=2pt> 비밀번호가 일치하지 않습니다. </font></b>"
+}
 
 </script>
 <!-- function mberValiCheck(){//1. 왜 이로직은 안될까? 
@@ -76,7 +80,7 @@ function userIdCheck(){
 	   
 	} -->
 <center>
-	로그인 하기 ${resultID}
+	로그인 하기
 	<form action="login" method="post" onsubmit="return mberValiCheck('${resultID}')">
 		<p>아이디 <input type="text" name="ID" id="ID" value="${cookieID}"/>&nbsp;<span id="userIdCheckText"></span>
 		<p>비밀번호 <input type="password" name="PASSWORD" id="PASSWORD"/>&nbsp;<span id="passwordCheckText"></span>
@@ -87,6 +91,11 @@ function userIdCheck(){
 <c:if test="${resultID != null}">
 	<script>
 	 IdCheck();
+   </script>
+</c:if>
+<c:if test="${resultID2 != null}">
+	<script>
+	 passwordCheck();
    </script>
 </c:if>
 </body>
