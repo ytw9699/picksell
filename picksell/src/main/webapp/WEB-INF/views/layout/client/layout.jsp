@@ -11,8 +11,8 @@
 <style>
 body{margin:0;}
 .headerWrap{width:100%;}
-.bodyWrap{width:100%;}
-.footerWrap{width:100%;}
+.bodyWrap {width: 80%;margin: 0 auto;/* display: inline-block; */}
+.footerWrap {width: 80%;margin: 0 auto;}
 </style>
 </head>
 <body>
