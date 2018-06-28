@@ -6,6 +6,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 </head>
 <body>
-일반판매
+	<form>
+	상품제목:
+	</form>
 </body>
 </html>
