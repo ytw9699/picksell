@@ -184,7 +184,7 @@ body{ overflow-x:hidden;}
 	var onWrite = function(){
 		oEditors.getById["txtContent"].exec("UPDATE_CONTENTS_FIELD", []); // 에디터의 내용이 textarea에 적용됨
 		var productForm = document.getElementById("productForm");  
-		var fileValue = document.getElementById("firstImg").value;
+		//var fileValue = document.getElementById("firstImg").value;
 		productForm.action ="/picksell/sell/sellProc";              
 		productForm.submit();
 	}
