@@ -52,10 +52,7 @@ public class MemberController {
 	@RequestMapping(value="/login", method=RequestMethod.POST)
 	public String login(CommandMap map) {
 		
-		//{id=내가입력한거,무언가name=내가입력한거}
-		System.out.println(map.get("id"));
 		resultMap = MemberService.userCheck(map.getMap());
-		//resultMap = MemberService.userCheck((String)map.get("id"));
 		if(resultMap != null) {
 			System.out.println("id에 해당하는 계정있음");
 		}
