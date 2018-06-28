@@ -60,7 +60,7 @@ import com.mycom.utils.FileUpload;
 	}
 	
 	@RequestMapping(value="/login", method=RequestMethod.POST)
-	public String login(CommandMap map, HttpSession session, HttpServletResponse response)throws IOException{
+	public String login(CommandMap map, HttpSession session, HttpServletResponse response, Model model)throws IOException{
 		
 		resultMap = MemberService.userCheck(map.getMap());
 		if(resultMap != null) {
@@ -70,7 +70,11 @@ import com.mycom.utils.FileUpload;
 		
 		response.addCookie(CookieBox.createCookie("ID",ID));//ID 쿠키 생성
 				
-		}
+		}else if (resultMap == null) {
+			
+			model.addAttribute("resultID", "NO");
+			return "login/loginForm";
+        }
 		return "redirect:/main";
 	}
 		@RequestMapping("/logout")
