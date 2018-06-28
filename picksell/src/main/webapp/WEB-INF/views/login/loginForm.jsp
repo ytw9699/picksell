@@ -11,17 +11,17 @@
 <body>
 <script>
 function mberValiCheck(){//2.밸리데이터를 했을때 아이디와 비밀번호가 밀리지않게끔 못할까?
-   var userId = document.getElementById("userId").value;
+   var id = document.getElementById("id").value;
    var password = document.getElementById("password").value;
 
-   if(userId != ""){
+   if(id != ""){
 		 document.getElementById("userIdCheckText").innerHTML = ""
 	   }
    if(password != ""){
 		 document.getElementById("passwordCheckText").innerHTML = ""
 	   }
 	   
-   if(userId == ""){
+   if(id == ""){
       document.getElementById("userIdCheckText").innerHTML = 
     	  "<b><font color=red size=2pt> 아이디를 입력해주세요. </font></b>"
    if( password == ""){
@@ -63,7 +63,7 @@ function userIdCheck(){
 <center>
 	로그인 하기
 	<form action="login" method="post" onsubmit="return mberValiCheck()">
-		<p>아이디 <input type="text" name="userId" id="userId" />&nbsp;<span id="userIdCheckText"></span>
+		<p>아이디 <input type="text" name="id" id="id" />&nbsp;<span id="userIdCheckText"></span>
 		<p>비밀번호 <input type="password" name="password" id="password"/>&nbsp;<span id="passwordCheckText"></span>
 		<p><input type="submit" value="로그인" />
 		<P>계정을 잊어버리셨나요?</P>
