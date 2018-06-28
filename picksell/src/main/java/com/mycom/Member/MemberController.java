@@ -26,6 +26,7 @@ import com.mycom.utils.FileUpload;
 
 @Controller
 public class MemberController {
+	Map<String, Object> resultMap = new HashMap<String, Object>();//공통사용
 	
 	@Resource(name="memberService")
 	private MemberService MemberService;
@@ -34,6 +35,7 @@ public class MemberController {
 	public String loginForm(Model model) {	
 		return "/join/joinForm";
 	}
+	
 	@RequestMapping(value="/joinForm", method=RequestMethod.POST)
 	public String join(CommandMap map) {
 		
@@ -41,11 +43,18 @@ public class MemberController {
 		
 		return "redirect:/login";
 	}
+	
 	@RequestMapping(value="/loginForm", method=RequestMethod.GET)
 	public String loginForm() {
 		return "login/loginForm";
 	}
-
 	
-	
+	@RequestMapping(value="/login", method=RequestMethod.POST)
+	public String login(CommandMap map) {
+		resultMap = MemberService.userCheck(map.getMap());
+		if(resultMap != null) {
+			System.out.println("계정있음");
+		}
+		return "redirect:/main";
+}
 }
