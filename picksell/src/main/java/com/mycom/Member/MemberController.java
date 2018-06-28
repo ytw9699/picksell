@@ -9,6 +9,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -50,12 +51,19 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="/login", method=RequestMethod.POST)
-	public String login(CommandMap map) {
+	public String login(CommandMap map, HttpSession session) {
 		
 		resultMap = MemberService.userCheck(map.getMap());
 		if(resultMap != null) {
-			System.out.println("id에 해당하는 계정있음");
+		session.setAttribute("sessionId", resultMap.get("ID"));
 		}
 		return "redirect:/main";
 }
-}
+	@RequestMapping("/logout")
+	public String logout(HttpSession session) {
+		session.invalidate();
+		return "redirect:/loginForm";
+		}
+	}
+
+
