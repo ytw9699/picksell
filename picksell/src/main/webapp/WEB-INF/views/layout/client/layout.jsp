@@ -19,7 +19,7 @@ body{margin:0;}
     border-top: 2px solid #dbdbdb;
     width: 80%;
     margin: 0 auto;
-    margin-top: 10%;
+    margin-top: 2%;
     padding-top: 2%;
 }
 </style>
