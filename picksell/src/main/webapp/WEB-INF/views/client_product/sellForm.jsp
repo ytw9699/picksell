@@ -8,6 +8,9 @@
 <body>
 ${howtosell }
 	<form>
+	<input type="hidden" name="seller_id" value="일반판매자test" />
+	<input type="hidden" name="howtosell" value="${howtosell }" />
+	<input type="hidden" name="stock" value="1" />
 	카테고리등록:
 	<select name="category_num">
 		<option></option>
@@ -19,7 +22,11 @@ ${howtosell }
 		<option></option>
 		<option></option>
 	</select>
-	상품제목: <input type="text" name="" />
+	상품제목: <input type="text" name="subject" />
+	<p>제품사용여부: <input type="radio" name="product_status" value="0" />
+	<input type="radio" name="product_status" value="1" />
+	
+	
 	</form>
 </body>
 </html>
