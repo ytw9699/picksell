@@ -4,9 +4,17 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<style>
+	
+</style>
 </head>
+<script>
+	
+</script>
 <body>
-헤더입니다
+
+<img src="/picksell/resources/img/main_logo.png" />
+<p>
+<a href="#" id="linkOfMypage">마이페이지 ▼</a>
 </body>
 </html>

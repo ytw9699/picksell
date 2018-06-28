@@ -6,11 +6,24 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="/picksell/resources/img/pavicon_ps.png" rel="icon" type="image/x-icon" />
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <title>PICKSELL</title>
+<style>
+body{margin:0;}
+.headerWrap{width:100%;}
+.bodyWrap{width:100%;}
+.footerWrap{width:100%;}
+</style>
 </head>
 <body>
-	<tiles:insertAttribute name="header"/><!-- // header -->
-	<tiles:insertAttribute name="body"/><!-- // container -->
-	<tiles:insertAttribute name="footer"/><!-- // footer -->
+	<div class="headerWrap">
+		<tiles:insertAttribute name="header"/><!-- // header -->
+	</div>
+	<div class="bodyWrap">
+		<tiles:insertAttribute name="body"/><!-- // container -->
+	</div>
+	<div class="footerWrap">
+		<tiles:insertAttribute name="footer"/><!-- // footer -->
+	</div>
 </body>
 </html>
