@@ -43,7 +43,7 @@ body{ overflow-x:hidden;}
 </head>
 <body>
 	<div id="container">
-		<form action="/picksell/sell/sellProc" method="post" enctype="multipart/form-data">
+		<form id="productForm"  method="post" enctype="multipart/form-data">
 		
 		<input type="hidden" name="seller_id" value="일반판매자test" />
 		<input type="hidden" name="howtosell" value="${howtosell }" />
@@ -115,8 +115,9 @@ body{ overflow-x:hidden;}
 			<p><input type="text" name="price" />
 			<p><input type="button" value="뒤로" onclick="Animate2id('#c3'); return false" class="c2_cancel" />
 			<!-- <p><a href="#" onClick="Animate2id('#c1'); return false">취소</a> -->
-			<p><input type="submit" value="작성" />
-		
+			<!-- <p><input type="submit" value="작성" /> -->
+			
+			<input type="button" onclick="onWrite()" value="작성" />
 		</div>
 		</form>
 	</div>
@@ -164,7 +165,7 @@ body{ overflow-x:hidden;}
 	nhn.husky.EZCreator.createInIFrame({
 	oAppRef: oEditors,
 	elPlaceHolder: document.getElementById('txtContent'), // html editor가 들어갈 textarea id
-	sSkinURI: "/summer/resources/se/SmartEditor2Skin.html",  // html editor가 skin url
+	sSkinURI: "/picksell/resources/se/SmartEditor2Skin.html",  // html editor가 skin url
 	fOnAppLoad: function () { 
         //수정모드를 구현할 때 사용할 부분. 로딩이 끝난 후 값이 체워지게 하는 구현을 하면 된다.
          var subject = '${item.subject}';               
@@ -179,6 +180,24 @@ body{ overflow-x:hidden;}
 	    var sHTML = '<img src="${pageContext.request.contextPath}/resources/productUpload/'+filename+'">';
 	    oEditors.getById["txtContent"].exec("PASTE_HTML", [sHTML]);
 	};
+	
+	var onWrite = function(){
+		oEditors.getById["txtContent"].exec("UPDATE_CONTENTS_FIELD", []); // 에디터의 내용이 textarea에 적용됨
+		var productForm = document.getElementById("productForm");  
+		var fileValue = document.getElementById("firstImg").value;
+		productForm.action ="/picksell/sell/sellProc";              
+		productForm.submit();
+	}
+		/*  if(validationType(fileValue)){
+			 productForm.action ="/summer/board/write";              
+			 productForm.submit();
+		}else if(fileValue == ""){
+			alert("대표사진을 등록해야합니다");
+			return false;
+		}else if(!validationType(fileValue)){
+			alert("사진파일이 아닙니다");
+			return false;
+		} */
 	</script>
 </body>
 </html>
