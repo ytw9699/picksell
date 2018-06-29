@@ -28,11 +28,11 @@ function mberValiCheck(resultID){//2.밸리데이터를 했을때 아이디와 �
    if(ID == ""){
       document.getElementById("userIdCheckText").innerHTML = 
     	  "<b><font color=red size=2pt> 아이디를 입력해주세요. </font></b>"
-    	   // loginForm.ID.focus();
     	  
    if(PASSWORD == ""){
    	  document.getElementById("passwordCheckText").innerHTML = 
    		  "<b><font color = red size=2pt> 비밀번호를 입력해주세요. </font></b>"
+   		  // loginForm.ID.focus();
    	  return false;
    	 }
       return false;
