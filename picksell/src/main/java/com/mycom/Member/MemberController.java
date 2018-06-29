@@ -36,7 +36,7 @@ import com.mycom.utils.FileUpload;
 	
 	@RequestMapping(value="/joinForm", method=RequestMethod.GET)
 	public String loginForm(Model model) {	
-		return "/join/joinForm";
+		return "joinForm";
 	}
 	
 	@RequestMapping(value="/joinForm", method=RequestMethod.POST)
@@ -44,7 +44,7 @@ import com.mycom.utils.FileUpload;
 		
 		MemberService.insertMember(map.getMap());
 		
-		return "redirect:/login";
+		return "redirect:/loginForm";
 	}
 	
 	@RequestMapping(value="/loginForm", method=RequestMethod.GET)
@@ -56,7 +56,7 @@ import com.mycom.utils.FileUpload;
 		
 		model.addAttribute("cookieID", ID);
 		
-		return "login/loginForm";
+		return "loginForm";
 	}
 	
 /*	if(resultMap == null) {
@@ -78,13 +78,13 @@ import com.mycom.utils.FileUpload;
 		
 		if (resultMap == null) {
 			
-			model.addAttribute("resultID", "NO");
-			return "login/loginForm";
+			model.addAttribute("resultID", "NO");//아이디가 없다면
+			return "loginForm";
         }
 		if(resultMap != null) {
 		if(!resultMap.get("PASSWORD").equals(PASSWORD)){
-			model.addAttribute("resultID2", "NO");
-			return "login/loginForm";
+			model.addAttribute("resultID2", "NO");//비밀번호가 틀리다면
+			return "loginForm";
 		}
 		String ID = (String)resultMap.get("ID");
 			

@@ -33,7 +33,7 @@ public class mainController {
 	
 	@RequestMapping(value="/main", method=RequestMethod.GET)
 	public String loginForm(Model model) {	
-		return "/main/main";
+		return "main";//이렇게 해줘야 타일즈랑 연결됨
 	}
 
 }
