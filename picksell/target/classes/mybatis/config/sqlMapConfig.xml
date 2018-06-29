@@ -16,7 +16,10 @@ PUBLIC " - //mybatis.org//DTD Config 3.0//EN"
 			</settings>
 	
 	   <typeAliases>
-	  <typeAlias alias="adminMember" type="com.mycom.admin_member.AdminMemberModel"/>
+	  		<typeAlias alias="adminMember" type="com.mycom.admin_member.AdminMemberModel"/>
+	  		<typeAlias alias="AdminPaymentModel" type="com.mycom.admin_order.AdminPaymentModel"/>
+	  		<typeAlias alias="AdminSellModel" type="com.mycom.admin_products.AdminSellModel"/>
+	  		<typeAlias alias="AdminSingoModel" type="com.mycom.admin_singo.AdminSingoModel"/>
 	   </typeAliases>
 	   <!-- SQL 정의한 xml문서 Mapping -->
 	<mappers>
