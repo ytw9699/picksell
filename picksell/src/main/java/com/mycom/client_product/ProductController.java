@@ -40,11 +40,13 @@ public class ProductController {
 	@Resource(name="productService")
 	private ProductService productService;
 	
+	//상품등록 진입점 
 	@RequestMapping("/sell/howto")
 	public String howtosell() {
 		return "howtosell";
 	}
 	
+	//상품등록폼(일반판매)
 	@RequestMapping("/sell/{level}")
 	public String sellForm(
 			@PathVariable("level") String howtosell,
@@ -131,8 +133,7 @@ public class ProductController {
 		return "productList";
 	}
 	
-	
-	
+	//상품등록폼(플러스상품)
 	@RequestMapping("/sellPlus")
 	public String sellPlusForm(
 			Model model) {
