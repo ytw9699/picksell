@@ -16,6 +16,8 @@ function mberValiCheck(resultID){//2.밸리데이터를 했을때 아이디와 �
    var PASSWORD = document.getElementById("PASSWORD").value;
    
    var loginForm = document.getElementById("loginForm");
+ 
+   alert('1');
 	
    if(ID != ""){
 		 document.getElementById("userIdCheckText").innerHTML = ""
@@ -26,13 +28,17 @@ function mberValiCheck(resultID){//2.밸리데이터를 했을때 아이디와 �
 	   }
 	   
    if(ID == ""){
+	   alert('2');
       document.getElementById("userIdCheckText").innerHTML = 
     	  "<b><font color=red size=2pt> 아이디를 입력해주세요. </font></b>"
+    	  loginForm.ID.focus();
     	  
    if(PASSWORD == ""){
+	   alert('3');
    	  document.getElementById("passwordCheckText").innerHTML = 
    		  "<b><font color = red size=2pt> 비밀번호를 입력해주세요. </font></b>"
-   		  // loginForm.ID.focus();
+   		alert('4');
+   		//loginForm.PASSWORD.focus();
    	  return false;
    	 }
       return false;
@@ -41,6 +47,8 @@ function mberValiCheck(resultID){//2.밸리데이터를 했을때 아이디와 �
    if( PASSWORD == ""){//이부분 중복을 어떻게 제거할수있을까?
 	   document.getElementById("passwordCheckText").innerHTML = 
 		   "<b><font color = red size=2pt> 비밀번호를 입력해주세요. </font></b>"
+		   alert('5');
+		   //loginForm.PASSWORD.focus();
  	return false;
    }
 }
@@ -86,7 +94,7 @@ function userIdCheck(){
 	로그인 하기
 	<form action="login" name="loginForm" method="post" onsubmit="return mberValiCheck('${resultID}')">
 		<p>아이디 <input type="text" name="ID" id="ID" value="${cookieID}"/>&nbsp;<span id="userIdCheckText"></span>
-		<p>비밀번호 <input type="password" name="PASSWORD" id="PASSWORD"/>&nbsp;<span id="passwordCheckText"></span>
+		<p>비밀번호 <input type="password" name="PASSWORD3" id="PASSWORD"/>&nbsp;<span id="passwordCheckText"></span>
 		<p><input type="checkbox" name="idSave" value= "save" id="idSave"/>아이디 저장
 		<input type="submit" value="로그인" />
 		<P>계정을 잊어버리셨나요?</P>
