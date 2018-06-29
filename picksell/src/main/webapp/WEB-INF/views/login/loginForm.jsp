@@ -14,10 +14,13 @@
 function mberValiCheck(resultID){//2.밸리데이터를 했을때 아이디와 비밀번호가 밀리지않게끔 못할까?
    var ID = document.getElementById("ID").value;
    var PASSWORD = document.getElementById("PASSWORD").value;
+   
+   var loginForm = document.getElementById("loginForm");
 	
    if(ID != ""){
 		 document.getElementById("userIdCheckText").innerHTML = ""
 	   }
+   
    if(PASSWORD != ""){
 		 document.getElementById("passwordCheckText").innerHTML = ""
 	   }
@@ -25,26 +28,32 @@ function mberValiCheck(resultID){//2.밸리데이터를 했을때 아이디와 �
    if(ID == ""){
       document.getElementById("userIdCheckText").innerHTML = 
     	  "<b><font color=red size=2pt> 아이디를 입력해주세요. </font></b>"
-   if( PASSWORD == ""){
+    	   // loginForm.ID.focus();
+    	  
+   if(PASSWORD == ""){
    	  document.getElementById("passwordCheckText").innerHTML = 
    		  "<b><font color = red size=2pt> 비밀번호를 입력해주세요. </font></b>"
    	  return false;
    	 }
       return false;
    }
-   if( PASSWORD == ""){
+   
+   if( PASSWORD == ""){//이부분 중복을 어떻게 제거할수있을까?
 	   document.getElementById("passwordCheckText").innerHTML = 
 		   "<b><font color = red size=2pt> 비밀번호를 입력해주세요. </font></b>"
  	return false;
    }
 }
+
 function IdCheck(){
 	 document.getElementById("userIdCheckText").innerHTML = 
    	  "<b><font color=red size=2pt> 입력하신 아이디가 존재하지 않습니다. </font></b>"
+		   loginForm.ID.focus();
 }
 function passwordCheck(){
 	 document.getElementById("passwordCheckText").innerHTML = 
   	  "<b><font color=red size=2pt> 입력하신 아이디와 비밀번호가 일치하지 않습니다. </font></b>"
+		 loginForm.PASSWORD.focus();
 }
 function idSaveCheck(){
 	 var idSave = document.getElementById('idSave');
@@ -75,7 +84,7 @@ function userIdCheck(){
 	} -->
 <center>
 	로그인 하기
-	<form action="login" method="post" onsubmit="return mberValiCheck('${resultID}')">
+	<form action="login" name="loginForm" method="post" onsubmit="return mberValiCheck('${resultID}')">
 		<p>아이디 <input type="text" name="ID" id="ID" value="${cookieID}"/>&nbsp;<span id="userIdCheckText"></span>
 		<p>비밀번호 <input type="password" name="PASSWORD" id="PASSWORD"/>&nbsp;<span id="passwordCheckText"></span>
 		<p><input type="checkbox" name="idSave" value= "save" id="idSave"/>아이디 저장
