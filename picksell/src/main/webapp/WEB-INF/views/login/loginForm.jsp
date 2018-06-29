@@ -40,13 +40,16 @@ function mberValiCheck(resultID){//2.밸리데이터를 했을때 아이디와 �
 }
 function IdCheck(){
 	 document.getElementById("userIdCheckText").innerHTML = 
-   	  "<b><font color=red size=2pt> 일치하는 아이디가 없습니다. </font></b>"
+   	  "<b><font color=red size=2pt> 입력하신 아이디가 존재하지 않습니다. </font></b>"
 }
 function passwordCheck(){
 	 document.getElementById("passwordCheckText").innerHTML = 
-  	  "<b><font color=red size=2pt> 비밀번호가 일치하지 않습니다. </font></b>"
+  	  "<b><font color=red size=2pt> 입력하신 아이디와 비밀번호가 일치하지 않습니다. </font></b>"
 }
-
+function idSaveCheck(){
+	 var idSave = document.getElementById('idSave');
+	 idSave.checked="checked";
+}	
 </script>
 <!-- function mberValiCheck(){//1. 왜 이로직은 안될까? 
 	userIdCheck();
@@ -75,7 +78,7 @@ function userIdCheck(){
 	<form action="login" method="post" onsubmit="return mberValiCheck('${resultID}')">
 		<p>아이디 <input type="text" name="ID" id="ID" value="${cookieID}"/>&nbsp;<span id="userIdCheckText"></span>
 		<p>비밀번호 <input type="password" name="PASSWORD" id="PASSWORD"/>&nbsp;<span id="passwordCheckText"></span>
-		<p><input type="checkbox" name="idSave" value= "save" />로그인 상태 유지
+		<p><input type="checkbox" name="idSave" value= "save" id="idSave"/>아이디 저장
 		<input type="submit" value="로그인" />
 		<P>계정을 잊어버리셨나요?</P>
 	</form>
@@ -88,6 +91,11 @@ function userIdCheck(){
 <c:if test="${resultID2 != null}">
 	<script>
 	 passwordCheck();
+   </script>
+</c:if>
+<c:if test="${cookieID != null}">
+	<script>
+	idSaveCheck();
    </script>
 </c:if>
 </body>
