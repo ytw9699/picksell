@@ -18,7 +18,7 @@ public class AdminMemberModel {
 	private String alarm_consent;
 	private String business_number;
 	private String business_name;
-	private Date regdate;
+	private Date  regdate;
 	
 	public String getId() {
 		return id;

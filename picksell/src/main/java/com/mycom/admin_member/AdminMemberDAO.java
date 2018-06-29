@@ -10,5 +10,11 @@ public interface AdminMemberDAO {
 	public List<AdminMemberModel> AdminMemberList();
 	
 	//회원검색할때 
-	//public List<MemberModel> searchOneMember(String search);
+	public List<AdminMemberModel> searchName(String search);
+	
+	public List<AdminMemberModel> searchId(String search);
+ 
+	
+	
+	
 }

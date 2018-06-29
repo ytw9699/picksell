@@ -17,6 +17,20 @@
 		<put-attribute name="body" value="/WEB-INF/views/testTiles.jsp" />
 	</definition>
 	
+	<!-- admin -->
+	<definition name="admin" template="/WEB-INF/views/layout/admin/layout.jsp">
+		<put-attribute name="menu" value="/WEB-INF/views/layout/admin/menu.jsp"/>
+	</definition>
+	
+	<definition name="adminDefault" extends="admin">
+		 <put-attribute name="title" value="adminHome"/>
+		 <put-attribute name="body" value="/WEB-INF/views/admin_main/adminMain.jsp"/>
+	</definition>
+	
+	<definition name="adminMemberList" extends="admin">
+		<put-attribute name="title" value="adminMember"/>
+		<put-attribute name="body" value="/WEB-INF/views/admin_member/adminMemberList.jsp"/>
+	</definition>
 
 </tiles-definitions>
 	
