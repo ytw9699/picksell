@@ -3,6 +3,9 @@ package com.mycom.client_product;
 import java.io.File;
 import java.io.IOException;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -109,12 +112,23 @@ public class ProductController {
 	//일반상품(일반판매) 리스트
 	@RequestMapping("/products/goods")
 	public String productList(
-			@RequestParam(value="ca", required=false, defaultValue="0") int category_num) {
+			@RequestParam(value="ca", required=false, defaultValue="0") int category_num,
+			@RequestParam(value="od", required=false, defaultValue="0") int orderMethod,
+			Model model) {
 		
-		//카테고리0 일때 전체상품카테고리
+		//정렬은 0 > 최신순, 1 > 낮은가격순, 2 > 높은가격순
+		
+		//카테고리0 일때 전체상품카테고리 / 카테고리0 아닐때 해당 카테고리리스트
 		//카테고리가0이 아니면 해당카테고리에 대한 모든 상품
+		Map<String, Object> parameterMap = new HashMap<String, Object>();
+		parameterMap.put("category", category_num);
+		parameterMap.put("orderMethod", orderMethod);
+		List<Map<String, Object>> resultList = productService.getNomalProductList(parameterMap);
 		
-		return "client_product/productList";
+		model.addAttribute("currentCategory", category_num);
+		model.addAttribute("resultProductList", resultList);
+		
+		return "productList";
 	}
 	
 	
