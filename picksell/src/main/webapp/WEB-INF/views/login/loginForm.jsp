@@ -75,7 +75,8 @@ function userIdCheck(){
 	<form action="login" method="post" onsubmit="return mberValiCheck('${resultID}')">
 		<p>아이디 <input type="text" name="ID" id="ID" value="${cookieID}"/>&nbsp;<span id="userIdCheckText"></span>
 		<p>비밀번호 <input type="password" name="PASSWORD" id="PASSWORD"/>&nbsp;<span id="passwordCheckText"></span>
-		<p><input type="submit" value="로그인" />
+		<p><input type="checkbox" name="idSave" value= "save" />로그인 상태 유지
+		<input type="submit" value="로그인" />
 		<P>계정을 잊어버리셨나요?</P>
 	</form>
 </center>

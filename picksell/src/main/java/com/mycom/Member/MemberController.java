@@ -76,6 +76,7 @@ import com.mycom.utils.FileUpload;
 		resultMap = MemberService.userCheck(map.getMap());
 		String PASSWORD = request.getParameter("PASSWORD");
 		
+		
 		if (resultMap == null) {
 			
 			model.addAttribute("resultID", "NO");//아이디가 없다면
@@ -90,8 +91,12 @@ import com.mycom.utils.FileUpload;
 			
 		session.setAttribute("sessionId", ID);//세션에 값저장
 		
-		response.addCookie(CookieBox.createCookie("ID",ID));//ID 쿠키 생성
-		
+		if((request.getParameter("idSave")) != null) {
+		if(((String)request.getParameter("idSave")).equals("save")) {
+			response.addCookie(CookieBox.createCookie("ID",ID));//ID 쿠키 생성
+			System.out.println(1);
+		}
+		}
 		}
 		return "redirect:/main";
 	}
