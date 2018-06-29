@@ -1,6 +1,7 @@
 package com.mycom.admin_member;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -20,15 +21,20 @@ public class AdminMemberService implements AdminMemberDAO {
 	}
 	
 	@Override
-	public List<AdminMemberModel> searchName(String name){
-		return sqlSessionTemplate.selectList("admin_Member.searchName", name);
+	public List<AdminMemberModel> searchName(String memberSearch){
+		return sqlSessionTemplate.selectList("admin_Member.searchName", memberSearch);
 	}
 	
 	@Override
-	public List<AdminMemberModel> searchId(String id){
-		return sqlSessionTemplate.selectList("admin_Member.searchId", id);
+	public List<AdminMemberModel> searchId(String memberSearch){
+		return sqlSessionTemplate.selectList("admin_Member.searchId",memberSearch);
 	}
 	
+	@Override
+	public Map<String,Object> selectOneMember(String id) {
+		return sqlSessionTemplate.selectOne("admin_Member.selectOneMember",id);
+	}
+
 	
 	
 }

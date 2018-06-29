@@ -8,7 +8,7 @@
 <title>member계정</title>
 </head>
 <body>
-<form action="/picksell/admin/member/search">
+<form action="/picksell/admin/member/search" >
 <select name="searchNum">
 		<option value="0">이름</option>
 		<option value="1">ID</option>	
@@ -17,7 +17,16 @@
 <button type="submit">Search</button>
 </form>
 <h1>회원목록</h1>
-<table border="1px">
+<c:choose>
+<c:when test="${0 lt searchCount  }">
+총 검색 결과는 ${searchCount }건 입니다.
+</c:when>
+<c:when test="${0 eq searchCount }">
+검색결과가 없습니다.
+</c:when>
+
+</c:choose>
+<table>
    <thead>
  	<tr>
  		<th>번호</th>
@@ -28,21 +37,35 @@
  		<th>권한</th>
  	</tr>
 </thead>
-<tbody>
 
+<tbody>
 <c:forEach var="memberslist" items="${memberslist}" >
-   
+  
     <tr>
      <td>번호</td>
-     <td>${memberslist.id}</td>
- 	 <td>${memberslist.name }</td>
+    
+     <td><a href="/picksell/admin/member/info/${memberslist.id} ">${memberslist.id}</a></td>
+	 <td>${memberslist.name }</td>
 	 <td>${memberslist.profile_img }</td>
 	 <td>${memberslist.email }</td>
-	 <td>${memberslist.kind }</td>
+     
+	 <c:choose>
+	 <c:when test="${ '99' eq memberslist.kind }">
+	 <td>관리자</td>
+	 </c:when>
+	 <c:when test="${ '0' eq memberslist.kind }" >
+	 <td>개인회원</td>
+	 </c:when>
+	 <c:when test="${ '1' eq memberslist.kind }" >
+	 <td>사업자 회원</td>
+	</c:when>
+	</c:choose>
 	</tr>
 	
 </c:forEach>
+
 </tbody>
 </table>
+
 </body>
 </html>

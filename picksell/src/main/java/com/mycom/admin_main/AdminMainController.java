@@ -13,7 +13,7 @@ public class AdminMainController {
 	
 	@RequestMapping(value="/main")
 	public String main(){
-		return "/admin_main/adminMain";
+		return "adminMain";
 	}
 
 

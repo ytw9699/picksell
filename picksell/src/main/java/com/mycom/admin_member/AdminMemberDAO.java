@@ -1,6 +1,8 @@
 package com.mycom.admin_member;
 
 import java.util.List;
+import java.util.Map;
+
 import com.mycom.admin_member.AdminMemberModel;
 
 public interface AdminMemberDAO {
@@ -14,7 +16,8 @@ public interface AdminMemberDAO {
 	
 	public List<AdminMemberModel> searchId(String search);
  
-	
+	//회원 상세보기
+	public Map<String,Object> selectOneMember(String id);
 	
 	
 }

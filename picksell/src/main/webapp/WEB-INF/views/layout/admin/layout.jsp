@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<tiles:insertAttribute name="title"/>
+
 	<tiles:insertAttribute name="menu" />
 	<div style="float:left;padding:10px;width:20%"></div>
 	<tiles:insertAttribute name="body" />

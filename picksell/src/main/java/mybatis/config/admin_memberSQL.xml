@@ -25,7 +25,7 @@ PUBLIC " - //mybatis.org//DTD Config 3.0//EN"
 	</resultMap>
 	
 	<select id="membersList" resultMap="adminMemberRes">
-		SELECT * FROM ps_member ORDER BY regdate DESC
+		SELECT * FROM PS_MEMBER ORDER BY regdate DESC
 	</select>
 
 	<select id="searchName" resultMap="adminMemberRes" parameterType="string">
@@ -36,6 +36,9 @@ PUBLIC " - //mybatis.org//DTD Config 3.0//EN"
 		SELECT * FROM PS_MEMBER WHERE id = #{id} ORDER BY regdate desc 
 	</select>
 	
-</mapper>
+	 <select id="selectOneMember" resultType="hashmap" parameterType="string">
+	 	SELECT * FROM PS_MEMBER WHERE id = #{id}
+	 </select>
+ </mapper>
 
 	
