@@ -31,6 +31,23 @@
 		<put-attribute name="body" value="/WEB-INF/views/client_product/sellPlusForm.jsp" />
 	</definition>
 	
+	<!-- 메인 -->
+	<definition name="main" extends="default">
+		<put-attribute name="body" value="/WEB-INF/views/main/main.jsp" />
+	</definition>
+	
+	<!-- 회원가입 -->
+	<definition name="joinForm" extends="default">
+		<put-attribute name="header" value="/WEB-INF/views/layout/client/joinHeader.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/join/joinForm.jsp" />
+	</definition>
+	
+	<!-- 로긴폼 -->
+	<definition name="loginForm" extends="default">
+		<put-attribute name="header" value="/WEB-INF/views/layout/client/joinHeader.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/login/loginForm.jsp" />
+	</definition>
+	
 
 </tiles-definitions>
 	
