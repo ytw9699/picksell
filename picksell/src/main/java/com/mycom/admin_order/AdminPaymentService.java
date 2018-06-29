@@ -14,7 +14,7 @@ public class AdminPaymentService implements AdminPaymentDAO {
 	// 오더 리스트 
 	@Override
 	public List<AdminPaymentModel> orderList(){
-		return null;
+		return sqlSessionTemplate.selectList("adminOrder.orderList-all");
 	}
 	// 오더 상세보기 
 	@Override
@@ -29,6 +29,17 @@ public class AdminPaymentService implements AdminPaymentDAO {
 	// 입금완료, 배송확인, 인수확인 등 STATUS변수 업데이트 
 	@Override
 	public Object updateStatus(AdminPaymentModel adminPaymentModel) {
+		return null;
+	}
+	
+	//오더 리스트(ps_orderlist)
+	@Override
+	public List<AdminPaymentListModel> orderList2(){
+		return null;
+	}
+	// to pick up some colums from ps_orderlist
+	@Override
+	public AdminPaymentListModel getOne(int order_num) {
 		return null;
 	}
 	

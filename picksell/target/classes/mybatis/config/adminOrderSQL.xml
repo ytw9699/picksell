@@ -5,6 +5,41 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="adminOrder">
 	
+	<resultMap type="AdminPaymentModel" id="orderRes">
 	
+		<result property="order_num" column="order_num"/>
+		<result property="buyer_id" column="buyer_id"/>
+		<result property="status" column="status"/>
+		<result property="total_price" column="total_price"/>
+		<result property="destination" column="destination"/>
+		<result property="account" column="account"/>
+		<result property="account_name" column="account_name"/>
+		<result property="bank" column="bank"/>
+		<result property="purchase_num" column="purchase_num"/>
+		<result property="delivery_company" column="delivery_company"/>
+		<result property="invoice_num" column="invoice_num"/>
+		
+	</resultMap>
+	
+	<!-- 전체 주문리스트 -->
+	<select id="orderList-all" resultMap="orderRes">
+		SELECT * FROM ps_order ORDER BY order_num desc
+	</select>
+	
+	<!--특 주문 찾기 쿼리  -->
+	<select id="searchOrder" resultMap="orderRes" parameterType="String">
+		SELECT * FROM ps_order 
+			WHERE buyer_id LIKE #{search}
+			OR status LIKE #{search}
+			OR delivery_company LIKE #{search}
+		ORDER BY order_num desc
+	</select>
+	
+	<!-- 거래상태 업데이트 -->
+	<update id="updateStatus" parameterType="AdminPaymentModel">
+		UPDATE ps_order
+			SET status = #{status}
+				WHERE order_num = #{order_num}
+	</update>
 	
 </mapper>
