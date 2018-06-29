@@ -44,7 +44,7 @@ import com.mycom.utils.FileUpload;
 		
 		MemberService.insertMember(map.getMap());
 		
-		return "redirect:/login";
+		return "redirect:/loginForm";
 	}
 	
 	@RequestMapping(value="/loginForm", method=RequestMethod.GET)

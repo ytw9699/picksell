@@ -30,15 +30,12 @@ body{ overflow-x:hidden;}
 
 <div id="container">
 <div id="c1">
- <form method="post">
  	<p>회원가입</p>
 	<p> 1.약관동의 2.가입방법선택 3.정보입력</p>
 	<input type="checkbox" name="agree"/>동의
-</form>
 <p><input type="button" value="다음" onclick="Animate2id('#c2','easeInOutExpo'); return false" />
 </div>
 <div id="c2">
- <form method="post">
  <p>회원가입</p>
  <p> 1.약관동의 2.가입방법선택 3.정보입력</p>
  <p>
@@ -49,7 +46,6 @@ body{ overflow-x:hidden;}
  <img src="/picksell/resources/img/businessPurchase.png" onclick="Animate2id('#c3','easeInOutExpo'); return false"  >
  </a>
  </p>
-</form>
 <p><input type="button" value="이전" onclick="Animate2id('#c1'); return false" />
 </div>
 <div id="c3">
@@ -81,7 +77,7 @@ body{ overflow-x:hidden;}
 	은행명(선택)<input type="text" name="bank" />
 	<br/>
 	<input type="submit" value="가입완료"/>
-</form>
+	</form>
 <p><input type="button" value="이전" onclick="Animate2id('#c2'); return false" /></p>
 </div>
 </div>
