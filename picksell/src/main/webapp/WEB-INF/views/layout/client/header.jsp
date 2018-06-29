@@ -97,8 +97,8 @@ li.headerCategory {
 	<ul class="bottomUL">
 		<li class="headerCategory totalCategory"><a href="#">전체카테고리</a></li>
 		<li class="headerCategory"><a href="#">픽셀 플러스</a></li>
+		<li class="headerCategory"><a href="#">인기상품</a></li>
 		<li class="headerCategory"><a href="#">일반상품</a></li>
-		<li class="headerCategory"><a href="#">새로 등록된 상품</a></li>
 		<li class="headerCategory"><a href="#">무료나눔</a></li>
 	</ul>
 </div>

@@ -53,7 +53,7 @@ public class ProductController {
 		return "sellForm";
 	}
 	
-	//스마트에디터 사진업로드
+	//스마트에디터 사진업로드(사업자판매와 일반판매 모두 같이사용합니다)
 	@RequestMapping(value = "/sell/fileUpload", method = RequestMethod.POST)
 	public String fileUpload(Model model, MultipartRequest multipartRequest, HttpServletRequest request) throws IOException{
 		System.out.println("/sell/fileUpload 메서드");
@@ -80,6 +80,7 @@ public class ProductController {
 		return "client_product/file_upload";
 	}
 	
+	//일반판매글 등록처리
 	@RequestMapping(value="/sell/sellProc", method=RequestMethod.POST)
 	public String sellFormProc(
 			CommandMap map,
@@ -89,6 +90,15 @@ public class ProductController {
 		System.out.println(file.getOriginalFilename());
 		
 		return "resultJsp";
+	}
+	
+	//일반상품(일반판매) 리스트
+	@RequestMapping("/products/goods")
+	public String productList(
+			@RequestParam(value="ca", required=false) int category_num) {
+		
+		
+		return "client_product/productList";
 	}
 	
 	
