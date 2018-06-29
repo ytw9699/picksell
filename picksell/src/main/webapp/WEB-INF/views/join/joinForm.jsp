@@ -27,13 +27,22 @@ body{ overflow-x:hidden;}
 </style>
 </head>
 <body>
+<script>
+function checkbox(){ 
+	if(document.getElementById("checkbox").checked ){
+	  document.getElementById("c1_next").disabled = false;
+	}  else {
+	document.getElementById("c1_next").disabled = true;
+	}
+}
+</script>
 
 <div id="container">
 <div id="c1">
  	<p>회원가입</p>
 	<p> 1.약관동의 2.가입방법선택 3.정보입력</p>
-	<input type="checkbox" name="agree"/>동의
-<p><input type="button" value="다음" onclick="Animate2id('#c2','easeInOutExpo'); return false" />
+	<input type="checkbox" id="checkbox" name="agree" onchange="checkbox()"/>동의
+<p><input type="button" value="다음" id ="c1_next" onclick="Animate2id('#c2','easeInOutExpo'); return false" disabled="disabled" />
 </div>
 <div id="c2">
  <p>회원가입</p>
@@ -49,6 +58,38 @@ body{ overflow-x:hidden;}
 <p><input type="button" value="이전" onclick="Animate2id('#c1'); return false" />
 </div>
 <div id="c3">
+  <form method="post">
+	<input type="hidden" name="kind" value="0"/>
+	<!-- 일반회원0  -->
+	<p>회원가입</p>
+    <p> 1.약관동의 2.가입방법선택 3.정보입력</p>
+	<br/>
+	*선택정보는 입력하지 않아도 아래 완료 버튼을 통해 가입하실 수 있습니다		
+	<br/>
+	<br/>
+	 아이디<input type="text" name="id" />
+	<br/>
+        비밀번호<input type="password" name="password" id="password"  onkeyup="passwordsCheck()" />
+    <br/>
+	비밀번호 재확인<input type="password" name="passwordCheck" id="passwordCheck" onkeyup="passwordsCheck()" />&nbsp;<span id="passwordCheckText"></span>
+	<br/>
+	이름<input type="text" name="name" />
+	<br/>
+	이메일<input type="text" name="email" id="email" /><!--  onkeyup="emailCheck()"/>&nbsp;<span id="emailCheckText"></span> -->
+	<br/>
+	주소(선택)<input type="text" name="address" />
+	<br/>
+	계좌번호(선택)<input type="text" name="account" placeholder=" -를 빼고 입력해주세요"/>
+	<br/>
+	예금주(선택)<input type="text" name="account_name" />
+	<br/>
+	은행명(선택)<input type="text" name="bank" />
+	<br/>
+	<input type="submit" value="가입완료"/>
+	</form>
+<p><input type="button" value="이전" onclick="Animate2id('#c2'); return false" /></p>
+</div>
+<div id="c4">
   <form method="post">
 	<input type="hidden" name="kind" value="0"/>
 	<!-- 일반회원0  -->
