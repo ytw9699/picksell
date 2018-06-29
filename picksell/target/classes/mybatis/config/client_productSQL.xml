@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="client_product">
+
+	<insert id="insertProduct" parameterType="hashmap">
+		insert into ps_product(product_num,
+								category_num,
+								seller_id,
+								howtosell,
+								hitcount,
+								stock,
+								product_regdate,
+								deal_status,
+								board_status,
+								content,
+								first_img,
+								subject,
+								product_status,
+								price) valuse(product_seq.NEXTVAL,
+												#{category_num},
+												#{seller_id},
+												#{howtosell},
+												0,
+												#{stock},
+												sysdate,
+												0,
+												0,
+												#{content},
+												#{first_img},
+												#{subject},
+												#{product_status},
+												#{price})
+	</insert>
+</mapper>

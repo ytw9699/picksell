@@ -31,6 +31,11 @@
 		<put-attribute name="body" value="/WEB-INF/views/client_product/sellPlusForm.jsp" />
 	</definition>
 	
+	<!-- 일반상품리스트 -->
+	<definition name="productList" extends="default">
+		<put-attribute name="body" value="/WEB-INF/views/client_product/productList.jsp" />
+	</definition>
+	
 
 </tiles-definitions>
 	

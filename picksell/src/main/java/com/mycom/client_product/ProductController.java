@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Calendar;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
@@ -24,18 +25,17 @@ public class ProductController {
 	/*픽셀플러스 인기상품 전체보기
 	새로등록된 플러스상품 전체보기
 	새로등록된 일반상품 전체보기
-
 	상품등록폼(메인에서)
-
 	ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
 	픽셀플러스(헤더에서) -> 카테고리 분류있음
 	일반상품(헤더에서) -> 카테고리 분류있음
 	새로등록된상품(헤더에서) -> 카테고리 분류없음
-	
 	카테고리별 
-	DD
 	*/
 	//등록폼: 판매방식확인 -> 등록폼 -> 확인 
+	
+	@Resource(name="productService")
+	private ProductService productService;
 	
 	@RequestMapping("/sell/howto")
 	public String howtosell() {
@@ -84,10 +84,24 @@ public class ProductController {
 	@RequestMapping(value="/sell/sellProc", method=RequestMethod.POST)
 	public String sellFormProc(
 			CommandMap map,
-			@RequestParam("first_img") MultipartFile file) {
+			@RequestParam("first_img") MultipartFile file,
+			HttpServletRequest request) throws IOException {
 		
 		System.out.println(map.getMap());
-		System.out.println(file.getOriginalFilename());
+		//대표이미지(썸네일) 업로드규칙은 자신의아이디+현재시간+타입
+		String imgFileName = file.getOriginalFilename();
+		String imgFileType = imgFileName.substring(imgFileName.lastIndexOf("."), imgFileName.length());
+		Calendar cal = Calendar.getInstance();
+		String replaceName = "세션아이디"+cal.getTimeInMillis()+imgFileType;
+		
+		//대표이미지 업로드
+		String path = request.getSession().getServletContext().getRealPath("/")+File.separator+"resources/productUpload";
+		File uploadFirstImg = new File(path, replaceName);
+		file.transferTo(uploadFirstImg);
+		//System.out.println(path); 경로확인
+		map.put("first_img", replaceName);
+		
+		productService.insertProduct(map.getMap());
 		
 		return "resultJsp";
 	}
@@ -95,8 +109,10 @@ public class ProductController {
 	//일반상품(일반판매) 리스트
 	@RequestMapping("/products/goods")
 	public String productList(
-			@RequestParam(value="ca", required=false) int category_num) {
+			@RequestParam(value="ca", required=false, defaultValue="0") int category_num) {
 		
+		//카테고리0 일때 전체상품카테고리
+		//카테고리가0이 아니면 해당카테고리에 대한 모든 상품
 		
 		return "client_product/productList";
 	}
