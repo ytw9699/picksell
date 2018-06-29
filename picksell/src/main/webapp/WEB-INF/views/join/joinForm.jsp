@@ -21,6 +21,7 @@ body{ overflow-x:hidden;}
 #c1{width:2000px; height:100%; float:left; background-color: white; padding: 25px;}
 #c2{width:2000px; height:100%; float:left; background-color: white; padding: 50px;}
 #c3{width:2000px; height:100%; float:left; background-color: white; padding: 50px;}
+#c4{width:2000px; height:100%; float:left; background-color: white; padding: 50px;}
 .contentDiv {
     width: 80%;
 }
@@ -52,7 +53,7 @@ function checkbox(){
  <img src="/picksell/resources/img/personalPurchase.png" onclick="Animate2id('#c3','easeInOutExpo'); return false"  >
  </a>
  <a href="/picksell/joinForm">
- <img src="/picksell/resources/img/businessPurchase.png" onclick="Animate2id('#c3','easeInOutExpo'); return false"  >
+ <img src="/picksell/resources/img/businessPurchase.png" onclick="Animate2id('#c4','easeInOutExpo'); return false"  >
  </a>
  </p>
 <p><input type="button" value="이전" onclick="Animate2id('#c1'); return false" />
@@ -116,6 +117,10 @@ function checkbox(){
 	예금주(선택)<input type="text" name="account_name" />
 	<br/>
 	은행명(선택)<input type="text" name="bank" />
+	<br/>
+	사업자등록번호<input type="text" name="business_number" />
+	<br/>
+	상호명<input type="text" name="business_name" />
 	<br/>
 	<input type="submit" value="가입완료"/>
 	</form>
