@@ -3,3 +3,18 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
+<<<<<<< HEAD
+=======
+<mapper namespace="adminSingo">
+
+	<resultMap type="AdminSingoModel" id="singoRes">
+		<result property="singo_num" column="singo_num"/>
+		<result property="product_num" column="product_num"/>
+		<result property="singoee" column="singoee"/>
+		<result property="singo_writer" column="singo_writer"/>
+		<result property="singo_regdate" column="singo_regdate"/>
+		<result property="singo_content" column="singo_content"/>
+	</resultMap>
+		
+</mapper>
+>>>>>>> master

@@ -2,4 +2,28 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<<<<<<< HEAD
  
+=======
+
+<mapper namespace="adminProducts">
+
+	<resultMap type="AdminSellModel" id="productsRes">
+		<result property="product_num" column="product_num"/>
+		<result property="category_num" column="category_num"/>
+		<result property="seller_id" column="seller_id"/>
+		<result property="howtosell" column="howtosell"/>
+		<result property="hitcount" column="hitcount"/>
+		<result property="stock" column="stock"/>
+		<result property="product_regdate" column="product_regdate"/>
+		<result property="deal_status" column="deal_status"/>
+		<result property="board_status" column="board_status"/>
+		<result property="content" column="content"/>
+		<result property="first_img" column="first_img"/>
+		<result property="subject" column="subject"/>
+		<result property="product_status" column="product_status"/>
+		<result property="price" column="price"/>
+	</resultMap>
+	
+</mapper>
+>>>>>>> master

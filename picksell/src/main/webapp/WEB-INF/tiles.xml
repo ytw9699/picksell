@@ -6,17 +6,18 @@
 
 <tiles-definitions>
 
-	<!-- 테스트용 타일즈 레이아웃-->
+	<!-- 클라이언트 타일즈 레이아웃 -->
 	<definition name="default" template="/WEB-INF/views/layout/client/layout.jsp">
 		<put-attribute name="header" value="/WEB-INF/views/layout/client/header.jsp" />
 		<put-attribute name="footer" value="/WEB-INF/views/layout/client/footer.jsp" />
 	</definition>
 	
-	<!-- 테스트용 타일즈 페이지 -->
+	<!-- 테스트용 -->
 	<definition name="testForm" extends="default">
 		<put-attribute name="body" value="/WEB-INF/views/testTiles.jsp" />
 	</definition>
 	
+<<<<<<< HEAD
 	<!-- admin -->
 	<definition name="admin" template="/WEB-INF/views/layout/admin/layout.jsp">
 		<put-attribute name="menu" value="/WEB-INF/views/layout/admin/menu.jsp"/>
@@ -32,6 +33,39 @@
 	<definition name="adminMemberDetail" extends="admin">
 		<put-attribute name="body" value="/WEB-INF/views/admin_member/adminMemberDetail.jsp"/>
 	</definition>
+=======
+	<!-- 판매하기(판매방식선택) -->
+	<definition name="howtosell" extends="default">
+		<put-attribute name="body" value="/WEB-INF/views/client_product/howtosell.jsp" />
+	</definition>
+	
+	<!-- 판매하기폼(일반) -->
+	<definition name="sellForm" extends="default">
+		<put-attribute name="body" value="/WEB-INF/views/client_product/sellForm.jsp" />
+	</definition>
+	<!-- 판매하기폼(사업자) -->
+	<definition name="sellPlusForm" extends="default">
+		<put-attribute name="body" value="/WEB-INF/views/client_product/sellPlusForm.jsp" />
+	</definition>
+	
+	<!-- 메인 -->
+	<definition name="main" extends="default">
+		<put-attribute name="body" value="/WEB-INF/views/main/main.jsp" />
+	</definition>
+	
+	<!-- 회원가입 -->
+	<definition name="joinForm" extends="default">
+		<put-attribute name="header" value="/WEB-INF/views/layout/client/joinHeader.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/join/joinForm.jsp" />
+	</definition>
+	
+	<!-- 로긴폼 -->
+	<definition name="loginForm" extends="default">
+		<put-attribute name="header" value="/WEB-INF/views/layout/client/joinHeader.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/login/loginForm.jsp" />
+	</definition>
+	
+>>>>>>> master
 
 </tiles-definitions>
 	
