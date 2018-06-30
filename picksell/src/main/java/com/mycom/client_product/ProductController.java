@@ -3,7 +3,11 @@ package com.mycom.client_product;
 import java.io.File;
 import java.io.IOException;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
@@ -24,24 +28,25 @@ public class ProductController {
 	/*픽셀플러스 인기상품 전체보기
 	새로등록된 플러스상품 전체보기
 	새로등록된 일반상품 전체보기
-
 	상품등록폼(메인에서)
-
 	ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
 	픽셀플러스(헤더에서) -> 카테고리 분류있음
 	일반상품(헤더에서) -> 카테고리 분류있음
 	새로등록된상품(헤더에서) -> 카테고리 분류없음
-	
 	카테고리별 
-	DD
 	*/
 	//등록폼: 판매방식확인 -> 등록폼 -> 확인 
 	
+	@Resource(name="productService")
+	private ProductService productService;
+	
+	//상품등록 진입점 
 	@RequestMapping("/sell/howto")
 	public String howtosell() {
 		return "howtosell";
 	}
 	
+	//상품등록폼(일반판매)
 	@RequestMapping("/sell/{level}")
 	public String sellForm(
 			@PathVariable("level") String howtosell,
@@ -53,7 +58,7 @@ public class ProductController {
 		return "sellForm";
 	}
 	
-	//스마트에디터 사진업로드
+	//스마트에디터 사진업로드(사업자판매와 일반판매 모두 같이사용합니다)
 	@RequestMapping(value = "/sell/fileUpload", method = RequestMethod.POST)
 	public String fileUpload(Model model, MultipartRequest multipartRequest, HttpServletRequest request) throws IOException{
 		System.out.println("/sell/fileUpload 메서드");
@@ -80,19 +85,55 @@ public class ProductController {
 		return "client_product/file_upload";
 	}
 	
+	//일반판매글 등록처리
 	@RequestMapping(value="/sell/sellProc", method=RequestMethod.POST)
 	public String sellFormProc(
 			CommandMap map,
-			@RequestParam("first_img") MultipartFile file) {
+			@RequestParam("first_img") MultipartFile file,
+			HttpServletRequest request) throws IOException {
 		
 		System.out.println(map.getMap());
-		System.out.println(file.getOriginalFilename());
+		//대표이미지(썸네일) 업로드규칙은 자신의아이디+현재시간+타입
+		String imgFileName = file.getOriginalFilename();
+		String imgFileType = imgFileName.substring(imgFileName.lastIndexOf("."), imgFileName.length());
+		Calendar cal = Calendar.getInstance();
+		String replaceName = "세션아이디"+cal.getTimeInMillis()+imgFileType;
+		
+		//대표이미지 업로드
+		String path = request.getSession().getServletContext().getRealPath("/")+File.separator+"resources/productUpload";
+		File uploadFirstImg = new File(path, replaceName);
+		file.transferTo(uploadFirstImg);
+		//System.out.println(path); 경로확인
+		map.put("first_img", replaceName);
+		
+		productService.insertProduct(map.getMap());
 		
 		return "resultJsp";
 	}
 	
+	//일반상품(일반판매) 리스트
+	@RequestMapping("/products/goods")
+	public String productList(
+			@RequestParam(value="ca", required=false, defaultValue="0") int category_num,
+			@RequestParam(value="od", required=false, defaultValue="0") int orderMethod,
+			Model model) {
+		
+		//정렬은 0 > 최신순, 1 > 낮은가격순, 2 > 높은가격순
+		
+		//카테고리0 일때 전체상품카테고리 / 카테고리0 아닐때 해당 카테고리리스트
+		//카테고리가0이 아니면 해당카테고리에 대한 모든 상품
+		Map<String, Object> parameterMap = new HashMap<String, Object>();
+		parameterMap.put("category", category_num);
+		parameterMap.put("orderMethod", orderMethod);
+		List<Map<String, Object>> resultList = productService.getNomalProductList(parameterMap);
+		
+		model.addAttribute("currentCategory", category_num);
+		model.addAttribute("resultProductList", resultList);
+		
+		return "productList";
+	}
 	
-	
+	//상품등록폼(플러스상품)
 	@RequestMapping("/sellPlus")
 	public String sellPlusForm(
 			Model model) {

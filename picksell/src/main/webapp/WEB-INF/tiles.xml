@@ -43,9 +43,16 @@
 	<definition name="sellForm" extends="default">
 		<put-attribute name="body" value="/WEB-INF/views/client_product/sellForm.jsp" />
 	</definition>
+  
 	<!-- 판매하기폼(사업자) -->
 	<definition name="sellPlusForm" extends="default">
 		<put-attribute name="body" value="/WEB-INF/views/client_product/sellPlusForm.jsp" />
+	</definition>
+	
+
+	<!-- 일반상품리스트 -->
+	<definition name="productList" extends="default">
+		<put-attribute name="body" value="/WEB-INF/views/client_product/productList.jsp" />
 	</definition>
 	
 	<!-- 메인 -->
@@ -65,7 +72,6 @@
 		<put-attribute name="body" value="/WEB-INF/views/login/loginForm.jsp" />
 	</definition>
 	
-
 
 </tiles-definitions>
 	
