@@ -46,8 +46,9 @@ body{ overflow-x:hidden;}
 		<form id="productForm"  method="post" enctype="multipart/form-data">
 		
 		<input type="hidden" name="seller_id" value="플러스판매자test" />
+		<input type="hidden" name="howtosell" value="${howtosell }" />
 		<input type="hidden" name="product_status" value="0" />
-		<input type="hidden" name="stock" value="1" />
+		<!-- <input type="hidden" name="stock" value="1" /> -->
 		
 		<!-- 제품이미지 업로드단계 -->
 		<div id="c1">

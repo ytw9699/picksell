@@ -55,6 +55,11 @@
 		<put-attribute name="body" value="/WEB-INF/views/client_product/productList.jsp" />
 	</definition>
 	
+	<!-- 플러스상품리스트 -->
+	<definition name="productPlusList" extends="default">
+		<put-attribute name="body" value="/WEB-INF/views/client_product/productPlusList.jsp" />
+	</definition>
+	
 	<!-- 메인 -->
 	<definition name="main" extends="default">
 		<put-attribute name="body" value="/WEB-INF/views/main/main.jsp" />

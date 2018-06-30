@@ -12,23 +12,23 @@
 		<div class="categoryTitle">
 		</div>
 		<div class="categoryList">
-			<span><a href="/picksell/products/goods">모든상품</a></span>
-			<span><a href="/picksell/products/goods?ca=1">전자제품</a></span>
-			<span><a href="/picksell/products/goods?ca=2">패션/의류</a></span>
-			<span><a href="/picksell/products/goods?ca=3">패션/잡화</a></span>
-			<span><a href="/picksell/products/goods?ca=4">화장품/미용</a></span>
-			<span><a href="/picksell/products/goods?ca=5">스포츠/레저</a></span>
-			<span><a href="/picksell/products/goods?ca=6">유아동/출산</a></span>
-			<span><a href="/picksell/products/goods?ca=7">완구/문구/취미</a></span>
-			<span><a href="/picksell/products/goods?ca=8">도서/음반/DVD</a></span>
-			<span><a href="/picksell/products/goods?ca=9">가구/인테리어</a></span>
-			<span><a href="/picksell/products/goods?ca=10">생활/건강</a></span>
+			<span><a href="/picksell/products/plus">모든상품</a></span>
+			<span><a href="/picksell/products/plus?ca=1">전자제품</a></span>
+			<span><a href="/picksell/products/plus?ca=2">패션/의류</a></span>
+			<span><a href="/picksell/products/plus?ca=3">패션/잡화</a></span>
+			<span><a href="/picksell/products/plus?ca=4">화장품/미용</a></span>
+			<span><a href="/picksell/products/plus?ca=5">스포츠/레저</a></span>
+			<span><a href="/picksell/products/plus?ca=6">유아동/출산</a></span>
+			<span><a href="/picksell/products/plus?ca=7">완구/문구/취미</a></span>
+			<span><a href="/picksell/products/plus?ca=8">도서/음반/DVD</a></span>
+			<span><a href="/picksell/products/plus?ca=9">가구/인테리어</a></span>
+			<span><a href="/picksell/products/plus?ca=10">생활/건강</a></span>
 		</div>
 	</div>
 	<div class="orderMethodWrap">
-		<span><a href="/picksell/products/goods?ca=${currentCategory }&od=0">최신순</a></span>
-		<span><a href="/picksell/products/goods?ca=${currentCategory }&od=1">낮은가격순</a></span>
-		<span><a href="/picksell/products/goods?ca=${currentCategory }&od=2">높은가격순</a></span>
+		<span><a href="/picksell/products/plus?ca=${currentCategory }&od=0">최신순</a></span>
+		<span><a href="/picksell/products/plus?ca=${currentCategory }&od=1">낮은가격순</a></span>
+		<span><a href="/picksell/products/plus?ca=${currentCategory }&od=2">높은가격순</a></span>
 	</div>
 	<div class="contentWrap">
 		<c:forEach var="product" items="${resultProductList }">
