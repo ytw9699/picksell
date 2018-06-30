@@ -50,7 +50,24 @@
 	<c:if test="${fn:length(orderList) le 0}">
 		<tr><td colspan="9" style="text-align:center;">등록된 상품이 없습니다</td></tr>
 	</c:if> 
-
+	
+	<div class="row">
+		<div style="text-align:center;">
+			<div id="dataTables-example_filter" class="dataTables_filter">
+				<form action="">
+					<select class="form-control" name="searchNum" id="searchNum">
+						<option value="0">구매자</option>
+						<option value="1">상태</option>
+						<option value="2">택배사</option>
+					</select>
+					<input class="form-control" type="text" name="isSearch" id="isSearch"/>
+					<span>
+						<button type="submit" class="btn btn-default">검색</button>
+					</span>
+				</form>
+			</div>							
+		</div>				
+	</div>
 
 </body>
 </html>

@@ -47,6 +47,14 @@ public class AdminPaymentController {
 		
 	}
 	
+	@RequestMapping("/adminMain")
+	public ModelAndView adminMain() {
+		
+		mav.setViewName("admin_order/adminMain");
+		return mav;
+		
+	}
+	
 	@RequestMapping("/search")
 	public ModelAndView orderSearch() {
 		
