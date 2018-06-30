@@ -17,7 +17,7 @@
 		<put-attribute name="body" value="/WEB-INF/views/testTiles.jsp" />
 	</definition>
 	
-<<<<<<< HEAD
+
 	<!-- admin -->
 	<definition name="admin" template="/WEB-INF/views/layout/admin/layout.jsp">
 		<put-attribute name="menu" value="/WEB-INF/views/layout/admin/menu.jsp"/>
@@ -33,7 +33,7 @@
 	<definition name="adminMemberDetail" extends="admin">
 		<put-attribute name="body" value="/WEB-INF/views/admin_member/adminMemberDetail.jsp"/>
 	</definition>
-=======
+
 	<!-- 판매하기(판매방식선택) -->
 	<definition name="howtosell" extends="default">
 		<put-attribute name="body" value="/WEB-INF/views/client_product/howtosell.jsp" />
@@ -65,7 +65,7 @@
 		<put-attribute name="body" value="/WEB-INF/views/login/loginForm.jsp" />
 	</definition>
 	
->>>>>>> master
+
 
 </tiles-definitions>
 	
