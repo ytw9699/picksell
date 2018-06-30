@@ -39,6 +39,40 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</if>
 	</select>
 	
+	<select id="selectPlusProductList" resultType="hashmap" parameterType="hashmap">
+		<if test='category == "0" '>
+			select * from ps_product 
+			where howtosell = 2
+			<choose>
+				<when test='orderMethod == "0" '>
+				order by product_regdate desc
+				</when>
+				<when test='orderMethod == "1" '>
+				order by price asc
+				</when>
+				<when test='orderMethod == "2" '>
+				order by price desc
+				</when>
+			</choose>
+		</if>
+		<if test='category != "0" '>
+			select * from ps_product 
+			where howtosell = 2 and category_num = #{category}
+			<choose>
+				<when test='orderMethod == "0" '>
+				order by product_regdate desc
+				</when>
+				<when test='orderMethod == "1" '>
+				order by price asc
+				</when>
+				<when test='orderMethod == "2" '>
+				order by price desc
+				</when>
+			</choose>
+			
+		</if>
+	</select>
+	
 	<insert id="insertProduct" parameterType="hashmap">
 		insert into ps_product(product_num,
 								category_num,
