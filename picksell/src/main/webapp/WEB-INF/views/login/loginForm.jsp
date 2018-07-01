@@ -74,10 +74,10 @@ function formIdSave(){
 	<form action="login" name="loginForm" id="loginForm" method="post" onsubmit="return mberValiCheck('${resultID}')">
 	     <input type="hidden" name=formID id="formID" value="${formID}"/>
 		<p>아이디 <input type="text" name="ID" id="ID" value="${cookieID}"/>&nbsp;<span id="userIdCheckText"></span>
-		<p>비밀번호 <input type="password" name="PASSWORD" id="PASSWORD"/>&nbsp;<span id="passwordCheckText"></span>
-		<p><input type="checkbox" name="idSave" id="idSave" value="save" />아이디,비밀번호 저장
-		<input type="submit" value="로그인" />
-		<p><a href="#">계정을 잊어버리셨나요?</a></p>
+		<p>비밀번호 <input type="password" name="PASSWORD" id="PASSWORD" value="${cookiePW}"/>&nbsp;<span id="passwordCheckText"></span>
+		<p><input type="checkbox" name="idSave" id="idSave" value="save" />아이디/비밀번호 유지
+		<P><input type="submit" value="로그인" /></P>
+		<p><a href="#">아이디/비밀번호 찾기</a></p>
 	</form>
 </center>
 <c:if test="${formID != null}">

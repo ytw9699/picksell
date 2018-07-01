@@ -53,8 +53,10 @@ import com.mycom.utils.FileUpload;
 		CookieBox CookieBox = new CookieBox(request);
 		
 		String ID = CookieBox.getValue("ID");
+		String PASSWORD = CookieBox.getValue("PW");
 		
 		model.addAttribute("cookieID", ID);
+		model.addAttribute("cookiePW", PASSWORD);
 		
 		return "loginForm";
 	}
@@ -89,6 +91,7 @@ import com.mycom.utils.FileUpload;
 		if((request.getParameter("idSave")) != null) {
 		if(((String)request.getParameter("idSave")).equals("save")) {
 			response.addCookie(CookieBox.createCookie("ID",ID));//ID 쿠키 생성
+			response.addCookie(CookieBox.createCookie("PW",PASSWORD));//ID 쿠키 생성
 		}
 		}
 		}
