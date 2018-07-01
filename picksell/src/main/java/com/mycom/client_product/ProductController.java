@@ -225,15 +225,22 @@ public class ProductController {
 		
 		
 		//코멘트리스트++
-		
+		List<Map<String, Object>> resultCommentList = productService.getProductCommentList(product_num);
+		System.out.println("코멘트리스트사이즈:" + resultCommentList.size());
 		//구매신청리스트++
+		List<Map<String, Object>> resultPurchaseList = productService.getProductPurchaseList(product_num);
+		//System.out.println("구매신청사이즈:" + resultPurchaseList.size());
 		
 		//디테일 정보 확인
 		//System.out.println(resultMap);
-		model.addAttribute("product_num", product_num);
-		model.addAttribute("resultObject", resultMap);
-		model.addAttribute("currentPage", currentPage);
 		model.addAttribute("category_num", category_num);
+		model.addAttribute("product_num", product_num);
+		model.addAttribute("currentPage", currentPage);
+
+		//상품상세정보
+		model.addAttribute("resultObject", resultMap);
+		//상품문의리스트
+		model.addAttribute("resultCommentList", resultCommentList);
 		
 		return "productDetail";
 	}
@@ -243,6 +250,7 @@ public class ProductController {
 	public String writeComment(CommandMap map, Model model) {
 		
 		System.out.println(map.getMap());
+		productService.insertProductComment(map.getMap());
 		
 		model.addAttribute("redirect", 1);
 		model.addAttribute("category_num", map.getMap().get("category_num"));
