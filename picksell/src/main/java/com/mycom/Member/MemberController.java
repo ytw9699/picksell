@@ -102,8 +102,8 @@ import com.mycom.utils.FileUpload;
 	}
 		@RequestMapping("/logout")
 	public String logout(HttpSession session) {
-		session.invalidate();
-		return "redirect:/loginForm";
+		session.invalidate();//로그아웃후 다시 메인으로
+		return "redirect:/main";
 		}
 	}
 	
