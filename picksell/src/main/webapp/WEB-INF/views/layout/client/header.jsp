@@ -90,6 +90,7 @@ li.headerCategory {
 		
 	
    </span>
+
 </div>
 <div class="headerCenter">
 	<div class="mainLogoWrap">

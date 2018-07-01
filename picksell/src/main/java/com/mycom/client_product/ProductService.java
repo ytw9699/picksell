@@ -18,17 +18,14 @@ public class ProductService implements ProductDao {
 	public void insertProduct(Map<String, Object> map) {
 		sqlMapper.insert("client_product.insertProduct", map);
 	}
-	
 	//판매글 리스트(일반판매)
 	public List<Map<String, Object>> getNomalProductList(Map<String, Object> map){
 		return sqlMapper.selectList("client_product.selectNomalProductList", map);
 	}
-	
 	//판매글 리스트(플러스판매)
 	public List<Map<String, Object>> getPlusProductList(Map<String, Object> map){
 		return sqlMapper.selectList("client_product.selectPlusProductList", map);
 	}
-	
 	//판매글 상세보기(일반판매+플러스판매)
 	public Map<String, Object> getProductDetail(Map<String, Object> map){
 		return sqlMapper.selectOne("client_product.selectProductOne", map);
@@ -37,5 +34,24 @@ public class ProductService implements ProductDao {
 	public void updateProductHitcount(Map<String, Object> map) {
 		sqlMapper.update("client_product.updateProductHitcount", map);
 	}
-
+	//판매글 문의작성
+	public void insertProductComment(Map<String, Object> map) {
+		sqlMapper.insert("client_product.insertProductComment", map);
+	}
+	//판매글 문의리스트
+	public List<Map<String, Object>> getProductCommentList(int product_num){
+		return sqlMapper.selectList("client_product.selectProductComment", product_num);
+	}
+	//판매글 구매신청
+	public void insertProductPurchaseList(Map<String, Object> map) {
+		sqlMapper.insert("client_product.insertPurchaseList", map);
+	}
+	//판매글 구매신청취소
+	public void deleteProductPurchaseList(Map<String, Object> map) {
+		sqlMapper.delete("client_product.deletePurchaseList", map);
+	}
+	//판매글 구매신청리스트
+	public List<Map<String, Object>> getProductPurchaseList(int product_num){
+		return sqlMapper.selectList("client_product.selectPurchaseList", product_num);
+	}
 }

@@ -223,12 +223,35 @@ public class ProductController {
 		//두번째는 내가 구매신청을 했었는지 그래서 대기중인지
 		//세번째는 내가 구매신청을 수락받았는지 그래서 구매하기가 가능한지
 		
+		
+		//코멘트리스트++
+		List<Map<String, Object>> resultCommentList = productService.getProductCommentList(product_num);
+		System.out.println("코멘트리스트사이즈:" + resultCommentList.size());
+		//System.out.println("코멘트리스트사이즈:" + resultCommentList.get(0));
+		//구매신청리스트++
+		List<Map<String, Object>> resultPurchaseList = productService.getProductPurchaseList(product_num);
+		//System.out.println("구매신청사이즈:" + resultPurchaseList.size());
+		model.addAttribute("alreadyPurchase", false);
+		for(int i = 0 ; i < resultPurchaseList.size() ; i++) {
+			if(resultPurchaseList.get(i).get("BUYER_ID").equals("임시구매자")) {
+				model.addAttribute("alreadyPurchase", true);
+				break;
+			}
+		}
+		
+		
 		//디테일 정보 확인
 		//System.out.println(resultMap);
-		model.addAttribute("product_num", product_num);
-		model.addAttribute("resultObject", resultMap);
-		model.addAttribute("currentPage", currentPage);
 		model.addAttribute("category_num", category_num);
+		model.addAttribute("product_num", product_num);
+		model.addAttribute("currentPage", currentPage);
+
+		//상품상세정보
+		model.addAttribute("resultObject", resultMap);
+		//상품문의리스트
+		model.addAttribute("resultCommentList", resultCommentList);
+		
+		
 		
 		return "productDetail";
 	}
@@ -238,6 +261,7 @@ public class ProductController {
 	public String writeComment(CommandMap map, Model model) {
 		
 		System.out.println(map.getMap());
+		productService.insertProductComment(map.getMap());
 		
 		model.addAttribute("redirect", 1);
 		model.addAttribute("category_num", map.getMap().get("category_num"));
@@ -247,7 +271,46 @@ public class ProductController {
 		return "client_product/redirecting";
 	}
 	
+	//구매신청하기
+	@RequestMapping("/products/purchseRequest/{ca}/{pn}/{cp}")
+	public String purchaseRequest(
+			@PathVariable("pn") int product_num,
+			@PathVariable("ca") int category_num,
+			@PathVariable("cp") int currentPage,
+			HttpServletRequest request,
+			Model model) {
+		
+		//세션아이디 임시구매자
+		Map<String, Object> parameterMap = new HashMap<String, Object>();
+		parameterMap.put("product_num", product_num);
+		parameterMap.put("buyer_id", "임시구매자");
+		
+		productService.insertProductPurchaseList(parameterMap);
+		
+		model.addAttribute("redirect", 2);
+		model.addAttribute("category_num", category_num);
+		model.addAttribute("product_num", product_num);
+		model.addAttribute("currentPage", currentPage);
+		return "client_product/redirecting";
+	}
 	
-
-	
+	@RequestMapping("/products/purchseRequestCancel/{ca}/{pn}/{cp}")
+	public String purchaseRequestCancel(
+			@PathVariable("pn") int product_num,
+			@PathVariable("ca") int category_num,
+			@PathVariable("cp") int currentPage,
+			HttpServletRequest request,
+			Model model) {
+		
+		Map<String, Object> parameterMap = new HashMap<String, Object>();
+		parameterMap.put("product_num", product_num);
+		parameterMap.put("buyer_id", "임시구매자");
+		productService.deleteProductPurchaseList(parameterMap);
+		
+		model.addAttribute("redirect", 4);
+		model.addAttribute("category_num", category_num);
+		model.addAttribute("product_num", product_num);
+		model.addAttribute("currentPage", currentPage);
+		return "client_product/redirecting";
+	}
 }

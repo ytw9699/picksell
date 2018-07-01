@@ -73,14 +73,16 @@
 					<input type="button" value="장바구니" disabled="disabled" />
 				</c:when>
 				<c:when test="${resultObject.HOWTOSELL == 2 }">
-					<input type="button" value="장바구니" />
+					<input type="button" value="장바구니" onclick="location.href='/picksell/cart/into/${category_num}/${product_num }/${currentPage }'" />
 				</c:when>
 			</c:choose>
-			
 			<!-- 구매신청하기버튼 -->
 			<c:choose>
-				<c:when test="${resultObject.DEAL_STATUS == 0 and resultObject.HOWTOSELL != 2 }">
-					<input type="button" value="구매신청하기" />
+				<c:when test="${resultObject.DEAL_STATUS == 0 and resultObject.HOWTOSELL != 2 and alreadyPurchase == false }">
+					<input type="button" value="구매신청하기" onclick="location.href='/picksell/products/purchseRequest/${category_num}/${product_num }/${currentPage }'" />
+				</c:when>
+				<c:when test="${alreadyPurchase == true }">
+					<input type="button" value="구매신청 취소하기" onclick="location.href='/picksell/products/purchseRequestCancel/${category_num}/${product_num }/${currentPage }'" />
 				</c:when>
 			</c:choose>
 			
@@ -104,9 +106,20 @@
 		<div class="commentWrap">
 			<span>상품문의 [개수]</span><input type="button" value="상품 문의하기" onclick="openCommentForm()" />
 			<div class="commentListWrap">
-				등록된 상품문의가 없습니다
-				<p>
-				내가쓴 상품문의는 판매자외의 다른사람이 볼 수 없습니다!
+				<c:choose>
+					<c:when test="${empty resultCommentList }">
+						등록된 상품문의가 없습니다
+						<p>
+						내가쓴 상품문의는 판매자외의 다른사람이 볼 수 없습니다!
+					</c:when>
+					<c:when test="${!empty resultCommentList }">
+						<c:forEach var="comment" items="${resultCommentList }">
+							<p>${comment.COMMENT_WRITER } .. ${comment.COMMENT_REGDATE } .. ${comment.COMMENT_CONTENT }
+						</c:forEach>
+					</c:when>
+				</c:choose>
+				
+				
 			</div>
 		</div>
 	</div>

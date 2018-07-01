@@ -64,6 +64,11 @@
 		<put-attribute name="body" value="/WEB-INF/views/client_product/productDetail.jsp" />
 	</definition>
 	
+	<!-- [장바구니] 장바구니리스트 -->
+	<definition name="basketList" extends="default">
+		<put-attribute name="body" value="/WEB-INF/views/client_basket/basketList.jsp" />
+	</definition>
+	
 	<!-- 메인 -->
 	<definition name="main" extends="default">
 		<put-attribute name="body" value="/WEB-INF/views/main/main.jsp" />
