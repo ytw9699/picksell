@@ -84,7 +84,7 @@ li.headerCategory {
 	<a href="#" id="linkOfMypage">마이페이지▼</a>|<a href="/picksell/logout">로그아웃</a>
 	</c:if>
 	<c:if test="${sessionId == null}">
-	|<a href="loginForm">로그인</a>
+	|<a href="/picksell/loginForm">로그인</a>
 	</c:if> 
 	|<a href="#">장바구니</a>
 		
@@ -93,7 +93,7 @@ li.headerCategory {
 </div>
 <div class="headerCenter">
 	<div class="mainLogoWrap">
-		<a href="main">
+		<a href="/picksell/main">
 		<img src="/picksell/resources/img/main_logo.png" class="mainLogo" />
 		</a>
 	</div>
