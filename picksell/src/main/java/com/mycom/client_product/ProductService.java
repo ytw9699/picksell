@@ -28,5 +28,14 @@ public class ProductService implements ProductDao {
 	public List<Map<String, Object>> getPlusProductList(Map<String, Object> map){
 		return sqlMapper.selectList("client_product.selectPlusProductList", map);
 	}
+	
+	//판매글 상세보기(일반판매+플러스판매)
+	public Map<String, Object> getProductDetail(Map<String, Object> map){
+		return sqlMapper.selectOne("client_product.selectProductOne", map);
+	}
+	//판매글 조회수증가(상세보기랑 같이)
+	public void updateProductHitcount(Map<String, Object> map) {
+		sqlMapper.update("client_product.updateProductHitcount", map);
+	}
 
 }

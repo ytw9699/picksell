@@ -5,6 +5,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="client_product">
 	
+	<select id="selectProductOne" resultType="hashmap" parameterType="hashmap">
+		select * from ps_product where product_num = #{product_num}
+	</select>
+	
 	<select id="selectNomalProductList" resultType="hashmap" parameterType="hashmap">
 		<if test='category == "0" '>
 			select * from ps_product 
@@ -102,4 +106,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 												#{product_status},
 												#{price})
 	</insert>
+	
+	<update id="updateProductHitcount" parameterType="hashmap">
+		update ps_product set hitcount = hitcount + 1 where product_num = #{product_num}
+	</update>
 </mapper>

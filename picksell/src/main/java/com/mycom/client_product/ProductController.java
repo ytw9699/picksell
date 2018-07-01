@@ -42,7 +42,7 @@ public class ProductController {
 	private ProductService productService;
 	
 	//페이징
-	private int currentPage = 1;	 
+	//private int currentPage = 1; //안쓰는변수 어노테이션으로 해결함
 	private int totalCount; 		 
 	private int blockCount = 10;	 
 	private int blockPage = 5; 	 
@@ -161,6 +161,7 @@ public class ProductController {
 		model.addAttribute("pagingHtml", pagingHtml);
 		model.addAttribute("currentCategory", category_num);
 		model.addAttribute("resultProductList", resultList);
+		model.addAttribute("currentPage", currentPageNumber);
 		
 		return "productList";
 	}
@@ -195,10 +196,32 @@ public class ProductController {
 		model.addAttribute("pagingHtml", pagingHtml);
 		model.addAttribute("currentCategory", category_num);
 		model.addAttribute("resultProductList", resultList);
+		model.addAttribute("currentPage", currentPageNumber);
 		
 		return "productPlusList";
 	}
 	
+	//상품 상세보기
+	@RequestMapping("/products/detail/{product_num}/{currentPage}")
+	public String productsDetail(
+			@PathVariable("product_num") int product_num,
+			@PathVariable("currentPage") int currentPage,
+			Model model,
+			HttpServletRequest request) {
+		
+		Map<String, Object> parameterMap = new HashMap<String, Object>();
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		parameterMap.put("product_num", product_num);
+		productService.updateProductHitcount(parameterMap);
+		
+		resultMap = productService.getProductDetail(parameterMap);
+		
+		System.out.println(resultMap);
+		model.addAttribute("resultObject", resultMap);
+		model.addAttribute("currentPage", currentPage);
+		
+		return "productDetail";
+	}
 	
 	
 

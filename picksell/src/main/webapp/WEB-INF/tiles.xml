@@ -49,7 +49,6 @@
 		<put-attribute name="body" value="/WEB-INF/views/client_product/sellPlusForm.jsp" />
 	</definition>
 	
-
 	<!-- 일반상품리스트 -->
 	<definition name="productList" extends="default">
 		<put-attribute name="body" value="/WEB-INF/views/client_product/productList.jsp" />
@@ -58,6 +57,11 @@
 	<!-- 플러스상품리스트 -->
 	<definition name="productPlusList" extends="default">
 		<put-attribute name="body" value="/WEB-INF/views/client_product/productPlusList.jsp" />
+	</definition>
+	
+	<!-- 상품상세보기(일반+플러스같이사용) -->
+	<definition name="productDetail" extends="default">
+		<put-attribute name="body" value="/WEB-INF/views/client_product/productDetail.jsp" />
 	</definition>
 	
 	<!-- 메인 -->
