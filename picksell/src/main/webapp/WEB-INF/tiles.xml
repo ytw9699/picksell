@@ -82,7 +82,7 @@
 	
 	<!-- 로긴폼 -->
 	<definition name="loginForm" extends="default">
-		<put-attribute name="header" value="/WEB-INF/views/layout/client/joinHeader.jsp" />
+		<put-attribute name="header" value="/WEB-INF/views/layout/client/loginFormHeader.jsp" />
 		<put-attribute name="body" value="/WEB-INF/views/login/loginForm.jsp" />
 	</definition>
 	
