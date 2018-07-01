@@ -90,8 +90,8 @@ import com.mycom.utils.FileUpload;
 		
 		if((request.getParameter("idSave")) != null) {
 		if(((String)request.getParameter("idSave")).equals("save")) {
-			response.addCookie(CookieBox.createCookie("ID",ID));//ID 쿠키 생성
-			response.addCookie(CookieBox.createCookie("PW",PASSWORD));//ID 쿠키 생성
+			response.addCookie(CookieBox.createCookie("ID",ID,999999999));//ID 쿠키 생성
+			response.addCookie(CookieBox.createCookie("PW",PASSWORD,999999999));//ID 쿠키 생성
 		}
 		}
 		}

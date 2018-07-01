@@ -52,6 +52,11 @@ public class CookieBox {
     	 //메소드 오버로딩1//쿠키의 이름과 값만 받아서 쿠키 객체 리턴
         //static이 붙어서 객체생성 필요없이 쿠키 객체생성
     }
+    public static Cookie createCookie(String name, String value,int maxAge) throws IOException {
+        Cookie cookie = new Cookie(name, URLEncoder.encode(value, "euc-kr"));
+        cookie.setMaxAge(maxAge);
+        return cookie;
+    }
     public static Cookie deleteCookie(String name, String value,int maxAge) throws IOException {
         Cookie cookie = new Cookie(name, URLEncoder.encode(value, "euc-kr"));
         cookie.setMaxAge(maxAge);
