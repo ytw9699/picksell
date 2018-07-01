@@ -36,7 +36,15 @@
 		<span class="cancel"><a href="#" onclick="closeCommentForm()">X</a></span>
 	</div>
 	<div class="formBody">
-		
+		<form action="/picksell/products/commentProc" method="post" id="commentForm">
+			<input type="hidden" name="product_num" value="${product_num }" />
+			<input type="hidden" name="currentPage" value="${currentPage }" />
+			<input type="hidden" name="category_num" value="${category_num }" />
+			<input type="hidden" name="comment_writer" value="상품문의작성자" />
+			<input type="hidden" name="step_num" value="0" />
+			<input type="text" name="comment_content" />
+			<input type="submit" value="작성" />
+		</form>
 	</div>
 </div>
 	<div class="contentWrap">
@@ -59,9 +67,31 @@
 			<span>가격: <fmt:formatNumber value="${resultObject.PRICE }" pattern="#,###.##" /> 원</span>
 		</div>
 		<div class="button_wrap">
-			<input type="button" value="장바구니" />
-			<input type="button" value="구매하기" />
-			<input type="button" value="구매신청하기" />
+			<!-- 장바구니버튼 -->
+			<c:choose>
+				<c:when test="${resultObject.HOWTOSELL != 2 }">
+					<input type="button" value="장바구니" disabled="disabled" />
+				</c:when>
+				<c:when test="${resultObject.HOWTOSELL == 2 }">
+					<input type="button" value="장바구니" />
+				</c:when>
+			</c:choose>
+			
+			<!-- 구매신청하기버튼 -->
+			<c:choose>
+				<c:when test="${resultObject.DEAL_STATUS == 0 and resultObject.HOWTOSELL != 2 }">
+					<input type="button" value="구매신청하기" />
+				</c:when>
+			</c:choose>
+			
+			<!-- 구매하기 + 구매수락일때를 생각해야함 -->
+			<c:choose>
+				<c:when test="${resultObject.HOWTOSELL == 2 }">
+					<input type="button" value="구매하기" />
+				</c:when>
+			</c:choose>
+			
+			
 		</div>
 		<div class="product_detail">
 			${resultObject.CONTENT }
