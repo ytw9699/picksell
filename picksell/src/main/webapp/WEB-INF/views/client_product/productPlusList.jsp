@@ -6,6 +6,11 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style>
+.productWrap {
+    display: inline-block;
+}
+</style>
 </head>
 <body>
 	<div class="categoryWrap">
@@ -37,7 +42,7 @@
 					<span class="productSeller">${product.SELLER_ID }</span>
 				</div>
 				<div class="firstImgWrap">
-					<a href="/picksell/products/detail/${product.PRODUCT_NUM }/${currentPage}">
+					<a href="/picksell/products/detail/${product.CATEGORY_NUM }/${product.PRODUCT_NUM }/${currentPage}">
 					<img src="/picksell/resources/productUpload/${product.FIRST_IMG }" style="width: 200px;" />
 					</a>
 				</div>
