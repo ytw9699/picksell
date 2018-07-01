@@ -106,11 +106,11 @@ li.headerCategory {
 <div id="mypage_menuBox">
 	<div id="menuBox-header"></div>
 	<div id="menuBox-body">
-	<span><a href="#">내 정보</a></span>
-	<span><a href="#">판매내역</a></span>
-	<span><a href="#">구매내역</a></span>
-	<span><a href="#">주문관리</a></span>
-	<span><a href="#">알림설정</a></span>
+		<span><a href="#">내 정보</a></span>
+		<span><a href="#">판매내역</a></span>
+		<span><a href="#">구매내역</a></span>
+		<span><a href="#">주문관리</a></span>
+		<span><a href="#">알림설정</a></span>
 	</div>
 </div>
 
