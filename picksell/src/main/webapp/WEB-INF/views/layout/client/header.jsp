@@ -96,15 +96,22 @@ li.headerCategory {
 <div class="headerBottom">
 	<ul class="bottomUL">
 		<li class="headerCategory totalCategory"><a href="#">전체카테고리</a></li>
-		<li class="headerCategory"><a href="#">픽셀 플러스</a></li>
-		<li class="headerCategory"><a href="#">일반상품</a></li>
-		<li class="headerCategory"><a href="#">새로 등록된 상품</a></li>
+		<li class="headerCategory"><a href="/picksell/products/plus">픽셀 플러스</a></li>
+		<li class="headerCategory"><a href="#">인기상품</a></li>
+		<li class="headerCategory"><a href="/picksell/products/goods">일반상품</a></li>
 		<li class="headerCategory"><a href="#">무료나눔</a></li>
+		<li class="headerCategory" style="float: right;"><a href="/picksell/sell/howto">물건 판매하기</a></li>
 	</ul>
 </div>
 <div id="mypage_menuBox">
 	<div id="menuBox-header"></div>
-	<div id="menuBox-body"></div>
+	<div id="menuBox-body">
+		<span><a href="#">내 정보</a></span>
+		<span><a href="#">판매내역</a></span>
+		<span><a href="#">구매내역</a></span>
+		<span><a href="#">주문관리</a></span>
+		<span><a href="#">알림설정</a></span>
+	</div>
 </div>
 
 <p>

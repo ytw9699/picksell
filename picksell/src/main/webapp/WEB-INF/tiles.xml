@@ -17,6 +17,23 @@
 		<put-attribute name="body" value="/WEB-INF/views/testTiles.jsp" />
 	</definition>
 	
+
+	<!-- admin -->
+	<definition name="admin" template="/WEB-INF/views/layout/admin/layout.jsp">
+		<put-attribute name="menu" value="/WEB-INF/views/layout/admin/menu.jsp"/>
+	</definition>
+	
+	<definition name="adminMain" extends="admin">
+		 <put-attribute name="body" value="/WEB-INF/views/admin_main/adminMain.jsp"/>
+	</definition>
+	
+	<definition name="adminMemberList" extends="admin">
+		<put-attribute name="body" value="/WEB-INF/views/admin_member/adminMemberList.jsp"/>
+	</definition>
+	<definition name="adminMemberDetail" extends="admin">
+		<put-attribute name="body" value="/WEB-INF/views/admin_member/adminMemberDetail.jsp"/>
+	</definition>
+
 	<!-- 판매하기(판매방식선택) -->
 	<definition name="howtosell" extends="default">
 		<put-attribute name="body" value="/WEB-INF/views/client_product/howtosell.jsp" />
@@ -26,9 +43,25 @@
 	<definition name="sellForm" extends="default">
 		<put-attribute name="body" value="/WEB-INF/views/client_product/sellForm.jsp" />
 	</definition>
+  
 	<!-- 판매하기폼(사업자) -->
 	<definition name="sellPlusForm" extends="default">
 		<put-attribute name="body" value="/WEB-INF/views/client_product/sellPlusForm.jsp" />
+	</definition>
+	
+	<!-- 일반상품리스트 -->
+	<definition name="productList" extends="default">
+		<put-attribute name="body" value="/WEB-INF/views/client_product/productList.jsp" />
+	</definition>
+	
+	<!-- 플러스상품리스트 -->
+	<definition name="productPlusList" extends="default">
+		<put-attribute name="body" value="/WEB-INF/views/client_product/productPlusList.jsp" />
+	</definition>
+	
+	<!-- 상품상세보기(일반+플러스같이사용) -->
+	<definition name="productDetail" extends="default">
+		<put-attribute name="body" value="/WEB-INF/views/client_product/productDetail.jsp" />
 	</definition>
 	
 	<!-- 메인 -->

@@ -16,9 +16,9 @@
       <property name="dataSource" ref="dataSource" />
       <property name="configLocation" value="classpath:/mybatis/config/sqlMapConfig.xml" />
    </bean>
-   
+  
    <bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate" destroy-method="close">
       <constructor-arg ref="sqlSessionFactory" />
    </bean>
-      
+    
 </beans>
