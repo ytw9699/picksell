@@ -14,10 +14,7 @@
 function mberValiCheck(resultID){//2.밸리데이터를 했을때 아이디와 비밀번호가 밀리지않게끔 못할까?
    var ID = document.getElementById("ID").value;
    var PASSWORD = document.getElementById("PASSWORD").value;
-   
    var loginForm = document.getElementById("loginForm");
- 
-   alert('1');
 	
    if(ID != ""){
 		 document.getElementById("userIdCheckText").innerHTML = ""
@@ -28,27 +25,26 @@ function mberValiCheck(resultID){//2.밸리데이터를 했을때 아이디와 �
 	   }
 	   
    if(ID == ""){
-	   alert('2');
-      document.getElementById("userIdCheckText").innerHTML = 
+          document.getElementById("userIdCheckText").innerHTML = 
     	  "<b><font color=red size=2pt> 아이디를 입력해주세요. </font></b>"
     	  loginForm.ID.focus();
     	  
    if(PASSWORD == ""){
-	   alert('3');
    	  document.getElementById("passwordCheckText").innerHTML = 
    		  "<b><font color = red size=2pt> 비밀번호를 입력해주세요. </font></b>"
-   		alert('4');
-   		//loginForm.PASSWORD.focus();
+   		if(ID == ""){
+   		 loginForm.ID.focus();
+   		}else{
+   		loginForm.PASSWORD.focus();
+   		}
    	  return false;
    	 }
       return false;
    }
-   
    if( PASSWORD == ""){//이부분 중복을 어떻게 제거할수있을까?
 	   document.getElementById("passwordCheckText").innerHTML = 
 		   "<b><font color = red size=2pt> 비밀번호를 입력해주세요. </font></b>"
-		   alert('5');
-		   //loginForm.PASSWORD.focus();
+		   loginForm.PASSWORD.focus();
  	return false;
    }
 }
@@ -67,45 +63,35 @@ function idSaveCheck(){
 	 var idSave = document.getElementById('idSave');
 	 idSave.checked="checked";
 }	
+function formIdSave(){
+	 var formID = document.getElementById('formID');
+	 var ID = document.getElementById('ID');
+	 ID.value = formID.value;//아이디나 비밀번호를 잘못입력했어도 아이디는! 폼값에 저장되게끔
+}	
 </script>
-<!-- function mberValiCheck(){//1. 왜 이로직은 안될까? 
-	userIdCheck();
-	passwordCheck();
-}
-function passwordCheck(){
-	 var password = document.getElementById("password").value;
-	
-	 if( password == ""){
-		   document.getElementById("passwordCheckText").innerHTML = "<b><font color = red size=2pt> 비밀번호를 입력해주세요. </font></b>"
-	 	return false;
-	   }
-	 
-}
-function userIdCheck(){
-	   var userId = document.getElementById("userId").value;
-
-	   if(userId == ""){
-	      document.getElementById("userIdCheckText").innerHTML = "<b><font color=red size=2pt> 아이디를 입력해주세요. </font></b>"
-	      return false;
-	   }
-	   
-	} -->
 <center>
 	로그인 하기
-	<form action="login" name="loginForm" method="post" onsubmit="return mberValiCheck('${resultID}')">
+	<form action="login" name="loginForm" id="loginForm" method="post" onsubmit="return mberValiCheck('${resultID}')">
+	     <input type="hidden" name=formID id="formID" value="${formID}"/>
 		<p>아이디 <input type="text" name="ID" id="ID" value="${cookieID}"/>&nbsp;<span id="userIdCheckText"></span>
 		<p>비밀번호 <input type="password" name="PASSWORD" id="PASSWORD"/>&nbsp;<span id="passwordCheckText"></span>
-		<p><input type="checkbox" name="idSave" value= "save" id="idSave"/>아이디 저장
+		<p><input type="checkbox" name="idSave" id="idSave" value="save" />아이디,비밀번호 저장
 		<input type="submit" value="로그인" />
-		<P>계정을 잊어버리셨나요?</P>
+		<p><a href="#">계정을 잊어버리셨나요?</a></p>
 	</form>
 </center>
-<c:if test="${resultID != null}">
+<c:if test="${formID != null}">
+	<script>
+	formIdSave();
+	//formIdSave(${formID});//이렇게 넣어주는 방법 없나..?
+   </script>
+</c:if>
+<c:if test="${resultID == 'NULL'}">
 	<script>
 	 IdCheck();
    </script>
 </c:if>
-<c:if test="${resultID2 != null}">
+<c:if test="${resultPW == 'WRONG'}">
 	<script>
 	 passwordCheck();
    </script>
