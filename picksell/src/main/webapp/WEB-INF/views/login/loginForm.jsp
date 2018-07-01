@@ -94,7 +94,7 @@ function userIdCheck(){
 	로그인 하기
 	<form action="login" name="loginForm" method="post" onsubmit="return mberValiCheck('${resultID}')">
 		<p>아이디 <input type="text" name="ID" id="ID" value="${cookieID}"/>&nbsp;<span id="userIdCheckText"></span>
-		<p>비밀번호 <input type="password" name="PASSWORD3" id="PASSWORD"/>&nbsp;<span id="passwordCheckText"></span>
+		<p>비밀번호 <input type="password" name="PASSWORD" id="PASSWORD"/>&nbsp;<span id="passwordCheckText"></span>
 		<p><input type="checkbox" name="idSave" value= "save" id="idSave"/>아이디 저장
 		<input type="submit" value="로그인" />
 		<P>계정을 잊어버리셨나요?</P>
