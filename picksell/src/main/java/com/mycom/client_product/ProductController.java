@@ -202,10 +202,11 @@ public class ProductController {
 	}
 	
 	//상품 상세보기
-	@RequestMapping("/products/detail/{product_num}/{currentPage}")
+	@RequestMapping("/products/detail/{category_num}/{product_num}/{currentPage}")
 	public String productsDetail(
 			@PathVariable("product_num") int product_num,
 			@PathVariable("currentPage") int currentPage,
+			@PathVariable("category_num") int category_num,
 			Model model,
 			HttpServletRequest request) {
 		
@@ -219,6 +220,7 @@ public class ProductController {
 		System.out.println(resultMap);
 		model.addAttribute("resultObject", resultMap);
 		model.addAttribute("currentPage", currentPage);
+		model.addAttribute("category_num", category_num);
 		
 		return "productDetail";
 	}
