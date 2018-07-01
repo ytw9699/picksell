@@ -79,7 +79,7 @@ li.headerCategory {
 <div class="headerTop">
 
 	<span class="headerTop_menu">
-		<a href="#" id="linkOfMypage">마이페이지▼</a>|<a href="#">로그아웃</a>|<a href="#">장바구니</a>
+		<a href="#" id="linkOfMypage">마이페이지▼</a>|<a href="#">로그아웃</a>|<a href="/picksell/cart">장바구니</a>
 	</span>
 </div>
 <div class="headerCenter">

@@ -223,6 +223,11 @@ public class ProductController {
 		//두번째는 내가 구매신청을 했었는지 그래서 대기중인지
 		//세번째는 내가 구매신청을 수락받았는지 그래서 구매하기가 가능한지
 		
+		
+		//코멘트리스트++
+		
+		//구매신청리스트++
+		
 		//디테일 정보 확인
 		//System.out.println(resultMap);
 		model.addAttribute("product_num", product_num);
@@ -247,7 +252,19 @@ public class ProductController {
 		return "client_product/redirecting";
 	}
 	
-	
-
-	
+	//구매신청하기
+	@RequestMapping("/products/purchseRequest/{ca}/{pn}/{cp}")
+	public String purchaseRequest(
+			@PathVariable("pn") int product_num,
+			@PathVariable("ca") int category_num,
+			@PathVariable("cp") int currentPage,
+			HttpServletRequest request,
+			Model model) {
+		
+		model.addAttribute("redirect", 2);
+		model.addAttribute("category_num", category_num);
+		model.addAttribute("product_num", product_num);
+		model.addAttribute("currentPage", currentPage);
+		return "client_product/redirecting";
+	}
 }
