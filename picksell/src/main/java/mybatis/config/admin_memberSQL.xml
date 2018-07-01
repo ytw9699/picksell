@@ -3,9 +3,10 @@
 PUBLIC " - //mybatis.org//DTD Config 3.0//EN"
 	   " http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 	  
-<mapper namespace="admin_member">
+<mapper namespace="admin_Member">
 
-	<resultMap type="adminMember" id="admin_memberRes">
+	<resultMap type="adminMember" id="adminMemberRes">
+		
 		<result property="id" column="ID" />
 		<result property="password" column="PASSWORD"/>
 		<result property="name" column="NAME"/>
@@ -22,6 +23,22 @@ PUBLIC " - //mybatis.org//DTD Config 3.0//EN"
 		<result property="business_name" column="BUSINESS_NAME"/>
 		<result property="regdate" column="REGDATE"/>
 	</resultMap>
-</mapper>
+	
+	<select id="membersList" resultMap="adminMemberRes">
+		SELECT * FROM PS_MEMBER ORDER BY regdate DESC
+	</select>
+
+	<select id="searchName" resultMap="adminMemberRes" parameterType="string">
+	 	SELECT * FROM PS_MEMBER WHERE  name = #{name}  ORDER BY regdate desc 	 
+	</select>
+	
+	<select id="searchId" resultMap="adminMemberRes" parameterType="string">
+		SELECT * FROM PS_MEMBER WHERE id = #{id} ORDER BY regdate desc 
+	</select>
+	
+	 <select id="selectOneMember" resultType="hashmap" parameterType="string">
+	 	SELECT * FROM PS_MEMBER WHERE id = #{id}
+	 </select>
+ </mapper>
 
 	
