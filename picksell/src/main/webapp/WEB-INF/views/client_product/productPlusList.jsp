@@ -49,5 +49,8 @@
 			</div>
 		</c:forEach>
 	</div>
+	<div class="paging">
+	${pagingHtml}
+	</div>
 </body>
 </html>
