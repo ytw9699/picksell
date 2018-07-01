@@ -42,6 +42,14 @@ public class ProductService implements ProductDao {
 	public List<Map<String, Object>> getProductCommentList(int product_num){
 		return sqlMapper.selectList("client_product.selectProductComment", product_num);
 	}
+	//판매글 구매신청
+	public void insertProductPurchaseList(Map<String, Object> map) {
+		sqlMapper.insert("client_product.insertPurchaseList", map);
+	}
+	//판매글 구매신청취소
+	public void deleteProductPurchaseList(Map<String, Object> map) {
+		sqlMapper.delete("client_product.deletePurchaseList", map);
+	}
 	//판매글 구매신청리스트
 	public List<Map<String, Object>> getProductPurchaseList(int product_num){
 		return sqlMapper.selectList("client_product.selectPurchaseList", product_num);

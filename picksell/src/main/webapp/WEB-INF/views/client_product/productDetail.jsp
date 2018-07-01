@@ -76,11 +76,13 @@
 					<input type="button" value="장바구니" onclick="location.href='/picksell/cart/into/${category_num}/${product_num }/${currentPage }'" />
 				</c:when>
 			</c:choose>
-			
 			<!-- 구매신청하기버튼 -->
 			<c:choose>
-				<c:when test="${resultObject.DEAL_STATUS == 0 and resultObject.HOWTOSELL != 2 }">
+				<c:when test="${resultObject.DEAL_STATUS == 0 and resultObject.HOWTOSELL != 2 and alreadyPurchase == false }">
 					<input type="button" value="구매신청하기" onclick="location.href='/picksell/products/purchseRequest/${category_num}/${product_num }/${currentPage }'" />
+				</c:when>
+				<c:when test="${alreadyPurchase == true }">
+					<input type="button" value="구매신청 취소하기" onclick="location.href='/picksell/products/purchseRequestCancel/${category_num}/${product_num }/${currentPage }'" />
 				</c:when>
 			</c:choose>
 			

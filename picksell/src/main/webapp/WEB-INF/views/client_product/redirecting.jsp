@@ -16,5 +16,9 @@
 		alert('해당상품을 장바구니에 담았습니다');
 		document.location.href='/picksell/products/detail/'+${category_num}+'/'+${product_num}+'/'+${currentPage};
 		break;
+	case 4:
+		alert('구매신청이 취소되었습니다');
+		document.location.href='/picksell/products/detail/'+${category_num}+'/'+${product_num}+'/'+${currentPage};
+		break;
 	}
 </script>

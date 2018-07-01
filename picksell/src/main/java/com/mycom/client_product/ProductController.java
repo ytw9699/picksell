@@ -231,6 +231,14 @@ public class ProductController {
 		//구매신청리스트++
 		List<Map<String, Object>> resultPurchaseList = productService.getProductPurchaseList(product_num);
 		//System.out.println("구매신청사이즈:" + resultPurchaseList.size());
+		model.addAttribute("alreadyPurchase", false);
+		for(int i = 0 ; i < resultPurchaseList.size() ; i++) {
+			if(resultPurchaseList.get(i).get("BUYER_ID").equals("임시구매자")) {
+				model.addAttribute("alreadyPurchase", true);
+				break;
+			}
+		}
+		
 		
 		//디테일 정보 확인
 		//System.out.println(resultMap);
@@ -242,6 +250,8 @@ public class ProductController {
 		model.addAttribute("resultObject", resultMap);
 		//상품문의리스트
 		model.addAttribute("resultCommentList", resultCommentList);
+		
+		
 		
 		return "productDetail";
 	}
@@ -270,7 +280,34 @@ public class ProductController {
 			HttpServletRequest request,
 			Model model) {
 		
+		//세션아이디 임시구매자
+		Map<String, Object> parameterMap = new HashMap<String, Object>();
+		parameterMap.put("product_num", product_num);
+		parameterMap.put("buyer_id", "임시구매자");
+		
+		productService.insertProductPurchaseList(parameterMap);
+		
 		model.addAttribute("redirect", 2);
+		model.addAttribute("category_num", category_num);
+		model.addAttribute("product_num", product_num);
+		model.addAttribute("currentPage", currentPage);
+		return "client_product/redirecting";
+	}
+	
+	@RequestMapping("/products/purchseRequestCancel/{ca}/{pn}/{cp}")
+	public String purchaseRequestCancel(
+			@PathVariable("pn") int product_num,
+			@PathVariable("ca") int category_num,
+			@PathVariable("cp") int currentPage,
+			HttpServletRequest request,
+			Model model) {
+		
+		Map<String, Object> parameterMap = new HashMap<String, Object>();
+		parameterMap.put("product_num", product_num);
+		parameterMap.put("buyer_id", "임시구매자");
+		productService.deleteProductPurchaseList(parameterMap);
+		
+		model.addAttribute("redirect", 4);
 		model.addAttribute("category_num", category_num);
 		model.addAttribute("product_num", product_num);
 		model.addAttribute("currentPage", currentPage);

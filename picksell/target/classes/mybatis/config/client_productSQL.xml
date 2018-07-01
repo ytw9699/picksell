@@ -135,7 +135,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 															#{comment_content})
 	</insert>
 	
+	<insert id="insertPurchaseList" parameterType="hashmap">
+		insert into ps_purchase_list(purchase_num,
+										product_num,
+										buyer_id,
+										regdate,
+										status) values(pl_seq.NEXTVAL,
+														#{product_num},
+														#{buyer_id},
+														sysdate,
+														0)
+	</insert>
+	
 	<update id="updateProductHitcount" parameterType="hashmap">
 		update ps_product set hitcount = hitcount + 1 where product_num = #{product_num}
 	</update>
+	
+	<delete id="deletePurchaseList" parameterType="hashmap">
+		delete from ps_purchase_list 
+		where product_num = #{product_num} and buyer_id = #{buyer_id}
+	</delete>
 </mapper>
