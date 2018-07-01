@@ -79,14 +79,18 @@
 			
 			<!-- 구매신청하기버튼 -->
 			<c:choose>
-				<c:when test="${resultObject.DEAL_STATUS == 0 }">
+				<c:when test="${resultObject.DEAL_STATUS == 0 and resultObject.HOWTOSELL != 2 }">
 					<input type="button" value="구매신청하기" />
 				</c:when>
 			</c:choose>
 			
-			<!-- 구매하기 -->
+			<!-- 구매하기 + 구매수락일때를 생각해야함 -->
+			<c:choose>
+				<c:when test="${resultObject.HOWTOSELL == 2 }">
+					<input type="button" value="구매하기" />
+				</c:when>
+			</c:choose>
 			
-			<input type="button" value="구매하기" />
 			
 		</div>
 		<div class="product_detail">

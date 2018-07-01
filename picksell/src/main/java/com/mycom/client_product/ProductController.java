@@ -218,6 +218,11 @@ public class ProductController {
 		
 		resultMap = productService.getProductDetail(parameterMap);
 		
+		//버튼을 위한 모델경우의수
+		//첫번째는 내가 이걸 장바구니에 담았었는지(장바구니는 플러스만가능이니까 howtosell 기준)
+		//두번째는 내가 구매신청을 했었는지 그래서 대기중인지
+		//세번째는 내가 구매신청을 수락받았는지 그래서 구매하기가 가능한지
+		
 		//디테일 정보 확인
 		//System.out.println(resultMap);
 		model.addAttribute("product_num", product_num);
