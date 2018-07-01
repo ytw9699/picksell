@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -217,12 +218,28 @@ public class ProductController {
 		
 		resultMap = productService.getProductDetail(parameterMap);
 		
-		System.out.println(resultMap);
+		//디테일 정보 확인
+		//System.out.println(resultMap);
+		model.addAttribute("product_num", product_num);
 		model.addAttribute("resultObject", resultMap);
 		model.addAttribute("currentPage", currentPage);
 		model.addAttribute("category_num", category_num);
 		
 		return "productDetail";
+	}
+	
+	//상품문의 작성
+	@RequestMapping(value="/products/commentProc", method=RequestMethod.POST)
+	public String writeComment(CommandMap map, Model model) {
+		
+		System.out.println(map.getMap());
+		
+		model.addAttribute("redirect", 1);
+		model.addAttribute("category_num", map.getMap().get("category_num"));
+		model.addAttribute("product_num", map.getMap().get("product_num"));
+		model.addAttribute("currentPage", map.getMap().get("currentPage"));
+		//return "redirect:/products/detail/"+map.getMap().get("category_num")+"/"+map.getMap().get("product_num")+"/"+map.getMap().get("currentPage");
+		return "client_product/redirecting";
 	}
 	
 	
