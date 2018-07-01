@@ -14,20 +14,8 @@
 
 <center>
 
-	picksell 메인
-	<br/>
-	<c:if test="${sessionId == null}">
-		 로그인을 해주시기 바랍니다.
-		 <br/>
-		<input type="button" value="Login" onClick="javascript:location.href='/picksell/loginForm'"/>
-	</c:if>
-	
-	<c:if test="${sessionId != null}">
-	아이디 ${sessionId} 
-	<br/>
-	<input type="button" value="LogOut" onClick="javascript:location.href='/picksell/logout'"/>	 
-	</c:if>
-	 
+메인입니다
+
 </center>
 
 </body>
