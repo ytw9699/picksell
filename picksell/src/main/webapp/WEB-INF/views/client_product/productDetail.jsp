@@ -104,9 +104,20 @@
 		<div class="commentWrap">
 			<span>상품문의 [개수]</span><input type="button" value="상품 문의하기" onclick="openCommentForm()" />
 			<div class="commentListWrap">
-				등록된 상품문의가 없습니다
-				<p>
-				내가쓴 상품문의는 판매자외의 다른사람이 볼 수 없습니다!
+				<c:choose>
+					<c:when test="${empty resultCommentList }">
+						등록된 상품문의가 없습니다
+						<p>
+						내가쓴 상품문의는 판매자외의 다른사람이 볼 수 없습니다!
+					</c:when>
+					<c:when test="${!empty resultCommentList }">
+						<c:forEach var="comment" items="${resultCommentList }">
+							<p>${comment.COMMENT_WRITER } .. ${comment.COMMENT_REGDATE } .. ${comment.COMMENT_CONTENT }
+						</c:forEach>
+					</c:when>
+				</c:choose>
+				
+				
 			</div>
 		</div>
 	</div>

@@ -227,6 +227,7 @@ public class ProductController {
 		//코멘트리스트++
 		List<Map<String, Object>> resultCommentList = productService.getProductCommentList(product_num);
 		System.out.println("코멘트리스트사이즈:" + resultCommentList.size());
+		//System.out.println("코멘트리스트사이즈:" + resultCommentList.get(0));
 		//구매신청리스트++
 		List<Map<String, Object>> resultPurchaseList = productService.getProductPurchaseList(product_num);
 		//System.out.println("구매신청사이즈:" + resultPurchaseList.size());
