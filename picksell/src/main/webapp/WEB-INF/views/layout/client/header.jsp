@@ -79,12 +79,13 @@ li.headerCategory {
 <div class="headerTop">
 
 	<span class="headerTop_menu">
-		<a href="#" id="linkOfMypage">마이페이지▼</a>|<a href="#">로그아웃</a>|<a href="#">장바구니</a>
+		<a href="#" id="linkOfMypage">마이페이지▼</a>|<a href="/picksell/logout">로그아웃</a>|<a href="#">장바구니</a>
+		
 	</span>
 </div>
 <div class="headerCenter">
 	<div class="mainLogoWrap">
-		<a href="#">
+		<a href="main">
 		<img src="/picksell/resources/img/main_logo.png" class="mainLogo" />
 		</a>
 	</div>
