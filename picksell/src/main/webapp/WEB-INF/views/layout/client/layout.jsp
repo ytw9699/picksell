@@ -9,8 +9,8 @@
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <title>PICKSELL</title>
 <style>
-@font-face{font-family:'NotoSansBold'; src:url('/resources/clientcss/font/NotoSansCJKkr-Bold.otf')}
-@font-face{font-family:'NotoSansLight'; src:url('/resources/clientcss/font/NotoSansCJKkr-DemiLight.otf')}
+@font-face{font-family:'NotoSansBold'; src:url('/picksell/resources/clientcss/font/NotoSansCJKkr-Bold.otf')}
+@font-face{font-family:'NotoSansLight'; src:url('/picksell/resources/clientcss/font/NotoSansCJKkr-DemiLight.otf')}
 body, table, div, p {font-family:'NotoSansLight';}
 body{margin:0;}
 .headerWrap{width:100%;}
