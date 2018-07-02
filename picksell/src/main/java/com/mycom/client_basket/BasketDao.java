@@ -13,4 +13,10 @@ public interface BasketDao {
 	
 	//장바구니 리스트
 	public List<Map<String, Object>> selectBasketList(String sessionId); 
+	
+	//장바구니 수량증가
+	public void addQuantity(int basket_num);
+	
+	//장바구니 수량감소
+	public void subQuantity(int basket_num);
 }

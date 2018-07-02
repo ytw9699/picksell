@@ -31,4 +31,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 															'1')
 	</insert>
 	
+	<update id="addQuantity" parameterType="int">
+		update ps_basket set product_quantity = product_quantity + 1 where basket_num = #{basket_num}
+	</update>
+	
+	<update id="subQuantity" parameterType="int">
+		update ps_basket set product_quantity = product_quantity - 1 where basket_num = #{basket_num}
+	</update>
+	
 </mapper>

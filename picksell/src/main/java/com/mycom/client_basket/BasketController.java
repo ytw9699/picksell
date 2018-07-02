@@ -67,7 +67,7 @@ public class BasketController {
 			@PathVariable("targetNum") int basket_num,
 			Model model) {
 		
-		System.out.println(basket_num);
+		basketService.addQuantity(basket_num);
 		
 		return "client_basket/basketFetchView";
 	}
@@ -76,7 +76,8 @@ public class BasketController {
 	public String subQuantity(
 			@PathVariable("targetNum") int basket_num,
 			Model model) {
-		System.out.println(basket_num);
+
+		basketService.subQuantity(basket_num);
 		
 		return "client_basket/basketFetchView";
 	}

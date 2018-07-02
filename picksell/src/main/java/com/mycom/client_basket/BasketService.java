@@ -26,6 +26,14 @@ public class BasketService implements BasketDao {
 	public List<Map<String, Object>> selectBasketList(String sessionId){
 		return sqlMapper.selectList("client_basket.selectBasketList", sessionId);
 	}
+	//장바구니 수량증가
+	public void addQuantity(int basket_num) {
+		sqlMapper.update("client_basket.addQuantity", basket_num);
+	}
+	//장바구니 수량감소
+	public void subQuantity(int basket_num) {
+		sqlMapper.update("client_basket.subQuantity", basket_num);
+	}
 	
 
 }
