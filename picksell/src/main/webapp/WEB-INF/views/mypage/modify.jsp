@@ -15,10 +15,14 @@
 <div>
 <form method="post">
 	<input type="hidden" name="kind" value="0"/>
-	<!-- 일반회원0  -->
-	아이디<input type="text" name="id" value="${resultMap.ID}"/>
+	<input type="hidden" name="id" value="${resultMap.ID}"/>
+	<input type="hidden" name="name" value="${resultMap.NAME}"/>
+	<input type="hidden" name="profile_img" value="${resultMap.PROFILE_IMG}"/>
+	<input type="hidden" name="alarm_consent" value="${resultMap.ALARM_CONSENT}"/>
+	<!-- 일반회원  -->
+	아이디 ${resultMap.ID}
 	 <br/>
-	  이름<input type="text" name="name" value="${resultMap.NAME}"/>
+	이름 ${resultMap.NAME}
 	<br/>
         새로운 비밀번호<input type="password" name="password" id="password" onkeyup="passwordsCheck()" />
     <br/>
@@ -43,10 +47,14 @@
 <div>
 <form method="post">
 	<input type="hidden" name="kind" value="1"/>
+	<input type="hidden" name="id" value="${resultMap.ID}"/>
+	<input type="hidden" name="name" value="${resultMap.NAME}"/>
+	<input type="hidden" name="profile_img" value="${resultMap.PROFILE_IMG}"/>
+	<input type="hidden" name="alarm_consent" value="${resultMap.ALARM_CONSENT}"/>
 	<!-- 사업자회원  -->
-	아이디<input type="text" name="id" value="${resultMap.ID}"/>
+	아이디 ${resultMap.ID}
 	 <br/>
-	  이름<input type="text" name="name" value="${resultMap.NAME}"/>
+	이름 ${resultMap.NAME}
 	<br/>
         새로운 비밀번호<input type="password" name="password" id="password" onkeyup="passwordsCheck()" />
     <br/>

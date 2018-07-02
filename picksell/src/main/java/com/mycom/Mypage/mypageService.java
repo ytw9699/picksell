@@ -17,4 +17,11 @@ public class mypageService implements mypageDao {
 	public Map<String, Object> userInfo(String sessionId) {
 		return sqlMapper.selectOne("mypage.userInfo", sessionId);
 	}
+
+	public void updateBusiness(Map<String, Object> map) {
+		sqlMapper.update("mypage.updateBusiness", map);
+		}
+	public void updatePersonal(Map<String, Object> map) {
+		sqlMapper.update("mypage.updatePersonal", map);
+		}
 }

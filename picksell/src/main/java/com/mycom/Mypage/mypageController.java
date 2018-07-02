@@ -34,18 +34,29 @@ public class mypageController {
 	
 	@RequestMapping("/mypage")
 	public String mypage(Model model) {	
-		return "mypage";//이렇게 해줘야 타일즈랑 연결됨
+		return "mypage";
 	}
 	@RequestMapping(value="/mypage/modify",method=RequestMethod.GET)
-	public String modify(CommandMap map,
-			HttpSession session,
-			Model model) {	
+	public String modify(HttpSession session, Model model) {	
+		
 		String sessionId =(String)session.getAttribute("sessionId");
 		
-		resultMap = mypageService.userInfo(sessionId);
+		resultMap = mypageService.userInfo(sessionId);//세션아이디에 해당하는 회원정보 한줄가져옴
+		
 		model.addAttribute("resultMap", resultMap);
 		
-		return "modify";//이렇게 해줘야 타일즈랑 연결됨
+		return "modify";
+	}
+	@RequestMapping(value="/mypage/modify",method=RequestMethod.POST)
+	public String modify(CommandMap map) {	
+		
+		if(map.get("business_number") == null) {
+			mypageService.updatePersonal(map.getMap());//일반 회원수정	
+			}
+			else{
+				mypageService.updateBusiness(map.getMap());//사업자 회원수정	
+			}
+		return "redirect:/mypage/modify";
 	}
 	
 }
