@@ -9,6 +9,28 @@
 </head>
 <body>
 <script>
+
+	//전체 가격 
+	var total = Number(0);
+
+	function sumfunc(addvalue){
+		total += Number(addvalue);
+		document.getElementById('sumValue').innerHTML = total;
+	}
+	function subfunc(subvalue){
+		total -= Number(subvalue);
+		document.getElementById('sumValue').innerHTML = total;
+	}
+	function basketChecking(checkTarget, keyNumber){
+		if(checkTarget.checked){
+			//체크되있을때 디스에이블 풀러야댐
+			sumfunc(Number(document.getElementById('hid_currentPrice'+keyNumber).value));
+		}else if(!checkTarget.checked){
+			//체크해제일때 디스에이블 걸어야댐
+			subfunc(Number(document.getElementById('hid_currentPrice'+keyNumber).value));
+		}
+	}
+	
 	function subQuantity(targetBasketNum,keyNumber){
 		if(Number(document.getElementById('hid_quantity'+keyNumber).value - 1) < 1){
 			alert('더이상 수량을 차감할 수 없습니다');
@@ -25,7 +47,12 @@
 						document.getElementById('hid_quantity'+keyNumber).value = uppoint;
 						document.getElementById('product_quantity'+keyNumber).innerHTML = uppoint;
 					
+						document.getElementById('hid_currentPrice'+keyNumber).value = multiResult;
 						document.getElementById('subtotal'+keyNumber).innerHTML = multiResult;
+					
+						if(document.getElementById('baketCheck'+keyNumber).checked){
+							subfunc(document.getElementById('hid_price'+keyNumber).value);
+						}
 					}
 				})
 			})
@@ -47,7 +74,12 @@
 						document.getElementById('hid_quantity'+keyNumber).value = uppoint;
 						document.getElementById('product_quantity'+keyNumber).innerHTML = uppoint;
 						
+						document.getElementById('hid_currentPrice'+keyNumber).value = multiResult;
 						document.getElementById('subtotal'+keyNumber).innerHTML = multiResult;
+					
+						if(document.getElementById('baketCheck'+keyNumber).checked){
+							sumfunc(priceInfo);
+						}
 					}
 				})
 			})
@@ -67,8 +99,9 @@
 			<input type="hidden" id="hid_stock${indexStatus.index }" value="${list.STOCK }" />
 			<input type="hidden" id="hid_quantity${indexStatus.index }" value="${list.PRODUCT_QUANTITY }" />
 			<input type="hidden" id="hid_price${indexStatus.index }" value="${list.PRICE }" />
+			<input type="hidden" id="hid_currentPrice${indexStatus.index }" value="${list.PRICE * list.PRODUCT_QUANTITY }" />
 			<tr>
-				<td>체크박스</td>
+				<td><input type="checkbox" onclick="basketChecking(this, ${indexStatus.index})" id="baketCheck${indexStatus.index }" /></td>
 				<td><img src="/picksell/resources/productUpload/${list.FIRST_IMG }" style="width: 200px;"/></td>
 				<td>
 					<span>${list.SUBJECT }</span><br/>
@@ -86,5 +119,12 @@
 			</tr>
 		</c:forEach>
 	</table>
+	<input type="button" value="전체삭제" />
+	<div class="summaryInfoWrap">
+		
+		<span class="sumText">총 합계</span>
+		<span class="sumValue" id="sumValue">0</span>
+		<input type="button" value="구매하기" />
+	</div>
 </body>
 </html>
