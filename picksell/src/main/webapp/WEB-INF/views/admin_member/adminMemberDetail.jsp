@@ -9,7 +9,7 @@
 </head>
 <body>
 <table>
-<tr>아이디 : ${map.ID }</tr>
+<tr><a href="">아이디 : ${map.ID }</a></tr>
 <tr>이름 : ${map.NAME }</tr>
 <tr>이메일 : ${map.EMAIL }</tr>
 <tr>주소 : ${map.ADDRESS }</tr>
@@ -26,6 +26,9 @@
 	</c:when>
 	</c:choose>
 	</tr>
+<tr>이 회원 주문내역 상세보기</tr>
+<tr>이 회원 판매내역 상세보기</tr>
+<tr>
 </table>
 </body>
 </html>
