@@ -16,7 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.mycom.admin_products.AdminSellModel;
 import com.mycom.admin_products.AdminSellService;
 
-import com.mycom.common.pagingAction;
+import com.mycom.common.Paging;
 
 @Controller
 @RequestMapping("/admin_products")
@@ -34,8 +34,8 @@ public class AdminSellController {
 	private int blockCount = 10;
 	private int blockPage = 5;
 	private String pagingHtml;
-	private pagingAction page;
-	private int num = 0;
+	private Paging page;
+
 	
 	AdminSellModel adminSellModel = new AdminSellModel();
 	
@@ -46,7 +46,15 @@ public class AdminSellController {
 	@RequestMapping("/list")
 	public ModelAndView adminProductList(HttpServletRequest request) {
 		
+		if(request.getParameter("currentPage") == null || request.getParameter("currentPage").trim().isEmpty() || request.getParameter("currentPage").equals("0")) {
+            currentPage = 1;
+        } else {
+            currentPage = Integer.parseInt(request.getParameter("currentPage"));
+        }
+		
+		
 		List<AdminSellModel> productsList = adminSellService.productsList();
+		
 		
 		isSearch = request.getParameter("isSearch");
 		if(isSearch != null) {
@@ -60,7 +68,7 @@ public class AdminSellController {
 				productsList = adminSellService.productsSearch2(isSearch);
 			
 			totalCount = productsList.size();
-			page = new pagingAction(currentPage, totalCount, blockCount, blockPage, num, "");
+			page = new Paging(currentPage, totalCount, blockCount, blockPage, "list", searchNum, isSearch);
 			pagingHtml = page.getPagingHtml().toString(); 
 			int lastCount = totalCount;
 			if (page.getEndCount() < totalCount)
@@ -81,7 +89,7 @@ public class AdminSellController {
 		}
 		
 		totalCount = productsList.size();
-		page = new pagingAction(currentPage, totalCount, blockCount, blockPage, num, "");
+		page = new Paging(currentPage, totalCount, blockCount, blockPage, "list");
 		pagingHtml = page.getPagingHtml().toString(); 
 		int lastCount = totalCount;
 		if (page.getEndCount() < totalCount)
@@ -90,11 +98,11 @@ public class AdminSellController {
 		productsList = productsList.subList(page.getStartCount(), lastCount);
 		
 		
-		mav.addObject("isSearch", isSearch);
-		mav.addObject("searchNum",searchNum);
+		
 		mav.addObject("totalCount", totalCount);
 		mav.addObject("pagingHtml", pagingHtml);
 		mav.addObject("currentPage", currentPage);
+		
 		mav.addObject("productsList",productsList);
 		mav.setViewName("admin_products/list");
 		
@@ -182,21 +190,15 @@ public class AdminSellController {
 		this.pagingHtml = pagingHtml;
 	}
 
-	public pagingAction getPage() {
+	public Paging getPage() {
 		return page;
 	}
 
-	public void setPage(pagingAction page) {
+	public void setPage(Paging page) {
 		this.page = page;
 	}
 
-	public int getNum() {
-		return num;
-	}
 
-	public void setNum(int num) {
-		this.num = num;
-	}
 
 	public AdminSellModel getAdminSellModel() {
 		return adminSellModel;

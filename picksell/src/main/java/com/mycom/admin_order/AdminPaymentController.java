@@ -16,7 +16,7 @@ import com.mycom.admin_order.AdminPaymentModel;
 import com.mycom.admin_order.AdminPaymentListModel;
 import com.mycom.admin_order.AdminPaymentService;
 
-import com.mycom.common.pagingAction;
+import com.mycom.common.Paging;
 
 @Controller
 @RequestMapping("/admin_order")
@@ -34,8 +34,8 @@ public class AdminPaymentController {
 	private int blockCount = 10;
 	private int blockPage = 5;
 	private String pagingHtml;
-	private pagingAction page;
-	private int num = 0;
+	private Paging page;
+	
 	
 	AdminPaymentModel adminPaymentModel = new AdminPaymentModel();
 	AdminPaymentListModel adminPaymentListModel = new AdminPaymentListModel();
@@ -51,6 +51,12 @@ public class AdminPaymentController {
 		
 		//String order_num = request.getParameter("order_num");
 		
+		if(request.getParameter("currentPage") == null || request.getParameter("currentPage").trim().isEmpty() || request.getParameter("currentPage").equals("0")) {
+            currentPage = 1;
+        } else {
+            currentPage = Integer.parseInt(request.getParameter("currentPage"));
+        }
+		
 		List<AdminPaymentModel> orderList = adminPaymentService.orderList();
 		
 		isSearch = request.getParameter("isSearch");
@@ -65,7 +71,7 @@ public class AdminPaymentController {
 				orderList = adminPaymentService.orderSearch2(isSearch);
 			
 			totalCount = orderList.size();
-			page = new pagingAction(currentPage, totalCount, blockCount, blockPage, num, "");
+			page = new Paging(currentPage, totalCount, blockCount, blockPage, "orderList", searchNum, isSearch);
 			pagingHtml = page.getPagingHtml().toString(); 
 			int lastCount = totalCount;
 			if (page.getEndCount() < totalCount)
@@ -86,7 +92,7 @@ public class AdminPaymentController {
 		}
 		
 		totalCount = orderList.size();
-		page = new pagingAction(currentPage, totalCount, blockCount, blockPage, num, "");
+		page = new Paging(currentPage, totalCount, blockCount, blockPage, "orderList");
 		pagingHtml = page.getPagingHtml().toString(); 
 		int lastCount = totalCount;
 		if (page.getEndCount() < totalCount)
@@ -95,11 +101,11 @@ public class AdminPaymentController {
 		orderList = orderList.subList(page.getStartCount(), lastCount);
 		
 		
-		mav.addObject("isSearch", isSearch);
-		mav.addObject("searchNum",searchNum);
+		
 		mav.addObject("totalCount", totalCount);
 		mav.addObject("pagingHtml", pagingHtml);
 		mav.addObject("currentPage", currentPage);
+		
 		mav.addObject("orderList",orderList);
 		mav.setViewName("admin_order/orderList");
 		
@@ -199,18 +205,13 @@ public class AdminPaymentController {
 	public void setPagingHtml(String pagingHtml) {
 		this.pagingHtml = pagingHtml;
 	}
-	public pagingAction getPage() {
+	public Paging getPage() {
 		return page;
 	}
-	public void setPage(pagingAction page) {
+	public void setPage(Paging page) {
 		this.page = page;
 	}
-	public int getNum() {
-		return num;
-	}
-	public void setNum(int num) {
-		this.num = num;
-	}
+	
 	public AdminPaymentModel getAdminPaymentModel() {
 		return adminPaymentModel;
 	}
