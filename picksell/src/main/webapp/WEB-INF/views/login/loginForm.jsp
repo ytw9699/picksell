@@ -7,14 +7,15 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <title>로그인1</title>
 </head>
 <body>
 <script>
 function mberValiCheck(resultID){//2.밸리데이터를 했을때 아이디와 비밀번호가 밀리지않게끔 못할까?
-   var ID = document.getElementById("ID").value;
-   var PASSWORD = document.getElementById("PASSWORD").value;
-   var loginForm = document.getElementById("loginForm");
+   var ID = $('#ID').val();
+   var PASSWORD = $('#PASSWORD').val();
+   var loginForm = document.getElementById("loginForm");//$('#loginForm');이거는 왜안되는지..
 	
    if(ID != ""){
 		 document.getElementById("userIdCheckText").innerHTML = ""
