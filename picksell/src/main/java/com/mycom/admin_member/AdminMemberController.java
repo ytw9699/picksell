@@ -23,7 +23,11 @@ import com.mycom.config.CommandMap;
 @Controller
 @RequestMapping("/admin/member")
 public class AdminMemberController {
+
+	//누구세요?
+
 	//현우가 임시로 바꾼주석
+
     //전체 회원리스트
 	//회원상세보기 
 	//회원계정상태 변경처리
@@ -95,5 +99,6 @@ public class AdminMemberController {
 		return "adminMemberDetail";
 	}
 	
+ 
 	
 }
