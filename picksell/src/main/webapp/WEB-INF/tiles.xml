@@ -86,6 +86,14 @@
 		<put-attribute name="body" value="/WEB-INF/views/login/loginForm.jsp" />
 	</definition>
 	
+	<!-- 마이페이지 기본 레이아웃 내 정보수정-->
+	<definition name="modify" template="/WEB-INF/views/layout/client/mypageLayout.jsp">
+		<put-attribute name="header" value="/WEB-INF/views/layout/client/header.jsp" />
+		<put-attribute name="left" value="/WEB-INF/views/layout/client/mypageleft.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/mypage/modify.jsp" />
+		<put-attribute name="footer" value="/WEB-INF/views/layout/client/footer.jsp" />
+	</definition>
+	
 
 </tiles-definitions>
 	

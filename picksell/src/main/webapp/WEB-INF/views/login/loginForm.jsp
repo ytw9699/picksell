@@ -18,21 +18,20 @@ function mberValiCheck(resultID){//2.밸리데이터를 했을때 아이디와 �
    var loginForm = document.getElementById("loginForm");//$('#loginForm');이거는 왜안되는지..
 	
    if(ID != ""){
-		 document.getElementById("userIdCheckText").innerHTML = ""
-	   }
-   
+	   $('#userIdCheckText').html('');
+   }
+	   
    if(PASSWORD != ""){
-		 document.getElementById("passwordCheckText").innerHTML = ""
+	   $('#passwordCheckText').html('');
 	   }
 	   
    if(ID == ""){
-          document.getElementById("userIdCheckText").innerHTML = 
-    	  "<b><font color=red size=2pt> 아이디를 입력해주세요. </font></b>"
-    	  loginForm.ID.focus();
+  	   $('#userIdCheckText').html('<b><font color=red size=2pt> 아이디를 입력해주세요. </font></b>');
+  	  loginForm.ID.focus();
+  	  
     	  
    if(PASSWORD == ""){
-   	  document.getElementById("passwordCheckText").innerHTML = 
-   		  "<b><font color = red size=2pt> 비밀번호를 입력해주세요. </font></b>"
+	   $('#passwordCheckText').html('<b><font color=red size=2pt> 비밀번호를 입력해주세요. </font></b>');
    		if(ID == ""){
    		 loginForm.ID.focus();
    		}else{
@@ -43,21 +42,18 @@ function mberValiCheck(resultID){//2.밸리데이터를 했을때 아이디와 �
       return false;
    }
    if( PASSWORD == ""){//이부분 중복을 어떻게 제거할수있을까?
-	   document.getElementById("passwordCheckText").innerHTML = 
-		   "<b><font color = red size=2pt> 비밀번호를 입력해주세요. </font></b>"
+	   $('#passwordCheckText').html('<b><font color=red size=2pt> 비밀번호를 입력해주세요. </font></b>');
 		   loginForm.PASSWORD.focus();
  	return false;
    }
 }
 
 function IdCheck(){
-	 document.getElementById("userIdCheckText").innerHTML = 
-   	  "<b><font color=red size=2pt> 입력하신 아이디가 존재하지 않습니다. </font></b>"
+	$('#userIdCheckText').html('<b><font color=red size=2pt> 입력하신 아이디가 존재하지 않습니다. </font></b>');
 		   loginForm.ID.focus();
 }
 function passwordCheck(){
-	 document.getElementById("passwordCheckText").innerHTML = 
-  	  "<b><font color=red size=2pt> 입력하신 아이디와 비밀번호가 일치하지 않습니다. </font></b>"
+	  $('#passwordCheckText').html('<b><font color=red size=2pt> 입력하신 아이디와 비밀번호가 일치하지 않습니다. </font></b>');
 		 loginForm.PASSWORD.focus();
 }
 function idSaveCheck(){
