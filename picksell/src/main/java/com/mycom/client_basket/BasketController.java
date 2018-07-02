@@ -24,6 +24,8 @@ public class BasketController {
 	public String gotoBasket(
 			HttpServletRequest request) {
 		
+		String currentID = request.getSession().getAttribute("sessionId").toString();
+		
 		
 		
 		return "basketList";
@@ -43,19 +45,13 @@ public class BasketController {
 			@PathVariable("currentID") String currentID,
 			Model model) {
 		
-		//System.out.println(request.getSession().getAttribute("sessionId"));
-		//String currentID = (String) request.getSession().getAttribute("sessionId");
-		//System.out.println("장바구니 세션"+currentID);
-		
 		Map<String, Object> parameterMap = new HashMap<String, Object>();
 		parameterMap.put("basket_id", currentID);
 		parameterMap.put("product_num", product_num);
 		//parameterMap.put("product_quantity", 1);
-		System.out.println(parameterMap);
-		basketService.insertBasket(parameterMap);
-		
 
-		
+		basketService.insertBasket(parameterMap);
+	
 		model.addAttribute("redirect", 3);
 		model.addAttribute("product_num", product_num);
 		return "client_product/redirecting";

@@ -69,12 +69,15 @@
 		})
 	}
 	//장바구니담기
+	function gotoBasket(){
+		location.href='/picksell/cart';
+	}
 	function intoBasket(){
 		fetch('/picksell/cart/into/${product_num}/${sessionScope.sessionId}').then(function(response){
 			response.text().then(function(text){
 				if(response.status == '200'){
 					alert('장바구니에 담았습니다!');
-					var inner = "<input type='button' value='장바구니로가기' />";
+					var inner = "<input type='button' value='장바구니로가기' onclick='gotoBasket();' />";
 					document.getElementById('basketWrap').innerHTML = inner;
 				}
 			})
@@ -131,7 +134,7 @@
 						<input type="button" value="장바구니" onclick="intoBasket();" />
 					</c:when>
 					<c:when test="${resultObject.HOWTOSELL == 2 and alreadyBasket == true }">
-						<input type="button" value="장바구니로가기" />
+						<input type="button" value="장바구니로가기" onclick="location.href='/picksell/cart'" />
 					</c:when>
 				</c:choose>
 			</div>

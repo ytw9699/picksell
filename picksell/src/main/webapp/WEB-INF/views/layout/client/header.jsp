@@ -78,7 +78,6 @@ li.headerCategory {
 </script>
 <body>
 <div class="headerTop">
-세션값: ${sessionScope.sessionId }
   <span class="headerTop_menu">
 	<c:if test="${sessionId != null}">
 	<a href="#" id="linkOfMypage">마이페이지▼</a>|<a href="/picksell/logout">로그아웃</a>
@@ -86,7 +85,7 @@ li.headerCategory {
 	<c:if test="${sessionId == null}">
 	|<a href="/picksell/loginForm">로그인</a>
 	</c:if> 
-	|<a href="#">장바구니</a>
+	|<a href="/picksell/cart">장바구니</a>
 		
 	
    </span>
