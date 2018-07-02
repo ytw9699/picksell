@@ -92,8 +92,8 @@ function checkbox(){
 </div>
 <div id="c4">
   <form method="post">
-	<input type="hidden" name="kind" value="0"/>
-	<!-- 일반회원0  -->
+	<input type="hidden" name="kind" value="1"/>
+	<!-- 사업자회원  -->
 	<p>회원가입</p>
     <p> 1.약관동의 2.가입방법선택 3.정보입력</p>
 	<br/>
@@ -102,9 +102,9 @@ function checkbox(){
 	<br/>
 	 아이디<input type="text" name="id" />
 	<br/>
-        비밀번호<input type="password" name="password" id="password"  onkeyup="passwordsCheck()" />
+        비밀번호<input type="password" name="password" id="password2"  onkeyup="passwordsCheck2()" />
     <br/>
-	비밀번호 재확인<input type="password" name="passwordCheck" id="passwordCheck" onkeyup="passwordsCheck()" />&nbsp;<span id="passwordCheckText"></span>
+	비밀번호 재확인<input type="password" name="passwordCheck" id="passwordCheck2" onkeyup="passwordsCheck2()" />&nbsp;<span id="passwordCheckText2"></span>
 	<br/>
 	이름<input type="text" name="name" />
 	<br/>
@@ -155,6 +155,19 @@ function passwordsCheck(){
 	      document.getElementById("passwordCheckText").innerHTML = "<b><font color=red size=2pt> 비밀번호가 다릅니다. </font></b>"
 	   } else {
 	      document.getElementById("passwordCheckText").innerHTML = "<b><font color=green size=2pt> 비밀번호가 일치합니다. </font></b>"
+	   }
+	}
+	
+function passwordsCheck2(){
+	   var password2 = document.getElementById("password2").value;
+	   var passwordCheck2 = document.getElementById("passwordCheck2").value;
+
+	   if(passwordCheck2 == ""){
+	      document.getElementById("passwordCheckText2").innerHTML = ""
+	   } else if (password2 != passwordCheck2) {
+	      document.getElementById("passwordCheckText2").innerHTML = "<b><font color=red size=2pt> 비밀번호가 다릅니다. </font></b>"
+	   } else {
+	      document.getElementById("passwordCheckText2").innerHTML = "<b><font color=green size=2pt> 비밀번호가 일치합니다. </font></b>"
 	   }
 	}
 

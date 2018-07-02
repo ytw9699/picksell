@@ -41,9 +41,12 @@ import com.mycom.utils.FileUpload;
 	
 	@RequestMapping(value="/joinForm", method=RequestMethod.POST)
 	public String join(CommandMap map) {
-		
-		MemberService.insertMember(map.getMap());
-		
+		if(map.get("business_number") == null) {
+		MemberService.insertMember(map.getMap());//일반 회원가입	
+		}
+		else{
+			MemberService.insertBsMember(map.getMap());//사업자 회원가입	
+		}
 		return "redirect:/loginForm";
 	}
 	
@@ -53,52 +56,54 @@ import com.mycom.utils.FileUpload;
 		CookieBox CookieBox = new CookieBox(request);
 		
 		String ID = CookieBox.getValue("ID");
+		String PASSWORD = CookieBox.getValue("PW");
 		
 		model.addAttribute("cookieID", ID);
+		model.addAttribute("cookiePW", PASSWORD);
 		
 		return "loginForm";
 	}
 	
-/*	if(resultMap == null) {
-		System.out.println("계정없음");
-		return "login/loginForm";
-	}else if(!resultMap.get("USERPW").equals(memberModel.getUserPw())) {
-		System.out.println("비번틀림");
-		return "login/loginForm";
-	}else {
-		request.getSession().setAttribute("logonID", memberModel.getUserId());
-		return "redirect:/board/main";
-	}
-	*/
 	@RequestMapping(value="/login", method=RequestMethod.POST)
-	public String login(CommandMap map, HttpSession session, HttpServletResponse response, Model model, HttpServletRequest request)throws IOException{
+	public String login(
+			CommandMap map,
+			HttpSession session,
+			HttpServletResponse response,
+			HttpServletRequest request,
+			Model model
+			)throws IOException{
 		
 		resultMap = MemberService.userCheck(map.getMap());
+		//SELECT ID,PASSWORD,NAME FROM PS_MEMBER WHERE ID = #{ID}
 		String PASSWORD = request.getParameter("PASSWORD");
+		String ID = request.getParameter("ID");
 		
 		if (resultMap == null) {
-			
-			model.addAttribute("resultID", "NO");//아이디가 없다면
+			model.addAttribute("resultID", "NULL");//아이디가 없다면
+			model.addAttribute("formID", ID);//폼아이디값 넘겨주기
 			return "loginForm";
         }
 		if(resultMap != null) {
 		if(!resultMap.get("PASSWORD").equals(PASSWORD)){
-			model.addAttribute("resultID2", "NO");//비밀번호가 틀리다면
+			model.addAttribute("resultPW", "WRONG");//비밀번호가 틀리다면
+			model.addAttribute("formID", ID);//폼아이디값 넘겨주기
 			return "loginForm";
 		}
-		String ID = (String)resultMap.get("ID");
-			
 		session.setAttribute("sessionId", ID);//세션에 값저장
 		
-		response.addCookie(CookieBox.createCookie("ID",ID));//ID 쿠키 생성
-		
+		if((request.getParameter("idSave")) != null) {
+		if(((String)request.getParameter("idSave")).equals("save")) {
+			response.addCookie(CookieBox.createCookie("ID",ID,999999999));//ID 쿠키 생성
+			response.addCookie(CookieBox.createCookie("PW",PASSWORD,999999999));//ID 쿠키 생성
+		}
+		}
 		}
 		return "redirect:/main";
 	}
 		@RequestMapping("/logout")
 	public String logout(HttpSession session) {
-		session.invalidate();
-		return "redirect:/loginForm";
+		session.invalidate();//로그아웃후 다시 메인으로
+		return "redirect:/main";
 		}
 	}
 	

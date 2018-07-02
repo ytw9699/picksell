@@ -4,21 +4,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
-<style>
-
-</style>
 </head>
-<script>
-
-</script>
 <body>
-<center>
-<p>
-<a href="/picksell/joinForm">회원가입</a>
-<a href="/picksell/loginForm">로그인하기</a>
-<hr/>
-<p/>
-</center>
+
 </body>
 </html>

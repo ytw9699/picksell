@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -78,13 +79,22 @@ li.headerCategory {
 <body>
 <div class="headerTop">
 
-	<span class="headerTop_menu">
-		<a href="#" id="linkOfMypage">마이페이지▼</a>|<a href="#">로그아웃</a>|<a href="#">장바구니</a>
-	</span>
+  <span class="headerTop_menu">
+	<c:if test="${sessionId != null}">
+	<a href="#" id="linkOfMypage">마이페이지▼</a>|<a href="/picksell/logout">로그아웃</a>
+	</c:if>
+	<c:if test="${sessionId == null}">
+	|<a href="/picksell/loginForm">로그인</a>
+	</c:if> 
+	|<a href="#">장바구니</a>
+		
+	
+   </span>
+
 </div>
 <div class="headerCenter">
 	<div class="mainLogoWrap">
-		<a href="#">
+		<a href="/picksell/main">
 		<img src="/picksell/resources/img/main_logo.png" class="mainLogo" />
 		</a>
 	</div>
@@ -106,11 +116,11 @@ li.headerCategory {
 <div id="mypage_menuBox">
 	<div id="menuBox-header"></div>
 	<div id="menuBox-body">
-	<span><a href="#">내 정보</a></span>
-	<span><a href="#">판매내역</a></span>
-	<span><a href="#">구매내역</a></span>
-	<span><a href="#">주문관리</a></span>
-	<span><a href="#">알림설정</a></span>
+		<span><a href="#">내 정보</a></span>
+		<span><a href="#">판매내역</a></span>
+		<span><a href="#">구매내역</a></span>
+		<span><a href="#">주문관리</a></span>
+		<span><a href="#">알림설정</a></span>
 	</div>
 </div>
 

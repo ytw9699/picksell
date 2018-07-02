@@ -6,6 +6,11 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style>
+.productWrap {
+    display: inline-block;
+}
+</style>
 </head>
 <body>
 	<div class="categoryWrap">
@@ -31,23 +36,37 @@
 		<span><a href="/picksell/products/plus?ca=${currentCategory }&od=2">높은가격순</a></span>
 	</div>
 	<div class="contentWrap">
-		<c:forEach var="product" items="${resultProductList }">
-			<div class="productWrap">
-				<div class="writerWrap">
-					<span class="productSeller">${product.SELLER_ID }</span>
+	
+	<c:choose>
+		<c:when test="${!empty resultProductList }" >
+			<c:forEach var="product" items="${resultProductList }">
+				<div class="productWrap">
+					<div class="writerWrap">
+						<span class="productSeller">${product.SELLER_ID }</span>
+					</div>
+					<div class="firstImgWrap">
+						<a href="/picksell/products/detail/${product.CATEGORY_NUM }/${product.PRODUCT_NUM }/${currentPage}">
+						<img src="/picksell/resources/productUpload/${product.FIRST_IMG }" style="width: 200px;" />
+						</a>
+					</div>
+					<div class="infoWrap">
+						<span class="productSubject">${product.SUBJECT }</span><br>
+						<span class="productPrice">
+						<fmt:formatNumber value="${product.PRICE }" pattern="#,###.##" /> 원
+						</span>
+					</div>
+		
 				</div>
-				<div class="firstImgWrap">
-					<img src="/picksell/resources/productUpload/${product.FIRST_IMG }" style="width: 200px;" />
-				</div>
-				<div class="infoWrap">
-					<span class="productSubject">${product.SUBJECT }</span><br>
-					<span class="productPrice">
-					<fmt:formatNumber value="${product.PRICE }" pattern="#,###.##" /> 원
-					</span>
-				</div>
-			
+			</c:forEach>
+			<div class="paging">
+			${pagingHtml}
 			</div>
-		</c:forEach>
+		</c:when>
+		<c:when test="${empty resultProductList }">
+			등록된 상품이 없습니다!
+		</c:when>
+	</c:choose>
 	</div>
+	
 </body>
 </html>

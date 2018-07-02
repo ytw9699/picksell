@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -20,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartRequest;
 
 import com.mycom.config.CommandMap;
+
 import com.mycom.utils.FileUpload;
 
 @Controller
@@ -40,6 +42,14 @@ public class ProductController {
 	@Resource(name="productService")
 	private ProductService productService;
 	
+	//페이징
+	//private int currentPage = 1; //안쓰는변수 어노테이션으로 해결함
+	private int totalCount; 		 
+	private int blockCount = 10;	 
+	private int blockPage = 5; 	 
+	private String pagingHtml;  
+	private ProductPaging page;
+	
 	//상품등록 진입점 
 	@RequestMapping("/sell/howto")
 	public String howtosell() {
@@ -57,6 +67,16 @@ public class ProductController {
 		
 		return "sellForm";
 	}
+	
+	//상품등록폼(플러스상품)
+		@RequestMapping("/sellPlus")
+		public String sellPlusForm(
+				Model model) {
+			
+			model.addAttribute("howtosell", 2);
+			
+			return "sellPlusForm";
+		}
 	
 	//스마트에디터 사진업로드(사업자판매와 일반판매 모두 같이사용합니다)
 	@RequestMapping(value = "/sell/fileUpload", method = RequestMethod.POST)
@@ -85,7 +105,7 @@ public class ProductController {
 		return "client_product/file_upload";
 	}
 	
-	//일반판매글 등록처리
+	//판매글 등록처리
 	@RequestMapping(value="/sell/sellProc", method=RequestMethod.POST)
 	public String sellFormProc(
 			CommandMap map,
@@ -116,6 +136,7 @@ public class ProductController {
 	public String productList(
 			@RequestParam(value="ca", required=false, defaultValue="0") int category_num,
 			@RequestParam(value="od", required=false, defaultValue="0") int orderMethod,
+			@RequestParam(value="p", required=false, defaultValue="1") int currentPageNumber,
 			Model model) {
 		
 		//정렬은 0 > 최신순, 1 > 낮은가격순, 2 > 높은가격순
@@ -127,20 +148,23 @@ public class ProductController {
 		parameterMap.put("orderMethod", orderMethod);
 		List<Map<String, Object>> resultList = productService.getNomalProductList(parameterMap);
 		
+		totalCount = resultList.size();
+		
+		page = new ProductPaging(currentPageNumber, totalCount, blockCount, blockPage, "/picksell/products/goods", category_num, orderMethod);
+		pagingHtml = page.getPagingHtml().toString();
+		int lastCount = totalCount;
+		
+		if(page.getEndCount() < totalCount)
+			lastCount = page.getEndCount() + 1;
+		
+		resultList = resultList.subList(page.getStartCount(), lastCount);
+		
+		model.addAttribute("pagingHtml", pagingHtml);
 		model.addAttribute("currentCategory", category_num);
 		model.addAttribute("resultProductList", resultList);
+		model.addAttribute("currentPage", currentPageNumber);
 		
 		return "productList";
-	}
-	
-	//상품등록폼(플러스상품)
-	@RequestMapping("/sellPlus")
-	public String sellPlusForm(
-			Model model) {
-		
-		model.addAttribute("howtosell", 2);
-		
-		return "sellPlusForm";
 	}
 	
 	//플러스상품 리스트
@@ -148,6 +172,7 @@ public class ProductController {
 	public String productPlusList(
 			@RequestParam(value="ca", required=false, defaultValue="0") int category_num,
 			@RequestParam(value="od", required=false, defaultValue="0") int orderMethod,
+			@RequestParam(value="p", required=false, defaultValue="1") int currentPageNumber,
 			Model model) {
 		
 		//정렬은 0 > 최신순, 1 > 낮은가격순, 2 > 높은가격순
@@ -159,14 +184,133 @@ public class ProductController {
 		parameterMap.put("orderMethod", orderMethod);
 		List<Map<String, Object>> resultList = productService.getPlusProductList(parameterMap);
 		
+		totalCount = resultList.size();
+		page = new ProductPaging(currentPageNumber, totalCount, blockCount, blockPage, "/picksell/products/plus", category_num, orderMethod);
+		pagingHtml = page.getPagingHtml().toString();
+		int lastCount = totalCount;
+		
+		if(page.getEndCount() < totalCount)
+			lastCount = page.getEndCount() + 1;
+		
+		resultList = resultList.subList(page.getStartCount(), lastCount);
+		
+		model.addAttribute("pagingHtml", pagingHtml);
 		model.addAttribute("currentCategory", category_num);
 		model.addAttribute("resultProductList", resultList);
+		model.addAttribute("currentPage", currentPageNumber);
 		
 		return "productPlusList";
 	}
 	
-	
-	
+	//상품 상세보기
+	@RequestMapping("/products/detail/{category_num}/{product_num}/{currentPage}")
+	public String productsDetail(
+			@PathVariable("product_num") int product_num,
+			@PathVariable("currentPage") int currentPage,
+			@PathVariable("category_num") int category_num,
+			Model model,
+			HttpServletRequest request) {
+		
+		Map<String, Object> parameterMap = new HashMap<String, Object>();
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		parameterMap.put("product_num", product_num);
+		productService.updateProductHitcount(parameterMap);
+		
+		resultMap = productService.getProductDetail(parameterMap);
+		
+		//버튼을 위한 모델경우의수
+		//첫번째는 내가 이걸 장바구니에 담았었는지(장바구니는 플러스만가능이니까 howtosell 기준)
+		//두번째는 내가 구매신청을 했었는지 그래서 대기중인지
+		//세번째는 내가 구매신청을 수락받았는지 그래서 구매하기가 가능한지
+		
+		
+		//코멘트리스트++
+		List<Map<String, Object>> resultCommentList = productService.getProductCommentList(product_num);
+		System.out.println("코멘트리스트사이즈:" + resultCommentList.size());
+		//System.out.println("코멘트리스트사이즈:" + resultCommentList.get(0));
+		//구매신청리스트++
+		List<Map<String, Object>> resultPurchaseList = productService.getProductPurchaseList(product_num);
+		//System.out.println("구매신청사이즈:" + resultPurchaseList.size());
+		model.addAttribute("alreadyPurchase", false);
+		for(int i = 0 ; i < resultPurchaseList.size() ; i++) {
+			if(resultPurchaseList.get(i).get("BUYER_ID").equals("임시구매자")) {
+				model.addAttribute("alreadyPurchase", true);
+				break;
+			}
+		}
+		
+		
+		//디테일 정보 확인
+		//System.out.println(resultMap);
+		model.addAttribute("category_num", category_num);
+		model.addAttribute("product_num", product_num);
+		model.addAttribute("currentPage", currentPage);
 
+		//상품상세정보
+		model.addAttribute("resultObject", resultMap);
+		//상품문의리스트
+		model.addAttribute("resultCommentList", resultCommentList);
+		
+		
+		
+		return "productDetail";
+	}
 	
+	//상품문의 작성
+	@RequestMapping(value="/products/commentProc", method=RequestMethod.POST)
+	public String writeComment(CommandMap map, Model model) {
+		
+		System.out.println(map.getMap());
+		productService.insertProductComment(map.getMap());
+		
+		model.addAttribute("redirect", 1);
+		model.addAttribute("category_num", map.getMap().get("category_num"));
+		model.addAttribute("product_num", map.getMap().get("product_num"));
+		model.addAttribute("currentPage", map.getMap().get("currentPage"));
+		//return "redirect:/products/detail/"+map.getMap().get("category_num")+"/"+map.getMap().get("product_num")+"/"+map.getMap().get("currentPage");
+		return "client_product/redirecting";
+	}
+	
+	//구매신청하기
+	@RequestMapping("/products/purchseRequest/{ca}/{pn}/{cp}")
+	public String purchaseRequest(
+			@PathVariable("pn") int product_num,
+			@PathVariable("ca") int category_num,
+			@PathVariable("cp") int currentPage,
+			HttpServletRequest request,
+			Model model) {
+		
+		//세션아이디 임시구매자
+		Map<String, Object> parameterMap = new HashMap<String, Object>();
+		parameterMap.put("product_num", product_num);
+		parameterMap.put("buyer_id", "임시구매자");
+		
+		productService.insertProductPurchaseList(parameterMap);
+		
+		model.addAttribute("redirect", 2);
+		model.addAttribute("category_num", category_num);
+		model.addAttribute("product_num", product_num);
+		model.addAttribute("currentPage", currentPage);
+		return "client_product/redirecting";
+	}
+	
+	@RequestMapping("/products/purchseRequestCancel/{ca}/{pn}/{cp}")
+	public String purchaseRequestCancel(
+			@PathVariable("pn") int product_num,
+			@PathVariable("ca") int category_num,
+			@PathVariable("cp") int currentPage,
+			HttpServletRequest request,
+			Model model) {
+		
+		Map<String, Object> parameterMap = new HashMap<String, Object>();
+		parameterMap.put("product_num", product_num);
+		parameterMap.put("buyer_id", "임시구매자");
+		productService.deleteProductPurchaseList(parameterMap);
+		
+		model.addAttribute("redirect", 4);
+		model.addAttribute("category_num", category_num);
+		model.addAttribute("product_num", product_num);
+		model.addAttribute("currentPage", currentPage);
+		return "client_product/redirecting";
+	}
 }
