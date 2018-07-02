@@ -3,40 +3,45 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <style>
-.vertical-menu {
-    width: 200px;
+
+.sidenav {
+    height: 100%;
+    width: 160px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    padding-top: 20px;
 }
 
-.vertical-menu a {
-    background-color: #eee;
-    color: black;
-    display: block;
-    padding: 12px;
+.sidenav a {
+    padding: 6px 8px 6px 16px;
     text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
 }
 
-.vertical-menu a:hover {
-    background-color: #ccc;
+.sidenav a:hover {
+    color: #f1f1f1;
 }
 
-.vertical-menu a.active {
-    background-color: #4CAF50;
-    color: white;
-}
+
+
 </style>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
-<h1>Vertical Menu</h1>
-
-<div class="vertical-menu">
-  <a href="#" class="active">Home</a>
-  <a href="#">Link 1</a>
-  <a href="#">Link 2</a>
-  <a href="#">Link 3</a>
-  <a href="#">Link 4</a>
+<div class="sidenav">
+  <a href="/picksell/admin/main">메인메뉴</a>
+  <a href="/picksell/admin/member/list">계정관리</a>
+  <a href="#clients">판매관리</a>
+  <a href="#contact">주문관리</a>
+  <a href="#">구매관리</a>
 </div>
 </body>
 </html>
