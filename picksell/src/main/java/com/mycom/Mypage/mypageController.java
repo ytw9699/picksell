@@ -32,10 +32,6 @@ public class mypageController {
 	@Resource(name="mypageService")
 	private mypageService mypageService;
 	
-	@RequestMapping("/mypage")
-	public String mypage(Model model) {	
-		return "mypage";
-	}
 	@RequestMapping(value="/mypage/modify",method=RequestMethod.GET)
 	public String modify(HttpSession session, Model model) {	
 		

@@ -11,7 +11,7 @@
 <title>마이페이지 초안</title>
 </head>
 <body>
-마이페이지 초안
+<p><a href="/picksell/mypage/modify">마이페이지</a></p>
 <p><a href="/picksell/mypage/modify">내정보</a></p>
 <p><a href="/picksell/mypage/modify">판매내역</a></p>
 <p><a href="/picksell/mypage/modify">구매내역</a></p>
