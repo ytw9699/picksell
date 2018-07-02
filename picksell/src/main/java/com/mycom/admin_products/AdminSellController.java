@@ -1,5 +1,6 @@
 package com.mycom.admin_products;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -11,25 +12,92 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+
 import com.mycom.admin_products.AdminSellModel;
 import com.mycom.admin_products.AdminSellService;
 
+import com.mycom.common.pagingAction;
 
 @Controller
-@RequestMapping("/admin/products")
+@RequestMapping("/admin_products")
 public class AdminSellController {
 
 	@Resource
 	private AdminSellService adminSellService;
 	
 	ModelAndView mav = new ModelAndView();
+	private int searchNum;
+	private String isSearch;
+	
+	private int currentPage = 1;
+	private int totalCount;
+	private int blockCount = 10;
+	private int blockPage = 5;
+	private String pagingHtml;
+	private pagingAction page;
+	private int num = 0;
+	
+	AdminSellModel adminSellModel = new AdminSellModel();
 	
 	AdminSellController(){
 		
 	}
 	
 	@RequestMapping("/list")
-	public ModelAndView adminProductList() {
+	public ModelAndView adminProductList(HttpServletRequest request) {
+		
+		List<AdminSellModel> productsList = adminSellService.productsList();
+		
+		isSearch = request.getParameter("isSearch");
+		if(isSearch != null) {
+			searchNum = Integer.parseInt(request.getParameter("searchNum"));
+			
+			if(searchNum==0) //구매자 
+				productsList = adminSellService.productsSearch0(isSearch);
+			else if(searchNum == 1) // 상태 
+				productsList = adminSellService.productsSearch1(isSearch);
+			else if(searchNum == 2) // 택배사 
+				productsList = adminSellService.productsSearch2(isSearch);
+			
+			totalCount = productsList.size();
+			page = new pagingAction(currentPage, totalCount, blockCount, blockPage, num, "");
+			pagingHtml = page.getPagingHtml().toString(); 
+			int lastCount = totalCount;
+			if (page.getEndCount() < totalCount)
+				lastCount = page.getEndCount() + 1;
+			
+			productsList =productsList.subList(page.getStartCount(), lastCount);
+			
+			
+			mav.addObject("isSearch", isSearch);
+			mav.addObject("searchNum",searchNum);
+			mav.addObject("totalCount", totalCount);
+			mav.addObject("pagingHtml", pagingHtml);
+			mav.addObject("currentPage", currentPage);
+			mav.addObject("productsList", productsList);
+			mav.setViewName("admin_products/list");
+			return mav;
+			
+		}
+		
+		totalCount = productsList.size();
+		page = new pagingAction(currentPage, totalCount, blockCount, blockPage, num, "");
+		pagingHtml = page.getPagingHtml().toString(); 
+		int lastCount = totalCount;
+		if (page.getEndCount() < totalCount)
+			lastCount = page.getEndCount() + 1;
+		
+		productsList = productsList.subList(page.getStartCount(), lastCount);
+		
+		
+		mav.addObject("isSearch", isSearch);
+		mav.addObject("searchNum",searchNum);
+		mav.addObject("totalCount", totalCount);
+		mav.addObject("pagingHtml", pagingHtml);
+		mav.addObject("currentPage", currentPage);
+		mav.addObject("productsList",productsList);
+		mav.setViewName("admin_products/list");
+		
 		
 		return mav;
 		
@@ -40,6 +108,102 @@ public class AdminSellController {
 		
 		return mav;
 		
+	}
+
+	public AdminSellService getAdminSellService() {
+		return adminSellService;
+	}
+
+	public void setAdminSellService(AdminSellService adminSellService) {
+		this.adminSellService = adminSellService;
+	}
+
+	public ModelAndView getMav() {
+		return mav;
+	}
+
+	public void setMav(ModelAndView mav) {
+		this.mav = mav;
+	}
+
+	public int getSearchNum() {
+		return searchNum;
+	}
+
+	public void setSearchNum(int searchNum) {
+		this.searchNum = searchNum;
+	}
+
+	public String getIsSearch() {
+		return isSearch;
+	}
+
+	public void setIsSearch(String isSearch) {
+		this.isSearch = isSearch;
+	}
+
+	public int getCurrentPage() {
+		return currentPage;
+	}
+
+	public void setCurrentPage(int currentPage) {
+		this.currentPage = currentPage;
+	}
+
+	public int getTotalCount() {
+		return totalCount;
+	}
+
+	public void setTotalCount(int totalCount) {
+		this.totalCount = totalCount;
+	}
+
+	public int getBlockCount() {
+		return blockCount;
+	}
+
+	public void setBlockCount(int blockCount) {
+		this.blockCount = blockCount;
+	}
+
+	public int getBlockPage() {
+		return blockPage;
+	}
+
+	public void setBlockPage(int blockPage) {
+		this.blockPage = blockPage;
+	}
+
+	public String getPagingHtml() {
+		return pagingHtml;
+	}
+
+	public void setPagingHtml(String pagingHtml) {
+		this.pagingHtml = pagingHtml;
+	}
+
+	public pagingAction getPage() {
+		return page;
+	}
+
+	public void setPage(pagingAction page) {
+		this.page = page;
+	}
+
+	public int getNum() {
+		return num;
+	}
+
+	public void setNum(int num) {
+		this.num = num;
+	}
+
+	public AdminSellModel getAdminSellModel() {
+		return adminSellModel;
+	}
+
+	public void setAdminSellModel(AdminSellModel adminSellModel) {
+		this.adminSellModel = adminSellModel;
 	}
 	
 }

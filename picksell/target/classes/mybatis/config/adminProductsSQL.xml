@@ -23,5 +23,30 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="price" column="price"/>
 	</resultMap>
 	
+	<select id="productsList-all" resultMap="productsRes">
+		SELECT * FROM ps_product ORDER BY product_num desc
+	</select>
+	
+<!-- 	판매자 id -->
+	<select id="productsSearch0" resultMap="productsRes" parameterType="String">
+		SELECT * FROM ps_product
+		WHERE seller_id LIKE #{isSearch}
+		ORDER BY product_num DESC
+	</select>
+		
+<!-- 	제목  -->
+	<select id="productsSearch1" resultMap="productsRes" parameterType="String">
+		SELECT * FROM ps_product
+		WHERE subject LIKE #{isSearch}
+		ORDER BY product_num DESC
+	</select>
+	
+<!-- 	내용  -->
+	<select id="productsSearch2" resultMap="productsRes" parameterType="String">
+		SELECT * FROM ps_product
+		WHERE content LIKE #{isSearch}
+		ORDER BY product_num DESC
+	</select>
+	
 </mapper>
 

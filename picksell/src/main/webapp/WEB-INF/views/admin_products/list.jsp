@@ -1,12 +1,80 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>판매제품 리스트</title>
 </head>
 <body>
+<table>
+	<thead>
+		<tr role="row">
+			<th style="width: 7%; text-align:center;">번호</th>
+			<th style="width: 7%; text-align:center;">카테고리번호</th>
+			<th style="width: 7%; text-align:center;">판매자</th>
+			<th style="width: 7%; text-align:center;">판매방법</th>										
+			<th style="width: 7%; text-align:center;">조회수</th>
+			<th style="width: 7%; text-align:center;">재고</th>
+			<th style="width: 7%; text-align:center;">등록일자</th>
+			<th style="width: 7%; text-align:center;">거래상태</th>
+			<th style="width: 7%; text-align:center;">게시글상태</th>
+			<th style="width: 9%; text-align:center;">내용</th>
+			<th style="width: 7%; text-align:center;">이미지</th>
+			<th style="width: 7%; text-align:center;">제목</th>
+			<th style="width: 7%; text-align:center;">제품상태</th>
+			<th style="width: 7%; text-align:center;">가격</th>
+		</tr>
+	</thead>
+	
+	<div class="productsList">
+ 		<c:forEach var="productsList" items="${productsList}" varStatus="stat">
+ 			<tr class="orderListContents" role="row">
+ 				<td style="text-align:center;vertical-align:middle;">${productsList.product_num}</td>
+ 				<td style="text-align:center;vertical-align:middle;">${productsList.category_num}</td>
+ 				<td style="text-align:center;vertical-align:middle;">${productsList.seller_id}</td>
+ 				<td style="text-align:center;vertical-align:middle;">${productsList.howtosell}</td>
+ 				<td style="text-align:center;vertical-align:middle;">${productsList.hitcount}</td>
+ 				<td style="text-align:center;vertical-align:middle;">${productsList.stock}</td>
+ 				<td style="text-align:center;vertical-align:middle;">${productsList.product_regdate}</td>
+ 				<td style="text-align:center;vertical-align:middle;">${productsList.deal_status}</td>
+ 				<td style="text-align:center;vertical-align:middle;">${productsList.board_status}</td>
+ 				<td style="text-align:center;vertical-align:middle;">${productsList.content}</td>
+ 				<td style="text-align:center;vertical-align:middle;">${productsList.first_img}</td>
+ 				<td style="text-align:center;vertical-align:middle;">${productsList.subject}</td>
+ 				<td style="text-align:center;vertical-align:middle;">${productsList.product_status}</td>
+ 				<td style="text-align:center;vertical-align:middle;">${productsList.price}</td>
+ 				<br/>
+ 			</tr>
+ 		</c:forEach>
+ 	</div>
+	
+</table>
 
+	<!--  등록된 상품이 없을때 -->
+	<c:if test="${fn:length(productsList) le 0}">
+		<tr><td colspan="9" style="text-align:center;">등록된 상품이 없습니다</td></tr>
+	</c:if> 
+	
+	<div class="row">
+		<div style="text-align:center;">
+			<div id="dataTables-example_filter" class="dataTables_filter">
+				<form action=""> 
+					<select class="form-control" name="searchNum" id="searchNum">
+						<option value="0">판매자</option>
+						<option value="1">제목</option>
+						<option value="2">내용</option>
+					</select>
+					<input class="form-control" type="text" name="isSearch" id="isSearch"/>
+					<span>
+						<button type="submit" class="btn btn-default">검색</button>
+					</span>
+				</form>
+			</div>							
+		</div>				
+	</div>
+	
 </body>
 </html>
