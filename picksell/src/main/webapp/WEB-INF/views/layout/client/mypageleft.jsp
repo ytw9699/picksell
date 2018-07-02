@@ -13,9 +13,9 @@
 <body>
 <p><a href="/picksell/mypage/modify">마이페이지</a></p>
 <p><a href="/picksell/mypage/modify">내정보</a></p>
-<p><a href="/picksell/mypage/modify">판매내역</a></p>
-<p><a href="/picksell/mypage/modify">구매내역</a></p>
-<p><a href="/picksell/mypage/modify">주문관리</a></p>
-<p><a href="/picksell/mypage/modify">알림설정</a></p>
+<p><a href="/picksell/mypage/modify" onclick="alert('기다리시오ㅎㅎ');">판매내역</a></p>
+<p><a href="/picksell/mypage/modify" onclick="alert('기다리시오ㅎㅎ');">구매내역</a></p>
+<p><a href="/picksell/mypage/modify" onclick="alert('기다리시오ㅎㅎ');">주문관리</a></p>
+<p><a href="/picksell/mypage/modify" onclick="alert('기다리시오ㅎㅎ');">알림설정</a></p>
 </body>
 </html>
