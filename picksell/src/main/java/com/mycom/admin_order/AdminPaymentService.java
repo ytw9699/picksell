@@ -23,8 +23,14 @@ public class AdminPaymentService implements AdminPaymentDAO {
 	}
 	// 특정 오더 검색 
 	@Override
-	public List<AdminPaymentModel> orderSearchList(String search){
-		return null;
+	public List<AdminPaymentModel> orderSearch0(String search){
+		return sqlSessionTemplate.selectList("adminOrder.orderSearch0", "%"+search+"%");
+	}
+	public List<AdminPaymentModel> orderSearch1(String search){
+		return sqlSessionTemplate.selectList("adminOrder.orderSearch1", "%"+search+"%");
+	}
+	public List<AdminPaymentModel> orderSearch2(String search){
+		return sqlSessionTemplate.selectList("adminOrder.orderSearch2", "%"+search+"%");
 	}
 	// 입금완료, 배송확인, 인수확인 등 STATUS변수 업데이트 
 	@Override

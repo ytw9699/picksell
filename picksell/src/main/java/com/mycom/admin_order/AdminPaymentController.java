@@ -24,11 +24,13 @@ public class AdminPaymentController {
 	private AdminPaymentService adminPaymentService;
 	
 	ModelAndView mav = new ModelAndView();
+	private int searchNum;
+	private String isSearch;
 	
 	AdminPaymentModel adminPaymentModel = new AdminPaymentModel();
 	AdminPaymentListModel adminPaymentListModel = new AdminPaymentListModel();
 	
-	private List<AdminPaymentModel> orderList = new ArrayList<AdminPaymentModel>();
+//	private List<AdminPaymentModel> orderList = new ArrayList<AdminPaymentModel>();
 	private List<AdminPaymentListModel> orderList2 = new ArrayList<AdminPaymentListModel>();
 	
 	AdminPaymentController(){
@@ -39,10 +41,32 @@ public class AdminPaymentController {
 		
 		//String order_num = request.getParameter("order_num");
 		
-		orderList = adminPaymentService.orderList();
+		List<AdminPaymentModel> orderList = adminPaymentService.orderList();
 		
-		mav.addObject("orderList",orderList);
+		isSearch = request.getParameter("isSearch");
+		if(isSearch != null) {
+			searchNum = Integer.parseInt(request.getParameter("searchNum"));
+			
+			if(searchNum==0) //구매자 
+				orderList = adminPaymentService.orderSearch0(isSearch);
+			else if(searchNum == 1) // 상태 
+				orderList = adminPaymentService.orderSearch1(isSearch);
+			else if(searchNum == 2) // 택배사 
+				orderList = adminPaymentService.orderSearch2(isSearch);
+			
+		}
+		
+		mav.addObject("isSearch", isSearch);
+		mav.addObject("searchNum",searchNum);
 		mav.setViewName("admin_order/orderList");
+		return mav;
+		
+	}
+	
+	@RequestMapping("/adminMain")
+	public ModelAndView adminMain() {
+		
+		mav.setViewName("admin_order/adminMain");
 		return mav;
 		
 	}
