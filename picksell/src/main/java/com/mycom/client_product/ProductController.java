@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartRequest;
 
+import com.mycom.client_basket.BasketService;
 import com.mycom.config.CommandMap;
 
 import com.mycom.utils.FileUpload;
@@ -27,20 +28,11 @@ import com.mycom.utils.FileUpload;
 @Controller
 public class ProductController {
 	
-	/*픽셀플러스 인기상품 전체보기
-	새로등록된 플러스상품 전체보기
-	새로등록된 일반상품 전체보기
-	상품등록폼(메인에서)
-	ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
-	픽셀플러스(헤더에서) -> 카테고리 분류있음
-	일반상품(헤더에서) -> 카테고리 분류있음
-	새로등록된상품(헤더에서) -> 카테고리 분류없음
-	카테고리별 
-	*/
-	//등록폼: 판매방식확인 -> 등록폼 -> 확인 
-	
 	@Resource(name="productService")
 	private ProductService productService;
+	
+	@Resource(name="basketService")
+	private BasketService basketService;
 	
 	//페이징
 	//private int currentPage = 1; //안쓰는변수 어노테이션으로 해결함
@@ -211,34 +203,42 @@ public class ProductController {
 			Model model,
 			HttpServletRequest request) {
 		
+		String currentID = (String) request.getSession().getAttribute("sessionId");
+		
+		
+		//조회수 증가
 		Map<String, Object> parameterMap = new HashMap<String, Object>();
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		parameterMap.put("product_num", product_num);
 		productService.updateProductHitcount(parameterMap);
 		
+		//상품상세정보
 		resultMap = productService.getProductDetail(parameterMap);
-		
-		//버튼을 위한 모델경우의수
-		//첫번째는 내가 이걸 장바구니에 담았었는지(장바구니는 플러스만가능이니까 howtosell 기준)
-		//두번째는 내가 구매신청을 했었는지 그래서 대기중인지
-		//세번째는 내가 구매신청을 수락받았는지 그래서 구매하기가 가능한지
-		
-		
+	
 		//코멘트리스트++
 		List<Map<String, Object>> resultCommentList = productService.getProductCommentList(product_num);
-		System.out.println("코멘트리스트사이즈:" + resultCommentList.size());
-		//System.out.println("코멘트리스트사이즈:" + resultCommentList.get(0));
+
 		//구매신청리스트++
 		List<Map<String, Object>> resultPurchaseList = productService.getProductPurchaseList(product_num);
-		//System.out.println("구매신청사이즈:" + resultPurchaseList.size());
+
+		//구매신청을 했는지
 		model.addAttribute("alreadyPurchase", false);
 		for(int i = 0 ; i < resultPurchaseList.size() ; i++) {
-			if(resultPurchaseList.get(i).get("BUYER_ID").equals("임시구매자")) {
+			if(resultPurchaseList.get(i).get("BUYER_ID").equals(currentID)) {
 				model.addAttribute("alreadyPurchase", true);
 				break;
 			}
 		}
 		
+		//장바구니에 담았는지
+		model.addAttribute("alreadyBasket", false);
+		Map<String, Object> basketParameterMap = new HashMap<String, Object>();
+		basketParameterMap.put("product_num", product_num);
+		basketParameterMap.put("basket_id", currentID);
+		int isBasket = basketService.countingIsBasket(basketParameterMap);
+		if(isBasket > 0) {
+			model.addAttribute("alreadyBasket", true);
+		}
 		
 		//디테일 정보 확인
 		//System.out.println(resultMap);
@@ -272,45 +272,43 @@ public class ProductController {
 	}
 	
 	//구매신청하기
-	@RequestMapping("/products/purchseRequest/{ca}/{pn}/{cp}")
+	@RequestMapping("/products/purchseRequest/{pn}/{sessionID}")
 	public String purchaseRequest(
 			@PathVariable("pn") int product_num,
-			@PathVariable("ca") int category_num,
-			@PathVariable("cp") int currentPage,
-			HttpServletRequest request,
+			@PathVariable("sessionID") String currentID,
 			Model model) {
+		
+		
 		
 		//세션아이디 임시구매자
 		Map<String, Object> parameterMap = new HashMap<String, Object>();
 		parameterMap.put("product_num", product_num);
-		parameterMap.put("buyer_id", "임시구매자");
+		parameterMap.put("buyer_id", currentID);
 		
 		productService.insertProductPurchaseList(parameterMap);
 		
 		model.addAttribute("redirect", 2);
-		model.addAttribute("category_num", category_num);
+
 		model.addAttribute("product_num", product_num);
-		model.addAttribute("currentPage", currentPage);
+
 		return "client_product/redirecting";
 	}
 	
-	@RequestMapping("/products/purchseRequestCancel/{ca}/{pn}/{cp}")
+	//구매신청 취소
+	@RequestMapping("/products/purchseRequestCancel/{pn}/{sessionID}")
 	public String purchaseRequestCancel(
 			@PathVariable("pn") int product_num,
-			@PathVariable("ca") int category_num,
-			@PathVariable("cp") int currentPage,
-			HttpServletRequest request,
+			@PathVariable("sessionID") String currentID,
 			Model model) {
 		
 		Map<String, Object> parameterMap = new HashMap<String, Object>();
 		parameterMap.put("product_num", product_num);
-		parameterMap.put("buyer_id", "임시구매자");
+		parameterMap.put("buyer_id", currentID);
 		productService.deleteProductPurchaseList(parameterMap);
 		
 		model.addAttribute("redirect", 4);
-		model.addAttribute("category_num", category_num);
 		model.addAttribute("product_num", product_num);
-		model.addAttribute("currentPage", currentPage);
+
 		return "client_product/redirecting";
 	}
 }

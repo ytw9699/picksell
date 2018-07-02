@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="client_basket">
+	
+	<select id="selectIsBasket" resultType="int" parameterType="hashmap">
+		select count(*) as resultvalue 
+		from ps_basket 
+		where product_num = #{product_num} and basket_id = #{basket_id}
+	</select>
+	
+	<select id="selectBasketList" resultType="hashmap" parameterType="string">
+		select a.basket_num, a.product_num, a.basket_id, a.basket_regdate, a.product_quantity,
+		b.category_num, b.seller_id, b.howtosell, b.stock, b.subject, b.first_img, b.product_status, b.price 
+		from ps_basket a, ps_product b  
+		where a.product_num = b.product_num and a.basket_id = #{sessionId} 
+		order by a.basket_num desc 
+	</select>
+	
+	<insert id="insertBasket" parameterType="hashmap">
+		insert into ps_basket(BASKET_NUM,
+								PRODUCT_NUM,
+								BASKET_ID,
+								BASKET_REGDATE,
+								PRODUCT_QUANTITY) values(basket_seq.NEXTVAL,
+															#{product_num},
+															#{basket_id},
+															sysdate,
+															'1')
+	</insert>
+	
+	<update id="addQuantity" parameterType="int">
+		update ps_basket set product_quantity = product_quantity + 1 where basket_num = #{basket_num}
+	</update>
+	
+	<update id="subQuantity" parameterType="int">
+		update ps_basket set product_quantity = product_quantity - 1 where basket_num = #{basket_num}
+	</update>
+	
+</mapper>

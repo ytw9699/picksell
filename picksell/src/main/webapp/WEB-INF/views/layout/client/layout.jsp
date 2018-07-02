@@ -6,7 +6,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="/picksell/resources/img/pavicon_ps.png" rel="icon" type="image/x-icon" />
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<!-- <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <title>PICKSELL</title>
 <style>
 @font-face{font-family:'NotoSansBold'; src:url('/picksell/resources/clientcss/font/NotoSansCJKkr-Bold.otf')}

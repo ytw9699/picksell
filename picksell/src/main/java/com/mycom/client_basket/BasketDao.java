@@ -1,5 +1,22 @@
 package com.mycom.client_basket;
 
-public interface BasketDao {
+import java.util.List;
+import java.util.Map;
 
+public interface BasketDao {
+	
+	//제품상세보기 > 이미 장바구니에 담았는지 확인
+	public int countingIsBasket(Map<String, Object> map);
+
+	//장바구니에 담기
+	public void insertBasket(Map<String, Object> map);
+	
+	//장바구니 리스트
+	public List<Map<String, Object>> selectBasketList(String sessionId); 
+	
+	//장바구니 수량증가
+	public void addQuantity(int basket_num);
+	
+	//장바구니 수량감소
+	public void subQuantity(int basket_num);
 }
