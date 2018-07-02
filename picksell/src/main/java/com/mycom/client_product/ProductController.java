@@ -272,11 +272,9 @@ public class ProductController {
 	}
 	
 	//구매신청하기
-	@RequestMapping("/products/purchseRequest/{ca}/{pn}/{cp}")
+	@RequestMapping("/products/purchseRequest/{pn}")
 	public String purchaseRequest(
 			@PathVariable("pn") int product_num,
-			@PathVariable("ca") int category_num,
-			@PathVariable("cp") int currentPage,
 			HttpServletRequest request,
 			Model model) {
 		
@@ -288,17 +286,16 @@ public class ProductController {
 		productService.insertProductPurchaseList(parameterMap);
 		
 		model.addAttribute("redirect", 2);
-		model.addAttribute("category_num", category_num);
+
 		model.addAttribute("product_num", product_num);
-		model.addAttribute("currentPage", currentPage);
+
 		return "client_product/redirecting";
 	}
 	
-	@RequestMapping("/products/purchseRequestCancel/{ca}/{pn}/{cp}")
+	//구매신청 취소
+	@RequestMapping("/products/purchseRequestCancel/{pn}")
 	public String purchaseRequestCancel(
 			@PathVariable("pn") int product_num,
-			@PathVariable("ca") int category_num,
-			@PathVariable("cp") int currentPage,
 			HttpServletRequest request,
 			Model model) {
 		
@@ -308,9 +305,8 @@ public class ProductController {
 		productService.deleteProductPurchaseList(parameterMap);
 		
 		model.addAttribute("redirect", 4);
-		model.addAttribute("category_num", category_num);
 		model.addAttribute("product_num", product_num);
-		model.addAttribute("currentPage", currentPage);
+
 		return "client_product/redirecting";
 	}
 }

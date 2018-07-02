@@ -24,6 +24,13 @@ public class BasketController {
 		return "basketList";
 	}
 	
+	@RequestMapping("/fetchTest")
+	public String fetchTest() {
+		
+		System.out.println("패치실행");
+		return "fetchTest";
+	}
+	
 	//장바구니담기
 	@RequestMapping("/cart/into/{ca}/{pn}/{cp}")
 	public String putBasket(

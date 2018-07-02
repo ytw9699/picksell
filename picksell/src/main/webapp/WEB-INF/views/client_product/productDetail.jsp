@@ -6,6 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 <style>
 .hiddenBackGround{
     width: 100%;
@@ -28,8 +29,50 @@
 }
 
 </style>
+
 </head>
 <body>
+<script>
+	function applyFetch(){ //패치 테스트용
+		fetch('/picksell/fetchTest').then(function(response){
+			response.text().then(function(text){
+				//document.querySelector('body').innerHTML = text;
+				//document.getElementById('fetchResult').innerHTML = text;
+				if(response.status == '200'){
+					alert('fetch!');
+				}
+			})
+		})
+	}
+	function purchaseApply(){
+		fetch('/picksell/products/purchseRequest/'+${product_num}).then(function(response){
+			response.text().then(function(text){
+				if(response.status == '200'){
+					alert('구매신청이 완료되었습니다! \n판매자의 수락까지 기다려주세요');
+					var inner = "<input type='button' value='구매신청 취소하기' onclick='purchaseCancel()' />";
+					document.getElementById('purchaseWrap').innerHTML = inner;		
+				}
+			})
+		})
+	}
+	function purchaseCancel(){
+		fetch('/picksell/products/purchseRequestCancel/'+${product_num}).then(function(response){
+			response.text().then(function(text){
+				if(response.status == '200'){
+					alert('구매신청이 취소되었습니다!');
+					var inner = "<input type='button' value='구매신청하기' onclick='purchaseApply()' />";
+					document.getElementById('purchaseWrap').innerHTML = inner;
+				}
+			})
+		})
+	}
+	
+	
+</script>
+<div id="fetchResult">
+	
+</div>
+<input type="button" value="패치" onclick="applyFetch()" />
 <div class="hiddenBackGround" onclick="closeCommentForm()"></div>
 <div class="hiddenCommentForm">
 	<div class="formTop">
@@ -68,23 +111,27 @@
 		</div>
 		<div class="button_wrap">
 			<!-- 장바구니버튼 -->
-			<c:choose>
-				<c:when test="${resultObject.HOWTOSELL != 2 }">
-					<input type="button" value="장바구니" disabled="disabled" />
-				</c:when>
-				<c:when test="${resultObject.HOWTOSELL == 2 }">
-					<input type="button" value="장바구니" onclick="location.href='/picksell/cart/into/${category_num}/${product_num }/${currentPage }'" />
-				</c:when>
-			</c:choose>
+			<div class="basketWrap">
+				<c:choose>
+					<c:when test="${resultObject.HOWTOSELL != 2 }">
+						<input type="button" value="장바구니" disabled="disabled" />
+					</c:when>
+					<c:when test="${resultObject.HOWTOSELL == 2 }">
+						<input type="button" value="장바구니" onclick="location.href='/picksell/cart/into/${category_num}/${product_num }/${currentPage }'" />
+					</c:when>
+				</c:choose>
+			</div>
 			<!-- 구매신청하기버튼 -->
-			<c:choose>
-				<c:when test="${resultObject.DEAL_STATUS == 0 and resultObject.HOWTOSELL != 2 and alreadyPurchase == false }">
-					<input type="button" value="구매신청하기" onclick="location.href='/picksell/products/purchseRequest/${category_num}/${product_num }/${currentPage }'" />
-				</c:when>
-				<c:when test="${alreadyPurchase == true }">
-					<input type="button" value="구매신청 취소하기" onclick="location.href='/picksell/products/purchseRequestCancel/${category_num}/${product_num }/${currentPage }'" />
-				</c:when>
-			</c:choose>
+			<div class="purchaseWrap" id="purchaseWrap">
+				<c:choose>
+					<c:when test="${resultObject.DEAL_STATUS == 0 and resultObject.HOWTOSELL != 2 and alreadyPurchase == false }">
+						<input type="button" value="구매신청하기" onclick="purchaseApply();" />
+					</c:when>
+					<c:when test="${alreadyPurchase == true }">
+						<input type="button" value="구매신청 취소하기" onclick="purchaseCancel();" />
+					</c:when>
+				</c:choose>
+			</div>
 			
 			<!-- 구매하기 + 구매수락일때를 생각해야함 -->
 			<c:choose>
@@ -135,5 +182,6 @@
 	}
 		
 </script>
+
 </body>
 </html>
