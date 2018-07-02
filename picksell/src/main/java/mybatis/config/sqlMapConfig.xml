@@ -30,6 +30,7 @@ PUBLIC " - //mybatis.org//DTD Config 3.0//EN"
 		<mapper resource="mybatis/config/memberSQL.xml" />
 		<mapper resource="mybatis/config/admin_memberSQL.xml"/>
 		<mapper resource="mybatis/config/client_productSQL.xml" />
+		<mapper resource="mybatis/config/mypageSQL.xml" />
 	</mappers>
 	
 	</configuration>
