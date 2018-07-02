@@ -5,11 +5,13 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class BasketController {
@@ -35,19 +37,21 @@ public class BasketController {
 	}
 	
 	//장바구니담기
-	@RequestMapping("/cart/into/{pn}")
+	@RequestMapping("/cart/into/{pn}/{currentID}")
 	public String putBasket(
-			HttpServletRequest request,
 			@PathVariable("pn") int product_num,
+			@PathVariable("currentID") String currentID,
 			Model model) {
 		
-		String currentID = (String) request.getSession().getAttribute("sessionId");
+		//System.out.println(request.getSession().getAttribute("sessionId"));
+		//String currentID = (String) request.getSession().getAttribute("sessionId");
+		//System.out.println("장바구니 세션"+currentID);
 		
 		Map<String, Object> parameterMap = new HashMap<String, Object>();
 		parameterMap.put("basket_id", currentID);
 		parameterMap.put("product_num", product_num);
-		parameterMap.put("product_quantity", 1);
-		
+		//parameterMap.put("product_quantity", 1);
+		System.out.println(parameterMap);
 		basketService.insertBasket(parameterMap);
 		
 

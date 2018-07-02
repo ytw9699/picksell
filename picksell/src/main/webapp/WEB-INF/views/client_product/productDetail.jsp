@@ -44,8 +44,9 @@
 			})
 		})
 	}
+	//구매요청
 	function purchaseApply(){
-		fetch('/picksell/products/purchseRequest/'+${product_num}).then(function(response){
+		fetch('/picksell/products/purchseRequest/${product_num}/${sessionScope.sessionId}').then(function(response){
 			response.text().then(function(text){
 				if(response.status == '200'){
 					alert('구매신청이 완료되었습니다! \n판매자의 수락까지 기다려주세요');
@@ -55,8 +56,9 @@
 			})
 		})
 	}
+	//구매요청 취소
 	function purchaseCancel(){
-		fetch('/picksell/products/purchseRequestCancel/'+${product_num}).then(function(response){
+		fetch('/picksell/products/purchseRequestCancel/${product_num}/${sessionScope.sessionId}').then(function(response){
 			response.text().then(function(text){
 				if(response.status == '200'){
 					alert('구매신청이 취소되었습니다!');
@@ -66,8 +68,9 @@
 			})
 		})
 	}
+	//장바구니담기
 	function intoBasket(){
-		fetch('/picksell/cart/into/'+${product_num}).then(function(response){
+		fetch('/picksell/cart/into/${product_num}/${sessionScope.sessionId}').then(function(response){
 			response.text().then(function(text){
 				if(response.status == '200'){
 					alert('장바구니에 담았습니다!');
@@ -81,10 +84,6 @@
 	
 	
 </script>
-<div id="fetchResult">
-	
-</div>
-<input type="button" value="패치" onclick="applyFetch()" />
 <div class="hiddenBackGround" onclick="closeCommentForm()"></div>
 <div class="hiddenCommentForm">
 	<div class="formTop">

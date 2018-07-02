@@ -205,6 +205,7 @@ public class ProductController {
 		
 		String currentID = (String) request.getSession().getAttribute("sessionId");
 		
+		
 		//조회수 증가
 		Map<String, Object> parameterMap = new HashMap<String, Object>();
 		Map<String, Object> resultMap = new HashMap<String, Object>();
@@ -223,7 +224,7 @@ public class ProductController {
 		//구매신청을 했는지
 		model.addAttribute("alreadyPurchase", false);
 		for(int i = 0 ; i < resultPurchaseList.size() ; i++) {
-			if(resultPurchaseList.get(i).get("BUYER_ID").equals("임시구매자")) {
+			if(resultPurchaseList.get(i).get("BUYER_ID").equals(currentID)) {
 				model.addAttribute("alreadyPurchase", true);
 				break;
 			}
@@ -271,16 +272,18 @@ public class ProductController {
 	}
 	
 	//구매신청하기
-	@RequestMapping("/products/purchseRequest/{pn}")
+	@RequestMapping("/products/purchseRequest/{pn}/{sessionID}")
 	public String purchaseRequest(
 			@PathVariable("pn") int product_num,
-			HttpServletRequest request,
+			@PathVariable("sessionID") String currentID,
 			Model model) {
+		
+		
 		
 		//세션아이디 임시구매자
 		Map<String, Object> parameterMap = new HashMap<String, Object>();
 		parameterMap.put("product_num", product_num);
-		parameterMap.put("buyer_id", "임시구매자");
+		parameterMap.put("buyer_id", currentID);
 		
 		productService.insertProductPurchaseList(parameterMap);
 		
@@ -292,15 +295,15 @@ public class ProductController {
 	}
 	
 	//구매신청 취소
-	@RequestMapping("/products/purchseRequestCancel/{pn}")
+	@RequestMapping("/products/purchseRequestCancel/{pn}/{sessionID}")
 	public String purchaseRequestCancel(
 			@PathVariable("pn") int product_num,
-			HttpServletRequest request,
+			@PathVariable("sessionID") String currentID,
 			Model model) {
 		
 		Map<String, Object> parameterMap = new HashMap<String, Object>();
 		parameterMap.put("product_num", product_num);
-		parameterMap.put("buyer_id", "임시구매자");
+		parameterMap.put("buyer_id", currentID);
 		productService.deleteProductPurchaseList(parameterMap);
 		
 		model.addAttribute("redirect", 4);

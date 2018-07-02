@@ -20,7 +20,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 															#{product_num},
 															#{basket_id},
 															sysdate,
-															1)
+															'1')
 	</insert>
 	
 </mapper>
