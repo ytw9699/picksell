@@ -2,6 +2,8 @@ package com.mycom.admin_member;
 
 
 
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -23,18 +25,10 @@ import com.mycom.config.CommandMap;
 @Controller
 @RequestMapping("/admin/member")
 public class AdminMemberController {
+    
 
-	//누구세요?
-
-	//현우가 임시로 바꾼주석
-
-    //전체 회원리스트
-	//회원상세보기 
 	//회원계정상태 변경처리
-	//회원 주문내역리스트
-	//회원 판매내역 리스트
-	//회원 구매내역리스트
-	//회원 판매글 리스트
+
 	//판매글 블라인드
 	
 	//회원검색
@@ -47,58 +41,119 @@ public class AdminMemberController {
 	
 	ModelAndView mav = new ModelAndView();
 	List<AdminMemberModel> memberslist;
-	
+	List<Map<String,Object>> maplist;
+	//전체 회원리스트
 	@RequestMapping(value="/list")
 	public ModelAndView adminMemberList(HttpServletRequest request) throws Exception{
 	   
 		memberslist= adminMemberService.AdminMemberList();
 		
 		mav.addObject("memberCount",memberslist.size());
-		mav.addObject("searchCount",null);
+		mav.addObject("searchCount",0);
 		mav.addObject("memberslist",memberslist);
 	    mav.setViewName("adminMemberList");
 		return mav;
 		//검색결과는 0 , memberCount = 전체 회원수 
 	}
 	
-	
+	//회원 검색
 	@RequestMapping(value="/search")
 	public ModelAndView adminMemberSearch(HttpServletRequest request) throws Exception{
 		//name
         
 	  searchNum = Integer.parseInt(request.getParameter("searchNum"));
 	  memberSearch = request.getParameter("memberSearch");
-      
+      if(memberSearch == "") {
+    	  mav.setViewName("adminMemberList");
+    	  return mav;
+    	
+      }
+
 	  if(memberSearch != null) { //검색어 있을 경우 
-    	 if(searchNum == 0) {
-			
-			memberslist = adminMemberService.searchName(memberSearch);
-			
-    	 }else{
-			
-			memberslist = adminMemberService.searchId(memberSearch);
+    	 if(searchNum == 0) { // value 이름
+		    memberslist = adminMemberService.searchName(memberSearch);			
+		 }else{
+		    memberslist = adminMemberService.searchId(memberSearch);
     	 }
-    	 
-   
-    	 mav.addObject("searchCount",memberslist.size()); 
+    	  	 
 	  }
-   
 	    //공통
-  		mav.addObject("memberslist",memberslist); //원래있던 memberlist
+	  	mav.addObject("searchCount",memberslist.size()); 
+	  	mav.addObject("memberslist",memberslist);
 		mav.setViewName("adminMemberList");
 		return mav;
 	}
 	
-	
+	//회원상세보기 
 	@RequestMapping(value="/info/{memberId}")
 	public String adminMemberDetail(@PathVariable("memberId")String id,Model model) throws Exception{
-		System.out.println(id);
+	
 		Map<String,Object> resultmap = adminMemberService.selectOneMember(id);
-		System.out.println(resultmap);
+		
 		model.addAttribute("map",resultmap);
 		return "adminMemberDetail";
 	}
 	
+	
+	//회원 주문내역리스트
+	@RequestMapping(value="/orderList/{memberId}")
+	public String adminMemberOrderList(@PathVariable("memberId") String id,Model model) throws Exception {
+
+		maplist = adminMemberService.adminOrderList(id);
+		
+		int statusCheck;
+		
+		for(int i=0; i<maplist.size(); i++) {
+		   statusCheck =Integer.valueOf((String)maplist.get(i).get("STATUS"));
+		   
+		   switch(statusCheck){
+		   case 0:
+			   maplist.get(i).put("STATUS", "입금대기");
+			   break;
+		   case 1:
+			   maplist.get(i).put("STATUS", "입금완료 및 배송대기중");
+			   break;
+		   case 2:
+			   maplist.get(i).put("STATUS", "배송 및 인수확인 대기");
+			   break;
+		   case 3:
+			   maplist.get(i).put("STATUS", "인수확인 및 거래완료");
+			   break;
+		   }
+		}
+		model.addAttribute("maplist",maplist);
+		return "adminMemberOrderList";
+	}
  
 	
+	//회원 판매내역 리스트
+	@RequestMapping(value="/sellHistory/{memberId}")
+	public String adminSellHistory(@PathVariable("memberId") String id,Model model)throws Exception {
+		
+		
+		
+		
+		return "adminSellHistory";
+	}
+
+	//회원 구매내역리스트
+	@RequestMapping(value="/purchaseHistory/{memberId}")
+	public String adminPurchaseHistory(@PathVariable("memberId") String id,Model model) throws Exception {
+		
+		
+		
+		
+		return "adminPurchaseHistory";
+	}
+	
+	
+	//회원 판매글 리스트
+	@RequestMapping(value="/products/{memberId}")
+	public String Products(@PathVariable("memberId") String id,Model model) throws Exception{
+		
+		
+		return "adminProducts";
+		
+		
+	}
 }

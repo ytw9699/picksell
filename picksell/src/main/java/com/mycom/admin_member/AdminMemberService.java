@@ -34,7 +34,11 @@ public class AdminMemberService implements AdminMemberDAO {
 	public Map<String,Object> selectOneMember(String id) {
 		return sqlSessionTemplate.selectOne("admin_Member.selectOneMember",id);
 	}
-
+	
+	@Override
+	public List<Map<String,Object>> adminOrderList(String id){
+		return sqlSessionTemplate.selectList("admin_Member.selectOrderList",id);
+	}
 	
 	
 }
