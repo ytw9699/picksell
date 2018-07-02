@@ -1,5 +1,8 @@
 package com.mycom.client_basket;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
@@ -32,18 +35,25 @@ public class BasketController {
 	}
 	
 	//장바구니담기
-	@RequestMapping("/cart/into/{ca}/{pn}/{cp}")
+	@RequestMapping("/cart/into/{pn}")
 	public String putBasket(
 			HttpServletRequest request,
-			@PathVariable("ca") int category_num,
 			@PathVariable("pn") int product_num,
-			@PathVariable("cp") int currentPage,
 			Model model) {
 		
+		String currentID = (String) request.getSession().getAttribute("sessionId");
+		
+		Map<String, Object> parameterMap = new HashMap<String, Object>();
+		parameterMap.put("basket_id", currentID);
+		parameterMap.put("product_num", product_num);
+		parameterMap.put("product_quantity", 1);
+		
+		basketService.insertBasket(parameterMap);
+		
+
+		
 		model.addAttribute("redirect", 3);
-		model.addAttribute("category_num", category_num);
 		model.addAttribute("product_num", product_num);
-		model.addAttribute("currentPage", currentPage);
 		return "client_product/redirecting";
 	}
 	

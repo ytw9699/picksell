@@ -66,6 +66,18 @@
 			})
 		})
 	}
+	function intoBasket(){
+		fetch('/picksell/cart/into/'+${product_num}).then(function(response){
+			response.text().then(function(text){
+				if(response.status == '200'){
+					alert('장바구니에 담았습니다!');
+					var inner = "<input type='button' value='장바구니로가기' />";
+					document.getElementById('basketWrap').innerHTML = inner;
+				}
+			})
+		})
+	}
+	
 	
 	
 </script>
@@ -111,13 +123,16 @@
 		</div>
 		<div class="button_wrap">
 			<!-- 장바구니버튼 -->
-			<div class="basketWrap">
+			<div class="basketWrap" id="basketWrap">
 				<c:choose>
 					<c:when test="${resultObject.HOWTOSELL != 2 }">
 						<input type="button" value="장바구니" disabled="disabled" />
 					</c:when>
-					<c:when test="${resultObject.HOWTOSELL == 2 }">
-						<input type="button" value="장바구니" onclick="location.href='/picksell/cart/into/${category_num}/${product_num }/${currentPage }'" />
+					<c:when test="${resultObject.HOWTOSELL == 2 and alreadyBasket == false }">
+						<input type="button" value="장바구니" onclick="intoBasket();" />
+					</c:when>
+					<c:when test="${resultObject.HOWTOSELL == 2 and alreadyBasket == true }">
+						<input type="button" value="장바구니로가기" />
 					</c:when>
 				</c:choose>
 			</div>

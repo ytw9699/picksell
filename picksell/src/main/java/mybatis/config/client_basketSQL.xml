@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="client_basket">
+	
+	<select id="selectIsBasket" resultType="int" parameterType="hashmap">
+		select count(*) as resultvalue 
+		from ps_basket 
+		where product_num = #{product_num} and basket_id = #{basket_id}
+	</select>
+	
+	<insert id="insertBasket" parameterType="hashmap">
+		insert into ps_basket(BASKET_NUM,
+								PRODUCT_NUM,
+								BASKET_ID,
+								BASKET_REGDATE,
+								PRODUCT_QUANTITY) values(basket_seq.NEXTVAL,
+															#{product_num},
+															#{basket_id},
+															sysdate,
+															1)
+	</insert>
+	
+</mapper>
