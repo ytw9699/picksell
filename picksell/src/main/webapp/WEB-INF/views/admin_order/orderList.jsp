@@ -54,7 +54,7 @@
 	<div class="row">
 		<div style="text-align:center;">
 			<div id="dataTables-example_filter" class="dataTables_filter">
-				<form action="/admin_order/search">
+				<form action=""> 
 					<select class="form-control" name="searchNum" id="searchNum">
 						<option value="0">구매자</option>
 						<option value="1">상태</option>
