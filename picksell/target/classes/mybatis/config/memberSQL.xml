@@ -27,6 +27,35 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 									sysdate )
 	</insert>
 	
+	<!-- 사업자 회원가입 -->
+	<insert id="insertBsMember" parameterType="hashmap">
+		insert into PS_MEMBER(id,
+							password,
+							name,
+							email,
+							address,
+							kind,
+							account,
+							account_name,
+							bank,
+							regdate,
+							business_number,
+							business_name
+							) values(#{id},
+									#{password},
+									#{name},
+									#{email},
+									#{address},
+									#{kind},
+									#{account},
+									#{account_name},
+									#{bank},
+									sysdate,
+									#{business_number},
+									#{business_name}
+									)
+	</insert>
+	
 	<select id="userCheck" parameterType="hashmap" resultType="hashmap">
 			SELECT ID,PASSWORD,NAME FROM PS_MEMBER WHERE ID = #{ID}
 	</select>
