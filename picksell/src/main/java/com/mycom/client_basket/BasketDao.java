@@ -1,5 +1,6 @@
 package com.mycom.client_basket;
 
+import java.util.List;
 import java.util.Map;
 
 public interface BasketDao {
@@ -9,4 +10,7 @@ public interface BasketDao {
 
 	//장바구니에 담기
 	public void insertBasket(Map<String, Object> map);
+	
+	//장바구니 리스트
+	public List<Map<String, Object>> selectBasketList(String sessionId); 
 }

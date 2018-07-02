@@ -1,5 +1,6 @@
 package com.mycom.client_basket;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -20,6 +21,10 @@ public class BasketService implements BasketDao {
 	//장바구니에 담기
 	public void insertBasket(Map<String, Object> map) {
 		sqlMapper.insert("client_basket.insertBasket", map);
+	}
+	//장바구니 리스트
+	public List<Map<String, Object>> selectBasketList(String sessionId){
+		return sqlMapper.selectList("client_basket.selectBasketList", sessionId);
 	}
 	
 
