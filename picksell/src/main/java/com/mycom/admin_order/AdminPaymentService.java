@@ -26,9 +26,11 @@ public class AdminPaymentService implements AdminPaymentDAO {
 	public List<AdminPaymentModel> orderSearch0(String search){
 		return sqlSessionTemplate.selectList("adminOrder.orderSearch0", "%"+search+"%");
 	}
+	@Override
 	public List<AdminPaymentModel> orderSearch1(String search){
 		return sqlSessionTemplate.selectList("adminOrder.orderSearch1", "%"+search+"%");
 	}
+	@Override
 	public List<AdminPaymentModel> orderSearch2(String search){
 		return sqlSessionTemplate.selectList("adminOrder.orderSearch2", "%"+search+"%");
 	}

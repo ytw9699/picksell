@@ -29,19 +29,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<select id="orderSearch0" resultMap="orderRes" parameterType="String">
 		SELECT * FROM ps_order
-		WHERE buyer_id LIKE ${isSearch}
+		WHERE buyer_id LIKE #{isSearch}
 		ORDER BY order_num DESC
 	</select>
 	
 	<select id="orderSearch1" resultMap="orderRes" parameterType="String">
 		SELECT * FROM ps_order
-		WHERE status LIKE ${isSearch}
+		WHERE status LIKE #{isSearch}
 		ORDER BY order_num DESC
 	</select>
 	
 	<select id="orderSearch2" resultMap="orderRes" parameterType="String">
 		SELECT * FROM ps_order
-		WHERE delivery_company LIKE ${isSearch}
+		WHERE delivery_company LIKE #{isSearch}
 		ORDER BY order_num DESC
 	</select>
 	

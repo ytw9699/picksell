@@ -7,6 +7,23 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>오더 리스트</title>
+
+<style type="text/css">
+.paging{text-align:center;height:32px;margin-top:5px;margin-bottom:15px;}
+.paging a,
+.paging strong{display:inline-block;width:36px;height:32px;line-height:28px;font-size:14px;border:1px solid #e0e0e0;margin-left:5px;
+-webkit-border-radius:3px;
+   -moz-border-radius:3px;
+		border-radius:3px;
+-webkit-box-shadow:1px 1px 1px 0px rgba(235,235,235,1);
+	-moz-box-shadow:1px 1px 1px 0px rgba(235,235,235,1);
+		  box-shadow:1px 1px 1px 0px rgba(235,235,235,1);
+}
+.paging a:first-child{margin-left:0;}
+.paging strong{color:#fff;background:#337AB7;border:1px solid #337AB7;}
+.paging .page_arw{font-size:11px;line-height:30px;}
+</style>
+
 </head>
 <body>
 <table>
@@ -51,10 +68,14 @@
 		<tr><td colspan="9" style="text-align:center;">등록된 상품이 없습니다</td></tr>
 	</c:if> 
 	
+	<div class="paging">
+		${pagingHtml}
+	</div>
+	
 	<div class="row">
 		<div style="text-align:center;">
 			<div id="dataTables-example_filter" class="dataTables_filter">
-				<form action="/admin_order/search">
+				<form action=""> 
 					<select class="form-control" name="searchNum" id="searchNum">
 						<option value="0">구매자</option>
 						<option value="1">상태</option>

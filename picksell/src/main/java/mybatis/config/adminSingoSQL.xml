@@ -14,5 +14,30 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="singo_content" column="singo_content"/>
 	</resultMap>
 		
+	<select id="singoList-all" resultMap="singoRes">
+		SELECT * FROM ps_singo ORDER BY singo_num desc
+	</select>
+	
+<!-- 	피신고자 id -->
+	<select id="singoSearch0" resultMap="singoRes" parameterType="String">
+		SELECT * FROM ps_singo
+		WHERE singoee LIKE #{isSearch}
+		ORDER BY singo_num DESC
+	</select>
+		
+<!-- 	신고자  -->
+	<select id="singoSearch1" resultMap="singoRes" parameterType="String">
+		SELECT * FROM ps_singo
+		WHERE singo_writer LIKE #{isSearch}
+		ORDER BY singo_num DESC
+	</select>
+	
+<!-- 	신고내용  -->
+	<select id="singoSearch2" resultMap="singoRes" parameterType="String">
+		SELECT * FROM ps_singo
+		WHERE singo_content LIKE #{isSearch}
+		ORDER BY singo_num DESC
+	</select>	
+		
 </mapper>
 
