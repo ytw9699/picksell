@@ -13,5 +13,8 @@ public class mypageService implements mypageDao {
 
 	@Resource(name="sqlSessionTemplate")
 	private SqlSessionTemplate sqlMapper;
-	
+
+	public Map<String, Object> userInfo(String sessionId) {
+		return sqlMapper.selectOne("mypage.userInfo", sessionId);
+	}
 }

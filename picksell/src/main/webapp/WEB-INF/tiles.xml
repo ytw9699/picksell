@@ -91,6 +91,11 @@
 		<put-attribute name="body" value="/WEB-INF/views/layout/client/mypage.jsp" />
 	</definition>
 	
+	<!-- 내정보 수정-->
+	<definition name="modify" extends="default">
+		<put-attribute name="body" value="/WEB-INF/views/mypage/modify.jsp" />
+	</definition>
+	
 
 </tiles-definitions>
 	
