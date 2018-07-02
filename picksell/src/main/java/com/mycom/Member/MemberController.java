@@ -41,9 +41,12 @@ import com.mycom.utils.FileUpload;
 	
 	@RequestMapping(value="/joinForm", method=RequestMethod.POST)
 	public String join(CommandMap map) {
-		
-		MemberService.insertMember(map.getMap());
-		
+		if(map.get("business_number") == null) {
+		MemberService.insertMember(map.getMap());//일반 회원가입	
+		}
+		else{
+			MemberService.insertBsMember(map.getMap());//사업자 회원가입	
+		}
 		return "redirect:/loginForm";
 	}
 	

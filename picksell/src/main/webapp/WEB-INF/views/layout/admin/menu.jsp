@@ -3,30 +3,45 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <style>
-.sidenav {
-	height: 100%;
-	width : 20%;
 
+.sidenav {
+    height: 100%;
+    width: 160px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    padding-top: 20px;
 }
+
+.sidenav a {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+}
+
+.sidenav a:hover {
+    color: #f1f1f1;
+}
+
+
+
 </style>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
-메뉴
-<div class="adminPage">
- <h1>관리자 페이지</h1>
-</div>
 <div class="sidenav">
-
-	
-	<a href="#mainmenu">메인메뉴</a>
-	<a href="#member">계정관리</a>
-	<a href="#sell">판매관리</a>
-	<a href="#pay">결제관리</a> 
-	<a href="#singo">신고관리</a>
-
+  <a href="/picksell/admin/main">메인메뉴</a>
+  <a href="/picksell/admin/member/list">계정관리</a>
+  <a href="#clients">판매관리</a>
+  <a href="#contact">주문관리</a>
+  <a href="#">구매관리</a>
 </div>
 </body>
 </html>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mypage"> 
+	
+<select id="userInfo" parameterType="String" resultType="hashmap">
+		SELECT ID,
+		PASSWORD,
+		NAME,
+		EMAIL,
+		ADDRESS,
+		KIND,
+		ACCOUNT,
+		ACCOUNT_NAME,
+		BANK,
+		PROFILE_IMG,
+		ALARM_CONSENT,
+		BUSINESS_NUMBER,
+		BUSINESS_NAME,
+		REGDATE FROM PS_MEMBER WHERE ID = #{sessionId}
+</select>
+	
+<update id="updateBusiness" parameterType="hashmap">
+		update PS_MEMBER set 
+		password = #{password},
+		email = #{email},
+		address = #{address},
+		account = #{account},
+		account_name = #{account_name},
+		bank = #{bank},
+		profile_img = #{profile_img},
+		alarm_consent = #{alarm_consent},
+		business_number = #{business_number},
+		business_name = #{business_name}
+		where id = #{id}
+</update>	
+
+<update id="updatePersonal" parameterType="hashmap">
+		update PS_MEMBER set 
+		password = #{password},
+		email = #{email},
+		address = #{address},
+		account = #{account},
+		account_name = #{account_name},
+		bank = #{bank},
+		profile_img = #{profile_img},
+		alarm_consent = #{alarm_consent},
+		where id = #{id}
+</update>	
+	
+</mapper>

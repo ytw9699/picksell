@@ -19,5 +19,8 @@ public interface AdminMemberDAO {
 	//회원 상세보기
 	public Map<String,Object> selectOneMember(String id);
 	
+	//회원 주문내역리스트
+	public List<Map<String,Object>> adminOrderList(String id);
+	
 	
 }

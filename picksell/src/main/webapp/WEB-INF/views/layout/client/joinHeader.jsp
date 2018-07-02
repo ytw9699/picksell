@@ -15,8 +15,8 @@
 <body>
 <center>
 <p>
-<a href="joinForm">회원가입</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-이미 회원이신가요?<a href="loginForm">로그인하기</a>
+<a href="/picksell/joinForm">회원가입</a>
+<a href="/picksell/loginForm">로그인하기</a>
 <hr/>
 <p/>
 </center>

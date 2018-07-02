@@ -11,7 +11,9 @@ public interface AdminPaymentDAO {
 	// 오더 상세보기 
 	public AdminPaymentModel orderView(int order_num);
 	// 특정 오더 검색 
-	public List<AdminPaymentModel> orderSearchList(String search);
+	public List<AdminPaymentModel> orderSearch0(String search);
+	public List<AdminPaymentModel> orderSearch1(String search);
+	public List<AdminPaymentModel> orderSearch2(String search);
 	// 입금완료, 배송확인, 인수확인 등 STATUS변
 	public Object updateStatus(AdminPaymentModel adminPaymentModel);
 	

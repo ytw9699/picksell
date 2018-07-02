@@ -35,5 +35,10 @@ public class mainController {
 	public String loginForm(Model model) {	
 		return "main";//이렇게 해줘야 타일즈랑 연결됨
 	}
+	
+	@RequestMapping(value="/mainSearch", method=RequestMethod.GET)
+	public String mainSearch(Model model) {	
+		return "mainSearch";//이렇게 해줘야 타일즈랑 연결됨
+	}
 
 }

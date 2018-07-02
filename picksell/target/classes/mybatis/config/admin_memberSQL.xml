@@ -29,15 +29,20 @@ PUBLIC " - //mybatis.org//DTD Config 3.0//EN"
 	</select>
 
 	<select id="searchName" resultMap="adminMemberRes" parameterType="string">
-	 	SELECT * FROM PS_MEMBER WHERE  name = #{name}  ORDER BY regdate desc 	 
+	 	SELECT * FROM PS_MEMBER WHERE  name = #{name}  ORDER BY regdate DESC 	 
 	</select>
 	
 	<select id="searchId" resultMap="adminMemberRes" parameterType="string">
-		SELECT * FROM PS_MEMBER WHERE id = #{id} ORDER BY regdate desc 
+		SELECT * FROM PS_MEMBER WHERE id = #{id} ORDER BY regdate DESC
 	</select>
 	
 	 <select id="selectOneMember" resultType="hashmap" parameterType="string">
 	 	SELECT * FROM PS_MEMBER WHERE id = #{id}
+	 </select>
+	 
+	 <select id="selectOrderList" resultType="hashmap" parameterType="string">
+	 SELECT * FROM PS_ORDER a,PS_ORDERLIST b WHERE a.order_num = b.order_num AND buyer_id = #{buyer_id}
+	 ORDER BY a.order_num DESC
 	 </select>
  </mapper>
 

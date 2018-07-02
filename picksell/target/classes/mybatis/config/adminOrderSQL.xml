@@ -27,14 +27,32 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT * FROM ps_order ORDER BY order_num desc
 	</select>
 	
-	<!--특 주문 찾기 쿼리  -->
-	<select id="searchOrder" resultMap="orderRes" parameterType="String">
-		SELECT * FROM ps_order 
-			WHERE buyer_id LIKE #{search}
-			OR status LIKE #{search}
-			OR delivery_company LIKE #{search}
-		ORDER BY order_num desc
+	<select id="orderSearch0" resultMap="orderRes" parameterType="String">
+		SELECT * FROM ps_order
+		WHERE buyer_id LIKE #{isSearch}
+		ORDER BY order_num DESC
 	</select>
+	
+	<select id="orderSearch1" resultMap="orderRes" parameterType="String">
+		SELECT * FROM ps_order
+		WHERE status LIKE #{isSearch}
+		ORDER BY order_num DESC
+	</select>
+	
+	<select id="orderSearch2" resultMap="orderRes" parameterType="String">
+		SELECT * FROM ps_order
+		WHERE delivery_company LIKE #{isSearch}
+		ORDER BY order_num DESC
+	</select>
+	
+	<!--특 주문 찾기 쿼리  -->
+<!-- 	<select id="searchOrder" resultMap="orderRes" parameterType="String"> -->
+<!-- 		SELECT * FROM ps_order  -->
+<!-- 			WHERE buyer_id LIKE #{search} -->
+<!-- 			OR status LIKE #{search} -->
+<!-- 			OR delivery_company LIKE #{search} -->
+<!-- 		ORDER BY order_num desc -->
+<!-- 	</select> -->
 	
 	<!-- 거래상태 업데이트 -->
 	<update id="updateStatus" parameterType="AdminPaymentModel">
