@@ -12,34 +12,27 @@
 <body>
 <script>
 
- 	/* function wow(){
-		var allData = "test1=1&test2=2";
-		$.ajax({
-			type : "POST",
-			url : "/picksell/ajax/wow",
-			dataType : 'json',
-			data : allData,
-			success : function(data){
-				alert(data.wow);
-			}
-		});
-	}  */
-
 	//전체 가격 
 	var total = Number(0);
 
 	function sumfunc(addvalue){
 		total += Number(addvalue);
+		
+		document.getElementById('hid_sumValue').value = total;
 		document.getElementById('sumValue').innerHTML = total;
 	}
 	function subfunc(subvalue){
 		total -= Number(subvalue);
+		
+		document.getElementById('hid_sumValue').value = total;
 		document.getElementById('sumValue').innerHTML = total;
 	}
 	function basketChecking(checkTarget, keyNumber){
 		if(checkTarget.checked){
 			//체크되있을때 디스에이블 풀러야댐
 			sumfunc(Number(document.getElementById('hid_currentPrice'+keyNumber).value));
+			document.getElementById('hid_product_num'+keyNumber).disabled = false;
+			document.getElementById('hid_product_subject'+keyNumber).disabled = false;
 		}else if(!checkTarget.checked){
 			//체크해제일때 디스에이블 걸어야댐
 			subfunc(Number(document.getElementById('hid_currentPrice'+keyNumber).value));
@@ -103,7 +96,7 @@
 		}
 	}
 </script>
-
+	<form action="/picksell/purchase/batchOrder" method="post">
 	<!-- <input type="button" value="에이젝스 버튼" id="btn" onclick="wow()" /> -->
 	<div class="textTopWrapper">
 		<span>장바구니</span> <span>${listSize }</span>
@@ -114,7 +107,11 @@
 			<td>수량</td>
 			<td colspan="2">상품금액</td>
 		</tr>
+		
+		<!-- 장바구니 시작 -->
 		<c:forEach var="list" items="${resultList }" varStatus="indexStatus">
+			<input type="hidden" id="hid_product_subject${indexStatus.index }" name="p_list[${indexStatus.index }].product_subject" value="${list.SUBJECT }" disabled="disabled" />
+			<input type="hidden" id="hid_product_num${indexStatus.index }" name="p_list[${indexStatus.index }].product_num" value="${list.PRODUCT_NUM }" disabled="disabled" />
 			<input type="hidden" id="hid_stock${indexStatus.index }" value="${list.STOCK }" />
 			<input type="hidden" id="hid_quantity${indexStatus.index }" value="${list.PRODUCT_QUANTITY }" />
 			<input type="hidden" id="hid_price${indexStatus.index }" value="${list.PRICE }" />
@@ -136,14 +133,18 @@
 				</td>
 				<td><a href="#">삭제</a></td>
 			</tr>
+			
+			
 		</c:forEach>
 	</table>
 	<input type="button" value="전체삭제" />
 	<div class="summaryInfoWrap">
 		
 		<span class="sumText">총 합계</span>
+		<input type="hidden" id="hid_sumValue" name="totalSum" value="0" />
 		<span class="sumValue" id="sumValue">0</span>
-		<input type="button" value="구매하기" />
+		<input type="submit" value="구매하기" />
 	</div>
+	</form>
 </body>
 </html>
