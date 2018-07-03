@@ -35,6 +35,7 @@ PUBLIC " - //mybatis.org//DTD Config 3.0//EN"
 		<mapper resource="mybatis/config/client_productSQL.xml" />
 		<mapper resource="mybatis/config/client_basketSQL.xml" />
 		<mapper resource="mybatis/config/mypageSQL.xml" />
+		<mapper resource="mybatis/config/mainSQL.xml" />
 	</mappers>
 	
 	</configuration>
