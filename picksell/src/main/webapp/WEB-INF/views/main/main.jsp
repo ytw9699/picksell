@@ -9,13 +9,17 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>메인</title>
 </head>
-
 <body>
-
+<table>
+	<c:forEach var="nomalProduct" items="${nomalProductList}">
+		<tr>
+			<div>${nomalProduct.SUBJECT }</div>
+		</tr>
+	
+	</c:forEach>
+</table>
 <center>
-
 메인 초안 입니다
-
 </center>
 
 </body>

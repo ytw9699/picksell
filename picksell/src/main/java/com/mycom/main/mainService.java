@@ -14,4 +14,8 @@ public class mainService implements mainDao {
 	@Resource(name="sqlSessionTemplate")
 	private SqlSessionTemplate sqlMapper;
 	
+	public List<Map<String, Object>> nomalProduct(){
+		return sqlMapper.selectList("main.nomalProduct");
+	}
+	
 }

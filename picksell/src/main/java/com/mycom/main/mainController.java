@@ -30,12 +30,21 @@ import com.mycom.utils.FileUpload;
 public class mainController {
 	Map<String, Object> resultMap = new HashMap<String, Object>();//공통사용
 	
+	
 	@Resource(name="mainService")
 	private mainService mainService;
 	
-	@RequestMapping(value="/main", method=RequestMethod.GET)
-	public String loginForm(Model model) {	
-		return "main";//이렇게 해줘야 타일즈랑 연결됨
+	@RequestMapping("/main")
+	public String main(Model model) {	
+		
+		List<Map<String, Object>> nomalProductList = mainService.nomalProduct();
+		
+		model.addAttribute("nomalProductList",nomalProductList);
+		
+		System.out.println(nomalProductList.size());
+		
+		return "main";
+		
 	}
 	
 	@RequestMapping(value="/mainSearch", method=RequestMethod.GET)
