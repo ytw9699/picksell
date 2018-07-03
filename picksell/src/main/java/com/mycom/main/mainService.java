@@ -25,5 +25,9 @@ public class mainService implements mainDao {
 	public List<Map<String, Object>> hotProduct() {
 		return sqlMapper.selectList("main.hotProduct");
 	}
+
+	public List<Map<String, Object>> hotCategory() {
+		return sqlMapper.selectList("main.hotCategory");
+	}
 	
 }

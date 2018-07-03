@@ -32,6 +32,17 @@
 	</div>
 </div>
 </c:forEach>
+<p>인기 카테고리</p>
+<c:forEach var="hotCategory" items="${hotCategoryList }">
+	<div class="productWrap">
+	<div class="firstImgWrap">
+		카테고리 이미지
+	</div>
+	<div class="infoWrap">
+		<span class="productSubject">${hotCategory.CATEGORY_NAME }</span><br>
+	</div>
+</div>
+</c:forEach>
 <p>new 새로 등록된 플러스 상품</p>
 <c:forEach var="pulsProduct" items="${plusProductList }">
 	<div class="productWrap">

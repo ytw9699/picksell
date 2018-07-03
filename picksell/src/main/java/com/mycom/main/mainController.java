@@ -40,10 +40,12 @@ public class mainController {
 		List<Map<String, Object>> nomalProductList = mainService.nomalProduct();
 		List<Map<String, Object>> plusProductList = mainService.pulsProduct();
 		List<Map<String, Object>> hotProductList = mainService.hotProduct();
+		List<Map<String, Object>> hotCategoryList = mainService.hotCategory();
 		
 		model.addAttribute("nomalProductList", nomalProductList);
 		model.addAttribute("plusProductList", plusProductList);
 		model.addAttribute("hotProductList", hotProductList);
+		model.addAttribute("hotCategoryList", hotCategoryList);
 		
 		//System.out.println(nomalProductList.size());
 		

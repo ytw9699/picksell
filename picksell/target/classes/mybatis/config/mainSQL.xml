@@ -14,6 +14,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			select * from ps_product where howtosell = '2' order by product_regdate desc
 	</select>
 	
+	<select id="hotCategory"  resultType="hashmap">
+			<![CDATA[
+		select r, b.total, b.category_num, c.category_name from(
+
+		select rownum r, a.total, a.category_num from(
+		
+		select count(*) as total, category_num from ps_product group by category_num order by count(*) desc
+	
+	      )a order by a.total desc )b, ps_category c where b.category_num = c.category_num and r < 7
+	         ]]>
+	      
+	</select>
+	
 	 <select id="hotProduct"  resultType="hashmap">
       <![CDATA[
       select r, b.total, b.product_num, c.content, c.first_img, c.subject 
