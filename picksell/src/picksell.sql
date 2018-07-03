@@ -1,3 +1,17 @@
+<select id="hotProduct"  resultType="hashmap">
+      <![CDATA[
+      select r, b.total, b.product_num, c.content, c.first_img, c.subject 
+      from(
+      select rownum r, a.total, a.product_num from(
+      select count(*) as total, product_num
+      from ps_orderlist
+      group by product_num
+      order by count(*) desc
+      )a order by a.total desc )b, ps_product c where b.product_num = c.product_num and r < 4
+     ]]>
+   </select>
+	
+
 CREATE TABLE PS_MEMBER (
     ID VARCHAR2(30) NOT NULL PRIMARY KEY,
     PASSWORD VARCHAR2(30) NOT NULL,
