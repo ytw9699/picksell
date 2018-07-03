@@ -41,7 +41,7 @@ public class mainController {
 		
 		model.addAttribute("nomalProductList",nomalProductList);
 		
-		System.out.println(nomalProductList.size());
+		//System.out.println(nomalProductList.size());
 		
 		return "main";
 		
