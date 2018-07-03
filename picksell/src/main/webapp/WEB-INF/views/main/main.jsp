@@ -16,50 +16,34 @@
 </style>
 </head>
 <body>
-<p>인기 카테고리</p>
-<c:forEach var="nomalProduct" items="${nomalProductList }">
-	<div class="productWrap">
-	<div class="firstImgWrap">
-		<a href="/picksell/products/detail/${nomalProduct.CATEGORY_NUM }/${nomalProduct.PRODUCT_NUM }/1">
-		<img src="/picksell/resources/productUpload/${nomalProduct.FIRST_IMG }" style="width: 200px;" />
-		</a>
-	</div>
-	<div class="infoWrap">
-		<span class="productSubject">${nomalProduct.SUBJECT }</span><br>
-		<span class="productPrice">
-		<fmt:formatNumber value="${nomalProduct.PRICE }" pattern="#,###.##" /> 원
-		</span>
-	</div>
-</div>
-</c:forEach>
 <p>픽셀 플러스 인기상품</p>
-<c:forEach var="nomalProduct" items="${nomalProductList }">
+<c:forEach var="hotProduct" items="${hotProductList }">
 	<div class="productWrap">
 	<div class="firstImgWrap">
-		<a href="/picksell/products/detail/${nomalProduct.CATEGORY_NUM }/${nomalProduct.PRODUCT_NUM }/1">
-		<img src="/picksell/resources/productUpload/${nomalProduct.FIRST_IMG }" style="width: 200px;" />
+		<a href="/picksell/products/detail/${hotProduct.CATEGORY_NUM }/${hotProduct.PRODUCT_NUM }/1">
+		<img src="/picksell/resources/productUpload/${hotProduct.FIRST_IMG }" style="width: 200px;" />
 		</a>
 	</div>
 	<div class="infoWrap">
-		<span class="productSubject">${nomalProduct.SUBJECT }</span><br>
+		<span class="productSubject">${hotProduct.SUBJECT }</span><br>
 		<span class="productPrice">
-		<fmt:formatNumber value="${nomalProduct.PRICE }" pattern="#,###.##" /> 원
+		<fmt:formatNumber value="${hotProduct.PRICE }" pattern="#,###.##" /> 원
 		</span>
 	</div>
 </div>
 </c:forEach>
 <p>new 새로 등록된 플러스 상품</p>
-<c:forEach var="nomalProduct" items="${nomalProductList }">
+<c:forEach var="pulsProduct" items="${plusProductList }">
 	<div class="productWrap">
 	<div class="firstImgWrap">
-		<a href="/picksell/products/detail/${nomalProduct.CATEGORY_NUM }/${nomalProduct.PRODUCT_NUM }/1">
-		<img src="/picksell/resources/productUpload/${nomalProduct.FIRST_IMG }" style="width: 200px;" />
+		<a href="/picksell/products/detail/${pulsProduct.CATEGORY_NUM }/${pulsProduct.PRODUCT_NUM }/1">
+		<img src="/picksell/resources/productUpload/${pulsProduct.FIRST_IMG }" style="width: 200px;" />
 		</a>
 	</div>
 	<div class="infoWrap">
-		<span class="productSubject">${nomalProduct.SUBJECT }</span><br>
+		<span class="productSubject">${pulsProduct.SUBJECT }</span><br>
 		<span class="productPrice">
-		<fmt:formatNumber value="${nomalProduct.PRICE }" pattern="#,###.##" /> 원
+		<fmt:formatNumber value="${pulsProduct.PRICE }" pattern="#,###.##" /> 원
 		</span>
 	</div>
 </div>

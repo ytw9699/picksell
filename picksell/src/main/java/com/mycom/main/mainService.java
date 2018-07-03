@@ -17,5 +17,13 @@ public class mainService implements mainDao {
 	public List<Map<String, Object>> nomalProduct(){
 		return sqlMapper.selectList("main.nomalProduct");
 	}
+
+	public List<Map<String, Object>> pulsProduct() {
+		return sqlMapper.selectList("main.pulsProduct");
+	}
+
+	public List<Map<String, Object>> hotProduct() {
+		return sqlMapper.selectList("main.hotProduct");
+	}
 	
 }

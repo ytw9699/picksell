@@ -6,7 +6,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="main"> 
 	
 	<select id="nomalProduct"  resultType="hashmap">
-			select * from ps_product where howtosell = '0'
+			select * from ps_product where  howtosell != 2 order by product_regdate desc
+			<!-- select * from ps_product where howtosell = 0 or howtosell = 1  -->
 	</select>
+	
+	<select id="pulsProduct"  resultType="hashmap">
+			select * from ps_product where howtosell = '2' order by product_regdate desc
+	</select>
+	
+	 <select id="hotProduct"  resultType="hashmap">
+      <![CDATA[
+      select r, b.total, b.product_num, c.content, c.first_img, c.subject 
+      from(
+      select rownum r, a.total, a.product_num from(
+      select count(*) as total, product_num
+      from ps_orderlist
+      group by product_num
+      order by count(*) desc
+      )a order by a.total desc )b, ps_product c where b.product_num = c.product_num and r < 4
+     ]]>
+   </select>
 	
 </mapper>
