@@ -40,6 +40,8 @@ public class AdminMemberController {
 	List<AdminMemberModel> memberslist;
 	List<Map<String,Object>> maplist;
 	
+
+	
 	//전체 회원리스트
 	@RequestMapping(value="/list")
 	public ModelAndView adminMemberList(HttpServletRequest request) throws Exception{
@@ -61,10 +63,10 @@ public class AdminMemberController {
         
 	  searchNum = Integer.parseInt(request.getParameter("searchNum"));
 	  memberSearch = request.getParameter("memberSearch");
-      if(memberSearch == "") {
+      if(memberSearch == " ") {
     	  mav.setViewName("adminMemberList");
     	  return mav;
-    	
+    	 
       }
 
 	  if(memberSearch != null) { //검색어 있을 경우 
@@ -94,16 +96,17 @@ public class AdminMemberController {
 	
 	//회원 주문 내역리스트
 	@RequestMapping(value="/orderList/{memberId}")
-	public String adminMemberOrderList(@PathVariable("memberId") String id,CommandMap map,Model model) throws Exception {
+	public String adminMemberOrderList(@PathVariable("memberId") String id,Model model) throws Exception {
 		
-	
+		Map<String,Object> map = new HashMap<String,Object>();
 		maplist = adminMemberService.adminOrderList(id);
 	    int statusCheck;
 	    map.put("mapSize", maplist.size());
 	  
+	    
 		for(int i=0; i< maplist.size(); i++) {
-		   statusCheck =Integer.valueOf((String)maplist.get(i).get("STATUS"));
-		   
+		  
+		   statusCheck =Integer.parseInt((String)maplist.get(i).get("STATUS"));
 		   switch(statusCheck){
 		   case 0:
 			   maplist.get(i).put("STATUS", "입금대기");
@@ -120,7 +123,7 @@ public class AdminMemberController {
 		   }
 		}
 		
-		model.addAttribute("mapSize",map);
+		model.addAttribute("map",map);
 		model.addAttribute("maplist",maplist);
 		
 		return "adminMemberOrderList";
@@ -130,16 +133,19 @@ public class AdminMemberController {
 	//회원 판매내역 리스트
 	@RequestMapping(value="/sellHistory/{memberId}")
 	public String adminSellHistory(@PathVariable("memberId") String id,Model model)throws Exception {
-		
-		
-		
-		
+	 
+		//판매내역개수
+		maplist = adminMemberService.adminSellHistory(id);
+		model.addAttribute("maplist", maplist);
 		return "adminSellHistory";
 	}
 
 	//회원 구매내역리스트
-	@RequestMapping(value="/purchaseHistory/{memberId}")
+	@RequestMapping(value="/purchaseHistory/{memberId}") 
 	public String adminPurchaseHistory(@PathVariable("memberId") String id,Model model) throws Exception {
+		maplist = adminMemberService.adminPurchaseHistory(id);
+		model.addAttribute("maplist",maplist);
+		
 		
 		
 		

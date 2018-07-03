@@ -42,8 +42,20 @@ PUBLIC " - //mybatis.org//DTD Config 3.0//EN"
 	 </select>
 	 
 	 <select id="selectOrderList" resultType="hashmap" parameterType="string">
-	 SELECT * FROM PS_ORDER a,PS_ORDERLIST b WHERE a.order_num = b.order_num AND buyer_id = #{buyer_id}
-	 ORDER BY a.order_num DESC
+	 	SELECT * FROM PS_ORDER a,PS_ORDERLIST b WHERE a.order_num = b.order_num AND buyer_id = #{buyer_id}
+		ORDER BY a.order_num DESC
+	 </select>
+	 
+	 <select id="adminSellHistory" resultType="hashmap" parameterType="string">
+		SELECT * FROM ps_orderlist a,ps_seller_history b,ps_order c 
+		WHERE a.orderlist_num = b.orderlist_num  
+		AND c.order_num = a.order_num and a.seller_id = #{id}
+	 </select>
+	 
+	 <select id="adminPurchaseHistory" resultType="hashmap" parameterType="string">
+	    SELECT * FROM ps_buyer_history a,ps_order b,ps_orderlist c 
+		WHERE a.order_num = b.order_num and b.buyer_id = #{id} 
+		AND b.order_num = c.order_num
 	 </select>
  </mapper>
 

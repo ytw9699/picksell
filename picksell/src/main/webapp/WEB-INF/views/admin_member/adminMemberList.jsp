@@ -74,11 +74,9 @@
 </thead>
 <tbody>
 
-<c:forEach var="memberslist" items="${memberslist}">
-     
-    <tr>
-     
-   	 <td class="indexx">번호</td>
+<c:forEach var="memberslist" items="${memberslist}" varStatus="i" >
+    <tr>  
+     <td>${i.index + 1 }</td>
    	 <td><a href="/picksell/admin/member/info/${memberslist.id}">${memberslist.id}</a></td>
 	 <td>${memberslist.name }</td>
 	 <td>${memberslist.profile_img }</td>
@@ -96,12 +94,13 @@
 	</c:choose>
 	
 	</tr>
-  
+
 </c:forEach>
 
 </tbody>
 </table>
 <input type="submit" value="전체 목록" onclick="window.location='/picksell/admin/member/list'"/>
+
 </div>
 </body>
 </html>
