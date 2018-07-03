@@ -8,8 +8,8 @@ public class BasketProductModel {
 	> 상품현재가격
 	> 주문수량
 	> 판매자아이디*/
-	private int product_num;
-	private String product_subject;
+	private int product_num; //d
+	private String product_subject; //d
 	private String product_img;
 	private int product_price;
 	private int product_currentPrice;

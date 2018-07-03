@@ -113,6 +113,8 @@ public class BasketController {
 			for(int i = 0 ; i < basketModel.getP_list().size() ; i++) {
 				System.out.println(i +"번째 프로덕트넘"+ basketModel.getP_list().get(i).getProduct_num());
 				System.out.println(i +"번째 프로덕트제목"+ basketModel.getP_list().get(i).getProduct_subject());
+				System.out.println(i +"번째 프로덕트이미지"+ basketModel.getP_list().get(i).getProduct_img());
+			
 			}
 		}
 		

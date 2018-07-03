@@ -33,6 +33,7 @@
 			sumfunc(Number(document.getElementById('hid_currentPrice'+keyNumber).value));
 			document.getElementById('hid_product_num'+keyNumber).disabled = false;
 			document.getElementById('hid_product_subject'+keyNumber).disabled = false;
+			document.getElementById('hid_product_img'+keyNumber).disabled = false;
 		}else if(!checkTarget.checked){
 			//체크해제일때 디스에이블 걸어야댐
 			subfunc(Number(document.getElementById('hid_currentPrice'+keyNumber).value));
@@ -112,9 +113,10 @@
 		<c:forEach var="list" items="${resultList }" varStatus="indexStatus">
 			<input type="hidden" id="hid_product_subject${indexStatus.index }" name="p_list[${indexStatus.index }].product_subject" value="${list.SUBJECT }" disabled="disabled" />
 			<input type="hidden" id="hid_product_num${indexStatus.index }" name="p_list[${indexStatus.index }].product_num" value="${list.PRODUCT_NUM }" disabled="disabled" />
+			<input type="hidden" id="hid_product_img${indexStatus.index }" name="p_list[${indexStatus.index }].product_img" value="${list.FIRST_IMG }" disabled="disabled" />
+			<input type="hidden" id="hid_price${indexStatus.index }" name="p_list[${indexStatus.index }].product_price" value="${list.PRICE }" disabled="disabled" />
 			<input type="hidden" id="hid_stock${indexStatus.index }" value="${list.STOCK }" />
 			<input type="hidden" id="hid_quantity${indexStatus.index }" value="${list.PRODUCT_QUANTITY }" />
-			<input type="hidden" id="hid_price${indexStatus.index }" value="${list.PRICE }" />
 			<input type="hidden" id="hid_currentPrice${indexStatus.index }" value="${list.PRICE * list.PRODUCT_QUANTITY }" />
 			<tr>
 				<td><input type="checkbox" onclick="basketChecking(this, ${indexStatus.index})" id="baketCheck${indexStatus.index }" /></td>
