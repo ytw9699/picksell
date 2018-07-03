@@ -49,5 +49,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		alarm_consent = #{alarm_consent},
 		where id = #{id}
 </update>	
+
+<select id="sellList0" resultType="hashmap" parameterType="String">
+	
+	select * from ps_product where deal_status = '0' and seller_id = #{sessionId}
+</select>
+
+<select id="sellList1" resultType="hashmap" parameterType="String">
+	
+	select * from ps_product where deal_status = '1' and seller_id = #{sessionId}
+</select>
+
+<select id="sellList2" resultType="hashmap" parameterType="String">
+	
+	select * from ps_product where deal_status = '2' and seller_id = #{sessionId}
+</select>
 	
 </mapper>

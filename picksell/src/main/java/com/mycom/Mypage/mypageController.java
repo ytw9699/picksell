@@ -54,5 +54,23 @@ public class mypageController {
 			}
 		return "redirect:/mypage/modify";
 	}
+	@RequestMapping(value="/mypage/sellList/{DEAL_STATUS}", method=RequestMethod.GET)
+	public String sellList(Model model, HttpSession session, @PathVariable("DEAL_STATUS") String DEAL_STATUS) {	
+		
+	String sessionId =(String)session.getAttribute("sessionId");
+	if(DEAL_STATUS.equals("0")) {
+		List<Map<String, Object>> sellList = mypageService.sellList0(sessionId);
+		model.addAttribute("sellList", sellList);
+	}
+	if(DEAL_STATUS.equals("1")) {
+		List<Map<String, Object>> sellList = mypageService.sellList1(sessionId);
+		model.addAttribute("sellList", sellList);
+		}
+	if(DEAL_STATUS.equals("2")) {
+		List<Map<String, Object>> sellList = mypageService.sellList2(sessionId);
+		model.addAttribute("sellList", sellList);
+	}
 	
+	return "sellList";
+	}
 }

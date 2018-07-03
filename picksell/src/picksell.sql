@@ -21,6 +21,8 @@
    </select>
 	
 
+   update ps_product set seller_id = '2' where hitcount = 1
+   
 CREATE TABLE PS_MEMBER (
     ID VARCHAR2(30) NOT NULL PRIMARY KEY,
     PASSWORD VARCHAR2(30) NOT NULL,
