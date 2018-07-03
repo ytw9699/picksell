@@ -5,13 +5,34 @@
 <html>
 <style>
 .main{
-   margin-left: 160px; /* Same as the width of the sidenav */
-   
+	 margin-left: 160px; 
+}
+.reverse{
+	background: Red;
+	color : White;
+}
+.searchBar{
+	width : 400px;
+	height: 50px;
+	border-style: solid;
+	border-color : #7151fc;
+	padding-top: 10px;
+    padding-left: 50px;
 }
 
 </style>
-
 <head>
+<script src="http://code.jquery.com/jquery-1.7.js"></script>
+<script>
+   $(document).ready(function(){
+	   $('button').bind({
+		  mouseenter : function() {$(this).addClass('reverse');},
+		  mouseleave : function() {$(this).removeClass('reverse');} 
+	   });
+   	});
+  
+</script>
+<link rel="stylesheet" type="text/css" href="/admincss/admin.css" media="screen" />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>member계정</title>
 </head>
@@ -20,6 +41,7 @@
 	세션 아이디 , 권한 확인 부분
  -->
 <div class="main">
+<div class="searchBar">
 <form action="/picksell/admin/member/search" >
 <select name="searchNum">
 		<option value="0">이름</option>
@@ -28,6 +50,7 @@
 <input type="text" name="memberSearch" id="memberSearch" placeholder="회원검색" />
 <button type="submit">Search</button>
 </form>
+</div>
 
 <h1>회원목록</h1>
 <c:choose>
@@ -50,17 +73,17 @@
  	</tr>
 </thead>
 <tbody>
-<c:forEach var="memberslist" items="${memberslist}" >
-  
+
+<c:forEach var="memberslist" items="${memberslist}">
+     
     <tr>
-     <td>번호</td>
-   
-     <td><a href="/picksell/admin/member/info/${memberslist.id}">${memberslist.id}</a></td>
+     
+   	 <td class="indexx">번호</td>
+   	 <td><a href="/picksell/admin/member/info/${memberslist.id}">${memberslist.id}</a></td>
 	 <td>${memberslist.name }</td>
 	 <td>${memberslist.profile_img }</td>
 	 <td>${memberslist.email }</td>
-     
-	 <c:choose>
+     <c:choose>
 	 <c:when test="${ '99' eq memberslist.kind }">
 	 <td>관리자</td>
 	 </c:when>
@@ -71,8 +94,9 @@
 	 <td>사업자 회원</td>
 	</c:when>
 	</c:choose>
-	</tr>
 	
+	</tr>
+  
 </c:forEach>
 
 </tbody>

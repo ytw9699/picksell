@@ -8,14 +8,15 @@
    margin-left: 160px; /* Same as the width of the sidenav */
    
 }
-
 </style>
 <head>
+
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>관리자 회원 상세보기</title>
 </head>
 <body>
 <div class="main">
+
 <table border="1px" align="center">
 <tr>
 <td>아이디 : ${map.ID }</td>

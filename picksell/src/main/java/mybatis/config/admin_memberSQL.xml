@@ -22,6 +22,7 @@ PUBLIC " - //mybatis.org//DTD Config 3.0//EN"
 		<result property="business_number" column="BUSINESS_NUMBER"/>
 		<result property="business_name" column="BUSINESS_NAME"/>
 		<result property="regdate" column="REGDATE"/>
+	
 	</resultMap>
 	
 	<select id="membersList" resultMap="adminMemberRes">

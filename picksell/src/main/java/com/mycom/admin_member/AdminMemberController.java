@@ -1,10 +1,7 @@
 package com.mycom.admin_member;
 
-
-
-import java.net.URLDecoder;
-import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -42,6 +39,7 @@ public class AdminMemberController {
 	ModelAndView mav = new ModelAndView();
 	List<AdminMemberModel> memberslist;
 	List<Map<String,Object>> maplist;
+	
 	//전체 회원리스트
 	@RequestMapping(value="/list")
 	public ModelAndView adminMemberList(HttpServletRequest request) throws Exception{
@@ -89,21 +87,21 @@ public class AdminMemberController {
 	public String adminMemberDetail(@PathVariable("memberId")String id,Model model) throws Exception{
 	
 		Map<String,Object> resultmap = adminMemberService.selectOneMember(id);
-		
 		model.addAttribute("map",resultmap);
 		return "adminMemberDetail";
 	}
 	
 	
-	//회원 주문내역리스트
+	//회원 주문 내역리스트
 	@RequestMapping(value="/orderList/{memberId}")
-	public String adminMemberOrderList(@PathVariable("memberId") String id,Model model) throws Exception {
-
+	public String adminMemberOrderList(@PathVariable("memberId") String id,CommandMap map,Model model) throws Exception {
+		
+	
 		maplist = adminMemberService.adminOrderList(id);
-		
-		int statusCheck;
-		
-		for(int i=0; i<maplist.size(); i++) {
+	    int statusCheck;
+	    map.put("mapSize", maplist.size());
+	  
+		for(int i=0; i< maplist.size(); i++) {
 		   statusCheck =Integer.valueOf((String)maplist.get(i).get("STATUS"));
 		   
 		   switch(statusCheck){
@@ -121,10 +119,13 @@ public class AdminMemberController {
 			   break;
 		   }
 		}
+		
+		model.addAttribute("mapSize",map);
 		model.addAttribute("maplist",maplist);
+		
 		return "adminMemberOrderList";
 	}
- 
+   
 	
 	//회원 판매내역 리스트
 	@RequestMapping(value="/sellHistory/{memberId}")

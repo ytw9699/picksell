@@ -4,8 +4,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <style>
-
-.main{
+.main {
    margin-left: 160px; /* Same as the width of the sidenav */
    
 }
@@ -17,7 +16,12 @@
 </head>
 <body>
 <div class="main">
-
+<c:choose>
+<c:when test="${0 eq mapSize.map.mapSize }">
+주문내역이 없습니다.
+</c:when>
+<c:when test="${0 lt mapSize.map.mapSize }">
+주문건수는 총 ${mapSize.map.mapSize }건 입니다.
 <table border="1px" align="center">
 	<thead>
 	<tr>
@@ -39,7 +43,8 @@
 	 </tr>
 </c:forEach>
 </table>
-
+</c:when>
+</c:choose>
 </div>
 </body>
 </html>
