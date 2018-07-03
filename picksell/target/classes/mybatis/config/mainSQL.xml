@@ -6,7 +6,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="main"> 
 	
 	<select id="nomalProduct"  resultType="hashmap">
-			select * from ps_product where  howtosell != 2 order by product_regdate desc
+			select * from ps_product where  howtosell != '2' order by product_regdate desc
 			<!-- select * from ps_product where howtosell = 0 or howtosell = 1  -->
 	</select>
 	
