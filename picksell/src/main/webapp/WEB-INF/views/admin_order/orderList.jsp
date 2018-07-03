@@ -30,17 +30,20 @@
 
 	<thead>
 		<tr role="row">
-			<th style="width: 9%; text-align:center;">번호</th>
-			<th style="width: 9%; text-align:center;">구매자</th>
-			<th style="width: 9%; text-align:center;">배송상태</th>
-			<th style="width: 9%; text-align:center;">총 가격</th>										
-			<th style="width: 9%; text-align:center;">배송지</th>
-			<th style="width: 9%; text-align:center;">계좌</th>
-			<th style="width: 9%; text-align:center;">입금주</th>
-			<th style="width: 9%; text-align:center;">은행명</th>
-			<th style="width: 9%; text-align:center;">주문번호</th>
-			<th style="width: 9%; text-align:center;">택배사</th>
-			<th style="width: 10%; text-align:center;">송장번호</th>
+			<th style="width: 7%; text-align:center;">번호</th>
+			<th style="width: 7%; text-align:center;">구매자</th>
+			<th style="width: 10%; text-align:center;">배송상태</th>
+			<th style="width: 7%; text-align:center;">총 가격</th>										
+			<th style="width: 7%; text-align:center;">배송지</th>
+			<th style="width: 7%; text-align:center;">계좌</th>
+			<th style="width: 7%; text-align:center;">입금주</th>
+			<th style="width: 7%; text-align:center;">은행명</th>
+			<th style="width: 7%; text-align:center;">주문번호</th>
+			<th style="width: 7%; text-align:center;">택배사</th>
+			<th style="width: 7%; text-align:center;">송장번호</th>
+			<th style="width: 7%; text-align:center;">입금확인</th>
+			<th style="width: 7%; text-align:center;">배송확인</th>
+			<th style="width: 7%; text-align:center;">인수확인</th>
 		</tr>
 	</thead>
 
@@ -49,7 +52,23 @@
  			<tr class="orderListContents" role="row">
  				<td style="text-align:center;vertical-align:middle;">${orderList.order_num}</td>
  				<td style="text-align:center;vertical-align:middle;">${orderList.buyer_id}</td>
- 				<td style="text-align:center;vertical-align:middle;">${orderList.status}</td>
+ 				<td style="text-align:center;vertical-align:middle;">
+ 					<c:if test="${orderList.status eq 0}">
+					입금대기
+					</c:if>
+					<c:if test="${orderList.status eq 1}">
+					입금완료 및 배송대기중
+					</c:if>
+					<c:if test="${orderList.status eq 2}">
+					배송 및 인수확인 대기
+					</c:if>
+					<c:if test="${orderList.status eq 3}">
+					인수확인 및 거래완료 
+					</c:if>
+					<c:if test="${orderList.status eq 4}">
+					결제취소
+					</c:if>
+ 				</td>
  				<td style="text-align:center;vertical-align:middle;">${orderList.total_price}</td>
  				<td style="text-align:center;vertical-align:middle;">${orderList.destination}</td>
  				<td style="text-align:center;vertical-align:middle;">${orderList.account}</td>
@@ -58,8 +77,30 @@
  				<td style="text-align:center;vertical-align:middle;">${orderList.purchase_num}</td>
  				<td style="text-align:center;vertical-align:middle;">${orderList.delivery_company}</td>
  				<td style="text-align:center;vertical-align:middle;">${orderList.invoice_num}</td>
+ 				<td style="text-align:center;vertical-align:middle;">
+<%--  				<c:url var="status1" value="/admin_order/confirmProc" > --%>
+<%-- 					<c:param name="order_num" value="${orderList.order_num}" />							 --%>
+<%-- 				</c:url> --%>
+				 <a href="/picksell/admin_order/confirmProc?order_num=${orderList.order_num}"><input type="button" value="입금완료"></a>
+<%-- 				 <a href="${status1}"><input type="button" value="입금완료"></a> --%>
+
+ 				</td>
+ 				<td style="text-align:center;vertical-align:middle;">
+ 				<c:url var="status2" value="/admin_order/deliveryProc" >
+					<c:param name="order_num" value="${orderList.order_num}" />							
+				</c:url>
+				 <a href="${status2}"><input type="button" value="배송중"></a>
+ 				</td>
+ 				<br/>
+ 				<td style="text-align:center;vertical-align:middle;">
+ 				<c:url var="status3" value="/admin_order/orderTerminate" >
+					<c:param name="order_num" value="${orderList.order_num}" />							
+				</c:url>
+				 <a href="${status3}"><input type="button" value="인수확인"></a>
+ 				</td>
  				<br/>
  			</tr>
+ 			
  		</c:forEach>
  	</div>
 <table/> 	

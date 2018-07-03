@@ -50,12 +50,38 @@
  				<td style="text-align:center;vertical-align:middle;">${productsList.product_num}</td>
  				<td style="text-align:center;vertical-align:middle;">${productsList.category_num}</td>
  				<td style="text-align:center;vertical-align:middle;">${productsList.seller_id}</td>
- 				<td style="text-align:center;vertical-align:middle;">${productsList.howtosell}</td>
+ 				<td style="text-align:center;vertical-align:middle;">
+ 					<c:if test="${productsList.howtosell eq 0}">
+					일반안전거래
+					</c:if>
+					<c:if test="${productsList.howtosell eq 1}">
+					일반 or 쿨거래
+					</c:if>
+					<c:if test="${productsList.howtosell eq 2}">
+					사업자 안전거래 
+					</c:if></td>
  				<td style="text-align:center;vertical-align:middle;">${productsList.hitcount}</td>
  				<td style="text-align:center;vertical-align:middle;">${productsList.stock}</td>
  				<td style="text-align:center;vertical-align:middle;">${productsList.product_regdate}</td>
- 				<td style="text-align:center;vertical-align:middle;">${productsList.deal_status}</td>
- 				<td style="text-align:center;vertical-align:middle;">${productsList.board_status}</td>
+ 				<td style="text-align:center;vertical-align:middle;">
+ 					<c:if test="${productsList.deal_status eq 0}">
+					판매중
+					</c:if>
+					<c:if test="${productsList.deal_status eq 1}">
+					거래중
+					</c:if>
+					<c:if test="${productsList.deal_status eq 2}">
+					판매완료
+					</c:if>
+ 					</td>
+ 					<td style="text-align:center;vertical-align:middle;">
+ 					<c:if test="${productsList.board_status eq 0}">
+					정상
+					</c:if>
+					<c:if test="${productsList.board_status eq 1}">
+					블라인드
+					</c:if>
+ 					</td>
  				<td style="text-align:center;vertical-align:middle;">${productsList.content}</td>
  				<td style="text-align:center;vertical-align:middle;">${productsList.first_img}</td>
  				<td style="text-align:center;vertical-align:middle;">${productsList.subject}</td>

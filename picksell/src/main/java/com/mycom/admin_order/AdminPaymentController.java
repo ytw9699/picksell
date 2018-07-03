@@ -128,25 +128,35 @@ public class AdminPaymentController {
 		
 	}
 	
-	@RequestMapping("/confirmProc")
-	public ModelAndView orderConfirm() {
+	@RequestMapping("/confirmProc") //입금완료 및 배송대기 
+	public ModelAndView orderConfirm(HttpServletRequest request) {
 		
 		
-		return mav;
-		
-	}
-	
-	@RequestMapping("/deliveryProc")
-	public ModelAndView adminDeliveryConfirm() {
-		
+		adminPaymentModel = adminPaymentService.orderGetOne(request.getParameter("order_num"));
+		adminPaymentService.updateStatus1(adminPaymentModel);
+		mav.setViewName("redirect:/admin_order/list");
 		
 		return mav;
 		
 	}
 	
-	@RequestMapping("/orderTerminate")
-	public ModelAndView adminOrderTerminate() {
+	@RequestMapping("/deliveryProc") // 배송 및 인수확인대기 
+	public ModelAndView adminDeliveryConfirm(HttpServletRequest request) {
 		
+		adminPaymentModel = adminPaymentService.orderGetOne(request.getParameter("order_num"));
+		adminPaymentService.updateStatus2(adminPaymentModel);
+		mav.setViewName("redirect:/admin_order/list");
+		
+		return mav;
+		
+	}
+	
+	@RequestMapping("/orderTerminate") //인수확인 및 거래완료
+	public ModelAndView adminOrderTerminate(HttpServletRequest request) {
+		
+		adminPaymentModel = adminPaymentService.orderGetOne(request.getParameter("order_num"));
+		adminPaymentService.updateStatus3(adminPaymentModel);
+		mav.setViewName("redirect:/admin_order/list");
 		
 		return mav;
 		

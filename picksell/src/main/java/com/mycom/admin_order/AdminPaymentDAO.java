@@ -15,11 +15,16 @@ public interface AdminPaymentDAO {
 	public List<AdminPaymentModel> orderSearch1(String search);
 	public List<AdminPaymentModel> orderSearch2(String search);
 	// 입금완료, 배송확인, 인수확인 등 STATUS변
-	public Object updateStatus(AdminPaymentModel adminPaymentModel);
+	public Object updateStatus1(AdminPaymentModel adminPaymentModel);
+	public Object updateStatus2(AdminPaymentModel adminPaymentModel);
+	public Object updateStatus3(AdminPaymentModel adminPaymentModel);
+	// to pick up some colums from ps_orderlist
+	public AdminPaymentModel orderGetOne(String order_num);
+	
+	
 	
 	//오더 리스트(ps_orderlist)
 	public List<AdminPaymentListModel> orderList2();
-	// to pick up some colums from ps_orderlist
-	public AdminPaymentListModel getOne(int order_num);
+	
 	
 }
