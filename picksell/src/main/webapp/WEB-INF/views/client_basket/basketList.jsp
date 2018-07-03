@@ -5,10 +5,25 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
+
 
 </head>
 <body>
 <script>
+
+ 	/* function wow(){
+		var allData = "test1=1&test2=2";
+		$.ajax({
+			type : "POST",
+			url : "/picksell/ajax/wow",
+			dataType : 'json',
+			data : allData,
+			success : function(data){
+				alert(data.wow);
+			}
+		});
+	}  */
 
 	//전체 가격 
 	var total = Number(0);
@@ -79,6 +94,8 @@
 					
 						if(document.getElementById('baketCheck'+keyNumber).checked){
 							sumfunc(priceInfo);
+							
+							document.getElementById('프로필을감싸는div').innerHTML = text;
 						}
 					}
 				})
@@ -86,6 +103,8 @@
 		}
 	}
 </script>
+
+	<!-- <input type="button" value="에이젝스 버튼" id="btn" onclick="wow()" /> -->
 	<div class="textTopWrapper">
 		<span>장바구니</span> <span>${listSize }</span>
 	</div>

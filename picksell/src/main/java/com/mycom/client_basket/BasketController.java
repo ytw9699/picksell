@@ -8,17 +8,47 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.annotations.ResultMap;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class BasketController {
 
 	@Resource(name="basketService")
 	private BasketService basketService;
+	
+	/*//ajax테스트
+	@ResponseBody
+	@RequestMapping("/ajax/wow")
+	public Map<String, Object> ajax(HttpServletRequest request){
+		
+		
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		System.out.println("ajax 함수 실행 get");
+		resultMap.put("wow", "ajax 결과");
+		
+		return resultMap;
+	}*/
+	@RequestMapping("/cart/countingMyBasket")
+	@ResponseBody
+	public Map<String, Object> countingMyBasketSum(HttpServletRequest request){
+		
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		
+		String sessionId = (String) request.getSession().getAttribute("sessionId");
+		int resultSum = basketService.countingMyBasket(sessionId);
+		
+		resultMap.put("currentCounting", resultSum);
+		
+		return resultMap;
+	}
+	
 	
 	//장바구니리스트 보기
 	@RequestMapping("/cart")
@@ -71,6 +101,8 @@ public class BasketController {
 		
 		return "client_basket/basketFetchView";
 	}
+	
+	
 	//장바구니수량줄이기
 	@RequestMapping("/cart/subQuantity/{targetNum}")
 	public String subQuantity(

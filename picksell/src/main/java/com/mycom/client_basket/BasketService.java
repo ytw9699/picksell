@@ -14,6 +14,11 @@ public class BasketService implements BasketDao {
 	@Resource(name="sqlSessionTemplate")
 	private SqlSessionTemplate sqlMapper;
 	
+	//고객레이아웃 > 헤더의 현재 장바구니 개수 표시
+	public int countingMyBasket(String sessionId) {
+		return sqlMapper.selectOne("client_basket.countingMyBasket", sessionId);
+	}
+		
 	//제품상세보기 > 이미 장바구니에 담았는지 확인
 	public int countingIsBasket(Map<String, Object> map) {
 		return sqlMapper.selectOne("client_basket.selectIsBasket", map);
