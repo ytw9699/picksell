@@ -130,7 +130,28 @@ public class BasketController {
 		
 		System.out.println("총결제금액 : " + basketModel.getTotalSum());
 		
-		if(basketModel.getP_list() != null) {
+		List<BasketProductModel> resultList = new ArrayList<BasketProductModel>();
+		
+		
+		for(int i = 0 ; i < basketModel.getP_list().size() ; i++) {
+			if(basketModel.getP_list().get(i).getProduct_subject() == null) {
+				//System.out.println(i+"번째는 비어있어요");
+				continue;
+			}
+			BasketProductModel tmp = new BasketProductModel();
+			tmp.setOrderSum(basketModel.getP_list().get(i).getOrderSum());
+			tmp.setProduct_currentPrice(basketModel.getP_list().get(i).getProduct_currentPrice());
+			tmp.setProduct_img(basketModel.getP_list().get(i).getProduct_img());
+			tmp.setProduct_num(basketModel.getP_list().get(i).getProduct_num());
+			tmp.setProduct_price(basketModel.getP_list().get(i).getProduct_price());
+			tmp.setProduct_subject(basketModel.getP_list().get(i).getProduct_subject());
+			tmp.setSeller_id(basketModel.getP_list().get(i).getSeller_id());
+			
+			resultList.add(tmp);
+		}
+		
+		
+		/*if(basketModel.getP_list() != null) {
 			for(int i = 0 ; i < basketModel.getP_list().size() ; i++) {
 				System.out.println(i +"번째 프로덕트넘"+ basketModel.getP_list().get(i).getProduct_num());
 				System.out.println(i +"번째 프로덕트제목"+ basketModel.getP_list().get(i).getProduct_subject());
@@ -140,8 +161,10 @@ public class BasketController {
 				System.out.println(i +"번째 프로덕트주문수량"+ basketModel.getP_list().get(i).getOrderSum());
 				System.out.println(i +"번째 프로덕트판매자"+ basketModel.getP_list().get(i).getSeller_id());
 			}
-		}
+		}*/
 		
+		model.addAttribute("totalSum", basketModel.getTotalSum());
+		model.addAttribute("resultList", resultList);
 		
 		return "orderReady";
 	}
