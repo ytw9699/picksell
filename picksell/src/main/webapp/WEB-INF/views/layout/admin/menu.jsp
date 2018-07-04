@@ -26,6 +26,7 @@
 
 .sidenav a:hover {
     color: #f1f1f1;
+    text-decoration: underline;
 }
 
 
@@ -42,6 +43,7 @@
   <a href="#clients">판매관리</a>
   <a href="#contact">주문관리</a>
   <a href="#">구매관리</a>
+  <a href="#">로그아웃</a>
 </div>
 </body>
 </html>
