@@ -33,20 +33,20 @@
 <table>
 	<thead>
 		<tr role="row">
-			<th style="width: 7%; text-align:center;">번호</th>
-			<th style="width: 7%; text-align:center;">카테고리번호</th>
-			<th style="width: 7%; text-align:center;">판매자</th>
-			<th style="width: 7%; text-align:center;">판매방법</th>										
-			<th style="width: 7%; text-align:center;">조회수</th>
-			<th style="width: 7%; text-align:center;">재고</th>
-			<th style="width: 7%; text-align:center;">등록일자</th>
-			<th style="width: 7%; text-align:center;">거래상태</th>
-			<th style="width: 7%; text-align:center;">게시글상태</th>
-			<th style="width: 9%; text-align:center;">내용</th>
-			<th style="width: 7%; text-align:center;">이미지</th>
-			<th style="width: 7%; text-align:center;">제목</th>
-			<th style="width: 7%; text-align:center;">제품상태</th>
-			<th style="width: 7%; text-align:center;">가격</th>
+			<th >번호</th>
+			<th>카테고리번호</th>
+			<th >판매자</th>
+			<th>판매방법</th>										
+			<th >조회수</th>
+			<th >재고</th>
+			<th >등록일자</th>
+			<th >거래상태</th>
+			<th >게시글상태</th>
+			<th >내용</th>
+			<th >이미지</th>
+			<th >제목</th>
+			<th >제품상태</th>
+			<th >가격</th>
 		</tr>
 	</thead>
 	
@@ -101,7 +101,7 @@
 </table>
 
 	<!--  등록된 상품이 없을때 -->
-	<c:if test="${fn:length(productsList) le 0}">
+	<c:if test="${empty orderList}">
 		<tr><td colspan="9" style="text-align:center;">등록된 상품이 없습니다</td></tr>
 	</c:if> 
 	

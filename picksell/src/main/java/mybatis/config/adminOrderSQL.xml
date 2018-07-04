@@ -69,19 +69,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 거래상태 업데이트 -->
 	<update id="updateStatus1" parameterType="AdminPaymentModel">
 		UPDATE ps_order
-			SET status = 1
+			SET status = 1,
 			step2_date = sysdate
 		WHERE order_num = #{order_num}
 	</update>
 	<update id="updateStatus2" parameterType="AdminPaymentModel">
 		UPDATE ps_order
-			SET status = 2
+			SET status = 2,
 			step3_date = sysdate
 		WHERE order_num = #{order_num}
 	</update>
 	<update id="updateStatus3" parameterType="AdminPaymentModel">
 		UPDATE ps_order
-			SET status = 3
+			SET status = 3,
 			step4_date = sysdate
 		WHERE order_num = #{order_num}
 	</update>
