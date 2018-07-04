@@ -28,11 +28,11 @@
 	<tr>
 		<td>${order.ORDER_NUM}</td>
 		<td>
-			<a href="/picksell/products/detail/${order.CATEGORY_NUM }/${order.PRODUCT_NUM }/1">
+			<a href="/picksell/mypage/orderDetail/${order.PRODUCT_NUM }">
 			<img src="/picksell/resources/productUpload/${order.FIRST_IMG }" style="width: 200px;" />
 			</a>
 		</td>
-		<td><a href="/picksell/products/detail/${order.CATEGORY_NUM }/${order.PRODUCT_NUM }/1">${order.SUBJECT }</a></td>
+		<td><a href="/picksell/mypage/orderDetail/${order.PRODUCT_NUM }">${order.SUBJECT }</a></td>
 		<td><fmt:formatNumber value="${order.PRICE }" pattern="#,###.##" /> 원</td>
 		
 		<c:if test="${order.STATUS == '0'}">

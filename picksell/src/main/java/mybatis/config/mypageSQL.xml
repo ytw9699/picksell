@@ -84,8 +84,9 @@ and b.buyer_id = #{sessionId} order by b.regdate desc
 </select>
 
 <!-- 주문조회 상세보기 -->	
-<select id="orderListDetail" parameterType="String" resultType="hashmap">
-		select * from PS_ORDER WHERE PRODUCT_NUM = #{PRODUCT_NUM}
+<select id="orderDetail" parameterType="Integer" resultType="hashmap">
+		select a.ORDER_NUM, a.BUYER_ID, a.STATUS, a.TOTAL_PRICE , a.DESTINATION, a.ACCOUNT, a.ACCOUNT_NAME, a.BANK, a.PURCHASE_NUM, a.DELIVERY_COMPANY, a.INVOICE_NUM, b.seller_id, b.subject, b.first_img, b.category_num, b.product_num
+		from(select * from PS_ORDER )a, ps_product b where a.product_num = b.product_num
 </select>
 
 </mapper>

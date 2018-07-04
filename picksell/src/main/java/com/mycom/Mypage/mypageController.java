@@ -98,14 +98,12 @@ public class mypageController {
 	
 		return "orderList";
 	}
-	@RequestMapping(value="/mypage/orderListDetail",method=RequestMethod.GET)
-	public String orderList(Model model, HttpServletRequest request) {	
+	@RequestMapping(value="/mypage/orderDetail/{PRODUCT_NUM}",method=RequestMethod.GET)
+	public String orderList(Model model, @PathVariable("PRODUCT_NUM") int PRODUCT_NUM) {	
 		
-		String PRODUCT_NUM = request.getParameter("PRODUCT_NUM");
-		
-			Map<String, Object> orderListDetail = mypageService.orderListDetail(PRODUCT_NUM);
-			model.addAttribute("orderListDetail", orderListDetail);
+			Map<String, Object> orderDetail = mypageService.orderDetail(PRODUCT_NUM);
+			model.addAttribute("orderDetail", orderDetail);
 	
-		return "orderListDetail";
+		return "orderDetail";
 	}
 }
