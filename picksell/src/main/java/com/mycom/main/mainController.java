@@ -47,17 +47,22 @@ public class mainController {
 		model.addAttribute("hotProductList", hotProductList);
 		model.addAttribute("hotCategoryList", hotCategoryList);
 		
-		//System.out.println(nomalProductList.size());
-		
 		return "main";
 		
 	}
 	
-	@RequestMapping(value="/mainSearch", method=RequestMethod.GET)
-	public String mainSearch(Model model) {	
-		return "mainSearch";//이렇게 해줘야 타일즈랑 연결됨
+	@RequestMapping(value="/mainSearchList", method=RequestMethod.GET)
+	public String mainSearchList(Model model, HttpServletRequest request) {	
+		
+		String searchKeyword = request.getParameter("searchKeyword");
+		
+		List<Map<String, Object>> mainSearchList = mainService.mainSearchList(searchKeyword);
+		
+			model.addAttribute("mainSearchList", mainSearchList);//아이디가 없다면
+			
+		return "mainSearchList";
 	}
-	
+}
 	/*@RequestMapping("/game/AjaxHome")
 	public ModelAndView AjaxHome(HttpServletRequest request) throws Exception {
 	    ModelAndView mv = new ModelAndView("/main/test");
@@ -77,4 +82,3 @@ public class mainController {
 	    map.put("test2", secondArg);
 	    return map;
 	}*/
-}
