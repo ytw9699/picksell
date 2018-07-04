@@ -30,10 +30,13 @@ public class BasketController {
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		
 		String sessionId = (String) request.getSession().getAttribute("sessionId");
-		int resultSum = basketService.countingMyBasket(sessionId);
 		
-		resultMap.put("currentCounting", resultSum);
-		
+		if(sessionId != null) {
+			int resultSum = basketService.countingMyBasket(sessionId);
+			resultMap.put("currentCounting", resultSum);
+		}else if(sessionId == null) {
+			resultMap.put("currentCounting", 0);
+		}
 		return resultMap;
 	}
 	

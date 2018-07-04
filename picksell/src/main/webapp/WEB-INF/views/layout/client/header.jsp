@@ -84,7 +84,8 @@ li.headerCategory {
 				//alert(data.currentCounting);
 				document.getElementById('myBasketSum').innerHTML = data.currentCounting;
 			}
-		});	
+		});		
+		
 		
 	});
 </script>
