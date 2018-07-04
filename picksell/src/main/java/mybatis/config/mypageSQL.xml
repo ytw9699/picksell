@@ -67,20 +67,29 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <select id="purchaseList" resultType="hashmap" parameterType="String">
 	
-	select a.seller_id, a.subject, a.first_img, a.price, a.category_num, b.purchase_num, b.product_num, b.buyer_id, b.regdate, b.status, c.status as ps_order_status
-   from(select seller_id, subject, first_img, price, category_num, product_num  from ps_product)a, ps_purchase_list b , ps_order c where a.product_num = b.product_num and a.product_num = c.product_num
+	select a.seller_id, a.subject, a.first_img, a.price, a.category_num, b.purchase_num, b.product_num, b.buyer_id, b.regdate,
+ b.status, c.status as ps_order_status
+   from(select seller_id, subject, first_img, price, category_num, product_num  from ps_product)a, 
+ps_purchase_list b , ps_order c where a.product_num = b.product_num and b.purchase_num = c.purchase_num
 and b.buyer_id = #{sessionId} order by b.regdate desc
-
- <!-- select a.seller_id, a.subject, a.first_img, a.price, a.category_num, b.purchase_num, b.product_num, b.buyer_id, b.regdate, b.status
-   from(select seller_id, subject, first_img, price, category_num, product_num  from ps_product)a, ps_purchase_list b where a.product_num = b.product_num
- and b.buyer_id = #{sessionId} order by b.regdate desc -->
       
 </select>
+
 <!-- 주문조회 리스트 -->
 <select id="orderList" resultType="hashmap" parameterType="String">
-	select a.seller_id, a.subject, a.first_img, a.price, a.category_num, b.purchase_num, b.product_num, b.order_num, b.buyer_id, b.status, b.total_price 
+
+	select * from ps_order where buyer_id = #{sessionId}
+
+	<!-- select a.seller_id, a.subject, a.first_img, a.price, a.category_num, b.purchase_num, b.product_num, b.order_num, b.buyer_id, b.status, b.total_price 
 	from(select seller_id, subject, first_img, price, category_num, product_num  from ps_product)a, ps_order b where a.product_num = b.product_num
-	and b.buyer_id = #{sessionId}
+	and b.buyer_id = #{sessionId} -->
+</select>
+
+<!-- 주문조회 리스트 -->
+<select id="orderInList" resultType="hashmap" parameterType="Integer">
+
+	select * from PS_ORDERLIST where ORDER_NUM = #{ORDER_NUM}
+
 </select>
 
 <!-- 주문조회 상세보기 -->	

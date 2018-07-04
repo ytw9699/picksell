@@ -2,6 +2,7 @@ package com.mycom.Mypage;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
@@ -88,16 +89,32 @@ public class mypageController {
 	
 		return "purchaseList";
 	}
+	
+    
 	@RequestMapping(value="/mypage/orderList",method=RequestMethod.GET)
 	public String orderList(Model model, HttpSession session) {	
 		
-		String sessionId =(String)session.getAttribute("sessionId");
-	
-			List<Map<String, Object>> orderList = mypageService.orderList(sessionId);
-			model.addAttribute("orderList", orderList);
-	
-		return "orderList";
-	}
+	List<Map<String, Object>> orderList = new ArrayList<Map<String,Object>>();//PS_ORDER
+
+    List orderSubList = new ArrayList();//PS_ORDERLIST
+    
+    String sessionId =(String)session.getAttribute("sessionId");
+    
+    orderList = mypageService.orderList(sessionId);//PS_ORDER
+    //select * from ps_order where buyer_id = #{sessionId}
+    
+    for(int i = 0 ; i < orderList.size() ; i++) {
+    	Map<String, Object> parameterMap = new HashMap<String, Object>(); 
+    	parameterMap.put("ORDER_NUM",String.valueOf(orderList.get(i).get("ORDER_NUM")));
+    	
+       orderSubList.add(mypageService.orderInList(parameterMap));//리스트하나를 GET하고 다시 맵에서 GET
+    }
+    System.out.println(orderSubList.get(0));
+    model.addAttribute("orderList", orderList);
+    model.addAttribute("orderSubList", orderSubList);
+
+	return "orderList";
+}
 	@RequestMapping(value="/mypage/orderDetail/{PRODUCT_NUM}",method=RequestMethod.GET)
 	public String orderList(Model model, @PathVariable("PRODUCT_NUM") int PRODUCT_NUM) {	
 		

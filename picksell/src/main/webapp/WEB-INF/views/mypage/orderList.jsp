@@ -15,16 +15,35 @@
 <body>
 주문조회 리스트 입니다
 <table>
-<c:if test="${orderList.size() > 0}">
-	<tr>
-		<td>상품 주문번호</td>
-		<td>사진</td>
-		<td>제목</td>
-		<td>상품금액</td>
-		<td>거래상태</td>
-	</tr>
+<%-- <c:if test="${orderList.size() > 0}"> --%>
+	<!-- <tr>
+		<td>상품 주문번호</td>통합
+		<td>거래상태</td> 통합: 거래상태(입금대기0 / 입금완료 및 배송대기중1 / 배송 및 인수확인 대기2 / 인수확인 및 거래완료3 / 결체취소44)
+		<td>사진</td> 각각 
+		<td>제목</td> 각각 
+		<td>상품금액</td> 각각 
+	</tr> -->
 
-	<c:forEach var="order" items="${orderList}">
+<c:forEach var="order" items="${orderList}" varStatus="listStatus">
+      <h1>${order.STATUS }</h1>
+      <h1>${order.TOTAL_PRICE }</h1>
+      <h1>${order.ORDER_NUM }</h1>
+
+         <c:forEach var="orderSubList1" items="${orderSubList[listStatus.index]}"  varStatus="subStatus">
+         
+         	
+         	${orderSubList1.ORDERLIST_NUM }
+         	${orderSubList1.SELLER_ID }
+         	${orderSubList1.PRODUCT_NUM }
+         	<p>
+           <%-- <h5>${orderSubList[listStatus.index][subStatus.index].ORDERLIST_NUM  }</h5> --%>
+           <%--  <h5>${orderSubList[listStatus.index][subStatus.index].PRODUCT_NUM  }</h5>
+            <h5>${orderSubList[listStatus.index][subStatus.index].ORDER_QUANTITY  }</h5> --%>
+         </c:forEach> 
+      
+</c:forEach>
+
+	<%-- <c:forEach var="order" items="${orderList}">
 	<tr>
 		<td>${order.ORDER_NUM}</td>
 		<td>
@@ -51,12 +70,12 @@
 		<td>결제취소</td>
 		</c:if>
 	</tr>
-	</c:forEach>
+	</c:forEach> --%>
 
-</c:if>
+<%-- </c:if>
 <c:if test="${orderList.size() < 1}">
 <p>내역이 없습니다</p>
-</c:if>
+</c:if> --%>
 </table>
 </body>
 </html>

@@ -135,6 +135,11 @@
 		<put-attribute name="body" value="/WEB-INF/views/mypage/orderDetail.jsp" />
 	</definition>
 	
+	<!-- 메인 통합검색-->
+	<definition name="mainSearchList" extends="default">
+		<put-attribute name="body" value="/WEB-INF/views/main/mainSearchList.jsp" />
+	</definition>
+	
 
 </tiles-definitions>
 	

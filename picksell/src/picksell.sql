@@ -1,3 +1,32 @@
+select a.step1_date, a.order_num, a.status ,b.order_quantity, c.subject, c.price, c.first_img
+
+from ps_order a, ps_orderlist b, ps_product c
+
+where a.order_num = b.order_num and b.product_num = c.product_num and a.buyer_id = '2' 
+
+order by a.step1_date desc  >> 리스트2
+
+
+select c.subject, c.price, c.first_img
+
+from ps_order a, ps_orderlist b, ps_product c
+
+where a.order_num = b.order_num and b.product_num = c.product_num and a.buyer_id = '2' 
+
+order by a.step1_date desc 
+
+
+
+insert into PS_ORDERLIST(ORDERLIST_NUM,
+							ORDER_NUM,
+							PRODUCT_NUM,
+							ORDER_QUANTITY,
+							SELLER_ID) values(16,
+							14,
+							83,
+							1,
+							'2')
+
 select a.seller_id, a.subject, a.first_img, a.price, a.category_num, b.purchase_num, b.product_num, b.order_num, b.buyer_id, b.status, b.total_price 
 from(select seller_id, subject, first_img, price, category_num, product_num  from ps_product)a, ps_order b where a.product_num = b.product_num
 
