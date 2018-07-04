@@ -15,7 +15,7 @@
 <p><a href="/picksell/mypage/modify">내정보</a></p>
 <p><a href="/picksell/mypage/sellList/0">판매내역</a></p>
 <p><a href="/picksell/mypage/purchaseList/0">구매신청리스트</a></p>
-<p><a href="/picksell/mypage/purchaseList/0">배송 및 주문 조회</a></p>
+<p><a href="/picksell/mypage/orderList">배송 및 주문 조회</a></p>
 <p><a href="/picksell/mypage/modify" onclick="alert('공사중');">알림설정</a></p>
 </body>
 </html>

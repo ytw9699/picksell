@@ -77,5 +77,9 @@ and b.buyer_id = #{sessionId} order by b.regdate desc
       
 </select>
 
-	
+<select id="orderList" resultType="hashmap" parameterType="String">
+	select a.seller_id, a.subject, a.first_img, a.price, a.category_num, b.purchase_num, b.product_num, b.order_num, b.buyer_id, b.status, b.total_price 
+	from(select seller_id, subject, first_img, price, category_num, product_num  from ps_product)a, ps_order b where a.product_num = b.product_num
+	and b.buyer_id = #{sessionId}
+</select>	
 </mapper>

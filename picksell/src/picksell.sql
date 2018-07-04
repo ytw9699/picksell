@@ -1,3 +1,11 @@
+select a.seller_id, a.subject, a.first_img, a.price, a.category_num, b.purchase_num, b.product_num, b.order_num, b.buyer_id, b.status, b.total_price 
+from(select seller_id, subject, first_img, price, category_num, product_num  from ps_product)a, ps_order b where a.product_num = b.product_num
+
+
+
+
+
+
 select a.seller_id, a.subject, a.first_img, a.price, a.category_num, b.purchase_num, b.product_num, b.buyer_id, b.regdate, b.status, c.status as ps_order_status
    from(select seller_id, subject, first_img, price, category_num, product_num  from ps_product)a, ps_purchase_list b , ps_order c where a.product_num = b.product_num and a.product_num = c.product_num
 order by b.regdate desc

@@ -86,4 +86,14 @@ public class mypageController {
 	
 		return "purchaseList";
 	}
+	@RequestMapping(value="/mypage/orderList",method=RequestMethod.GET)
+	public String orderList(Model model, HttpSession session) {	
+		
+		String sessionId =(String)session.getAttribute("sessionId");
+	
+			List<Map<String, Object>> orderList = mypageService.orderList(sessionId);
+			model.addAttribute("orderList", orderList);
+	
+		return "orderList";
+	}
 }

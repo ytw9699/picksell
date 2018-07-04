@@ -43,7 +43,10 @@
 		<td>구매 요청 수락 완료</td>
 		</c:if>
 		<td><input type="button" value="구매" id ="purchase" disabled="disabled" /></td>
-		<c:if test="${purchase.PS_ORDER_STATUS == '0'}">
+		<c:if test="${purchase.STATUS == '0'}">
+		<td>입금 요청 전</td>
+		</c:if>
+		<c:if test="${purchase.PS_ORDER_STATUS == '0' && purchase.STATUS == '1'}">
 		<td>입금대기중</td>
 		</c:if>
 		<c:if test="${purchase.PS_ORDER_STATUS == '1'}">
