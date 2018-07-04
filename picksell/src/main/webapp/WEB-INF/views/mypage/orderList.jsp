@@ -16,21 +16,25 @@
 주문조회 리스트 입니다
 <table>
 <%-- <c:if test="${orderList.size() > 0}"> --%>
-	<tr>
-		<td>상품 주문번호</td><!-- 통합 -->
-		<td>거래상태</td> <!-- 통합: 거래상태(입금대기0 / 입금완료 및 배송대기중1 / 배송 및 인수확인 대기2 / 인수확인 및 거래완료3 / 결체취소44) -->
-		<td>사진</td> <!-- 각각  -->
-		<td>제목</td> <!-- 각각  -->
-		<td>상품금액</td> <!-- 각각  -->
-	</tr>
+	<!-- <tr>
+		<td>상품 주문번호</td>통합
+		<td>거래상태</td> 통합: 거래상태(입금대기0 / 입금완료 및 배송대기중1 / 배송 및 인수확인 대기2 / 인수확인 및 거래완료3 / 결체취소44)
+		<td>사진</td> 각각 
+		<td>제목</td> 각각 
+		<td>상품금액</td> 각각 
+	</tr> -->
 
-<c:forEach var="변수" items="${리스트1}">
-<div class="바깥div">
-   <c:forEach var="변수" items="${리스트2}">
+<c:forEach var="order" items="${orderList}" varStatus="listStatus">
+      <h1>${order.STATUS }</h1>
+      <h1>${order.TOTAL_PRICE }</h1>
+      <h1>${order.ORDER_NUM }</h1>
 
-   </c:forEach>
-</div> 
-
+         <c:forEach var="orderSubList" items="${orderSubList}" varStatus="subStatus">
+            <h5>${orderSubList[listStatus.index][subStatus.index].FIRST_IMG  }</h5>
+            <h5>${orderSubList[listStatus.index][subStatus.index].SUBJECT  }</h5>
+            <h5>${orderSubList[listStatus.index][subStatus.index].PRICE  }</h5>
+         </c:forEach> 
+      
 </c:forEach>
 
 	<%-- <c:forEach var="order" items="${orderList}">
