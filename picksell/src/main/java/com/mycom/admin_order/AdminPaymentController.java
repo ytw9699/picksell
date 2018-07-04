@@ -107,7 +107,7 @@ public class AdminPaymentController {
 		mav.addObject("currentPage", currentPage);
 		
 		mav.addObject("orderList",orderList);
-		mav.setViewName("admin_order/orderList");
+		mav.setViewName("admin_orderList");
 		
 		return mav;
 		
