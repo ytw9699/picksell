@@ -5,6 +5,9 @@ import java.util.Map;
 
 public interface BasketDao {
 	
+	//고객레이아웃 > 헤더의 현재 장바구니 개수 표시
+	public int countingMyBasket(String sessionId);
+	
 	//제품상세보기 > 이미 장바구니에 담았는지 확인
 	public int countingIsBasket(Map<String, Object> map);
 
@@ -19,4 +22,5 @@ public interface BasketDao {
 	
 	//장바구니 수량감소
 	public void subQuantity(int basket_num);
+	
 }

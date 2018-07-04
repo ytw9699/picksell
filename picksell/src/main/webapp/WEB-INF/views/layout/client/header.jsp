@@ -74,6 +74,19 @@ li.headerCategory {
 				//$('#shareit-field').val('');
 				$(this).hide();
 		});
+	
+		$.ajax({
+			type : "POST",
+			url : "/picksell/cart/countingMyBasket",
+			dataType : 'json',
+			//data : allData,
+			success : function(data){
+				//alert(data.currentCounting);
+				document.getElementById('myBasketSum').innerHTML = data.currentCounting;
+			}
+		});		
+		
+		
 	});
 </script>
 <body>
@@ -85,7 +98,7 @@ li.headerCategory {
 	<c:if test="${sessionId == null}">
 	|<a href="/picksell/loginForm">로그인</a>
 	</c:if> 
-	|<a href="/picksell/cart">장바구니</a>
+	|<a href="/picksell/cart">장바구니</a><span class="myBasketSum" id="myBasketSum">0</span>
 		
 	
    </span>

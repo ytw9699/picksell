@@ -85,6 +85,11 @@
 		<put-attribute name="body" value="/WEB-INF/views/client_basket/basketList.jsp" />
 	</definition>
 	
+	<!-- [장바구니] 일괄구매 오더 -->
+	<definition name="orderReady" extends="default">
+		<put-attribute name="body" value="/WEB-INF/views/client_order/orderReady.jsp" />
+	</definition>
+	
 	<!-- 메인 -->
 	<definition name="main" extends="default">
 		<put-attribute name="body" value="/WEB-INF/views/main/main.jsp" />
