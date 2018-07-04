@@ -9,6 +9,9 @@
 <title>오더 리스트</title>
 
 <style type="text/css">
+.main{
+	 margin-left: 160px; 
+	}
 .paging{text-align:center;height:32px;margin-top:5px;margin-bottom:15px;}
 .paging a,
 .paging strong{display:inline-block;width:36px;height:32px;line-height:28px;font-size:14px;border:1px solid #e0e0e0;margin-left:5px;
@@ -26,6 +29,7 @@
 
 </head>
 <body>
+<div class="main">
 <table>
 
 	<thead>
@@ -103,7 +107,7 @@
  			
  		</c:forEach>
  	</div>
-<table/> 	
+</table> 	
  	<!--  등록된 상품이 없을때 -->
 	<c:if test="${fn:length(orderList) le 0}">
 		<tr><td colspan="9" style="text-align:center;">등록된 상품이 없습니다</td></tr>
@@ -130,6 +134,6 @@
 			</div>							
 		</div>				
 	</div>
-
+</div>
 </body>
 </html>

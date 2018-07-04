@@ -8,6 +8,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>신고 리스트</title>
 <style type="text/css">
+.main{
+	 margin-left: 160px; 
+	}
 .paging{text-align:center;height:32px;margin-top:5px;margin-bottom:15px;}
 .paging a,
 .paging strong{display:inline-block;width:36px;height:32px;line-height:28px;font-size:14px;border:1px solid #e0e0e0;margin-left:5px;
@@ -24,6 +27,7 @@
 </style>
 </head>
 <body>
+<div class="main">
 <table>
 	<thead>
 		<tr role="row">
@@ -80,6 +84,6 @@
 			</div>							
 		</div>				
 	</div>
-	
+</div>	
 </body>
 </html>
