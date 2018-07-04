@@ -13,7 +13,7 @@
 </style>
 </head>
 <body>
-구매 신청 리스트
+구매 신청 리스트 입니다
 <table>
 <c:if test="${purchaseList.size() > 0}">
 	<tr>
@@ -35,15 +35,26 @@
 		<td><a href="/picksell/products/detail/${purchase.CATEGORY_NUM }/${purchase.PRODUCT_NUM }/1">${purchase.SUBJECT }</a></td>
 		<td><fmt:formatNumber value="${purchase.PRICE }" pattern="#,###.##" /> 원</td>
 		<td>${purchase.REGDATE }</td>
-		<td>${purchase.STATUS }</td>
+		<c:if test="${purchase.STATUS == '0'}">
+		<td>구매 요청 수락 대기중</td>
+		</c:if>
+		<c:if test="${purchase.STATUS == '1'}">
+		<td>구매 요청 수락 완료</td>
+		</c:if>
+		<td><input type="button" value="구매" id ="purchase" disabled="disabled" /></td>
 		
 	</tr>
 	</c:forEach>
 
 </c:if>
 <c:if test="${purchaseList.size() < 1}">
-<p>내역이 없습니다</p>
+<p>내역이 없습니다 구매 신청을 해주세요</p>
 </c:if>
 </table>
+<c:if test="${purchase.STATUS == '1'}">
+<script>
+	document.getElementById("purchase").disabled = true;
+</script>
+</c:if>
 </body>
 </html>
