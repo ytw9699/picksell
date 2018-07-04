@@ -45,6 +45,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		ORDER BY order_num DESC
 	</select>
 	
+	<!-- 주문한개가져오기 -->
+	<select id="orderGetOne" resultMap="orderRes" parameterType="String">
+	select *
+	from ps_order
+	where order_num = #{order_num} 
+	</select>
+	
 	<!--특 주문 찾기 쿼리  -->
 <!-- 	<select id="searchOrder" resultMap="orderRes" parameterType="String"> -->
 <!-- 		SELECT * FROM ps_order  -->
@@ -55,11 +62,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <!-- 	</select> -->
 	
 	<!-- 거래상태 업데이트 -->
-	<update id="updateStatus" parameterType="AdminPaymentModel">
+	<update id="updateStatus1" parameterType="AdminPaymentModel">
 		UPDATE ps_order
-			SET status = #{status}
-				WHERE order_num = #{order_num}
+			SET status = 1
+		WHERE order_num = #{order_num}
 	</update>
+	<update id="updateStatus2" parameterType="AdminPaymentModel">
+		UPDATE ps_order
+			SET status = 2
+		WHERE order_num = #{order_num}
+	</update>
+	<update id="updateStatus3" parameterType="AdminPaymentModel">
+		UPDATE ps_order
+			SET status = 3
+		WHERE order_num = #{order_num}
+	</update>
+	
 	
 </mapper>
 
