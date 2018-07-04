@@ -125,6 +125,11 @@
 		<put-attribute name="body" value="/WEB-INF/views/mypage/orderList.jsp" />
 	</definition>
 	
+	<!-- 주문조회 상세보기-->
+	<definition name="orderListDetail" extends="modify">
+		<put-attribute name="body" value="/WEB-INF/views/mypage/orderListDetail.jsp" />
+	</definition>
+	
 
 </tiles-definitions>
 	

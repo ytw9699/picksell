@@ -11,6 +11,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartRequest;
 
+import com.mycom.Member.CookieBox;
 import com.mycom.config.CommandMap;
 import com.mycom.utils.FileUpload;
 
@@ -95,5 +97,15 @@ public class mypageController {
 			model.addAttribute("orderList", orderList);
 	
 		return "orderList";
+	}
+	@RequestMapping(value="/mypage/orderListDetail",method=RequestMethod.GET)
+	public String orderList(Model model, HttpServletRequest request) {	
+		
+		String PRODUCT_NUM = request.getParameter("PRODUCT_NUM");
+		
+			Map<String, Object> orderListDetail = mypageService.orderListDetail(PRODUCT_NUM);
+			model.addAttribute("orderListDetail", orderListDetail);
+	
+		return "orderListDetail";
 	}
 }
