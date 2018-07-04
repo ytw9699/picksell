@@ -1,6 +1,18 @@
+select a.seller_id, a.subject, a.first_img, a.price, a.category_num, b.purchase_num, b.product_num, b.buyer_id, b.regdate, b.status, c.status as ps_order_status
+   from(select seller_id, subject, first_img, price, category_num, product_num  from ps_product)a, ps_purchase_list b , ps_order c where a.product_num = b.product_num and a.product_num = c.product_num
+order by b.regdate desc
+   
+ALTER TABLE ps_order ADD(PRODUCT_NUM number); 
+
 select a.seller_id, a.subject, a.first_img, a.price, a.category_num, b.purchase_num, b.product_num, b.buyer_id, b.regdate, b.status
    from(select seller_id, subject, first_img, price, category_num, product_num  from ps_product)a, ps_purchase_list b where a.product_num = b.product_num
 order by b.regdate desc
+
+select a.seller_id, a.subject, b.product_num, b.buyer_id
+   from(select seller_id, subject, product_num  from ps_product)a, ps_purchase_list b, ps_order c where a.product_num = b.product_num
+
+
+
 <![CDATA[
 select r, b.total, b.category_num, c.category_name from(
 

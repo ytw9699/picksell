@@ -117,7 +117,8 @@ li.headerCategory {
 	<div id="menuBox-body">
 		<span><a href="/picksell/mypage/modify">내 정보</a></span>
 		<span><a href="/picksell/mypage/sellList/0">판매내역</a></span>
-		<span><a href="/picksell/mypage/purchaseList/0">구매내역 & 주문관리</a></span>
+		<span><a href="/picksell/mypage/purchaseList/0">구매신청리스트</a></span>
+		<span><a href="/picksell/mypage/purchaseList/0">배송 및 주문 조회</a></span>
 		<span><a href="#">알림설정</a></span>
 	</div>
 </div>

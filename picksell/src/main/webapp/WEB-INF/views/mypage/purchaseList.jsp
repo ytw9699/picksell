@@ -23,6 +23,7 @@
 		<td>신청날짜</td>
 		<td>신청상태</td>
 		<td>구매하기</td>
+		<td>거래상태</td>
 	</tr>
 
 	<c:forEach var="purchase" items="${purchaseList}">
@@ -42,7 +43,21 @@
 		<td>구매 요청 수락 완료</td>
 		</c:if>
 		<td><input type="button" value="구매" id ="purchase" disabled="disabled" /></td>
-		
+		<c:if test="${purchase.PS_ORDER_STATUS == '0'}">
+		<td>입금대기중</td>
+		</c:if>
+		<c:if test="${purchase.PS_ORDER_STATUS == '1'}">
+		<td>입금 완료 및 배송 대기중</td>
+		</c:if>
+		<c:if test="${purchase.PS_ORDER_STATUS == '2'}">
+		<td>배송 및 인수확인 대기</td>
+		</c:if>
+		<c:if test="${purchase.PS_ORDER_STATUS == '3'}">
+		<td>인수확인 및 거래완료</td>
+		</c:if>
+		<c:if test="${purchase.PS_ORDER_STATUS == '44'}">
+		<td>결제취소</td>
+		</c:if>
 	</tr>
 	</c:forEach>
 
