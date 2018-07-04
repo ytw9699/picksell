@@ -9,9 +9,9 @@
 <title>판매제품 리스트</title>
 <style type="text/css">
 
-.main{
-	 margin-left: 160px; 
-	}
+ .main{ 
+ 	 margin-left: 160px;  
+ 	} 
 
 .paging{text-align:center;height:32px;margin-top:5px;margin-bottom:15px;}
 .paging a,
@@ -101,7 +101,7 @@
 </table>
 
 	<!--  등록된 상품이 없을때 -->
-	<c:if test="${empty orderList}">
+	<c:if test="${empty productsList}">
 		<tr><td colspan="9" style="text-align:center;">등록된 상품이 없습니다</td></tr>
 	</c:if> 
 	

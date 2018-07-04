@@ -9,9 +9,9 @@
 <title>오더 리스트</title>
 
 <style type="text/css">
-.main{
-	 margin-left: 160px; 
-	}
+ .main{ 
+ 	 margin-left: 160px;  
+ 	} 
 .paging{text-align:center;height:32px;margin-top:5px;margin-bottom:15px;}
 .paging a,
 .paging strong{display:inline-block;width:36px;height:32px;line-height:28px;font-size:14px;border:1px solid #e0e0e0;margin-left:5px;
