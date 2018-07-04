@@ -1,5 +1,6 @@
 package com.mycom.client_basket;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -103,12 +104,29 @@ public class BasketController {
 		return "client_basket/basketFetchView";
 	}
 	//장바구니삭제하기
+	@RequestMapping("/cart/delete/{basket_num}")
+	public String deleteBasket(
+			@PathVariable("basket_num") int basket_num) {
+		
+		basketService.deleteBasket(basket_num);
+		
+		return "redirect:/cart";
+	}
 	
 	//장바구니전체삭제하기
-	
+	@RequestMapping("/cart/deleteAll")
+	public String deleteAllBasket(
+			HttpServletRequest request) {
+		
+		String sessionId = (String) request.getSession().getAttribute("sessionId");
+		
+		basketService.deleteAllBasket(sessionId);
+		
+		return "redirect:/cart";
+	}
 	//일괄구매하기
 	@RequestMapping(value="/purchase/batchOrder", method=RequestMethod.POST)
-	public String basketBatchOrder(BasketModel basketModel) {
+	public String basketBatchOrder(BasketModel basketModel, Model model) {
 		
 		System.out.println("총결제금액 : " + basketModel.getTotalSum());
 		
@@ -117,9 +135,13 @@ public class BasketController {
 				System.out.println(i +"번째 프로덕트넘"+ basketModel.getP_list().get(i).getProduct_num());
 				System.out.println(i +"번째 프로덕트제목"+ basketModel.getP_list().get(i).getProduct_subject());
 				System.out.println(i +"번째 프로덕트이미지"+ basketModel.getP_list().get(i).getProduct_img());
-			
+				System.out.println(i +"번째 프로덕트가격"+ basketModel.getP_list().get(i).getProduct_price());
+				System.out.println(i +"번째 프로덕트현재가격"+ basketModel.getP_list().get(i).getProduct_currentPrice());
+				System.out.println(i +"번째 프로덕트주문수량"+ basketModel.getP_list().get(i).getOrderSum());
+				System.out.println(i +"번째 프로덕트판매자"+ basketModel.getP_list().get(i).getSeller_id());
 			}
 		}
+		
 		
 		return "orderReady";
 	}

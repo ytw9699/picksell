@@ -23,4 +23,10 @@ public interface BasketDao {
 	//장바구니 수량감소
 	public void subQuantity(int basket_num);
 	
+	//장바구니 단일삭제
+	public void deleteBasket(int basket_num);
+	
+	//장바구니 전체삭제(장바구니비우기)
+	public void deleteAllBasket(String sessionId);
+	
 }
