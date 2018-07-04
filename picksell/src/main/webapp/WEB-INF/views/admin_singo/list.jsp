@@ -58,7 +58,7 @@
 </table>
 
 	<!--  등록된 상품이 없을때 -->
-	<c:if test="${fn:length(singoList) le 0}">
+	<c:if test="${empty singoList}">
 		<tr><td colspan="9" style="text-align:center;">등록된 신고가 없습니다</td></tr>
 	</c:if> 
 	

@@ -19,6 +19,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="purchase_num" column="purchase_num"/>
 		<result property="delivery_company" column="delivery_company"/>
 		<result property="invoice_num" column="invoice_num"/>
+		<result property="step1_date" column="step1_date"/>
+		<result property="step2_date" column="step2_date"/>
+		<result property="step3_date" column="step3_date"/>
+		<result property="step4_date" column="step4_date"/>
+		<result property="cancel_date" column="cancel_date"/>
 		
 	</resultMap>
 	
@@ -65,16 +70,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="updateStatus1" parameterType="AdminPaymentModel">
 		UPDATE ps_order
 			SET status = 1
+			step2_date = sysdate
 		WHERE order_num = #{order_num}
 	</update>
 	<update id="updateStatus2" parameterType="AdminPaymentModel">
 		UPDATE ps_order
 			SET status = 2
+			step3_date = sysdate
 		WHERE order_num = #{order_num}
 	</update>
 	<update id="updateStatus3" parameterType="AdminPaymentModel">
 		UPDATE ps_order
 			SET status = 3
+			step4_date = sysdate
 		WHERE order_num = #{order_num}
 	</update>
 	
