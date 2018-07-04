@@ -73,4 +73,17 @@ public class mypageController {
 	
 	return "sellList";
 	}
+	
+	@RequestMapping(value="/mypage/purchaseList/{STATUS}",method=RequestMethod.GET)
+	public String purchaseList(Model model, HttpSession session, @PathVariable("STATUS") String STATUS) {	
+		
+		String sessionId =(String)session.getAttribute("sessionId");
+		
+		if(STATUS.equals("0")) {
+			List<Map<String, Object>> purchaseList = mypageService.purchaseList0(sessionId);
+			model.addAttribute("purchaseList", purchaseList);
+		}
+	
+		return "purchaseList";
+	}
 }

@@ -114,6 +114,13 @@
 	<definition name="sellList" extends="modify">
 		<put-attribute name="body" value="/WEB-INF/views/mypage/sellList.jsp" />
 	</definition>
+	
+	<!-- 구매내역-->
+	<definition name="purchaseList" extends="modify">
+		<put-attribute name="body" value="/WEB-INF/views/mypage/purchaseList.jsp" />
+	</definition>
+	
+	
 
 </tiles-definitions>
 	
