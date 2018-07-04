@@ -115,6 +115,26 @@
 		<put-attribute name="footer" value="/WEB-INF/views/layout/client/footer.jsp" />
 	</definition>
 	
+	<!-- 판매내역-->
+	<definition name="sellList" extends="modify">
+		<put-attribute name="body" value="/WEB-INF/views/mypage/sellList.jsp" />
+	</definition>
+	
+	<!-- 구매내역-->
+	<definition name="purchaseList" extends="modify">
+		<put-attribute name="body" value="/WEB-INF/views/mypage/purchaseList.jsp" />
+	</definition>
+	
+	<!-- 주문조회-->
+	<definition name="orderList" extends="modify">
+		<put-attribute name="body" value="/WEB-INF/views/mypage/orderList.jsp" />
+	</definition>
+	
+	<!-- 주문조회 상세보기-->
+	<definition name="orderDetail" extends="modify">
+		<put-attribute name="body" value="/WEB-INF/views/mypage/orderDetail.jsp" />
+	</definition>
+	
 
 </tiles-definitions>
 	

@@ -24,4 +24,25 @@ public class mypageService implements mypageDao {
 	public void updatePersonal(Map<String, Object> map) {
 		sqlMapper.update("mypage.updatePersonal", map);
 		}
+	public List<Map<String, Object>> sellList0(String sessionId) {
+		return sqlMapper.selectList("mypage.sellList0", sessionId);
+	}
+	public List<Map<String, Object>> sellList1(String sessionId) {
+		return sqlMapper.selectList("mypage.sellList1", sessionId);
+	}
+	public List<Map<String, Object>> sellList2(String sessionId) {
+		return sqlMapper.selectList("mypage.sellList2", sessionId);
+	}
+
+	public List<Map<String, Object>> purchaseList0(String sessionId) {
+		return sqlMapper.selectList("mypage.purchaseList", sessionId);
+	}
+
+	public List<Map<String, Object>> orderList(String sessionId) {
+		return sqlMapper.selectList("mypage.orderList", sessionId);
+	}
+
+	public Map<String, Object> orderDetail(int PRODUCT_NUM) {
+		return sqlMapper.selectOne("mypage.orderDetail", PRODUCT_NUM);
+	}
 }
