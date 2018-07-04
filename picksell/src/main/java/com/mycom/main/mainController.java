@@ -46,11 +46,9 @@ public class mainController {
 		model.addAttribute("plusProductList", plusProductList);
 		model.addAttribute("hotProductList", hotProductList);
 		model.addAttribute("hotCategoryList", hotCategoryList);
-		
 		return "main";
 		
 	}
-	
 	@RequestMapping(value="/mainSearchList", method=RequestMethod.GET)
 	public String mainSearchList(Model model, HttpServletRequest request) {	
 		

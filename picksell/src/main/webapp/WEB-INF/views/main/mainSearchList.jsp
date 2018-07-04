@@ -16,7 +16,6 @@
 </style>
 </head>
 <body>
-<p>mainSearch</p>
 <c:forEach var="mainSearch" items="${mainSearchList }">
 	<div class="productWrap">
 	<div class="firstImgWrap">
