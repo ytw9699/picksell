@@ -29,10 +29,16 @@
       <h1>${order.TOTAL_PRICE }</h1>
       <h1>${order.ORDER_NUM }</h1>
 
-         <c:forEach var="orderSubList" items="${orderSubList}" varStatus="subStatus">
-            <h5>${orderSubList[listStatus.index][subStatus.index].FIRST_IMG  }</h5>
-            <h5>${orderSubList[listStatus.index][subStatus.index].SUBJECT  }</h5>
-            <h5>${orderSubList[listStatus.index][subStatus.index].PRICE  }</h5>
+         <c:forEach var="orderSubList1" items="${orderSubList[listStatus.index]}"  varStatus="subStatus">
+         
+         	
+         	${orderSubList1.ORDERLIST_NUM }
+         	${orderSubList1.SELLER_ID }
+         	${orderSubList1.PRODUCT_NUM }
+         	<p>
+           <%-- <h5>${orderSubList[listStatus.index][subStatus.index].ORDERLIST_NUM  }</h5> --%>
+           <%--  <h5>${orderSubList[listStatus.index][subStatus.index].PRODUCT_NUM  }</h5>
+            <h5>${orderSubList[listStatus.index][subStatus.index].ORDER_QUANTITY  }</h5> --%>
          </c:forEach> 
       
 </c:forEach>
