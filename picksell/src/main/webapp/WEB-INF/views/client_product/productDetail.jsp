@@ -105,6 +105,7 @@
 	</div>
 </div>
 	<div class="contentWrap">
+	<form method="post">
 	
 	<%-- <c:if test="${resultObject.HOWTOSELL != 2 }">
 		<p><a href="/picksell/products/goods?p=${currentPage }">전체목록</a>
@@ -184,9 +185,10 @@
 				</c:choose>
 				
 				
-			</div>
-		</div>
-	</div>
+			</div><!-- commentListWrap end -->
+		</div><!-- commentWrap end -->
+	</form><!-- form end -->
+	</div><!-- contentWrap end -->
 <script>
 	function openCommentForm(){
 		$(".hiddenBackGround").show();
