@@ -9,6 +9,46 @@
 <title>판매제품 리스트</title>
 <style type="text/css">
 
+.button {
+  display: inline-block;
+  border-radius: 4px;
+  background-color: #008CBA;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 14px;
+  padding: 10px;
+  width: 130px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+}
+
+.button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.button span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.button:hover span {
+  padding-right: 25px;
+}
+
+.button:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+
 table {
     border-collapse: collapse;
     border-spacing: 0;
@@ -103,7 +143,11 @@ tr:nth-child(even){background-color: #f2f2f2}
 					블라인드
 					</c:if>
  					</td>
- 				<td style="text-align:center;vertical-align:middle;">${productsList.content}</td>
+<%--  				<td style="text-align:center;vertical-align:middle;">${productsList.content}</td> --%>
+<!--  				판매글로 가는 버튼  -->
+ 				<td style="text-align:center;vertical-align:middle;">
+ 				<a href="/picksell/products/detail/${productsList.category_num}/${productsList.product_num}"><button class="button" style="vertical-align:middle"><span>판매글 가기</span></button></a>
+ 				</td>
  				<td style="text-align:center;vertical-align:middle;">${productsList.first_img}</td>
  				<td style="text-align:center;vertical-align:middle;">${productsList.subject}</td>
  				<td style="text-align:center;vertical-align:middle;">
