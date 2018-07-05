@@ -14,12 +14,31 @@
 	<div class="orderInfoWrap">
 		<span>주문하기</span>
 		<p>
-		<table>
+		<table border="1">
 			<tr>
 				<td colspan="2">배송정보</td>
 			</tr>
 			<tr>
-				
+				<td colspan="2">
+					<span>이름</span><br>
+					<input type="text" />
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<span>전화번호</span><br>
+					<input type="text" />
+				</td>
+				<td>
+					<span>이메일</span><br>
+					<input type="text" />
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<span>배송지</span><br>
+					<input type="text" />
+				</td>
 			</tr>
 		</table>
 	</div>
