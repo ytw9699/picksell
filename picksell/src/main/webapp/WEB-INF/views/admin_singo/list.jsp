@@ -8,6 +8,21 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>신고 리스트</title>
 <style type="text/css">
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+    border: 1px solid #ddd;
+}
+
+th, td {
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even){background-color: #f2f2f2}
+
 .main{ 
  	 margin-left: 160px;  
  	} 
@@ -28,16 +43,17 @@
 </head>
 <body>
 <div class="main">
+<div style="overflow-x:auto;">
 <table>
 	<thead>
 		<tr role="row">
-			<th>신고번호</th>
-			<th>판매글 번호</th>
-			<th>피신고자</th>
-			<th>신고자</th>										
-			<th>신고일자</th>
-			<th>신고내용</th>
-			<th>게시글상태</th> <!-- board_status -->
+			<th style="text-align:center;">신고번호</th>
+			<th style="text-align:center;">판매글 번호</th>
+			<th style="text-align:center;">피신고자</th>
+			<th style="text-align:center;">신고자</th>										
+			<th style="text-align:center;">신고일자</th>
+			<th style="text-align:center;">신고내용</th>
+			<th style="text-align:center;">게시글상태</th> <!-- board_status -->
 		</tr>
 	</thead>
 	
@@ -57,6 +73,7 @@
  	</div>
 	
 </table>
+</div>
 
 	<!--  등록된 상품이 없을때 -->
 	<c:if test="${empty singoList2}">

@@ -7,15 +7,24 @@
 <style>
 @font-face{font-family:'Cute'; src:url('/picksell/resources/admincss/font/THE_Oegyeinseolmyeongseo.ttf')}
 body, table, div, p {font-family:'Cute';}
+
+.menuWrap{
+	display:inline-block;
+}
+.bodyWrap{
+	display:inline-block;
+}
+
 </style>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
-
+	<div class="menuWrap">
 	<tiles:insertAttribute name="menu" />
-	<div style="float:left;padding:10px;width:20%"></div>
+	</div>
+	<div class="bodyWrap">
 	<tiles:insertAttribute name="body" />
-	
+	</div>
 </body>
 </html>

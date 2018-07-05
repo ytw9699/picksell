@@ -42,8 +42,8 @@
   <a href="/picksell/admin/member/list">계정관리</a>
   <a href="/picksell/admin_products/list">판매관리</a>
   <a href="/picksell/admin_order/list">주문관리</a>
-  <a href="/picksell/admin_singo/list">구매관리</a>
-
+  <a href="/picksell/admin_singo/list">신고관리</a>
+  <a href="/picksell">회원 페이지</a>
 </div>
 </body>
 </html>
