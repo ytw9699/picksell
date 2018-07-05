@@ -101,7 +101,7 @@ public class AdminPaymentController {
 		orderList = orderList.subList(page.getStartCount(), lastCount);
 		
 		
-		
+		System.out.println(totalCount);
 		mav.addObject("totalCount", totalCount);
 		mav.addObject("pagingHtml", pagingHtml);
 		mav.addObject("currentPage", currentPage);
