@@ -14,7 +14,14 @@
 	<div class="orderInfoWrap">
 		<span>주문하기</span>
 		<p>
-		
+		<table>
+			<tr>
+				<td colspan="2">배송정보</td>
+			</tr>
+			<tr>
+				
+			</tr>
+		</table>
 	</div>
 	<div class="paymentInfoWrap">
 	
