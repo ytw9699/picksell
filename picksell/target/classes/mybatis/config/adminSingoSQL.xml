@@ -13,9 +13,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="singo_regdate" column="singo_regdate"/>
 		<result property="singo_content" column="singo_content"/>
 	</resultMap>
+	
 		
 	<select id="singoList-all" resultMap="singoRes">
 		SELECT * FROM ps_singo ORDER BY singo_num desc
+	</select>
+<!-- 	board_status included -->
+	<select id="singoList-all2" resultType="hashmap">
+		SELECT a.singo_num, a.product_num, a.singoee,
+		a.singo_writer, a.singo_regdate, a.singo_content, b.board_status  
+		FROM ps_singo a INNER JOIN ps_product b ON a.product_num = b.product_num
+		ORDER BY a.singo_num DESC
+		<!-- SELECT a.singo_num, a.product_num, a.singoee,
+		a.singo_writer, a.singo_regdate, a.singo_content, b.board_status 
+		FROM ps_singo a, ps_product b 
+		where a.product_num = b.product_num -->
 	</select>
 	
 <!-- 	피신고자 id -->

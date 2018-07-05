@@ -26,6 +26,7 @@
 
 .sidenav a:hover {
     color: #f1f1f1;
+    text-decoration: underline;
 }
 
 
@@ -39,9 +40,10 @@
 <div class="sidenav">
   <a href="/picksell/admin/main">메인메뉴</a>
   <a href="/picksell/admin/member/list">계정관리</a>
-  <a href="#clients">판매관리</a>
-  <a href="#contact">주문관리</a>
-  <a href="#">구매관리</a>
+  <a href="/picksell/admin_products/list">판매관리</a>
+  <a href="/picksell/admin_order/list">주문관리</a>
+  <a href="/picksell/admin_singo/list">신고관리</a>
+  <a href="/picksell">회원 페이지</a>
 </div>
 </body>
 </html>

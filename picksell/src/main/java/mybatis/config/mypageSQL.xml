@@ -21,7 +21,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		BUSINESS_NAME,
 		REGDATE FROM PS_MEMBER WHERE ID = #{sessionId}
 </select>
-	
+
 <update id="updateBusiness" parameterType="hashmap">
 		update PS_MEMBER set 
 		password = #{password},
@@ -49,5 +49,55 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		alarm_consent = #{alarm_consent},
 		where id = #{id}
 </update>	
+
+<select id="sellList0" resultType="hashmap" parameterType="String">
 	
+	select * from ps_product where deal_status = '0' and seller_id = #{sessionId}
+</select>
+
+<select id="sellList1" resultType="hashmap" parameterType="String">
+	
+	select * from ps_product where deal_status = '1' and seller_id = #{sessionId}
+</select>
+
+<select id="sellList2" resultType="hashmap" parameterType="String">
+	
+	select * from ps_product where deal_status = '2' and seller_id = #{sessionId}
+</select>
+
+<select id="purchaseList" resultType="hashmap" parameterType="String">
+	
+	select a.seller_id, a.subject, a.first_img, a.price, a.category_num, b.purchase_num, b.product_num, b.buyer_id, b.regdate,
+ b.status
+   from(select seller_id, subject, first_img, price, category_num, product_num  from ps_product)a, 
+ps_purchase_list b where a.product_num = b.product_num and b.buyer_id = #{sessionId} order by b.regdate desc
+
+<!-- select a.seller_id, a.subject, a.first_img, a.price, a.category_num, b.purchase_num, b.product_num, b.buyer_id, b.regdate,
+ b.status, c.status as ps_order_status
+   from(select seller_id, subject, first_img, price, category_num, product_num  from ps_product)a, 
+ps_purchase_list b , ps_order c where a.product_num = b.product_num and b.purchase_num = c.purchase_num
+and b.buyer_id = #{sessionId} order by b.regdate desc -->
+      
+</select>
+
+<!-- ps_order에서  리스트  반환-->
+<select id="orderList" resultType="hashmap" parameterType="String">
+
+	select * from ps_order where buyer_id = #{sessionId} order by step1_date desc
+	
+</select>
+
+<!-- PS_ORDERLIST + ps_product 조인해서 리스트 반환-->
+<select id="orderSubList" resultType="hashmap" parameterType="Integer">
+
+select b.PRICE, b.SUBJECT, b.FIRST_IMG, b.category_num, b.product_num, a.ORDER_NUM, a.ORDER_QUANTITY
+from(select * from PS_ORDERLIST)a, ps_product b, ps_order c where a.product_num = b.product_num and c.order_num = a.order_num and a.ORDER_NUM = #{ORDER_NUM}
+
+</select>
+
+<!-- 주문조회 상세보기 -->	
+<select id="orderDetail" parameterType="Integer" resultType="hashmap">
+	 select * from PS_ORDER where order_num = #{order_num}
+</select>
+
 </mapper>

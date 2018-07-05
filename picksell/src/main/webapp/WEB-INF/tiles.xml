@@ -49,6 +49,22 @@
     <definition name="adminProducts" extends="admin">
 	<put-attribute name="body" value="/WEB-INF/views/admin_member/adminProducts.jsp"/>
 	</definition>
+		
+	<!-- 판매글 리스트  -->
+	<definition name="admin_products/list" extends="admin"> 
+		<put-attribute name="body" value="/WEB-INF/views/admin_products/list.jsp"/> 
+	</definition>
+	
+
+	<!-- 주문리스트 -->
+	<definition name="admin_order/orderList" extends="admin">
+		<put-attribute name="body" value="/WEB-INF/views/admin_order/orderList.jsp"/>
+	</definition>
+	
+	<!-- 신고 리스트  -->
+	<definition name="admin_singo/list" extends="admin">
+	<put-attribute name="body" value="/WEB-INF/views/admin_singo/list.jsp"/>
+	</definition>
 	
 	<!-- 판매하기(판매방식선택) -->
 	<definition name="howtosell" extends="default">
@@ -118,6 +134,31 @@
 		<put-attribute name="left" value="/WEB-INF/views/layout/client/mypageleft.jsp" />
 		<put-attribute name="body" value="/WEB-INF/views/mypage/modify.jsp" />
 		<put-attribute name="footer" value="/WEB-INF/views/layout/client/footer.jsp" />
+	</definition>
+	
+	<!-- 판매내역-->
+	<definition name="sellList" extends="modify">
+		<put-attribute name="body" value="/WEB-INF/views/mypage/sellList.jsp" />
+	</definition>
+	
+	<!-- 구매내역-->
+	<definition name="purchaseList" extends="modify">
+		<put-attribute name="body" value="/WEB-INF/views/mypage/purchaseList.jsp" />
+	</definition>
+	
+	<!-- 주문조회-->
+	<definition name="orderList" extends="modify">
+		<put-attribute name="body" value="/WEB-INF/views/mypage/orderList.jsp" />
+	</definition>
+	
+	<!-- 주문조회 상세보기-->
+	<definition name="orderDetail" extends="modify">
+		<put-attribute name="body" value="/WEB-INF/views/mypage/orderDetail.jsp" />
+	</definition>
+	
+	<!-- 메인 통합검색-->
+	<definition name="mainSearchList" extends="default">
+		<put-attribute name="body" value="/WEB-INF/views/main/mainSearchList.jsp" />
 	</definition>
 	
 

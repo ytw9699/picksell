@@ -2,6 +2,7 @@ package com.mycom.Mypage;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
@@ -11,6 +12,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -22,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartRequest;
 
+import com.mycom.Member.CookieBox;
 import com.mycom.config.CommandMap;
 import com.mycom.utils.FileUpload;
 
@@ -54,5 +57,67 @@ public class mypageController {
 			}
 		return "redirect:/mypage/modify";
 	}
+	@RequestMapping(value="/mypage/sellList/{DEAL_STATUS}", method=RequestMethod.GET)
+	public String sellList(Model model, HttpSession session, @PathVariable("DEAL_STATUS") String DEAL_STATUS) {	
+		
+	String sessionId =(String)session.getAttribute("sessionId");
+	if(DEAL_STATUS.equals("0")) {
+		List<Map<String, Object>> sellList = mypageService.sellList0(sessionId);
+		model.addAttribute("sellList", sellList);
+	}
+	if(DEAL_STATUS.equals("1")) {
+		List<Map<String, Object>> sellList = mypageService.sellList1(sessionId);
+		model.addAttribute("sellList", sellList);
+		}
+	if(DEAL_STATUS.equals("2")) {
+		List<Map<String, Object>> sellList = mypageService.sellList2(sessionId);
+		model.addAttribute("sellList", sellList);
+	}
 	
+	return "sellList";
+	}
+	
+	@RequestMapping(value="/mypage/purchaseList/{STATUS}",method=RequestMethod.GET)
+	public String purchaseList(Model model, HttpSession session, @PathVariable("STATUS") String STATUS) {	
+		
+		String sessionId =(String)session.getAttribute("sessionId");
+		
+		if(STATUS.equals("0")) {
+			List<Map<String, Object>> purchaseList = mypageService.purchaseList0(sessionId);
+			model.addAttribute("purchaseList", purchaseList);
+		}
+	
+		return "purchaseList";
+	}
+	
+    
+	@RequestMapping(value="/mypage/orderList",method=RequestMethod.GET)
+	public String orderList(Model model, HttpSession session) {	
+
+    List orderSubList = new ArrayList();//PS_ORDERLIST + PS_PRODUCT 테이블 조인
+    
+    String sessionId =(String)session.getAttribute("sessionId");
+    
+    List<Map<String, Object>> orderList = mypageService.orderList(sessionId);//PS_ORDER
+    //select * from ps_order where buyer_id = #{sessionId}
+    
+    for(int i = 0 ; i < orderList.size() ; i++) {
+    	Map<String, Object> parameterMap = new HashMap<String, Object>(); 
+    	parameterMap.put("ORDER_NUM",String.valueOf(orderList.get(i).get("ORDER_NUM")));
+    	
+    	orderSubList.add(mypageService.orderSubList(parameterMap));//리스트하나를 GET하고 다시 맵에서 GET
+    }
+    //System.out.println(orderSubList.get(0));
+    model.addAttribute("orderList", orderList);
+    model.addAttribute("orderSubList", orderSubList);
+
+	return "orderList";
+}
+	@RequestMapping(value="/mypage/orderDetail/{PRODUCT_NUM}", method=RequestMethod.GET)
+	public String orderDetail(Model model, @PathVariable("PRODUCT_NUM") int PRODUCT_NUM) {	
+		 System.out.println(PRODUCT_NUM);
+			Map<String, Object> orderDetail = mypageService.orderDetail(PRODUCT_NUM);
+			model.addAttribute("orderDetail", orderDetail);
+		return "orderDetail";
+	}
 }

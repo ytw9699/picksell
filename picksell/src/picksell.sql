@@ -1,12 +1,64 @@
-		<![CDATA[
-		select r, b.total, b.category_num, c.category_name from(
+select a.step1_date, a.order_num, a.status ,b.order_quantity, c.subject, c.price, c.first_img
 
-		select rownum r, a.total, a.category_num from(
-		
-		select count(*) as total, category_num from ps_product group by category_num order by count(*) desc
-	
-	      )a order by a.total desc )b, ps_category c where b.category_num = c.category_num and r < 7
-	         ]]>
+from ps_order a, ps_orderlist b, ps_product c
+
+where a.order_num = b.order_num and b.product_num = c.product_num and a.buyer_id = '2' 
+
+order by a.step1_date desc  >> 리스트2
+
+
+select c.subject, c.price, c.first_img
+
+from ps_order a, ps_orderlist b, ps_product c
+
+where a.order_num = b.order_num and b.product_num = c.product_num and a.buyer_id = '2' 
+
+order by a.step1_date desc 
+
+
+
+insert into PS_ORDERLIST(ORDERLIST_NUM,
+							ORDER_NUM,
+							PRODUCT_NUM,
+							ORDER_QUANTITY,
+							SELLER_ID) values(16,
+							14,
+							83,
+							1,
+							'2')
+
+select a.seller_id, a.subject, a.first_img, a.price, a.category_num, b.purchase_num, b.product_num, b.order_num, b.buyer_id, b.status, b.total_price 
+from(select seller_id, subject, first_img, price, category_num, product_num  from ps_product)a, ps_order b where a.product_num = b.product_num
+
+
+
+
+
+
+select a.seller_id, a.subject, a.first_img, a.price, a.category_num, b.purchase_num, b.product_num, b.buyer_id, b.regdate, b.status, c.status as ps_order_status
+   from(select seller_id, subject, first_img, price, category_num, product_num  from ps_product)a, ps_purchase_list b , ps_order c where a.product_num = b.product_num and a.product_num = c.product_num
+order by b.regdate desc
+   
+ALTER TABLE ps_order ADD(PRODUCT_NUM number); 
+
+select a.seller_id, a.subject, a.first_img, a.price, a.category_num, b.purchase_num, b.product_num, b.buyer_id, b.regdate, b.status
+   from(select seller_id, subject, first_img, price, category_num, product_num  from ps_product)a, ps_purchase_list b where a.product_num = b.product_num
+order by b.regdate desc
+
+select a.seller_id, a.subject, b.product_num, b.buyer_id
+   from(select seller_id, subject, product_num  from ps_product)a, ps_purchase_list b, ps_order c where a.product_num = b.product_num
+
+
+
+<![CDATA[
+select r, b.total, b.category_num, c.category_name from(
+
+select rownum r, a.total, a.category_num from(
+
+select count(*) as total, category_num from ps_product group by category_num order by count(*) desc
+
+  )a order by a.total desc )b, ps_category c where b.category_num = c.category_num and r < 7
+     ]]>
       
 <select id="hotProduct"  resultType="hashmap">
       <![CDATA[
@@ -19,8 +71,14 @@
       )a order by a.total desc )b, ps_product c where b.product_num = c.product_num and r < 4
      ]]>
    </select>
+   
+   select a.purchase_num, a.product_num, a.buyer_id, a.regdate, a.status, b.seller_id, b.subject, b.first_img, b.price, b.category_num
+   from(select purchase_num, product_num, buyer_id, regdate, status from ps_purchase_list order by regdate desc) 
+   a, ps_product b where a.product_num = b.product_num
+   
 	
-
+   update ps_product set seller_id = '2' where hitcount = 1
+   
 CREATE TABLE PS_MEMBER (
     ID VARCHAR2(30) NOT NULL PRIMARY KEY,
     PASSWORD VARCHAR2(30) NOT NULL,
