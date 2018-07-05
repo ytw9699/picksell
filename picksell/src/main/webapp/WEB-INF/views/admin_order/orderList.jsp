@@ -68,12 +68,12 @@ tr:nth-child(even){background-color: #f2f2f2}
 			<th style="text-align:center;">배송상태</th>
 			<th style="text-align:center;">총 가격</th>										
 			<th style="text-align:center;">배송지</th>
-			<th style="text-align:center;">계좌</th>
-			<th style="text-align:center;">입금주</th>
-			<th style="text-align:center;">은행명</th>
+<!-- 			<th style="text-align:center;">계좌</th> -->
+<!-- 			<th style="text-align:center;">입금주</th> -->
+<!-- 			<th style="text-align:center;">은행명</th> -->
 			<th style="text-align:center;">주문번호</th>
-			<th style="text-align:center;">택배사</th>
-			<th style="text-align:center;">송장번호</th>
+<!-- 			<th style="text-align:center;">택배사</th> -->
+<!-- 			<th style="text-align:center;">송장번호</th> -->
 			<th style="text-align:center;" >입금시각</th>
 			<th style="text-align:center;">입금확인</th>
 			<th style="text-align:center;">배송시각</th>
@@ -107,14 +107,21 @@ tr:nth-child(even){background-color: #f2f2f2}
  				</td>
  				<td style="text-align:center;vertical-align:middle;">${orderList.total_price}</td>
  				<td style="text-align:center;vertical-align:middle;">${orderList.destination}</td>
- 				<td style="text-align:center;vertical-align:middle;">${orderList.account}</td>
- 				<td style="text-align:center;vertical-align:middle;">${orderList.account_name}</td>
- 				<td style="text-align:center;vertical-align:middle;">${orderList.bank}</td>
+<%--  				<td style="text-align:center;vertical-align:middle;">${orderList.account}</td> --%>
+<%--  				<td style="text-align:center;vertical-align:middle;">${orderList.account_name}</td> --%>
+<%--  				<td style="text-align:center;vertical-align:middle;">${orderList.bank}</td> --%>
  				<td style="text-align:center;vertical-align:middle;">${orderList.purchase_num}</td>
- 				<td style="text-align:center;vertical-align:middle;">${orderList.delivery_company}</td>
- 				<td style="text-align:center;vertical-align:middle;">${orderList.invoice_num}</td>
+<%--  				<td style="text-align:center;vertical-align:middle;">${orderList.delivery_company}</td> --%>
+<%--  				<td style="text-align:center;vertical-align:middle;">${orderList.invoice_num}</td> --%>
  				
- 				<td style="text-align:center;vertical-align:middle;">${orderList.step2_date}</td>
+ 				<td style="text-align:center;vertical-align:middle;">
+ 					<c:if test="${empty orderList.step2_date}">
+					<i class="fa fa-remove"></i>
+					</c:if>
+					<c:if test="${not empty orderList.step2_date}">
+					<i class="fa fa-check"></i>
+					</c:if>
+ 				</td>
  				<td style="text-align:center;vertical-align:middle;">
 <%--  				<c:url var="status1" value="/admin_order/confirmProc" > --%>
 <%-- 					<c:param name="order_num" value="${orderList.order_num}" />							 --%>
@@ -123,7 +130,14 @@ tr:nth-child(even){background-color: #f2f2f2}
 <%-- 				 <a href="${status1}"><input type="button" value="입금완료"></a> --%>
 
  				</td>
- 				<td style="text-align:center;vertical-align:middle;">${orderList.step3_date}</td>
+ 				<td style="text-align:center;vertical-align:middle;">
+ 					<c:if test="${empty orderList.step3_date}">
+					<i class="fa fa-remove"></i>
+					</c:if>
+					<c:if test="${not empty orderList.step3_date}">
+					<i class="fa fa-check"></i>
+					</c:if>
+ 				</td>
  				<td style="text-align:center;vertical-align:middle;">
  				<c:url var="status2" value="/admin_order/deliveryProc" >
 					<c:param name="order_num" value="${orderList.order_num}" />							
@@ -131,7 +145,14 @@ tr:nth-child(even){background-color: #f2f2f2}
 				 <a href="${status2}"><input type="button" value="배송중"></a>
  				</td>
  				
- 				<td style="text-align:center;vertical-align:middle;">${orderList.step4_date}</td>
+ 				<td style="text-align:center;vertical-align:middle;">
+ 					<c:if test="${empty orderList.step4_date}">
+					<i class="fa fa-remove"></i>
+					</c:if>
+					<c:if test="${not empty orderList.step4_date}">
+					<i class="fa fa-check"></i>
+					</c:if>
+ 				</td>
  				<td style="text-align:center;vertical-align:middle;">
  				<c:url var="status3" value="/admin_order/orderTerminate" >
 					<c:param name="order_num" value="${orderList.order_num}" />							
