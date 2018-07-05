@@ -4,6 +4,7 @@
     <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+     <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -17,7 +18,7 @@
 <a href="/picksell/mypage/sellList/1">거래중 상품</a>
 <a href="/picksell/mypage/sellList/2">판매 완료 상품</a>
 <table>
-<c:if test="${sellList.size() > 0}">
+<c:if test="${fn:length(sellList) > 0}">
 	<tr>
 		<td>대표이미지</td>
 		<td>제목</td>
@@ -39,7 +40,7 @@
 	</c:forEach>
 
 </c:if>
-<c:if test="${sellList.size() < 1}">
+<c:if test="${fn:length(sellList) < 1}">
 <p>세션 아이디에 해당하는 판매 상품이 없습니다</p>
 </c:if>
 </table>

@@ -8,6 +8,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>신고 리스트</title>
 <style type="text/css">
+.main{ 
+ 	 margin-left: 160px;  
+ 	} 
 .paging{text-align:center;height:32px;margin-top:5px;margin-bottom:15px;}
 .paging a,
 .paging strong{display:inline-block;width:36px;height:32px;line-height:28px;font-size:14px;border:1px solid #e0e0e0;margin-left:5px;
@@ -24,15 +27,16 @@
 </style>
 </head>
 <body>
+<div class="main">
 <table>
 	<thead>
 		<tr role="row">
-			<th style="width: 12%; text-align:center;">신고번호</th>
-			<th style="width: 12%; text-align:center;">판매글 번호</th>
-			<th style="width: 12%; text-align:center;">피신고자</th>
-			<th style="width: 12%; text-align:center;">신고자</th>										
-			<th style="width: 12%; text-align:center;">신고일자</th>
-			<th style="width: 40%; text-align:center;">신고내용</th>
+			<th>신고번호</th>
+			<th>판매글 번호</th>
+			<th>피신고자</th>
+			<th>신고자</th>										
+			<th>신고일자</th>
+			<th>신고내용</th>
 			
 		</tr>
 	</thead>
@@ -54,7 +58,7 @@
 </table>
 
 	<!--  등록된 상품이 없을때 -->
-	<c:if test="${fn:length(singoList) le 0}">
+	<c:if test="${empty singoList}">
 		<tr><td colspan="9" style="text-align:center;">등록된 신고가 없습니다</td></tr>
 	</c:if> 
 	
@@ -80,6 +84,6 @@
 			</div>							
 		</div>				
 	</div>
-	
+</div>	
 </body>
 </html>
