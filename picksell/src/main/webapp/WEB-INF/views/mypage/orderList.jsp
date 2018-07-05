@@ -35,14 +35,13 @@
 		</c:if>
      <br>주문일: ${ps_order.STEP1_DATE} </br><!-- 주문일(입금대기날짜) -->
 <c:forEach var="joinMap" items="${orderSubList[orderListStatus.index]}">
-	 <P>
-	 <br>사진: 
-	 	<a href="/picksell/products/detail/${joinMap.CATEGORY_NUM }/${joinMap.PRODUCT_NUM }/1">
-		<img src="/picksell/resources/productUpload/${joinMap.FIRST_IMG }" style="width: 200px;" />
-		</a>
-	 </br>
-	 <br>제목: ${joinMap.SUBJECT }</br>
-	 <br>상품금액: ${joinMap.PRICE }</br>
+ <br>사진: 
+ 	<a href="/picksell/products/detail/${joinMap.CATEGORY_NUM }/${joinMap.PRODUCT_NUM }/1">
+	<img src="/picksell/resources/productUpload/${joinMap.FIRST_IMG }" style="width: 200px;" />
+	</a>
+ </br>
+ <br>제목: ${joinMap.SUBJECT }</br>
+ <br>상품금액: ${joinMap.PRICE }</br>
 </c:forEach> 
 </c:forEach>
 
