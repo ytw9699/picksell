@@ -75,27 +75,25 @@ and b.buyer_id = #{sessionId} order by b.regdate desc
       
 </select>
 
-<!-- 주문조회 리스트 -->
+<!-- ps_order에서  리스트  반환-->
 <select id="orderList" resultType="hashmap" parameterType="String">
 
-	select * from ps_order where buyer_id = #{sessionId}
-
-	<!-- select a.seller_id, a.subject, a.first_img, a.price, a.category_num, b.purchase_num, b.product_num, b.order_num, b.buyer_id, b.status, b.total_price 
-	from(select seller_id, subject, first_img, price, category_num, product_num  from ps_product)a, ps_order b where a.product_num = b.product_num
-	and b.buyer_id = #{sessionId} -->
+	select * from ps_order where buyer_id = #{sessionId} order by step1_date desc
+	
 </select>
 
-<!-- 주문조회 리스트 -->
-<select id="orderInList" resultType="hashmap" parameterType="Integer">
+<!-- PS_ORDERLIST + ps_product 조인해서 리스트 반환-->
+<select id="orderSubList" resultType="hashmap" parameterType="Integer">
 
-	select * from PS_ORDERLIST where ORDER_NUM = #{ORDER_NUM}
+select b.PRICE, b.SUBJECT, b.FIRST_IMG, b.category_num, b.product_num
+from(select * from PS_ORDERLIST)a, ps_product b, ps_order c where a.product_num = b.product_num and c.order_num = a.order_num and a.ORDER_NUM = #{ORDER_NUM}
 
 </select>
 
 <!-- 주문조회 상세보기 -->	
 <select id="orderDetail" parameterType="Integer" resultType="hashmap">
-		select a.ORDER_NUM, a.BUYER_ID, a.STATUS, a.TOTAL_PRICE , a.DESTINATION, a.ACCOUNT, a.ACCOUNT_NAME, a.BANK, a.PURCHASE_NUM, a.DELIVERY_COMPANY, a.INVOICE_NUM, b.seller_id, b.subject, b.first_img, b.category_num, b.product_num
-		from(select * from PS_ORDER )a, ps_product b where a.product_num = b.product_num
+select a.ORDER_NUM, a.BUYER_ID, a.STATUS, a.TOTAL_PRICE , a.DESTINATION, a.ACCOUNT, a.ACCOUNT_NAME, a.BANK, a.PURCHASE_NUM, a.DELIVERY_COMPANY, a.INVOICE_NUM, b.seller_id, b.subject, b.first_img, b.category_num, b.product_num
+from(select * from PS_ORDER )a, ps_product b where a.product_num = b.product_num
 </select>
 
 </mapper>
