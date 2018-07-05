@@ -37,9 +37,10 @@
 			<img src="/picksell/resources/productUpload/${orderDetail.FIRST_IMG }" style="width: 200px;" />
 			</a>
 		</td>
+		<td>${orderDetail.SUBJECT}</td>
 		
 		<td>${orderDetail.ORDER_NUM}</td>
-		<td>${orderDetail.SUBJECT}</td>
+		
 		
 		<td><a href="/picksell/products/detail/${orderDetail.CATEGORY_NUM }/${orderDetail.PRODUCT_NUM }/1">${orderDetail.SUBJECT }</a></td>
 		<c:if test="${orderDetail.STATUS == '0'}">
