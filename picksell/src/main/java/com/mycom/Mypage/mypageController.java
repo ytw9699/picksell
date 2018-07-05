@@ -114,11 +114,10 @@ public class mypageController {
 	return "orderList";
 }
 	@RequestMapping(value="/mypage/orderDetail/{PRODUCT_NUM}",method=RequestMethod.GET)
-	public String orderList(Model model, @PathVariable("PRODUCT_NUM") int PRODUCT_NUM) {	
+	public String orderDetail(Model model, @PathVariable("PRODUCT_NUM") int PRODUCT_NUM) {	
 		
 			Map<String, Object> orderDetail = mypageService.orderDetail(PRODUCT_NUM);
 			model.addAttribute("orderDetail", orderDetail);
-	
 		return "orderDetail";
 	}
 }
