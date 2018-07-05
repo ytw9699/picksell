@@ -20,7 +20,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 								PURCHASE_NUM,
 								DELIVERY_COMPANY,
 								INVOICE_NUM,
-								STEP1_DATE) values(#{order_num},
+								STEP1_DATE,
+								PRECAUTIONS,
+								BUYER_PHONE,
+								BUYER_EMAIL) values(#{order_num},
 													#{buyer_id},
 													'0',
 													#{total_price},
@@ -31,7 +34,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 													'0',
 													'0',
 													'0',
-													sysdate)
+													sysdate,
+													#{precautions},
+													#{buyer_phone},
+													#{buyer_email})
 	</insert>
 	
 	<insert id="insertOrderList" parameterType="orderListModel">

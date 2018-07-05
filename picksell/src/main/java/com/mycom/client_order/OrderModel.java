@@ -10,6 +10,9 @@ public class OrderModel {
 	private String account_name; //예금주
 	private String bank; //은행명
 	private String buyer_id;
+	private String buyer_phone;
+	private String buyer_email;
+	private String precautions;
 	
 	private int order_num;
 	//구매신청번호(7월5일기준 아직 추가x)
@@ -18,6 +21,24 @@ public class OrderModel {
 	
 	
 	
+	public String getBuyer_phone() {
+		return buyer_phone;
+	}
+	public void setBuyer_phone(String buyer_phone) {
+		this.buyer_phone = buyer_phone;
+	}
+	public String getBuyer_email() {
+		return buyer_email;
+	}
+	public void setBuyer_email(String buyer_email) {
+		this.buyer_email = buyer_email;
+	}
+	public String getPrecautions() {
+		return precautions;
+	}
+	public void setPrecautions(String precautions) {
+		this.precautions = precautions;
+	}
 	public String getBuyer_id() {
 		return buyer_id;
 	}

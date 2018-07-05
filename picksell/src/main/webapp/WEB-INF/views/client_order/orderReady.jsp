@@ -31,11 +31,11 @@
 			<tr>
 				<td>
 					<span>전화번호</span><br>
-					<input type="text" />
+					<input type="text" name="buyer_phone" />
 				</td>
 				<td>
 					<span>이메일</span><br>
-					<input type="text" />
+					<input type="text" name="buyer_email" />
 				</td>
 			</tr>
 			<tr>
@@ -62,6 +62,12 @@
 				<td>
 					계좌번호<br>
 					<input type="text" name="account" />
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2">
+					배송시 주의사항<br>
+					<input type="text" name="precautions" />
 				</td>
 			</tr>
 		</table>
