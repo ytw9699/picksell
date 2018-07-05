@@ -90,6 +90,11 @@
 		<put-attribute name="body" value="/WEB-INF/views/client_order/orderReady.jsp" />
 	</definition>
 	
+	<!-- [회원주문] 성공페이지 -->
+	<definition name="orderSuccess" extends="default">
+		<put-attribute name="body" value="/WEB-INF/views/client_order/orderSuccess.jsp" />
+	</definition>
+	
 	<!-- 메인 -->
 	<definition name="main" extends="default">
 		<put-attribute name="body" value="/WEB-INF/views/main/main.jsp" />
