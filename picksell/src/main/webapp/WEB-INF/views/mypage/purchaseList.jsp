@@ -4,6 +4,7 @@
     <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+    <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -15,7 +16,7 @@
 <body>
 구매 신청 리스트 입니다
 <table>
-<c:if test="${purchaseList.size() > 0}">
+<c:if test="${fn:length(purchaseList) > 0}">
 	<tr>
 		<td>대표이미지</td>
 		<td>제목</td>
@@ -65,7 +66,7 @@
 	</c:forEach>
 
 </c:if>
-<c:if test="${purchaseList.size() < 1}">
+<c:if test="${fn:length(purchaseList) < 1}">
 <p>내역이 없습니다 구매 신청을 해주세요</p>
 </c:if>
 </table>

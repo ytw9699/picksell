@@ -111,8 +111,10 @@ li.headerCategory {
 		</a>
 	</div>
 	<div class="searchWrap">
-		<input type="text" placeholder="상품명으로 검색해보세요" class="searchINPUT" />
-		<input type="submit" value="돋보기모양" class="searchSUBMIT" />
+		<form action="mainSearchList" method="GET">
+			<input type="text" name="searchKeyword" placeholder="상품명으로 검색해보세요" class="searchINPUT" />
+			<input type="submit" value="돋보기모양" class="searchSUBMIT" />
+		</form>
 	</div>
 </div>
 <div class="headerBottom">

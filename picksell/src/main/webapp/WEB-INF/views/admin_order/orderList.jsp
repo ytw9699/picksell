@@ -5,10 +5,40 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>오더 리스트</title>
 
 <style type="text/css">
+
+.fa-check {
+    color: green;
+}
+
+.fa-remove {
+    color: red;
+}
+
+.main{ 
+ 	 margin-left: 160px;  
+ 	} 
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+    border: 1px solid #ddd;
+}
+
+th, td {
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even){background-color: #f2f2f2}
+
+
 .paging{text-align:center;height:32px;margin-top:5px;margin-bottom:15px;}
 .paging a,
 .paging strong{display:inline-block;width:36px;height:32px;line-height:28px;font-size:14px;border:1px solid #e0e0e0;margin-left:5px;
@@ -26,24 +56,30 @@
 
 </head>
 <body>
+
+<div class="main">
+<div style="overflow-x:auto;">
 <table>
 
 	<thead>
 		<tr role="row">
-			<th style="width: 7%; text-align:center;">번호</th>
-			<th style="width: 7%; text-align:center;">구매자</th>
-			<th style="width: 10%; text-align:center;">배송상태</th>
-			<th style="width: 7%; text-align:center;">총 가격</th>										
-			<th style="width: 7%; text-align:center;">배송지</th>
-			<th style="width: 7%; text-align:center;">계좌</th>
-			<th style="width: 7%; text-align:center;">입금주</th>
-			<th style="width: 7%; text-align:center;">은행명</th>
-			<th style="width: 7%; text-align:center;">주문번호</th>
-			<th style="width: 7%; text-align:center;">택배사</th>
-			<th style="width: 7%; text-align:center;">송장번호</th>
-			<th style="width: 7%; text-align:center;">입금확인</th>
-			<th style="width: 7%; text-align:center;">배송확인</th>
-			<th style="width: 7%; text-align:center;">인수확인</th>
+			<th style="text-align:center;">번호</th>
+			<th style="text-align:center;">구매자</th>
+			<th style="text-align:center;">배송상태</th>
+			<th style="text-align:center;">총 가격</th>										
+			<th style="text-align:center;">배송지</th>
+			<th style="text-align:center;">계좌</th>
+			<th style="text-align:center;">입금주</th>
+			<th style="text-align:center;">은행명</th>
+			<th style="text-align:center;">주문번호</th>
+			<th style="text-align:center;">택배사</th>
+			<th style="text-align:center;">송장번호</th>
+			<th style="text-align:center;" >입금시각</th>
+			<th style="text-align:center;">입금확인</th>
+			<th style="text-align:center;">배송시각</th>
+			<th style="text-align:center;">배송확인</th>
+			<th style="text-align:center;">인수시각</th>
+			<th style="text-align:center;">인수확인</th>
 		</tr>
 	</thead>
 
@@ -77,6 +113,8 @@
  				<td style="text-align:center;vertical-align:middle;">${orderList.purchase_num}</td>
  				<td style="text-align:center;vertical-align:middle;">${orderList.delivery_company}</td>
  				<td style="text-align:center;vertical-align:middle;">${orderList.invoice_num}</td>
+ 				
+ 				<td style="text-align:center;vertical-align:middle;">${orderList.step2_date}</td>
  				<td style="text-align:center;vertical-align:middle;">
 <%--  				<c:url var="status1" value="/admin_order/confirmProc" > --%>
 <%-- 					<c:param name="order_num" value="${orderList.order_num}" />							 --%>
@@ -85,27 +123,30 @@
 <%-- 				 <a href="${status1}"><input type="button" value="입금완료"></a> --%>
 
  				</td>
+ 				<td style="text-align:center;vertical-align:middle;">${orderList.step3_date}</td>
  				<td style="text-align:center;vertical-align:middle;">
  				<c:url var="status2" value="/admin_order/deliveryProc" >
 					<c:param name="order_num" value="${orderList.order_num}" />							
 				</c:url>
 				 <a href="${status2}"><input type="button" value="배송중"></a>
  				</td>
- 				<br/>
+ 				
+ 				<td style="text-align:center;vertical-align:middle;">${orderList.step4_date}</td>
  				<td style="text-align:center;vertical-align:middle;">
  				<c:url var="status3" value="/admin_order/orderTerminate" >
 					<c:param name="order_num" value="${orderList.order_num}" />							
 				</c:url>
 				 <a href="${status3}"><input type="button" value="인수확인"></a>
  				</td>
- 				<br/>
+ 				
  			</tr>
  			
  		</c:forEach>
  	</div>
-<table/> 	
+</table> 
+</div>	
  	<!--  등록된 상품이 없을때 -->
-	<c:if test="${fn:length(orderList) le 0}">
+	<c:if test="${empty orderList}">
 		<tr><td colspan="9" style="text-align:center;">등록된 상품이 없습니다</td></tr>
 	</c:if> 
 	
@@ -130,6 +171,6 @@
 			</div>							
 		</div>				
 	</div>
-
+</div>
 </body>
 </html>

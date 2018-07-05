@@ -8,6 +8,25 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>판매제품 리스트</title>
 <style type="text/css">
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+    border: 1px solid #ddd;
+}
+
+th, td {
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even){background-color: #f2f2f2}
+
+ .main{ 
+ 	 margin-left: 160px;  
+ 	} 
+
 .paging{text-align:center;height:32px;margin-top:5px;margin-bottom:15px;}
 .paging a,
 .paging strong{display:inline-block;width:36px;height:32px;line-height:28px;font-size:14px;border:1px solid #e0e0e0;margin-left:5px;
@@ -24,23 +43,25 @@
 </style>
 </head>
 <body>
+<div class="main">
+<div style="overflow-x:auto;">
 <table>
 	<thead>
 		<tr role="row">
-			<th style="width: 7%; text-align:center;">번호</th>
-			<th style="width: 7%; text-align:center;">카테고리번호</th>
-			<th style="width: 7%; text-align:center;">판매자</th>
-			<th style="width: 7%; text-align:center;">판매방법</th>										
-			<th style="width: 7%; text-align:center;">조회수</th>
-			<th style="width: 7%; text-align:center;">재고</th>
-			<th style="width: 7%; text-align:center;">등록일자</th>
-			<th style="width: 7%; text-align:center;">거래상태</th>
-			<th style="width: 7%; text-align:center;">게시글상태</th>
-			<th style="width: 9%; text-align:center;">내용</th>
-			<th style="width: 7%; text-align:center;">이미지</th>
-			<th style="width: 7%; text-align:center;">제목</th>
-			<th style="width: 7%; text-align:center;">제품상태</th>
-			<th style="width: 7%; text-align:center;">가격</th>
+			<th style="text-align:center;">번호</th>
+			<th style="text-align:center;">카테고리번호</th>
+			<th style="text-align:center;">판매자</th>
+			<th style="text-align:center;">판매방법</th>										
+			<th style="text-align:center;">조회수</th>
+			<th style="text-align:center;">재고</th>
+			<th style="text-align:center;">등록일자</th>
+			<th style="text-align:center;" >거래상태</th>
+			<th style="text-align:center;">게시글상태</th>
+			<th style="text-align:center;">내용</th>
+			<th style="text-align:center;">이미지</th>
+			<th style="text-align:center;">제목</th>
+			<th style="text-align:center;">제품상태</th>
+			<th style="text-align:center;">가격</th>
 		</tr>
 	</thead>
 	
@@ -85,17 +106,24 @@
  				<td style="text-align:center;vertical-align:middle;">${productsList.content}</td>
  				<td style="text-align:center;vertical-align:middle;">${productsList.first_img}</td>
  				<td style="text-align:center;vertical-align:middle;">${productsList.subject}</td>
- 				<td style="text-align:center;vertical-align:middle;">${productsList.product_status}</td>
+ 				<td style="text-align:center;vertical-align:middle;">
+ 					<c:if test="${productsList.product_status eq 0}">
+					NEW
+					</c:if>
+					<c:if test="${productsList.product_status eq 1}">
+					USED
+					</c:if>
+ 				</td>
  				<td style="text-align:center;vertical-align:middle;">${productsList.price}</td>
- 				<br/>
+ 				
  			</tr>
  		</c:forEach>
  	</div>
 	
 </table>
-
+</div>
 	<!--  등록된 상품이 없을때 -->
-	<c:if test="${fn:length(productsList) le 0}">
+	<c:if test="${empty productsList}">
 		<tr><td colspan="9" style="text-align:center;">등록된 상품이 없습니다</td></tr>
 	</c:if> 
 	
@@ -121,6 +149,6 @@
 			</div>							
 		</div>				
 	</div>
-	
+</div>	
 </body>
 </html>

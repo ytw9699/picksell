@@ -90,6 +90,11 @@ import com.mycom.utils.FileUpload;
 			return "loginForm";
 		}
 		session.setAttribute("sessionId", ID);//세션에 값저장
+		session.setAttribute("sessionName", (String)resultMap.get("NAME"));//세션에 값저장
+		session.setAttribute("sessionKind", (String)resultMap.get("KIND"));//세션에 값저장
+		session.setAttribute("sessionPorfile_Img", (String)resultMap.get("PROFILE_IMG"));//세션에 값저장
+		session.setAttribute("sessionStatus", (String)resultMap.get("STATUS"));//세션에 값저장
+		
 		
 		if((request.getParameter("idSave")) != null) {
 		if(((String)request.getParameter("idSave")).equals("save")) {

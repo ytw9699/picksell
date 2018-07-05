@@ -9,6 +9,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>메인</title>
+
 <style>
 .productWrap {
     display: inline-block;

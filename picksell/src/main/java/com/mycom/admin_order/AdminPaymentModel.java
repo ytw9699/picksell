@@ -1,5 +1,7 @@
 package com.mycom.admin_order;
 
+import java.util.Date;
+
 public class AdminPaymentModel {
 	
 	private int order_num;
@@ -13,6 +15,11 @@ public class AdminPaymentModel {
 	private int purchase_num;
 	private String delivery_company = "0";
 	private String invoice_num = "0";
+	private Date step1_date;
+	private Date step2_date;
+	private Date step3_date;
+	private Date step4_date;
+	private Date cancel_date;
 	
 	public int getOrder_num() {
 		return order_num;
@@ -80,5 +87,35 @@ public class AdminPaymentModel {
 	public void setInvoice_num(String invoice_num) {
 		this.invoice_num = invoice_num;
 	}
-	
+	public Date getStep1_date() {
+		return step1_date;
+	}
+	public void setStep1_date(Date step1_date) {
+		this.step1_date = step1_date;
+	}
+	public Date getStep2_date() {
+		return step2_date;
+	}
+	public void setStep2_date(Date step2_date) {
+		this.step2_date = step2_date;
+	}
+	public Date getStep3_date() {
+		return step3_date;
+	}
+	public void setStep3_date(Date step3_date) {
+		this.step3_date = step3_date;
+	}
+	public Date getStep4_date() {
+		return step4_date;
+	}
+	public void setStep4_date(Date step4_date) {
+		this.step4_date = step4_date;
+	}
+	public Date getCancel_date() {
+		return cancel_date;
+	}
+	public void setCancel_date(Date cancel_date) {
+		this.cancel_date = cancel_date;
+	}
 }
+	
