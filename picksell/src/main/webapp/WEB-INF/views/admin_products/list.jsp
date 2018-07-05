@@ -9,6 +9,20 @@
 <title>판매제품 리스트</title>
 <style type="text/css">
 
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+    border: 1px solid #ddd;
+}
+
+th, td {
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even){background-color: #f2f2f2}
+
  .main{ 
  	 margin-left: 160px;  
  	} 
@@ -30,23 +44,24 @@
 </head>
 <body>
 <div class="main">
+<div style="overflow-x:auto;">
 <table>
 	<thead>
 		<tr role="row">
-			<th >번호</th>
-			<th>카테고리번호</th>
-			<th >판매자</th>
-			<th>판매방법</th>										
-			<th >조회수</th>
-			<th >재고</th>
-			<th >등록일자</th>
-			<th >거래상태</th>
-			<th >게시글상태</th>
-			<th >내용</th>
-			<th >이미지</th>
-			<th >제목</th>
-			<th >제품상태</th>
-			<th >가격</th>
+			<th style="text-align:center;">번호</th>
+			<th style="text-align:center;">카테고리번호</th>
+			<th style="text-align:center;">판매자</th>
+			<th style="text-align:center;">판매방법</th>										
+			<th style="text-align:center;">조회수</th>
+			<th style="text-align:center;">재고</th>
+			<th style="text-align:center;">등록일자</th>
+			<th style="text-align:center;" >거래상태</th>
+			<th style="text-align:center;">게시글상태</th>
+			<th style="text-align:center;">내용</th>
+			<th style="text-align:center;">이미지</th>
+			<th style="text-align:center;">제목</th>
+			<th style="text-align:center;">제품상태</th>
+			<th style="text-align:center;">가격</th>
 		</tr>
 	</thead>
 	
@@ -91,15 +106,22 @@
  				<td style="text-align:center;vertical-align:middle;">${productsList.content}</td>
  				<td style="text-align:center;vertical-align:middle;">${productsList.first_img}</td>
  				<td style="text-align:center;vertical-align:middle;">${productsList.subject}</td>
- 				<td style="text-align:center;vertical-align:middle;">${productsList.product_status}</td>
+ 				<td style="text-align:center;vertical-align:middle;">
+ 					<c:if test="${productsList.product_status eq 0}">
+					NEW
+					</c:if>
+					<c:if test="${productsList.product_status eq 1}">
+					USED
+					</c:if>
+ 				</td>
  				<td style="text-align:center;vertical-align:middle;">${productsList.price}</td>
- 				<br/>
+ 				
  			</tr>
  		</c:forEach>
  	</div>
 	
 </table>
-
+</div>
 	<!--  등록된 상품이 없을때 -->
 	<c:if test="${empty productsList}">
 		<tr><td colspan="9" style="text-align:center;">등록된 상품이 없습니다</td></tr>

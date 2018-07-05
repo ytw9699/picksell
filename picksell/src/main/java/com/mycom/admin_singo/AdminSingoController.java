@@ -51,6 +51,7 @@ public class AdminSingoController {
         }
 		
 		List<AdminSingoModel> singoList = adminSingoService.singoList();
+		List<Map<String,Object>> singoList2 = adminSingoService.singoList2();
 		
 		isSearch = request.getParameter("isSearch");
 		if(isSearch != null) {
@@ -79,6 +80,7 @@ public class AdminSingoController {
 			mav.addObject("pagingHtml", pagingHtml);
 			mav.addObject("currentPage", currentPage);
 			mav.addObject("singoList", singoList);
+			mav.addObject("singoList2", singoList2);
 			mav.setViewName("admin_singo/list");
 			return mav;
 			
@@ -100,6 +102,7 @@ public class AdminSingoController {
 		mav.addObject("currentPage", currentPage);
 		
 		mav.addObject("singoList",singoList);
+		mav.addObject("singoList2", singoList2);
 		mav.setViewName("admin_singo/list");
 		
 		return mav;

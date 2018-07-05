@@ -1,6 +1,7 @@
 package com.mycom.admin_singo;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 
@@ -20,6 +21,10 @@ public class AdminSingoService implements AdminSingoDAO {
 	@Override
 	public List<AdminSingoModel> singoList(){
 		return sqlSessionTemplate.selectList("adminSingo.singoList-all");
+	}
+	//board_status 포함해서 신고리스트 출력하기 위한 것 
+	public List<Map<String,Object>> singoList2(){
+		return sqlSessionTemplate.selectList("adminSingo.singoList-all2");
 	}
 	
 	// 특정 오더 검색 
