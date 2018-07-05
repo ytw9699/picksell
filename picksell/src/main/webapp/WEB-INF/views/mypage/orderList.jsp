@@ -15,7 +15,7 @@
 </style>
 </head>
 <body>
-주문조회 리스트 입니다
+주문조회 리스트 입니다.
 <table>
 <c:if test="${fn:length(orderList) > 0}">
 <c:forEach var="ps_order" items="${orderList}" varStatus="orderListStatus">
@@ -61,7 +61,7 @@
 	</tr>
 	</c:forEach> --%>
 </c:if>
-<c:if test="${fn:length(orderList) <1 }">
+<c:if test="${fn:length(orderList) < 1}">
 <p>내역이 없습니다</p>
 </c:if>
 </table>
