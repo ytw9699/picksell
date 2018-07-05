@@ -37,19 +37,20 @@
 			<th>신고자</th>										
 			<th>신고일자</th>
 			<th>신고내용</th>
-			
+			<th>게시글상태</th> <!-- board_status -->
 		</tr>
 	</thead>
 	
 	<div class="singoList">
- 		<c:forEach var="singoList" items="${singoList}" varStatus="stat">
+ 		<c:forEach var="singoList" items="${singoList2}" varStatus="stat">
  			<tr class="orderListContents" role="row">
- 				<td style="text-align:center;vertical-align:middle;">${singoList.singo_num}</td>
- 				<td style="text-align:center;vertical-align:middle;">${singoList.product_num}</td>
- 				<td style="text-align:center;vertical-align:middle;">${singoList.singoee}</td>
- 				<td style="text-align:center;vertical-align:middle;">${singoList.singo_writer}</td>
- 				<td style="text-align:center;vertical-align:middle;">${singoList.singo_regdate}</td>
- 				<td style="text-align:center;vertical-align:middle;">${singoList.singo_content}</td>
+ 				<td style="text-align:center;vertical-align:middle;">${singoList2.singo_num}</td>
+ 				<td style="text-align:center;vertical-align:middle;">${singoList2.product_num}</td>
+ 				<td style="text-align:center;vertical-align:middle;">${singoList2.singoee}</td>
+ 				<td style="text-align:center;vertical-align:middle;">${singoList2.singo_writer}</td>
+ 				<td style="text-align:center;vertical-align:middle;">${singoList2.singo_regdate}</td>
+ 				<td style="text-align:center;vertical-align:middle;">${singoList2.singo_content}</td>
+ 				<td style="text-align:center;vertical-align:middle;">${singoList2.board_status}</td>
  				<br/>
  			</tr>
  		</c:forEach>
@@ -58,7 +59,7 @@
 </table>
 
 	<!--  등록된 상품이 없을때 -->
-	<c:if test="${empty singoList}">
+	<c:if test="${empty singoList2}">
 		<tr><td colspan="9" style="text-align:center;">등록된 신고가 없습니다</td></tr>
 	</c:if> 
 	

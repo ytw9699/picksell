@@ -1,6 +1,7 @@
 package com.mycom.admin_singo;
 
 import java.util.List;
+import java.util.Map;
 
 import com.mycom.admin_products.AdminSellModel;
 import com.mycom.admin_singo.AdminSingoModel;
@@ -17,5 +18,7 @@ public interface AdminSingoDAO {
 	public AdminSingoModel singoView(int singo_num);
 	//신고 검색 
 	public List<AdminSingoModel> singoSearchList(String search);
+	
+	public List<Map<String,Object>> singoList2();
 	
 }
