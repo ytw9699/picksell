@@ -5,10 +5,20 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style>
+
+</style>
 </head>
 <body>
 
+	<div class="orderInfoWrap">
+		<span>주문하기</span>
+		<p>
+		
+	</div>
+	<div class="paymentInfoWrap">
 	
+	</div>
 
 </body>
 </html>
