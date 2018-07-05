@@ -154,9 +154,10 @@ public class AdminMemberController {
 		
 		Map<String,Object> map = new HashMap<String,Object>();
 		maplist = adminMemberService.adminOrderList(id);
-	    map.put("mapSize", maplist.size());
-
+	   
+	
 		
+		map.put("mapSize", maplist.size());
 		model.addAttribute("map",map);
 		model.addAttribute("maplist",maplist);
 		
@@ -179,7 +180,6 @@ public class AdminMemberController {
 	public String adminPurchaseHistory(@PathVariable("memberId") String id,Model model) throws Exception {
 		maplist = adminMemberService.adminPurchaseHistory(id);
 		model.addAttribute("maplist",maplist);
-		
 
 		
 		return "adminPurchaseHistory";
@@ -189,7 +189,10 @@ public class AdminMemberController {
 	//회원 판매글 리스트
 	@RequestMapping(value="/products/{memberId}")
 	public String Products(@PathVariable("memberId") String id,Model model) throws Exception{
+		maplist = adminMemberService.adminProducts(id);
 		
+		model.addAttribute("total",maplist.size());
+		model.addAttribute("maplist",maplist);
 		
 		return "adminProducts";
 		

@@ -15,7 +15,8 @@ public interface AdminMemberDAO {
 	public List<AdminMemberModel> searchName(String search);
 	
 	public List<AdminMemberModel> searchId(String search);
- 
+   
+	
 	//회원 상세보기
 	public Map<String,Object> selectOneMember(String id);
 	
@@ -29,7 +30,7 @@ public interface AdminMemberDAO {
 	public List<Map<String,Object>> adminPurchaseHistory(String id);
 	
 	//회원 판매리스트
-	
+	public List<Map<String,Object>> adminProducts(String id);
 	
 	//회원 블라인드처리
 	

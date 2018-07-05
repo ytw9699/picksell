@@ -59,6 +59,7 @@
 <select name="searchNum">
 		<option value="0">이름</option>
 		<option value="1">ID</option>	
+		
 </select>
 <input type="text" name="isSearch" id="memberSearch" placeholder="회원검색" />
 <button type="submit">Search</button>

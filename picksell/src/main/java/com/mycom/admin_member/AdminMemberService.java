@@ -30,6 +30,7 @@ public class AdminMemberService implements AdminMemberDAO {
 		return sqlSessionTemplate.selectList("admin_Member.searchId",memberSearch);
 	}
 	
+	
 	@Override
 	public Map<String,Object> selectOneMember(String id) {
 		return sqlSessionTemplate.selectOne("admin_Member.selectOneMember",id);
@@ -48,5 +49,10 @@ public class AdminMemberService implements AdminMemberDAO {
 	@Override
 	public List<Map<String,Object>> adminPurchaseHistory(String id){
 		return sqlSessionTemplate.selectList("admin_Member.adminPurchaseHistory",id);
+	}
+	
+	@Override
+	public List<Map<String,Object>> adminProducts(String id){
+		return sqlSessionTemplate.selectList("admin_Member.adminSelling",id);
 	}
 }

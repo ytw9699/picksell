@@ -57,6 +57,12 @@ PUBLIC " - //mybatis.org//DTD Config 3.0//EN"
 		WHERE a.order_num = b.order_num and b.buyer_id = #{id} 
 		AND b.order_num = c.order_num
 	 </select>
+	 
+	 <select id="adminSelling" resultType="hashmap" parameterType="string">
+	    SELECT * FROM ps_product WHERE seller_id = #{id} and 
+	    deal_status = '0'
+	 
+	 </select>
  </mapper>
 
 	
