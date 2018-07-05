@@ -33,17 +33,7 @@
 </head>
 <body>
 <script>
-	function applyFetch(){ //패치 테스트용
-		fetch('/picksell/fetchTest').then(function(response){
-			response.text().then(function(text){
-				//document.querySelector('body').innerHTML = text;
-				//document.getElementById('fetchResult').innerHTML = text;
-				if(response.status == '200'){
-					alert('fetch!');
-				}
-			})
-		})
-	}
+	
 	//구매요청
 	function purchaseApply(){
 		fetch('/picksell/products/purchseRequest/${product_num}/${sessionScope.sessionId}').then(function(response){
@@ -107,14 +97,14 @@
 	<div class="contentWrap">
 	<form method="post">
 	
-	<%-- <c:if test="${resultObject.HOWTOSELL != 2 }">
-		<p><a href="/picksell/products/goods?p=${currentPage }">전체목록</a>
-		<p><a href="/picksell/products/goods?ca=">카테고리 목록</a>
-	</c:if> --%>
-	<%-- <c:if test="">
-		<p><a href="">전체목록</a>
-		<p><a href="">카테고리 목록</a>
-	</c:if> --%>
+	<c:if test="${resultObject.HOWTOSELL != 2 }">
+		<a href="/picksell/products/goods">전체목록</a> > 
+		<a href="/picksell/products/goods?ca=${resultObject.CATEGORY_NUM }">${resultObject.CATEGORY_NAME }</a>
+	</c:if>
+	<c:if test="${resultObject.HOWTOSELL == 2 }">
+		<a href="/picksell/products/plus">전체목록</a> > 
+		<a href="/picksell/products/plus?ca=${resultObject.CATEGORY_NUM }">${resultObject.CATEGORY_NAME }</a>
+	</c:if>
 	
 		<div class="seller_info">
 			<span>${resultObject.SELLER_ID }</span>
@@ -122,7 +112,14 @@
 		<div class="product_info">
 			<span>상품번호: ${resultObject.PRODUCT_NUM }</span>
 			<p>
-			<span>가격: <fmt:formatNumber value="${resultObject.PRICE }" pattern="#,###.##" /> 원</span>
+			<span>가격: </span>
+			<span id="currentPriceText"><fmt:formatNumber value="${resultObject.PRICE }" pattern="#,###.##" /></span>
+			<p>
+			<c:if test="${resultObject.HOWTOSELL == 2 }">
+			<input type="hidden" id="currentPrice" value="${resultObject.PRICE }" />
+			<input type="hidden" id="currentOrderSum" value="1" />
+			<span>수량 </span><input type="button" value="-" id="subBtn" onclick="subOrder()" disabled="disabled"/><span id="currentOrderView">1</span><input type="button" value="+" id="addBtn" onclick="addOrder();" />
+			</c:if>
 		</div>
 		<div class="button_wrap">
 			<!-- 장바구니버튼 -->
@@ -199,7 +196,54 @@
 		$(".hiddenBackGround").hide();
 		$(".hiddenCommentForm").hide();
 	}
+	
+	var product_stock = Number('${resultObject.STOCK}');
+	var product_price = Number('${resultObject.PRICE}');
+	var current_price = Number(document.getElementById('currentPrice').value);
+	var current_price_ele = document.getElementById('currentPrice');
+	var current_order_sum = Number(document.getElementById('currentOrderSum').value);
+	var current_order_sum_ele = document.getElementById('currentOrderSum');
+	var current_order_view = document.getElementById('currentOrderView');
+	var current_price_view = document.getElementById('currentPriceText');
+	var subBtn_ele = document.getElementById('subBtn');
+	
+	function addComma(num) {
+		var regexp = /\B(?=(\d{3})+(?!\d))/g;
+		return num.toString().replace(regexp, ',');
+	}
+	
+	function addOrder(){
+		if((current_order_sum + 1) > product_stock){
+			alert('최대 수량입니다');
+			return false;
+		}else{
+			subBtn_ele.disabled = false;
+			//현재 주문+1 처리
+			current_order_sum += 1;
+			current_order_sum_ele.value = current_order_sum;
+			current_order_view.innerHTML = current_order_sum;
+			
+			//가격 주문* 처리
+			current_price = product_price * current_order_sum;
+			current_price_ele.value = current_price;
+			current_price_view.innerHTML = addComma(current_price);
+		}
+	}
+	function subOrder(){
+			//현재 주문-1 처리
+			current_order_sum -= 1;
+			current_order_sum_ele.value = current_order_sum;
+			current_order_view.innerHTML = current_order_sum;
+			
+			//가격 주문* 처리
+			current_price = product_price * current_order_sum;
+			current_price_ele.value = current_price;
+			current_price_view.innerHTML = addComma(current_price);
 		
+			if(current_order_sum == 1)
+				subBtn_ele.disabled = true;
+	}
+	
 </script>
 
 </body>

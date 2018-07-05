@@ -6,7 +6,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="client_product">
 	
 	<select id="selectProductOne" resultType="hashmap" parameterType="hashmap">
-		select * from ps_product where product_num = #{product_num}
+		select * from ps_product a, ps_category b 
+		where a.product_num = #{product_num} and a.category_num = b.category_num
 	</select>
 	
 	<select id="selectNomalProductList" resultType="hashmap" parameterType="hashmap">
