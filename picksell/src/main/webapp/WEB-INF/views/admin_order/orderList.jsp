@@ -5,10 +5,20 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>오더 리스트</title>
 
 <style type="text/css">
+
+.fa-check {
+    color: green;
+}
+
+.fa-remove {
+    color: red;
+}
 
 .main{ 
  	 margin-left: 160px;  
@@ -103,6 +113,7 @@ tr:nth-child(even){background-color: #f2f2f2}
  				<td style="text-align:center;vertical-align:middle;">${orderList.purchase_num}</td>
  				<td style="text-align:center;vertical-align:middle;">${orderList.delivery_company}</td>
  				<td style="text-align:center;vertical-align:middle;">${orderList.invoice_num}</td>
+ 				
  				<td style="text-align:center;vertical-align:middle;">${orderList.step2_date}</td>
  				<td style="text-align:center;vertical-align:middle;">
 <%--  				<c:url var="status1" value="/admin_order/confirmProc" > --%>
