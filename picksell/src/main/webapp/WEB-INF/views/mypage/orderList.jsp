@@ -37,7 +37,7 @@
 		</c:if>
      <br>주문일: ${ps_order.STEP1_DATE} </br><!-- 주문일(입금대기날짜) -->
 <c:forEach var="joinMap" items="${orderSubList[orderListStatus.index]}">
- <br>사진: 
+ <br>사진: ${joinMap.ORDER_NUM }
 	<a href="/picksell/mypage/orderDetail/${joinMap.ORDER_NUM }">
 		<img src="/picksell/resources/productUpload/${joinMap.FIRST_IMG }" style="width: 200px;" />
 	</a>
