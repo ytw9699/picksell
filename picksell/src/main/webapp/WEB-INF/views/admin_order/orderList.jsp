@@ -12,6 +12,31 @@
 
 <style type="text/css">
 
+.button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 8px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+.button1 {
+    background-color: white; 
+    color: black; 
+    border: 2px solid #008CBA;
+}
+
+.button1:hover {
+    background-color: #008CBA;
+    color: white;
+}
+
 .fa-check {
     color: green;
 }
@@ -80,6 +105,7 @@ tr:nth-child(even){background-color: #f2f2f2}
 			<th style="text-align:center;">배송확인</th>
 			<th style="text-align:center;">인수시각</th>
 			<th style="text-align:center;">인수확인</th>
+			<th style="text-align:center;">상세보기</th>
 		</tr>
 	</thead>
 
@@ -160,6 +186,11 @@ tr:nth-child(even){background-color: #f2f2f2}
 				 <a href="${status3}"><input type="button" value="인수확인"></a>
  				</td>
  				
+ 				<td style="text-align:center;vertical-align:middle;">
+
+					<a href="#"><button class="button button1">상세보기</button></a>
+<!--  				<a href="#" class="button button1"><input type="button" value="상세보기"></a> -->
+ 				</td>
  			</tr>
  			
  		</c:forEach>
