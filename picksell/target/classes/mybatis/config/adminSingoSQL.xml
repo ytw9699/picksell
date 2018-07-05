@@ -20,9 +20,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 <!-- 	board_status included -->
 	<select id="singoList-all2" resultType="hashmap">
-		SELECT singo_num, product_num, singoee,
-		singo_writer, singo_regdate, singo_content, board_status,
-		FROM ps_singo a INNER JOIN ps_product b ON a.product_num = b.product_num;
+		SELECT a.singo_num, a.product_num, a.singoee,
+		a.singo_writer, a.singo_regdate, a.singo_content, b.board_status  
+		FROM ps_singo a INNER JOIN ps_product b ON a.product_num = b.product_num
+		<!-- SELECT a.singo_num, a.product_num, a.singoee,
+		a.singo_writer, a.singo_regdate, a.singo_content, b.board_status 
+		FROM ps_singo a, ps_product b 
+		where a.product_num = b.product_num -->
 	</select>
 	
 <!-- 	피신고자 id -->
