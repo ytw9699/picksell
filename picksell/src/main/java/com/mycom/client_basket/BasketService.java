@@ -39,6 +39,13 @@ public class BasketService implements BasketDao {
 	public void subQuantity(int basket_num) {
 		sqlMapper.update("client_basket.subQuantity", basket_num);
 	}
-	
+	//장바구니 단일삭제
+	public void deleteBasket(int basket_num) {
+		sqlMapper.delete("client_basket.deleteBasket", basket_num);
+	}
+	//장바구니 전체삭제(장바구니비우기)
+	public void deleteAllBasket(String sessionId) {
+		sqlMapper.delete("client_basket.deleteAllBasket", sessionId);
+	}
 
 }

@@ -16,13 +16,14 @@ PUBLIC " - //mybatis.org//DTD Config 3.0//EN"
 			</settings>
 	
 	   <typeAliases>
-	   <typeAlias alias="adminMember" type="com.mycom.admin_member.AdminMemberModel"/>
-
+	   		<typeAlias alias="adminMember" type="com.mycom.admin_member.AdminMemberModel"/>
 	  		<typeAlias alias="adminMember" type="com.mycom.admin_member.AdminMemberModel"/>
 	  		<typeAlias alias="AdminPaymentModel" type="com.mycom.admin_order.AdminPaymentModel"/>
 	  		<typeAlias alias="AdminSellModel" type="com.mycom.admin_products.AdminSellModel"/>
 	  		<typeAlias alias="AdminSingoModel" type="com.mycom.admin_singo.AdminSingoModel"/>
 
+			<typeAlias type="com.mycom.client_order.OrderModel" alias="orderModel" />
+			<typeAlias type="com.mycom.client_order.OrderListModel" alias="orderListModel" />
 	   </typeAliases>
 	   <!-- SQL 정의한 xml문서 Mapping -->
 	<mappers>
@@ -34,6 +35,7 @@ PUBLIC " - //mybatis.org//DTD Config 3.0//EN"
 		<mapper resource="mybatis/config/admin_memberSQL.xml"/>
 		<mapper resource="mybatis/config/client_productSQL.xml" />
 		<mapper resource="mybatis/config/client_basketSQL.xml" />
+		<mapper resource="mybatis/config/client_orderSQL.xml" />
 		<mapper resource="mybatis/config/mypageSQL.xml" />
 		<mapper resource="mybatis/config/mainSQL.xml" />
 	</mappers>
