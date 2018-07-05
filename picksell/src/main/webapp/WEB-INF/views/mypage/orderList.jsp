@@ -5,6 +5,7 @@
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
     <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+    <!-- 수정 -->
 <!DOCTYPE html PUBLIC "-//W3C//Dbr HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dbr">
 <html>
 <head>
@@ -14,11 +15,13 @@
 </style>
 </head>
 <body>
-주문조회 리스트 입니다.
 <table>
 <c:if test="${fn:length(orderList) > 0}">
 <c:forEach var="ps_order" items="${orderList}" varStatus="orderListStatus">
-     <br>상품주문번호: ${ps_order.ORDER_NUM } </br><!-- 상품 주문번호 -->
+<BR/>"하나의 주문시작 ======================================================="
+	<a href="/picksell/mypage/orderDetail/${ps_order.ORDER_NUM }">
+	주문 내역 상세보기
+	</a>
      <c:if test="${ps_order.STATUS == '0'}">
 		<br> 거래상태:입금대기중</br>
 		</c:if>
@@ -36,14 +39,14 @@
 		</c:if>
      <br>주문일: ${ps_order.STEP1_DATE} </br><!-- 주문일(입금대기날짜) -->
 <c:forEach var="joinMap" items="${orderSubList[orderListStatus.index]}">
- <br>사진: 
-	<a href="/picksell/mypage/orderDetail/${joinMap.ORDER_NUM }">
+ <br>사진: ${joinMap.ORDER_NUM }
 		<img src="/picksell/resources/productUpload/${joinMap.FIRST_IMG }" style="width: 200px;" />
-	</a>
  </br>
  <br>제목: ${joinMap.SUBJECT }</br>
  <br>상품금액: ${joinMap.PRICE }</br>
+ <br>갯수: ${joinMap.ORDER_QUANTITY}</br>
 </c:forEach> 
+"하나의 주문 끝==========================================================="<BR/>
 </c:forEach>
 
 	<%-- <c:forEach var="order" items="${orderList}">

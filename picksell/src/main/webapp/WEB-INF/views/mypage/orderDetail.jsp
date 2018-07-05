@@ -17,7 +17,6 @@
 <table>
 
 	<tr>
-	
 		<td>사진</td>
 		<td>제목</td>
 		
@@ -34,15 +33,14 @@
 	<tr>
 		<td>
 			<a href="/picksell/products/detail/${orderDetail.CATEGORY_NUM }/${orderDetail.PRODUCT_NUM }/1">
-			<img src="/picksell/resources/productUpload/${orderDetail.FIRST_IMG }" style="width: 200px;" />
+				<img src="/picksell/resources/productUpload/${orderDetail.FIRST_IMG }" style="width: 200px;" />
 			</a>
 		</td>
-		<td>${orderDetail.SUBJECT}</td>
-		
+			<a href="/picksell/products/detail/${orderDetail.CATEGORY_NUM }/${orderDetail.PRODUCT_NUM }/1">
+				<td>${orderDetail.SUBJECT}</td>
+			</a>
 		<td>${orderDetail.ORDER_NUM}</td>
 		
-		
-		<td><a href="/picksell/products/detail/${orderDetail.CATEGORY_NUM }/${orderDetail.PRODUCT_NUM }/1">${orderDetail.SUBJECT }</a></td>
 		<c:if test="${orderDetail.STATUS == '0'}">
 		<td>입금대기중</td>
 		</c:if>
