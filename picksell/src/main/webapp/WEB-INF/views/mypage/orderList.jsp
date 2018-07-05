@@ -4,6 +4,7 @@
     <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+    <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html PUBLIC "-//W3C//Dbr HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dbr">
 <html>
 <head>
@@ -15,7 +16,7 @@
 <body>
 주문조회 리스트 입니다.
 <table>
-<c:if test="${orderList.size() > 0}">
+<c:if test="${fn:length(orderList) > 0}">
 <c:forEach var="ps_order" items="${orderList}" varStatus="orderListStatus">
      <br>상품주문번호: ${ps_order.ORDER_NUM } </br><!-- 상품 주문번호 -->
      <c:if test="${ps_order.STATUS == '0'}">
@@ -59,7 +60,7 @@
 	</tr>
 	</c:forEach> --%>
 </c:if>
-<c:if test="${orderList.size() < 1}">
+<c:if test="${fn:length(orderList) < 1}">
 <p>내역이 없습니다</p>
 </c:if>
 </table>
