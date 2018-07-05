@@ -93,23 +93,21 @@ public class mypageController {
     
 	@RequestMapping(value="/mypage/orderList",method=RequestMethod.GET)
 	public String orderList(Model model, HttpSession session) {	
-		
-	List<Map<String, Object>> orderList = new ArrayList<Map<String,Object>>();//PS_ORDER
 
-    List orderSubList = new ArrayList();//PS_ORDERLIST
+    List orderSubList = new ArrayList();//PS_ORDERLIST + PS_PRODUCT 테이블 조인
     
     String sessionId =(String)session.getAttribute("sessionId");
     
-    orderList = mypageService.orderList(sessionId);//PS_ORDER
+    List<Map<String, Object>> orderList = mypageService.orderList(sessionId);//PS_ORDER
     //select * from ps_order where buyer_id = #{sessionId}
     
     for(int i = 0 ; i < orderList.size() ; i++) {
     	Map<String, Object> parameterMap = new HashMap<String, Object>(); 
     	parameterMap.put("ORDER_NUM",String.valueOf(orderList.get(i).get("ORDER_NUM")));
     	
-       orderSubList.add(mypageService.orderInList(parameterMap));//리스트하나를 GET하고 다시 맵에서 GET
+    	orderSubList.add(mypageService.orderSubList(parameterMap));//리스트하나를 GET하고 다시 맵에서 GET
     }
-    System.out.println(orderSubList.get(0));
+    //System.out.println(orderSubList.get(0));
     model.addAttribute("orderList", orderList);
     model.addAttribute("orderSubList", orderSubList);
 
