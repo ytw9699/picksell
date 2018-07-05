@@ -9,11 +9,27 @@ public class OrderModel {
 	private String account;  // 계좌번호
 	private String account_name; //예금주
 	private String bank; //은행명
+	private String buyer_id;
+	
+	private int order_num;
 	//구매신청번호(7월5일기준 아직 추가x)
 	
 	private List<OrderListModel> o_list;
 	
 	
+	
+	public String getBuyer_id() {
+		return buyer_id;
+	}
+	public void setBuyer_id(String buyer_id) {
+		this.buyer_id = buyer_id;
+	}
+	public int getOrder_num() {
+		return order_num;
+	}
+	public void setOrder_num(int order_num) {
+		this.order_num = order_num;
+	}
 	public List<OrderListModel> getO_list() {
 		return o_list;
 	}

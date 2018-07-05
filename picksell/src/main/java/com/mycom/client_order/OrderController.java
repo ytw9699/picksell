@@ -1,6 +1,9 @@
 package com.mycom.client_order;
 
+import java.util.List;
+
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,10 +16,16 @@ public class OrderController {
 	private OrderService orderService;
 	
 	@RequestMapping(value="/purchase/order", method=RequestMethod.POST)
-	public String orderProc(OrderModel orderModel) {
+	public String orderProc(
+			OrderModel orderModel,
+			HttpServletRequest request) {
+	
+		List<OrderListModel> parameterList = orderModel.getO_list();
+		orderModel.setBuyer_id(request.getSession().getAttribute("sessionId").toString());
 		
 		
-		System.out.println("ordercontroller:::"+orderModel.getO_list().size());
+		orderService.insertBatchOrder(orderModel, parameterList);
+		
 		
 		
 		

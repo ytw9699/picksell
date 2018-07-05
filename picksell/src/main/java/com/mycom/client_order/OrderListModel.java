@@ -5,6 +5,15 @@ public class OrderListModel {
 	private int product_num;
 	private int order_quantity;
 	private String seller_id;
+	private int order_num;
+	
+	
+	public int getOrder_num() {
+		return order_num;
+	}
+	public void setOrder_num(int order_num) {
+		this.order_num = order_num;
+	}
 	public int getProduct_num() {
 		return product_num;
 	}
