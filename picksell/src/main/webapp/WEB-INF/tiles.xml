@@ -49,18 +49,19 @@
     <definition name="adminProducts" extends="admin">
 	<put-attribute name="body" value="/WEB-INF/views/admin_member/adminProducts.jsp"/>
 	</definition>
-	
-<!-- 	판매글 리스트  -->
-	<definition name="admin_products/list" extends="admin">
-	<put-attribute name="body" value="/WEB-INF/views/admin_order/list.jsp"/>
+		
+	<!-- 판매글 리스트  -->
+	<definition name="admin_products/list" extends="admin"> 
+		<put-attribute name="body" value="/WEB-INF/views/admin_products/list.jsp"/> 
 	</definition>
 	
-<!-- 	주문 리스트  -->
+
+	<!-- 주문리스트 -->
 	<definition name="admin_order/orderList" extends="admin">
-	<put-attribute name="body" value="/WEB-INF/views/admin_products/orderList.jsp"/>
+		<put-attribute name="body" value="/WEB-INF/views/admin_order/orderList.jsp"/>
 	</definition>
 	
-<!-- 	신고 리스트  -->
+	<!-- 신고 리스트  -->
 	<definition name="admin_singo/list" extends="admin">
 	<put-attribute name="body" value="/WEB-INF/views/admin_singo/list.jsp"/>
 	</definition>
