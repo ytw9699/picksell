@@ -26,6 +26,7 @@
 
 .sidenav a:hover {
     color: #f1f1f1;
+    text-decoration: underline;
 }
 
 
@@ -42,6 +43,7 @@
   <a href="/picksell/admin_products/list">판매관리</a>
   <a href="/picksell/admin_order/list">주문관리</a>
   <a href="/picksell/admin_singo/list">구매관리</a>
+
 </div>
 </body>
 </html>

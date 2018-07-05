@@ -60,4 +60,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			SELECT ID,PASSWORD,NAME FROM PS_MEMBER WHERE ID = #{ID}
 	</select>
 	
+	
+	
 </mapper>

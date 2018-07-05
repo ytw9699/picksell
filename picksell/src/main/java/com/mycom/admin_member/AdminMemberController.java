@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.mycom.admin_member.AdminMemberModel;
+import com.mycom.common.Paging;
 import com.mycom.config.CommandMap;
 
 
@@ -30,8 +31,17 @@ public class AdminMemberController {
 	
 	//회원검색
 	private int searchNum;
-	private String memberSearch;
+	private String isSearch;
 	private int searchCount;
+
+	//paging
+	private int currentPage = 1;
+	private int totalCount;
+	private int blockCount = 10;
+	private int blockPage = 5;
+	private String pagingHtml;
+	private Paging page;
+	
 	
 	@Resource
 	private AdminMemberService adminMemberService;
@@ -47,9 +57,30 @@ public class AdminMemberController {
 	public ModelAndView adminMemberList(HttpServletRequest request) throws Exception{
 	   
 		memberslist= adminMemberService.AdminMemberList();
-		
+		if(request.getParameter("currentPage") == null || request.getParameter("currentPage").trim().isEmpty() || request.getParameter("currentPage").equals("0")) {
+            currentPage = 1;
+        } else {
+            currentPage = Integer.parseInt(request.getParameter("currentPage"));
+        }
+	
+		isSearch = null;
+		totalCount = memberslist.size();
+		page = new Paging(currentPage, totalCount, blockCount, blockPage, "list", searchNum,isSearch);
+		pagingHtml = page.getPagingHtml().toString();
+		int lastCount = totalCount;
 		mav.addObject("memberCount",memberslist.size());
-		mav.addObject("searchCount",0);
+		mav.addObject("a",totalCount);
+		if(page.getEndCount() < totalCount)
+			lastCount = page.getEndCount() + 1;
+		memberslist = memberslist.subList(page.getStartCount(), lastCount);
+		
+		int startNumber = (currentPage-1) * blockCount + 1;
+		searchCount = 0;
+		mav.addObject("startNumber",startNumber);
+		mav.addObject("totalCount",totalCount);
+		mav.addObject("pagingHtml", pagingHtml);
+		mav.addObject("currentPage", currentPage);
+		mav.addObject("searchCount",searchCount);
 		mav.addObject("memberslist",memberslist);
 	    mav.setViewName("adminMemberList");
 		return mav;
@@ -62,24 +93,47 @@ public class AdminMemberController {
 		//name
         
 	  searchNum = Integer.parseInt(request.getParameter("searchNum"));
-	  memberSearch = request.getParameter("memberSearch");
-      if(memberSearch == " ") {
-    	  mav.setViewName("adminMemberList");
-    	  return mav;
-    	 
+	  isSearch = request.getParameter("isSearch");
+	
+	  
+	  if(request.getParameter("currentPage") == null || request.getParameter("currentPage").trim().isEmpty() || request.getParameter("currentPage").equals("0")) {
+          currentPage = 1;
+      } else {
+          currentPage = Integer.parseInt(request.getParameter("currentPage"));
       }
-
-	  if(memberSearch != null) { //검색어 있을 경우 
+	  
+	  if(isSearch != null) { //검색어 있을 경우 
     	 if(searchNum == 0) { // value 이름
-		    memberslist = adminMemberService.searchName(memberSearch);			
+		    memberslist = adminMemberService.searchName(isSearch);			
 		 }else{
-		    memberslist = adminMemberService.searchId(memberSearch);
+		    memberslist  = adminMemberService.searchId(isSearch);
     	 }
-    	  	 
+    	 mav.addObject("searchCount",memberslist.size());
+    	 totalCount = memberslist.size();
+	     page = new Paging(currentPage, totalCount, blockCount, blockPage, "search", searchNum, isSearch);
+		 pagingHtml = page.getPagingHtml().toString();
+		 int lastCount = totalCount;
+		 if(page.getEndCount() < totalCount)
+				lastCount = page.getEndCount() + 1;
+		  
+		 memberslist = memberslist.subList(page.getStartCount(), lastCount);
+	  
+	  }
+	  
+	  if(isSearch == ""){
+		  
+		  adminMemberList(request);
 	  }
 	    //공통
-	  	mav.addObject("searchCount",memberslist.size()); 
-	  	mav.addObject("memberslist",memberslist);
+	  	int startNumber = (currentPage-1) * blockCount + 1;
+		mav.addObject("startNumber",startNumber);
+	    mav.addObject("blockCount",blockCount);
+	    mav.addObject("memberslist",memberslist);
+		mav.addObject("isSearch", isSearch);
+		mav.addObject("searchNum", searchNum);
+		mav.addObject("currentPage", currentPage);
+		mav.addObject("pagingHtml", pagingHtml);
+		mav.addObject("totalCount", totalCount);
 		mav.setViewName("adminMemberList");
 		return mav;
 	}
@@ -100,28 +154,8 @@ public class AdminMemberController {
 		
 		Map<String,Object> map = new HashMap<String,Object>();
 		maplist = adminMemberService.adminOrderList(id);
-	    int statusCheck;
 	    map.put("mapSize", maplist.size());
-	  
-	    
-		for(int i=0; i< maplist.size(); i++) {
-		  
-		   statusCheck =Integer.parseInt((String)maplist.get(i).get("STATUS"));
-		   switch(statusCheck){
-		   case 0:
-			   maplist.get(i).put("STATUS", "입금대기");
-			   break;
-		   case 1:
-			   maplist.get(i).put("STATUS", "입금완료 및 배송대기중");
-			   break;
-		   case 2:
-			   maplist.get(i).put("STATUS", "배송 및 인수확인 대기");
-			   break;
-		   case 3:
-			   maplist.get(i).put("STATUS", "인수확인 및 거래완료");
-			   break;
-		   }
-		}
+
 		
 		model.addAttribute("map",map);
 		model.addAttribute("maplist",maplist);
@@ -146,9 +180,7 @@ public class AdminMemberController {
 		maplist = adminMemberService.adminPurchaseHistory(id);
 		model.addAttribute("maplist",maplist);
 		
-		
-		
-		
+
 		
 		return "adminPurchaseHistory";
 	}

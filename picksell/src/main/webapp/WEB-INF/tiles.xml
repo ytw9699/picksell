@@ -101,6 +101,11 @@
 		<put-attribute name="body" value="/WEB-INF/views/client_basket/basketList.jsp" />
 	</definition>
 	
+	<!-- [장바구니] 일괄구매 오더 -->
+	<definition name="orderReady" extends="default">
+		<put-attribute name="body" value="/WEB-INF/views/client_order/orderReady.jsp" />
+	</definition>
+	
 	<!-- 메인 -->
 	<definition name="main" extends="default">
 		<put-attribute name="body" value="/WEB-INF/views/main/main.jsp" />
@@ -124,6 +129,31 @@
 		<put-attribute name="left" value="/WEB-INF/views/layout/client/mypageleft.jsp" />
 		<put-attribute name="body" value="/WEB-INF/views/mypage/modify.jsp" />
 		<put-attribute name="footer" value="/WEB-INF/views/layout/client/footer.jsp" />
+	</definition>
+	
+	<!-- 판매내역-->
+	<definition name="sellList" extends="modify">
+		<put-attribute name="body" value="/WEB-INF/views/mypage/sellList.jsp" />
+	</definition>
+	
+	<!-- 구매내역-->
+	<definition name="purchaseList" extends="modify">
+		<put-attribute name="body" value="/WEB-INF/views/mypage/purchaseList.jsp" />
+	</definition>
+	
+	<!-- 주문조회-->
+	<definition name="orderList" extends="modify">
+		<put-attribute name="body" value="/WEB-INF/views/mypage/orderList.jsp" />
+	</definition>
+	
+	<!-- 주문조회 상세보기-->
+	<definition name="orderDetail" extends="modify">
+		<put-attribute name="body" value="/WEB-INF/views/mypage/orderDetail.jsp" />
+	</definition>
+	
+	<!-- 메인 통합검색-->
+	<definition name="mainSearchList" extends="default">
+		<put-attribute name="body" value="/WEB-INF/views/main/mainSearchList.jsp" />
 	</definition>
 	
 

@@ -74,6 +74,19 @@ li.headerCategory {
 				//$('#shareit-field').val('');
 				$(this).hide();
 		});
+	
+		$.ajax({
+			type : "POST",
+			url : "/picksell/cart/countingMyBasket",
+			dataType : 'json',
+			//data : allData,
+			success : function(data){
+				//alert(data.currentCounting);
+				document.getElementById('myBasketSum').innerHTML = data.currentCounting;
+			}
+		});		
+		
+		
 	});
 </script>
 <body>
@@ -85,7 +98,7 @@ li.headerCategory {
 	<c:if test="${sessionId == null}">
 	|<a href="/picksell/loginForm">로그인</a>
 	</c:if> 
-	|<a href="/picksell/cart">장바구니</a>
+	|<a href="/picksell/cart">장바구니</a><span class="myBasketSum" id="myBasketSum">0</span>
 		
 	
    </span>
@@ -98,8 +111,10 @@ li.headerCategory {
 		</a>
 	</div>
 	<div class="searchWrap">
-		<input type="text" placeholder="상품명으로 검색해보세요" class="searchINPUT" />
-		<input type="submit" value="돋보기모양" class="searchSUBMIT" />
+		<form action="mainSearchList" method="GET">
+			<input type="text" name="searchKeyword" placeholder="상품명으로 검색해보세요" class="searchINPUT" />
+			<input type="submit" value="돋보기모양" class="searchSUBMIT" />
+		</form>
 	</div>
 </div>
 <div class="headerBottom">
@@ -116,9 +131,9 @@ li.headerCategory {
 	<div id="menuBox-header"></div>
 	<div id="menuBox-body">
 		<span><a href="/picksell/mypage/modify">내 정보</a></span>
-		<span><a href="#">판매내역</a></span>
-		<span><a href="#">구매내역</a></span>
-		<span><a href="#">주문관리</a></span>
+		<span><a href="/picksell/mypage/sellList/0">판매내역</a></span>
+		<span><a href="/picksell/mypage/purchaseList/0">구매신청리스트</a></span>
+		<span><a href="/picksell/mypage/orderList">배송 및 주문 조회</a></span>
 		<span><a href="#">알림설정</a></span>
 	</div>
 </div>

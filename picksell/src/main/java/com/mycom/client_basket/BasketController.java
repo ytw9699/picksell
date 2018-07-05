@@ -8,17 +8,37 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.annotations.ResultMap;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class BasketController {
 
 	@Resource(name="basketService")
 	private BasketService basketService;
+	
+	@RequestMapping("/cart/countingMyBasket")
+	@ResponseBody
+	public Map<String, Object> countingMyBasketSum(HttpServletRequest request){
+		
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		
+		String sessionId = (String) request.getSession().getAttribute("sessionId");
+		
+		if(sessionId != null) {
+			int resultSum = basketService.countingMyBasket(sessionId);
+			resultMap.put("currentCounting", resultSum);
+		}else if(sessionId == null) {
+			resultMap.put("currentCounting", 0);
+		}
+		return resultMap;
+	}
 	
 	//장바구니리스트 보기
 	@RequestMapping("/cart")
@@ -71,6 +91,7 @@ public class BasketController {
 		
 		return "client_basket/basketFetchView";
 	}
+	
 	//장바구니수량줄이기
 	@RequestMapping("/cart/subQuantity/{targetNum}")
 	public String subQuantity(
@@ -86,5 +107,20 @@ public class BasketController {
 	//장바구니전체삭제하기
 	
 	//일괄구매하기
-	
+	@RequestMapping(value="/purchase/batchOrder", method=RequestMethod.POST)
+	public String basketBatchOrder(BasketModel basketModel) {
+		
+		System.out.println("총결제금액 : " + basketModel.getTotalSum());
+		
+		if(basketModel.getP_list() != null) {
+			for(int i = 0 ; i < basketModel.getP_list().size() ; i++) {
+				System.out.println(i +"번째 프로덕트넘"+ basketModel.getP_list().get(i).getProduct_num());
+				System.out.println(i +"번째 프로덕트제목"+ basketModel.getP_list().get(i).getProduct_subject());
+				System.out.println(i +"번째 프로덕트이미지"+ basketModel.getP_list().get(i).getProduct_img());
+			
+			}
+		}
+		
+		return "orderReady";
+	}
 }

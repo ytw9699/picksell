@@ -5,6 +5,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="client_basket">
 	
+	<select id="countingMyBasket" resultType="int" parameterType="string">
+		select count(*) as basketsum 
+		from ps_basket 
+		where basket_id = #{sessionId}
+	</select>
+	
 	<select id="selectIsBasket" resultType="int" parameterType="hashmap">
 		select count(*) as resultvalue 
 		from ps_basket 

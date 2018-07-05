@@ -27,4 +27,11 @@ public interface AdminMemberDAO {
 	
 	//회원 구매내역리스트
 	public List<Map<String,Object>> adminPurchaseHistory(String id);
+	
+	//회원 판매리스트
+	
+	
+	//회원 블라인드처리
+	
+	//회원 계정상태 처리
 }

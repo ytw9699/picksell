@@ -5,6 +5,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
+
 
 </head>
 <body>
@@ -15,16 +17,23 @@
 
 	function sumfunc(addvalue){
 		total += Number(addvalue);
+		
+		document.getElementById('hid_sumValue').value = total;
 		document.getElementById('sumValue').innerHTML = total;
 	}
 	function subfunc(subvalue){
 		total -= Number(subvalue);
+		
+		document.getElementById('hid_sumValue').value = total;
 		document.getElementById('sumValue').innerHTML = total;
 	}
 	function basketChecking(checkTarget, keyNumber){
 		if(checkTarget.checked){
 			//체크되있을때 디스에이블 풀러야댐
 			sumfunc(Number(document.getElementById('hid_currentPrice'+keyNumber).value));
+			document.getElementById('hid_product_num'+keyNumber).disabled = false;
+			document.getElementById('hid_product_subject'+keyNumber).disabled = false;
+			document.getElementById('hid_product_img'+keyNumber).disabled = false;
 		}else if(!checkTarget.checked){
 			//체크해제일때 디스에이블 걸어야댐
 			subfunc(Number(document.getElementById('hid_currentPrice'+keyNumber).value));
@@ -79,6 +88,8 @@
 					
 						if(document.getElementById('baketCheck'+keyNumber).checked){
 							sumfunc(priceInfo);
+							
+							document.getElementById('프로필을감싸는div').innerHTML = text;
 						}
 					}
 				})
@@ -86,6 +97,8 @@
 		}
 	}
 </script>
+	<form action="/picksell/purchase/batchOrder" method="post">
+	<!-- <input type="button" value="에이젝스 버튼" id="btn" onclick="wow()" /> -->
 	<div class="textTopWrapper">
 		<span>장바구니</span> <span>${listSize }</span>
 	</div>
@@ -95,10 +108,15 @@
 			<td>수량</td>
 			<td colspan="2">상품금액</td>
 		</tr>
+		
+		<!-- 장바구니 시작 -->
 		<c:forEach var="list" items="${resultList }" varStatus="indexStatus">
+			<input type="hidden" id="hid_product_subject${indexStatus.index }" name="p_list[${indexStatus.index }].product_subject" value="${list.SUBJECT }" disabled="disabled" />
+			<input type="hidden" id="hid_product_num${indexStatus.index }" name="p_list[${indexStatus.index }].product_num" value="${list.PRODUCT_NUM }" disabled="disabled" />
+			<input type="hidden" id="hid_product_img${indexStatus.index }" name="p_list[${indexStatus.index }].product_img" value="${list.FIRST_IMG }" disabled="disabled" />
+			<input type="hidden" id="hid_price${indexStatus.index }" name="p_list[${indexStatus.index }].product_price" value="${list.PRICE }" disabled="disabled" />
 			<input type="hidden" id="hid_stock${indexStatus.index }" value="${list.STOCK }" />
 			<input type="hidden" id="hid_quantity${indexStatus.index }" value="${list.PRODUCT_QUANTITY }" />
-			<input type="hidden" id="hid_price${indexStatus.index }" value="${list.PRICE }" />
 			<input type="hidden" id="hid_currentPrice${indexStatus.index }" value="${list.PRICE * list.PRODUCT_QUANTITY }" />
 			<tr>
 				<td><input type="checkbox" onclick="basketChecking(this, ${indexStatus.index})" id="baketCheck${indexStatus.index }" /></td>
@@ -117,14 +135,18 @@
 				</td>
 				<td><a href="#">삭제</a></td>
 			</tr>
+			
+			
 		</c:forEach>
 	</table>
 	<input type="button" value="전체삭제" />
 	<div class="summaryInfoWrap">
 		
 		<span class="sumText">총 합계</span>
+		<input type="hidden" id="hid_sumValue" name="totalSum" value="0" />
 		<span class="sumValue" id="sumValue">0</span>
-		<input type="button" value="구매하기" />
+		<input type="submit" value="구매하기" />
 	</div>
+	</form>
 </body>
 </html>
