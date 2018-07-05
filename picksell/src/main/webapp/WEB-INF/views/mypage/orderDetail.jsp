@@ -17,9 +17,11 @@
 <table>
 
 	<tr>
-		<td>주문번호</td>
+	
 		<td>사진</td>
 		<td>제목</td>
+		
+		<td>주문번호</td>
 		<td>거래상태</td>
 		<td>총결제금액</td>
 		<td>배송지</td>
@@ -30,12 +32,16 @@
 		<td>송장번호</td>
 	</tr>
 	<tr>
-		<td>${orderDetail.ORDER_NUM}</td>
 		<td>
 			<a href="/picksell/products/detail/${orderDetail.CATEGORY_NUM }/${orderDetail.PRODUCT_NUM }/1">
 			<img src="/picksell/resources/productUpload/${orderDetail.FIRST_IMG }" style="width: 200px;" />
 			</a>
 		</td>
+		<td>${orderDetail.SUBJECT}</td>
+		
+		<td>${orderDetail.ORDER_NUM}</td>
+		
+		
 		<td><a href="/picksell/products/detail/${orderDetail.CATEGORY_NUM }/${orderDetail.PRODUCT_NUM }/1">${orderDetail.SUBJECT }</a></td>
 		<c:if test="${orderDetail.STATUS == '0'}">
 		<td>입금대기중</td>
