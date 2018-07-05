@@ -99,7 +99,7 @@ li.headerCategory {
 	|<a href="/picksell/loginForm">로그인</a>
 	</c:if> 
 	|<a href="/picksell/cart">장바구니</a><span class="myBasketSum" id="myBasketSum">0</span>
-	<c:if test="${sessionKind != null}">
+	<c:if test="${sessionKind == '99'}">
 	|<a href="/picksell/admin/main">관리자</a>
 	</c:if> 
    </span>
