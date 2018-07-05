@@ -85,7 +85,7 @@ and b.buyer_id = #{sessionId} order by b.regdate desc
 <!-- PS_ORDERLIST + ps_product 조인해서 리스트 반환-->
 <select id="orderSubList" resultType="hashmap" parameterType="Integer">
 
-select b.PRICE, b.SUBJECT, b.FIRST_IMG, b.category_num, b.product_num, a.ORDER_NUM
+select b.PRICE, b.SUBJECT, b.FIRST_IMG, b.category_num, b.product_num, a.ORDER_NUM, a.ORDER_QUANTITY
 from(select * from PS_ORDERLIST)a, ps_product b, ps_order c where a.product_num = b.product_num and c.order_num = a.order_num and a.ORDER_NUM = #{ORDER_NUM}
 
 </select>

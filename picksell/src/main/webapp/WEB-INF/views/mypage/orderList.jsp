@@ -19,7 +19,6 @@
 <table>
 <c:if test="${fn:length(orderList) > 0}">
 <c:forEach var="ps_order" items="${orderList}" varStatus="orderListStatus">
-     <br>상품주문번호: ${ps_order.ORDER_NUM } </br><!-- 상품 주문번호 -->
      <c:if test="${ps_order.STATUS == '0'}">
 		<br> 거래상태:입금대기중</br>
 		</c:if>
@@ -44,6 +43,7 @@
  </br>
  <br>제목: ${joinMap.SUBJECT }</br>
  <br>상품금액: ${joinMap.PRICE }</br>
+ <br>갯수: ${joinMap.ORDER_QUANTITY}</br>
 </c:forEach> 
 </c:forEach>
 
