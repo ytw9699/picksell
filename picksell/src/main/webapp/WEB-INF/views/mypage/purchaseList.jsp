@@ -64,6 +64,11 @@
 		<td>결제취소</td>
 		</c:if>
 	</tr>
+	<c:if test="${purchase.STATUS == '1'}">
+<script>
+	document.getElementById("purchase").disabled = false;//
+</script>
+</c:if>
 	</c:forEach>
 
 </c:if>
@@ -71,10 +76,5 @@
 <p>내역이 없습니다 구매 신청을 해주세요</p>
 </c:if>
 </table>
-<c:if test="${purchase.STATUS == '1'}">
-<script>
-	document.getElementById("purchase").disabled = true;
-</script>
-</c:if>
 </body>
 </html>
