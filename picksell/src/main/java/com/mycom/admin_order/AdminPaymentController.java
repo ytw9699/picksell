@@ -156,8 +156,7 @@ public class AdminPaymentController {
 		adminPaymentModel = adminPaymentService.orderGetOne(request.getParameter("order_num"));
 		List<Map<String, Object>> ming = adminPaymentService.orderDetail2(Integer.parseInt(request.getParameter("order_num")));
 		
-		//ming을 반복문을 돌려서 
-		//adminSellService.updateStock()
+		//입금완료의 순간마다 재고 줄이기. 
 		for(int i=0 ; i<ming.size() ; i++) {
 			adminSellService.updateStock(ming.get(i));
 		}
