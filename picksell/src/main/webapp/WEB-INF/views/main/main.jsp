@@ -4,7 +4,6 @@
     <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -17,8 +16,9 @@
 </style>
 </head>
 <body>
-<p>픽셀 플러스 인기상품</p>
-<c:forEach var="hotProduct" items="${hotProductList }">
+
+<p>픽셀 플러스 인기상품      <a href="/picksell/hotPlusProduct">전체보기</a></p>
+<c:forEach var="hotProduct" items="${hotProductList}" end="3">
 	<div class="productWrap">
 	<div class="firstImgWrap">
 		<a href="/picksell/products/detail/${hotProduct.CATEGORY_NUM }/${hotProduct.PRODUCT_NUM }/1">
@@ -44,7 +44,7 @@
 	</div>
 </div>
 </c:forEach>
-<p>new 새로 등록된 플러스 상품</p>
+<p>new 새로 등록된 플러스 상품  <a href="#">전체보기</a></p>
 <c:forEach var="pulsProduct" items="${plusProductList }">
 	<div class="productWrap">
 	<div class="firstImgWrap">
@@ -60,7 +60,7 @@
 	</div>
 </div>
 </c:forEach>
-<p>new 새로 등록된 일반 상품</p>
+<p>new 새로 등록된 일반 상품  <a href="#">전체보기</a></p>
 <c:forEach var="nomalProduct" items="${nomalProductList }">
 <div class="productWrap">
 <div class="firstImgWrap">

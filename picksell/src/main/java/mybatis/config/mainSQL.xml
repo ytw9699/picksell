@@ -26,7 +26,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	         ]]>
 	      
 	</select>
-	
+	 <!-- 플러스 인기 상품 판매수 만큼 순위로 뽑음 --> 
 	 <select id="hotProduct" resultType="hashmap">
       <![CDATA[
       select r, b.total, b.product_num, c.content, c.first_img, c.subject 
@@ -36,7 +36,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
       from ps_orderlist
       group by product_num
       order by count(*) desc
-      )a order by a.total desc )b, ps_product c where b.product_num = c.product_num and r < 4
+      )a order by a.total desc )b, ps_product c where b.product_num = c.product_num and r < 31 and c.howtosell ='2'
      ]]>
    </select>
    
