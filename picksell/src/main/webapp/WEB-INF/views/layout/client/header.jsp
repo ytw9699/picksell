@@ -74,7 +74,7 @@ li.headerCategory {
 				//$('#shareit-field').val('');
 				$(this).hide();
 		});
-	
+		//var allData = "test1=1&test2=2";
 		$.ajax({
 			type : "POST",
 			url : "/picksell/cart/countingMyBasket",

@@ -30,6 +30,26 @@ public class ProductService implements ProductDao {
 	public Map<String, Object> getProductDetail(Map<String, Object> map){
 		return sqlMapper.selectOne("client_product.selectProductOne", map);
 	}
+	//판매글 해당구매리스트(조건부)
+	public List<Map<String, Object>> getProductSellerPurchaseList(int product_num){
+		return sqlMapper.selectList("client_product.selectSellerPurchaseList", product_num);
+	}
+	//판매글 수락여부(조건부)
+	public int getAlreadyPurchaseApproving(int product_num) {
+		return sqlMapper.selectOne("client_product.selectAlradyPurchaseApproving", product_num);
+	}
+	//판매글 수락하기(조건부)
+	public void letPurchaseApprove(int purchase_num) {
+		sqlMapper.update("client_product.letPurchaseApprove", purchase_num);
+	}
+	//판매글 수락취소하기(조건부)
+	public void letPurchaseApproveCancel(int purchase_num) {
+		sqlMapper.update("client_product.letPurchaseApproveCancel", purchase_num);
+	}
+	//구매요청 수락여부(구매자)
+	public int selectMyPurchase(Map<String, Object> map) {
+		return sqlMapper.selectOne("client_product.selectMyPurchase2", map);
+	}
 	//판매글 조회수증가(상세보기랑 같이)
 	public void updateProductHitcount(Map<String, Object> map) {
 		sqlMapper.update("client_product.updateProductHitcount", map);

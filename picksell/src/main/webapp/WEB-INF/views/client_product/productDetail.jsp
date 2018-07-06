@@ -27,11 +27,21 @@
     left: 0;
     height: 100px;
 }
+.hiddenPurchaseListForm{
+	display: none;
+	width: 300px;
+    background-color: white;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100px;
+}
 
 </style>
 
 </head>
 <body>
+
 <script>
 	
 	//구매요청
@@ -73,11 +83,39 @@
 			})
 		})
 	}
+	function purchaseApprove(purchaseNumber,buyer){
+		var params = "pn=${product_num}&purnum="+purchaseNumber+"&buyer="+buyer;
+		$.ajax({
+			type : "POST",
+			url : "/picksell/products/purchaseApproveProc",
+			dataType : 'json',
+			data : params,
+			success : function(data){
+				alert(data.resultMsg);
+				document.location.href='/picksell/products/detail/${category_num}/${product_num}';
+			}
+		});
+	}
+	function purchaseApproveCancel(purchaseNumber,buyer){
+		var params = "pn=${product_num}&purnum="+purchaseNumber+"&buyer="+buyer;
+		$.ajax({
+			type : "POST",
+			url : "/picksell/products/purchaseApproveCancelProc",
+			dataType : 'json',
+			data : params,
+			success : function(data){
+				alert(data.resultMsg);
+				document.location.href='/picksell/products/detail/${category_num}/${product_num}';
+			}
+		});
+	}
 	
 	
 	
 </script>
+<!-- 모달div background -->
 <div class="hiddenBackGround" onclick="closeCommentForm()"></div>
+<!-- 문의댓글 모달div -->
 <div class="hiddenCommentForm">
 	<div class="formTop">
 		<span class="cancel"><a href="#" onclick="closeCommentForm()">X</a></span>
@@ -93,7 +131,48 @@
 			<input type="submit" value="작성" />
 		</form>
 	</div>
-</div>
+</div><!-- hiddenCommentForm end -->
+
+<!-- 문의리스트 모달div where isMyProducts = true 일때 -->
+<div class="hiddenPurchaseListForm">
+	<div class="purchaseList">
+		<c:if test="${isMyProducts == 'yes' }">
+			<table>
+				<tr>
+					<td>구매요청 아이디</td>
+					<td>신청날짜</td>
+					<td colspan="2">신청상태</td>
+				</tr>
+			<c:forEach var="sellerPurList" items="${sellerPurList }">
+				<tr>
+					<td>${sellerPurList.BUYER_ID }</td>
+					<td>${sellerPurList.REGDATE }</td>
+					
+					<c:choose>
+						<c:when test="${sellerPurList.STATUS == 0 }">
+						<td>요청대기중</td>
+						</c:when>
+						<c:when test="${sellerPurList.STATUS == 1 }">
+						<td>수락상태</td>
+						</c:when>
+					</c:choose>
+					
+					<c:choose>
+						<c:when test="${sellerPurList.STATUS == 0 }">
+							<td><input type="button" value="수락" onclick="purchaseApprove('${sellerPurList.PURCHASE_NUM}','${sellerPurList.BUYER_ID }');" /></td>
+						</c:when>
+						<c:when test="${sellerPurList.STATUS == 1 }">
+							<td><input type="button" value="수락취소" onclick="purchaseApproveCancel('${sellerPurList.PURCHASE_NUM}','${sellerPurList.BUYER_ID }');" /></td>
+						</c:when>
+					</c:choose>
+				</tr>
+			</c:forEach>
+			</table>
+		</c:if>
+	</div>
+</div><!-- hiddenPurchaseListForm end -->
+
+	<!-- 컨텐츠 시작 -->
 	<div class="contentWrap">
 	<form action="/picksell/purchase/order/single" method="post">
 	
@@ -115,7 +194,6 @@
 			<span>가격: </span>
 			<span id="currentPriceText"><fmt:formatNumber value="${resultObject.PRICE }" pattern="#,###.##" /></span>
 			<p>
-			<c:if test="${resultObject.HOWTOSELL == 2 }">
 			<input type="hidden" name="totalSum" id="currentPrice" value="${resultObject.PRICE }" />
 			<input type="hidden" name="p_list[0].orderSum" id="currentOrderSum" value="1" />
 			<input type="hidden" name="p_list[0].product_price" value="${resultObject.PRICE }" />
@@ -123,6 +201,7 @@
 			<input type="hidden" name="p_list[0].product_img" value="${resultObject.FIRST_IMG }" />
 			<input type="hidden" name="p_list[0].product_subject" value="${resultObject.SUBJECT }" />
 			<input type="hidden" name="p_list[0].product_num" value="${resultObject.PRODUCT_NUM }" />
+			<c:if test="${resultObject.HOWTOSELL == 2 }">
  			<span>수량 </span><input type="button" value="-" id="subBtn" onclick="subOrder()" disabled="disabled"/><span id="currentOrderView">1</span><input type="button" value="+" id="addBtn" onclick="addOrder();" />
 			</c:if>
 		</div>
@@ -142,14 +221,22 @@
 				</c:choose>
 			</div>
 			<!-- 구매신청하기버튼 -->
+			
 			<div class="purchaseWrap" id="purchaseWrap">
 				<c:choose>
-					<c:when test="${resultObject.DEAL_STATUS == 0 and resultObject.HOWTOSELL != 2 and alreadyPurchase == false }">
+					<c:when test="${resultObject.DEAL_STATUS == 0 and resultObject.HOWTOSELL != 2 and alreadyPurchase == false and isMyProducts == 'no' }">
 						<input type="button" value="구매신청하기" onclick="purchaseApply();" />
+					</c:when>
+					<c:when test="${isApprovedPC == 'yes' and alreadyPurchase == true }">
+						<input type="submit" value="구매하기" />
 					</c:when>
 					<c:when test="${alreadyPurchase == true }">
 						<input type="button" value="구매신청 취소하기" onclick="purchaseCancel();" />
 					</c:when>
+					<c:when test="${isMyProducts == 'yes' }">
+						<input type="button" value="구매신청 확인하기" onclick="openPurchaseList();" />
+					</c:when>
+					
 				</c:choose>
 			</div>
 			
@@ -196,12 +283,17 @@
 		$(".hiddenBackGround").show();
 		$(".hiddenCommentForm").show();
 	}
-	
 	function closeCommentForm(){
 		$(".hiddenBackGround").hide();
 		$(".hiddenCommentForm").hide();
+		
+		$(".hiddenPurchaseListForm").hide();
 	}
-	
+	function openPurchaseList(){
+		$(".hiddenPurchaseListForm").show();
+		$(".hiddenBackGround").show();
+	}
+
 	var product_stock = Number('${resultObject.STOCK}');
 	var product_price = Number('${resultObject.PRICE}');
 	var current_price = Number(document.getElementById('currentPrice').value);

@@ -90,6 +90,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		order by regdate desc
 	</select>
 	
+	<select id="selectSellerPurchaseList" resultType="hashmap" parameterType="int">
+		select * from ps_purchase_list 
+		where product_num = #{product_num} 
+		order by regdate desc
+	</select>
+	
+	<select id="selectAlradyPurchaseApproving" resultType="int" parameterType="int">
+		select count(*) from ps_purchase_list 
+		where product_num = #{product_num} and status = 1
+	</select>
+	
+	<select id="selectMyPurchase2" resultType="int" parameterType="hashmap">
+		select status from ps_purchase_list 
+		where buyer_id = #{buyer_id} and product_num = #{product_num}
+	</select>
+	
 	<insert id="insertProduct" parameterType="hashmap">
 		insert into ps_product(product_num,
 								category_num,
@@ -152,8 +168,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		update ps_product set hitcount = hitcount + 1 where product_num = #{product_num}
 	</update>
 	
+	<update id="letPurchaseApprove" parameterType="int">
+		update ps_purchase_list set status = 1 
+		where purchase_num = #{purchase_num}
+	</update>
+	
+	<update id="letPurchaseApproveCancel" parameterType="int">
+		update ps_purchase_list set status = 0 
+		where purchase_num = #{purchase_num}
+	</update>
+	
 	<delete id="deletePurchaseList" parameterType="hashmap">
 		delete from ps_purchase_list 
 		where product_num = #{product_num} and buyer_id = #{buyer_id}
 	</delete>
+	
 </mapper>
