@@ -17,7 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.mycom.admin_order.AdminPaymentModel;
 import com.mycom.admin_order.AdminPaymentListModel;
 import com.mycom.admin_order.AdminPaymentService;
-
+import com.mycom.admin_products.AdminSellService;
 import com.mycom.common.Paging;
 
 @Controller
@@ -26,6 +26,9 @@ public class AdminPaymentController {
 	
 	@Resource
 	private AdminPaymentService adminPaymentService;
+	
+	@Resource
+	private AdminSellService adminSellService;
 	
 	ModelAndView mav = new ModelAndView();
 	private int searchNum;
@@ -118,15 +121,27 @@ public class AdminPaymentController {
 	@RequestMapping("/orderDetail/{order_num}")
 	public ModelAndView orderDetail(@PathVariable("order_num") int order_num) {
 		
-		Map<String, Object> mp = new HashMap<String, Object>();
-		mp = adminPaymentService.orderDetail(order_num);
-		System.out.println(mp.keySet());
+//		Map<String, Object> mp = new HashMap<String, Object>();
+		
+		List<Map<String, Object>> mp = adminPaymentService.orderDetail2(order_num);
+		System.out.println(mp);
 		mav.addObject("orderDetail",mp);
-//		mav.addObject("order_num", order_num);
 		mav.setViewName("admin_order/orderDetail");
 		return mav;
 		
 	}
+	
+//	@RequestMapping("/orderDetail/{order_num}")
+//	public ModelAndView orderDetail(@PathVariable("order_num") int order_num) {
+//		
+//		Map<String, Object> mp = new HashMap<String, Object>();
+//		mp = adminPaymentService.orderDetail(order_num);
+//		System.out.println(mp.keySet());
+//		mav.addObject("orderDetail",mp);
+//		mav.setViewName("admin_order/orderDetail");
+//		return mav;
+//		
+//	}
 	
 	@RequestMapping("/search")
 	public ModelAndView orderSearch() {
@@ -138,8 +153,8 @@ public class AdminPaymentController {
 	@RequestMapping("/confirmProc") //입금완료 및 배송대기 
 	public ModelAndView orderConfirm(HttpServletRequest request) {
 		
-		
 		adminPaymentModel = adminPaymentService.orderGetOne(request.getParameter("order_num"));
+//		List<Map<String, Object>> ming = adminPaymentService.orderDetail2(request.getParameter("order_num"));
 		adminPaymentService.updateStatus1(adminPaymentModel);
 		mav.setViewName("redirect:/admin_order/list");
 		

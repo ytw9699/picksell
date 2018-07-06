@@ -30,5 +30,6 @@ public interface AdminPaymentDAO {
 	public List<AdminPaymentListModel> orderList2();
 	
 	public Map<String,Object> orderDetail = new HashMap<String,Object>();
+	public Map<String,Object> orderDetail2 = new HashMap<String,Object>();
 	
 }

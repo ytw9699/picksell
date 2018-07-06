@@ -23,6 +23,15 @@ public class AdminPaymentService implements AdminPaymentDAO {
 	public Map<String,Object> orderDetail(int order_num){
 		return sqlSessionTemplate.selectOne("adminOrder.orderDetail",order_num);
 	}
+	
+	// 오더 상세보기 
+		public List<Map<String,Object>> orderDetail2(int order_num){
+			return sqlSessionTemplate.selectList("adminOrder.orderDetail2",order_num);
+		}
+		
+		public List<Map<String,Object>> ming(int order_num){
+			return sqlSessionTemplate.selectList("adminOrder.orderDetail2",order_num);
+		}
 	// 오더 상세보기 
 	@Override
 	public AdminPaymentModel orderView(int order_num) {

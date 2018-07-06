@@ -13,7 +13,15 @@
 </style>
 </head>
 <body>
+
+
+
 <div class="main">
+
+<c:forEach var="orderDetail" items="${orderDetail}" varStatus="status">
+
+ <c:if test="${status.first}">
+
 <p>주문번호 : ${orderDetail.ORDER_NUM}</p>
 
 
@@ -81,6 +89,19 @@
 
 <p>구매자 이메일 : ${orderDetail.BUYER_EMAIL}</p>
 
+ </c:if>
+
+<p>상품번호 : ${orderDetail.PRODUCT_NUM}</p>
+
+<p>주문개수 : ${orderDetail.ORDER_QUANTITY}</p>
+
+<c:if test="${status.first}">
+
+<p>판매자 ID : ${orderDetail.SELLER_ID}</p>
+	
+</c:if>
+
+</c:forEach>
 </div>
 </body>
 </html>
