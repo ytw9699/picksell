@@ -113,10 +113,10 @@ public class AdminPaymentController {
 		
 	}
 	
-	@RequestMapping("/adminMain")
-	public ModelAndView adminMain() {
+	@RequestMapping("/orderDetail")
+	public ModelAndView orderDetail() {
 		
-		mav.setViewName("admin_order/adminMain");
+		mav.setViewName("admin_order/orderDetail");
 		return mav;
 		
 	}
