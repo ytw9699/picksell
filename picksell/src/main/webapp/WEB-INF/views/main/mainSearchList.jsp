@@ -19,7 +19,7 @@
 <c:forEach var="mainSearch" items="${mainSearchList }">
 	<div class="productWrap">
 	<div class="firstImgWrap">
-		<a href="/picksell/products/detail/${mainSearch.CATEGORY_NUM }/${mainSearch.PRODUCT_NUM }/1">
+		<a href="/picksell/products/detail/${mainSearch.CATEGORY_NUM }/${mainSearch.PRODUCT_NUM }">
 		<img src="/picksell/resources/productUpload/${mainSearch.FIRST_IMG }" style="width: 200px;" />
 		</a>
 	</div>
