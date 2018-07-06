@@ -49,6 +49,14 @@ public class mainController {
 		return "main";
 		
 	}
+	@RequestMapping("/newPlusProduct")
+	public String newPlusProduct(Model model) {	
+		
+		List<Map<String, Object>> plusProductList = mainService.pulsProduct();		
+		model.addAttribute("plusProductList", plusProductList);
+		return "newPlusProduct";
+		
+	}
 	@RequestMapping("/hotPlusProduct")
 	public String hotPlusProduct(Model model) {	
 		

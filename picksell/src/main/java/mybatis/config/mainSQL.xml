@@ -10,6 +10,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<!-- select * from ps_product where howtosell = 0 or howtosell = 1  -->
 	</select>
 	
+	<!-- 새로등록된 플러스 상품 -->
 	<select id="pulsProduct"  resultType="hashmap">
 			select * from ps_product where howtosell = '2' order by product_regdate desc
 	</select>
@@ -36,7 +37,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
       from ps_orderlist
       group by product_num
       order by count(*) desc
-      )a order by a.total desc )b, ps_product c where b.product_num = c.product_num and r < 31 and c.howtosell ='2'
+      )a order by a.total desc )b, ps_product c where b.product_num = c.product_num and c.howtosell ='2'
      ]]>
    </select>
    
