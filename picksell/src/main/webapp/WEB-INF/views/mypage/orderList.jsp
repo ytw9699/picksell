@@ -6,7 +6,6 @@
     <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
     <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
     <!-- 수정 -->
-<!DOCTYPE html PUBLIC "-//W3C//Dbr HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dbr">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -23,28 +22,27 @@
 	주문 내역 상세보기
 	</a>
      <c:if test="${ps_order.STATUS == '0'}">
-		<br> 거래상태:입금대기중</br>
+		<br> 거래상태:입금대기중
 		</c:if>
 		<c:if test="${ps_order.STATUS == '1'}">
-		<br>거래상태:입금 완료 및 배송 대기중</br>
+		<br>거래상태:입금 완료 및 배송 대기중
 		</c:if>
 		<c:if test="${ps_order.STATUS == '2'}">
-		<br>거래상태:배송 및 인수확인 대기</br>
+		<br>거래상태:배송 및 인수확인 대기
 		</c:if>
 		<c:if test="${ps_order.STATUS == '3'}">
-		<br>거래상태:인수확인 및 거래완료</br>
+		<br>거래상태:인수확인 및 거래완료
 		</c:if>
 		<c:if test="${ps_order.STATUS == '44'}">
-		<br>거래상태:결제취소</br>
+		<br>거래상태:결제취소
 		</c:if>
-     <br>주문일: ${ps_order.STEP1_DATE} </br><!-- 주문일(입금대기날짜) -->
+     <br>주문일: ${ps_order.STEP1_DATE}<!-- 주문일(입금대기날짜) -->
 <c:forEach var="joinMap" items="${orderSubList[orderListStatus.index]}">
  <br>사진: ${joinMap.ORDER_NUM }
 		<img src="/picksell/resources/productUpload/${joinMap.FIRST_IMG }" style="width: 200px;" />
- </br>
- <br>제목: ${joinMap.SUBJECT }</br>
- <br>상품금액: ${joinMap.PRICE }</br>
- <br>갯수: ${joinMap.ORDER_QUANTITY}</br>
+ <br>제목: ${joinMap.SUBJECT }
+ <br>상품금액: ${joinMap.PRICE }
+ <br>갯수: ${joinMap.ORDER_QUANTITY}
 </c:forEach> 
 "하나의 주문 끝==========================================================="<BR/>
 </c:forEach>

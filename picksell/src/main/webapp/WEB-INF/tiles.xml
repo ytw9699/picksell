@@ -116,6 +116,7 @@
 		<put-attribute name="body" value="/WEB-INF/views/main/main.jsp" />
 	</definition>
 	
+	
 	<!-- 회원가입 -->
 	<definition name="joinForm" extends="default">
 		<put-attribute name="header" value="/WEB-INF/views/layout/client/joinHeader.jsp" />
@@ -161,7 +162,11 @@
 		<put-attribute name="body" value="/WEB-INF/views/main/mainSearchList.jsp" />
 	</definition>
 	
-
+	<!-- hotPlusProduct 핫 플러스 상품 -->
+	<definition name="hotPlusProduct" extends="default">
+		<put-attribute name="body" value="/WEB-INF/views/main/hotPlusProduct.jsp" />
+	</definition>
+	
 </tiles-definitions>
 	
 	

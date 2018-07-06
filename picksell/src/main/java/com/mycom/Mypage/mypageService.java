@@ -48,5 +48,8 @@ public class mypageService implements mypageDao {
 		return sqlMapper.selectOne("mypage.orderDetail", PRODUCT_NUM);
 	}
 
+	public List<Map<String, Object>> orderSubDetail(int PRODUCT_NUM) {
+		return sqlMapper.selectList("mypage.orderSubDetail", PRODUCT_NUM);
+	}
 	
 }

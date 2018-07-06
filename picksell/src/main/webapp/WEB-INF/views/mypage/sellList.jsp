@@ -6,7 +6,6 @@
     <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
      <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
      <!-- 수정 -->
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -30,11 +29,11 @@
 	<c:forEach var="list" items="${sellList}">
 	<tr>
 		<td>
-			<a href="/picksell/products/detail/${list.CATEGORY_NUM }/${list.PRODUCT_NUM }/1">
+			<a href="/picksell/products/detail/${list.CATEGORY_NUM }/${list.PRODUCT_NUM }">
 			<img src="/picksell/resources/productUpload/${list.FIRST_IMG }" style="width: 200px;" />
 			</a>
 		</td>
-		<td><a href="/picksell/products/detail/${list.CATEGORY_NUM }/${list.PRODUCT_NUM }/1">${list.SUBJECT }</a></td>
+		<td><a href="/picksell/products/detail/${list.CATEGORY_NUM }/${list.PRODUCT_NUM }">${list.SUBJECT }</a></td>
 		<td><fmt:formatNumber value="${list.PRICE }" pattern="#,###.##" /> 원</td>
 		<td>${list.PRODUCT_REGDATE }</td>
 	</tr>
