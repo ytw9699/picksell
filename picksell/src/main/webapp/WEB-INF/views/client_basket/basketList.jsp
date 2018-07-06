@@ -20,12 +20,17 @@
 		
 		document.getElementById('hid_sumValue').value = total;
 		document.getElementById('sumValue').innerHTML = total;
+		
+		document.getElementById('order_submit').disabled = false;
 	}
 	function subfunc(subvalue){
 		total -= Number(subvalue);
 		
 		document.getElementById('hid_sumValue').value = total;
 		document.getElementById('sumValue').innerHTML = total;
+		
+		if(total == 0)
+			document.getElementById('order_submit').disabled = true;
 	}
 	function basketChecking(checkTarget, keyNumber){
 		if(checkTarget.checked){
@@ -41,6 +46,15 @@
 		}else if(!checkTarget.checked){
 			//체크해제일때 디스에이블 걸어야댐
 			subfunc(Number(document.getElementById('hid_currentPrice'+keyNumber).value));
+			document.getElementById('hid_product_num'+keyNumber).disabled = true;
+			document.getElementById('hid_product_subject'+keyNumber).disabled = true;
+			document.getElementById('hid_product_img'+keyNumber).disabled = true;
+			document.getElementById('hid_price'+keyNumber).disabled = true;
+			document.getElementById('hid_currentPrice'+keyNumber).disabled = true;
+			document.getElementById('hid_quantity'+keyNumber).disabled = true;
+			document.getElementById('hid_seller'+keyNumber).disabled = true;
+		
+			
 		}
 	}
 	
@@ -159,7 +173,7 @@
 		<span class="sumText">총 합계</span>
 		<input type="hidden" id="hid_sumValue" name="totalSum" value="0" />
 		<span class="sumValue" id="sumValue">0</span>
-		<input type="submit" value="구매하기" />
+		<input type="submit" value="구매하기" id="order_submit" disabled="disabled" />
 	</div>
 	</form>
 </body>

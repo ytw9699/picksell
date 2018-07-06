@@ -52,13 +52,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 												#{seller_id})
 	</insert>
 	
-	<!-- ORDERLIST_NUM
-ORDER_NUM
-PRODUCT_NUM
-ORDER_QUANTITY
-SELLER_ID
 	
-	OL_SEQ -->
 	
 	
 </mapper>

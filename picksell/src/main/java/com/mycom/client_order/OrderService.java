@@ -13,7 +13,7 @@ public class OrderService implements OrderDao {
 	@Resource(name="sqlSessionTemplate")
 	private SqlSessionTemplate sqlMapper;
 	
-	//주문하기(일괄주문)
+	//주문하기(일괄주문 단일주문 통일)
 	public void insertBatchOrder(OrderModel orderModel, List<OrderListModel> orderList) {
 		sqlMapper.insert("client_order.insertOrderBatch", orderModel);
 		System.out.println("인서트후 "+orderModel.getOrder_num());

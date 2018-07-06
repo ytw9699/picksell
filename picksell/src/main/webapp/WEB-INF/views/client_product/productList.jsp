@@ -16,6 +16,7 @@
 
 	<div class="categoryWrap">
 		<div class="categoryTitle">
+			
 		</div>
 		<div class="categoryList">
 			<span><a href="/picksell/products/goods">모든상품</a></span>
@@ -40,7 +41,8 @@
 	
 		<c:choose>
 			<c:when test="${!empty resultProductList }" >
-			<c:forEach var="product" items="${resultProductList }">
+			<c:forEach var="product" items="${resultProductList }" varStatus="status">
+				
 				<div class="productWrap">
 					<div class="writerWrap">
 						<span class="productSeller">${product.SELLER_ID }</span>

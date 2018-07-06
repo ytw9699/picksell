@@ -8,15 +8,48 @@
 
 <style>
 ul{list-style: none;}
+a:link { color: black; text-decoration: none;} 
+a:visited { color: black; text-decoration: none;}
+a:hover { color: black; text-decoration: none;}
+
+.headerTop_menu, .headerTop_menu a {
+    color: #666;
+    font-size: 13px;
+}
 #mypage_menuBox{position:absolute; display:none;}
-#menuBox-header{width:138px;}
-#menuBox-body {width:200px; height:100px;border:1px solid black;background-color: white;}
+#menuBox-header {
+    height: 32px;
+}
+
+#menuBox-body {
+    width: 95px;
+    border: 1px solid #c2c2c2;
+    background-color: white;
+    padding: 13px;
+    margin-left: 12px;
+}
+.menuBox-link {
+    display: block;
+    margin-bottom: 3px;
+    color: #666;
+    font-size: 13px;
+}
+span.menuBox-link a {
+    color: #666;
+}
+a.menu_el {
+    margin: 0px 8px;
+}
+a.menu_el:hover {
+	text-decoration: underline;
+}
 
 .headerTop {height: 60px;}
 span.headerTop_menu {
     float: right;
     /* margin: 30px; */
     margin-right: 15%;
+    margin-top: 8px;
 }
 .headerCenter {width: 80%;margin: 0 auto;}
 .searchWrap {
@@ -56,6 +89,16 @@ li.headerCategory {
     width: 130px;
     text-align: center;
 }
+span#myBasketSum {
+    background-color: #7151fc;
+    color: white;
+    border-radius: 30px;
+    width: 23px;
+    height: 23px;
+    line-height: 21px;
+    display: inline-block;
+    text-align: center;
+}
 
 </style>
 </head>
@@ -74,7 +117,7 @@ li.headerCategory {
 				//$('#shareit-field').val('');
 				$(this).hide();
 		});
-	
+		//var allData = "test1=1&test2=2";
 		$.ajax({
 			type : "POST",
 			url : "/picksell/cart/countingMyBasket",
@@ -93,14 +136,15 @@ li.headerCategory {
 <div class="headerTop">
   <span class="headerTop_menu">
 	<c:if test="${sessionId != null}">
-	<a href="#" id="linkOfMypage">마이페이지▼</a>|<a href="/picksell/logout">로그아웃</a>
+	<a href="#" id="linkOfMypage" class="menu_el">마이페이지 ▼</a>|<a href="/picksell/logout" class="menu_el">로그아웃</a>
 	</c:if>
 	<c:if test="${sessionId == null}">
-	|<a href="/picksell/loginForm">로그인</a>
+	|<a href="/picksell/loginForm" class="menu_el">로그인</a>
 	</c:if> 
-	|<a href="/picksell/cart">장바구니</a><span class="myBasketSum" id="myBasketSum">0</span>
+	|<a href="/picksell/cart" class="menu_el">장바구니</a>
+	<span class="myBasketSum" id="myBasketSum">0</span>
 	<c:if test="${sessionKind == '99'}">
-	|<a href="/picksell/admin/main">관리자</a>
+	|<a href="/picksell/admin/main" class="menu_el">관리자</a>
 	</c:if> 
    </span>
 
@@ -131,11 +175,11 @@ li.headerCategory {
 <div id="mypage_menuBox">
 	<div id="menuBox-header"></div>
 	<div id="menuBox-body">
-		<span><a href="/picksell/mypage/modify">내 정보</a></span>
-		<span><a href="/picksell/mypage/sellList/0">판매내역</a></span>
-		<span><a href="/picksell/mypage/purchaseList/0">구매신청리스트</a></span>
-		<span><a href="/picksell/mypage/orderList">배송 및 주문 조회</a></span>
-		<span><a href="#">알림설정</a></span>
+		<span class="menuBox-link"><a href="/picksell/mypage/modify">내 정보</a></span>
+		<span class="menuBox-link"><a href="/picksell/mypage/sellList/0">판매내역</a></span>
+		<span class="menuBox-link"><a href="/picksell/mypage/purchaseList/0">구매신청리스트</a></span>
+		<span class="menuBox-link"><a href="/picksell/mypage/orderList">배송 및 주문 조회</a></span>
+		<span class="menuBox-link"><a href="#">알림설정</a></span>
 	</div>
 </div>
 
