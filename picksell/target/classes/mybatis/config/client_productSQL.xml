@@ -106,6 +106,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where buyer_id = #{buyer_id} and product_num = #{product_num}
 	</select>
 	
+	<select id="getCategoryList" resultType="hashmap">
+		select * from ps_category
+	</select>
+	
 	<insert id="insertProduct" parameterType="hashmap">
 		insert into ps_product(product_num,
 								category_num,
