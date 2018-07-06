@@ -31,11 +31,11 @@
 	<c:forEach var="purchase" items="${purchaseList}">
 	<tr>
 		<td>
-			<a href="/picksell/products/detail/${purchase.CATEGORY_NUM }/${purchase.PRODUCT_NUM }/1">
+			<a href="/picksell/products/detail/${purchase.CATEGORY_NUM }/${purchase.PRODUCT_NUM }">
 			<img src="/picksell/resources/productUpload/${purchase.FIRST_IMG }" style="width: 200px;" />
 			</a>
 		</td>
-		<td><a href="/picksell/products/detail/${purchase.CATEGORY_NUM }/${purchase.PRODUCT_NUM }/1">${purchase.SUBJECT }</a></td>
+		<td><a href="/picksell/products/detail/${purchase.CATEGORY_NUM }/${purchase.PRODUCT_NUM }">${purchase.SUBJECT }</a></td>
 		<td><fmt:formatNumber value="${purchase.PRICE }" pattern="#,###.##" /> 원</td>
 		<td>${purchase.REGDATE }</td>
 		<c:if test="${purchase.STATUS == '0'}">
@@ -44,9 +44,9 @@
 		<c:if test="${purchase.STATUS == '1'}">
 		<td>구매 요청 수락 완료</td>
 		</c:if>
-		<td><input type="button" value="구매" id ="purchase" disabled="disabled" /></td>
+		<td><input type="button" value="구매" id ="purchase" disabled="disabled" onclick="location.href = '/picksell/products/detail/${purchase.CATEGORY_NUM }/${purchase.PRODUCT_NUM }'"/></td>
 		<c:if test="${purchase.STATUS == '0'}">
-		<td>입금 요청 전</td>
+	 	<td>입금 요청 전</td>
 		</c:if>
 		<c:if test="${purchase.PS_ORDER_STATUS == '0' && purchase.STATUS == '1'}">
 		<td>입금대기중</td>
@@ -64,6 +64,11 @@
 		<td>결제취소</td>
 		</c:if>
 	</tr>
+	<c:if test="${purchase.STATUS == '1'}">
+<script>
+	document.getElementById("purchase").disabled = false;//
+</script>
+</c:if>
 	</c:forEach>
 
 </c:if>
@@ -71,10 +76,5 @@
 <p>내역이 없습니다 구매 신청을 해주세요</p>
 </c:if>
 </table>
-<c:if test="${purchase.STATUS == '1'}">
-<script>
-	document.getElementById("purchase").disabled = true;
-</script>
-</c:if>
 </body>
 </html>
