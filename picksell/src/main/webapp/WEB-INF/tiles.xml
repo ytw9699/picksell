@@ -61,6 +61,11 @@
 		<put-attribute name="body" value="/WEB-INF/views/admin_order/orderList.jsp"/>
 	</definition>
 	
+	<!-- 주문리스트 detail-->
+	<definition name="admin_order/orderDetail" extends="admin">
+		<put-attribute name="body" value="/WEB-INF/views/admin_order/orderDetail.jsp"/>
+	</definition>
+	
 	<!-- 신고 리스트  -->
 	<definition name="admin_singo/list" extends="admin">
 	<put-attribute name="body" value="/WEB-INF/views/admin_singo/list.jsp"/>

@@ -1,6 +1,7 @@
 package com.mycom.admin_order;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 ///this is a test.
@@ -9,13 +10,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.mycom.admin_order.AdminPaymentModel;
 import com.mycom.admin_order.AdminPaymentListModel;
 import com.mycom.admin_order.AdminPaymentService;
-
+import com.mycom.admin_products.AdminSellService;
 import com.mycom.common.Paging;
 
 @Controller
@@ -24,6 +26,9 @@ public class AdminPaymentController {
 	
 	@Resource
 	private AdminPaymentService adminPaymentService;
+	
+	@Resource
+	private AdminSellService adminSellService;
 	
 	ModelAndView mav = new ModelAndView();
 	private int searchNum;
@@ -113,13 +118,30 @@ public class AdminPaymentController {
 		
 	}
 	
-	@RequestMapping("/adminMain")
-	public ModelAndView adminMain() {
+	@RequestMapping("/orderDetail/{order_num}")
+	public ModelAndView orderDetail(@PathVariable("order_num") int order_num) {
 		
-		mav.setViewName("admin_order/adminMain");
+//		Map<String, Object> mp = new HashMap<String, Object>();
+		
+		List<Map<String, Object>> mp = adminPaymentService.orderDetail2(order_num);
+		System.out.println(mp);
+		mav.addObject("orderDetail",mp);
+		mav.setViewName("admin_order/orderDetail");
 		return mav;
 		
 	}
+	
+//	@RequestMapping("/orderDetail/{order_num}")
+//	public ModelAndView orderDetail(@PathVariable("order_num") int order_num) {
+//		
+//		Map<String, Object> mp = new HashMap<String, Object>();
+//		mp = adminPaymentService.orderDetail(order_num);
+//		System.out.println(mp.keySet());
+//		mav.addObject("orderDetail",mp);
+//		mav.setViewName("admin_order/orderDetail");
+//		return mav;
+//		
+//	}
 	
 	@RequestMapping("/search")
 	public ModelAndView orderSearch() {
@@ -131,8 +153,17 @@ public class AdminPaymentController {
 	@RequestMapping("/confirmProc") //입금완료 및 배송대기 
 	public ModelAndView orderConfirm(HttpServletRequest request) {
 		
-		
 		adminPaymentModel = adminPaymentService.orderGetOne(request.getParameter("order_num"));
+		List<Map<String, Object>> ming = adminPaymentService.orderDetail2(Integer.parseInt(request.getParameter("order_num")));
+		
+		//입금완료의 순간마다 재고 줄이기. 
+		for(int i=0 ; i<ming.size() ; i++) {
+			adminSellService.updateStock(ming.get(i));
+		}
+		
+		
+		
+		
 		adminPaymentService.updateStatus1(adminPaymentModel);
 		mav.setViewName("redirect:/admin_order/list");
 		
