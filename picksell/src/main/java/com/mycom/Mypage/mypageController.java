@@ -115,9 +115,15 @@ public class mypageController {
 }
 	@RequestMapping(value="/mypage/orderDetail/{PRODUCT_NUM}", method=RequestMethod.GET)
 	public String orderDetail(Model model, @PathVariable("PRODUCT_NUM") int PRODUCT_NUM) {	
-		 System.out.println(PRODUCT_NUM);
+		 //System.out.println(PRODUCT_NUM);
 			Map<String, Object> orderDetail = mypageService.orderDetail(PRODUCT_NUM);
 			model.addAttribute("orderDetail", orderDetail);
+			
+			List<Map<String, Object>> orderSubDetail = mypageService.orderSubDetail(PRODUCT_NUM);
+			model.addAttribute("orderSubDetail", orderSubDetail);
+			
+			
+			
 		return "orderDetail";
 	}
 }
