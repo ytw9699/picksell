@@ -60,8 +60,8 @@
 	</div>
 </div>
 </c:forEach>
-<p>new 새로 등록된 일반 상품  <a href="#">전체보기</a></p>
-<c:forEach var="nomalProduct" items="${nomalProductList }">
+<p>new 새로 등록된 일반 상품  <a href="/picksell/newNomalProduct">전체보기</a></p>
+<c:forEach var="nomalProduct" items="${nomalProductList }" end="3">
 <div class="productWrap">
 <div class="firstImgWrap">
 	<a href="/picksell/products/detail/${nomalProduct.CATEGORY_NUM }/${nomalProduct.PRODUCT_NUM }/1">
