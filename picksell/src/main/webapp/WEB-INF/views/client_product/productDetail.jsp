@@ -95,7 +95,7 @@
 	</div>
 </div>
 	<div class="contentWrap">
-	<form method="post">
+	<form action="/picksell/purchase/order/single" method="post">
 	
 	<c:if test="${resultObject.HOWTOSELL != 2 }">
 		<a href="/picksell/products/goods">전체목록</a> > 
@@ -116,9 +116,14 @@
 			<span id="currentPriceText"><fmt:formatNumber value="${resultObject.PRICE }" pattern="#,###.##" /></span>
 			<p>
 			<c:if test="${resultObject.HOWTOSELL == 2 }">
-			<input type="hidden" id="currentPrice" value="${resultObject.PRICE }" />
-			<input type="hidden" id="currentOrderSum" value="1" />
-			<span>수량 </span><input type="button" value="-" id="subBtn" onclick="subOrder()" disabled="disabled"/><span id="currentOrderView">1</span><input type="button" value="+" id="addBtn" onclick="addOrder();" />
+			<input type="hidden" name="totalSum" id="currentPrice" value="${resultObject.PRICE }" />
+			<input type="hidden" name="p_list[0].orderSum" id="currentOrderSum" value="1" />
+			<input type="hidden" name="p_list[0].product_price" value="${resultObject.PRICE }" />
+			<input type="hidden" name="p_list[0].seller_id" value="${resultObject.SELLER_ID }" />
+			<input type="hidden" name="p_list[0].product_img" value="${resultObject.FIRST_IMG }" />
+			<input type="hidden" name="p_list[0].product_subject" value="${resultObject.SUBJECT }" />
+			<input type="hidden" name="p_list[0].product_num" value="${resultObject.PRODUCT_NUM }" />
+ 			<span>수량 </span><input type="button" value="-" id="subBtn" onclick="subOrder()" disabled="disabled"/><span id="currentOrderView">1</span><input type="button" value="+" id="addBtn" onclick="addOrder();" />
 			</c:if>
 		</div>
 		<div class="button_wrap">
@@ -151,7 +156,7 @@
 			<!-- 구매하기 + 구매수락일때를 생각해야함 -->
 			<c:choose>
 				<c:when test="${resultObject.HOWTOSELL == 2 }">
-					<input type="button" value="구매하기" />
+					<input type="submit" value="구매하기" />
 				</c:when>
 			</c:choose>
 			
