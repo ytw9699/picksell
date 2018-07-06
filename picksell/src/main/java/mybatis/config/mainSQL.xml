@@ -10,7 +10,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<!-- select * from ps_product where howtosell = 0 or howtosell = 1  -->
 	</select>
 	
-	<!-- 새로등록된 플러스 상품 -->
+	<!-- 새로등록된 플러스 상품 plusProductList-->
 	<select id="pulsProduct"  resultType="hashmap">
 			select * from ps_product where howtosell = '2' order by product_regdate desc
 	</select>

@@ -49,21 +49,6 @@ public class mainController {
 		return "main";
 		
 	}
-	@RequestMapping("/newNomalProduct")
-	public String newNomalProduct(Model model) {	
-		List<Map<String, Object>> nomalProductList = mainService.nomalProduct();
-		model.addAttribute("nomalProductList", nomalProductList);
-		return "newNomalProduct";
-		
-	}
-	@RequestMapping("/newPlusProduct")
-	public String newPlusProduct(Model model) {	
-		
-		List<Map<String, Object>> plusProductList = mainService.pulsProduct();		
-		model.addAttribute("plusProductList", plusProductList);
-		return "newPlusProduct";
-		
-	}
 	@RequestMapping("/hotPlusProduct")
 	public String hotPlusProduct(Model model) {	
 		

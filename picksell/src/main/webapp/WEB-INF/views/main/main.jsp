@@ -44,7 +44,7 @@
 	</div>
 </div>
 </c:forEach>
-<p>new 새로 등록된 플러스 상품  <a href="/picksell/newPlusProduct">전체보기</a></p>
+<p>new 새로 등록된 플러스 상품  <a href="/picksell/products/plus">전체보기</a></p>
 <c:forEach var="pulsProduct" items="${plusProductList }" end="3">
 	<div class="productWrap">
 	<div class="firstImgWrap">
@@ -60,7 +60,7 @@
 	</div>
 </div>
 </c:forEach>
-<p>new 새로 등록된 일반 상품  <a href="/picksell/newNomalProduct">전체보기</a></p>
+<p>new 새로 등록된 일반 상품  <a href="/picksell/products/goods">전체보기</a></p>
 <c:forEach var="nomalProduct" items="${nomalProductList }" end="3">
 <div class="productWrap">
 <div class="firstImgWrap">

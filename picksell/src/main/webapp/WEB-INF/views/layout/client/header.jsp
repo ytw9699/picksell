@@ -122,7 +122,7 @@ li.headerCategory {
 	<ul class="bottomUL">
 		<li class="headerCategory totalCategory"><a href="#">전체카테고리</a></li>
 		<li class="headerCategory"><a href="/picksell/products/plus">픽셀 플러스</a></li>
-		<li class="headerCategory"><a href="#">인기상품</a></li>
+		<li class="headerCategory"><a href="/picksell/hotPlusProduct">인기상품</a></li>
 		<li class="headerCategory"><a href="/picksell/products/goods">일반상품</a></li>
 		<li class="headerCategory"><a href="#">무료나눔</a></li>
 		<li class="headerCategory" style="float: right;"><a href="/picksell/sell/howto">물건 판매하기</a></li>
