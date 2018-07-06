@@ -30,11 +30,11 @@
 	<c:forEach var="list" items="${sellList}">
 	<tr>
 		<td>
-			<a href="/picksell/products/detail/${list.CATEGORY_NUM }/${list.PRODUCT_NUM }/1">
+			<a href="/picksell/products/detail/${list.CATEGORY_NUM }/${list.PRODUCT_NUM }">
 			<img src="/picksell/resources/productUpload/${list.FIRST_IMG }" style="width: 200px;" />
 			</a>
 		</td>
-		<td><a href="/picksell/products/detail/${list.CATEGORY_NUM }/${list.PRODUCT_NUM }/1">${list.SUBJECT }</a></td>
+		<td><a href="/picksell/products/detail/${list.CATEGORY_NUM }/${list.PRODUCT_NUM }">${list.SUBJECT }</a></td>
 		<td><fmt:formatNumber value="${list.PRICE }" pattern="#,###.##" /> 원</td>
 		<td>${list.PRODUCT_REGDATE }</td>
 	</tr>
