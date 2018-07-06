@@ -1,6 +1,8 @@
 package com.mycom.admin_products;
 
 import java.util.List;
+import java.util.Map;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
@@ -33,6 +35,9 @@ public class AdminSellService implements AdminSellDAO {
 		return sqlSessionTemplate.selectList("adminProducts.productsSearch2", "%"+search+"%");
 	}
 	
+	public void updateStock(Map<String, Object> map) {
+		 sqlSessionTemplate.update("adminOrder.updateStock",map);
+	}
 	
 	//판매글 상세보기 
 	@Override

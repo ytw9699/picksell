@@ -49,6 +49,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		
 	</select>
 	
+	
+	
+	
 	<select id="orderSearch0" resultMap="orderRes" parameterType="String">
 		SELECT * FROM ps_order
 		WHERE buyer_id LIKE #{isSearch}
@@ -103,7 +106,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE order_num = #{order_num}
 	</update>
 	
-	<!-- product_num에 해당하는만큼 order_quantity차감  -->
-	
+	<!-- product_num에 해당하는만큼 order_quantity차감 여기서 파라미터는 모델(맵)으로 -->
+	<update id="updateStock"  parameterType="hashmap">
+		UPDATE ps_product 
+			SET stock = stock - #{ORDER_QUANTITY}
+			WHERE product_num = #{PRODUCT_NUM}
+	</update>
 </mapper>
 

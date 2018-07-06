@@ -154,7 +154,17 @@ public class AdminPaymentController {
 	public ModelAndView orderConfirm(HttpServletRequest request) {
 		
 		adminPaymentModel = adminPaymentService.orderGetOne(request.getParameter("order_num"));
-//		List<Map<String, Object>> ming = adminPaymentService.orderDetail2(request.getParameter("order_num"));
+		List<Map<String, Object>> ming = adminPaymentService.orderDetail2(Integer.parseInt(request.getParameter("order_num")));
+		
+		//ming을 반복문을 돌려서 
+		//adminSellService.updateStock()
+		for(int i=0 ; i<ming.size() ; i++) {
+			adminSellService.updateStock(ming.get(i));
+		}
+		
+		
+		
+		
 		adminPaymentService.updateStatus1(adminPaymentModel);
 		mav.setViewName("redirect:/admin_order/list");
 		
