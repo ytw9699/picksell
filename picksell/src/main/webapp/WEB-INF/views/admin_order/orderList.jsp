@@ -188,7 +188,7 @@ tr:nth-child(even){background-color: #f2f2f2}
  				
  				<td style="text-align:center;vertical-align:middle;">
 
-					<a href="/picksell/admin_order/orderDetail"><button class="button button1">상세보기</button></a>
+					<a href="/picksell/admin_order/orderDetail/${orderList.order_num}"><button class="button button1">상세보기</button></a>
 <!--  				<a href="#" class="button button1"><input type="button" value="상세보기"></a> -->
  				</td>
  			</tr>

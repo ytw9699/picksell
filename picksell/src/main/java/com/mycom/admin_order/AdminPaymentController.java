@@ -1,6 +1,7 @@
 package com.mycom.admin_order;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 ///this is a test.
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -113,9 +115,14 @@ public class AdminPaymentController {
 		
 	}
 	
-	@RequestMapping("/orderDetail")
-	public ModelAndView orderDetail() {
+	@RequestMapping("/orderDetail/{order_num}")
+	public ModelAndView orderDetail(@PathVariable("order_num") int order_num) {
 		
+		Map<String, Object> mp = new HashMap<String, Object>();
+		mp = adminPaymentService.orderDetail(order_num);
+		System.out.println(mp.keySet());
+		mav.addObject("orderDetail",mp);
+//		mav.addObject("order_num", order_num);
 		mav.setViewName("admin_order/orderDetail");
 		return mav;
 		

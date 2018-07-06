@@ -1,6 +1,9 @@
 package com.mycom.admin_order;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
@@ -15,6 +18,10 @@ public class AdminPaymentService implements AdminPaymentDAO {
 	@Override
 	public List<AdminPaymentModel> orderList(){
 		return sqlSessionTemplate.selectList("adminOrder.orderList-all");
+	}
+	// 오더 상세보기 
+	public Map<String,Object> orderDetail(int order_num){
+		return sqlSessionTemplate.selectOne("adminOrder.orderDetail",order_num);
 	}
 	// 오더 상세보기 
 	@Override

@@ -32,6 +32,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT * FROM ps_order ORDER BY order_num desc
 	</select>
 	
+	<!-- 주문상세보기 -->
+	<select id="orderDetail" resultType="hashmap" parameterType="int">
+		select *
+		from ps_order
+		where order_num = #{order_num} 
+	</select>
+	
 	<select id="orderSearch0" resultMap="orderRes" parameterType="String">
 		SELECT * FROM ps_order
 		WHERE buyer_id LIKE #{isSearch}
