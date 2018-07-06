@@ -17,7 +17,7 @@
 </head>
 <body>
 
-<p>픽셀 플러스 인기상품    <a href="/picksell/hotPlusProduct">전체보기</a></p>
+<p>픽셀 플러스 인기상품    <a href="/picksell/hotPlusProduct/latest">전체보기</a></p>
 <c:forEach var="hotProduct" items="${hotProductList}" end="3">
 	<div class="productWrap">
 	<div class="firstImgWrap">

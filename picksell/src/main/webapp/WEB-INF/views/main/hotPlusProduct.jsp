@@ -18,6 +18,11 @@
 <body>
 
 <p>픽셀 플러스 인기상품  전체</p>
+<a href="/picksell/hotPlusProduct/latest">모든상품</a>
+<a href="/picksell/hotPlusProduct/latest">최신순</a>
+<a href="/picksell/hotPlusProduct/HighPrice">높은가격순</a>
+<a href="/picksell/hotPlusProduct/LowPrice">낮은가격순</a>
+
 <c:forEach var="hotProduct" items="${hotProductList}">
 	<div class="productWrap">
 	<div class="firstImgWrap">
@@ -30,6 +35,8 @@
 		<span class="productPrice">
 		<fmt:formatNumber value="${hotProduct.PRICE }" pattern="#,###.##" /> 원
 		</span>
+		<br>
+		<span>${hotProduct.PRODUCT_REGDATE }</span>
 	</div>
 </div>
 </c:forEach>

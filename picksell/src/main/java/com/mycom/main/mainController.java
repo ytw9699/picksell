@@ -58,6 +58,35 @@ public class mainController {
 		return "hotPlusProduct";
 		
 	}
+	
+	@RequestMapping("/hotPlusProduct/latest")
+	public String hotPlusProductlatest(Model model) {	
+		
+		List<Map<String, Object>> hotProductListLatest = mainService.hotProductListLatest();
+		
+		model.addAttribute("hotProductList", hotProductListLatest);
+		return "hotPlusProduct";
+		
+	}
+	
+	@RequestMapping("/hotPlusProduct/HighPrice")
+	public String hotProductHP(Model model) {//높은가격순 HighPrice = HP	
+		
+		List<Map<String, Object>> hotProductHP = mainService.hotProductHP();
+		
+		model.addAttribute("hotProductList", hotProductHP);
+		return "hotPlusProduct";
+		
+	}
+	@RequestMapping("/hotPlusProduct/LowPrice")
+	public String hotProductLP(Model model) {//높은가격순 HighPrice = HP	
+		
+		List<Map<String, Object>> hotProductLP = mainService.hotProductLP();
+		
+		model.addAttribute("hotProductList", hotProductLP);
+		return "hotPlusProduct";
+		
+	}
 	@RequestMapping(value="/mainSearchList", method=RequestMethod.GET)
 	public String mainSearchList(Model model, HttpServletRequest request) {	
 		
