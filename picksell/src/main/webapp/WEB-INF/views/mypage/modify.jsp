@@ -24,9 +24,9 @@
 	 <br/>
 	이름 ${resultMap.NAME}
 	<br/>
-        새로운 비밀번호<input type="password" name="password" id="password" onkeyup="passwordsCheck()" />
+        신규 비밀번호<input type="password" name="password" id="password" onkeyup="passwordsCheck()" value="${resultMap.PASSWORD}"/>
     <br/>
-	비밀번호 재확인<input type="password" name="passwordCheck" id="passwordCheck" onkeyup="passwordsCheck()" />&nbsp;<span id="passwordCheckText"></span>
+	비밀번호 다시 입력<input type="password" name="passwordCheck" id="passwordCheck" onkeyup="passwordsCheck()" value="${resultMap.PASSWORD}"/>&nbsp;<span id="passwordCheckText"></span>
 	<br/>
 	이메일<input type="text" value="${resultMap.EMAIL}" name="email" id="email" />
 	<br/>

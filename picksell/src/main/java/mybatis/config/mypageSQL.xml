@@ -46,7 +46,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		account_name = #{account_name},
 		bank = #{bank},
 		profile_img = #{profile_img},
-		alarm_consent = #{alarm_consent},
+		alarm_consent = #{alarm_consent}
 		where id = #{id}
 </update>	
 
