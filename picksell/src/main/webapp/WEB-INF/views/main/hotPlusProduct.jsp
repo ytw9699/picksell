@@ -52,7 +52,7 @@ span.product_category.active a {
 
 .categoryWrap {
     border: 1px solid #ececec;
-    height: 200px;
+    height: 150px;
 }
 .categoryTitle {
     float: left;
