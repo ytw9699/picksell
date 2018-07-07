@@ -17,11 +17,11 @@
 </head>
 <body>
 
-<p>픽셀 플러스 인기상품    <a href="/picksell/hotPlusProduct">전체보기</a></p>
+<p>픽셀 플러스 인기상품    <a href="/picksell/hotPlusProduct">전체보기</p>
 <c:forEach var="hotProduct" items="${hotProductList}" end="3">
 	<div class="productWrap">
 	<div class="firstImgWrap">
-		<a href="/picksell/products/detail/${hotProduct.CATEGORY_NUM }/${hotProduct.PRODUCT_NUM }/1">
+		<a href="/picksell/products/detail/${hotProduct.CATEGORY_NUM }/${hotProduct.PRODUCT_NUM }">
 		<img src="/picksell/resources/productUpload/${hotProduct.FIRST_IMG }" style="width: 200px;" />
 		</a>
 	</div>
@@ -48,7 +48,7 @@
 <c:forEach var="pulsProduct" items="${plusProductList }" end="3">
 	<div class="productWrap">
 	<div class="firstImgWrap">
-		<a href="/picksell/products/detail/${pulsProduct.CATEGORY_NUM }/${pulsProduct.PRODUCT_NUM }/1">
+		<a href="/picksell/products/detail/${pulsProduct.CATEGORY_NUM }/${pulsProduct.PRODUCT_NUM }">
 		<img src="/picksell/resources/productUpload/${pulsProduct.FIRST_IMG }" style="width: 200px;" />
 		</a>
 	</div>
@@ -64,7 +64,7 @@
 <c:forEach var="nomalProduct" items="${nomalProductList }" end="3">
 <div class="productWrap">
 <div class="firstImgWrap">
-	<a href="/picksell/products/detail/${nomalProduct.CATEGORY_NUM }/${nomalProduct.PRODUCT_NUM }/1">
+	<a href="/picksell/products/detail/${nomalProduct.CATEGORY_NUM }/${nomalProduct.PRODUCT_NUM }">
 	<img src="/picksell/resources/productUpload/${nomalProduct.FIRST_IMG }" style="width: 200px;" />
 	</a>
 </div>

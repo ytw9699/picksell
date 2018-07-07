@@ -30,7 +30,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	 <!-- 플러스 인기 상품 판매수 만큼 순위로 뽑음 최신순--> 
 	 <select id="hotProduct" resultType="hashmap">
       <![CDATA[
-      select r, b.total, b.product_num, c.content, c.first_img, c.subject ,c.price
+      select r, b.total, b.product_num, c.content, c.first_img, c.subject ,c.price, c.CATEGORY_NUM
       from(
       select rownum r, a.total, a.product_num from(
       select count(*) as total, product_num
