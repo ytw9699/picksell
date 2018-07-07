@@ -154,7 +154,7 @@ li.orderMethodLI.active > a {
 					</div>
 					<div class="firstImgWrap">
 						<a href="/picksell/products/detail/${product.CATEGORY_NUM }/${product.PRODUCT_NUM }">
-						<img src="/picksell/resources/productUpload/${product.FIRST_IMG }" style="width: 200px;" />
+						<img src="/picksell/resources/productUpload/${product.FIRST_IMG }" style="width: 200px;" onerror="this.src='/picksell/resources/img/imgready.gif'" />
 						</a>
 					</div>
 					<div class="infoWrap">
