@@ -14,12 +14,19 @@
 </style>
 </head>
 <body>
-<a href="/picksell/mypage/sellList/0">판매중 상품</a>
-<a href="/picksell/mypage/sellList/1">거래중 상품</a>
-<a href="/picksell/mypage/sellList/2">판매 완료 상품</a>
+<h4>
+<a href="/picksell/mypage/sellList/0">일반 상품</a>/
+<a href="/picksell/mypage/sellList/1">픽셀플러스 상품</a>/
+</h4>
+<h4>
+<a href="/picksell/mypage/sellList/0">판매중 상품</a>/
+<a href="/picksell/mypage/sellList/1">거래중 상품</a>/
+<a href="/picksell/mypage/sellList/2">판매 완료 상품</a>/
+</h4>
 <table>
 <c:if test="${fn:length(sellList) > 0}">
 	<tr>
+		<td>판매상품</td>
 		<td>대표이미지</td>
 		<td>제목</td>
 		<td>가격</td>
@@ -28,6 +35,14 @@
 
 	<c:forEach var="list" items="${sellList}">
 	<tr>
+		<td>
+		<c:if test="${list.HOWTOSELL != '2'}">
+		일반상품
+		</c:if>
+		<c:if test="${list.HOWTOSELL == '2'}">
+		픽셀플러스 상품
+		</c:if>
+		</td>
 		<td>
 			<a href="/picksell/products/detail/${list.CATEGORY_NUM }/${list.PRODUCT_NUM }">
 			<img src="/picksell/resources/productUpload/${list.FIRST_IMG }" style="width: 200px;" />
