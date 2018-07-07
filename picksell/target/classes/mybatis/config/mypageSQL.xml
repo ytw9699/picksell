@@ -6,20 +6,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="mypage"> 
 	
 <select id="userInfo" parameterType="String" resultType="hashmap">
-		SELECT ID,
-		PASSWORD,
-		NAME,
-		EMAIL,
-		ADDRESS,
-		KIND,
-		ACCOUNT,
-		ACCOUNT_NAME,
-		BANK,
-		PROFILE_IMG,
-		ALARM_CONSENT,
-		BUSINESS_NUMBER,
-		BUSINESS_NAME,
-		REGDATE FROM PS_MEMBER WHERE ID = #{sessionId}
+		select * from PS_MEMBER WHERE ID = #{sessionId}
 </select>
 
 <update id="updateBusiness" parameterType="hashmap">
