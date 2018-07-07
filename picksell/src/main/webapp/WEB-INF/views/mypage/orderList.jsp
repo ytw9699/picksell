@@ -17,34 +17,37 @@
 <table>
 <c:if test="${fn:length(orderList) > 0}">
 <c:forEach var="ps_order" items="${orderList}" varStatus="orderListStatus">
-<BR/>"하나의 주문시작 ======================================================="
+    <br><h3>주문일:<fmt:formatDate value="${ps_order.STEP1_DATE}" pattern="yyyy년 MM월 dd일 hh:mm:ss" />
 	<a href="/picksell/mypage/orderDetail/${ps_order.ORDER_NUM }">
-	주문 내역 상세보기
-	</a>
-     <c:if test="${ps_order.STATUS == '0'}">
-		<br> 거래상태:입금대기중
+		<font color = "red">주문 내역 상세보기</font>
+		</a></h3>
+    	<c:if test="${ps_order.STATUS == '0'}">
+		거래상태:입금대기중
 		</c:if>
 		<c:if test="${ps_order.STATUS == '1'}">
-		<br>거래상태:입금 완료 및 배송 대기중
+		거래상태:입금 완료 및 배송 대기중
 		</c:if>
 		<c:if test="${ps_order.STATUS == '2'}">
-		<br>거래상태:배송 및 인수확인 대기
+		거래상태:배송 및 인수확인 대기
 		</c:if>
 		<c:if test="${ps_order.STATUS == '3'}">
-		<br>거래상태:인수확인 및 거래완료
+		거래상태:인수확인 및 거래완료
 		</c:if>
 		<c:if test="${ps_order.STATUS == '44'}">
-		<br>거래상태:결제취소
+		거래상태:결제취소
 		</c:if>
-     <br>주문일: ${ps_order.STEP1_DATE}<!-- 주문일(입금대기날짜) -->
+		<br>
+		<br>
 <c:forEach var="joinMap" items="${orderSubList[orderListStatus.index]}">
- <br>사진: ${joinMap.ORDER_NUM }
-		<img src="/picksell/resources/productUpload/${joinMap.FIRST_IMG }" style="width: 200px;" />
- <br>제목: ${joinMap.SUBJECT }
- <br>상품금액: ${joinMap.PRICE }
- <br>갯수: ${joinMap.ORDER_QUANTITY}
-</c:forEach> 
-"하나의 주문 끝==========================================================="<BR/>
+<a href="/picksell/products/detail/${joinMap.CATEGORY_NUM }/${joinMap.PRODUCT_NUM }">
+<img src="/picksell/resources/productUpload/${joinMap.FIRST_IMG }" style="width: 200px;" />
+ /${joinMap.SUBJECT }
+</a>
+ /${joinMap.PRICE }원
+ /갯수: ${joinMap.ORDER_QUANTITY}개
+ <br>
+</c:forEach>
+================================================================================ 
 </c:forEach>
 
 	<%-- <c:forEach var="order" items="${orderList}">
