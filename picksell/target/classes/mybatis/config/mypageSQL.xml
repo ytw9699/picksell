@@ -6,20 +6,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="mypage"> 
 	
 <select id="userInfo" parameterType="String" resultType="hashmap">
-		SELECT ID,
-		PASSWORD,
-		NAME,
-		EMAIL,
-		ADDRESS,
-		KIND,
-		ACCOUNT,
-		ACCOUNT_NAME,
-		BANK,
-		PROFILE_IMG,
-		ALARM_CONSENT,
-		BUSINESS_NUMBER,
-		BUSINESS_NAME,
-		REGDATE FROM PS_MEMBER WHERE ID = #{sessionId}
+		select * from PS_MEMBER WHERE ID = #{sessionId}
 </select>
 
 <update id="updateBusiness" parameterType="hashmap">
@@ -46,7 +33,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		account_name = #{account_name},
 		bank = #{bank},
 		profile_img = #{profile_img},
-		alarm_consent = #{alarm_consent},
+		alarm_consent = #{alarm_consent}
 		where id = #{id}
 </update>	
 
@@ -106,6 +93,10 @@ select * from ps_order where ORDER_NUM = #{order_num}
 
 select * from ps_product a, PS_ORDERLIST b where b.ORDER_NUM = #{order_num} and b.PRODUCT_NUM = a.PRODUCT_NUM
 
+</select>
+
+<select id="userCheck" parameterType="String" resultType="String">
+			SELECT password FROM PS_MEMBER WHERE ID = #{ID}
 </select>
 
 </mapper>

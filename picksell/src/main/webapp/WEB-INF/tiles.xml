@@ -172,6 +172,12 @@
 		<put-attribute name="body" value="/WEB-INF/views/main/hotPlusProduct.jsp" />
 	</definition>
 	
+	<!-- 개인정보 확인 및 수정 -->
+	<definition name="memberCheck" extends="modify">
+		<put-attribute name="body" value="/WEB-INF/views/mypage/memberCheck.jsp" />
+	</definition>
+	
+	
 </tiles-definitions>
 	
 	

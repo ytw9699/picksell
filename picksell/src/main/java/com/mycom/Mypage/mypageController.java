@@ -35,8 +35,24 @@ public class mypageController {
 	@Resource(name="mypageService")
 	private mypageService mypageService;
 	
+	@RequestMapping(value="/mypage/memberCheck", method=RequestMethod.GET)
+	public String memberCheck(){
+		return "memberCheck";
+	}
+	@RequestMapping(value="/mypage/memberCheck", method=RequestMethod.POST)
+	public String memberCheck2(HttpServletRequest request, Model model, HttpSession session){
+		String DbPassword= mypageService.userCheck((String)session.getAttribute("sessionId"));
+		String PASSWORD = request.getParameter("PASSWORD");
+		
+		if(!DbPassword.equals(PASSWORD)){
+			model.addAttribute("resultPW", "WRONG");//비밀번호가 틀리다면
+			return "memberCheck";
+		}
+		return "redirect:/mypage/modify";
+	}
+	
 	@RequestMapping(value="/mypage/modify",method=RequestMethod.GET)
-	public String modify(HttpSession session, Model model) {	
+	public String modify(HttpSession session, Model model, HttpServletRequest request) {	
 		
 		String sessionId =(String)session.getAttribute("sessionId");
 		
@@ -44,10 +60,14 @@ public class mypageController {
 		
 		model.addAttribute("resultMap", resultMap);
 		
+		String Updated =  request.getParameter("updated");
+		if(Updated != null) {
+			model.addAttribute("Updated", "Updated");
+		}
 		return "modify";
 	}
 	@RequestMapping(value="/mypage/modify",method=RequestMethod.POST)
-	public String modify(CommandMap map) {	
+	public String modify(CommandMap map, Model model) {	
 		
 		if(map.get("business_number") == null) {
 			mypageService.updatePersonal(map.getMap());//일반 회원수정	
@@ -55,7 +75,7 @@ public class mypageController {
 			else{
 				mypageService.updateBusiness(map.getMap());//사업자 회원수정	
 			}
-		return "redirect:/mypage/modify";
+		return "redirect:/mypage/modify?updated=updated";
 	}
 	@RequestMapping(value="/mypage/sellList/{DEAL_STATUS}", method=RequestMethod.GET)
 	public String sellList(Model model, HttpSession session, @PathVariable("DEAL_STATUS") String DEAL_STATUS) {	
@@ -121,9 +141,6 @@ public class mypageController {
 			
 			List<Map<String, Object>> orderSubDetail = mypageService.orderSubDetail(PRODUCT_NUM);
 			model.addAttribute("orderSubDetail", orderSubDetail);
-			
-			
-			
 		return "orderDetail";
 	}
 }
