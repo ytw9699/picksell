@@ -142,7 +142,7 @@ public class ProductController {
 		parameterMap.put("category", category_num);
 		parameterMap.put("orderMethod", orderMethod);
 		List<Map<String, Object>> resultList = productService.getNomalProductList(parameterMap);
-		
+		List<Map<String, Object>> categoryList = productService.getCategoryList();
 		totalCount = resultList.size();
 		
 		page = new ProductPaging(currentPageNumber, totalCount, blockCount, blockPage, "/picksell/products/goods", category_num, orderMethod);
@@ -157,7 +157,10 @@ public class ProductController {
 		model.addAttribute("pagingHtml", pagingHtml);
 		model.addAttribute("currentCategory", category_num);
 		model.addAttribute("resultProductList", resultList);
+		model.addAttribute("categoryList", categoryList);
 		model.addAttribute("currentPage", currentPageNumber);
+		model.addAttribute("orderMethod", orderMethod);
+		model.addAttribute("forwardingListKind", "2");
 		
 		return "productList";
 	}
@@ -179,6 +182,7 @@ public class ProductController {
 		parameterMap.put("category", category_num);
 		parameterMap.put("orderMethod", orderMethod);
 		List<Map<String, Object>> resultList = productService.getPlusProductList(parameterMap);
+		List<Map<String, Object>> categoryList = productService.getCategoryList();
 		
 		totalCount = resultList.size();
 		page = new ProductPaging(currentPageNumber, totalCount, blockCount, blockPage, "/picksell/products/plus", category_num, orderMethod);
@@ -194,6 +198,9 @@ public class ProductController {
 		model.addAttribute("currentCategory", category_num);
 		model.addAttribute("resultProductList", resultList);
 		model.addAttribute("currentPage", currentPageNumber);
+		model.addAttribute("categoryList", categoryList);
+		model.addAttribute("orderMethod", orderMethod);
+		model.addAttribute("forwardingListKind", "0");
 		
 		return "productPlusList";
 	}

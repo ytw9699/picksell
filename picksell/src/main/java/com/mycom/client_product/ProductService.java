@@ -74,4 +74,9 @@ public class ProductService implements ProductDao {
 	public List<Map<String, Object>> getProductPurchaseList(int product_num){
 		return sqlMapper.selectList("client_product.selectPurchaseList", product_num);
 	}
+	//카테고리 긁어오기
+	public List<Map<String, Object>> getCategoryList(){
+		return sqlMapper.selectList("client_product.getCategoryList");
+	}
+		
 }

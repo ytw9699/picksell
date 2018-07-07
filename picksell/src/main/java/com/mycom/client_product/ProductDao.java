@@ -50,5 +50,6 @@ public interface ProductDao {
 	//판매글 구매신청리스트
 	public List<Map<String, Object>> getProductPurchaseList(int product_num);
 	
-	
+	//카테고리 긁어오기
+	public List<Map<String, Object>> getCategoryList();
 }

@@ -56,7 +56,8 @@ span.headerTop_menu {
     display: inline-block;
     border: 2px solid #7151fc;
     margin-left: 15%;
-}
+    width: 40%;
+}	
 .mainLogoWrap {
     display: inline-block;
     float: left;
@@ -68,26 +69,55 @@ img.mainLogo {
 input.searchINPUT {
     border: none;
     padding: 10px;
-    font-size: 17px;
+    font-size: 14px;
+    width: 70%;
 }
-.headerBottom {width: 100%;border-top: 1px solid #dbdbdb;border-bottom: 1px solid #dbdbdb;}
+.headerBottom {
+    width: 100%;
+    margin-top: 40px;
+    border-top: 1px solid #dbdbdb;
+    border-bottom: 1px solid #dbdbdb;
+}
+
 ul.bottomUL {
     width: 80%;
     margin: 0 auto;
-    height: 60px;
+    height: 50px;
     padding: 0;
 }
 li.headerCategory {
     float: left;
-    height: 60px;
-    line-height: 60px;
-    padding-right: 30px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    padding: 0 30px;
+    font-size: 15px;
+    color: #333333;
 }
 .totalCategory {
     border-left: 1px solid #dbdbdb;
     border-right: 1px solid #dbdbdb;
     width: 130px;
     text-align: center;
+}
+a.menuLink {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+.menuCategory .active{
+	color: #7151fc;
+    border-bottom: 2px solid #7151fc;
+}
+a.menuLink:hover {
+	color: #7151fc;
+    border-bottom: 2px solid #7151fc;
+}
+a.sellLink{
+	display: block;
+    width: 100%;
+    height: 100%;
+    color: #7151fc;
 }
 span#myBasketSum {
     background-color: #7151fc;
@@ -152,7 +182,7 @@ span#myBasketSum {
 <div class="headerCenter">
 	<div class="mainLogoWrap">
 		<a href="/picksell/main">
-		<img src="/picksell/resources/img/main_logo.png" class="mainLogo" />
+		<img src="/picksell/resources/img/main_logo2.gif" class="mainLogo" />
 		</a>
 	</div>
 	<div class="searchWrap">
@@ -165,11 +195,11 @@ span#myBasketSum {
 <div class="headerBottom">
 	<ul class="bottomUL">
 		<li class="headerCategory totalCategory"><a href="#">전체카테고리</a></li>
-		<li class="headerCategory"><a href="/picksell/products/plus">픽셀 플러스</a></li>
-		<li class="headerCategory"><a href="/picksell/hotPlusProduct">인기상품</a></li>
-		<li class="headerCategory"><a href="/picksell/products/goods">일반상품</a></li>
-		<li class="headerCategory"><a href="#">무료나눔</a></li>
-		<li class="headerCategory" style="float: right;"><a href="/picksell/sell/howto">물건 판매하기</a></li>
+		<li class="headerCategory menuCategory"><a href="/picksell/products/plus" class="menuLink <c:if test="${forwardingListKind == '0' }">active</c:if>">픽셀 플러스</a></li>
+		<li class="headerCategory menuCategory"><a href="/picksell/hotPlusProduct" class="menuLink <c:if test="${forwardingListKind == '1' }">active</c:if>">인기상품</a></li>
+		<li class="headerCategory menuCategory"><a href="/picksell/products/goods" class="menuLink <c:if test="${forwardingListKind == '2' }">active</c:if>">일반상품</a></li>
+		<li class="headerCategory menuCategory"><a href="#" class="menuLink">무료나눔</a></li>
+		<li class="headerCategory menuCategory" style="float: right;"><a href="/picksell/sell/howto" class="sellLink">물건 판매하기</a></li>
 	</ul>
 </div>
 <div id="mypage_menuBox">
