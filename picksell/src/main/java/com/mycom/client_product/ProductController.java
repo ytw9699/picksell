@@ -159,6 +159,7 @@ public class ProductController {
 		model.addAttribute("resultProductList", resultList);
 		model.addAttribute("categoryList", categoryList);
 		model.addAttribute("currentPage", currentPageNumber);
+		model.addAttribute("orderMethod", orderMethod);
 		
 		return "productList";
 	}
@@ -197,6 +198,7 @@ public class ProductController {
 		model.addAttribute("resultProductList", resultList);
 		model.addAttribute("currentPage", currentPageNumber);
 		model.addAttribute("categoryList", categoryList);
+		model.addAttribute("orderMethod", orderMethod);
 		
 		return "productPlusList";
 	}

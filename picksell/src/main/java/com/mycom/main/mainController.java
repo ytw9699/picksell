@@ -103,6 +103,9 @@ public class mainController {
 			model.addAttribute("resultProductList", resultList);
 			model.addAttribute("currentPage", currentPageNumber);
 			model.addAttribute("categoryList", categoryList);
+			//인기상품 정렬조회 css 를 위해서 추가합니다 by 현우
+			model.addAttribute("orderMethod", orderMethod);
+			
 			
 			return "hotPlusProduct";
 		}

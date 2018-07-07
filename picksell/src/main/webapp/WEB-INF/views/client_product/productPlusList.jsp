@@ -64,7 +64,31 @@ span.product_category.active a {
     width: 10%;
     box-sizing: border-box;
 }
+/*  */
+.orderMethodWrap {
+    height: 50px;
+    margin-top: 40px;
+    border-bottom: 2px solid #ececec;
+}
 
+ul.orderMethodUL {
+    margin: 0;
+    padding: 0;
+    height: 50px;
+    line-height: 50px;
+}
+
+li.orderMethodLI > a {
+    float: left;
+    width: 100px;
+    text-align: center;
+    font-size: 15px;
+    color: #9f9f9f;
+}
+li.orderMethodLI.active > a {
+    color: #7151fc;
+    border-bottom: 2px solid #7151fc;
+}
 </style>
 </head>
 <body>
@@ -106,12 +130,21 @@ span.product_category.active a {
 		</div>
 	</div>
 	<div class="orderMethodWrap">
-		<span><a href="/picksell/products/plus?ca=${currentCategory }&od=0">최신순</a></span>
-		<span><a href="/picksell/products/plus?ca=${currentCategory }&od=1">낮은가격순</a></span>
-		<span><a href="/picksell/products/plus?ca=${currentCategory }&od=2">높은가격순</a></span>
+	<ul class="orderMethodUL">
+		
+		<li class="orderMethodLI <c:if test="${orderMethod == 0 }">active</c:if>">
+			<a href="/picksell/products/plus?ca=${currentCategory }&od=0">최신순</a>
+		</li>
+		<li class="orderMethodLI <c:if test="${orderMethod == 1 }">active</c:if>">
+			<a href="/picksell/products/plus?ca=${currentCategory }&od=1">낮은가격순</a>
+		</li>
+		<li class="orderMethodLI <c:if test="${orderMethod == 2 }">active</c:if>">
+			<a href="/picksell/products/plus?ca=${currentCategory }&od=2">높은가격순</a>
+		</li>
+		
+	</ul>
 	</div>
 	<div class="contentWrap">
-	
 	<c:choose>
 		<c:when test="${!empty resultProductList }" >
 			<c:forEach var="product" items="${resultProductList }">
