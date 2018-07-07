@@ -15,7 +15,7 @@
 </style>
 </head>
 <body>
-구매 신청 리스트 입니다
+<h2>일반 상품 구매 신청 리스트</h2> 
 <table>
 <c:if test="${fn:length(purchaseList) > 0}">
 	<tr>
@@ -45,6 +45,7 @@
 		<td>구매 요청 수락 완료</td>
 		</c:if>
 		<td><input type="button" value="구매" id ="purchase" disabled="disabled" onclick="location.href = '/picksell/products/detail/${purchase.CATEGORY_NUM }/${purchase.PRODUCT_NUM }'"/></td>
+		<td><input type="button" value="취소" id ="purchase" onclick="location.href = '/picksell/mypage/deletePurchaseList/${purchase.PURCHASE_NUM }'"/></td>
 		<c:if test="${purchase.STATUS == '0'}">
 	 	<td>입금 요청 전</td>
 		</c:if>

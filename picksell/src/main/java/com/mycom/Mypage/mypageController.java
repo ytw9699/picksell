@@ -96,7 +96,6 @@ public class mypageController {
 	
 	return "sellList";
 	}
-	
 	@RequestMapping(value="/mypage/purchaseList/{STATUS}",method=RequestMethod.GET)
 	public String purchaseList(Model model, HttpSession session, @PathVariable("STATUS") String STATUS) {	
 		
@@ -108,6 +107,18 @@ public class mypageController {
 		}
 	
 		return "purchaseList";
+	}
+		
+	@RequestMapping("/mypage/deletePurchaseList/{purchase_num}")
+	public String deletePurchaseList(@PathVariable("purchase_num") int purchase_num) {	
+			
+		System.out.println(purchase_num);
+		
+    	//parameterMap.put("PURCHASE_NUM",PURCHASE_NUM);
+    	
+		mypageService.deletePurchaseList(purchase_num);
+	
+		return  "redirect:/mypage/purchaseList/0";
 	}
 	
     
