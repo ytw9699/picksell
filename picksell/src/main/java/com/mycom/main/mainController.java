@@ -24,6 +24,7 @@ import org.springframework.web.multipart.MultipartRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.mycom.client_product.ProductPaging;
+import com.mycom.client_product.ProductService;
 import com.mycom.config.CommandMap;
 import com.mycom.utils.FileUpload;
 
@@ -42,6 +43,9 @@ public class mainController {
 	
 	@Resource(name="mainService")
 	private mainService mainService;
+	
+	@Resource(name="productService")
+	private ProductService productService;
 	
 	@RequestMapping("/main")
 	public String main(Model model) {	
@@ -82,6 +86,7 @@ public class mainController {
 			parameterMap.put("category", category_num);
 			parameterMap.put("orderMethod", orderMethod);
 			List<Map<String, Object>> resultList = mainService.hotPlusProduct(parameterMap);
+			List<Map<String, Object>> categoryList = productService.getCategoryList();
 			
 		    totalCount = resultList.size();
 			page = new ProductPaging(currentPageNumber, totalCount, blockCount, blockPage, "/picksell/hotPlusProduct", category_num, orderMethod);
@@ -97,6 +102,7 @@ public class mainController {
 			model.addAttribute("currentCategory", category_num);
 			model.addAttribute("resultProductList", resultList);
 			model.addAttribute("currentPage", currentPageNumber);
+			model.addAttribute("categoryList", categoryList);
 			
 			return "hotPlusProduct";
 		}
