@@ -39,17 +39,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <select id="sellList0" resultType="hashmap" parameterType="String">
 	
-	select * from ps_product where deal_status = '0' and seller_id = #{sessionId}
+	select * from ps_product where deal_status = '0' and seller_id = #{sessionId} order by PRODUCT_REGDATE desc 
 </select>
 
 <select id="sellList1" resultType="hashmap" parameterType="String">
 	
-	select * from ps_product where deal_status = '1' and seller_id = #{sessionId}
+	select * from ps_product where deal_status = '1' and seller_id = #{sessionId} order by PRODUCT_REGDATE desc 
 </select>
 
 <select id="sellList2" resultType="hashmap" parameterType="String">
 	
-	select * from ps_product where deal_status = '2' and seller_id = #{sessionId}
+	select * from ps_product where deal_status = '2' and seller_id = #{sessionId} order by PRODUCT_REGDATE desc 
 </select>
 
 <select id="purchaseList" resultType="hashmap" parameterType="String">
