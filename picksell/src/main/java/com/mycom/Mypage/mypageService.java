@@ -55,4 +55,7 @@ public class mypageService implements mypageDao {
 	public String userCheck(String string) {
 		return sqlMapper.selectOne("mypage.userCheck", string);
 	}
+	public void deletePurchaseList(int purchase_num) {
+		sqlMapper.delete("mypage.deletePurchaseList", purchase_num);
+	}
 }

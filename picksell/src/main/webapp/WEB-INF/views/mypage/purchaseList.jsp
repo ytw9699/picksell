@@ -15,7 +15,7 @@
 </style>
 </head>
 <body>
-구매 신청 리스트 입니다
+<h2>일반 상품 구매 신청 리스트</h2> 
 <table>
 <c:if test="${fn:length(purchaseList) > 0}">
 	<tr>
@@ -23,9 +23,9 @@
 		<td>제목</td>
 		<td>가격</td>
 		<td>신청날짜</td>
-		<td>신청상태</td>
+		<td>구매 요청 상태</td>
+		<td>취소</td>
 		<td>구매하기</td>
-		<td>거래상태</td>
 	</tr>
 
 	<c:forEach var="purchase" items="${purchaseList}">
@@ -44,25 +44,8 @@
 		<c:if test="${purchase.STATUS == '1'}">
 		<td>구매 요청 수락 완료</td>
 		</c:if>
+		<td><input type="button" value="취소" id ="cancel" onclick="location.href = '/picksell/mypage/deletePurchaseList/${purchase.PURCHASE_NUM }'"/></td>
 		<td><input type="button" value="구매" id ="purchase" disabled="disabled" onclick="location.href = '/picksell/products/detail/${purchase.CATEGORY_NUM }/${purchase.PRODUCT_NUM }'"/></td>
-		<c:if test="${purchase.STATUS == '0'}">
-	 	<td>입금 요청 전</td>
-		</c:if>
-		<c:if test="${purchase.PS_ORDER_STATUS == '0' && purchase.STATUS == '1'}">
-		<td>입금대기중</td>
-		</c:if>
-		<c:if test="${purchase.PS_ORDER_STATUS == '1'}">
-		<td>입금 완료 및 배송 대기중</td>
-		</c:if>
-		<c:if test="${purchase.PS_ORDER_STATUS == '2'}">
-		<td>배송 및 인수확인 대기</td>
-		</c:if>
-		<c:if test="${purchase.PS_ORDER_STATUS == '3'}">
-		<td>인수확인 및 거래완료</td>
-		</c:if>
-		<c:if test="${purchase.PS_ORDER_STATUS == '44'}">
-		<td>결제취소</td>
-		</c:if>
 	</tr>
 	<c:if test="${purchase.STATUS == '1'}">
 <script>
@@ -73,7 +56,7 @@
 
 </c:if>
 <c:if test="${fn:length(purchaseList) < 1}">
-<p>내역이 없습니다 구매 신청을 해주세요</p>
+<p>구매 요청 내역이 없습니다. 일반상품글에서 구매 요청을 해주시기 바랍니다.</p>
 </c:if>
 </table>
 </body>
