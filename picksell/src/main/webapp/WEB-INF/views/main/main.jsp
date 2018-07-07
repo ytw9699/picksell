@@ -17,8 +17,8 @@
 </head>
 <body>
 
-<p>픽셀 플러스 인기상품    <a href="/picksell/hotPlusProduct">전체보기</p>
-<c:forEach var="hotProduct" items="${hotProductList}" end="3">
+<h3>픽셀 플러스 <font color="red">BEST</font> 인기 상품    <a href="/picksell/hotPlusProduct"><font color="red" size="2">전체보기</font></a></h3>
+<c:forEach var="hotProduct" items="${hotProductList}" end="4" varStatus="status">
 	<div class="productWrap">
 	<div class="firstImgWrap">
 		<a href="/picksell/products/detail/${hotProduct.CATEGORY_NUM }/${hotProduct.PRODUCT_NUM }">
@@ -26,26 +26,31 @@
 		</a>
 	</div>
 	<div class="infoWrap">
-		<span class="productSubject">${hotProduct.SUBJECT }</span><br>
+		<span class="productSubject"><font color="red" size="4">${status.index+1}.</font>${hotProduct.SUBJECT }</span><br>
 		<span class="productPrice">
 		<fmt:formatNumber value="${hotProduct.PRICE }" pattern="#,###.##" /> 원
 		</span>
 	</div>
 </div>
 </c:forEach>
-<p>인기 카테고리</p>
-<c:forEach var="hotCategory" items="${hotCategoryList }">
+
+<h3>픽셀 플러스<font color="red">BEST</font> 카테고리 <a href="/picksell/products/plus"><font color="red" size="2">전체보기</font></a></h3>
+<c:forEach var="hotCategory" items="${hotCategoryList }" varStatus="status" end="4">
 	<div class="productWrap">
 	<div class="firstImgWrap">
-		카테고리 이미지
+		<a href="/picksell/products/plus?ca=${hotCategory.CATEGORY_NUM }">
+		<img src="/picksell/" style="width: 200px;" />
+		</a>
 	</div>
 	<div class="infoWrap">
-		<span class="productSubject">${hotCategory.CATEGORY_NAME }</span><br>
+		<a href="/picksell/products/plus?ca=${hotCategory.CATEGORY_NUM }">
+		<span class="productSubject"><font color="red" size="4">${status.index+1}.</font>[#${hotCategory.CATEGORY_NAME }]</span><br>
+		</a>
 	</div>
 </div>
 </c:forEach>
-<p>new 새로 등록된 플러스 상품  <a href="/picksell/products/plus">전체보기</a></p>
-<c:forEach var="pulsProduct" items="${plusProductList }" end="3">
+<h3>NEW 픽셀 플러스 상품  <a href="/picksell/products/plus"><font color="red" size="2">전체보기</font></a></h3>
+<c:forEach var="pulsProduct" items="${plusProductList }" end="4">
 	<div class="productWrap">
 	<div class="firstImgWrap">
 		<a href="/picksell/products/detail/${pulsProduct.CATEGORY_NUM }/${pulsProduct.PRODUCT_NUM }">
@@ -60,8 +65,8 @@
 	</div>
 </div>
 </c:forEach>
-<p>new 새로 등록된 일반 상품  <a href="/picksell/products/goods">전체보기</a></p>
-<c:forEach var="nomalProduct" items="${nomalProductList }" end="3">
+<h3>NEW 일반 상품  <a href="/picksell/products/goods"><font color="red" size="2">전체보기</font></a></h3>
+<c:forEach var="nomalProduct" items="${nomalProductList }" end="4">
 <div class="productWrap">
 <div class="firstImgWrap">
 	<a href="/picksell/products/detail/${nomalProduct.CATEGORY_NUM }/${nomalProduct.PRODUCT_NUM }">
@@ -69,8 +74,8 @@
 	</a>
 </div>
 <div class="infoWrap">
-	<span class="productSubject"><c:if test="${nomalProduct.PRODUCT_STATUS == '0'}">[미사용]</c:if>
-	<c:if test="${nomalProduct.PRODUCT_STATUS == '1'}">[새상품]</c:if> ${nomalProduct.SUBJECT }</span><br>
+	<span class="productSubject"><c:if test="${nomalProduct.PRODUCT_STATUS == '0'}"><font size="1">[미사용]</font></c:if>
+	<c:if test="${nomalProduct.PRODUCT_STATUS == '1'}"><font size="1">[새상품]</font></c:if> ${nomalProduct.SUBJECT }</span><br>
 	<span class="productPrice">
 	<fmt:formatNumber value="${nomalProduct.PRICE }" pattern="#,###.##" /> 원
 	</span>
