@@ -108,4 +108,8 @@ select * from ps_product a, PS_ORDERLIST b where b.ORDER_NUM = #{order_num} and 
 
 </select>
 
+<select id="userCheck" parameterType="String" resultType="String">
+			SELECT password FROM PS_MEMBER WHERE ID = #{ID}
+</select>
+
 </mapper>
