@@ -29,12 +29,12 @@ function passwordCheck(){
 }
 </script>
 <center>
-	<p>회원정보확인</p>
-	<p>정보를 안전하게 보호하기 위해 비밀번호를 다시 한번 확인 합니다</p>
+	<h2>회원정보확인</h2>
+	<h3>정보를 안전하게 보호하기 위해 비밀번호를 다시 한번 확인 합니다</h3>
 	<form action="/picksell/mypage/memberCheck" name="memberCheckForm" id="memberCheckForm" method="post" onsubmit="return mberValiCheck()">
 		<p>아이디 : ${sessionId}
 		<p>비밀번호 <input type="password" name="PASSWORD" id="PASSWORD" value="${cookiePW}"/>&nbsp;<span id="passwordCheckText"></span>
-		<P><input type="submit" value="로그인" /></P>
+		<P><input type="submit" value="확인" /><input type="button" value="취소" /></P>
 	</form>
 </center>
 
