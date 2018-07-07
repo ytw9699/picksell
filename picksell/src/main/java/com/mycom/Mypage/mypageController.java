@@ -35,6 +35,22 @@ public class mypageController {
 	@Resource(name="mypageService")
 	private mypageService mypageService;
 	
+	@RequestMapping(value="/mypage/memberCheck", method=RequestMethod.GET)
+	public String memberCheck(){
+		return "memberCheck";
+	}
+	@RequestMapping(value="/mypage/memberCheck", method=RequestMethod.POST)
+	public String memberCheck2(HttpServletRequest request, Model model, HttpSession session){
+		String DbPassword= mypageService.userCheck((String)session.getAttribute("sessionId"));
+		String PASSWORD = request.getParameter("PASSWORD");
+		
+		if(!DbPassword.equals(PASSWORD)){
+			model.addAttribute("resultPW", "WRONG");//비밀번호가 틀리다면
+			return "memberCheck";
+		}
+		return "redirect:/mypage/modify";
+	}
+	
 	@RequestMapping(value="/mypage/modify",method=RequestMethod.GET)
 	public String modify(HttpSession session, Model model) {	
 		
@@ -121,9 +137,6 @@ public class mypageController {
 			
 			List<Map<String, Object>> orderSubDetail = mypageService.orderSubDetail(PRODUCT_NUM);
 			model.addAttribute("orderSubDetail", orderSubDetail);
-			
-			
-			
 		return "orderDetail";
 	}
 }
