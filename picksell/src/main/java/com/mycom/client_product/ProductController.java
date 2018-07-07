@@ -160,6 +160,7 @@ public class ProductController {
 		model.addAttribute("categoryList", categoryList);
 		model.addAttribute("currentPage", currentPageNumber);
 		model.addAttribute("orderMethod", orderMethod);
+		model.addAttribute("forwardingListKind", "2");
 		
 		return "productList";
 	}
@@ -199,6 +200,7 @@ public class ProductController {
 		model.addAttribute("currentPage", currentPageNumber);
 		model.addAttribute("categoryList", categoryList);
 		model.addAttribute("orderMethod", orderMethod);
+		model.addAttribute("forwardingListKind", "0");
 		
 		return "productPlusList";
 	}

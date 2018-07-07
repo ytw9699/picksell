@@ -105,6 +105,10 @@ a.menuLink {
     width: 100%;
     height: 100%;
 }
+.menuCategory .active{
+	color: #7151fc;
+    border-bottom: 2px solid #7151fc;
+}
 a.menuLink:hover {
 	color: #7151fc;
     border-bottom: 2px solid #7151fc;
@@ -191,9 +195,9 @@ span#myBasketSum {
 <div class="headerBottom">
 	<ul class="bottomUL">
 		<li class="headerCategory totalCategory"><a href="#">전체카테고리</a></li>
-		<li class="headerCategory menuCategory"><a href="/picksell/products/plus" class="menuLink">픽셀 플러스</a></li>
-		<li class="headerCategory menuCategory"><a href="/picksell/hotPlusProduct" class="menuLink">인기상품</a></li>
-		<li class="headerCategory menuCategory"><a href="/picksell/products/goods" class="menuLink">일반상품</a></li>
+		<li class="headerCategory menuCategory"><a href="/picksell/products/plus" class="menuLink <c:if test="${forwardingListKind == '0' }">active</c:if>">픽셀 플러스</a></li>
+		<li class="headerCategory menuCategory"><a href="/picksell/hotPlusProduct" class="menuLink <c:if test="${forwardingListKind == '1' }">active</c:if>">인기상품</a></li>
+		<li class="headerCategory menuCategory"><a href="/picksell/products/goods" class="menuLink <c:if test="${forwardingListKind == '2' }">active</c:if>">일반상품</a></li>
 		<li class="headerCategory menuCategory"><a href="#" class="menuLink">무료나눔</a></li>
 		<li class="headerCategory menuCategory" style="float: right;"><a href="/picksell/sell/howto" class="sellLink">물건 판매하기</a></li>
 	</ul>
