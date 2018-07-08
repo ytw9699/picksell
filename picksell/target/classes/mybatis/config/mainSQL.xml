@@ -87,12 +87,99 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			
 		</if>
 	</select>
-
-   <!-- 통합 검색 로직 -->
-   <select id="mainSearchList" resultType="hashmap" parameterType="String">
-	select * from ps_product where subject like '%'||#{searchKeyword}||'%' order by product_regdate desc
-	<!-- select * from ps_product where subject like #{searchKeyword} order by product_regdate desc			 -->							
-   
-	</select>
+	
+<!-- 통합검색 로직 -->
+<select id="mainSearchList" resultType="hashmap" parameterType="hashmap">
+ 	<if test='HowToSell == "3" '>
+ 	<!-- 검색된 전체 상품 보기 -->
+<choose>
+ 		<when test='order == "0" '>
+ 			select * from ps_product where subject like '%'||#{searchKeyword}||'%' order by product_regdate desc
+ 		</when>
+ 		
+ 		<when test='order == "1" '>
+		  select r, b.total, b.product_num, c.first_img, c.subject ,c.price, c.PRODUCT_REGDATE, c.CATEGORY_NUM, c. SELLER_ID
+		  from(
+		  select rownum r, a.total, a.product_num from(
+		  select count(*) as total, product_num
+		  from ps_orderlist
+		  group by product_num
+		  order by count(*) desc
+		  )a order by a.total desc )b, ps_product c where b.product_num = c.product_num and c.subject like '%'||#{searchKeyword}||'%'
+   		</when>
+   		
+   		<when test='order == "2" '>
+   			select * from ps_product where subject like '%'||#{searchKeyword}||'%' order by PRICE asc
+   		</when>
+   		
+   		<when test='order == "3" '>
+   			select * from ps_product where subject like '%'||#{searchKeyword}||'%' order by PRICE desc
+   		</when>
+</choose>
+ 	</if>
+ 	
+ 	<if test='HowToSell == "0" '>
+ 		select * from ps_product where subject like '%'||#{searchKeyword}||'%' and HowToSell = '0'
+  		<choose>
+ 		<when test='order == "0" '>
+ 			 order by product_regdate desc
+ 		</when>
+   		
+   		<when test='order == "2" '>
+   			order by PRICE asc
+   		</when>
+   		
+   		<when test='order == "3" '>
+   			order by PRICE desc
+   		</when>
+		</choose>
+  	</if>
+  	
+  	<if test='HowToSell == "1" '>
+  		select * from ps_product where subject like '%'||#{searchKeyword}||'%' and HowToSell = '1'
+  		<choose>
+ 		<when test='order == "0" '>
+ 			 order by product_regdate desc
+ 		</when>
+   		
+   		<when test='order == "2" '>
+   			order by PRICE asc
+   		</when>
+   		
+   		<when test='order == "3" '>
+   			order by PRICE desc
+   		</when>
+		</choose>
+  	</if>
+  	
+  	<if test='HowToSell == "2" '>
+<choose>
+		<when test='order == "0" '>
+ 			select * from ps_product where subject like '%'||#{searchKeyword}||'%' and HowToSell = '2' order by product_regdate desc
+ 		</when>
+ 		
+ 		<when test='order == "1" '>
+		  select r, b.total, b.product_num, c.first_img, c.subject ,c.price, c.PRODUCT_REGDATE, c.CATEGORY_NUM, c. SELLER_ID
+		  from(
+		  select rownum r, a.total, a.product_num from(
+		  select count(*) as total, product_num
+		  from ps_orderlist
+		  group by product_num
+		  order by count(*) desc
+		  )a order by a.total desc )b, ps_product c where b.product_num = c.product_num and c.HowToSell = '2' and c.subject like '%'||#{searchKeyword}||'%'
+   		</when>
+   		
+   		<when test='order == "2" '>
+   			select * from ps_product where subject like '%'||#{searchKeyword}||'%' and HowToSell = '2' order by PRICE asc
+   		</when>
+   		
+   		<when test='order == "3" '>
+   			select * from ps_product where subject like '%'||#{searchKeyword}||'%' and HowToSell = '2' order by PRICE desc
+   		</when>
+</choose>  	
+  	</if>
+  	
+  	
+</select>
 	
 </mapper>
