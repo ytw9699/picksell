@@ -38,7 +38,7 @@
 		<td>판매상태</td>
 		<td>조회수</td>
 		<td>재고</td>
-		<td>수량</td>
+		<td>남은수량</td>
 	</tr>
 
 <c:forEach var="list" items="${sellList}">
