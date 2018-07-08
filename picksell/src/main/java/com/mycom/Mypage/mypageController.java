@@ -90,7 +90,7 @@ public class mypageController {
 	public String sellList(
 	@RequestParam(value="HowToSell", required=false, defaultValue="3") String HowToSell,//기본값 3은 전체보기 
 	@RequestParam(value="deal_status", required=false, defaultValue="3") String deal_status,//기본값 3은 전체보기
-	@RequestParam(value="currentPageNumber", required=false, defaultValue="1") int currentPageNumber,
+	@RequestParam(value="p", required=false, defaultValue="1") int currentPageNumber,
 	Model model, HttpSession session) {
 		
 	Map<String, Object> parameterMap = new HashMap<String, Object>();
@@ -105,7 +105,7 @@ public class mypageController {
 	
     totalCount = sellList.size();
     
-	page = new ProductPaging(currentPageNumber, totalCount, blockCount, blockPage, "/mypage/sellList", HowToSell, deal_status);
+	page = new ProductPaging(currentPageNumber, totalCount, blockCount, blockPage, "/picksell/mypage/sellList", HowToSell, deal_status);
 	
 	pagingHtml = page.getPagingHtml().toString();
 	
@@ -123,26 +123,7 @@ public class mypageController {
 	
 	return "sellList";
 }
-	
-/*	@RequestMapping(value="/mypage/sellList/{DEAL_STATUS}", method=RequestMethod.GET)
-	public String sellList(Model model, HttpSession session, @PathVariable("DEAL_STATUS") String DEAL_STATUS) {	
-		
-	String sessionId =(String)session.getAttribute("sessionId");
-	if(DEAL_STATUS.equals("0")) {
-		List<Map<String, Object>> sellList = mypageService.sellList0(sessionId);
-		model.addAttribute("sellList", sellList);
-	}
-	if(DEAL_STATUS.equals("1")) {
-		List<Map<String, Object>> sellList = mypageService.sellList1(sessionId);
-		model.addAttribute("sellList", sellList);
-		}
-	if(DEAL_STATUS.equals("2")) {
-		List<Map<String, Object>> sellList = mypageService.sellList2(sessionId);
-		model.addAttribute("sellList", sellList);
-	}
-	
-	return "sellList";
-	}*/
+
 	@RequestMapping(value="/mypage/purchaseList/{STATUS}",method=RequestMethod.GET)
 	public String purchaseList(Model model, HttpSession session, @PathVariable("STATUS") String STATUS) {	
 		
