@@ -30,6 +30,14 @@ import com.mycom.utils.FileUpload;
 
 @Controller
 public class mypageController {
+	
+	//페이징
+	private int totalCount; 		 
+	private int blockCount = 10;	 
+	private int blockPage = 5; 	 
+	private String pagingHtml;  
+	private ProductPaging page;
+			
 	Map<String, Object> resultMap = new HashMap<String, Object>();//공통사용
 	
 	@Resource(name="mypageService")
@@ -77,7 +85,46 @@ public class mypageController {
 			}
 		return "redirect:/mypage/modify?updated=updated";
 	}
-	@RequestMapping(value="/mypage/sellList/{DEAL_STATUS}", method=RequestMethod.GET)
+	
+	@RequestMapping("/mypage/sellList")
+	public String sellList(
+	@RequestParam(value="HowToSell", required=false, defaultValue="3") String HowToSell,//기본값 3은 전체보기 
+	@RequestParam(value="deal_status", required=false, defaultValue="3") String deal_status,//기본값 3은 전체보기
+	@RequestParam(value="currentPageNumber", required=false, defaultValue="1") int currentPageNumber,
+	Model model, HttpSession session) {
+		
+	Map<String, Object> parameterMap = new HashMap<String, Object>();
+	
+	String sessionId =(String)session.getAttribute("sessionId");
+	
+	parameterMap.put("HowToSell", HowToSell);
+	parameterMap.put("deal_status", deal_status);
+	parameterMap.put("sessionId", sessionId);
+	
+	List<Map<String, Object>> sellList = mypageService.sellList(parameterMap);
+	
+    totalCount = sellList.size();
+    
+	page = new ProductPaging(currentPageNumber, totalCount, blockCount, blockPage, "/mypage/sellList", HowToSell, deal_status);
+	
+	pagingHtml = page.getPagingHtml().toString();
+	
+	int lastCount = totalCount;
+	
+	if(page.getEndCount() < totalCount)
+		lastCount = page.getEndCount() + 1;
+	
+	sellList = sellList.subList(page.getStartCount(), lastCount);
+	
+	model.addAttribute("pagingHtml", pagingHtml);
+	model.addAttribute("HowToSell", HowToSell);
+	model.addAttribute("sellList", sellList);
+	model.addAttribute("currentPage", currentPageNumber);
+	
+	return "sellList";
+}
+	
+/*	@RequestMapping(value="/mypage/sellList/{DEAL_STATUS}", method=RequestMethod.GET)
 	public String sellList(Model model, HttpSession session, @PathVariable("DEAL_STATUS") String DEAL_STATUS) {	
 		
 	String sessionId =(String)session.getAttribute("sessionId");
@@ -95,7 +142,7 @@ public class mypageController {
 	}
 	
 	return "sellList";
-	}
+	}*/
 	@RequestMapping(value="/mypage/purchaseList/{STATUS}",method=RequestMethod.GET)
 	public String purchaseList(Model model, HttpSession session, @PathVariable("STATUS") String STATUS) {	
 		
