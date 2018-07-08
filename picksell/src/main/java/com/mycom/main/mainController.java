@@ -110,14 +110,24 @@ public class mainController {
 			return "hotPlusProduct";
 		}
 	
-	@RequestMapping(value="/mainSearchList", method=RequestMethod.GET)
-	public String mainSearchList(Model model, HttpServletRequest request) {	
+	@RequestMapping("/mainSearchList")
+	public String mainSearchList(
+			@RequestParam(value="HowToSell", required=false, defaultValue="3") String HowToSell,
+			@RequestParam(value="order", required=false, defaultValue="0") String order,
+			@RequestParam(value="searchKeyword", required=false, defaultValue="") String searchKeyword,
+			Model model) {	
 		
-		String searchKeyword = request.getParameter("searchKeyword");
+		Map<String, Object> parameterMap = new HashMap<String, Object>();
 		
-		List<Map<String, Object>> mainSearchList = mainService.mainSearchList(searchKeyword);
+		parameterMap.put("HowToSell", HowToSell);
+		parameterMap.put("order", order);
+		parameterMap.put("searchKeyword", searchKeyword);
 		
-			model.addAttribute("mainSearchList", mainSearchList);//아이디가 없다면
+		List<Map<String, Object>> mainSearchList = mainService.mainSearchList(parameterMap);
+		
+		model.addAttribute("HowToSell", HowToSell);
+		model.addAttribute("searchKeyword", searchKeyword);
+		model.addAttribute("mainSearchList", mainSearchList);
 			
 		return "mainSearchList";
 	}
