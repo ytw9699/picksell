@@ -15,16 +15,16 @@
 </head>
 <body>
 <h4>
-<a href="/picksell/mypage/sellList">전체 상품</a>/
-<a href="/picksell/mypage/sellList?HowToSell=0">일반 안전 상품</a>/
-<a href="/picksell/mypage/sellList?HowToSell=1">일반 안전 상품+직거래</a>/
-<a href="/picksell/mypage/sellList?HowToSell=2">픽셀플러스 상품</a>/
+<a href="/picksell/mypage/sellList">전체 상품 글</a>/
+<a href="/picksell/mypage/sellList?HowToSell=0">일반 안전 상품글</a>/
+<a href="/picksell/mypage/sellList?HowToSell=1">일반 안전 상품+직거래글</a>/
+<a href="/picksell/mypage/sellList?HowToSell=2">픽셀플러스 상품글</a>/
 </h4>
 <h4>
-<a href="/picksell/mypage/sellList?HowToSell=${HowToSell}">모든 상품</a>/
-<a href="/picksell/mypage/sellList?HowToSell=${HowToSell}&deal_status=0">판매중 상품</a>/
-<a href="/picksell/mypage/sellList?HowToSell=${HowToSell}&deal_status=1">거래중 상품</a>/
-<a href="/picksell/mypage/sellList?HowToSell=${HowToSell}&deal_status=2">판매 완료 상품</a>/
+<a href="/picksell/mypage/sellList?HowToSell=${HowToSell}">모든 상품 글</a>/
+<a href="/picksell/mypage/sellList?HowToSell=${HowToSell}&deal_status=0">판매중 상품 글</a>/
+<a href="/picksell/mypage/sellList?HowToSell=${HowToSell}&deal_status=1">거래중 상품 글</a>/
+<a href="/picksell/mypage/sellList?HowToSell=${HowToSell}&deal_status=2">판매 종료 상품 글</a>/
 	
 </h4>
 <table>
