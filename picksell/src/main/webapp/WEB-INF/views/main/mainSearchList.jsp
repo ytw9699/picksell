@@ -24,7 +24,7 @@
 </c:if>
 <a href="/picksell/mainSearchList?searchKeyword=${searchKeyword}&HowToSell=${HowToSell}&order=2">낮은가격순</a>/
 <a href="/picksell/mainSearchList?searchKeyword=${searchKeyword}&HowToSell=${HowToSell}&order=3">높은가격순</a>/
-</h4>
+</h4> 
 <table>
 <tr>
 <td>상품종류/</td>
@@ -32,7 +32,9 @@
 <td>제목/</td>
 <td>가격/</td>
 <td>날짜/</td>
+<c:if test="${HowToSell == '2' || HowToSell == '3'}">
 <td>판매량/</td>
+</c:if>
 </tr>
 </table>
 <c:forEach var="mainSearch" items="${mainSearchList}"> 
