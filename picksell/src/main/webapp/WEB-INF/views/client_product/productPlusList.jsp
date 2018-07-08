@@ -99,20 +99,20 @@ li.orderMethodLI.active > a {
 		<div class="categoryList">
 			<c:choose>
 				<c:when test="${currentCategory == 0}">
-				<span class="product_category active"><a href="/picksell/products/goods">모든상품</a></span>
+				<span class="product_category active"><a href="/picksell/products/plus">모든상품</a></span>
 				</c:when>
 				<c:when test="${currentCategory != 0 }">
-				<span class="product_category"><a href="/picksell/products/goods">모든상품</a></span>
+				<span class="product_category"><a href="/picksell/products/plus">모든상품</a></span>
 				</c:when>
 			</c:choose>
 			
 			<c:forEach var="category" items="${categoryList }" >
 				<c:choose>
 				<c:when test="${currentCategory == category.CATEGORY_NUM }">
-					<span class="product_category active"><a href="/picksell/products/goods?ca=${category.CATEGORY_NUM }">${category.CATEGORY_NAME }</a></span>
+					<span class="product_category active"><a href="/picksell/products/plus?ca=${category.CATEGORY_NUM }">${category.CATEGORY_NAME }</a></span>
 				</c:when>
 				<c:when test="${currentCategory != category.CATEGORY_NUM }">
-					<span class="product_category"><a href="/picksell/products/goods?ca=${category.CATEGORY_NUM }">${category.CATEGORY_NAME }</a></span>
+					<span class="product_category"><a href="/picksell/products/plus?ca=${category.CATEGORY_NUM }">${category.CATEGORY_NAME }</a></span>
 				</c:when>
 				</c:choose>
 			</c:forEach>
