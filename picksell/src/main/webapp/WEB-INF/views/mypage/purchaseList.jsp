@@ -15,7 +15,7 @@
 </style>
 </head>
 <body>
-<h2>일반 상품 구매 신청 리스트</h2> 
+<h2>일반 상품 안전 구매 신청 리스트</h2> 
 <table>
 <c:if test="${fn:length(purchaseList) > 0}">
 	<tr>
