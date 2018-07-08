@@ -36,6 +36,9 @@
 		<td>가격</td>
 		<td>작성일</td>
 		<td>판매상태</td>
+		<td>조회수</td>
+		<td>재고</td>
+		<td>수량</td>
 	</tr>
 
 <c:forEach var="list" items="${sellList}">
@@ -69,6 +72,9 @@
 		<c:if test="${list.DEAL_STATUS == '2'}">
 		<td>판매완료 상품</td>
 		</c:if>
+		<td>${list.HITCOUNT }</td>
+		<td>${list.STOCK }</td>
+		<td><span>수량 </span><input type="button" value="-" id="subBtn" onclick="subOrder()" /><span id="currentOrderView">${list.STOCK }</span><input type="button" value="+" id="addBtn" onclick="addOrder()" /></td>
 	</tr>
 </c:forEach>
 </c:if>
