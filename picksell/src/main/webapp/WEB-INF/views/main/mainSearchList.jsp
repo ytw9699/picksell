@@ -16,6 +16,19 @@
 </style>
 </head>
 <body>
+<h4>
+<a href="/picksell/mainSearchList?searchKeyword=${searchKeyword}&HowToSell=${HowToSell}">전체 상품</a>/
+<a href="/picksell/mainSearchList?searchKeyword=${searchKeyword}&HowToSell=${HowToSell}">일반 안전 상품</a>/
+<a href="/picksell/mainSearchList?searchKeyword=${searchKeyword}&HowToSell=${HowToSell}">일반 안전 + 직거래 상품</a>/
+<a href="/picksell/mainSearchList?searchKeyword=${searchKeyword}&HowToSell=${HowToSell}">픽셀플러스 상품</a>/
+</h4>
+<h4>
+<a href="/picksell/mainSearchList?searchKeyword=${searchKeyword}&HowToSell=${HowToSell}&order=1">최신등록순</a>/
+<a href="/picksell/mainSearchList?searchKeyword=${searchKeyword}&HowToSell=${HowToSell}&order=2">판매량순</a>/
+<a href="/picksell/mainSearchList?searchKeyword=${searchKeyword}&HowToSell=${HowToSell}&order=3">낮은가격순</a>/
+<a href="/picksell/mainSearchList?searchKeyword=${searchKeyword}&HowToSell=${HowToSell}&order=4">높은가격순</a>/
+</h4>
+
 <c:forEach var="mainSearch" items="${mainSearchList }">
 	<div class="productWrap">
 	<div class="firstImgWrap">
