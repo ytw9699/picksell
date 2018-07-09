@@ -74,17 +74,15 @@
    
    
    <!-- 로그인체크 인터셉터 -->
-   <!-- <interceptors> //로그인이 안되어있으면,url로 들어가려면(session이 널이면) 로그인 페이지로 들어가게끔. 
+   <interceptors> <!-- //로그인이 안되어있으면,url로 들어가려면(session이 널이면) 로그인 페이지로 들어가게끔.  -->
         <interceptor> 
-            <mapping path="/test/**" />
-            <exclude-mapping path="/main/*"/>
-            <exclude-mapping path="/login/*"/>
-            <beans:bean class="com.mycom.config.SessionInterceptor"></beans:bean>            
-            
-            
-            
+            <mapping path="/cart/**" />
+            <mapping path="/sell/**"/>
+            <!-- <exclude-mapping path="/main/*"/>
+            <exclude-mapping path="/login/*"/> -->
+            <beans:bean class="com.mycom.config.SessionInterceptor"></beans:bean>
         </interceptor>        
-    </interceptors> -->
+    </interceptors> 
       
    
    

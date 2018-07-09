@@ -206,6 +206,8 @@
 			</c:if>
 		</div>
 		<div class="button_wrap">
+		
+			<c:if test="${sessionScope.sessionId != null }">
 			<!-- 장바구니버튼 -->
 			<div class="basketWrap" id="basketWrap">
 				<c:choose>
@@ -220,8 +222,8 @@
 					</c:when>
 				</c:choose>
 			</div>
-			<!-- 구매신청하기버튼 -->
 			
+			<!-- 구매신청하기버튼 -->
 			<div class="purchaseWrap" id="purchaseWrap">
 				<c:choose>
 					<c:when test="${resultObject.DEAL_STATUS == 0 and resultObject.HOWTOSELL != 2 and alreadyPurchase == false and isMyProducts == 'no' }">
@@ -247,7 +249,7 @@
 				</c:when>
 			</c:choose>
 			
-			
+			</c:if><!-- 세션조건 끝 -->
 		</div>
 		<div class="product_detail">
 			${resultObject.CONTENT }

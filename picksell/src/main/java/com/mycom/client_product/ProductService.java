@@ -18,6 +18,10 @@ public class ProductService implements ProductDao {
 	public void insertProduct(Map<String, Object> map) {
 		sqlMapper.insert("client_product.insertProduct", map);
 	}
+	//판매글 리스트(메인카테고리)
+	public List<Map<String, Object>> getProductListOnMain(Map<String, Object> map) {
+		return sqlMapper.selectList("client_product.selectProductListMain", map);
+	}
 	//판매글 리스트(일반판매)
 	public List<Map<String, Object>> getNomalProductList(Map<String, Object> map){
 		return sqlMapper.selectList("client_product.selectNomalProductList", map);

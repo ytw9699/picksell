@@ -12,12 +12,12 @@ public class SessionInterceptor extends HandlerInterceptorAdapter {
 		
 		
 		//return true;
-		Object userId = request.getSession().getAttribute("userId2");
+		Object userId = request.getSession().getAttribute("sessionId");
 		
 		
 		//만약에 로그인이 안된상태에서 다른 페이지로 가려고하면
 		if(userId == null) {
-			response.sendRedirect("/picksell/noSession");
+			response.sendRedirect("/picksell/loginForm");
 			return false;
 		}else
 			return true;

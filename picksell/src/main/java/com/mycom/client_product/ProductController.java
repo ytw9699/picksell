@@ -216,11 +216,8 @@ public class ProductController {
 		
 		//(구매자) 구매신청을 했는지
 		boolean purchaseApplying = false;
-		
 		Map<String, Object> forBuyerParamMap = new HashMap<String, Object>();
-		
 		String currentID = (String) request.getSession().getAttribute("sessionId");
-		
 		
 		//조회수 증가
 		Map<String, Object> parameterMap = new HashMap<String, Object>();
@@ -239,47 +236,52 @@ public class ProductController {
 
 		//구매신청을 했는지(구매자)
 		model.addAttribute("alreadyPurchase", false);
-		for(int i = 0 ; i < resultPurchaseList.size() ; i++) {
-			if(resultPurchaseList.get(i).get("BUYER_ID").equals(currentID)) {
-				purchaseApplying = true;
-				model.addAttribute("alreadyPurchase", true);
-				break;
+		if(currentID != null) {
+			for(int i = 0 ; i < resultPurchaseList.size() ; i++) {
+				if(resultPurchaseList.get(i).get("BUYER_ID").equals(currentID)) {
+					purchaseApplying = true;
+					model.addAttribute("alreadyPurchase", true);
+					break;
+				}
 			}
 		}
 		
 		//장바구니에 담았는지(구매자)
 		model.addAttribute("alreadyBasket", false);
-		Map<String, Object> basketParameterMap = new HashMap<String, Object>();
-		basketParameterMap.put("product_num", product_num);
-		basketParameterMap.put("basket_id", currentID);
-		int isBasket = basketService.countingIsBasket(basketParameterMap);
-		if(isBasket > 0) {
-			model.addAttribute("alreadyBasket", true);
+		if(currentID != null) {
+			Map<String, Object> basketParameterMap = new HashMap<String, Object>();
+			basketParameterMap.put("product_num", product_num);
+			basketParameterMap.put("basket_id", currentID);
+			int isBasket = basketService.countingIsBasket(basketParameterMap);
+			if(isBasket > 0) {
+				model.addAttribute("alreadyBasket", true);
+			}
 		}
 		
 		//이 게시글이 나의것인지(내것이면 구매신청리스트 확인(판매자))
-		if((resultMap.get("SELLER_ID").equals(currentID))) {
-			model.addAttribute("isMyProducts", "yes");
-			
-			List<Map<String, Object>> sellerPurList = productService.getProductSellerPurchaseList(product_num);
-			model.addAttribute("sellerPurList", sellerPurList);
-			
+		if(currentID != null) {
+			if((resultMap.get("SELLER_ID").equals(currentID))) {
+				model.addAttribute("isMyProducts", "yes");
+				
+				List<Map<String, Object>> sellerPurList = productService.getProductSellerPurchaseList(product_num);
+				model.addAttribute("sellerPurList", sellerPurList);
+			}
 		}
 		//이 게시글이 내것이아닌지(아니면 구매신청리스트 확인(판매자))
-		if((!resultMap.get("SELLER_ID").equals(currentID))) {
-			model.addAttribute("isMyProducts", "no");
-			if(purchaseApplying) {
-			
-			forBuyerParamMap.put("buyer_id", currentID);
-			forBuyerParamMap.put("product_num", product_num);
-			int isApprovedNum = productService.selectMyPurchase(forBuyerParamMap);
-				if(isApprovedNum == 1) {
-					model.addAttribute("isApprovedPC", "yes");
-				}else if(isApprovedNum == 0) {
-					model.addAttribute("isApprovedPC", "no");
+		if(currentID != null) {
+			if((!resultMap.get("SELLER_ID").equals(currentID))) {
+				model.addAttribute("isMyProducts", "no");
+				if(purchaseApplying) {
+				
+				forBuyerParamMap.put("buyer_id", currentID);
+				forBuyerParamMap.put("product_num", product_num);
+				int isApprovedNum = productService.selectMyPurchase(forBuyerParamMap);
+					if(isApprovedNum == 1) {
+						model.addAttribute("isApprovedPC", "yes");
+					}else if(isApprovedNum == 0) {
+						model.addAttribute("isApprovedPC", "no");
+					}
 				}
-			
-			
 			}
 		}
 		
@@ -396,4 +398,34 @@ public class ProductController {
 
 			return resultMap;
 		}
+		
+	//메인카테고리
+	@RequestMapping("/products")
+	public String mainCategoryProductListProc(
+			@RequestParam(value="ca") int ca,
+			@RequestParam(value="ls",required=false,defaultValue="0") int ls,
+			@RequestParam(value="od",required=false,defaultValue="0") int od,
+			Model model) {
+		
+		Map<String, Object> parameterMap = new HashMap<String, Object>();
+		/*System.out.println("카테고리:::"+ca);
+		System.out.println("타겟리스트:::"+ls);
+		System.out.println("정렬순서:::"+od);
+		*/
+		parameterMap.put("ca", ca);
+		parameterMap.put("ls", ls);
+		parameterMap.put("od", od);
+		
+		List<Map<String, Object>> resultList = productService.getProductListOnMain(parameterMap);
+		
+		//System.out.println("리스트사이즈:::"+resultList.size());
+		
+		model.addAttribute("currentCA", ca);
+		model.addAttribute("currentLS", ls);
+		model.addAttribute("currentOD", od);
+		model.addAttribute("resultProductList", resultList);
+		
+		return "proudctListMainCategory";
+	}
+		
 }
