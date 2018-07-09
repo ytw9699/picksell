@@ -37,4 +37,6 @@ public interface AdminMemberDAO {
 	//회원 블라인드처리
 	
 	//회원 계정상태 처리
+	public void changeMemberStatus(Map<String,Object> map);
+
 }

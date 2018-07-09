@@ -205,7 +205,20 @@ public class AdminMemberController {
 		model.addAttribute("maplist",maplist);
 		
 		return "adminProducts";
+
+	}
+	
+	@RequestMapping(value="/infoChangeProc")
+	public String memberStatus(HttpServletRequest request,Model model) throws Exception{
 		
-		
+		Map<String, Object> pMap = new HashMap<String, Object>(); 
+		pMap.put("id", request.getParameter("id"));
+		pMap.put("status", request.getParameter("status"));
+	
+		if(request.getParameter("status") != null) {
+			adminMemberService.changeMemberStatus(pMap);
+		}
+	
+		return "redirect:/admin/member/info/"+request.getParameter("id");
 	}
 }
