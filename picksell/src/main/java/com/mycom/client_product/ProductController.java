@@ -398,4 +398,34 @@ public class ProductController {
 
 			return resultMap;
 		}
+		
+	//메인카테고리
+	@RequestMapping("/products")
+	public String mainCategoryProductListProc(
+			@RequestParam(value="ca") int ca,
+			@RequestParam(value="ls",required=false,defaultValue="0") int ls,
+			@RequestParam(value="od",required=false,defaultValue="0") int od,
+			Model model) {
+		
+		Map<String, Object> parameterMap = new HashMap<String, Object>();
+		/*System.out.println("카테고리:::"+ca);
+		System.out.println("타겟리스트:::"+ls);
+		System.out.println("정렬순서:::"+od);
+		*/
+		parameterMap.put("ca", ca);
+		parameterMap.put("ls", ls);
+		parameterMap.put("od", od);
+		
+		List<Map<String, Object>> resultList = productService.getProductListOnMain(parameterMap);
+		
+		//System.out.println("리스트사이즈:::"+resultList.size());
+		
+		model.addAttribute("currentCA", ca);
+		model.addAttribute("currentLS", ls);
+		model.addAttribute("currentOD", od);
+		model.addAttribute("resultProductList", resultList);
+		
+		return "proudctListMainCategory";
+	}
+		
 }

@@ -37,13 +37,12 @@ a:hover { color: black; text-decoration: none;}
 #maincategory_menuBox{position:absolute; display:none;}
 #maincategory-header{height: 32px;}
 #maincategory-body {
-    width: 95px;
+    width: 190px;
     border: 1px solid #c2c2c2;
     background-color: white;
-    padding: 13px;
-    margin-left: 4px;
+    /* padding: 13px; */
+    /* margin-left: -1px; */
 }
-
 
 span.menuBox-link a {
     color: #666;
@@ -141,18 +140,42 @@ span#myBasketSum {
     display: inline-block;
     text-align: center;
 }
-/* .totalCategory:hover{
-	background-color: #7151fc;
-	color: white;
-	
-} */
-
 .totalCategoryText {
     background: url(/picksell/resources/img/maincategory_nohover.png) 2% 53% no-repeat;
     width: 100%;
     height: 50px;
     display: block;
 }
+
+#maincategory-body {
+    /* width: 128px; */
+    border: 1px solid #c2c2c2;
+    background-color: white;
+    /* padding: 13px; */
+    /* margin-left: -1px; */
+}
+
+ul.mainCategoryUL {
+    width: 190px;
+    margin: 0;
+    padding: 0;
+}
+
+li.mainCategoryLI {
+    color: #333;
+    padding: 12px;
+    cursor: pointer;
+}
+
+li.mainCategoryLI:hover {
+    background-color: #7151fc;
+    color: white;
+}
+
+
+
+
+
 
 </style>
 </head>
@@ -166,7 +189,7 @@ span#myBasketSum {
 			var height = $(this).height();
 			var top = $(this).offset().top;
 			//get the left and find the center value
-			var left = $(this).offset().left + ($(this).width() / 2) - ($('#maincategory_menuBox').width() / 2);
+			var left = $(this).offset().left + ($(this).width() / 2) - ($('#maincategory_menuBox').width() / 2) + 31;
 			$('#maincategory-header').height(height);
 			$('#maincategory_menuBox').show();
 			$('#maincategory_menuBox').css({'top':top, 'left':left});
@@ -262,11 +285,22 @@ span#myBasketSum {
 <div id="maincategory_menuBox">
 	<div id="maincategory-header"></div>
 	<div id="maincategory-body">
-		카테고리에용
+		<ul class="mainCategoryUL">
+			<li class="mainCategoryLI" onclick="location.href='/picksell/products?ca=1'">전자제품</li>
+			<li class="mainCategoryLI" onclick="location.href='/picksell/products?ca=2'">패션/의류</li>
+			<li class="mainCategoryLI" onclick="location.href='/picksell/products?ca=3'">패션/잡화</li>
+			<li class="mainCategoryLI" onclick="location.href='/picksell/products?ca=4'">화장품/미용</li>
+			<li class="mainCategoryLI" onclick="location.href='/picksell/products?ca=5'">스포츠/레저</li>
+			<li class="mainCategoryLI" onclick="location.href='/picksell/products?ca=6'">유아동/출산</li>
+			<li class="mainCategoryLI" onclick="location.href='/picksell/products?ca=7'">완구/문구/취미</li>
+			<li class="mainCategoryLI" onclick="location.href='/picksell/products?ca=8'">도서/음반/DVD</li>
+			<li class="mainCategoryLI" onclick="location.href='/picksell/products?ca=9'">가구/인테리어</li>
+			<li class="mainCategoryLI" onclick="location.href='/picksell/products?ca=10'">생활/건강</li>
+		</ul>
 	</div>
 </div>
 
 <p>
-
 </body>
+
 </html>
