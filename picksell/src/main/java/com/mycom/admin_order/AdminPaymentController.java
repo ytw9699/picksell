@@ -98,7 +98,7 @@ public class AdminPaymentController {
 		}
 		
 		totalCount = orderList.size();
-		page = new Paging(currentPage, totalCount, blockCount, blockPage, "orderList");
+		page = new Paging(currentPage, totalCount, blockCount, blockPage, "list");
 		pagingHtml = page.getPagingHtml().toString(); 
 		int lastCount = totalCount;
 		if (page.getEndCount() < totalCount)
