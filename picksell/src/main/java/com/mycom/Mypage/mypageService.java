@@ -31,8 +31,8 @@ public class mypageService implements mypageDao {
 		return sqlMapper.selectList("mypage.purchaseList", sessionId);
 	}
 
-	public List<Map<String, Object>> orderList(String sessionId) {
-		return sqlMapper.selectList("mypage.orderList", sessionId);
+	public List<Map<String, Object>> orderList(Map<String, Object> parameterMap) {
+		return sqlMapper.selectList("mypage.orderList", parameterMap);
 	}
 	public List<Map<String, Object>> orderSubList(Map<String, Object> parameterMap) {
 		return sqlMapper.selectList("mypage.orderSubList", parameterMap);

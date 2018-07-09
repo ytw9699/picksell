@@ -15,6 +15,24 @@
 </head>
 <body>
 <table>
+<a href="/picksell/mypage/orderList">
+전체보기/
+</a>
+<a href="/picksell/mypage/orderList?status=0">
+입금대기/
+</a>
+<a href="/picksell/mypage/orderList?status=1">
+입금완료 및 배송대기중/
+</a>
+<a href="/picksell/mypage/orderList?status=2">
+배송 및 인수확인 대기/
+</a>
+<a href="/picksell/mypage/orderList?status=3">
+인수확인 및 거래완료/
+</a>
+<a href="/picksell/mypage/orderList?status=44">
+결제취소/
+</a>
 <c:if test="${fn:length(orderList) > 0}">
 <c:forEach var="ps_order" items="${orderList}" varStatus="orderListStatus">
     <br><h3>주문일:<fmt:formatDate value="${ps_order.STEP1_DATE}" pattern="yyyy년 MM월 dd일 hh:mm:ss" />
@@ -67,6 +85,9 @@
 <c:if test="${fn:length(orderList) < 1}">
 <p>내역이 없습니다</p>
 </c:if>
+<div class="paging">
+			${pagingHtml} 페이지
+</div>
 </table>
 </body>
 </html>
