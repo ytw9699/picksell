@@ -104,6 +104,7 @@ a.menuLink {
     display: block;
     width: 100%;
     height: 100%;
+    
 }
 .menuCategory .active{
 	color: #7151fc;
