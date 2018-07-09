@@ -121,12 +121,6 @@ select * from ps_order a, ps_orderlist b where b.order_num = a.order_num and b.s
 select b.PRICE, b.SUBJECT, b.FIRST_IMG, b.category_num, b.product_num, a.ORDER_NUM, a.ORDER_QUANTITY
 from(select * from PS_ORDERLIST)a, ps_product b, ps_order c where a.order_num = #{ORDER_NUM} and a.seller_id = #{sessionId} and a.product_num = b.product_num and b.seller_id = #{sessionId} and
 
-
-select * from ps_product a, ps_orderlist b, ps_order c where b.order_num = 
-181 and b.seller_id = '2' and b.product_num = a.product_num and a.seller_id = '2' and c.status != '5'
-
-<!-- select * from ps_product a, ps_orderlist b, ps_order c where b.order_num = #{ORDER_NUM} and b.seller_id = #{sessionId} and b.product_num = a.product_num and a.seller_id = #{sessionId} and c.status != '5' -->
- 
 <if test='status == "5" '>
 c.status != '5'
 </if>
