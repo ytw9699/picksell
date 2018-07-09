@@ -6,10 +6,12 @@
 <html>
 <head>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>오더 리스트</title>
-
+<meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <style type="text/css">
 
 .button {
@@ -81,7 +83,7 @@ tr:nth-child(even){background-color: #f2f2f2}
 
 </head>
 <body>
-
+<div class="container">
 <div class="main">
 <div style="overflow-x:auto;">
 <table>
@@ -156,6 +158,7 @@ tr:nth-child(even){background-color: #f2f2f2}
 <%-- 				 <a href="${status1}"><input type="button" value="입금완료"></a> --%>
 
  				</td>
+ 				
  				<td style="text-align:center;vertical-align:middle;">
  					<c:if test="${empty orderList.step3_date}">
 					<i class="fa fa-remove"></i>
@@ -164,11 +167,44 @@ tr:nth-child(even){background-color: #f2f2f2}
 					<i class="fa fa-check"></i>
 					</c:if>
  				</td>
+ 				
  				<td style="text-align:center;vertical-align:middle;">
+ 				
  				<c:url var="status2" value="/admin_order/deliveryProc" >
 					<c:param name="order_num" value="${orderList.order_num}" />							
 				</c:url>
-				 <a href="${status2}"><input type="button" value="배송중"></a>
+				
+				<input type="button" data-toggle="modal" data-target="#myModal" data-id="myValue" value="배송중">
+				 
+				 <!-- Modal -->
+  				<div class="modal fade" id="myModal" role="dialog">
+   				 <div class="modal-dialog">
+    
+    			  <!-- Modal content-->
+     			 <div class="modal-content">
+      			  <div class="modal-header">
+      	  			  <button type="button" class="close" data-dismiss="modal">&times;</button>
+      		    <h4 class="modal-title">택배사 / 송장번호  입력</h4>
+      			  </div>
+     		    <form>
+   				 <div class="form-group">
+    			  <label for="usr">택배사</label>
+    			  <input type="text" class="form-control" id="usr">
+   				 </div>
+   				 <div class="form-group">
+          	 	  <label for="pwd">송장번호</label>
+    			  <input type="password" class="form-control" id="pwd">
+  		  		</div>
+ 		 </form>
+        <div class="modal-footer">
+         	<a href="${status2}">  <button type="button" class="btn btn-default" >입력완료</button> </a>
+        
+       	 </div>
+     		 </div>
+      
+   		 </div>
+ 			 </div>
+				 	 
  				</td>
  				
  				<td style="text-align:center;vertical-align:middle;">
@@ -197,6 +233,7 @@ tr:nth-child(even){background-color: #f2f2f2}
  	</div>
 </table> 
 </div>	
+
  	<!--  등록된 상품이 없을때 -->
 	<c:if test="${empty orderList}">
 		<tr><td colspan="9" style="text-align:center;">등록된 상품이 없습니다</td></tr>
@@ -223,6 +260,7 @@ tr:nth-child(even){background-color: #f2f2f2}
 			</div>							
 		</div>				
 	</div>
+</div>
 </div>
 </body>
 </html>
