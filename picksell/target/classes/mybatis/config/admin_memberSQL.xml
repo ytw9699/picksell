@@ -66,8 +66,24 @@ PUBLIC " - //mybatis.org//DTD Config 3.0//EN"
 	 <select id="adminSelling" resultType="hashmap" parameterType="string">
 	    SELECT * FROM ps_product WHERE seller_id = #{id} and 
 	    deal_status = '0'
-	 
 	 </select>
+	 
+	 <update id="adminMemberStatus" parameterType="HashMap">
+	  UPDATE ps_member SET 
+	   <choose>
+	    <when test='status == "0" '>
+	      status = '0'
+	    </when>
+	    <when test='status == "1" '>
+	      status = '1'
+	    </when>
+	    <when test='status == "2" '>
+	      status = '2'
+	    </when>
+	    </choose>
+	   WHERE id= #{id} 
+	 </update> 
+	 
  </mapper>
 
 	

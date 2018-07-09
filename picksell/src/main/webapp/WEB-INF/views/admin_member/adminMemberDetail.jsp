@@ -7,11 +7,32 @@
 <style>
 .main{
    margin-left: 160px; /* Same as the width of the sidenav */
-   
+}
+#hiddenPage{
+  	margin-left: 160px; 
+    width: 100%;
+    padding: 50px 0;
+    text-align: center;
+    background-color: lightgrey;
+    
 }
 </style>
+<script type="text/javascript">
+  function msg(){
+	  var x = document.getElementById("hiddenPage");
+	  var status = ${map.STATUS}
+	  if(x.style.display === "none" ){
+		  x.style.display = "block";
+		  
+	  }else{
+		  x.style.display = "none";
+	  }
+	  
+	  
+	  
+ }
+</script>
 <head>
-
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>관리자 회원 상세보기</title>
 </head>
@@ -33,8 +54,10 @@
 <tr><td>
 주소 : ${map.ADDRESS }
 </td></tr>
+
 <tr><td>
-계정 상태 : 
+
+계정 상태 :
 <c:choose>
 <c:when test="${ '0' eq map.STATUS }">
  정상
@@ -46,7 +69,10 @@
  로그인 제한
 </c:when>
 </c:choose>
+
+<input type="button" onclick="msg()" name="" value="변경"/>
 </td></tr>
+
 <tr><td>
 알람 동의 여부 : ${map.ALARM_CONSENT }
 </td></tr>
@@ -83,6 +109,24 @@
 회원 판매 글 리스트</a>
 </td></tr>
 </table>
+</div>
+<div id="hiddenPage"> 
+
+	<c:choose>
+		<c:when test="${map.STATUS == '0'}">
+		<input type="submit" value="게시글 제한" onclick="location.href='/picksell/admin/member/infoChangeProc?id=${map.ID}&status=1'" >
+   	    <input type="submit" value="로그인 제한" onclick="location.href='/picksell/admin/member/infoChangeProc?id=${map.ID}&status=2'" >
+		</c:when>
+		<c:when test="${map.STATUS == '1' }">
+				<input type="submit" value="정 상" onclick="location.href='/picksell/admin/member/infoChangeProc?id=${map.ID}&status=0'" >
+		   		 <input type="submit" value="로그인 제한" onclick="location.href='/picksell/admin/member/infoChangeProc?id=${map.ID}&status=2'" >
+		</c:when>
+		<c:when test="${map.STATUS == '2' }">
+			<input type="submit" value="정 상" onclick="location.href='/picksell/admin/member/infoChangeProc?id=${map.ID}&status=0'" >
+		   	<input type="submit" value="게시글 제한" onclick="location.href='/picksell/admin/member/infoChangeProc?id=${map.ID}&status=1'" >
+		</c:when>
+	</c:choose> 
+   
 </div>
 </body>
 </html>
