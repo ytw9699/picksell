@@ -68,6 +68,21 @@ PUBLIC " - //mybatis.org//DTD Config 3.0//EN"
 	    deal_status = '0'
 	 </select>
 	 
+	 <update id="blindStatus" parameterType="HashMap">
+	  UPDATE ps_product SET 
+	  <choose>
+	   <when test='board_status == "0" '>
+	   board_status = '0'
+	   </when>
+	   <when test='board_status == "1" '>
+	    board_status = '1'
+	   </when>
+	  </choose>
+	 WHERE  seller_id = #{id}
+	 AND product_num = #{product_num} 
+	 
+	 </update>
+	 
 	 <update id="adminMemberStatus" parameterType="HashMap">
 	  UPDATE ps_member SET 
 	   <choose>

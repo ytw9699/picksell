@@ -35,7 +35,7 @@ public interface AdminMemberDAO {
 	public List<Map<String,Object>> adminProducts(String id);
 	
 	//회원 블라인드처리
-	
+	public void changeBlindStatus(Map<String,Object> map);
 	//회원 계정상태 처리
 	public void changeMemberStatus(Map<String,Object> map);
 

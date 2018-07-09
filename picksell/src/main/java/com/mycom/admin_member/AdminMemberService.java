@@ -60,6 +60,11 @@ public class AdminMemberService implements AdminMemberDAO {
 	public List<Map<String,Object>> adminProducts(String id){
 		return sqlSessionTemplate.selectList("admin_Member.adminSelling",id);
 	}
+	
+	@Override
+	public void changeBlindStatus(Map<String,Object> map) {
+		sqlSessionTemplate.update("admin_Member.blindStatus",map);
+	}
 
 	@Override
 	public void changeMemberStatus(Map<String,Object> map) {

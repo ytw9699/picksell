@@ -181,6 +181,7 @@ public class AdminMemberController {
 	 
 		//판매내역개수
 		maplist = adminMemberService.adminSellHistory(id);
+		model.addAttribute("total",maplist.size());
 		model.addAttribute("maplist", maplist);
 		return "adminSellHistory";
 	}
@@ -189,9 +190,8 @@ public class AdminMemberController {
 	@RequestMapping(value="/purchaseHistory/{memberId}") 
 	public String adminPurchaseHistory(@PathVariable("memberId") String id,Model model) throws Exception {
 		maplist = adminMemberService.adminPurchaseHistory(id);
+		model.addAttribute("total",maplist.size());
 		model.addAttribute("maplist",maplist);
-
-		
 		return "adminPurchaseHistory";
 	}
 	
@@ -208,17 +208,32 @@ public class AdminMemberController {
 
 	}
 	
+	//회원 판매글 블라인드 처리
+	@RequestMapping(value="/productBlindProc")
+	public String adminBlindProc(HttpServletRequest request) throws Exception{
+		Map<String,Object> cm = new HashMap<String,Object>();
+		cm.put("id", request.getParameter("id"));
+		cm.put("board_status", request.getParameter("status"));
+		cm.put("product_num", request.getParameter("product_num"));
+		
+		adminMemberService.changeBlindStatus(cm);
+		
+		return "redirect:/admin/member/products/" + request.getParameter("id");
+	}
+	
 	@RequestMapping(value="/infoChangeProc")
-	public String memberStatus(HttpServletRequest request,Model model) throws Exception{
+	public String memberStatus(HttpServletRequest request) throws Exception{
 		
 		Map<String, Object> pMap = new HashMap<String, Object>(); 
 		pMap.put("id", request.getParameter("id"));
 		pMap.put("status", request.getParameter("status"));
-	
+		
 		if(request.getParameter("status") != null) {
 			adminMemberService.changeMemberStatus(pMap);
 		}
 	
 		return "redirect:/admin/member/info/"+request.getParameter("id");
 	}
+	
+
 }
