@@ -80,6 +80,27 @@ tr:nth-child(even){background-color: #f2f2f2}
 .paging strong{color:#fff;background:#337AB7;border:1px solid #337AB7;}
 .paging .page_arw{font-size:11px;line-height:30px;}
 </style>
+<script>
+
+// $(document).ready(function () {
+// 	$(‘body’).on(‘click’, ‘.feed-id’,function(){
+// 	document.getElementById(“feed_id”).value = $(this).attr(‘data-id’);
+// 	console.log($(this).attr(‘data-id’));
+// 	});
+// 	});
+
+$(document).on("click", ".open-AddBookDialog", function () {
+    var myBookId = $(this).data('id');
+//     $(".form-group #usr").val( myBookId );
+//     $(".form-group #pwd").val( myBookId ); 
+    $("#haha").val(myBookId);
+    // As pointed out in comments, 
+    // it is superfluous to have to manually call the modal.
+    // $('#addBookDialog').modal('show');
+});
+
+</script>
+
 
 </head>
 <body>
@@ -174,7 +195,7 @@ tr:nth-child(even){background-color: #f2f2f2}
 					<c:param name="order_num" value="${orderList.order_num}" />							
 				</c:url>
 				
-				<input type="button" data-toggle="modal" data-target="#myModal" data-id="myValue" value="배송중">
+				<input type="button" data-toggle="modal" class="open-AddBookDialog btn btn-primary" data-target="#myModal" data-id="${orderList.order_num}" value="배송중">
 				 
 				 <!-- Modal -->
   				<div class="modal fade" id="myModal" role="dialog">
@@ -184,22 +205,24 @@ tr:nth-child(even){background-color: #f2f2f2}
      			 <div class="modal-content">
       			  <div class="modal-header">
       	  			  <button type="button" class="close" data-dismiss="modal">&times;</button>
-      		    <h4 class="modal-title">택배사 / 송장번호  입력</h4>
+      		   		 <h4 class="modal-title">택배사 / 송장번호 입력 </h4>
       			  </div>
-     		    <form>
-   				 <div class="form-group">
-    			  <label for="usr">택배사</label>
-    			  <input type="text" class="form-control" id="usr">
-   				 </div>
-   				 <div class="form-group">
-          	 	  <label for="pwd">송장번호</label>
-    			  <input type="password" class="form-control" id="pwd">
-  		  		</div>
- 		 </form>
-        <div class="modal-footer">
-         	<a href="${status2}">  <button type="button" class="btn btn-default" >입력완료</button> </a>
+     		    <form action="/picksell/admin_order/deliveryProc" method="post">
+   				 	<div class="form-group">
+    				  <label for="delivery">택배사</label>
+    				  <input type="text" name="delivery_company" class="form-control" id="delivery">
+   					 </div>
+   					 <div class="form-group">
+          	 		  <label for="invoice">송장번호</label>
+    				  <input type="text" name="invoice_num" class="form-control" id="invoice">
+  		  			</div>
+  		  			<input type="hidden" id="haha" name="order_num" value=""/>
+  		  			<input type="submit" class="btn btn-default" value="입력완료"/>
+ 		 		</form>
+<!--        			 <div class="modal-footer"> -->
+<%--          			<a href="${status2}">  <button type="button" class="btn btn-default" >입력완료</button> </a> --%>
         
-       	 </div>
+<!--       	 		 </div> -->
      		 </div>
       
    		 </div>

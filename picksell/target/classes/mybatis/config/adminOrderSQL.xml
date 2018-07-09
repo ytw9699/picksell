@@ -96,12 +96,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="updateStatus2" parameterType="AdminPaymentModel">
 		UPDATE ps_order
 			SET status = 2,
+			delivery_company = #{delivery_company},
+			invoice_num = #{invoice_num},
 			step3_date = sysdate
 		WHERE order_num = #{order_num}
 	</update>
 	<update id="updateStatus3" parameterType="AdminPaymentModel">
 		UPDATE ps_order
-			SET status = 3,
+			SET status = 3,	
 			step4_date = sysdate
 		WHERE order_num = #{order_num}
 	</update>

@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.mycom.admin_order.AdminPaymentModel;
@@ -97,7 +98,7 @@ public class AdminPaymentController {
 		}
 		
 		totalCount = orderList.size();
-		page = new Paging(currentPage, totalCount, blockCount, blockPage, "orderList");
+		page = new Paging(currentPage, totalCount, blockCount, blockPage, "list");
 		pagingHtml = page.getPagingHtml().toString(); 
 		int lastCount = totalCount;
 		if (page.getEndCount() < totalCount)
@@ -171,10 +172,13 @@ public class AdminPaymentController {
 		
 	}
 	
-	@RequestMapping("/deliveryProc") // 배송 및 인수확인대기 
+	@RequestMapping(value="/deliveryProc" , method=RequestMethod.POST ) // 배송 및 인수확인대기 
 	public ModelAndView adminDeliveryConfirm(HttpServletRequest request) {
 		
 		adminPaymentModel = adminPaymentService.orderGetOne(request.getParameter("order_num"));
+		adminPaymentModel.setDelivery_company(request.getParameter("delivery_company"));
+		adminPaymentModel.setInvoice_num(request.getParameter("invoice_num"));
+		System.out.println(adminPaymentModel.getDelivery_company());
 		adminPaymentService.updateStatus2(adminPaymentModel);
 		mav.setViewName("redirect:/admin_order/list");
 		System.out.println(request.getParameter("order_num"));
