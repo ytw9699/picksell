@@ -106,7 +106,7 @@ public class AdminPaymentController {
 		orderList = orderList.subList(page.getStartCount(), lastCount);
 		
 		
-		System.out.println(totalCount);
+//		System.out.println(totalCount);
 		mav.addObject("totalCount", totalCount);
 		mav.addObject("pagingHtml", pagingHtml);
 		mav.addObject("currentPage", currentPage);
@@ -124,7 +124,7 @@ public class AdminPaymentController {
 //		Map<String, Object> mp = new HashMap<String, Object>();
 		
 		List<Map<String, Object>> mp = adminPaymentService.orderDetail2(order_num);
-		System.out.println(mp);
+//		System.out.println(mp);
 		mav.addObject("orderDetail",mp);
 		mav.setViewName("admin_order/orderDetail");
 		return mav;
@@ -177,7 +177,7 @@ public class AdminPaymentController {
 		adminPaymentModel = adminPaymentService.orderGetOne(request.getParameter("order_num"));
 		adminPaymentService.updateStatus2(adminPaymentModel);
 		mav.setViewName("redirect:/admin_order/list");
-		
+		System.out.println(request.getParameter("order_num"));
 		return mav;
 		
 	}
