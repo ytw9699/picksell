@@ -45,7 +45,7 @@ body{ overflow-x:hidden;}
 	<div id="container">
 		<form id="productForm"  method="post" enctype="multipart/form-data">
 		
-		<input type="hidden" name="seller_id" value="일반판매자test" />
+		<input type="hidden" name="seller_id" value="${sessionScope.sessionId }" />
 		<input type="hidden" name="howtosell" value="${howtosell }" />
 		<input type="hidden" name="stock" value="1" />
 		

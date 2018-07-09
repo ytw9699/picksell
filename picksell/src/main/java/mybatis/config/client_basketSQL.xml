@@ -45,4 +45,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		update ps_basket set product_quantity = product_quantity - 1 where basket_num = #{basket_num}
 	</update>
 	
+	<delete id="deleteBasket" parameterType="int">
+		delete from ps_basket where basket_num = #{basket_num}
+	</delete>
+	
+	<delete id="deleteAllBasket" parameterType="string">
+		delete from ps_basket where basket_id = #{basket_id}
+	</delete>
+	
 </mapper>

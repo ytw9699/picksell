@@ -21,17 +21,26 @@ public class mainService implements mainDao {
 	public List<Map<String, Object>> pulsProduct() {
 		return sqlMapper.selectList("main.pulsProduct");
 	}
-
 	public List<Map<String, Object>> hotProduct() {
 		return sqlMapper.selectList("main.hotProduct");
 	}
-
+	public List<Map<String, Object>> hotProductHP() {
+		return sqlMapper.selectList("main.hotProductHP");
+	}
+	public List<Map<String, Object>> hotProductLP() {
+		return sqlMapper.selectList("main.hotProductLP");
+	}
+	public List<Map<String, Object>> hotPlusProduct(Map<String, Object> map){
+			return sqlMapper.selectList("main.hotPlusProduct", map);
+	}
+	public List<Map<String, Object>> hotProductListLatest() {//최신순
+		return sqlMapper.selectList("main.hotProductLatest");
+	}
 	public List<Map<String, Object>> hotCategory() {
 		return sqlMapper.selectList("main.hotCategory");
 	}
-
-	public List<Map<String, Object>> mainSearchList(String searchKeyword) {
-		return sqlMapper.selectList("main.mainSearchList",searchKeyword);
+	public List<Map<String, Object>> mainSearchList(Map<String, Object> map) {
+		return sqlMapper.selectList("main.mainSearchList",map);
 	}
-	
+
 }

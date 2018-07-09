@@ -24,16 +24,9 @@ public class mypageService implements mypageDao {
 	public void updatePersonal(Map<String, Object> map) {
 		sqlMapper.update("mypage.updatePersonal", map);
 		}
-	public List<Map<String, Object>> sellList0(String sessionId) {
-		return sqlMapper.selectList("mypage.sellList0", sessionId);
+	public List<Map<String, Object>> sellList(Map<String, Object> map){
+		return sqlMapper.selectList("mypage.sellList", map);
 	}
-	public List<Map<String, Object>> sellList1(String sessionId) {
-		return sqlMapper.selectList("mypage.sellList1", sessionId);
-	}
-	public List<Map<String, Object>> sellList2(String sessionId) {
-		return sqlMapper.selectList("mypage.sellList2", sessionId);
-	}
-
 	public List<Map<String, Object>> purchaseList0(String sessionId) {
 		return sqlMapper.selectList("mypage.purchaseList", sessionId);
 	}
@@ -48,5 +41,17 @@ public class mypageService implements mypageDao {
 		return sqlMapper.selectOne("mypage.orderDetail", PRODUCT_NUM);
 	}
 	
+
+	public List<Map<String, Object>> orderSubDetail(int PRODUCT_NUM) {
+		return sqlMapper.selectList("mypage.orderSubDetail", PRODUCT_NUM);
+	}
+
+	public String userCheck(String string) {
+		return sqlMapper.selectOne("mypage.userCheck", string);
+	}
+	public void deletePurchaseList(int purchase_num) {
+		sqlMapper.delete("mypage.deletePurchaseList", purchase_num);
+	}
+
 	
 }

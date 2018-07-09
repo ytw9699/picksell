@@ -1,20 +1,15 @@
 package com.mycom.client_basket;
 
 public class BasketProductModel {
-	/*> 상품글번호	
-	> 상품제목
-	> 상품이미지
-	> 상품개당가격
-	> 상품현재가격
-	> 주문수량
-	> 판매자아이디*/
-	private int product_num; //d
-	private String product_subject; //d
-	private String product_img;
-	private int product_price;
-	private int product_currentPrice;
-	private int orderSum;
-	private String seller_id;
+	
+	private int product_num; // 상품글번호
+	private String product_subject; // 상품제목
+	private String product_img; // 상품이미지
+	private int product_price; // 상품개당가격
+	private int product_currentPrice; //상품현재가격
+	private int orderSum; // 주문수량
+	private String seller_id; // 판매자아이디
+	
 	public int getProduct_num() {
 		return product_num;
 	}

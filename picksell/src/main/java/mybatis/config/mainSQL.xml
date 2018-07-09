@@ -10,6 +10,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<!-- select * from ps_product where howtosell = 0 or howtosell = 1  -->
 	</select>
 	
+	<!-- 새로등록된 플러스 상품 plusProductList-->
 	<select id="pulsProduct"  resultType="hashmap">
 			select * from ps_product where howtosell = '2' order by product_regdate desc
 	</select>
@@ -26,25 +27,159 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	         ]]>
 	      
 	</select>
-	
+	 <!-- 플러스 인기 상품 판매수 만큼 순위로 뽑음 최신순--> 
 	 <select id="hotProduct" resultType="hashmap">
       <![CDATA[
-      select r, b.total, b.product_num, c.content, c.first_img, c.subject 
+      select r, b.total, b.product_num, c.content, c.first_img, c.subject ,c.price, c.CATEGORY_NUM
       from(
       select rownum r, a.total, a.product_num from(
       select count(*) as total, product_num
       from ps_orderlist
       group by product_num
       order by count(*) desc
-      )a order by a.total desc )b, ps_product c where b.product_num = c.product_num and r < 4
+      )a order by a.total desc )b, ps_product c where b.product_num = c.product_num and c.howtosell ='2' order by c.product_regdate desc
+      
      ]]>
    </select>
    
-   <!-- 통합 검색 로직 -->
-   <select id="mainSearchList" resultType="hashmap" parameterType="String">
-	select * from ps_product where subject like '%'||#{searchKeyword}||'%' order by product_regdate desc
-	<!-- select * from ps_product where subject like #{searchKeyword} order by product_regdate desc			 -->							
-   
+   <select id="hotPlusProduct" resultType="hashmap" parameterType="hashmap">
+		<if test='category == "0" '>
+			select r, b.total, b.product_num, c.content, c.first_img, c.subject ,c.price, c.PRODUCT_REGDATE, c.CATEGORY_NUM, c. SELLER_ID
+      from(
+      select rownum r, a.total, a.product_num from(
+      select count(*) as total, product_num
+      from ps_orderlist
+      group by product_num
+      order by count(*) desc
+      )a order by a.total desc )b, ps_product c where b.product_num = c.product_num and c.howtosell ='2'
+			<choose>
+				<when test='orderMethod == "0" '>
+				order by c.product_regdate desc
+				</when>
+				<when test='orderMethod == "1" '>
+				order by c.price asc
+				</when>
+				<when test='orderMethod == "2" '>
+				order by c.price desc
+				</when>
+			</choose>
+		</if>
+		<if test='category != "0" '>
+		select r, b.total, b.product_num, c.content, c.first_img, c.subject ,c.price, c.PRODUCT_REGDATE, c.CATEGORY_NUM, c. SELLER_ID
+      from(
+      select rownum r, a.total, a.product_num from(
+      select count(*) as total, product_num
+      from ps_orderlist
+      group by product_num
+      order by count(*) desc
+      )a order by a.total desc )b, ps_product c where b.product_num = c.product_num and c.howtosell ='2' and category_num = #{category}
+			<choose>
+				<when test='orderMethod == "0" '>
+				order by c.product_regdate desc
+				</when>
+				<when test='orderMethod == "1" '>
+				order by c.price asc
+				</when>
+				<when test='orderMethod == "2" '>
+				order by c.price desc
+				</when>
+			</choose>
+			
+		</if>
 	</select>
+	
+<!-- 통합검색 로직 -->
+<select id="mainSearchList" resultType="hashmap" parameterType="hashmap">
+ 	<if test='HowToSell == "3" '>
+ 	<!-- 검색된 전체 상품 보기 -->
+<choose>
+ 		<when test='order == "0" '>
+ 			select * from ps_product where subject like '%'||#{searchKeyword}||'%' order by product_regdate desc
+ 		</when>
+ 		
+ 		<when test='order == "1" '>
+		  select r, b.total, b.product_num, c.first_img, c.subject ,c.price, c.PRODUCT_REGDATE, c.CATEGORY_NUM, c. SELLER_ID
+		  from(
+		  select rownum r, a.total, a.product_num from(
+		  select count(*) as total, product_num
+		  from ps_orderlist
+		  group by product_num
+		  order by count(*) desc
+		  )a order by a.total desc )b, ps_product c where b.product_num = c.product_num and c.subject like '%'||#{searchKeyword}||'%'
+   		</when>
+   		
+   		<when test='order == "2" '>
+   			select * from ps_product where subject like '%'||#{searchKeyword}||'%' order by PRICE asc
+   		</when>
+   		
+   		<when test='order == "3" '>
+   			select * from ps_product where subject like '%'||#{searchKeyword}||'%' order by PRICE desc
+   		</when>
+</choose>
+ 	</if>
+ 	
+ 	<if test='HowToSell == "0" '>
+ 		select * from ps_product where subject like '%'||#{searchKeyword}||'%' and HowToSell = '0'
+  		<choose>
+ 		<when test='order == "0" '>
+ 			 order by product_regdate desc
+ 		</when>
+   		
+   		<when test='order == "2" '>
+   			order by PRICE asc
+   		</when>
+   		
+   		<when test='order == "3" '>
+   			order by PRICE desc
+   		</when>
+		</choose>
+  	</if>
+  	
+  	<if test='HowToSell == "1" '>
+  		select * from ps_product where subject like '%'||#{searchKeyword}||'%' and HowToSell = '1'
+  		<choose>
+ 		<when test='order == "0" '>
+ 			 order by product_regdate desc
+ 		</when>
+   		
+   		<when test='order == "2" '>
+   			order by PRICE asc
+   		</when>
+   		
+   		<when test='order == "3" '>
+   			order by PRICE desc
+   		</when>
+		</choose>
+  	</if>
+  	
+  	<if test='HowToSell == "2" '>
+<choose>
+		<when test='order == "0" '>
+ 			select * from ps_product where subject like '%'||#{searchKeyword}||'%' and HowToSell = '2' order by product_regdate desc
+ 		</when>
+ 		
+ 		<when test='order == "1" '>
+		  select r, b.total, b.product_num, c.first_img, c.subject ,c.price, c.PRODUCT_REGDATE, c.CATEGORY_NUM, c. SELLER_ID
+		  from(
+		  select rownum r, a.total, a.product_num from(
+		  select count(*) as total, product_num
+		  from ps_orderlist
+		  group by product_num
+		  order by count(*) desc
+		  )a order by a.total desc )b, ps_product c where b.product_num = c.product_num and c.HowToSell = '2' and c.subject like '%'||#{searchKeyword}||'%'
+   		</when>
+   		
+   		<when test='order == "2" '>
+   			select * from ps_product where subject like '%'||#{searchKeyword}||'%' and HowToSell = '2' order by PRICE asc
+   		</when>
+   		
+   		<when test='order == "3" '>
+   			select * from ps_product where subject like '%'||#{searchKeyword}||'%' and HowToSell = '2' order by PRICE desc
+   		</when>
+</choose>  	
+  	</if>
+  	
+  	
+</select>
 	
 </mapper>

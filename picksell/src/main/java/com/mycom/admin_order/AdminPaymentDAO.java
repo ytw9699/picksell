@@ -1,6 +1,9 @@
 package com.mycom.admin_order;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import com.mycom.admin_order.AdminPaymentModel;
 import com.mycom.admin_order.AdminPaymentListModel;
 
@@ -26,5 +29,7 @@ public interface AdminPaymentDAO {
 	//오더 리스트(ps_orderlist)
 	public List<AdminPaymentListModel> orderList2();
 	
+	public Map<String,Object> orderDetail = new HashMap<String,Object>();
+	public Map<String,Object> orderDetail2 = new HashMap<String,Object>();
 	
 }

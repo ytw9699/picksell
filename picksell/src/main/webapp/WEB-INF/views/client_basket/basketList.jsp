@@ -20,12 +20,17 @@
 		
 		document.getElementById('hid_sumValue').value = total;
 		document.getElementById('sumValue').innerHTML = total;
+		
+		document.getElementById('order_submit').disabled = false;
 	}
 	function subfunc(subvalue){
 		total -= Number(subvalue);
 		
 		document.getElementById('hid_sumValue').value = total;
 		document.getElementById('sumValue').innerHTML = total;
+		
+		if(total == 0)
+			document.getElementById('order_submit').disabled = true;
 	}
 	function basketChecking(checkTarget, keyNumber){
 		if(checkTarget.checked){
@@ -34,9 +39,22 @@
 			document.getElementById('hid_product_num'+keyNumber).disabled = false;
 			document.getElementById('hid_product_subject'+keyNumber).disabled = false;
 			document.getElementById('hid_product_img'+keyNumber).disabled = false;
+			document.getElementById('hid_price'+keyNumber).disabled = false;
+			document.getElementById('hid_currentPrice'+keyNumber).disabled = false;
+			document.getElementById('hid_quantity'+keyNumber).disabled = false;
+			document.getElementById('hid_seller'+keyNumber).disabled = false;
 		}else if(!checkTarget.checked){
 			//체크해제일때 디스에이블 걸어야댐
 			subfunc(Number(document.getElementById('hid_currentPrice'+keyNumber).value));
+			document.getElementById('hid_product_num'+keyNumber).disabled = true;
+			document.getElementById('hid_product_subject'+keyNumber).disabled = true;
+			document.getElementById('hid_product_img'+keyNumber).disabled = true;
+			document.getElementById('hid_price'+keyNumber).disabled = true;
+			document.getElementById('hid_currentPrice'+keyNumber).disabled = true;
+			document.getElementById('hid_quantity'+keyNumber).disabled = true;
+			document.getElementById('hid_seller'+keyNumber).disabled = true;
+		
+			
 		}
 	}
 	
@@ -109,15 +127,25 @@
 			<td colspan="2">상품금액</td>
 		</tr>
 		
+		<c:choose>
+		<c:when test="${empty resultList }">
+			<tr>
+				<td colspan="6">장바구니에 담은 상품이 없습니다</td>
+			</tr>
+		</c:when>
+		<c:when test="${!empty resultList }">
 		<!-- 장바구니 시작 -->
 		<c:forEach var="list" items="${resultList }" varStatus="indexStatus">
 			<input type="hidden" id="hid_product_subject${indexStatus.index }" name="p_list[${indexStatus.index }].product_subject" value="${list.SUBJECT }" disabled="disabled" />
 			<input type="hidden" id="hid_product_num${indexStatus.index }" name="p_list[${indexStatus.index }].product_num" value="${list.PRODUCT_NUM }" disabled="disabled" />
 			<input type="hidden" id="hid_product_img${indexStatus.index }" name="p_list[${indexStatus.index }].product_img" value="${list.FIRST_IMG }" disabled="disabled" />
 			<input type="hidden" id="hid_price${indexStatus.index }" name="p_list[${indexStatus.index }].product_price" value="${list.PRICE }" disabled="disabled" />
+			<input type="hidden" id="hid_currentPrice${indexStatus.index }" name="p_list[${indexStatus.index }].product_currentPrice" value="${list.PRICE * list.PRODUCT_QUANTITY }" disabled="disabled" />
+			<input type="hidden" id="hid_quantity${indexStatus.index }" name="p_list[${indexStatus.index }].orderSum" value="${list.PRODUCT_QUANTITY }" disabled="disabled" />
+			<input type="hidden" id="hid_seller${indexStatus.index }" name="p_list[${indexStatus.index }].seller_id" value="${list.SELLER_ID }" disabled="disabled" />
 			<input type="hidden" id="hid_stock${indexStatus.index }" value="${list.STOCK }" />
-			<input type="hidden" id="hid_quantity${indexStatus.index }" value="${list.PRODUCT_QUANTITY }" />
-			<input type="hidden" id="hid_currentPrice${indexStatus.index }" value="${list.PRICE * list.PRODUCT_QUANTITY }" />
+			
+			
 			<tr>
 				<td><input type="checkbox" onclick="basketChecking(this, ${indexStatus.index})" id="baketCheck${indexStatus.index }" /></td>
 				<td><img src="/picksell/resources/productUpload/${list.FIRST_IMG }" style="width: 200px;"/></td>
@@ -133,19 +161,19 @@
 				<td>
 					<span id="subtotal${indexStatus.index }">${list.PRICE * list.PRODUCT_QUANTITY }</span>
 				</td>
-				<td><a href="#">삭제</a></td>
+				<td><a href="/picksell/cart/delete/${list.BASKET_NUM }">삭제</a></td>
 			</tr>
-			
-			
-		</c:forEach>
+		</c:forEach><!-- foreach End -->
+		</c:when>
+		</c:choose>
 	</table>
-	<input type="button" value="전체삭제" />
+	<a href="/picksell/cart/deleteAll">전체삭제</a>
 	<div class="summaryInfoWrap">
 		
 		<span class="sumText">총 합계</span>
 		<input type="hidden" id="hid_sumValue" name="totalSum" value="0" />
 		<span class="sumValue" id="sumValue">0</span>
-		<input type="submit" value="구매하기" />
+		<input type="submit" value="구매하기" id="order_submit" disabled="disabled" />
 	</div>
 	</form>
 </body>

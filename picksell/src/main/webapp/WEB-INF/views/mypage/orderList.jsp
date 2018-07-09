@@ -5,7 +5,7 @@
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
     <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<!DOCTYPE html PUBLIC "-//W3C//Dbr HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dbr">
+    <!-- 수정 -->
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -14,36 +14,40 @@
 </style>
 </head>
 <body>
-주문조회 리스트 입니다.
 <table>
 <c:if test="${fn:length(orderList) > 0}">
 <c:forEach var="ps_order" items="${orderList}" varStatus="orderListStatus">
-     <br>상품주문번호: ${ps_order.ORDER_NUM } </br><!-- 상품 주문번호 -->
-     <c:if test="${ps_order.STATUS == '0'}">
-		<br> 거래상태:입금대기중</br>
+    <br><h3>주문일:<fmt:formatDate value="${ps_order.STEP1_DATE}" pattern="yyyy년 MM월 dd일 hh:mm:ss" />
+	<a href="/picksell/mypage/orderDetail/${ps_order.ORDER_NUM }">
+		<font color = "red">주문 내역 상세보기</font>
+		</a></h3>
+    	<c:if test="${ps_order.STATUS == '0'}">
+		거래상태:입금대기중
 		</c:if>
 		<c:if test="${ps_order.STATUS == '1'}">
-		<br>거래상태:입금 완료 및 배송 대기중</br>
+		거래상태:입금 완료 및 배송 대기중
 		</c:if>
 		<c:if test="${ps_order.STATUS == '2'}">
-		<br>거래상태:배송 및 인수확인 대기</br>
+		거래상태:배송 및 인수확인 대기
 		</c:if>
 		<c:if test="${ps_order.STATUS == '3'}">
-		<br>거래상태:인수확인 및 거래완료</br>
+		거래상태:인수확인 및 거래완료
 		</c:if>
 		<c:if test="${ps_order.STATUS == '44'}">
-		<br>거래상태:결제취소</br>
+		거래상태:결제취소
 		</c:if>
-     <br>주문일: ${ps_order.STEP1_DATE} </br><!-- 주문일(입금대기날짜) -->
+		<br>
+		<br>
 <c:forEach var="joinMap" items="${orderSubList[orderListStatus.index]}">
- <br>사진: 
-	<a href="/picksell/mypage/orderDetail/${joinMap.ORDER_NUM }">
-		<img src="/picksell/resources/productUpload/${joinMap.FIRST_IMG }" style="width: 200px;" />
-	</a>
- </br>
- <br>제목: ${joinMap.SUBJECT }</br>
- <br>상품금액: ${joinMap.PRICE }</br>
-</c:forEach> 
+<a href="/picksell/products/detail/${joinMap.CATEGORY_NUM }/${joinMap.PRODUCT_NUM }">
+<img src="/picksell/resources/productUpload/${joinMap.FIRST_IMG }" style="width: 200px;" />
+ /${joinMap.SUBJECT }
+</a>
+ /${joinMap.PRICE }원
+ /갯수: ${joinMap.ORDER_QUANTITY}개
+ <br>
+</c:forEach>
+================================================================================ 
 </c:forEach>
 
 	<%-- <c:forEach var="order" items="${orderList}">

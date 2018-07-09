@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartRequest;
 
@@ -105,11 +106,13 @@ public class ProductController {
 			HttpServletRequest request) throws IOException {
 		
 		System.out.println(map.getMap());
+		String currentID = (String) request.getSession().getAttribute("sessionId");
+		
 		//대표이미지(썸네일) 업로드규칙은 자신의아이디+현재시간+타입
 		String imgFileName = file.getOriginalFilename();
 		String imgFileType = imgFileName.substring(imgFileName.lastIndexOf("."), imgFileName.length());
 		Calendar cal = Calendar.getInstance();
-		String replaceName = "세션아이디"+cal.getTimeInMillis()+imgFileType;
+		String replaceName = currentID+cal.getTimeInMillis()+imgFileType;
 		
 		//대표이미지 업로드
 		String path = request.getSession().getServletContext().getRealPath("/")+File.separator+"resources/productUpload";
@@ -139,7 +142,7 @@ public class ProductController {
 		parameterMap.put("category", category_num);
 		parameterMap.put("orderMethod", orderMethod);
 		List<Map<String, Object>> resultList = productService.getNomalProductList(parameterMap);
-		
+		List<Map<String, Object>> categoryList = productService.getCategoryList();
 		totalCount = resultList.size();
 		
 		page = new ProductPaging(currentPageNumber, totalCount, blockCount, blockPage, "/picksell/products/goods", category_num, orderMethod);
@@ -154,7 +157,10 @@ public class ProductController {
 		model.addAttribute("pagingHtml", pagingHtml);
 		model.addAttribute("currentCategory", category_num);
 		model.addAttribute("resultProductList", resultList);
+		model.addAttribute("categoryList", categoryList);
 		model.addAttribute("currentPage", currentPageNumber);
+		model.addAttribute("orderMethod", orderMethod);
+		model.addAttribute("forwardingListKind", "2");
 		
 		return "productList";
 	}
@@ -176,6 +182,7 @@ public class ProductController {
 		parameterMap.put("category", category_num);
 		parameterMap.put("orderMethod", orderMethod);
 		List<Map<String, Object>> resultList = productService.getPlusProductList(parameterMap);
+		List<Map<String, Object>> categoryList = productService.getCategoryList();
 		
 		totalCount = resultList.size();
 		page = new ProductPaging(currentPageNumber, totalCount, blockCount, blockPage, "/picksell/products/plus", category_num, orderMethod);
@@ -191,18 +198,26 @@ public class ProductController {
 		model.addAttribute("currentCategory", category_num);
 		model.addAttribute("resultProductList", resultList);
 		model.addAttribute("currentPage", currentPageNumber);
+		model.addAttribute("categoryList", categoryList);
+		model.addAttribute("orderMethod", orderMethod);
+		model.addAttribute("forwardingListKind", "0");
 		
 		return "productPlusList";
 	}
 	
 	//상품 상세보기
-	@RequestMapping("/products/detail/{category_num}/{product_num}/{currentPage}")
+	@RequestMapping("/products/detail/{category_num}/{product_num}")
 	public String productsDetail(
 			@PathVariable("product_num") int product_num,
-			@PathVariable("currentPage") int currentPage,
 			@PathVariable("category_num") int category_num,
+			//@PathVariable("currentPage") int currentPage,
 			Model model,
 			HttpServletRequest request) {
+		
+		//(구매자) 구매신청을 했는지
+		boolean purchaseApplying = false;
+		
+		Map<String, Object> forBuyerParamMap = new HashMap<String, Object>();
 		
 		String currentID = (String) request.getSession().getAttribute("sessionId");
 		
@@ -222,16 +237,17 @@ public class ProductController {
 		//구매신청리스트++
 		List<Map<String, Object>> resultPurchaseList = productService.getProductPurchaseList(product_num);
 
-		//구매신청을 했는지
+		//구매신청을 했는지(구매자)
 		model.addAttribute("alreadyPurchase", false);
 		for(int i = 0 ; i < resultPurchaseList.size() ; i++) {
 			if(resultPurchaseList.get(i).get("BUYER_ID").equals(currentID)) {
+				purchaseApplying = true;
 				model.addAttribute("alreadyPurchase", true);
 				break;
 			}
 		}
 		
-		//장바구니에 담았는지
+		//장바구니에 담았는지(구매자)
 		model.addAttribute("alreadyBasket", false);
 		Map<String, Object> basketParameterMap = new HashMap<String, Object>();
 		basketParameterMap.put("product_num", product_num);
@@ -241,18 +257,40 @@ public class ProductController {
 			model.addAttribute("alreadyBasket", true);
 		}
 		
-		//디테일 정보 확인
-		//System.out.println(resultMap);
+		//이 게시글이 나의것인지(내것이면 구매신청리스트 확인(판매자))
+		if((resultMap.get("SELLER_ID").equals(currentID))) {
+			model.addAttribute("isMyProducts", "yes");
+			
+			List<Map<String, Object>> sellerPurList = productService.getProductSellerPurchaseList(product_num);
+			model.addAttribute("sellerPurList", sellerPurList);
+			
+		}
+		//이 게시글이 내것이아닌지(아니면 구매신청리스트 확인(판매자))
+		if((!resultMap.get("SELLER_ID").equals(currentID))) {
+			model.addAttribute("isMyProducts", "no");
+			if(purchaseApplying) {
+			
+			forBuyerParamMap.put("buyer_id", currentID);
+			forBuyerParamMap.put("product_num", product_num);
+			int isApprovedNum = productService.selectMyPurchase(forBuyerParamMap);
+				if(isApprovedNum == 1) {
+					model.addAttribute("isApprovedPC", "yes");
+				}else if(isApprovedNum == 0) {
+					model.addAttribute("isApprovedPC", "no");
+				}
+			
+			
+			}
+		}
+		
+		//카테고리번호&상품글번호
 		model.addAttribute("category_num", category_num);
 		model.addAttribute("product_num", product_num);
-		model.addAttribute("currentPage", currentPage);
 
 		//상품상세정보
 		model.addAttribute("resultObject", resultMap);
 		//상품문의리스트
 		model.addAttribute("resultCommentList", resultCommentList);
-		
-		
 		
 		return "productDetail";
 	}
@@ -312,4 +350,50 @@ public class ProductController {
 
 		return "client_product/redirecting";
 	}
+	
+	//구매신청 수락하기
+	@RequestMapping("/products/purchaseApproveProc")
+	@ResponseBody
+	public Map<String, Object> purchaseApprove(HttpServletRequest request) {
+		
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		
+		int product_num = Integer.parseInt(request.getParameter("pn"));
+		int purchase_num = Integer.parseInt(request.getParameter("purnum"));
+		String buyerID = request.getParameter("buyer");
+		
+		//이미 수락을 했는지 보고,
+		int isApprovingNum = productService.getAlreadyPurchaseApproving(product_num);
+		if(isApprovingNum > 0) {
+			
+			resultMap.put("resultCode", "fail");
+			resultMap.put("resultMsg", "이미 수락한 구매자가 존재합니다!");
+		}else if(isApprovingNum == 0) {
+			
+			productService.letPurchaseApprove(purchase_num);
+			resultMap.put("resultCode", "success");
+			resultMap.put("resultMsg", buyerID+" 회원의 구매요청을 수락했습니다!");
+		}
+
+		return resultMap;
+	}
+	
+	//구매신청 수락취소하기(판매자)
+		@RequestMapping("/products/purchaseApproveCancelProc")
+		@ResponseBody
+		public Map<String, Object> purchaseApproveCancel(HttpServletRequest request) {
+			
+			Map<String, Object> resultMap = new HashMap<String, Object>();
+			
+			int product_num = Integer.parseInt(request.getParameter("pn"));
+			int purchase_num = Integer.parseInt(request.getParameter("purnum"));
+			String buyerID = request.getParameter("buyer");
+			
+			productService.letPurchaseApproveCancel(purchase_num);
+			
+			resultMap.put("resultCode", "success");
+			resultMap.put("resultMsg", buyerID+" 회원의 구매요청수락을 취소했습니다!");
+
+			return resultMap;
+		}
 }

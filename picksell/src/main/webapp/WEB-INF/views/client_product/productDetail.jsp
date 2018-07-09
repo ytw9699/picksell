@@ -27,23 +27,23 @@
     left: 0;
     height: 100px;
 }
+.hiddenPurchaseListForm{
+	display: none;
+	width: 300px;
+    background-color: white;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100px;
+}
 
 </style>
 
 </head>
 <body>
+
 <script>
-	function applyFetch(){ //패치 테스트용
-		fetch('/picksell/fetchTest').then(function(response){
-			response.text().then(function(text){
-				//document.querySelector('body').innerHTML = text;
-				//document.getElementById('fetchResult').innerHTML = text;
-				if(response.status == '200'){
-					alert('fetch!');
-				}
-			})
-		})
-	}
+	
 	//구매요청
 	function purchaseApply(){
 		fetch('/picksell/products/purchseRequest/${product_num}/${sessionScope.sessionId}').then(function(response){
@@ -83,11 +83,39 @@
 			})
 		})
 	}
+	function purchaseApprove(purchaseNumber,buyer){
+		var params = "pn=${product_num}&purnum="+purchaseNumber+"&buyer="+buyer;
+		$.ajax({
+			type : "POST",
+			url : "/picksell/products/purchaseApproveProc",
+			dataType : 'json',
+			data : params,
+			success : function(data){
+				alert(data.resultMsg);
+				document.location.href='/picksell/products/detail/${category_num}/${product_num}';
+			}
+		});
+	}
+	function purchaseApproveCancel(purchaseNumber,buyer){
+		var params = "pn=${product_num}&purnum="+purchaseNumber+"&buyer="+buyer;
+		$.ajax({
+			type : "POST",
+			url : "/picksell/products/purchaseApproveCancelProc",
+			dataType : 'json',
+			data : params,
+			success : function(data){
+				alert(data.resultMsg);
+				document.location.href='/picksell/products/detail/${category_num}/${product_num}';
+			}
+		});
+	}
 	
 	
 	
 </script>
+<!-- 모달div background -->
 <div class="hiddenBackGround" onclick="closeCommentForm()"></div>
+<!-- 문의댓글 모달div -->
 <div class="hiddenCommentForm">
 	<div class="formTop">
 		<span class="cancel"><a href="#" onclick="closeCommentForm()">X</a></span>
@@ -103,17 +131,59 @@
 			<input type="submit" value="작성" />
 		</form>
 	</div>
-</div>
+</div><!-- hiddenCommentForm end -->
+
+<!-- 문의리스트 모달div where isMyProducts = true 일때 -->
+<div class="hiddenPurchaseListForm">
+	<div class="purchaseList">
+		<c:if test="${isMyProducts == 'yes' }">
+			<table>
+				<tr>
+					<td>구매요청 아이디</td>
+					<td>신청날짜</td>
+					<td colspan="2">신청상태</td>
+				</tr>
+			<c:forEach var="sellerPurList" items="${sellerPurList }">
+				<tr>
+					<td>${sellerPurList.BUYER_ID }</td>
+					<td>${sellerPurList.REGDATE }</td>
+					
+					<c:choose>
+						<c:when test="${sellerPurList.STATUS == 0 }">
+						<td>요청대기중</td>
+						</c:when>
+						<c:when test="${sellerPurList.STATUS == 1 }">
+						<td>수락상태</td>
+						</c:when>
+					</c:choose>
+					
+					<c:choose>
+						<c:when test="${sellerPurList.STATUS == 0 }">
+							<td><input type="button" value="수락" onclick="purchaseApprove('${sellerPurList.PURCHASE_NUM}','${sellerPurList.BUYER_ID }');" /></td>
+						</c:when>
+						<c:when test="${sellerPurList.STATUS == 1 }">
+							<td><input type="button" value="수락취소" onclick="purchaseApproveCancel('${sellerPurList.PURCHASE_NUM}','${sellerPurList.BUYER_ID }');" /></td>
+						</c:when>
+					</c:choose>
+				</tr>
+			</c:forEach>
+			</table>
+		</c:if>
+	</div>
+</div><!-- hiddenPurchaseListForm end -->
+
+	<!-- 컨텐츠 시작 -->
 	<div class="contentWrap">
+	<form action="/picksell/purchase/order/single" method="post">
 	
-	<%-- <c:if test="${resultObject.HOWTOSELL != 2 }">
-		<p><a href="/picksell/products/goods?p=${currentPage }">전체목록</a>
-		<p><a href="/picksell/products/goods?ca=">카테고리 목록</a>
-	</c:if> --%>
-	<%-- <c:if test="">
-		<p><a href="">전체목록</a>
-		<p><a href="">카테고리 목록</a>
-	</c:if> --%>
+	<c:if test="${resultObject.HOWTOSELL != 2 }">
+		<a href="/picksell/products/goods">전체목록</a> > 
+		<a href="/picksell/products/goods?ca=${resultObject.CATEGORY_NUM }">${resultObject.CATEGORY_NAME }</a>
+	</c:if>
+	<c:if test="${resultObject.HOWTOSELL == 2 }">
+		<a href="/picksell/products/plus">전체목록</a> > 
+		<a href="/picksell/products/plus?ca=${resultObject.CATEGORY_NUM }">${resultObject.CATEGORY_NAME }</a>
+	</c:if>
 	
 		<div class="seller_info">
 			<span>${resultObject.SELLER_ID }</span>
@@ -121,7 +191,19 @@
 		<div class="product_info">
 			<span>상품번호: ${resultObject.PRODUCT_NUM }</span>
 			<p>
-			<span>가격: <fmt:formatNumber value="${resultObject.PRICE }" pattern="#,###.##" /> 원</span>
+			<span>가격: </span>
+			<span id="currentPriceText"><fmt:formatNumber value="${resultObject.PRICE }" pattern="#,###.##" /></span>
+			<p>
+			<input type="hidden" name="totalSum" id="currentPrice" value="${resultObject.PRICE }" />
+			<input type="hidden" name="p_list[0].orderSum" id="currentOrderSum" value="1" />
+			<input type="hidden" name="p_list[0].product_price" value="${resultObject.PRICE }" />
+			<input type="hidden" name="p_list[0].seller_id" value="${resultObject.SELLER_ID }" />
+			<input type="hidden" name="p_list[0].product_img" value="${resultObject.FIRST_IMG }" />
+			<input type="hidden" name="p_list[0].product_subject" value="${resultObject.SUBJECT }" />
+			<input type="hidden" name="p_list[0].product_num" value="${resultObject.PRODUCT_NUM }" />
+			<c:if test="${resultObject.HOWTOSELL == 2 }">
+ 			<span>수량 </span><input type="button" value="-" id="subBtn" onclick="subOrder()" disabled="disabled"/><span id="currentOrderView">1</span><input type="button" value="+" id="addBtn" onclick="addOrder();" />
+			</c:if>
 		</div>
 		<div class="button_wrap">
 			<!-- 장바구니버튼 -->
@@ -139,21 +221,29 @@
 				</c:choose>
 			</div>
 			<!-- 구매신청하기버튼 -->
+			
 			<div class="purchaseWrap" id="purchaseWrap">
 				<c:choose>
-					<c:when test="${resultObject.DEAL_STATUS == 0 and resultObject.HOWTOSELL != 2 and alreadyPurchase == false }">
+					<c:when test="${resultObject.DEAL_STATUS == 0 and resultObject.HOWTOSELL != 2 and alreadyPurchase == false and isMyProducts == 'no' }">
 						<input type="button" value="구매신청하기" onclick="purchaseApply();" />
+					</c:when>
+					<c:when test="${isApprovedPC == 'yes' and alreadyPurchase == true }">
+						<input type="submit" value="구매하기" />
 					</c:when>
 					<c:when test="${alreadyPurchase == true }">
 						<input type="button" value="구매신청 취소하기" onclick="purchaseCancel();" />
 					</c:when>
+					<c:when test="${isMyProducts == 'yes' }">
+						<input type="button" value="구매신청 확인하기" onclick="openPurchaseList();" />
+					</c:when>
+					
 				</c:choose>
 			</div>
 			
 			<!-- 구매하기 + 구매수락일때를 생각해야함 -->
 			<c:choose>
 				<c:when test="${resultObject.HOWTOSELL == 2 }">
-					<input type="button" value="구매하기" />
+					<input type="submit" value="구매하기" />
 				</c:when>
 			</c:choose>
 			
@@ -184,20 +274,73 @@
 				</c:choose>
 				
 				
-			</div>
-		</div>
-	</div>
+			</div><!-- commentListWrap end -->
+		</div><!-- commentWrap end -->
+	</form><!-- form end -->
+	</div><!-- contentWrap end -->
 <script>
 	function openCommentForm(){
 		$(".hiddenBackGround").show();
 		$(".hiddenCommentForm").show();
 	}
-	
 	function closeCommentForm(){
 		$(".hiddenBackGround").hide();
 		$(".hiddenCommentForm").hide();
-	}
 		
+		$(".hiddenPurchaseListForm").hide();
+	}
+	function openPurchaseList(){
+		$(".hiddenPurchaseListForm").show();
+		$(".hiddenBackGround").show();
+	}
+
+	var product_stock = Number('${resultObject.STOCK}');
+	var product_price = Number('${resultObject.PRICE}');
+	var current_price = Number(document.getElementById('currentPrice').value);
+	var current_price_ele = document.getElementById('currentPrice');
+	var current_order_sum = Number(document.getElementById('currentOrderSum').value);
+	var current_order_sum_ele = document.getElementById('currentOrderSum');
+	var current_order_view = document.getElementById('currentOrderView');
+	var current_price_view = document.getElementById('currentPriceText');
+	var subBtn_ele = document.getElementById('subBtn');
+	
+	function addComma(num) {
+		var regexp = /\B(?=(\d{3})+(?!\d))/g;
+		return num.toString().replace(regexp, ',');
+	}
+	
+	function addOrder(){
+		if((current_order_sum + 1) > product_stock){
+			alert('최대 수량입니다');
+			return false;
+		}else{
+			subBtn_ele.disabled = false;
+			//현재 주문+1 처리
+			current_order_sum += 1;
+			current_order_sum_ele.value = current_order_sum;
+			current_order_view.innerHTML = current_order_sum;
+			
+			//가격 주문* 처리
+			current_price = product_price * current_order_sum;
+			current_price_ele.value = current_price;
+			current_price_view.innerHTML = addComma(current_price);
+		}
+	}
+	function subOrder(){
+			//현재 주문-1 처리
+			current_order_sum -= 1;
+			current_order_sum_ele.value = current_order_sum;
+			current_order_view.innerHTML = current_order_sum;
+			
+			//가격 주문* 처리
+			current_price = product_price * current_order_sum;
+			current_price_ele.value = current_price;
+			current_price_view.innerHTML = addComma(current_price);
+		
+			if(current_order_sum == 1)
+				subBtn_ele.disabled = true;
+	}
+	
 </script>
 
 </body>

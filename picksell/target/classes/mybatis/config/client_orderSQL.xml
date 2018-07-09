@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="client_order">
+	
+	<insert id="insertOrderBatch" parameterType="orderModel">
+		<selectKey keyProperty="order_num" resultType="int" order="BEFORE">
+			select order_seq.NEXTVAL from dual
+		</selectKey>
+		insert into ps_order(ORDER_NUM,
+								BUYER_ID,
+								STATUS,
+								TOTAL_PRICE,
+								DESTINATION,
+								ACCOUNT,
+								ACCOUNT_NAME,
+								BANK,
+								PURCHASE_NUM,
+								DELIVERY_COMPANY,
+								INVOICE_NUM,
+								STEP1_DATE,
+								PRECAUTIONS,
+								BUYER_PHONE,
+								BUYER_EMAIL) values(#{order_num},
+													#{buyer_id},
+													'0',
+													#{total_price},
+													#{destination},
+													#{account},
+													#{account_name},
+													#{bank},
+													'0',
+													'0',
+													'0',
+													sysdate,
+													#{precautions},
+													#{buyer_phone},
+													#{buyer_email})
+	</insert>
+	
+	<insert id="insertOrderList" parameterType="orderListModel">
+		insert into ps_orderlist(ORDERLIST_NUM,
+								ORDER_NUM,
+								PRODUCT_NUM,
+								ORDER_QUANTITY,
+								SELLER_ID) values(ol_seq.NEXTVAL,
+												#{order_num},
+												#{product_num},
+												#{order_quantity},
+												#{seller_id})
+	</insert>
+	
+	
+	
+	
+</mapper>

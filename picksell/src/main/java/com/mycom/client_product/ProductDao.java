@@ -17,6 +17,21 @@ public interface ProductDao {
 	//판매글 상세보기(일반판매+플러스판매)
 	public Map<String, Object> getProductDetail(Map<String, Object> map);
 	
+	//판매글 해당구매리스트(판매자 조건부)
+	public List<Map<String, Object>> getProductSellerPurchaseList(int product_num);
+	
+	//판매글 수락여부(판매자 조건부)
+	public int getAlreadyPurchaseApproving(int product_num);
+	
+	//판매글 수락하기(판매자 조건부)
+	public void letPurchaseApprove(int purchase_num);
+	
+	//판매글 수락취소하기(판매자 조건부)
+	public void letPurchaseApproveCancel(int purchase_num);
+	
+	//구매요청 수락여부(구매자)
+	public int selectMyPurchase(Map<String, Object> map);
+	
 	//판매글 조회수증가(상세보기랑 같이)
 	public void updateProductHitcount(Map<String, Object> map);
 	
@@ -35,4 +50,6 @@ public interface ProductDao {
 	//판매글 구매신청리스트
 	public List<Map<String, Object>> getProductPurchaseList(int product_num);
 	
+	//카테고리 긁어오기
+	public List<Map<String, Object>> getCategoryList();
 }

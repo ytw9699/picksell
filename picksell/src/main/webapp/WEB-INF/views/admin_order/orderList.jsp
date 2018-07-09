@@ -6,11 +6,38 @@
 <html>
 <head>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>오더 리스트</title>
-
+<meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <style type="text/css">
+
+.button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 8px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+.button1 {
+    background-color: white; 
+    color: black; 
+    border: 2px solid #008CBA;
+}
+
+.button1:hover {
+    background-color: #008CBA;
+    color: white;
+}
 
 .fa-check {
     color: green;
@@ -56,7 +83,7 @@ tr:nth-child(even){background-color: #f2f2f2}
 
 </head>
 <body>
-
+<div class="container">
 <div class="main">
 <div style="overflow-x:auto;">
 <table>
@@ -68,18 +95,19 @@ tr:nth-child(even){background-color: #f2f2f2}
 			<th style="text-align:center;">배송상태</th>
 			<th style="text-align:center;">총 가격</th>										
 			<th style="text-align:center;">배송지</th>
-			<th style="text-align:center;">계좌</th>
-			<th style="text-align:center;">입금주</th>
-			<th style="text-align:center;">은행명</th>
+<!-- 			<th style="text-align:center;">계좌</th> -->
+<!-- 			<th style="text-align:center;">입금주</th> -->
+<!-- 			<th style="text-align:center;">은행명</th> -->
 			<th style="text-align:center;">주문번호</th>
-			<th style="text-align:center;">택배사</th>
-			<th style="text-align:center;">송장번호</th>
+<!-- 			<th style="text-align:center;">택배사</th> -->
+<!-- 			<th style="text-align:center;">송장번호</th> -->
 			<th style="text-align:center;" >입금시각</th>
 			<th style="text-align:center;">입금확인</th>
 			<th style="text-align:center;">배송시각</th>
 			<th style="text-align:center;">배송확인</th>
 			<th style="text-align:center;">인수시각</th>
 			<th style="text-align:center;">인수확인</th>
+			<th style="text-align:center;">상세보기</th>
 		</tr>
 	</thead>
 
@@ -107,14 +135,21 @@ tr:nth-child(even){background-color: #f2f2f2}
  				</td>
  				<td style="text-align:center;vertical-align:middle;">${orderList.total_price}</td>
  				<td style="text-align:center;vertical-align:middle;">${orderList.destination}</td>
- 				<td style="text-align:center;vertical-align:middle;">${orderList.account}</td>
- 				<td style="text-align:center;vertical-align:middle;">${orderList.account_name}</td>
- 				<td style="text-align:center;vertical-align:middle;">${orderList.bank}</td>
+<%--  				<td style="text-align:center;vertical-align:middle;">${orderList.account}</td> --%>
+<%--  				<td style="text-align:center;vertical-align:middle;">${orderList.account_name}</td> --%>
+<%--  				<td style="text-align:center;vertical-align:middle;">${orderList.bank}</td> --%>
  				<td style="text-align:center;vertical-align:middle;">${orderList.purchase_num}</td>
- 				<td style="text-align:center;vertical-align:middle;">${orderList.delivery_company}</td>
- 				<td style="text-align:center;vertical-align:middle;">${orderList.invoice_num}</td>
+<%--  				<td style="text-align:center;vertical-align:middle;">${orderList.delivery_company}</td> --%>
+<%--  				<td style="text-align:center;vertical-align:middle;">${orderList.invoice_num}</td> --%>
  				
- 				<td style="text-align:center;vertical-align:middle;">${orderList.step2_date}</td>
+ 				<td style="text-align:center;vertical-align:middle;">
+ 					<c:if test="${empty orderList.step2_date}">
+					<i class="fa fa-remove"></i>
+					</c:if>
+					<c:if test="${not empty orderList.step2_date}">
+					<i class="fa fa-check"></i>
+					</c:if>
+ 				</td>
  				<td style="text-align:center;vertical-align:middle;">
 <%--  				<c:url var="status1" value="/admin_order/confirmProc" > --%>
 <%-- 					<c:param name="order_num" value="${orderList.order_num}" />							 --%>
@@ -123,15 +158,63 @@ tr:nth-child(even){background-color: #f2f2f2}
 <%-- 				 <a href="${status1}"><input type="button" value="입금완료"></a> --%>
 
  				</td>
- 				<td style="text-align:center;vertical-align:middle;">${orderList.step3_date}</td>
+ 				
  				<td style="text-align:center;vertical-align:middle;">
+ 					<c:if test="${empty orderList.step3_date}">
+					<i class="fa fa-remove"></i>
+					</c:if>
+					<c:if test="${not empty orderList.step3_date}">
+					<i class="fa fa-check"></i>
+					</c:if>
+ 				</td>
+ 				
+ 				<td style="text-align:center;vertical-align:middle;">
+ 				
  				<c:url var="status2" value="/admin_order/deliveryProc" >
 					<c:param name="order_num" value="${orderList.order_num}" />							
 				</c:url>
-				 <a href="${status2}"><input type="button" value="배송중"></a>
+				
+				<input type="button" data-toggle="modal" data-target="#myModal" data-id="myValue" value="배송중">
+				 
+				 <!-- Modal -->
+  				<div class="modal fade" id="myModal" role="dialog">
+   				 <div class="modal-dialog">
+    
+    			  <!-- Modal content-->
+     			 <div class="modal-content">
+      			  <div class="modal-header">
+      	  			  <button type="button" class="close" data-dismiss="modal">&times;</button>
+      		    <h4 class="modal-title">택배사 / 송장번호  입력</h4>
+      			  </div>
+     		    <form>
+   				 <div class="form-group">
+    			  <label for="usr">택배사</label>
+    			  <input type="text" class="form-control" id="usr">
+   				 </div>
+   				 <div class="form-group">
+          	 	  <label for="pwd">송장번호</label>
+    			  <input type="password" class="form-control" id="pwd">
+  		  		</div>
+ 		 </form>
+        <div class="modal-footer">
+         	<a href="${status2}">  <button type="button" class="btn btn-default" >입력완료</button> </a>
+        
+       	 </div>
+     		 </div>
+      
+   		 </div>
+ 			 </div>
+				 	 
  				</td>
  				
- 				<td style="text-align:center;vertical-align:middle;">${orderList.step4_date}</td>
+ 				<td style="text-align:center;vertical-align:middle;">
+ 					<c:if test="${empty orderList.step4_date}">
+					<i class="fa fa-remove"></i>
+					</c:if>
+					<c:if test="${not empty orderList.step4_date}">
+					<i class="fa fa-check"></i>
+					</c:if>
+ 				</td>
  				<td style="text-align:center;vertical-align:middle;">
  				<c:url var="status3" value="/admin_order/orderTerminate" >
 					<c:param name="order_num" value="${orderList.order_num}" />							
@@ -139,12 +222,18 @@ tr:nth-child(even){background-color: #f2f2f2}
 				 <a href="${status3}"><input type="button" value="인수확인"></a>
  				</td>
  				
+ 				<td style="text-align:center;vertical-align:middle;">
+
+					<a href="/picksell/admin_order/orderDetail/${orderList.order_num}"><button class="button button1">상세보기</button></a>
+<!--  				<a href="#" class="button button1"><input type="button" value="상세보기"></a> -->
+ 				</td>
  			</tr>
  			
  		</c:forEach>
  	</div>
 </table> 
 </div>	
+
  	<!--  등록된 상품이 없을때 -->
 	<c:if test="${empty orderList}">
 		<tr><td colspan="9" style="text-align:center;">등록된 상품이 없습니다</td></tr>
@@ -171,6 +260,7 @@ tr:nth-child(even){background-color: #f2f2f2}
 			</div>							
 		</div>				
 	</div>
+</div>
 </div>
 </body>
 </html>
