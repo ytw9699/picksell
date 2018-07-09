@@ -34,7 +34,21 @@
 주소 : ${map.ADDRESS }
 </td></tr>
 <tr><td>
-계정 상태 : ${map.STATUS }
+계정 상태 : 
+<c:choose>
+<c:when test="${ '0' eq map.STATUS }">
+ 정상
+</c:when>
+<c:when test="${ '1' eq map.STATUS }">
+ 게시글 제한
+</c:when>
+<c:when test="${ '2' eq map.STATUS }">
+ 로그인 제한
+</c:when>
+</c:choose>
+</td></tr>
+<tr><td>
+알람 동의 여부 : ${map.ALARM_CONSENT }
 </td></tr>
 <tr><td>
 가입 일자 : <fmt:formatDate value="${map.REGDATE }" pattern="yyyy-MM-dd"/>
