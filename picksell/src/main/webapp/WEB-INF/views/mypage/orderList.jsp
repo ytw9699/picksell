@@ -9,7 +9,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>주문내역/배송조회</title>
+<title>주문조회</title>
 <style>
 </style>
 </head>

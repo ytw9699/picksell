@@ -177,13 +177,17 @@ public class mypageController {
 	if(page2.getEndCount() < totalCount)
 		lastCount = page2.getEndCount() + 1;
 	
+	System.out.println(orderList);
 	orderList = orderList.subList(page2.getStartCount(), lastCount);
     
     for(int i = 0 ; i < orderList.size() ; i++) {
     	parameterMap.put("ORDER_NUM",String.valueOf(orderList.get(i).get("ORDER_NUM")));
     	
     	orderSubList.add(mypageService.orderSubList(parameterMap));//리스트하나를 GET하고 다시 맵에서 GET
+    	System.out.println(orderSubList);
     }
+    System.out.println(pagingHtml);
+    //System.out.println(orderSubList.get(0));
     model.addAttribute("orderList", orderList);
     model.addAttribute("orderSubList", orderSubList);
     model.addAttribute("pagingHtml", pagingHtml);
@@ -192,45 +196,8 @@ public class mypageController {
 }
 	
 	@RequestMapping("/mypage/saleList")
-	public String saleList(Model model, HttpSession session	,
-	@RequestParam(value="status", required=false, defaultValue="5") String status,//기본값 5는 전체보기
-	@RequestParam(value="p", required=false, defaultValue="1") int currentPageNumber
-	) {	
-		Map<String, Object> parameterMap = new HashMap<String, Object>();
-		
-		parameterMap.put("status", status);
-		
-		 List saleSubList = new ArrayList();//PS_ORDERLIST + PS_PRODUCT 테이블 조인
-		 
-		 String sessionId =(String)session.getAttribute("sessionId");
-		    
-		 parameterMap.put("sessionId", sessionId);
-		 
-		 List<Map<String, Object>> saleList = mypageService.saleList(parameterMap);
-		  
-		 totalCount = saleList.size();
-		
-		 page2 = new orderListPaging(currentPageNumber, totalCount, blockCount, blockPage, "/picksell/mypage/saleList", status);
-	
-		 pagingHtml = page2.getPagingHtml().toString();
-			
-		int lastCount = totalCount;
-			
-		if(page2.getEndCount() < totalCount)
-			lastCount = page2.getEndCount() + 1;
-			
-		saleList = saleList.subList(page2.getStartCount(), lastCount);
-		
-		for(int i = 0 ; i < saleList.size() ; i++) {
-	    	parameterMap.put("ORDER_NUM",String.valueOf(saleList.get(i).get("ORDER_NUM")));
-	    	
-	    	saleSubList.add(mypageService.saleSubList(parameterMap));//리스트하나를 GET하고 다시 맵에서 GET
-	    }
-		
-	model.addAttribute("saleList", saleList);
-	model.addAttribute("saleSubList", saleSubList);
-	System.out.println(saleSubList);
-	model.addAttribute("pagingHtml", pagingHtml);
+	public String saleList(Model model, HttpSession session) {	
+
 	return "saleList";
 }
 	@RequestMapping(value="/mypage/orderDetail/{PRODUCT_NUM}", method=RequestMethod.GET)
