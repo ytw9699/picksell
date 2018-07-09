@@ -47,6 +47,6 @@ public class mypageService implements mypageDao {
 	public Map<String, Object> orderDetail(int PRODUCT_NUM) {
 		return sqlMapper.selectOne("mypage.orderDetail", PRODUCT_NUM);
 	}
-
+	
 	
 }

@@ -14,6 +14,7 @@
 
 </style>
 <head>
+<script src="http://code.jquery.com/jquery-1.7.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>판매 중 리스트</title>
 </head>

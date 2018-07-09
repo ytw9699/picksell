@@ -23,6 +23,8 @@ public interface AdminMemberDAO {
 	//회원 주문내역리스트
 	public List<Map<String,Object>> adminOrderList(String id);
 	
+	public List<Map<String,Object>> adminOrderSubList(Map<String,Object> map);
+	
 	//회원 판매내역리스트
 	public List<Map<String,Object>> adminSellHistory(String id);
 	
