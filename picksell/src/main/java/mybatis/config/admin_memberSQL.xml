@@ -1,89 +1,104 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper
 PUBLIC " - //mybatis.org//DTD Config 3.0//EN"
-	   " http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-	  
+      " http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+     
 <mapper namespace="admin_Member">
 
-	<resultMap type="adminMember" id="adminMemberRes">
-		
-		<result property="id" column="ID" />
-		<result property="password" column="PASSWORD"/>
-		<result property="name" column="NAME"/>
-		<result property="email" column="EMAIL"/>
-		<result property="address" column="ADDRESS"/>
-		<result property="kind" column="KIND"/>
-		<result property="status" column="STATUS"/>
-		<result property="account" column="ACCOUNT"/>
-		<result property="account_name" column="ACCOUNT_NAME"/>
-		<result property="bank" column="BANK"/>
-		<result property="profile_img" column="PROFILE_IMG"/>
-		<result property="alarm_consent" column="ALARM_CONSENT"/>
-		<result property="business_number" column="BUSINESS_NUMBER"/>
-		<result property="business_name" column="BUSINESS_NAME"/>
-		<result property="regdate" column="REGDATE"/>
-	
-	</resultMap>
-	
-	<select id="membersList" resultMap="adminMemberRes">
-		SELECT * FROM PS_MEMBER ORDER BY regdate DESC
-	</select>
+   <resultMap type="adminMember" id="adminMemberRes">
+      
+      <result property="id" column="ID" />
+      <result property="password" column="PASSWORD"/>
+      <result property="name" column="NAME"/>
+      <result property="email" column="EMAIL"/>
+      <result property="address" column="ADDRESS"/>
+      <result property="kind" column="KIND"/>
+      <result property="status" column="STATUS"/>
+      <result property="account" column="ACCOUNT"/>
+      <result property="account_name" column="ACCOUNT_NAME"/>
+      <result property="bank" column="BANK"/>
+      <result property="profile_img" column="PROFILE_IMG"/>
+      <result property="alarm_consent" column="ALARM_CONSENT"/>
+      <result property="business_number" column="BUSINESS_NUMBER"/>
+      <result property="business_name" column="BUSINESS_NAME"/>
+      <result property="regdate" column="REGDATE"/>
+   
+   </resultMap>
+   
+   <select id="membersList" resultMap="adminMemberRes">
+      SELECT * FROM PS_MEMBER ORDER BY regdate DESC
+   </select>
 
-	<select id="searchName" resultMap="adminMemberRes" parameterType="string">
-	 	SELECT * FROM PS_MEMBER WHERE  name = #{name}  ORDER BY regdate DESC 	 
-	</select>
-	
-	<select id="searchId" resultMap="adminMemberRes" parameterType="string">
-		SELECT * FROM PS_MEMBER WHERE id = #{id} ORDER BY regdate DESC
-	</select>
-	
-	 <select id="selectOneMember" resultType="hashmap" parameterType="string">
-	 	SELECT * FROM PS_MEMBER WHERE id = #{id}
-	 </select>
-	 
-	 <select id="selectOrderList" resultType="hashmap" parameterType="string">
-	 	select * from PS_ORDER 
-		where buyer_id = #{id} order by step1_date desc
-	 </select>
-	 
-	 <select id="selectOrderSubList" resultType="hashmap" parameterType="Integer">
-	 SELECT * FROM(SELECT * FROM PS_ORDERLIST)a, ps_product b, ps_order c 
-	 WHERE a.product_num = b.product_num AND c.order_num = a.order_num AND a.ORDER_NUM = #{ORDER_NUM}
-	 </select>
-	 
-	 <select id="adminSellHistory" resultType="hashmap" parameterType="string">
-		SELECT * FROM ps_orderlist a,ps_seller_history b,ps_order c 
-		WHERE a.orderlist_num = b.orderlist_num  
-		AND c.order_num = a.order_num and a.seller_id = #{id}
-	 </select>
-	 
-	 <select id="adminPurchaseHistory" resultType="hashmap" parameterType="string">
-	    SELECT * FROM ps_buyer_history a,ps_order b,ps_orderlist c 
-		WHERE a.order_num = b.order_num and b.buyer_id = #{id} 
-		AND b.order_num = c.order_num
-	 </select>
-	 
-	 <select id="adminSelling" resultType="hashmap" parameterType="string">
-	    SELECT * FROM ps_product WHERE seller_id = #{id} and 
-	    deal_status = '0'
-	 </select>
-	 
-	 <update id="adminMemberStatus" parameterType="HashMap">
-	  UPDATE ps_member SET 
-	   <choose>
-	    <when test='status == "0" '>
-	      status = '0'
-	    </when>
-	    <when test='status == "1" '>
-	      status = '1'
-	    </when>
-	    <when test='status == "2" '>
-	      status = '2'
-	    </when>
-	    </choose>
-	   WHERE id= #{id} 
-	 </update> 
-	 
+   <select id="searchName" resultMap="adminMemberRes" parameterType="string">
+       SELECT * FROM PS_MEMBER WHERE  name = #{name}  ORDER BY regdate DESC     
+   </select>
+   
+   <select id="searchId" resultMap="adminMemberRes" parameterType="string">
+      SELECT * FROM PS_MEMBER WHERE id = #{id} ORDER BY regdate DESC
+   </select>
+   
+    <select id="selectOneMember" resultType="hashmap" parameterType="string">
+       SELECT * FROM PS_MEMBER WHERE id = #{id}
+    </select>
+    
+    <select id="selectOrderList" resultType="hashmap" parameterType="string">
+       SELECT * from PS_ORDER 
+      WHERE buyer_id = #{id} order by step1_date desc
+    </select>
+    
+    <select id="selectOrderSubList" resultType="hashmap" parameterType="hashmap">
+   select a.total_price, a.status, c.first_img, c.subject, c.price from ps_order a, ps_orderlist b, ps_product c 
+   WHERE a.order_num = #{ORDER_NUM} and a.order_num = b.order_num and b.product_num = c.product_num
+    </select>
+    
+    <select id="adminSellHistory" resultType="hashmap" parameterType="string">
+      SELECT * FROM ps_orderlist a,ps_seller_history b,ps_order c 
+      WHERE a.orderlist_num = b.orderlist_num  
+      AND c.order_num = a.order_num and a.seller_id = #{id}
+    </select>
+    
+    <select id="adminPurchaseHistory" resultType="hashmap" parameterType="string">
+       SELECT * FROM ps_buyer_history a,ps_order b,ps_orderlist c 
+      WHERE a.order_num = b.order_num and b.buyer_id = #{id} 
+      AND b.order_num = c.order_num
+    </select>
+    
+    <select id="adminSelling" resultType="hashmap" parameterType="string">
+       SELECT * FROM ps_product WHERE seller_id = #{id} and 
+       deal_status = '0'
+    </select>
+    
+    <update id="blindStatus" parameterType="HashMap">
+     UPDATE ps_product SET 
+     <choose>
+      <when test='board_status == "0" '>
+      board_status = '0'
+      </when>
+      <when test='board_status == "1" '>
+       board_status = '1'
+      </when>
+     </choose>
+    WHERE  seller_id = #{id}
+    AND product_num = #{product_num} 
+    
+    </update>
+    
+    <update id="adminMemberStatus" parameterType="HashMap">
+     UPDATE ps_member SET 
+      <choose>
+       <when test='status == "0" '>
+         status = '0'
+       </when>
+       <when test='status == "1" '>
+         status = '1'
+       </when>
+       <when test='status == "2" '>
+         status = '2'
+       </when>
+       </choose>
+      WHERE id= #{id} 
+    </update> 
+    
  </mapper>
 
-	
+   

@@ -42,7 +42,7 @@ public class AdminMemberService implements AdminMemberDAO {
 	}
 	
 	@Override
-	public List<Map<String,Object>> adminOrderSubList(Map<String,Object> map){
+	public List<Map<String, Object>> adminOrderSubList(Map<String,Object> map){
 		return sqlSessionTemplate.selectList("admin_Member.selectOrderSubList",map);
 	}
 	
@@ -59,6 +59,11 @@ public class AdminMemberService implements AdminMemberDAO {
 	@Override
 	public List<Map<String,Object>> adminProducts(String id){
 		return sqlSessionTemplate.selectList("admin_Member.adminSelling",id);
+	}
+	
+	@Override
+	public void changeBlindStatus(Map<String,Object> map) {
+		sqlSessionTemplate.update("admin_Member.blindStatus",map);
 	}
 
 	@Override

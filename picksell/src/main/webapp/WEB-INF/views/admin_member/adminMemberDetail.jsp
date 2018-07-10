@@ -38,7 +38,6 @@
 </head>
 <body>
 <div class="main">
-
 <table border="1px" align="center">
 <tr>
 <td>아이디 : ${map.ID }</td>

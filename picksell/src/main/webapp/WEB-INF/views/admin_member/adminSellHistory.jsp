@@ -4,11 +4,23 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
+<style>
+.main{
+   margin-left: 160px; /* Same as the width of the sidenav */
+}
+</style>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>관리자 판매 내역 리스트</title>
 </head>
 <body>
+<div class="main">
+
+<c:choose>
+<c:when test="${0 eq total }">
+판매내역이 없습니다.
+</c:when>
+<c:when test="${0 lt total }">
 <table border="1px" align="center">
  	<tr>
  	    <th>번호</th>
@@ -35,5 +47,8 @@
 	</tr>
 </c:forEach>
 </table>
+</c:when>
+</c:choose>
+</div>
 </body>
 </html>

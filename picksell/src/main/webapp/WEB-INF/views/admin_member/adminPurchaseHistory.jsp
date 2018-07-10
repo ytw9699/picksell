@@ -9,6 +9,12 @@
 <title>관리자 구매 내역 리스트</title>
 </head>
 <body>
+<c:choose>
+<c:when test="${ 0  eq total }">
+구매 내역이 없습니다.
+</c:when>
+<c:when test="${ 0 lt total }">
+
 <table border="1px" align="center">
  	<tr>
  	    <th>번호</th>
@@ -37,5 +43,7 @@
  		</tr>
  	</c:forEach>
  	</table>
+ </c:when>
+</c:choose>
 </body>
 </html>
