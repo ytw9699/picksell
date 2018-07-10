@@ -16,11 +16,9 @@ a:hover { color: black; text-decoration: none;}
     color: #666;
     font-size: 13px;
 }
+/* 마이페이지 메뉴 */
 #mypage_menuBox{position:absolute; display:none;}
-#menuBox-header {
-    height: 32px;
-}
-
+#menuBox-header {height: 32px;}
 #menuBox-body {
     width: 95px;
     border: 1px solid #c2c2c2;
@@ -34,6 +32,18 @@ a:hover { color: black; text-decoration: none;}
     color: #666;
     font-size: 13px;
 }
+
+/* 메인카테고리 메뉴 */
+#maincategory_menuBox{position:absolute; display:none;}
+#maincategory-header{height: 32px;}
+#maincategory-body {
+    width: 190px;
+    border: 1px solid #c2c2c2;
+    background-color: white;
+    /* padding: 13px; */
+    /* margin-left: -1px; */
+}
+
 span.menuBox-link a {
     color: #666;
 }
@@ -130,11 +140,66 @@ span#myBasketSum {
     display: inline-block;
     text-align: center;
 }
+.totalCategoryText {
+    background: url(/picksell/resources/img/maincategory_nohover.png) 2% 53% no-repeat;
+    width: 100%;
+    height: 50px;
+    display: block;
+}
+
+#maincategory-body {
+    /* width: 128px; */
+    border: 1px solid #c2c2c2;
+    background-color: white;
+    /* padding: 13px; */
+    /* margin-left: -1px; */
+}
+
+ul.mainCategoryUL {
+    width: 190px;
+    margin: 0;
+    padding: 0;
+}
+
+li.mainCategoryLI {
+    color: #333;
+    padding: 12px;
+    cursor: pointer;
+}
+
+li.mainCategoryLI:hover {
+    background-color: #7151fc;
+    color: white;
+}
+
+
+
+
+
 
 </style>
 </head>
 <script>
 	$(document).ready(function() {
+		
+		$('.totalCategory').mouseenter(function(){
+			$(this).css({'background-color':'#7151fc','color':'white'});
+			$('.totalCategoryText').css('background','url(/picksell/resources/img/maincategory_hover.png) 2% 53% no-repeat');
+		
+			var height = $(this).height();
+			var top = $(this).offset().top;
+			//get the left and find the center value
+			var left = $(this).offset().left + ($(this).width() / 2) - ($('#maincategory_menuBox').width() / 2) + 31;
+			$('#maincategory-header').height(height);
+			$('#maincategory_menuBox').show();
+			$('#maincategory_menuBox').css({'top':top, 'left':left});
+		});
+		$('#maincategory_menuBox').mouseleave(function (){
+			$('.totalCategoryText').css('background','url(/picksell/resources/img/maincategory_nohover.png) 2% 53% no-repeat');
+			$('.totalCategory').css({'background-color':'white','color':'#333'});
+			$(this).hide();
+		})
+		
 		$('#linkOfMypage').mouseenter(function() {
 			var height = $(this).height();
 			var top = $(this).offset().top;
@@ -145,7 +210,6 @@ span#myBasketSum {
 			$('#mypage_menuBox').css({'top':top, 'left':left});
 		});
 		$('#mypage_menuBox').mouseleave(function () {
-				//$('#shareit-field').val('');
 				$(this).hide();
 		});
 		//var allData = "test1=1&test2=2";
@@ -196,7 +260,11 @@ span#myBasketSum {
 </div>
 <div class="headerBottom">
 	<ul class="bottomUL">
-		<li class="headerCategory totalCategory"><a href="#">전체카테고리</a></li>
+		<li class="headerCategory totalCategory">
+		
+		<span class="totalCategoryText">전체카테고리</span>
+		
+		</li>
 		<li class="headerCategory menuCategory"><a href="/picksell/products/plus" class="menuLink <c:if test="${forwardingListKind == '0' }">active</c:if>">픽셀 플러스</a></li>
 		<li class="headerCategory menuCategory"><a href="/picksell/hotPlusProduct" class="menuLink <c:if test="${forwardingListKind == '1' }">active</c:if>">인기상품</a></li>
 		<li class="headerCategory menuCategory"><a href="/picksell/products/goods" class="menuLink <c:if test="${forwardingListKind == '2' }">active</c:if>">일반상품</a></li>
@@ -210,13 +278,31 @@ span#myBasketSum {
 		<span class="menuBox-link"><a href="/picksell/mypage/memberCheck">개인정보확인/수정</a></span>
 		<span class="menuBox-link"><a href="/picksell/mypage/purchaseList/0">일반구매 신청리스트</a></span>
 		<span class="menuBox-link"><a href="/picksell/mypage/sellList">판매글 관리</a></span>
-		<span class="menuBox-link"><a href="#">판매/배송 조회</a></span>
-		<span class="menuBox-link"><a href="/picksell/mypage/orderList">주문/배송 조회</a></span>
+		<span class="menuBox-link"><a href="/picksell/mypage/saleList">판매 내역/배송 조회</a></span>
+		<span class="menuBox-link"><a href="/picksell/mypage/orderList">주문 내역/배송 조회</a></span>
 		<span class="menuBox-link"><a href="#">알림설정</a></span>
 	</div>
 </div>
 
-<p>
+<div id="maincategory_menuBox">
+	<div id="maincategory-header"></div>
+	<div id="maincategory-body">
+		<ul class="mainCategoryUL">
+			<li class="mainCategoryLI" onclick="location.href='/picksell/products?ca=1'">전자제품</li>
+			<li class="mainCategoryLI" onclick="location.href='/picksell/products?ca=2'">패션/의류</li>
+			<li class="mainCategoryLI" onclick="location.href='/picksell/products?ca=3'">패션/잡화</li>
+			<li class="mainCategoryLI" onclick="location.href='/picksell/products?ca=4'">화장품/미용</li>
+			<li class="mainCategoryLI" onclick="location.href='/picksell/products?ca=5'">스포츠/레저</li>
+			<li class="mainCategoryLI" onclick="location.href='/picksell/products?ca=6'">유아동/출산</li>
+			<li class="mainCategoryLI" onclick="location.href='/picksell/products?ca=7'">완구/문구/취미</li>
+			<li class="mainCategoryLI" onclick="location.href='/picksell/products?ca=8'">도서/음반/DVD</li>
+			<li class="mainCategoryLI" onclick="location.href='/picksell/products?ca=9'">가구/인테리어</li>
+			<li class="mainCategoryLI" onclick="location.href='/picksell/products?ca=10'">생활/건강</li>
+		</ul>
+	</div>
+</div>
 
+<p>
 </body>
+
 </html>

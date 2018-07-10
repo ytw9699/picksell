@@ -96,6 +96,11 @@
 		<put-attribute name="body" value="/WEB-INF/views/client_product/productPlusList.jsp" />
 	</definition>
 	
+	<!-- 메인카테고리 리스트 -->
+	<definition name="proudctListMainCategory" extends="default">
+		<put-attribute name="body" value="/WEB-INF/views/client_product/productListMain.jsp" />
+	</definition>
+	
 	<!-- 상품상세보기(일반+플러스같이사용) -->
 	<definition name="productDetail" extends="default">
 		<put-attribute name="body" value="/WEB-INF/views/client_product/productDetail.jsp" />
@@ -155,6 +160,10 @@
 	<!-- 주문조회-->
 	<definition name="orderList" extends="modify">
 		<put-attribute name="body" value="/WEB-INF/views/mypage/orderList.jsp" />
+	</definition>
+	<!-- 판매내역 조회-->
+	<definition name="saleList" extends="modify">
+		<put-attribute name="body" value="/WEB-INF/views/mypage/saleList.jsp" />
 	</definition>
 	
 	<!-- 주문조회 상세보기-->

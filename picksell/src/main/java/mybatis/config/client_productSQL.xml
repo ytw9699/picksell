@@ -10,6 +10,30 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where a.product_num = #{product_num} and a.category_num = b.category_num
 	</select>
 	
+	<select id="selectProductListMain" resultType="hashmap" parameterType="hashmap">
+		select * from ps_product 
+		where category_num = #{ca} 
+		<choose>
+			<when test='ls == "1" '>
+			and howtosell = 2 
+			</when>
+			<when test='ls == "2" '>
+			and howtosell != 2 
+			</when>
+		</choose>
+		<choose>
+			<when test='od == "0" '>
+			order by product_regdate desc
+			</when>
+			<when test='od == "1" '>
+			order by price asc
+			</when>
+			<when test='od == "2" '>
+			order by price desc
+			</when>
+		</choose>
+	</select>
+	
 	<select id="selectNomalProductList" resultType="hashmap" parameterType="hashmap">
 		<if test='category == "0" '>
 			select * from ps_product 

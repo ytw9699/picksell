@@ -9,35 +9,35 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>주문내역/배송조회</title>
+<title>판매내역/배송조회</title>
 <style>
 </style>
 </head>
 <body>
 <table>
-<a href="/picksell/mypage/orderList">
+<a href="/picksell/mypage/saleList">
 전체보기/
 </a>
-<a href="/picksell/mypage/orderList?status=0">
+<a href="/picksell/mypage/saleList?status=0">
 입금대기/
 </a>
-<a href="/picksell/mypage/orderList?status=1">
+<a href="/picksell/mypage/saleList?status=1">
 입금완료 및 배송대기중/
 </a>
-<a href="/picksell/mypage/orderList?status=2">
+<a href="/picksell/mypage/saleList?status=2">
 배송 및 인수확인 대기/
 </a>
-<a href="/picksell/mypage/orderList?status=3">
+<a href="/picksell/mypage/saleList?status=3">
 인수확인 및 거래완료/
 </a>
-<a href="/picksell/mypage/orderList?status=44">
+<a href="/picksell/mypage/saleList?status=44">
 결제취소/
 </a>
-<c:if test="${fn:length(orderList) > 0}">
-<c:forEach var="ps_order" items="${orderList}" varStatus="orderListStatus">
+<c:if test="${fn:length(saleList) > 0}">
+<c:forEach var="ps_order" items="${saleList}" varStatus="saleListStatus">
     <br><h3>주문일:<fmt:formatDate value="${ps_order.STEP1_DATE}" pattern="yyyy년 MM월 dd일 hh:mm:ss" />
 	<a href="/picksell/mypage/orderDetail/${ps_order.ORDER_NUM }">
-		<font color = "red">주문 내역 상세보기</font>
+		<font color = "red">판매 내역 상세보기</font>
 		</a></h3>
     	<c:if test="${ps_order.STATUS == '0'}">
 		거래상태:입금대기중
@@ -56,7 +56,7 @@
 		</c:if>
 		<br>
 		<br>
-<c:forEach var="joinMap" items="${orderSubList[orderListStatus.index]}">
+<c:forEach var="joinMap" items="${saleSubList[saleListStatus.index]}">
 <a href="/picksell/products/detail/${joinMap.CATEGORY_NUM }/${joinMap.PRODUCT_NUM }">
 <img src="/picksell/resources/productUpload/${joinMap.FIRST_IMG }" style="width: 200px;" />
  /${joinMap.SUBJECT }
@@ -68,7 +68,7 @@
 ================================================================================ 
 </c:forEach>
 
-	<%-- <c:forEach var="order" items="${orderList}">
+	<%-- <c:forEach var="order" items="${saleList}">
 	<tr>
 		<br>${order.ORDER_NUM}</br>
 		<br>
@@ -82,7 +82,7 @@
 	</tr>
 	</c:forEach> --%>
 </c:if>
-<c:if test="${fn:length(orderList) < 1}">
+<c:if test="${fn:length(saleList) < 1}">
 <p>내역이 없습니다</p>
 </c:if>
 <div class="paging">
