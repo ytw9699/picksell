@@ -65,7 +65,7 @@
  /갯수: ${joinMap.ORDER_QUANTITY}개
  <br>
 </c:forEach>
-================================================================================ 
+
 </c:forEach>
 
 	<%-- <c:forEach var="order" items="${orderList}">

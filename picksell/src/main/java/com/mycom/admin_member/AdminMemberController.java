@@ -157,11 +157,15 @@ public class AdminMemberController {
 		List<Map<String,Object>> orderList   = adminMemberService.adminOrderList(id); //id당 총 주문 query 
 		Map<String,Object> numm = new HashMap<String,Object>(); 
 		List adminOrderSubList = new ArrayList();
-	    
+	 
 		for(int i=0; i < orderList.size() ; i++) {
 			numm.put("ORDER_NUM",String.valueOf(orderList.get(i).get("ORDER_NUM")));
 			adminOrderSubList.add(adminMemberService.adminOrderSubList(numm));
 			
+		}
+	
+		for(int i=0; i<adminOrderSubList.size(); i++) {
+			System.out.println(i + " " + adminOrderSubList.get(i));
 		}
 		
 		map.put("mapSize", orderList.size());
