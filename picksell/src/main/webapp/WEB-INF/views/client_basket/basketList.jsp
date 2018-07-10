@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -19,6 +20,21 @@ span.basketTotalTEXT {
 /* 테이블 */
 table.basketTable {
     width: 100%;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+td {
+    border-bottom: 2px solid #ececec;
+}
+
+span.product_subjectTEXT {
+    display: block;
+    font-size: 15px;
+}
+
+span.product_priceTEXT {
+    font-size: 22px;
+    margin-top: 10px;
 }
 
 td.tableTitle {
@@ -44,10 +60,14 @@ td.product_deleteTD {
 
 td.product_priceTD {
     text-align: right;
+    font-size: 20px;
 }
-
+span.subtotal_wonTEXT {
+    font-size: 15px;
+}
 td.product_quanTD {
     text-align: center;
+    padding: 40px;
 }
 td.product_checkTD {
     width: 5%;
@@ -56,9 +76,91 @@ td.product_checkTD {
 
 td.product_imgTD {
     width: 20%;
+    text-align: center;
+    box-sizing: border-box;
+    padding: 8px;
 }
 img.product_img {
-    width: 100%;
+    width: 80%;
+}
+a.deleteA {
+    color: #999999;
+    height: 50px;
+    width: 40px;
+    line-height: 80px;
+    background: url(/picksell/resources/img/cancel2.png) 50% 30% no-repeat;
+    background-size: 15px;
+    display: block;
+    font-size: 15px;
+    text-align: center;
+    margin: 0 auto;
+}
+input.subbtn {
+    float: left;
+    width: 35px;
+    height: 35px;
+    border-radius: 33px;
+    background: url(/picksell/resources/img/sub.png) 50% 50% no-repeat;
+    background-size: 20px;
+    border: 1px solid #ececec;
+}
+input.addbtn {
+    float: left;
+    width: 35px;
+    height: 35px;
+    border-radius: 33px;
+    background: url(/picksell/resources/img/add.png) 50% 50% no-repeat;
+    background-size: 20px;
+    border: 1px solid #ececec;
+}
+.proquan {
+    float: left;
+    font-size: 22px;
+    color: #726e6e;
+    margin: 0 20px;
+}	
+a.deleteAll {
+    float: left;
+    border: 1px solid #c2c2c2;
+    color: #666666;
+    font-size: 14px;
+    padding: 12px;
+    width: 100px;
+    text-align: center;
+}
+/* 최종금액 */
+.summaryInfoWrap {
+    float: right;
+    width: 320px;
+}
+span.sumText {
+    float: left;
+    font-size: 23px;
+    line-height: 52px;
+}
+span.sumtotal_wonTEXT {
+    color: #7151fc;
+    font-size: 30px;
+    float: right;
+}
+span.sumValue {
+    color: #7151fc;
+    font-size: 50px;
+    float: right;
+    line-height: 33px;
+}
+input#order_submit {
+    display: block;
+    border: none;
+    background-color: #7151fc;
+    color: white;
+    font-size: 20px;
+    padding: 17px;
+    margin-top: 82px;
+    width: 320px;
+}
+.hole {
+    height: 200px;
 }
 </style>
 </head>
@@ -68,11 +170,15 @@ img.product_img {
 	//전체 가격 
 	var total = Number(0);
 
+	function addComma(num) {
+		var regexp = /\B(?=(\d{3})+(?!\d))/g;
+		return num.toString().replace(regexp, ',');
+	}
 	function sumfunc(addvalue){
 		total += Number(addvalue);
 		
 		document.getElementById('hid_sumValue').value = total;
-		document.getElementById('sumValue').innerHTML = total;
+		document.getElementById('sumValue').innerHTML = addComma(total);
 		
 		document.getElementById('order_submit').disabled = false;
 	}
@@ -80,7 +186,7 @@ img.product_img {
 		total -= Number(subvalue);
 		
 		document.getElementById('hid_sumValue').value = total;
-		document.getElementById('sumValue').innerHTML = total;
+		document.getElementById('sumValue').innerHTML = addComma(total);
 		
 		if(total == 0)
 			document.getElementById('order_submit').disabled = true;
@@ -119,7 +225,7 @@ img.product_img {
 			fetch("/picksell/cart/subQuantity/"+targetBasketNum).then(function(response){
 				response.text().then(function(text){
 					if(response.status == '200'){
-						alert('차감되었어요!');
+						//alert('차감되었어요!');
 						var uppoint = Number(document.getElementById('hid_quantity'+keyNumber).value) - 1;
 						var priceInfo = Number(document.getElementById('hid_price'+keyNumber).value);
 						var multiResult = uppoint * priceInfo;
@@ -128,7 +234,7 @@ img.product_img {
 						document.getElementById('product_quantity'+keyNumber).innerHTML = uppoint;
 					
 						document.getElementById('hid_currentPrice'+keyNumber).value = multiResult;
-						document.getElementById('subtotal'+keyNumber).innerHTML = multiResult;
+						document.getElementById('subtotal'+keyNumber).innerHTML = addComma(multiResult);
 					
 						if(document.getElementById('baketCheck'+keyNumber).checked){
 							subfunc(document.getElementById('hid_price'+keyNumber).value);
@@ -146,7 +252,7 @@ img.product_img {
 			fetch('/picksell/cart/addQuantity/'+targetBasketNum).then(function(response){
 				response.text().then(function(text){
 					if(response.status == '200'){
-						alert('상승!');
+						//alert('상승!');
 						var uppoint = Number(document.getElementById('hid_quantity'+keyNumber).value) + 1;
 						var priceInfo = Number(document.getElementById('hid_price'+keyNumber).value);
 						var multiResult = uppoint * priceInfo;
@@ -155,7 +261,7 @@ img.product_img {
 						document.getElementById('product_quantity'+keyNumber).innerHTML = uppoint;
 						
 						document.getElementById('hid_currentPrice'+keyNumber).value = multiResult;
-						document.getElementById('subtotal'+keyNumber).innerHTML = multiResult;
+						document.getElementById('subtotal'+keyNumber).innerHTML = addComma(multiResult);
 					
 						if(document.getElementById('baketCheck'+keyNumber).checked){
 							sumfunc(priceInfo);
@@ -204,30 +310,37 @@ img.product_img {
 				<td class="product_imgTD"><img src="/picksell/resources/productUpload/${list.FIRST_IMG }" class="product_img" onerror="this.src='/picksell/resources/img/imgready.gif'"/></td>
 				<td class="product_infoTD">
 					<span class="product_subjectTEXT">${list.SUBJECT }</span>
-					<span class="product_priceTEXT">${list.PRICE }</span>
+					
+					<span class="product_priceTEXT"><fmt:formatNumber value="${list.PRICE }" pattern="#,###.##" /></span>
+					<span class="product_wonTEXT">원</span>
 				</td>
 				<td class="product_quanTD">
-					<input type="button" value="마이너스" onclick="subQuantity(${list.BASKET_NUM},${indexStatus.index})" />
-					<span id="product_quantity${indexStatus.index }">${list.PRODUCT_QUANTITY }</span>
-					<input type="button" value="플러스" onclick="addQuantity(${list.BASKET_NUM},${indexStatus.index })" />
+					<input type="button" class="subbtn" value="" onclick="subQuantity(${list.BASKET_NUM},${indexStatus.index})" />
+					<span class="proquan" id="product_quantity${indexStatus.index }">${list.PRODUCT_QUANTITY }</span>
+					<input type="button" class="addbtn" value="" onclick="addQuantity(${list.BASKET_NUM},${indexStatus.index })" />
 				</td>
 				<td class="product_priceTD">
-					<span id="subtotal${indexStatus.index }">${list.PRICE * list.PRODUCT_QUANTITY }</span>
+					<span id="subtotal${indexStatus.index }">
+					<fmt:formatNumber value="${list.PRICE * list.PRODUCT_QUANTITY }" pattern="#,###.##" />
+					</span>
+					<span class="subtotal_wonTEXT">원</span>
 				</td>
-				<td class="product_deleteTD"><a href="/picksell/cart/delete/${list.BASKET_NUM }">삭제</a></td>
+				<td class="product_deleteTD"><a href="/picksell/cart/delete/${list.BASKET_NUM }" class="deleteA">삭제</a></td>
 			</tr>
 		</c:forEach><!-- foreach End -->
 		</c:when>
 		</c:choose>
 	</table>
-	<a href="/picksell/cart/deleteAll">전체삭제</a>
+	<a href="/picksell/cart/deleteAll" class="deleteAll">전체삭제</a>
+	
 	<div class="summaryInfoWrap">
-		
 		<span class="sumText">총 합계</span>
 		<input type="hidden" id="hid_sumValue" name="totalSum" value="0" />
+		<span class="sumtotal_wonTEXT">원</span>
 		<span class="sumValue" id="sumValue">0</span>
 		<input type="submit" value="구매하기" id="order_submit" disabled="disabled" />
 	</div>
+	<div class="hole"></div>
 	</form>
 </body>
 </html>
