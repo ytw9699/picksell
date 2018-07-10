@@ -4,7 +4,71 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style>
+.howtoTopWrap {
+    text-align: center;
+    margin-top: 50px;
+}
 
+span.howtoText1 {
+    font-weight: 600;
+    display: block;
+    font-size: 33px;
+}
+
+span.howtoText2 {
+    display: block;
+    margin-top: 15px;
+    color: #666666;
+}
+.howtoTopWrap {
+    text-align: center;
+    margin-top: 50px;
+}
+.howtoselectWrap {
+    display: inline-block;
+    width: 33%;
+}
+.selectImgWrap {
+    width: 27%;
+    margin: 0 auto;
+}
+img.selectImg {
+    width: 100%;
+}
+.howtoCenterWrap {
+    margin-top: 60px;
+    margin-bottom: 100px;
+    background: url(/picksell/resources/img/howtosellback.png) 50% 29% no-repeat;
+}
+span.howtoTEXT {
+    display: block;
+    text-align: center;
+    color: #7151fc;
+    font-weight: 600;
+    margin-top: 30px;
+    font-size: 22px;
+}
+span.howtosubTEXT {
+    display: block;
+    text-align: center;
+    color: #999999;
+    font-size: 13px;
+    margin-top: 8px;
+}
+a.sellBtn {
+    width: 100px;
+    padding: 15px;
+    font-size: 15px;
+    color: white;
+    background-color: #7151fc;
+    display: block;
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 50px;
+}
+
+</style>
 </head>
 <body>
 	<div class="howtoTopWrap">
@@ -16,17 +80,32 @@
 		</span>
 	</div>
 	<div class="howtoCenterWrap">
-		<div class="">
-		일반 안전거래
-		<a href="/picksell/sell/0">판매하기</a>
+		<div class="howtoselectWrap">
+			<div class="selectImgWrap">
+				<img src="/picksell/resources/img/howtosell1.png" class="selectImg" />
+			</div>
+			<span class="howtoTEXT">일반 안전거래</span>
+			<span class="howtosubTEXT">안전거래만 가능합니다</span>
+			
+			<a href="/picksell/sell/0" class="sellBtn">판매하기</a>
 		</div>
-		<div class="">
-		사업자 안전거래
-		<a href="/picksell/sellPlus">판매하기</a>
+		<div class="howtoselectWrap">
+			<div class="selectImgWrap">
+				<img src="/picksell/resources/img/howtosell2.png" class="selectImg" />
+			</div>
+			<span class="howtoTEXT">일반+쿨거래</span>
+			<span class="howtosubTEXT">안전거래와 직거래가 가능합니다</span>
+			
+			<a href="/picksell/sell/1" class="sellBtn">판매하기</a>
 		</div>
-		<div class="">
-		일반+쿨거래
-		<a href="/picksell/sell/1">판매하기</a>
+		<div class="howtoselectWrap">
+			<div class="selectImgWrap">
+				<img src="/picksell/resources/img/howtosell3.png" class="selectImg" />
+			</div>
+			<span class="howtoTEXT">사업자 안전거래</span>
+			<span class="howtosubTEXT">사업자를 위한 안전거래입니다</span>
+			
+			<a href="/picksell/sellPlus" class="sellBtn">판매하기</a>
 		</div>
 	</div>
 </body>

@@ -66,8 +66,8 @@ span.headerTop_menu {
     display: inline-block;
     border: 2px solid #7151fc;
     margin-left: 15%;
-    width: 40%;
-}	
+    width: 35%;
+}
 .mainLogoWrap {
     display: inline-block;
     float: left;
@@ -80,7 +80,7 @@ input.searchINPUT {
     border: none;
     padding: 10px;
     font-size: 14px;
-    width: 70%;
+    width: 80%;
 }
 .headerBottom {
     width: 100%;
@@ -172,7 +172,14 @@ li.mainCategoryLI:hover {
     color: white;
 }
 
-
+.searchSUBMIT {
+    background: url(/picksell/resources/img/main_searchcon.png) 50% 50% no-repeat;
+    width: 35px;
+    height: 35px;
+    border: none;
+    float: right;
+    margin-right: 10px;
+}
 
 
 
@@ -254,7 +261,7 @@ li.mainCategoryLI:hover {
 		<form action="/picksell/mainSearchList" method="GET">
 			<input type="text" name="searchKeyword" placeholder="상품명으로 검색해보세요" class="searchINPUT" />
 			<input type="hidden" name="HowToSell" value="3"/>
-			<input type="submit" value="돋보기모양" class="searchSUBMIT" />
+			<input type="submit" value="" class="searchSUBMIT" />
 		</form>
 	</div>
 </div>

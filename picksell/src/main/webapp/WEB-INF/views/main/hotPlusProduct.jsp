@@ -88,6 +88,75 @@ li.orderMethodLI.active > a {
     color: #7151fc;
     border-bottom: 2px solid #7151fc;
 }
+/* 컨텐츠 */
+.contentWrap {
+    margin-top: 30px;
+}
+
+.productWrap {
+    display: inline-block;
+    width: 23%;
+    margin-left: 1%;
+    margin-top: 60px;
+}
+.product_firstimg{
+	width: 100%;
+}
+.writerWrap {
+    height: 40px;
+}
+.profileWrap {
+    width: 30px;
+    display: inline-block;
+    float: left;
+}
+img.profileImg {
+    width: 100%;
+    height: 100%;
+    border-radius: 30px;
+}
+span.productSeller {
+    color: #666666;
+    line-height: 28px;
+    margin-left: 10px;
+}
+span.productSubject {
+    display: block;
+    margin-bottom: 20px;
+}
+span.productPrice {
+    font-weight: 600;
+}
+span.priceTEXT {
+    font-size: 22px;
+    font-weight: 600;
+}
+
+span.wonTEXT {
+    font-size: 14px;
+}
+/* 페이징 */
+.paging {
+    margin-top: 40px;
+    text-align: center;
+}
+span.currentPaging {
+    width: 40px;
+    height: 40px;
+    display: inline-block;
+    background-color: #7151fc;
+    color: white;
+    border-radius: 30px;
+    font-size: 23px;
+}
+a.paging {
+    width: 40px;
+    height: 40px;
+    display: inline-block;
+    color: #666;
+    border-radius: 21px;
+    font-size: 23px;
+}
 </style>
 </head>
 <body>
@@ -152,6 +221,9 @@ li.orderMethodLI.active > a {
 			<c:forEach var="product" items="${resultProductList }">
 				<div class="productWrap">
 					<div class="writerWrap">
+						<div class="profileWrap">
+							<img src="/picksell/resources/img/basicProfile.png" class="profileImg"/>
+						</div>
 						<span class="productSeller">${product.SELLER_ID }</span>
 					</div>
 					<div class="firstImgWrap">
@@ -161,10 +233,10 @@ li.orderMethodLI.active > a {
 					</div>
 					<div class="infoWrap">
 						<span class="productSubject">${product.SUBJECT }</span><br>
-						<span class="productPrice">
-						<fmt:formatNumber value="${product.PRICE }" pattern="#,###.##" /> 원
-						</span><br>
-						<span class="productSubject">${product.PRODUCT_REGDATE }</span>
+						<span class="priceTEXT">
+							<fmt:formatNumber value="${product.PRICE }" pattern="#,###.##" />
+						</span>
+						<span class="wonTEXT">원</span>
 					</div>
 		
 				</div>
