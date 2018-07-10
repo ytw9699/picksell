@@ -17,10 +17,16 @@ a:hover { color: black; text-decoration: none;}
     font-size: 13px;
 }
 /* 마이페이지 메뉴 */
-#mypage_menuBox{position:absolute; display:none;}
-#menuBox-header {height: 32px;}
+#mypage_menuBox {
+    position: absolute;
+    display: none;
+}
+#menuBox-header {
+    height: 32px;
+    width: 20px;
+}
 #menuBox-body {
-    width: 95px;
+    width: 120px;
     border: 1px solid #c2c2c2;
     background-color: white;
     padding: 13px;
@@ -31,6 +37,9 @@ a:hover { color: black; text-decoration: none;}
     margin-bottom: 3px;
     color: #666;
     font-size: 13px;
+}
+.menuBox-link a:hover{
+	text-decoration: underline;
 }
 
 /* 메인카테고리 메뉴 */
@@ -209,10 +218,10 @@ li.mainCategoryLI:hover {
 		
 		$('#linkOfMypage').mouseenter(function() {
 			var height = $(this).height();
-			var top = $(this).offset().top;
+			var top = $(this).offset().top * 3;
 			//get the left and find the center value
 			var left = $(this).offset().left + ($(this).width() / 2) - ($('#mypage_menuBox').width() / 2);
-			$('#menuBox-header').height(height);
+			$('#menuBox-header').height(height - 10);
 			$('#mypage_menuBox').show();
 			$('#mypage_menuBox').css({'top':top, 'left':left});
 		});
@@ -280,7 +289,7 @@ li.mainCategoryLI:hover {
 	</ul>
 </div>
 <div id="mypage_menuBox">
-	<div id="menuBox-header"></div>
+	<div id="menuBox-header" class="menuheader"></div>
 	<div id="menuBox-body">
 		<span class="menuBox-link"><a href="/picksell/mypage/memberCheck">개인정보확인/수정</a></span>
 		<span class="menuBox-link"><a href="/picksell/mypage/purchaseList/0">일반구매 신청리스트</a></span>

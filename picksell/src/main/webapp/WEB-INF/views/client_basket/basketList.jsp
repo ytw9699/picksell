@@ -149,7 +149,9 @@ span.sumValue {
     float: right;
     line-height: 33px;
 }
-input#order_submit {
+input.disab{
+}
+input.abl {
     display: block;
     border: none;
     background-color: #7151fc;
@@ -159,8 +161,21 @@ input#order_submit {
     margin-top: 82px;
     width: 320px;
 }
+input.disab {
+    display: block;
+    border: none;
+    background-color: #999999;
+    color: white;
+    font-size: 20px;
+    padding: 17px;
+    margin-top: 82px;
+    width: 320px;
+}
 .hole {
     height: 200px;
+}
+.textTopWrapper {
+    margin-top: 40px;
 }
 </style>
 </head>
@@ -181,6 +196,8 @@ input#order_submit {
 		document.getElementById('sumValue').innerHTML = addComma(total);
 		
 		document.getElementById('order_submit').disabled = false;
+		document.getElementById('order_submit').classList.remove('disab');
+		document.getElementById('order_submit').classList.add('abl');
 	}
 	function subfunc(subvalue){
 		total -= Number(subvalue);
@@ -188,8 +205,12 @@ input#order_submit {
 		document.getElementById('hid_sumValue').value = total;
 		document.getElementById('sumValue').innerHTML = addComma(total);
 		
-		if(total == 0)
+		if(total == 0){
 			document.getElementById('order_submit').disabled = true;
+			document.getElementById('order_submit').classList.remove('abl');
+			document.getElementById('order_submit').classList.add('disab');
+		}
+		
 	}
 	function basketChecking(checkTarget, keyNumber){
 		if(checkTarget.checked){
@@ -338,7 +359,7 @@ input#order_submit {
 		<input type="hidden" id="hid_sumValue" name="totalSum" value="0" />
 		<span class="sumtotal_wonTEXT">원</span>
 		<span class="sumValue" id="sumValue">0</span>
-		<input type="submit" value="구매하기" id="order_submit" disabled="disabled" />
+		<input type="submit" class="disab" value="구매하기" id="order_submit" disabled="disabled" />
 	</div>
 	<div class="hole"></div>
 	</form>
