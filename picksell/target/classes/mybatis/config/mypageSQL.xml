@@ -103,15 +103,21 @@ ps_purchase_list b where a.product_num = b.product_num and b.buyer_id = #{sessio
 <!-- ps_order에서  리스트  반환-->
 <select id="saleList" resultType="hashmap" parameterType="hashmap">
 
-select * from ps_order a, ps_orderlist b where b.order_num = a.order_num and b.seller_id = #{sessionId} 
+
 <if test='status == "5" '>
-		<!-- 전체 상품 보기 -->
-		and a.status != '5' order by a.step1_date desc
+	<!-- 전체 상품 보기 -->
+	<!-- select a.order_num, a.status, a.step1_date from ps_order a, ps_orderlist b 
+	where b.seller_id = #{sessionId} and a.order_num = b.order_num and a.status != 5
+	group by a.order_num, a.status, a.step1_date order by a.step1_date desc
+	 위와 아래는 같은거 아래꺼를 쓰자-->
+	select distinct a.status, b.order_num, a.step1_date from ps_order a, ps_orderlist b 
+	where b.seller_id = '2' and a.order_num = b.order_num order by b.order_num desc
 </if>
 
 <if test='status != "5" '>
-
-		and a.status = #{status}' order by a.step1_date desc
+	select a.order_num, a.status, a.step1_date from ps_order a, ps_orderlist b 
+	where b.seller_id = #{sessionId} and a.order_num = b.order_num and a.status = #{status}
+	group by a.order_num, a.status, a.step1_date order by a.step1_date desc
 </if>
 
 </select>
@@ -120,6 +126,9 @@ select * from ps_order a, ps_orderlist b where b.order_num = a.order_num and b.s
 
 select b.PRICE, b.SUBJECT, b.FIRST_IMG, b.category_num, b.product_num, a.ORDER_NUM, a.ORDER_QUANTITY
 from(select * from PS_ORDERLIST)a, ps_product b, ps_order c where a.order_num = #{ORDER_NUM} and a.seller_id = #{sessionId} and a.product_num = b.product_num and b.seller_id = #{sessionId} and
+<!-- 
+select * from ps_orderlist a, ps_product p ,ps_order c
+where a.seller_id = '2' and a.order_num = 201 and a.product_num = p.product_num and = c.status != '5' -->
 
 <if test='status == "5" '>
 c.status != '5'
