@@ -186,6 +186,11 @@
 		<put-attribute name="body" value="/WEB-INF/views/mypage/memberCheck.jsp" />
 	</definition>
 	
+		<!-- 판매조회 상세보기-->
+	<definition name="saleDetail" extends="modify">
+		<put-attribute name="body" value="/WEB-INF/views/mypage/saleDetail.jsp" />
+	</definition>
+	
 	
 </tiles-definitions>
 	
