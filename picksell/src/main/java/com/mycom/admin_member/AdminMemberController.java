@@ -164,9 +164,6 @@ public class AdminMemberController {
 			
 		}
 	
-		for(int i=0; i<adminOrderSubList.size(); i++) {
-			System.out.println(i + " " + adminOrderSubList.get(i));
-		}
 		
 		map.put("mapSize", orderList.size());
 		model.addAttribute("map",map);
