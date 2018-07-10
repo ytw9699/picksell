@@ -58,4 +58,11 @@ public class mypageService implements mypageDao {
 	public void deletePurchaseList(int purchase_num) {
 		sqlMapper.delete("mypage.deletePurchaseList", purchase_num);
 	}
+	public Map<String, Object> saleDetail(int PRODUCT_NUM) {
+		return sqlMapper.selectOne("mypage.saleDetail", PRODUCT_NUM);
+	}
+	public List<Map<String, Object>> saleSubDetail(Map<String, Object> parameterMap) {
+		return sqlMapper.selectList("mypage.saleSubDetail", parameterMap);
+	}
+
 }

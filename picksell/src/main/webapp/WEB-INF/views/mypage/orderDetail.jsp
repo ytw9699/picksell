@@ -17,7 +17,11 @@
 <table>
 <c:if test="${fn:length(orderDetail) > 0}">
 			<h4>
-			주문일: 		<fmt:formatDate value="${orderDetail.STEP1_DATE}" pattern="yyyy년 MM월 dd일 hh:mm:ss" />  /
+			주문일: 		     <fmt:formatDate value="${orderDetail.STEP1_DATE}" pattern="yyyy년 MM월 dd일 hh:mm:ss" />  <br>
+			입금완료일: 		 <fmt:formatDate value="${orderDetail.STEP2_DATE}" pattern="yyyy년 MM월 dd일 hh:mm:ss" />  <br>
+			배송시작일: 		 <fmt:formatDate value="${orderDetail.STEP3_DATE}" pattern="yyyy년 MM월 dd일 hh:mm:ss" />  <br>
+			인수확인 및 거래 완료일:<fmt:formatDate value="${orderDetail.STEP4_DATE}" pattern="yyyy년 MM월 dd일 hh:mm:ss" />  <br>
+			주문취소일: 		 <fmt:formatDate value="${orderDetail.CANCEL_DATE}" pattern="yyyy년 MM월 dd일 hh:mm:ss" />  <br>
 			주문번호:    		${orderDetail.ORDER_NUM} /
 			<c:if test="${orderDetail.STATUS == '0'}">
 			거래상태:입금대기중
@@ -47,18 +51,19 @@
 			</c:forEach>
 			<h4>결제 정보</h4>
 			결제수단: 계좌이체  
-			<br>총 상품 가격:
-			<br>배송비:
-			<br>총결제금액:		${orderDetail.TOTAL_PRICE}
+			<br>총 상품 가격: ${orderDetail.TOTAL_PRICE - 2500} 원
+			<br>배송비: 2500 원
+			<br>총결제금액: ${orderDetail.TOTAL_PRICE} 원
 			</c:if>
 			<br>
 			<h4>받는사람 정보</h4>  
 			수령인 : ${orderDetail.ACCOUNT_NAME}<br>
 			연락처:  ${orderDetail.BUYER_PHONE}<br>
+			이메일:  ${orderDetail.BUYER_EMAIL}<br>
 			배송지:   ${orderDetail.DESTINATION}<br>
 			배송시 주의사항: ${orderDetail.PRECAUTIONS}<br>
-			택배사:  			${orderDetail.ELIVERY_COMPANY}<br>
-			송장번호:  		${orderDetail.INVOICE_NUM}<br>
+			택배사:  		${orderDetail.DELIVERY_COMPANY}<br>
+			송장번호:  	${orderDetail.INVOICE_NUM}<br>
 			
 </c:if>
 </table>

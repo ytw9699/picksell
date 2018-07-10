@@ -36,7 +36,7 @@
 <c:if test="${fn:length(saleList) > 0}">
 <c:forEach var="ps_order" items="${saleList}" varStatus="saleListStatus">
     <br><h3>주문일:<fmt:formatDate value="${ps_order.STEP1_DATE}" pattern="yyyy년 MM월 dd일 hh:mm:ss" />
-	<a href="/picksell/mypage/orderDetail/${ps_order.ORDER_NUM }">
+	<a href="/picksell/mypage/saleDetail/${ps_order.ORDER_NUM }">
 		<font color = "red">판매 내역 상세보기</font>
 		</a></h3>
     	<c:if test="${ps_order.STATUS == '0'}">

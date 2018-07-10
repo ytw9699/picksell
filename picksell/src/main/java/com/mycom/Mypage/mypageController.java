@@ -243,4 +243,25 @@ public class mypageController {
 			model.addAttribute("orderSubDetail", orderSubDetail);
 		return "orderDetail";
 	}
+	@RequestMapping(value="/mypage/saleDetail/{PRODUCT_NUM}", method=RequestMethod.GET)
+	public String sailDetail(Model model, @PathVariable("PRODUCT_NUM") int PRODUCT_NUM, HttpSession session) {	
+		
+			Map<String, Object> saleDetail = mypageService.saleDetail(PRODUCT_NUM);
+			
+			model.addAttribute("saleDetail", saleDetail);
+			
+			Map<String, Object> parameterMap = new HashMap<String, Object>();
+			
+			String sessionId =(String)session.getAttribute("sessionId");
+			
+			parameterMap.put("sessionId", sessionId);
+			
+			parameterMap.put("ORDER_NUM",saleDetail.get("ORDER_NUM"));
+			System.out.println(saleDetail.get("ORDER_NUM"));
+			System.out.println(5);
+			List<Map<String, Object>> saleSubDetail = mypageService.saleSubDetail(parameterMap);
+			System.out.println(6);
+			model.addAttribute("saleSubDetail", saleSubDetail);
+		return "saleDetail";
+	}
 }
