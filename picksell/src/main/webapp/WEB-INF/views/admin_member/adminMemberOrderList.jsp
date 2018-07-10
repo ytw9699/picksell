@@ -25,7 +25,7 @@
 주문건수는 총 ${map.mapSize }건 입니다.
 </c:when>
 </c:choose>
-<table>
+<table border=1px>
 <c:forEach var="orderList" items="${orderList}" varStatus="orderListStatus">
      <br>상품주문번호: ${orderList.ORDER_NUM } </br><!-- 상품 주문번호 -->
      <c:choose>

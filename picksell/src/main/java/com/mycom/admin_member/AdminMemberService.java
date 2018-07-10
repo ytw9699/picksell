@@ -42,7 +42,7 @@ public class AdminMemberService implements AdminMemberDAO {
 	}
 	
 	@Override
-	public List<Map<String,Object>> adminOrderSubList(Map<String,Object> map){
+	public List<Map<String, Object>> adminOrderSubList(Map<String,Object> map){
 		return sqlSessionTemplate.selectList("admin_Member.selectOrderSubList",map);
 	}
 	

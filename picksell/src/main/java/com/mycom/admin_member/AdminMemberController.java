@@ -74,7 +74,7 @@ public class AdminMemberController {
 			lastCount = page.getEndCount() + 1;
 		memberslist = memberslist.subList(page.getStartCount(), lastCount);
 		
-		int startNumber = (currentPage-1) * blockCount + 1;
+		int startNumber = (currentPage - 1) * blockCount + 1;
 		searchCount = 0;
 		mav.addObject("startNumber",startNumber);
 		mav.addObject("totalCount",totalCount);
@@ -154,19 +154,16 @@ public class AdminMemberController {
 		
 		//총 주문 크기 수 담을 맵
 		Map<String,Object> map = new HashMap<String,Object>();
-		
 		List<Map<String,Object>> orderList   = adminMemberService.adminOrderList(id); //id당 총 주문 query 
-		List<Map<String,Object>> adminOrderSubList = new ArrayList();
+		Map<String,Object> numm = new HashMap<String,Object>(); 
+		List adminOrderSubList = new ArrayList();
 	    
-	    for(int i=0; i< orderList.size(); i++) {
-	    
-	    	Map<String, Object> parameterMap = new HashMap<String, Object>(); 
-	    	adminOrderSubList = adminMemberService.adminOrderList(String.valueOf(orderList.get(i).get("ORDER_NUM")));
-	    	
-	 
-	    }
-	 
-	    
+		for(int i=0; i < orderList.size() ; i++) {
+			numm.put("ORDER_NUM",String.valueOf(orderList.get(i).get("ORDER_NUM")));
+			adminOrderSubList.add(adminMemberService.adminOrderSubList(numm));
+			
+		}
+		
 		map.put("mapSize", orderList.size());
 		model.addAttribute("map",map);
 		model.addAttribute("orderList",orderList);
@@ -177,7 +174,7 @@ public class AdminMemberController {
 	
 	//회원 판매내역 리스트
 	@RequestMapping(value="/sellHistory/{memberId}")
-	public String adminSellHistory(@PathVariable("memberId") String id,Model model)throws Exception {
+	public String adminSellHistory(@PathVariable("memberId")String id,Model model)throws Exception {
 	 
 		//판매내역개수
 		maplist = adminMemberService.adminSellHistory(id);
