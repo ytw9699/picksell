@@ -161,6 +161,10 @@
 	<definition name="orderList" extends="modify">
 		<put-attribute name="body" value="/WEB-INF/views/mypage/orderList.jsp" />
 	</definition>
+	<!-- 판매내역 조회-->
+	<definition name="saleList" extends="modify">
+		<put-attribute name="body" value="/WEB-INF/views/mypage/saleList.jsp" />
+	</definition>
 	
 	<!-- 주문조회 상세보기-->
 	<definition name="orderDetail" extends="modify">

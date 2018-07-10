@@ -98,7 +98,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		</when>
  		
  		<when test='order == "1" '>
-		  select r, b.total, b.product_num, c.first_img, c.subject ,c.price, c.PRODUCT_REGDATE, c.CATEGORY_NUM, c. SELLER_ID
+		  select r, b.total, b.product_num, c.first_img, c.subject ,c.price, c.PRODUCT_REGDATE, c.CATEGORY_NUM, c. SELLER_ID, c.HowToSell
 		  from(
 		  select rownum r, a.total, a.product_num from(
 		  select count(*) as total, product_num
@@ -159,7 +159,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		</when>
  		
  		<when test='order == "1" '>
-		  select r, b.total, b.product_num, c.first_img, c.subject ,c.price, c.PRODUCT_REGDATE, c.CATEGORY_NUM, c. SELLER_ID
+		  select r, b.total, b.product_num, c.first_img, c.subject ,c.price, c.PRODUCT_REGDATE, c.CATEGORY_NUM, c. SELLER_ID, c.HowToSell
 		  from(
 		  select rownum r, a.total, a.product_num from(
 		  select count(*) as total, product_num
