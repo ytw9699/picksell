@@ -6,8 +6,61 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
+<style>
+span.basketTEXT {
+    font-size: 25px;
+}
 
+span.basketTotalTEXT {
+    color: #7151fc;
+    font-size: 22px;
+    margin-left: 10px;
+}
+/* 테이블 */
+table.basketTable {
+    width: 100%;
+}
 
+td.tableTitle {
+    text-align: center;
+    color: #666666;
+    background-color: #f8f8f8;
+    font-size: 14px;
+    border-top: 1px solid #ececec;
+    box-sizing: border-box;
+    padding: 10px;
+}
+td.tableTitle.title1 {
+    width: 20%;
+}
+
+td.tableTitle.title2 {
+    width: 20%;
+}
+
+td.product_deleteTD {
+    text-align: right;
+}
+
+td.product_priceTD {
+    text-align: right;
+}
+
+td.product_quanTD {
+    text-align: center;
+}
+td.product_checkTD {
+    width: 5%;
+    text-align: center;
+}
+
+td.product_imgTD {
+    width: 20%;
+}
+img.product_img {
+    width: 100%;
+}
+</style>
 </head>
 <body>
 <script>
@@ -118,13 +171,13 @@
 	<form action="/picksell/purchase/batchOrder" method="post">
 	<!-- <input type="button" value="에이젝스 버튼" id="btn" onclick="wow()" /> -->
 	<div class="textTopWrapper">
-		<span>장바구니</span> <span>${listSize }</span>
+		<span class="basketTEXT">장바구니</span> <span class="basketTotalTEXT">${listSize }</span>
 	</div>
-	<table border="1">
+	<table class="basketTable" cellpadding="0" cellspacing="0">
 		<tr>
-			<td colspan="3">상품 정보</td>
-			<td>수량</td>
-			<td colspan="2">상품금액</td>
+			<td class="tableTitle" colspan="3">상품 정보</td>
+			<td class="tableTitle title1">수량</td>
+			<td class="tableTitle title2" colspan="2">상품금액</td>
 		</tr>
 		
 		<c:choose>
@@ -147,21 +200,21 @@
 			
 			
 			<tr>
-				<td><input type="checkbox" onclick="basketChecking(this, ${indexStatus.index})" id="baketCheck${indexStatus.index }" /></td>
-				<td><img src="/picksell/resources/productUpload/${list.FIRST_IMG }" style="width: 200px;"/></td>
-				<td>
-					<span>${list.SUBJECT }</span><br/>
-					<span>${list.PRICE }</span>
+				<td class="product_checkTD"><input type="checkbox" onclick="basketChecking(this, ${indexStatus.index})" id="baketCheck${indexStatus.index }" /></td>
+				<td class="product_imgTD"><img src="/picksell/resources/productUpload/${list.FIRST_IMG }" class="product_img" onerror="this.src='/picksell/resources/img/imgready.gif'"/></td>
+				<td class="product_infoTD">
+					<span class="product_subjectTEXT">${list.SUBJECT }</span>
+					<span class="product_priceTEXT">${list.PRICE }</span>
 				</td>
-				<td>
+				<td class="product_quanTD">
 					<input type="button" value="마이너스" onclick="subQuantity(${list.BASKET_NUM},${indexStatus.index})" />
 					<span id="product_quantity${indexStatus.index }">${list.PRODUCT_QUANTITY }</span>
 					<input type="button" value="플러스" onclick="addQuantity(${list.BASKET_NUM},${indexStatus.index })" />
 				</td>
-				<td>
+				<td class="product_priceTD">
 					<span id="subtotal${indexStatus.index }">${list.PRICE * list.PRODUCT_QUANTITY }</span>
 				</td>
-				<td><a href="/picksell/cart/delete/${list.BASKET_NUM }">삭제</a></td>
+				<td class="product_deleteTD"><a href="/picksell/cart/delete/${list.BASKET_NUM }">삭제</a></td>
 			</tr>
 		</c:forEach><!-- foreach End -->
 		</c:when>
