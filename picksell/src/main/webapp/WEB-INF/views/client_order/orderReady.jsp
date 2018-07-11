@@ -201,11 +201,13 @@ table td {
 			
 			<tr>
 				<td class="product_noticeTEXT">상품금액</td>
-				<td class="product_valueTEXT">${totalSum }</td>
+				<td class="product_valueTEXT">
+				<fmt:formatNumber value="${totalSum }" pattern="#,###.##" /> 원
+				</td>
 			</tr>
 			<tr>
 				<td class="product_noticeTEXT deliveryTEXT">배송료</td>
-				<td class="product_valueTEXT">2500 원</td>
+				<td class="product_valueTEXT">2,500 원</td>
 			</tr>
 			
 			<tr>

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -56,7 +57,7 @@ span.howtosubTEXT {
     font-size: 13px;
     margin-top: 8px;
 }
-a.sellBtn {
+input.sellBtn {
     width: 100px;
     padding: 15px;
     font-size: 15px;
@@ -66,8 +67,11 @@ a.sellBtn {
     text-align: center;
     margin: 0 auto;
     margin-top: 50px;
+    border: none;
 }
-
+input.sellBtn.disableBtn {
+    background-color: #b3b1b1;
+}
 </style>
 </head>
 <body>
@@ -87,7 +91,7 @@ a.sellBtn {
 			<span class="howtoTEXT">일반 안전거래</span>
 			<span class="howtosubTEXT">안전거래만 가능합니다</span>
 			
-			<a href="/picksell/sell/0" class="sellBtn">판매하기</a>
+			<input type="button" value="판매하기" class="sellBtn <c:if test="${sessionScope.sessionKind == 1 }">disableBtn</c:if>" onclick="location.href='/picksell/sell/0'" <c:if test="${sessionScope.sessionKind == 1 }">disabled="disabled"</c:if> />
 		</div>
 		<div class="howtoselectWrap">
 			<div class="selectImgWrap">
@@ -96,7 +100,7 @@ a.sellBtn {
 			<span class="howtoTEXT">일반+쿨거래</span>
 			<span class="howtosubTEXT">안전거래와 직거래가 가능합니다</span>
 			
-			<a href="/picksell/sell/1" class="sellBtn">판매하기</a>
+			<input type="button" value="판매하기" class="sellBtn <c:if test="${sessionScope.sessionKind == 1 }">disableBtn</c:if>" onclick="location.href='/picksell/sell/1'" <c:if test="${sessionScope.sessionKind == 1 }">disabled="disabled"</c:if> />
 		</div>
 		<div class="howtoselectWrap">
 			<div class="selectImgWrap">
@@ -105,7 +109,7 @@ a.sellBtn {
 			<span class="howtoTEXT">사업자 안전거래</span>
 			<span class="howtosubTEXT">사업자를 위한 안전거래입니다</span>
 			
-			<a href="/picksell/sellPlus" class="sellBtn">판매하기</a>
+			<input type="button" value="판매하기" class="sellBtn <c:if test="${sessionScope.sessionKind != 1 }">disableBtn</c:if>" onclick="location.href='/picksell/sellPlus'" <c:if test="${sessionScope.sessionKind != 1 }">disabled="disabled"</c:if> />
 		</div>
 	</div>
 </body>
