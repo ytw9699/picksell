@@ -10,19 +10,16 @@
    margin-left: 200px; /* Same as the width of the sidenav */
 }
 .hiddenPage{
-  	margin-left: 300px; 
-    width: 100%;
-    padding: 50px 0;
+
+
     text-align: center;
     background-color: lightgrey;
     
 }
-.panel{
-  margin-left : 120px;
-  margin-top : 40px;
-  width : 300px;
-  height: 500px;
-
+hr{
+ border: none;
+ border : 1px solid grey;
+ 
 }
 button{
   background: #337ab7;
@@ -59,38 +56,61 @@ button:hover:before,button:hover:after{
   width:100%;
   transition:800ms ease all;
 }
+
+.memberInfo{
+  margin-top : 40px;
+  margin-left : 15px;
+}
+.hiddenPage{
+ display : none;
+ border : 1px;
+ background-color : white;
+ 
+}
+.pimg{
+	display: none;
+
+	
+}
+
 </style>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="http://code.jquery.com/jquery-1.7.js"></script>
 <script>
 $(document).ready(function(){
-	$("button").click(function()){
-		$(".hiddenPage").toggle();	
-		
-	});
-	
+    $("button.change").click(function(){
+        $("div.hiddenPage").toggle("slow");
+        $("div.hiddenPage").css('display','inline')
+    });
 });
+
+$(document).ready(function(){
+    $("button.profile_img").click(function(){
+        $("div.pimg").toggle("slow");
+        $("div.pimg").css('display','inline')
+    });
+});
+
+
 </script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>관리자 회원 상세보기</title>
 </head>
 <body>
 <div class="main">
-
-<div class="panel">
 <div class="memberInfo">
 아이디 : ${map.ID }
-<hr>
+<div class="pimg">
+<img src="/picksell/resources/img/main_logo.png" style="width: 200px;" />
+</div>
+<button class="profile_img">프로필 이미지</button>
 
+<hr>
 이름 : ${map.NAME }
 <hr>
-
-
 이메일 : ${map.EMAIL }
 <hr>
-
 주소 : ${map.ADDRESS }
 <hr>
-
 계정 상태 :
 <c:choose>
 <c:when test="${ '0' eq map.STATUS }">
@@ -103,8 +123,25 @@ $(document).ready(function(){
  로그인 제한
 </c:when>
 </c:choose>
+<div class="hiddenPage"> 
 
-<button>변경</button>
+	<c:choose>
+		<c:when test="${map.STATUS == '0'}">
+		<input type="submit" value="게시글 제한" onclick="location.href='/picksell/admin/member/infoChangeProc?id=${map.ID}&status=1'" >
+   	    <input type="submit" value="로그인 제한" onclick="location.href='/picksell/admin/member/infoChangeProc?id=${map.ID}&status=2'" >
+		</c:when>
+		<c:when test="${map.STATUS == '1' }">
+				<input type="submit" value="정 상" onclick="location.href='/picksell/admin/member/infoChangeProc?id=${map.ID}&status=0'" >
+		   		 <input type="submit" value="로그인 제한" onclick="location.href='/picksell/admin/member/infoChangeProc?id=${map.ID}&status=2'" >
+		</c:when>
+		<c:when test="${map.STATUS == '2' }">
+			<input type="submit" value="정 상" onclick="location.href='/picksell/admin/member/infoChangeProc?id=${map.ID}&status=0'" >
+		   	<input type="submit" value="게시글 제한" onclick="location.href='/picksell/admin/member/infoChangeProc?id=${map.ID}&status=1'" >
+		</c:when>
+	</c:choose> 
+   
+</div>
+<button class="change">변경</button>
 <hr>
 
 
@@ -125,7 +162,7 @@ $(document).ready(function(){
 	</c:when>
 	</c:choose>
 <hr>
-</div>
+
 <a href="/picksell/admin/member/orderList/${map.ID}">
 회원 주문 내역 리스트
 </a>
@@ -143,28 +180,6 @@ $(document).ready(function(){
 회원 판매 글 리스트</a>
 <hr>
 </div>
-
-
-
-<div class="hiddenPage"> 
-
-	<c:choose>
-		<c:when test="${map.STATUS == '0'}">
-		<input type="submit" value="게시글 제한" onclick="location.href='/picksell/admin/member/infoChangeProc?id=${map.ID}&status=1'" >
-   	    <input type="submit" value="로그인 제한" onclick="location.href='/picksell/admin/member/infoChangeProc?id=${map.ID}&status=2'" >
-		</c:when>
-		<c:when test="${map.STATUS == '1' }">
-				<input type="submit" value="정 상" onclick="location.href='/picksell/admin/member/infoChangeProc?id=${map.ID}&status=0'" >
-		   		 <input type="submit" value="로그인 제한" onclick="location.href='/picksell/admin/member/infoChangeProc?id=${map.ID}&status=2'" >
-		</c:when>
-		<c:when test="${map.STATUS == '2' }">
-			<input type="submit" value="정 상" onclick="location.href='/picksell/admin/member/infoChangeProc?id=${map.ID}&status=0'" >
-		   	<input type="submit" value="게시글 제한" onclick="location.href='/picksell/admin/member/infoChangeProc?id=${map.ID}&status=1'" >
-		</c:when>
-	</c:choose> 
-   
-</div>
-
 </div>
 
 </body>

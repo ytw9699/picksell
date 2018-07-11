@@ -11,9 +11,6 @@ body, table, div, p {font-family:'Cute';}
 .menuWrap{
 	display:inline-block;
 }
-.bodyWrap{
-	display:inline-block;
-}
 
 </style>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">

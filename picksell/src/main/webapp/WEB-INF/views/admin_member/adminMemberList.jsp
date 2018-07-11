@@ -159,13 +159,13 @@ button:hover:before,button:hover:after{
 	 <td>${memberslist.email }</td>
      <c:choose>
 	 <c:when test="${ '99' eq memberslist.kind }">
-	 <td>관리자</td>
+	 <td><img src="/picksell/resources/img/admin.png" style="width: 25px; height :25px;" /></td>
 	 </c:when>
 	 <c:when test="${ '0' eq memberslist.kind }" >
-	 <td>개인회원</td>
+	 <td><img src="/picksell/resources/img/personal.png" style="width: 25px; height :25px;" /></td>
 	 </c:when>
 	 <c:when test="${ '1' eq memberslist.kind }" >
-	 <td>사업자 회원</td>
+	 <td> <img src="/picksell/resources/img/business-icon.png" style="width: 25px; height :25px;" /></td>
 	</c:when>
 	</c:choose>
 	

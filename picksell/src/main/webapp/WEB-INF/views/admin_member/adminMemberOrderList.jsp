@@ -7,9 +7,10 @@
 <html>
 <style>
 .main {
-   margin-left: 300px; /* Same as the width of the sidenav */
+   margin-left: 250px; /* Same as the width of the sidenav */
    
 }
+
 </style>
 
 
@@ -29,15 +30,16 @@
 </c:when>
 </c:choose>
 
-<c:forEach var="orderList" items="${orderList}" varStatus="orderListStatus">
 
-<p>주문번호 ${orderList.ORDER_NUM }
-<p>전체 주문 금액 ${orderList.TOTAL_PRICE}
+<c:forEach var="orderList" items="${orderList}" varStatus="orderListStatus">
+<div class="oneLine">
+<p>주문번호  : ${orderList.ORDER_NUM }
+<p>전체 주문 금액 : ${orderList.TOTAL_PRICE} (원)
  
     <c:forEach items="${adminOrderSubList[orderListStatus.index]}" var="i" varStatus="Sub">
 	
   	 <!-- 상품 주문번호 -->
-<p>제품명 ${i.SUBJECT } <c:if test="${(fn:length(adminOrderSubList[orderListStatus.index])-1) > 0 }">
+<p>제품명 : ${i.SUBJECT } <c:if test="${(fn:length(adminOrderSubList[orderListStatus.index])-1) > 0 }">
  			외 ${fn:length(adminOrderSubList[orderListStatus.index])-1}건
  		</c:if>
     </c:forEach>
@@ -63,9 +65,9 @@
 	 <fmt:formatDate value="${orderList.CANCEL_DATE }" pattern="yy-MM-dd HH:mm:ss"/>
 	  </c:when>
 	  </c:choose>	  	 
-	${orderList.STEP1_DATE} <!-- 주문일(입금대기날짜) -->              
-<hr>
+	최초 주문 시간 :${orderList.STEP1_DATE} <!-- 주문일(입금대기날짜) -->              
 
+</div>
    </c:forEach>
 
 <%-- <table border="1px" align="center">
