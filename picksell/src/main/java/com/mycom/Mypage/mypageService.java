@@ -65,4 +65,7 @@ public class mypageService implements mypageDao {
 		return sqlMapper.selectList("mypage.saleSubDetail", parameterMap);
 	}
 
+	public void stock(String PRODUCT_NUM) {
+			sqlMapper.update("mypage.stock", PRODUCT_NUM);
+	}
 }

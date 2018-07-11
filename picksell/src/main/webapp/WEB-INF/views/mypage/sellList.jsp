@@ -14,6 +14,20 @@
 </style>
 </head>
 <body>
+<script>
+function stock(PRODUCT_NUM){
+var allData = "PRODUCT_NUM="+PRODUCT_NUM;
+		$.ajax({
+			type : "GET",
+			url : "/picksell/mypage/stock",
+			dataType : 'json',
+			data : allData,
+			success : function(data){
+				alert("재고가 증가되었습니다");
+			}
+		});	
+}
+</script>
 <h4>
 <a href="/picksell/mypage/sellList">전체 상품 글</a>/
 <a href="/picksell/mypage/sellList?HowToSell=0">일반 안전 상품글</a>/
@@ -73,8 +87,11 @@
 		<td>판매완료 상품</td>
 		</c:if>
 		<td>${list.HITCOUNT }</td>
-		<td>${list.STOCK }</td>
-		<td><span>수량 </span><input type="button" value="-" id="subBtn" onclick="subOrder()" /><span id="currentOrderView">${list.STOCK }</span><input type="button" value="+" id="addBtn" onclick="addOrder()" /></td>
+		<td>${list.STOCK }</td> 
+		<td><span>수량 </span>
+							<input type="button" value="-" id="subBtn" onclick="location.href ='/picksell/mypage/stock/${list.PRODUCT_NUM}'"/>
+		    <span id="currentOrderView">${list.STOCK }</span>
+		    				<input type="button" value="+" id="addBtn" onclick="stock('${list.PRODUCT_NUM}')" /></td>
 	</tr>
 </c:forEach>
 </c:if>
