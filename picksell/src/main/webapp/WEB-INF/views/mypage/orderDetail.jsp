@@ -8,12 +8,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>주문상세</title>
+<title>주문 내역 상세 및 배송 조회</title>
 <style>
 </style>
 </head>
 <body>
-<h2>주문상세</h2>
+<h2>주문 내역 상세 및 배송 조회</h2>
 <table>
 <c:if test="${fn:length(orderDetail) > 0}">
 			<h4>
