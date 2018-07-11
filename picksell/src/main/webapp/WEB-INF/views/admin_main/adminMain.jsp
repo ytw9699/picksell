@@ -2,6 +2,39 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+<%@ page import="java.util.*,java.sql.*" %>
+<%@ page import="com.google.gson.Gson"%>
+<%@ page import="com.google.gson.JsonObject"%>
+
+<%
+Gson gsonObj = new Gson();
+Map<Object,Object> map = null;
+List<Map<Object,Object>> list = new ArrayList<Map<Object,Object>>();
+String dataPoints = null;
+ 
+try{
+	Class.forName("oracle.jdbc.driver.OracleDriver"); 
+	Connection connection = DriverManager.getConnection("jdbc:oracle:thin:@istudy.iptime.org:7000:ORCL", "KH00905", "oracle");
+	Statement statement = connection.createStatement();
+	String xVal, yVal;
+	
+	ResultSet resultSet = statement.executeQuery("SELECT order_num, status FROM ps_order");
+	
+	while(resultSet.next()){
+		xVal = resultSet.getString("order_num");
+		yVal = resultSet.getString("status");
+		
+		map = new HashMap<Object,Object>(); map.put("x", Integer.parseInt(xVal)); map.put("y", Integer.parseInt(yVal)); list.add(map);
+		dataPoints = gsonObj.toJson(list);
+	}
+	connection.close();
+}
+catch(SQLException e){
+	out.println("<div  style='width: 50%; margin-left: auto; margin-right: auto; margin-top: 200px;'>Database has not been connected yet.</div>");
+	dataPoints = null;
+}
+%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <style>
@@ -12,14 +45,19 @@
 </style>
 <head>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.3.0/Chart.bundle.js"></script>
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 
 </head>
 <body>
 <div class="main">
-<h1>ㅁㅔ인이니..?</h1>
-<canvas id="bar-chart" width="800" height="450"></canvas><br/>
+<h1>메인가즈아~!</h1>
+
+<div id="chartContainer" style="height: 370px; width: 100%;"></div>
+
+<br/><br/><br/><br/><br/>
+<canvas id="myChart" width="400" height="300"></canvas>  <canvas id="bar-chart" width="800" height="450"></canvas><br/>
 <canvas id="line-chart" width="800" height="450"></canvas><br/>
 <canvas id="pie-chart" width="800" height="450"></canvas><br/>
 <canvas id="radar-chart" width="800" height="600"></canvas><br/>
@@ -29,7 +67,40 @@
 <canvas id="bar-chart-grouped" width="800" height="450"></canvas><br/>
 <canvas id="mixed-chart" width="800" height="450"></canvas><br/>
 <canvas id="bubble-chart" width="800" height="800"></canvas>
-<script>
+
+<script type="text/javascript">
+
+
+window.onload = function() { 
+	 
+	<% if(dataPoints != null) { %>
+	var chart = new CanvasJS.Chart("chartContainer", {
+		animationEnabled: true,
+		exportEnabled: true,
+		title: {
+			text: " 그래프 테스트 "
+		},
+		axisX: {
+			title: "order_num from ps_order"
+		},
+		axisY: {
+			title: "status from ps_order"
+		},
+
+		data: [{
+			type: "column", //change type to bar, line, area, pie, etc
+			dataPoints: <%out.print(dataPoints);%>
+		}]
+	});
+	chart.render();
+	<% } %> 
+	 
+	}
+
+
+
+
+
 
 //Bar chart
 new Chart(document.getElementById("bar-chart"), {
@@ -342,6 +413,7 @@ new Chart(document.getElementById("bubble-chart"), {
     }
 });
 </script>
+
 </div>
 </body>
 </html>
