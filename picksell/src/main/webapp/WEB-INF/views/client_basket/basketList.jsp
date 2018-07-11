@@ -160,6 +160,10 @@ input.abl {
     padding: 17px;
     margin-top: 82px;
     width: 320px;
+    cursor: pointer;
+}
+input.abl:hover{
+	background-color: #6542fc;
 }
 input.disab {
     display: block;
@@ -328,7 +332,12 @@ input.disab {
 			
 			<tr>
 				<td class="product_checkTD"><input type="checkbox" onclick="basketChecking(this, ${indexStatus.index})" id="baketCheck${indexStatus.index }" /></td>
-				<td class="product_imgTD"><img src="/picksell/resources/productUpload/${list.FIRST_IMG }" class="product_img" onerror="this.src='/picksell/resources/img/imgready.gif'"/></td>
+				<td class="product_imgTD">
+					<a href="/picksell/products/detail/${list.CATEGORY_NUM}/${list.PRODUCT_NUM}">
+					<img src="/picksell/resources/productUpload/${list.FIRST_IMG }" class="product_img" onerror="this.src='/picksell/resources/img/imgready.gif'"/>
+					</a>
+				</td>
+				
 				<td class="product_infoTD">
 					<span class="product_subjectTEXT">${list.SUBJECT }</span>
 					
