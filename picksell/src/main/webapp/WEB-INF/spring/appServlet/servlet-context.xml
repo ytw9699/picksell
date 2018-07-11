@@ -78,6 +78,7 @@
         <interceptor> 
             <mapping path="/cart" />
             <mapping path="/sell/**"/>
+            <mapping path="/admin/*"/>
             <exclude-mapping path="/main/*"/>
             <exclude-mapping path="/login/*"/>
             <beans:bean class="com.mycom.config.SessionInterceptor"></beans:bean>

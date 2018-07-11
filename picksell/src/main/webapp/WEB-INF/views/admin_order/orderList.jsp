@@ -210,11 +210,11 @@ $(document).on("click", ".open-AddBookDialog", function () {
      		    <form action="/picksell/admin_order/deliveryProc" method="post">
    				 	<div class="form-group">
     				  <label for="delivery">택배사</label>
-    				  <input type="text" name="delivery_company" class="form-control" id="delivery">
+    				  <input type="text" name="delivery_company" value="Please type in a delivery company name"class="form-control" id="delivery">
    					 </div>
    					 <div class="form-group">
           	 		  <label for="invoice">송장번호</label>
-    				  <input type="text" name="invoice_num" class="form-control" id="invoice">
+    				  <input type="text" name="invoice_num" value="Please type in a invoice number"class="form-control" id="invoice">
   		  			</div>
   		  			<input type="hidden" id="haha" name="order_num" value=""/>
   		  			<input type="submit" class="btn btn-default" value="입력완료"/>
