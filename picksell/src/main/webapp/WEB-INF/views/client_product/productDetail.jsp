@@ -37,6 +37,200 @@
     height: 100px;
 }
 
+/* 상품시작 */
+a.link_wholeList {
+    font-size: 19px;
+}
+a.link_wholeList:hover{
+	text-decoration: underline;
+}
+
+span.letterGT {
+    font-size: 20px;
+    color: #7f7f7f;
+    font-weight: 600;
+    margin: 0 8px;
+}
+
+a.link_productList {
+    font-size: 18px;
+}
+a.link_productList:hover{
+	text-decoration: underline;
+}
+.seller_info {
+    display: inline-block;
+    width: 40%;
+    margin-left: 50px;
+    border: 1px solid red;
+}
+img.sellerProfileImg {
+    width: 100%;
+}
+.categoryMoveWrap {
+    margin-bottom: 80px;
+    margin-top: 30px;
+}
+.product_info {
+    float: right;
+    width: 50%;
+}
+span.sellerId {
+    display: block;
+    box-sizing: border-box;
+    border-bottom: 1px solid #ececec;
+    padding-bottom: 30px;
+}
+span.product_info_subject {
+    display: block;
+    font-size: 30px;
+    margin-top: 35px;
+}
+
+span.product_info_number {
+    color: #999999;
+    font-size: 16px;
+    margin-top: 5px;
+    display: block;
+}
+
+span.product_info_priceTEXT {
+    color: #999;
+    font-size: 15px;
+}
+
+span#currentPriceText {
+    font-size: 35px;
+    font-weight: 600;
+    margin-left: 20px;
+}
+
+.button_wrap {
+    width: 100%;
+    text-align: center;
+}
+
+div#basketWrap {
+    display: inline-block;
+    width: 48%;
+}
+input.basket_disabled {
+    width: 100%;
+    border: none;
+    color: white;
+    box-sizing: border-box;
+    padding: 16px;
+    font-size: 15px;
+    background-color: #dbdbdb;
+}
+
+div#purchaseWrap {
+    display: inline-block;
+    width: 48%;
+}
+
+input.purchase_confirm {
+    width: 100%;
+    border: none;
+    color: white;
+    box-sizing: border-box;
+    padding: 16px;
+    font-size: 15px;
+    background-color: #7151fc;
+}
+p.product_phr {
+    display: block;
+    height: 100px;
+    border-bottom: 1px solid #ececec;
+}
+span.product_info_wonTEXT {
+    color: #666;
+    font-size: 20px;
+}
+
+input.basket_go {
+    width: 100%;
+    border: none;
+    color: white;
+    box-sizing: border-box;
+    padding: 16px;
+    font-size: 15px;
+    background-color: #dbdbdb;
+}
+
+input.purchase_go {
+    width: 48%;
+    border: none;
+    color: white;
+    box-sizing: border-box;
+    padding: 16px;
+    font-size: 15px;
+    background-color: #7151fc;
+}
+
+input.basket_abled {
+    width: 100%;
+    border: 1px solid #7151fc;
+    color: #7151fc;
+    box-sizing: border-box;
+    padding: 16px;
+    font-size: 15px;
+    background-color: white;
+}
+.product_info_quanWrap {
+    height: 80px;
+}
+
+span.product_info_quanTEXT {
+    color: #999;
+    font-size: 15px;
+    margin-right: 30px;
+    float: left;
+    line-height: 30px;
+}
+input.subQuanBtn {
+    float: left;
+    width: 35px;
+    height: 35px;
+    border-radius: 33px;
+    background: url(/picksell/resources/img/sub.png) 50% 50% no-repeat;
+    background-size: 20px;
+    border: 1px solid #ececec;
+}
+span#currentOrderView {
+    float: left;
+    font-size: 22px;
+    color: #726e6e;
+    margin: 0 20px;
+}
+input.addQuanBtn {
+    float: left;
+    width: 35px;
+    height: 35px;
+    border-radius: 33px;
+    background: url(/picksell/resources/img/add.png) 50% 50% no-repeat;
+    background-size: 20px;
+    border: 1px solid #ececec;
+}
+.product_detail {
+    margin-top: 100px;
+}
+.product_content {
+    min-height: 400px;
+}
+span.product_contentTEXT {
+    display: block;
+    color: #333;
+    font-size: 20px;
+    margin-top: 70px;
+}
+span.deliveryTEXT {
+    display: block;
+    margin-left: 15px;
+    margin-top: 15px;
+    color: #333;
+    font-size: 14px;
+}
 </style>
 
 </head>
@@ -77,7 +271,7 @@
 			response.text().then(function(text){
 				if(response.status == '200'){
 					alert('장바구니에 담았습니다!');
-					var inner = "<input type='button' value='장바구니로가기' onclick='gotoBasket();' />";
+					var inner = "<input type='button' class='basket_go' value='장바구니로가기' onclick='gotoBasket();' />";
 					document.getElementById('basketWrap').innerHTML = inner;
 				}
 			})
@@ -176,24 +370,33 @@
 	<div class="contentWrap">
 	<form action="/picksell/purchase/order/single" method="post">
 	
-	<c:if test="${resultObject.HOWTOSELL != 2 }">
-		<a href="/picksell/products/goods">전체목록</a> > 
-		<a href="/picksell/products/goods?ca=${resultObject.CATEGORY_NUM }">${resultObject.CATEGORY_NAME }</a>
-	</c:if>
-	<c:if test="${resultObject.HOWTOSELL == 2 }">
-		<a href="/picksell/products/plus">전체목록</a> > 
-		<a href="/picksell/products/plus?ca=${resultObject.CATEGORY_NUM }">${resultObject.CATEGORY_NAME }</a>
-	</c:if>
-	
+	<div class="categoryMoveWrap">
+		<c:if test="${resultObject.HOWTOSELL != 2 }">
+			<a class="link_wholeList" href="/picksell/products/goods">전체목록</a>
+			<span class="letterGT">></span>
+			<a class="link_productList" href="/picksell/products/goods?ca=${resultObject.CATEGORY_NUM }">${resultObject.CATEGORY_NAME }</a>
+		</c:if>
+		<c:if test="${resultObject.HOWTOSELL == 2 }">
+			<a class="link_wholeList" href="/picksell/products/plus">전체목록</a>
+			<span class="letterGT">></span>
+			<a class="link_productList" href="/picksell/products/plus?ca=${resultObject.CATEGORY_NUM }">${resultObject.CATEGORY_NAME }</a>
+		</c:if>
+	</div>
+		
+		<!-- 상품판매정보 시작 -->
 		<div class="seller_info">
-			<span>${resultObject.SELLER_ID }</span>
+			<img src="/picksell/resources/img/imgready.gif" class="sellerProfileImg" />
 		</div>
 		<div class="product_info">
-			<span>상품번호: ${resultObject.PRODUCT_NUM }</span>
-			<p>
-			<span>가격: </span>
-			<span id="currentPriceText"><fmt:formatNumber value="${resultObject.PRICE }" pattern="#,###.##" /></span>
-			<p>
+			<span class="sellerId">${resultObject.SELLER_ID }</span>
+			<span class="product_info_subject">${resultObject.SUBJECT }</span>
+			<span class="product_info_number">상품번호: ${resultObject.PRODUCT_NUM } / [${resultObject.CATEGORY_NAME }]</span>
+			<p class="product_phr">
+			<span class="product_info_priceTEXT">판매가</span>
+			<span id="currentPriceText" class="product_info_priceVALUE"><fmt:formatNumber value="${resultObject.PRICE }" pattern="#,###.##" /></span>
+			<span class="product_info_wonTEXT">원</span>
+			
+			<!-- 폼데이터부분 -->
 			<input type="hidden" name="totalSum" id="currentPrice" value="${resultObject.PRICE }" />
 			<input type="hidden" name="p_list[0].orderSum" id="currentOrderSum" value="1" />
 			<input type="hidden" name="p_list[0].product_price" value="${resultObject.PRICE }" />
@@ -201,66 +404,89 @@
 			<input type="hidden" name="p_list[0].product_img" value="${resultObject.FIRST_IMG }" />
 			<input type="hidden" name="p_list[0].product_subject" value="${resultObject.SUBJECT }" />
 			<input type="hidden" name="p_list[0].product_num" value="${resultObject.PRODUCT_NUM }" />
+			
+			<!-- 플러스판매일경우 수량체크 -->
 			<c:if test="${resultObject.HOWTOSELL == 2 }">
- 			<span>수량 </span><input type="button" value="-" id="subBtn" onclick="subOrder()" disabled="disabled"/><span id="currentOrderView">1</span><input type="button" value="+" id="addBtn" onclick="addOrder();" />
+			
+			<div class="product_info_quanWrap">
+	 			<span class="product_info_quanTEXT">수량</span>
+	 			<input type="button" class="subQuanBtn" value="" id="subBtn" onclick="subOrder()" disabled="disabled"/>
+	 			<span class="product_info_quanVALUE" id="currentOrderView">1</span>
+	 			<input type="button" class="addQuanBtn" value="" id="addBtn" onclick="addOrder();" />
+			</div>
+			
 			</c:if>
-		</div>
-		<div class="button_wrap">
-		
+			
+			<!-- 버튼시작 -->
+			<div class="button_wrap">
 			<c:if test="${sessionScope.sessionId != null }">
 			<!-- 장바구니버튼 -->
 			<div class="basketWrap" id="basketWrap">
 				<c:choose>
 					<c:when test="${resultObject.HOWTOSELL != 2 }">
-						<input type="button" value="장바구니" disabled="disabled" />
+						<input type="button" class="basket_disabled" value="장바구니" disabled="disabled" />
 					</c:when>
 					<c:when test="${resultObject.HOWTOSELL == 2 and alreadyBasket == false }">
-						<input type="button" value="장바구니" onclick="intoBasket();" />
+						<input type="button" class="basket_abled" value="장바구니" onclick="intoBasket();" />
 					</c:when>
 					<c:when test="${resultObject.HOWTOSELL == 2 and alreadyBasket == true }">
-						<input type="button" value="장바구니로가기" onclick="location.href='/picksell/cart'" />
+						<input type="button" class="basket_go" value="장바구니로가기" onclick="location.href='/picksell/cart'" />
 					</c:when>
 				</c:choose>
 			</div>
 			
 			<!-- 구매신청하기버튼 -->
-			<div class="purchaseWrap" id="purchaseWrap">
+			
 				<c:choose>
 					<c:when test="${resultObject.DEAL_STATUS == 0 and resultObject.HOWTOSELL != 2 and alreadyPurchase == false and isMyProducts == 'no' }">
-						<input type="button" value="구매신청하기" onclick="purchaseApply();" />
+						<div class="purchaseWrap" id="purchaseWrap">
+						<input type="button" class="purchase_apply" value="구매신청하기" onclick="purchaseApply();" />
+						</div>
 					</c:when>
 					<c:when test="${isApprovedPC == 'yes' and alreadyPurchase == true }">
-						<input type="submit" value="구매하기" />
+						<div class="purchaseWrap" id="purchaseWrap">
+						<input type="submit" class="purchase_go" value="구매하기" />
+						</div>
 					</c:when>
 					<c:when test="${alreadyPurchase == true }">
-						<input type="button" value="구매신청 취소하기" onclick="purchaseCancel();" />
+						<div class="purchaseWrap" id="purchaseWrap">
+						<input type="button" class="purchase_cancel" value="구매신청 취소하기" onclick="purchaseCancel();" />
+						</div>
 					</c:when>
 					<c:when test="${isMyProducts == 'yes' }">
-						<input type="button" value="구매신청 확인하기" onclick="openPurchaseList();" />
+						<div class="purchaseWrap" id="purchaseWrap">
+						<input type="button" class="purchase_confirm" value="구매신청 확인하기" onclick="openPurchaseList();" />
+						</div>
 					</c:when>
-					
 				</c:choose>
-			</div>
+			
 			
 			<!-- 구매하기 + 구매수락일때를 생각해야함 -->
 			<c:choose>
 				<c:when test="${resultObject.HOWTOSELL == 2 }">
-					<input type="submit" value="구매하기" />
+					<input type="submit" class="purchase_go" value="구매하기" />
 				</c:when>
 			</c:choose>
 			
 			</c:if><!-- 세션조건 끝 -->
 		</div>
+		</div>
+		
 		<div class="product_detail">
+			<span class="product_contentTEXT">상품 정보</span>
+			<div class="product_content">
 			${resultObject.CONTENT }
+			</div>
 		</div>
 		<div class="delivery_info">
-		<p>1. 판매자가 제품을 발송하면 택배사, 송장번호를 안내해드립니다.
-		<p>2. 결제후 3일 이내에 판매자가 제품을 발송하지 않으면 거래가 자동 취소됩니다.
-		<p>3. 제품인수 후 3일 이내에 구매자가 인수확인하지 않으면 자동 인수확인처리 됩니다.
+			<span class="product_contentTEXT">배송 정보</span>
+			<span class="deliveryTEXT">1. 판매자가 제품을 발송하면 택배사, 송장번호를 안내해드립니다.</span>
+			<span class="deliveryTEXT">2. 결제후 3일 이내에 판매자가 제품을 발송하지 않으면 거래가 자동 취소됩니다.</span>
+			<span class="deliveryTEXT">3. 제품인수 후 3일 이내에 구매자가 인수확인하지 않으면 자동 인수확인처리 됩니다.</span>
 		</div>
 		<div class="commentWrap">
-			<span>상품문의 [개수]</span><input type="button" value="상품 문의하기" onclick="openCommentForm()" />
+			<span class="product_contentTEXT">상품 문의</span><span class="commentSumTEXT">[개수]</span>
+			<input type="button" value="상품 문의하기" onclick="openCommentForm()" />
 			<div class="commentListWrap">
 				<c:choose>
 					<c:when test="${empty resultCommentList }">

@@ -13,6 +13,9 @@
 
 <style>
 body{ overflow-x:hidden;}
+#ex_file1 { /* 파일 필드 숨기기 */
+position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0);
+border: 0; left: 140px; top: 292px;}
 .profileButtons{background-color: #ddd;
 	border: none;
     width: 50%;
@@ -52,10 +55,10 @@ body{ overflow-x:hidden;}
 		
 		<!-- 제품이미지 업로드단계 -->
 		<div id="c1">
-			<p>대표이미지를 선택해주세요
-			<p>
+			<span class="step1TEXT">대표이미지를 선택해주세요</span>
+			
 			<div class="mainImg">
-				<img src="#" id="mainPic" />
+				<img class="mainImgtag" src="/picksell/resources/img/for_first_img.png" id="mainPic" />
 			</div>
 	
 			<label for="ex_file1" class="profileButtons" id="profileSearch">이미지 찾기</label>	
@@ -67,8 +70,7 @@ body{ overflow-x:hidden;}
 		
 		<!-- 카테고리 및 제품사용여부 체크단계 -->
 		<div id="c2">
-			<p>제품 카테고리를 선택해주세요
-			카테고리등록:
+			<span class="step2TEXT">제품 카테고리를 선택해주세요</span>
 			<select name="category_num">
 				<option value="0">카테고리선택</option>
 				<option value="1">전자제품</option>
@@ -97,9 +99,9 @@ body{ overflow-x:hidden;}
 		
 		<!-- 상품제목 및 상세내용 입력단계 -->
 		<div id="c3">
-			<p>상품제목입력해주세요 <input type="text" name="subject" />
-			<p>상품내용입력해주세요
-			<p>스마트에디터
+			<span class="step3TEXT">상품제목을 입력해주세요</span>
+			<input type="text" class="contentINPUT" name="subject" />
+			<span class="step3TEXT">상품내용을 입력해주세요</span>
 			<div class="contentDiv">
 		 	<textarea id="txtContent" name="content" rows="20" style="width:100%;"></textarea>
 			</div>
@@ -113,11 +115,11 @@ body{ overflow-x:hidden;}
 		<!-- 제품가격 입력단계 -->
 		<div id="c4">
 
-			<p>제품 가격을 입력해주세요
-			<p><input type="text" name="price" />
+			<span class="step4TEXT">제품 가격을 입력해주세요</span>
+			<p><input type="text" class="contentINPUT" name="price" />
 			
-			<p>제품 수량을 입력해주세요
-			<p><input type="text" name="stock" />
+			<span class="step4TEXT">판매할 수량을 입력해주세요</span>
+			<p><input type="text" class="contentINPUT" name="stock" />
 			<p><input type="button" value="뒤로" onclick="Animate2id('#c3'); return false" class="c2_cancel" />
 			<!-- <p><a href="#" onClick="Animate2id('#c1'); return false">취소</a> -->
 			<!-- <p><input type="submit" value="작성" /> -->
