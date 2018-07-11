@@ -7,7 +7,7 @@
 <style>
 
 .main{
-   margin-left: 160px; /* Same as the width of the sidenav */
+   margin-left: 300px; /* Same as the width of the sidenav */
    
 
 }
@@ -18,8 +18,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>판매 중 리스트</title>
 </head>
-<body class="main">
+<body>
 <h1>현재 판매 중인 상품 글 리스트</h1>
+<div class="main">
 <c:choose>
 	<c:when test="${ 0 eq total }">
 	 판매 중인 상품이 없습니다.
@@ -27,7 +28,7 @@
 	</c:when>
 	<c:when test="${0 lt total }">
 
-<table border="1px" align="center" style="text-align:center">
+<table  border="1px" align="center" style="text-align:center">
  	<tr>
  	 	<th>INDEX</th>
  	    <th>상품 번호</th>
@@ -45,7 +46,7 @@
  
  	<c:forEach var="maplist" items="${maplist }" varStatus="i">
  	<tr>
- 	 <td>${i.index +1 }</td>
+ 	 <td>${i.count }</td>
  	 <td>${maplist.PRODUCT_NUM}</td>
  	 <td>${maplist.CATEGORY_NUM }</td>
  	 <td>${maplist.SELLER_ID }</td>
@@ -74,5 +75,6 @@
 </table>
 </c:when>
 </c:choose>
+</div>
 </body>
 </html>

@@ -4,11 +4,18 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
+<style>
+.main{
+ width: 300px;
+}
+
+</style>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>관리자 구매 내역 리스트</title>
 </head>
 <body>
+<div class="main">
 <c:choose>
 <c:when test="${ 0  eq total }">
 구매 내역이 없습니다.
@@ -29,7 +36,7 @@
  	</tr>
  	<c:forEach var="maplist" items="${maplist }" varStatus="i">
  		<tr>
- 		<td>${i.index+1 }</td>
+ 		<td>${i.count}</td>
  		<td>${maplist.BH_NUM }</td>
  		<td>${maplist.BUYER_ID }</td>
  		<td>${maplist.SELLER_ID }</td>
@@ -45,5 +52,6 @@
  	</table>
  </c:when>
 </c:choose>
+</div>
 </body>
 </html>

@@ -4,58 +4,113 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
+<head>
 <style>
 .main{
-   margin-left: 160px; /* Same as the width of the sidenav */
+   margin-left: 200px; /* Same as the width of the sidenav */
 }
-#hiddenPage{
-  	margin-left: 160px; 
-    width: 100%;
-    padding: 50px 0;
+.hiddenPage{
+
+
     text-align: center;
     background-color: lightgrey;
     
 }
+hr{
+ border: none;
+ border : 1px solid grey;
+ 
+}
+button{
+  background: #337ab7;
+  color:#fff;
+  border:none;
+  position:relative;
+  height:22px;
+  padding:0 2em;
+  cursor:pointer;
+  transition:800ms ease all;
+  outline:none;
+}
+button:hover{
+  background:#fff;
+  color:#337ab7;
+}
+button:before,button:after{
+  content:'';
+  position:absolute;
+  top:0;
+  right:0;
+  height:2px;
+  width:0;
+  background: #337ab7;
+  transition:400ms ease all;
+}
+button:after{
+  right:inherit;
+  top:inherit;
+  left:0;
+  bottom:0;
+}
+button:hover:before,button:hover:after{
+  width:100%;
+  transition:800ms ease all;
+}
+
+.memberInfo{
+  margin-top : 40px;
+  margin-left : 15px;
+}
+.hiddenPage{
+ display : none;
+ border : 1px;
+ background-color : white;
+ 
+}
+.pimg{
+	display: none;
+
+	
+}
+
 </style>
-<script type="text/javascript">
-  function msg(){
-	  var x = document.getElementById("hiddenPage");
-	  var status = ${map.STATUS}
-	  if(x.style.display === "none" ){
-		  x.style.display = "block";
-		  
-	  }else{
-		  x.style.display = "none";
-	  }
-	  
-	  
-	  
- }
+<script src="http://code.jquery.com/jquery-1.7.js"></script>
+<script>
+$(document).ready(function(){
+    $("button.change").click(function(){
+        $("div.hiddenPage").toggle("slow");
+        $("div.hiddenPage").css('display','inline')
+    });
+});
+
+$(document).ready(function(){
+    $("button.profile_img").click(function(){
+        $("div.pimg").toggle("slow");
+        $("div.pimg").css('display','inline')
+    });
+});
+
+
 </script>
-<head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>관리자 회원 상세보기</title>
 </head>
 <body>
 <div class="main">
-<table border="1px" align="center">
-<tr>
-<td>아이디 : ${map.ID }</td>
-</tr>
-<tr>
-<td>
+<div class="memberInfo">
+아이디 : ${map.ID }
+<div class="pimg">
+<img src="/picksell/resources/img/main_logo.png" style="width: 200px;" />
+</div>
+<button class="profile_img">프로필 이미지</button>
+
+<hr>
 이름 : ${map.NAME }
-</td>
-</tr>
-<tr><td>
+<hr>
 이메일 : ${map.EMAIL }
-</td></tr>
-<tr><td>
+<hr>
 주소 : ${map.ADDRESS }
-</td></tr>
-
-<tr><td>
-
+<hr>
 계정 상태 :
 <c:choose>
 <c:when test="${ '0' eq map.STATUS }">
@@ -68,48 +123,7 @@
  로그인 제한
 </c:when>
 </c:choose>
-
-<input type="button" onclick="msg()" name="" value="변경"/>
-</td></tr>
-
-<tr><td>
-알람 동의 여부 : ${map.ALARM_CONSENT }
-</td></tr>
-<tr><td>
-가입 일자 : <fmt:formatDate value="${map.REGDATE }" pattern="yyyy-MM-dd"/>
-</td></tr>
-<tr><td>권한 : <c:choose>
-	 <c:when test="${ '99' eq map.KIND}">
-	관리자</td>
-	 </c:when>
-	 <c:when test="${ '0' eq map.KIND }" >
-	개인회원</td>
-	 </c:when>
-	 <c:when test="${ '1' eq map.KIND }" >
-	사업자 회원</td>
-	</c:when>
-	</c:choose>
-</tr>
-<tr><td>
-<a href="/picksell/admin/member/orderList/${map.ID}">
-회원 주문 내역 리스트
-</a>
-</td></tr>
-<tr><td>
-<a href="/picksell/admin/member/sellHistory/${map.ID}">
-회원 판매 내역 리스트</a>
-</td></tr>
-<tr><td>
-<a href="/picksell/admin/member/purchaseHistory/${map.ID}">
-회원 구매 내역 리스트</a>
-</td></tr>
-<tr><td>
-<a href="/picksell/admin/member/products/${map.ID}">
-회원 판매 글 리스트</a>
-</td></tr>
-</table>
-</div>
-<div id="hiddenPage"> 
+<div class="hiddenPage"> 
 
 	<c:choose>
 		<c:when test="${map.STATUS == '0'}">
@@ -127,5 +141,46 @@
 	</c:choose> 
    
 </div>
+<button class="change">변경</button>
+<hr>
+
+
+알람 동의 여부 : ${map.ALARM_CONSENT }
+<hr>
+
+가입 일자 : <fmt:formatDate value="${map.REGDATE }" pattern="yyyy-MM-dd"/>
+<hr>
+권한 : <c:choose>
+	 <c:when test="${ '99' eq map.KIND}">
+	관리자
+	 </c:when>
+	 <c:when test="${ '0' eq map.KIND }" >
+	개인회원
+	 </c:when>
+	 <c:when test="${ '1' eq map.KIND }" >
+	사업자 회원
+	</c:when>
+	</c:choose>
+<hr>
+
+<a href="/picksell/admin/member/orderList/${map.ID}">
+회원 주문 내역 리스트
+</a>
+<hr>
+
+<a href="/picksell/admin/member/sellHistory/${map.ID}">
+회원 판매 내역 리스트</a>
+<hr>
+
+<a href="/picksell/admin/member/purchaseHistory/${map.ID}">
+회원 구매 내역 리스트</a>
+<hr>
+
+<a href="/picksell/admin/member/products/${map.ID}">
+회원 판매 글 리스트</a>
+<hr>
+</div>
+</div>
+
 </body>
 </html>

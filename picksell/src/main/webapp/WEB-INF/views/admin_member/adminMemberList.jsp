@@ -5,7 +5,7 @@
 <html>
 <style>
 .main{
-	 margin-left: 160px; 
+	 margin-left: 200px; 
 }
 .reverse{
 	background: Red;
@@ -18,6 +18,7 @@
 	border-color : #7151fc;
 	padding-top: 10px;
     padding-left: 50px;
+    margin-top : 10px;
 }
 .paging{text-align:center;height:32px;margin-top:5px;margin-bottom:15px;}
 .paging a,
@@ -32,6 +33,66 @@
 .paging a:first-child{margin-left:0;}
 .paging strong{color:#fff;background:#337AB7;border:1px solid #337AB7;}
 .paging .page_arw{font-size:11px;line-height:30px;}
+
+table.adminMemeberList{
+ border-collaspe : separate;
+ boarder-spacing : 1px;
+ text-align: center;
+ line-height : 1.5;
+ margin: 10px 5px;
+
+}
+table.adminMemeberList th {
+    width: 155px;
+    padding: 10px;
+    font-weight: bold;
+    vertical-align: top;
+    color: #fff;
+    background: #337ab7;
+   
+}
+table.adminMemeberList td {
+    width: 155px;
+    padding: 10px;
+    vertical-align: top;
+    border-bottom: 1px solid #ccc;
+    background: #fff;
+}
+button{
+  background: #337ab7;
+  color:#fff;
+  border:none;
+  position:relative;
+  height:22px;
+  padding:0 2em;
+  cursor:pointer;
+  transition:800ms ease all;
+  outline:none;
+}
+button:hover{
+  background:#fff;
+  color:#337ab7;
+}
+button:before,button:after{
+  content:'';
+  position:absolute;
+  top:0;
+  right:0;
+  height:2px;
+  width:0;
+  background: #337ab7;
+  transition:400ms ease all;
+}
+button:after{
+  right:inherit;
+  top:inherit;
+  left:0;
+  bottom:0;
+}
+button:hover:before,button:hover:after{
+  width:100%;
+  transition:800ms ease all;
+}
 
 </style>
 <head>
@@ -53,7 +114,9 @@
 <!-- 
 	세션 아이디 , 권한 확인 부분
  -->
+
 <div class="main">
+
 <div class="searchBar">
 <form action="/picksell/admin/member/search" >
 <select name="searchNum">
@@ -65,8 +128,7 @@
 <button type="submit">Search</button>
 </form>
 </div>
-
-<h1>회원목록</h1>
+<h1>회원 목록</h1>
 <c:choose>
 <c:when test="${ 0 lt searchCount }">
 검색 결과는 ${searchCount }건 입니다.
@@ -75,15 +137,15 @@
 전체 회원 수는 ${a}명 입니다.
 </c:when>
 </c:choose>
-<table align="center" border="1px">
+<table  class="adminMemeberList">
    <thead>
  	<tr>
- 		<th>번호</th>
- 		<th>id</th>
- 		<th>이름</th>
- 		<th>프로필이미지</th>
- 		<th>이메일</th>
- 		<th>권한</th>
+ 		<th scope="cols">번호</th>
+ 		<th scope="cols">ID</th>
+ 		<th scope="cols">이름</th>
+ 		<th scope="cols">프로필이미지</th>
+ 		<th scope="cols">이메일</th>
+ 		<th scope="cols">권한</th>
  	</tr>
 </thead>
 <tbody>
@@ -97,13 +159,13 @@
 	 <td>${memberslist.email }</td>
      <c:choose>
 	 <c:when test="${ '99' eq memberslist.kind }">
-	 <td>관리자</td>
+	 <td><img src="/picksell/resources/img/admin.png" style="width: 25px; height :25px;" /></td>
 	 </c:when>
 	 <c:when test="${ '0' eq memberslist.kind }" >
-	 <td>개인회원</td>
+	 <td><img src="/picksell/resources/img/personal.png" style="width: 25px; height :25px;" /></td>
 	 </c:when>
 	 <c:when test="${ '1' eq memberslist.kind }" >
-	 <td>사업자 회원</td>
+	 <td> <img src="/picksell/resources/img/business-icon.png" style="width: 25px; height :25px;" /></td>
 	</c:when>
 	</c:choose>
 	
@@ -116,8 +178,8 @@
 <div class="paging">
 		${pagingHtml}
 </div>
-<input type="submit" value="전체 목록" onclick="window.location='/picksell/admin/member/list'"/>
 
-</div>
+<button onclick="window.location='/picksell/admin/member/list'">목록</button>
+
 </body>
 </html>

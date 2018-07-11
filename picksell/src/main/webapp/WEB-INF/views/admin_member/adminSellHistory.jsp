@@ -6,7 +6,7 @@
 <html>
 <style>
 .main{
-   margin-left: 160px; /* Same as the width of the sidenav */
+   margin-left: 300px; /* Same as the width of the sidenav */
 }
 </style>
 <head>
@@ -15,7 +15,6 @@
 </head>
 <body>
 <div class="main">
-
 <c:choose>
 <c:when test="${0 eq total }">
 판매내역이 없습니다.
@@ -35,7 +34,7 @@
  	</tr>
   <c:forEach var="maplist" items="${maplist }" varStatus="i">
 	<tr>
-	    <td>${i.index+1 }</td>
+	    <td>${i.count }</td>
 		<td>${maplist.SH_NUM }</td>
 		<td>${maplist.SELLER_ID }</td>
 		<td>${maplist.BUYER_ID }</td>

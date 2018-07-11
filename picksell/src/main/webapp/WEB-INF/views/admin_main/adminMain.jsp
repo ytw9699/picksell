@@ -39,7 +39,7 @@ catch(SQLException e){
 <html>
 <style>
 .main{
-	margin-left: 160px; 
+	margin-left: 300px; 
 }
 
 </style>
