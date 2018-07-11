@@ -7,7 +7,7 @@
 <html>
 <style>
 .main {
-   margin-left: 160px; /* Same as the width of the sidenav */
+   margin-left: 300px; /* Same as the width of the sidenav */
    
 }
 </style>

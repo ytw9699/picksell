@@ -6,7 +6,7 @@
 
 .sidenav {
     height: 100%;
-    width: 160px;
+    width: 200px;
     position: fixed;
     z-index: 1;
     top: 0;
@@ -28,6 +28,12 @@
     color: #f1f1f1;
     text-decoration: underline;
 }
+#logoInput {
+   padding-left: 7px;
+   padding-bottom : 20px;
+   border-bottom : 1px  solid gray;
+
+}
 
 
 
@@ -38,12 +44,16 @@
 </head>
 <body>
 <div class="sidenav">
+ 
+  <div id="logoInput">
+  <a href="/picksell/main/"><img src="/picksell/resources/img/main_logo.png" width="150px" height="25px"></a>
+  </div>
+ 
   <a href="/picksell/admin/main">메인메뉴</a>
   <a href="/picksell/admin/member/list">계정관리</a>
   <a href="/picksell/admin_products/list">판매관리</a>
   <a href="/picksell/admin_order/list">주문관리</a>
   <a href="/picksell/admin_singo/list">신고관리</a>
-  <a href="/picksell">회원 페이지</a>
 </div>
 </body>
 </html>

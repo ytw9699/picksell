@@ -4,57 +4,92 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
+<head>
 <style>
 .main{
-   margin-left: 160px; /* Same as the width of the sidenav */
+   margin-left: 200px; /* Same as the width of the sidenav */
 }
-#hiddenPage{
-  	margin-left: 160px; 
+.hiddenPage{
+  	margin-left: 300px; 
     width: 100%;
     padding: 50px 0;
     text-align: center;
     background-color: lightgrey;
     
 }
+.panel{
+  margin-left : 120px;
+  margin-top : 40px;
+  width : 300px;
+  height: 500px;
+
+}
+button{
+  background: #337ab7;
+  color:#fff;
+  border:none;
+  position:relative;
+  height:22px;
+  padding:0 2em;
+  cursor:pointer;
+  transition:800ms ease all;
+  outline:none;
+}
+button:hover{
+  background:#fff;
+  color:#337ab7;
+}
+button:before,button:after{
+  content:'';
+  position:absolute;
+  top:0;
+  right:0;
+  height:2px;
+  width:0;
+  background: #337ab7;
+  transition:400ms ease all;
+}
+button:after{
+  right:inherit;
+  top:inherit;
+  left:0;
+  bottom:0;
+}
+button:hover:before,button:hover:after{
+  width:100%;
+  transition:800ms ease all;
+}
 </style>
-<script type="text/javascript">
-  function msg(){
-	  var x = document.getElementById("hiddenPage");
-	  var status = ${map.STATUS}
-	  if(x.style.display === "none" ){
-		  x.style.display = "block";
-		  
-	  }else{
-		  x.style.display = "none";
-	  }
-	  
-	  
-	  
- }
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+	$("button").click(function()){
+		$(".hiddenPage").toggle();	
+		
+	});
+	
+});
 </script>
-<head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>관리자 회원 상세보기</title>
 </head>
 <body>
 <div class="main">
-<table border="1px" align="center">
-<tr>
-<td>아이디 : ${map.ID }</td>
-</tr>
-<tr>
-<td>
-이름 : ${map.NAME }
-</td>
-</tr>
-<tr><td>
-이메일 : ${map.EMAIL }
-</td></tr>
-<tr><td>
-주소 : ${map.ADDRESS }
-</td></tr>
 
-<tr><td>
+<div class="panel">
+<div class="memberInfo">
+아이디 : ${map.ID }
+<hr>
+
+이름 : ${map.NAME }
+<hr>
+
+
+이메일 : ${map.EMAIL }
+<hr>
+
+주소 : ${map.ADDRESS }
+<hr>
 
 계정 상태 :
 <c:choose>
@@ -69,47 +104,49 @@
 </c:when>
 </c:choose>
 
-<input type="button" onclick="msg()" name="" value="변경"/>
-</td></tr>
+<button>변경</button>
+<hr>
 
-<tr><td>
+
 알람 동의 여부 : ${map.ALARM_CONSENT }
-</td></tr>
-<tr><td>
+<hr>
+
 가입 일자 : <fmt:formatDate value="${map.REGDATE }" pattern="yyyy-MM-dd"/>
-</td></tr>
-<tr><td>권한 : <c:choose>
+<hr>
+권한 : <c:choose>
 	 <c:when test="${ '99' eq map.KIND}">
-	관리자</td>
+	관리자
 	 </c:when>
 	 <c:when test="${ '0' eq map.KIND }" >
-	개인회원</td>
+	개인회원
 	 </c:when>
 	 <c:when test="${ '1' eq map.KIND }" >
-	사업자 회원</td>
+	사업자 회원
 	</c:when>
 	</c:choose>
-</tr>
-<tr><td>
+<hr>
+</div>
 <a href="/picksell/admin/member/orderList/${map.ID}">
 회원 주문 내역 리스트
 </a>
-</td></tr>
-<tr><td>
+<hr>
+
 <a href="/picksell/admin/member/sellHistory/${map.ID}">
 회원 판매 내역 리스트</a>
-</td></tr>
-<tr><td>
+<hr>
+
 <a href="/picksell/admin/member/purchaseHistory/${map.ID}">
 회원 구매 내역 리스트</a>
-</td></tr>
-<tr><td>
+<hr>
+
 <a href="/picksell/admin/member/products/${map.ID}">
 회원 판매 글 리스트</a>
-</td></tr>
-</table>
+<hr>
 </div>
-<div id="hiddenPage"> 
+
+
+
+<div class="hiddenPage"> 
 
 	<c:choose>
 		<c:when test="${map.STATUS == '0'}">
@@ -127,5 +164,8 @@
 	</c:choose> 
    
 </div>
+
+</div>
+
 </body>
 </html>
