@@ -76,7 +76,7 @@ var subtotalPRICE = Number('${saleDetail.TOTAL_PRICE}');
          </script>
          <c:if test="${status.last}">
     	 <script>
-    	 subtotalPRICE = subtotalPRICE - totalPRICE;
+    	 subtotalPRICE = subtotalPRICE - totalPRICE -2500;
          </script>
          </c:if>
          
