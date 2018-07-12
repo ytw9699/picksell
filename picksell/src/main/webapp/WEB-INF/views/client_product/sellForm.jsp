@@ -12,7 +12,7 @@
 <script type="text/javascript" src="/picksell/resources/js/forEditer/cc.js"></script>
 
 <style>
-body{ overflow-x:hidden;}
+/* body{ overflow-x:hidden;} */
 #ex_file1 { /* 파일 필드 숨기기 */
 position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0);
 border: 0; left: 140px; top: 292px;}
@@ -37,10 +37,10 @@ border: 0; left: 140px; top: 292px;}
 	top: 0;
 	min-height: 500px;
 }
-#c1{width:1200px; height:100%; float:left; background-color: white; padding: 25px;}
-#c2{width:1200px; height:100%; float:left; background-color: white; padding: 50px;}
-#c3{width:1200px; height:100%; float:left; background-color: white; padding: 50px;}
-#c4{width:1200px; height:100%; float:left; background-color: white; padding: 50px;}
+#c1{width:1200px; height:100%; float:left; background-color: white; padding-right: 20%;}
+#c2{width:1200px; height:100%; float:left; background-color: white; padding-right: 20%;}
+#c3{width:1200px; height:100%; float:left; background-color: white; padding-right: 20%;}
+#c4{width:1200px; height:100%; float:left; background-color: white; padding-right: 20%;}
 .contentDiv {
     width: 80%;
 }
@@ -65,6 +65,40 @@ img#mainPic {
     max-height: 300px;
 }
 
+/* 버튼업 */
+input.nextBtn {
+    display: block;
+    width: 23%;
+    margin: 0 auto;
+    margin-top: 23px;
+    border: none;
+    color: white;
+    background-color: #7151fc;
+    padding: 15px;
+    font-size: 15px;
+}
+input.nextDisabled {
+    background-color: #999;
+}
+span.step2TEXT {
+    display: block;
+    font-size: 25px;
+    text-align: center;
+    margin-top: 20px;
+    color: #7151fc;
+}
+select#categorySELECT {
+    padding: 10px;
+    padding-left: 25px;
+    font-size: 15px;
+    border: 1px solid #d8d8d8;
+    border-radius: 5px;
+    display: block;
+    width: 30%;
+    margin: 0 auto;
+    margin-top: 25px;
+    -webkit-appearance: none;
+}
 </style>
 </head>
 <body>
@@ -76,7 +110,7 @@ img#mainPic {
 		<input type="hidden" name="stock" value="1" />
 		
 		<!-- 제품이미지 업로드단계 -->
-		<div id="c1">
+		<div id="c1" class="innerContentWrap">
 			<span class="step1TEXT">대표이미지를 선택해주세요</span>
 			
 			<div class="mainImg">
@@ -86,15 +120,16 @@ img#mainPic {
 			<label for="ex_file1" class="profileButtons" id="profileSearch">이미지 찾기</label>	
 			<input type="file" name="first_img" id="ex_file1" />
 
-			<input type="button" class="nextBtn" onclick="Animate2id('#c2','easeInOutExpo'); return false" value="다음" />
+			<input type="button" id="step1_nextBtn" class="nextBtn nextDisabled" onclick="Animate2id('#c2','easeInOutExpo'); return false" value="다음" disabled="disabled" />
 			<!-- <a href="#" onClick="Animate2id('#c2','easeInOutExpo'); return false">다음</a> -->
 			<!-- onClick="Animate2id('#c2','easeInOutExpo'); return false" -->	
 		</div>
 		
 		<!-- 카테고리 및 제품사용여부 체크단계 -->
-		<div id="c2">
+		<div id="c2" class="innerContentWrap">
 			<span class="step2TEXT">제품 카테고리를 선택해주세요</span>
-			<select name="category_num">
+			<select class="categorySELECT" id="categorySELECT" name="category_num">
+				<option value="0">카테고리선택</option>
 				<option value="1">전자제품</option>
 				<option value="2">패션/의류</option>
 				<option value="3">패션/잡화</option>
@@ -108,8 +143,15 @@ img#mainPic {
 			</select>
 	
 			<span class="step2TEXT">제품 사용 여부를 체크해주세요</span>
-			미사용<input type="radio" name="product_status" value="0" />
-			사용<input type="radio" name="product_status" value="1" />
+			<input type="hidden" name="product_status" id="hid_status" value="" />
+			
+			<input type="button" value="미사용" class="status_check_btn" onclick="selectStatus('0');" />
+			<input type="button" value="사용" class="status_check_btn" onclick="selectStatus('1');" />
+			
+			<!-- <label for="product_statusRADIO0" id="radio_for_0">미사용</label>	
+			<label for="product_statusRADIO1" id="radio_for_1">사용</label>	 -->
+			<!-- <input type="radio" id="product_statusRADIO0" name="product_status" value="0" />
+			<input type="radio" id="product_statusRADIO1" name="product_status" value="1" /> -->
 	
 			<p>
 			<!-- <p><a href="#" onclick="Animate2id('#c3','easeInOutExpo'); return false" >아이디 찾기</a> -->
@@ -119,7 +161,7 @@ img#mainPic {
 		</div>
 		
 		<!-- 상품제목 및 상세내용 입력단계 -->
-		<div id="c3">
+		<div id="c3" class="innerContentWrap">
 			<span class="step3TEXT">상품제목을 입력해주세요</span>
 			<input type="text" class="contentINPUT" name="subject" />
 			<span class="step3TEXT">상품내용을 입력해주세요</span>
@@ -134,7 +176,7 @@ img#mainPic {
 		</div>
 		
 		<!-- 제품가격 입력단계 -->
-		<div id="c4">
+		<div id="c4" class="innerContentWrap">
 
 			<span class="step4TEXT">제품 가격을 입력해주세요</span>
 			<p><input type="text" class="contentINPUT" name="price" />
@@ -150,6 +192,16 @@ img#mainPic {
 	<script type="text/javascript" src="/picksell/resources/js/jquery.easing.1.3.js"></script>
 	<script>
 	$(document).ready(function(){
+		
+		var currentWindowWidth = document.body.offsetWidth - (document.body.offsetWidth / 100 * 20);
+		var paddingValue = document.body.offsetWidth / 100 * 20;
+		$('.innerContentWrap').css('width', currentWindowWidth);
+		$('.innerContentWrap').css('padding-right', paddingValue);
+		//$('#c1').css('width', currentWindowWidth);
+		//$('#c2').css('width', currentWindowWidth);
+		//$('#c3').css('width', currentWindowWidth);
+		//$('#c4').css('width', currentWindowWidth);
+		
 		function readURL(input) {
 			if (input.files && input.files[0]) {
 				var reader = new FileReader(); //파일을 읽기 위한 FileReader객체 생성
@@ -167,7 +219,17 @@ img#mainPic {
 		//file 양식으로 이미지를 선택(값이 변경) 되었을때 처리하는 코드
 		$("#ex_file1").change(function(){
 			//alert(this.value); //선택한 이미지 경로 표시
-			readURL(this);
+			if(!validationType(this.value)){
+				alert("사진파일이 아닙니다");
+				$('#mainPic').attr('src', '/picksell/resources/img/for_first_img.png');
+				$('#step1_nextBtn').addClass('nextDisabled');
+				$('#step1_nextBtn').attr('disabled','disabled');
+				return false;
+			}else if(validationType(this.value)){
+				$('#step1_nextBtn').removeClass('nextDisabled');
+				$('#step1_nextBtn').removeAttr('disabled');
+				readURL(this);
+			}
 		});
 		
 	 });
@@ -201,6 +263,15 @@ img#mainPic {
      fCreator: "createSEditor2"
  	});
 	
+	/* 사진업로드 타입 유효성검증 */
+	var validationType = function(fileName){
+		var type = fileName.substring(fileName.lastIndexOf('.')+1, fileName.length);
+		if(type.toUpperCase() == 'JPG' || type.toUpperCase() == 'GIF' || type.toUpperCase() == 'PNG' || type.toUpperCase() == 'BMP'){
+			return true;
+		}else
+			return false;
+	};
+	
 	var pasteHTML = function(filename){
 	    var sHTML = '<img src="${pageContext.request.contextPath}/resources/productUpload/'+filename+'">';
 	    oEditors.getById["txtContent"].exec("PASTE_HTML", [sHTML]);
@@ -223,6 +294,11 @@ img#mainPic {
 			alert("사진파일이 아닙니다");
 			return false;
 		} */
+	
+		//step2 라디오기능
+		function selectStatus(status){
+			$('#hid_status').val(status);
+		}
 	</script>
 </body>
 </html>
