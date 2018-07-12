@@ -29,13 +29,13 @@ border: 0; left: 140px; top: 292px;}
     padding: 15px;
 }
     
-    #container {
-	/* background-color: red; */
-	position: relative;
-	left: 0;
-	width: 10000px;
-	top: 0;
-	min-height: 500px;
+#container {
+    /* background-color: red; */
+    position: relative;
+    left: 0;
+    width: 10000px;
+    top: 0;
+    min-height: 600px;
 }
 #c1{width:1200px; height:100%; float:left; background-color: white; padding-right: 20%;}
 #c2{width:1200px; height:100%; float:left; background-color: white; padding-right: 20%;}
@@ -99,6 +99,27 @@ select#categorySELECT {
     margin-top: 25px;
     -webkit-appearance: none;
 }
+.step2_radioBtnWrap {
+    width: 50%;
+    margin: 0 auto;
+    margin-top: 30px;
+}
+
+input.status_check_btn {
+    width: 48%;
+    outline: none;
+    border: none;
+    background-color: #ecf0f1;
+    color: #9b9b9b;
+    padding: 10px;
+    font-size: 15px;
+    box-sizing: border-box;
+}
+input.status_checked_btn{
+	background-color: white;
+    border: 1px solid #7151fc;
+    color: #7151fc;
+}
 </style>
 </head>
 <body>
@@ -145,19 +166,17 @@ select#categorySELECT {
 			<span class="step2TEXT">제품 사용 여부를 체크해주세요</span>
 			<input type="hidden" name="product_status" id="hid_status" value="" />
 			
-			<input type="button" value="미사용" class="status_check_btn" onclick="selectStatus('0');" />
-			<input type="button" value="사용" class="status_check_btn" onclick="selectStatus('1');" />
+			<div class="step2_radioBtnWrap">
+				<input type="button" value="미사용" class="status_check_btn" onclick="selectStatus('0',this);" />
+				<input type="button" value="사용" class="status_check_btn" onclick="selectStatus('1',this);" />
+			</div>
 			
-			<!-- <label for="product_statusRADIO0" id="radio_for_0">미사용</label>	
-			<label for="product_statusRADIO1" id="radio_for_1">사용</label>	 -->
-			<!-- <input type="radio" id="product_statusRADIO0" name="product_status" value="0" />
-			<input type="radio" id="product_statusRADIO1" name="product_status" value="1" /> -->
-	
-			<p>
-			<!-- <p><a href="#" onclick="Animate2id('#c3','easeInOutExpo'); return false" >아이디 찾기</a> -->
-			<p><input type="button" value="다음" onclick="Animate2id('#c3','easeInOutExpo'); return false" class="c2_button" />
-			<!-- <p><a href="#" onClick="Animate2id('#c1'); return false" >취소</a> -->
-			<p><input type="button" value="뒤로" onclick="Animate2id('#c1'); return false" class="c2_cancel" />
+			<div class="step2_moveWrap">
+				<!-- <p><a href="#" onclick="Animate2id('#c3','easeInOutExpo'); return false" >아이디 찾기</a> -->
+				<input type="button" value="다음" onclick="Animate2id('#c3','easeInOutExpo'); return false" class="c2_button" />
+				<!-- <p><a href="#" onClick="Animate2id('#c1'); return false" >취소</a> -->
+				<input type="button" value="뒤로" onclick="Animate2id('#c1'); return false" class="c2_cancel" />
+			</div>
 		</div>
 		
 		<!-- 상품제목 및 상세내용 입력단계 -->
@@ -169,22 +188,24 @@ select#categorySELECT {
 		 	<textarea id="txtContent" name="content" rows="20" style="width:100%;"></textarea>
 			</div>
 			
-			<p><input type="button" value="다음" onclick="Animate2id('#c4','easeInOutExpo'); return false" class="c2_button" />
-			<!-- <p><a href="#" onClick="Animate2id('#c1'); return false" >취소</a> -->
-			<p><input type="button" value="뒤로" onclick="Animate2id('#c2'); return false" class="c2_cancel" />
-				
+			<div class="step3_moveWrap">
+				<input type="button" value="다음" onclick="Animate2id('#c4','easeInOutExpo'); return false" class="c2_button" />
+				<!-- <p><a href="#" onClick="Animate2id('#c1'); return false" >취소</a> -->
+				<input type="button" value="뒤로" onclick="Animate2id('#c2'); return false" class="c2_cancel" />
+			</div>
 		</div>
 		
 		<!-- 제품가격 입력단계 -->
 		<div id="c4" class="innerContentWrap">
 
 			<span class="step4TEXT">제품 가격을 입력해주세요</span>
-			<p><input type="text" class="contentINPUT" name="price" />
-			<p><input type="button" value="뒤로" onclick="Animate2id('#c3'); return false" class="c2_cancel" />
-			<!-- <p><a href="#" onClick="Animate2id('#c1'); return false">취소</a> -->
-			<!-- <p><input type="submit" value="작성" /> -->
+			<input type="text" class="contentINPUT" name="price" />
 			
-			<input type="button" onclick="onWrite()" value="작성" />
+			<div class="step4_moveWrap">
+				<input type="button" value="뒤로" onclick="Animate2id('#c3'); return false" class="c2_cancel" />
+				<!-- <p><a href="#" onClick="Animate2id('#c1'); return false">취소</a> -->
+				<input type="button" onclick="onWrite()" value="작성" />
+			</div>
 		</div>
 		</form>
 	</div>
@@ -284,21 +305,17 @@ select#categorySELECT {
 		productForm.action ="/picksell/sell/sellProc";              
 		productForm.submit();
 	}
-		/*  if(validationType(fileValue)){
-			 productForm.action ="/summer/board/write";              
-			 productForm.submit();
-		}else if(fileValue == ""){
-			alert("대표사진을 등록해야합니다");
-			return false;
-		}else if(!validationType(fileValue)){
-			alert("사진파일이 아닙니다");
-			return false;
-		} */
 	
-		//step2 라디오기능
-		function selectStatus(status){
-			$('#hid_status').val(status);
-		}
+	//step2 라디오기능
+	function selectStatus(status, elements){
+		$('#hid_status').val(status);
+		//alert(elements.value);
+		$('.status_check_btn').removeClass('status_checked_btn');
+		$(elements).addClass('status_checked_btn');
+	}
+	
+
+		
 	</script>
 </body>
 </html>
