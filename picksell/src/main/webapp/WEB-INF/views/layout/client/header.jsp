@@ -192,8 +192,29 @@ li.mainCategoryLI:hover {
     text-align: center;
 }
 
-
-
+/* tmp */
+.bigsq {
+    background-color: #999999;
+    /* margin-top: 35px; */
+    width: 50px;
+    height: 20px;
+    padding: 5px;
+    border-radius: 23px;
+    transition: 0.3s;
+    display: inline-block;
+}
+.smallsq {
+    width: 35px;
+    height: 35px;
+    background-color: #efefef;
+    display: inline-block;
+    margin-top: -8px;
+    margin-left: -15px;
+    border-radius: 35px;
+    transition: 0.3s;
+    border: none;
+    outline: none;
+}
 </style>
 </head>
 <script>
@@ -243,12 +264,47 @@ li.mainCategoryLI:hover {
 		
 		
 	});
+	var a = 0;
+	
+	//$('#smallsq').on('click', function(){
+		function moving(){
+		if(a == 0){
+			$('#smallsq').css('margin-left',25);
+			$('#smallsq').css('background-color', '#4285f4');
+			$('#bigsq').css('background-color', '#b3cefb');
+			a = 1;
+		}else{
+			$('#smallsq').css('margin-left', -15);
+			$('#smallsq').css('background-color', '#efefef');
+			$('#bigsq').css('background-color', '#999999');
+			a = 0;
+		}
+	}
+	//});
+/* 	function moving(){
+		if(a == 0){
+			$('#smallsq').css('margin-left',60);
+			$('#smallsq').css('background-color', '#4285f4');
+			$('#bigsq').css('background-color', '#b3cefb');
+			a = 1;
+		}else{
+			$('#smallsq').css('margin-left', 5);
+			$('#smallsq').css('background-color', '#efefef');
+			$('#bigsq').css('background-color', '#999999');
+			a = 0;
+		}
+	} */
 </script>
 <body>
+
+
 <div class="headerTop">
   <span class="headerTop_menu">
 	<c:if test="${sessionId != null}">
-	<a href="#" id="linkOfMypage" class="menu_el">마이페이지 ▼</a>|<a href="/picksell/logout" class="menu_el">로그아웃</a>
+	<a href="#" id="linkOfMypage" class="menu_el">마이페이지 ▼</a>|<a href="/picksell/logout" class="menu_el">로그아웃</a> | 
+		<div id="bigsq" class="bigsq">
+		<input type="button" id="smallsq" class="smallsq" onclick="moving();" />
+		</div>
 	</c:if>
 	<c:if test="${sessionId == null}">
 	|<a href="/picksell/loginForm" class="menu_el">로그인</a>
