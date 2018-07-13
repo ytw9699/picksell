@@ -18,11 +18,11 @@ try{
 	Statement statement = connection.createStatement();
 	String xVal, yVal;
 	
-	ResultSet resultSet = statement.executeQuery("SELECT order_num, status FROM ps_order");
+	ResultSet resultSet = statement.executeQuery("select to_char(step4_date, 'mmdd') as x,  sum(total_price) as y from ps_order where step4_date is not null group by to_char(step4_date, 'mmdd') order by to_char(step4_date, 'mmdd')"); 
 	
 	while(resultSet.next()){
-		xVal = resultSet.getString("order_num");
-		yVal = resultSet.getString("status");
+		xVal = resultSet.getString("x");
+		yVal = resultSet.getString("y");
 		
 		map = new HashMap<Object,Object>(); map.put("x", Integer.parseInt(xVal)); map.put("y", Integer.parseInt(yVal)); list.add(map);
 		dataPoints = gsonObj.toJson(list);
@@ -39,7 +39,7 @@ catch(SQLException e){
 <html>
 <style>
 .main{
-	margin-left: 300px; 
+	margin-left: 200px; 
 }
 
 </style>
@@ -52,7 +52,7 @@ catch(SQLException e){
 </head>
 <body>
 <div class="main">
-<h1>메인가즈아~!</h1>
+<h1>사업지표</h1>
 
 <div id="chartContainer" style="height: 370px; width: 100%;"></div>
 
@@ -78,13 +78,13 @@ window.onload = function() {
 		animationEnabled: true,
 		exportEnabled: true,
 		title: {
-			text: " 그래프 테스트 "
+			text: "PICKSELL 날짜별 거래(판매) 금액 "
 		},
 		axisX: {
-			title: "order_num from ps_order"
+			title: "날짜"
 		},
 		axisY: {
-			title: "status from ps_order"
+			title: "이익금"
 		},
 
 		data: [{

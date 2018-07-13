@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 <style type="text/css">
 	.main{ 
- 	 margin-left: 160px;  
+ 	 margin-left: 200px;  
  	} 
 </style>
 </head>

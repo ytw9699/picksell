@@ -64,7 +64,7 @@ th, td {
 tr:nth-child(even){background-color: #f2f2f2}
 
  .main{ 
- 	 margin-left: 160px;  
+ 	 margin-left: 200px;  
  	} 
 
 .paging{text-align:center;height:32px;margin-top:5px;margin-bottom:15px;}
