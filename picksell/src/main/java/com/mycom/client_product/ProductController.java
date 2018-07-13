@@ -207,11 +207,11 @@ public class ProductController {
 	}
 	
 	//상품 상세보기
-	@RequestMapping("/products/detail/{category_num}/{product_num}/{ALARM_NUM}")
+	@RequestMapping("/products/detail/{category_num}/{product_num}")
 	public String productsDetail(
 			@PathVariable("product_num") int product_num,
 			@PathVariable("category_num") int category_num,
-			@PathVariable("ALARM_NUM") int ALARM_NUM,
+			@RequestParam(value="ALARM_NUM",required=false, defaultValue="0") int ALARM_NUM,
 			//@PathVariable("currentPage") int currentPage,
 			Model model,
 			HttpServletRequest request) {
@@ -286,8 +286,10 @@ public class ProductController {
 				}
 			}
 		}
-		productService.alarmRead(ALARM_NUM);//알람읽기
-		
+	
+		if(ALARM_NUM != 0) {
+		productService.alarmRead(ALARM_NUM);//알람읽기	
+		}
 		//카테고리번호&상품글번호
 		model.addAttribute("category_num", category_num);
 		model.addAttribute("product_num", product_num);
