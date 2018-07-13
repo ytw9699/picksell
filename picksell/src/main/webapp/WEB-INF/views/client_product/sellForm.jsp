@@ -35,7 +35,7 @@ border: 0; left: 140px; top: 292px;}
     left: 0;
     width: 10000px;
     top: 0;
-    min-height: 600px;
+    min-height: 820px;
 }
 #c1{width:1200px; height:100%; float:left; background-color: white; padding-right: 20%;}
 #c2{width:1200px; height:100%; float:left; background-color: white; padding-right: 20%;}
@@ -191,6 +191,56 @@ input.step3_prevBtn {
     padding: 15px;
     font-size: 15px;
 }
+input.contentPRICE_INPUT {
+    border: none;
+    border-bottom: 1px solid #d8d8d8;
+    display: block;
+    width: 25%;
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 20px;
+    padding: 15px;
+    font-size: 20px;
+    color: #666;
+    outline: none;
+}
+
+span.step4TEXT {
+    display: block;
+    font-size: 25px;
+    text-align: center;
+    margin-top: 70px;
+    color: #7151fc;
+}
+.step4_moveWrap {
+    width: 50%;
+    margin: 0 auto;
+    margin-top: 60px;
+}
+
+input.step4_prevBtn {
+    display: inline-block;
+    width: 48%;
+    margin: 0 auto;
+    /* margin-top: 23px; */
+    border: 1px solid #7151fc;
+    color: #7151fc;
+    background-color: white;
+    padding: 15px;
+    font-size: 15px;
+}
+
+input.step4_nextBtn {
+    width: 48%;
+    margin: 0 auto;
+    /* margin-top: 23px; */
+    margin-left: 5px;
+    border: none;
+    color: white;
+    background-color: #7151fc;
+    padding: 15px;
+    font-size: 15px;
+}
 /* 버튼disabled */
 input.nextDisabled {
     background-color: #999;
@@ -256,7 +306,7 @@ input.nextDisabled {
 		<!-- 상품제목 및 상세내용 입력단계 -->
 		<div id="c3" class="innerContentWrap">
 			<span class="step3TEXT">상품제목을 입력해주세요</span>
-			<input type="text" class="contentINPUT" name="subject" />
+			<input type="text" class="contentINPUT" id="contentSUBJECT" name="subject" />
 			<span class="step3TEXT">상품내용을 입력해주세요</span>
 			<div class="contentDiv">
 		 	<textarea id="txtContent" name="content" rows="20" style="width:100%;"></textarea>
@@ -264,7 +314,7 @@ input.nextDisabled {
 			
 			<div class="step3_moveWrap">
 				<input type="button" value="뒤로" class="step3_prevBtn" onclick="Animate2id('#c2'); return false" class="c2_cancel" />
-				<input type="button" value="다음" class="step3_nextBtn nextDisabled" onclick="Animate2id('#c4','easeInOutExpo'); return false" class="c2_button" />
+				<input type="button" value="다음" class="step3_nextBtn nextDisabled" id="step3_nextBtn" onclick="Animate2id('#c4','easeInOutExpo'); return false" disabled="disabled"/>
 			</div>
 		</div>
 		
@@ -272,12 +322,13 @@ input.nextDisabled {
 		<div id="c4" class="innerContentWrap">
 
 			<span class="step4TEXT">제품 가격을 입력해주세요</span>
-			<input type="text" class="contentINPUT" name="price" />
+			<input type="hidden" id="contentPRICE_HIDDEN" name="price" value="" />
+			<input type="text" class="contentPRICE_INPUT" id="contentPRICE_INPUT" />
 			
 			<div class="step4_moveWrap">
-				<input type="button" value="뒤로" onclick="Animate2id('#c3'); return false" class="c2_cancel" />
+				<input type="button" value="뒤로" class="step4_prevBtn" onclick="Animate2id('#c3'); return false" class="c2_cancel" />
 				<!-- <p><a href="#" onClick="Animate2id('#c1'); return false">취소</a> -->
-				<input type="button" onclick="onWrite()" value="작성" />
+				<input type="button" id="total_submitINPUT" class="step4_nextBtn nextDisabled" onclick="onWrite()" value="작성" disabled="disabled" />
 			</div>
 		</div>
 		</form>
@@ -357,6 +408,12 @@ input.nextDisabled {
      fCreator: "createSEditor2"
  	});
 	
+	/* 콤마변환 */
+	function addComma(num) {
+		var regexp = /\B(?=(\d{3})+(?!\d))/g;
+		return num.toString().replace(regexp, ',');
+	}
+	
 	/* 사진업로드 타입 유효성검증 */
 	var validationType = function(fileName){
 		var type = fileName.substring(fileName.lastIndexOf('.')+1, fileName.length);
@@ -384,11 +441,16 @@ input.nextDisabled {
              oEditors.getById["txtContent"].exec("FOCUS"); //포커싱
              return false;
             
+        }else if(confirm("상품을 등록하시겠습니까?")){
+        	alert('ok!');
+        	var productForm = document.getElementById("productForm");  
+    		
+    		productForm.action ="/picksell/sell/sellProc";              
+    		productForm.submit();
+        }else{
+        	return false;
         }
-		var productForm = document.getElementById("productForm");  
 		
-		//productForm.action ="/picksell/sell/sellProc";              
-		//productForm.submit();
 	}
 	
 	//step2 다음버튼 유효성검증
@@ -401,6 +463,41 @@ input.nextDisabled {
 			$('#c2_button').addClass('nextDisabled');
 		}
 	}
+	
+	//setp3 다음버튼 유효성검증
+	$('#contentSUBJECT').blur(function(){
+		if(this.value == ''){
+			$('#step3_nextBtn').attr("disabled", "disabled");
+			$('#step3_nextBtn').addClass("nextDisabled");
+		}else if(this.value != ''){
+			$('#step3_nextBtn').removeAttr("disabled");
+			$('#step3_nextBtn').removeClass("nextDisabled");
+		}
+	/* 	if(this.value != '')
+			$('#step3_nextBtn').removeAttr("disabled");
+		else if(this.value == '')
+			$('#step3_nextBtn').addAttr("disabled", "disabled"); */
+	});
+	
+	 //step4 가격버튼 blur focus
+	$('#contentPRICE_INPUT').on({
+		focus : function(){
+			$(this).css('border-bottom', '1px solid #7151fc').val("");
+			$('#contentPRICE_HIDDEN').val("");
+		},
+		blur : function(){
+			$(this).css('border-bottom', '1px solid #d8d8d8');
+			var regExp = /^[0-9]+$/;
+			if(!regExp.test($(this).val())){
+				$(this).val("").focus();
+				$('#total_submitINPUT').addClass("nextDisabled").attr("disabled", "disabled");
+			}else{
+				$('#contentPRICE_HIDDEN').val($(this).val());
+				$(this).val(addComma($(this).val()+" 원"));
+				$('#total_submitINPUT').removeClass("nextDisabled").removeAttr("disabled");
+			}
+		}
+	}); 
 	
 	//step2 체인지테스트
 	$('#categorySELECT').change(function(){

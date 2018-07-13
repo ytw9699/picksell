@@ -11,20 +11,12 @@ ul{list-style: none;}
 a:link { color: black; text-decoration: none;} 
 a:visited { color: black; text-decoration: none;}
 a:hover { color: black; text-decoration: none;}
+.headerTop_menu, .headerTop_menu a {color: #666;font-size: 13px;}
 
-.headerTop_menu, .headerTop_menu a {
-    color: #666;
-    font-size: 13px;
-}
 /* 마이페이지 메뉴 */
-#mypage_menuBox {
-    position: absolute;
-    display: none;
-}
-#menuBox-header {
-    height: 32px;
-    width: 20px;
-}
+
+#mypage_menuBox {position: absolute;display: none;}
+#menuBox-header {height: 32px;width: 20px;}
 #menuBox-body {
     width: 120px;
     border: 1px solid #c2c2c2;
@@ -43,7 +35,7 @@ a:hover { color: black; text-decoration: none;}
 }
 
 /* 메인카테고리 메뉴 */
-#maincategory_menuBox{position:absolute; display:none;}
+#maincategory_menuBox{position:absolute; display:none; z-index: 1;}
 #maincategory-header{height: 32px;}
 #maincategory-body {
     width: 190px;
