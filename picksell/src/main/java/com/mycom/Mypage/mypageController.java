@@ -299,8 +299,9 @@ public class mypageController {
 		parameterMap.put("product_num",product_num);
 		parameterMap.put("sessionId",sessionId);
 		
+		System.out.println(1);
 		mypageService.alarmInsert(parameterMap);//알람 입력
-		
+		System.out.println(2);
 		return parameterMap;
 }
 	@RequestMapping("/mypage/alarmSelect")
