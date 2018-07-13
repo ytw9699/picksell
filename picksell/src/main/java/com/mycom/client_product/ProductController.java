@@ -294,6 +294,7 @@ public class ProductController {
 		//상품문의리스트
 		model.addAttribute("resultCommentList", resultCommentList);
 		
+		model.addAttribute("sessionId", currentID);
 		return "productDetail";
 	}
 	

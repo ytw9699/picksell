@@ -72,4 +72,8 @@ public class mypageService implements mypageDao {
 	public void minusStock(String PRODUCT_NUM) {
 		sqlMapper.update("mypage.minusStock", PRODUCT_NUM);
 	}
+
+	public void alarmInsert(Map<String, Object> parameterMap) {
+		sqlMapper.insert("mypage.alarmInsert",parameterMap);
+	}
 }

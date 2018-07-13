@@ -27,6 +27,9 @@ var allData = "PRODUCT_NUM="+PRODUCT_NUM;
 		document.getElementById('currentStock'+index).innerHTML = uppoint;
 		alert("재고가 1개 증가되었습니다");
 			}
+		/* error : function(){
+			alert("에러");
+		} */
 		});	
 }
 function minusStock(PRODUCT_NUM, index){

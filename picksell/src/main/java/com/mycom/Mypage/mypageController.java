@@ -273,12 +273,48 @@ public class mypageController {
 		
 		return "String";//ajax에서 json이 아니라 text여야함
 	}	
-	@ResponseBody
+	@ResponseBody//이렇게 선언하고
 	@RequestMapping(value="/mypage/minusStock", method=RequestMethod.GET)
 	public Map minusStock(HttpServletRequest Request) {//재고 1감소
 		String PRODUCT_NUM = Request.getParameter("PRODUCT_NUM");
 		mypageService.minusStock(PRODUCT_NUM);
 			Map<String, Object> parameterMap = new HashMap<String, Object>();
+		return parameterMap;//값을 이렇게 걍 아무거나 넘겨줘야 dataType : 'json',과 연관되서
+		//success : function(data) 안의 값이 실행됨
+}
+	@ResponseBody
+	@RequestMapping(value="/mypage/alarmInsert", method=RequestMethod.GET)
+	public Map alarmInsert(HttpServletRequest Request) {//재고 1감소
+		
+		Map<String, Object> parameterMap = new HashMap<String, Object>();
+		
+		String SELLER_ID = Request.getParameter("SELLER_ID");
+		String category_num = Request.getParameter("category_num");
+		String product_num = Request.getParameter("product_num");
+		String sessionId = Request.getParameter("sessionId");
+		
+		parameterMap.put("seller_id",SELLER_ID);
+		parameterMap.put("category_num",category_num);
+		parameterMap.put("product_num",product_num);
+		parameterMap.put("sessionId",sessionId);
+		System.out.println(1);
+		mypageService.alarmInsert(parameterMap);//알람 입력
+		System.out.println(2);
 		return parameterMap;
 }
+	@RequestMapping(value="/mypage/modify",method=RequestMethod.GET)
+	public String alarmSelect(HttpSession session, Model model, HttpServletRequest request) {	
+		
+		String sessionId =(String)session.getAttribute("sessionId");
+		
+		resultMap = mypageService.userInfo(sessionId);//세션아이디에 해당하는 회원정보 한줄가져옴
+		
+		model.addAttribute("resultMap", resultMap);
+		
+		String Updated =  request.getParameter("updated");
+		if(Updated != null) {
+			model.addAttribute("Updated", "Updated");
+		}
+		return "modify";
+	}
 }
