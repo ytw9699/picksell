@@ -191,12 +191,14 @@ select * from ps_product a, PS_ORDERLIST b where b.ORDER_NUM = #{order_num} and 
 <select id="userCheck" parameterType="String" resultType="String">
 			SELECT password FROM PS_MEMBER WHERE ID = #{ID}
 </select>
-
-<update id="stock" parameterType="String">
+<!-- 재고 1 증가 -->
+<update id="pulsStock" parameterType="String">
 		update PS_PRODUCT set stock = stock+1 where PRODUCT_NUM = #{PRODUCT_NUM}
 </update>
-
-
+<!-- 재고 1 감소 -->
+<update id="minusStock" parameterType="String">
+		update PS_PRODUCT set stock = stock-1 where PRODUCT_NUM = #{PRODUCT_NUM}
+</update>
 
 
 </mapper>
