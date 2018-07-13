@@ -32,9 +32,11 @@ function alarmRead(ALARM_NUM){
 <c:if test="${fn:length(alarmList) > 0}" >
 	<c:forEach var="alarmMap" items="${alarmList}" varStatus="Index">
 		<c:if test="${alarmMap.ALARM_KIND == '3'}">
-			<a href="/picksell/products/detail/${alarmMap.ALARM_CATEGORY_NUM}/${alarmMap.ALARM_BOARD_NUM}?ALARM_NUM=${alarmMap.ALARM_NUM}">
+			<td>
+			<a href="/picksell/products/detail/${alarmMap.ALARM_VARIABLE1}/${alarmMap.ALARM_VARIABLE2}?ALARM_NUM=${alarmMap.ALARM_NUM}">
 			${Index.index+1}.  ${alarmMap.ALARM_WRITER}님께서 구매신청을 하셨습니다.
 			</a>
+			</td>
 		<%-- <c:if test="${alarmMap.ALARM_CHECK == 'YES'}">
 		읽음
 		</c:if>
@@ -42,6 +44,8 @@ function alarmRead(ALARM_NUM){
 		안읽음
 		</c:if> --%>
 		</c:if>
+		<td>${alarmMap.ALARM_REGDATE}</td>
+		<br>
 	</c:forEach>
 </c:if>
 
