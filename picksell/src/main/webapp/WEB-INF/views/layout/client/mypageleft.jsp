@@ -18,6 +18,6 @@
 <p><a href="/picksell/mypage/saleList">판매 내역/배송 조회</a></p>
 <p><a href="/picksell/mypage/orderList">주문 내역/배송 조회</a></p>
 <p><a href="/picksell/mypage/memberCheck">최근 본 상품</a></p>
-<p><a href="/picksell/mypage/memberCheck" onclick="alert('개발중');">알림 내용 및 설정</a></p>
+<p><a href="/picksell/mypage/alarmSelect">알림 내용 및 설정</a></p>
 </body>
 </html>

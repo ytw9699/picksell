@@ -199,6 +199,26 @@ select * from ps_product a, PS_ORDERLIST b where b.ORDER_NUM = #{order_num} and 
 <update id="minusStock" parameterType="String">
 		update PS_PRODUCT set stock = stock-1 where PRODUCT_NUM = #{PRODUCT_NUM}
 </update>
-
+<!-- 알람입력 -->
+<insert id="alarmInsert" parameterType="hashmap">
+		insert into PS_ALARM(ALARM_NUM,
+							ALARM_TARGET,
+							ALARM_WRITER,
+							ALARM_BOARD_NUM,
+							ALARM_CATEGORY_NUM,
+							ALARM_KIND,
+							ALARM_REGDATE
+							) values(ALARM_SEQ.NEXTVAL,
+									#{seller_id},
+									#{sessionId},
+									#{product_num},
+									#{category_num},
+									'3',
+									sysdate)
+</insert>
+<!-- 알람가져오기 -->
+<select id="alarmSelect" parameterType="String" resultType="hashmap">
+			select * from ps_alarm WHERE ALARM_TARGET = #{sessionId} order by ALARM_REGDATE desc
+</select>
 
 </mapper>

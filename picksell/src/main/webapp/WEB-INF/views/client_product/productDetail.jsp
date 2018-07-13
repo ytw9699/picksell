@@ -237,15 +237,27 @@ span.deliveryTEXT {
 <body>
 
 <script>
-	
+	//알람입력
+	function alarmInsert(SELLER_ID, category_num, product_num, sessionId){
+	var allData = "SELLER_ID="+SELLER_ID+"&category_num="+category_num+"&product_num="+product_num+"&sessionId="+sessionId;
+			$.ajax({
+				type : "GET",
+				url : "/picksell/mypage/alarmInsert",
+				dataType : 'json',
+				data : allData,
+				success : function(data){
+				}
+			});	
+	}
 	//구매요청
-	function purchaseApply(){
+	function purchaseApply(SELLER_ID, category_num, product_num, sessionId){
 		fetch('/picksell/products/purchseRequest/${product_num}/${sessionScope.sessionId}').then(function(response){
 			response.text().then(function(text){
 				if(response.status == '200'){
 					alert('구매신청이 완료되었습니다! \n판매자의 수락까지 기다려주세요');
 					var inner = "<input type='button' value='구매신청 취소하기' onclick='purchaseCancel()' />";
-					document.getElementById('purchaseWrap').innerHTML = inner;		
+					document.getElementById('purchaseWrap').innerHTML = inner;	
+					alarmInsert(SELLER_ID, category_num, product_num, sessionId);
 				}
 			})
 		})
@@ -440,7 +452,7 @@ span.deliveryTEXT {
 				<c:choose>
 					<c:when test="${resultObject.DEAL_STATUS == 0 and resultObject.HOWTOSELL != 2 and alreadyPurchase == false and isMyProducts == 'no' }">
 						<div class="purchaseWrap" id="purchaseWrap">
-						<input type="button" class="purchase_apply" value="구매신청하기" onclick="purchaseApply();" />
+						<input type="button" class="purchase_apply" value="구매신청하기" onclick="purchaseApply('${resultObject.SELLER_ID}','${category_num}','${product_num}','${sessionId}');" />
 						</div>
 					</c:when>
 					<c:when test="${isApprovedPC == 'yes' and alreadyPurchase == true }">
