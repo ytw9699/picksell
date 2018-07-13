@@ -263,8 +263,10 @@ li.mainCategoryLI:hover {
 	</c:if> 
 	|<a href="/picksell/cart" class="menu_el">장바구니</a>
 	<span class="myBasketSum" id="myBasketSum">0</span>
+	<c:if test="${sessionId != null}">
 	|<a href="#" class="menu_el">알림
 	<span class="myAlarm" id="myAlarm">0</span></a>
+	</c:if> 
 	<c:if test="${sessionKind == '99'}">
 	|<a href="/picksell/admin/main" class="menu_el">관리자</a>
 	</c:if> 
