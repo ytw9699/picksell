@@ -204,8 +204,8 @@ select * from ps_product a, PS_ORDERLIST b where b.ORDER_NUM = #{order_num} and 
 		insert into PS_ALARM(ALARM_NUM,
 							ALARM_TARGET,
 							ALARM_WRITER,
-							ALARM_BOARD_NUM,
-							ALARM_CATEGORY_NUM,
+							ALARM_VARIABLE1,
+							ALARM_VARIABLE2,
 							ALARM_KIND,
 							ALARM_REGDATE
 							) values(ALARM_SEQ.NEXTVAL,
@@ -215,6 +215,7 @@ select * from ps_product a, PS_ORDERLIST b where b.ORDER_NUM = #{order_num} and 
 									#{category_num},
 									'3',
 									sysdate)
+									
 </insert>
 <!-- 알람가져오기 -->
 <select id="alarmSelect" parameterType="String" resultType="hashmap">

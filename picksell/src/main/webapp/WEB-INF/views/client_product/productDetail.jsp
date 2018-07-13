@@ -239,7 +239,10 @@ span.deliveryTEXT {
 <script>
 	//알람입력
 	function alarmInsert(SELLER_ID, category_num, product_num, sessionId){
-	var allData = "SELLER_ID="+SELLER_ID+"&category_num="+category_num+"&product_num="+product_num+"&sessionId="+sessionId;
+		alert(1);
+		alert(category_num);
+		alert(product_num);
+	var allData = "seller_id="+SELLER_ID+"&category_num="+category_num+"&product_num="+product_num+"&sessionId="+sessionId;
 			$.ajax({
 				type : "GET",
 				url : "/picksell/mypage/alarmInsert",
@@ -258,6 +261,8 @@ span.deliveryTEXT {
 					var inner = "<input type='button' value='구매신청 취소하기' onclick='purchaseCancel()' />";
 					document.getElementById('purchaseWrap').innerHTML = inner;	
 					alarmInsert(SELLER_ID, category_num, product_num, sessionId);
+					alert(category_num);
+					alert(product_num);
 				}
 			})
 		})
