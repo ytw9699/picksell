@@ -266,9 +266,16 @@ public class mypageController {
 		return "saleDetail";
 	}
 	@ResponseBody
-	@RequestMapping(value="/mypage/stock", method=RequestMethod.GET)
-	public void stock(Model model, HttpServletRequest Request) {
+	@RequestMapping(value="/mypage/pulsStock", method=RequestMethod.GET)
+	public void pulsStock(HttpServletRequest Request) {//재고 1 증가
 		String PRODUCT_NUM = Request.getParameter("PRODUCT_NUM");
-		mypageService.stock(PRODUCT_NUM);
+		mypageService.pulsStock(PRODUCT_NUM);
 	}	
+	
+	@ResponseBody
+	@RequestMapping(value="/mypage/minusStock", method=RequestMethod.GET)
+	public void minusStock(HttpServletRequest Request) {//재고 1감소
+		String PRODUCT_NUM = Request.getParameter("PRODUCT_NUM");
+		mypageService.minusStock(PRODUCT_NUM);
+	}
 }

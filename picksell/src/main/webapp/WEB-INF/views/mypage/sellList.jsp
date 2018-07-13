@@ -5,27 +5,43 @@
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
      <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-     <!-- 수정 -->
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>판매내역</title>
+<title>판매글 관리</title>
 <style>
 </style>
 </head>
 <body>
 <script>
-function stock(PRODUCT_NUM){
+
+function pulsStock(PRODUCT_NUM , index){
 var allData = "PRODUCT_NUM="+PRODUCT_NUM;
 		$.ajax({
 			type : "GET",
-			url : "/picksell/mypage/stock",
+			url : "/picksell/mypage/pulsStock",
 			dataType : 'json',
 			data : allData,
 			success : function(data){
-				alert("재고가 증가되었습니다");
 			}
 		});	
+		var uppoint = Number(document.getElementById('currentStock'+index).innerHTML) + 1;
+		document.getElementById('currentStock'+index).innerHTML = uppoint;
+		alert("재고가 1개 증가되었습니다");
+}
+function minusStock(PRODUCT_NUM, index){
+	var allData = "PRODUCT_NUM="+PRODUCT_NUM;
+			$.ajax({
+				type : "GET",
+				url : "/picksell/mypage/minusStock",
+				dataType : 'json',
+				data : allData,
+				success : function(data){
+				}
+			});	
+			var uppoint = Number(document.getElementById('currentStock'+index).innerHTML) - 1;
+			document.getElementById('currentStock'+index).innerHTML = uppoint;
+			alert("재고가 1개 감소되었습니다");
 }
 </script>
 <h4>
@@ -51,11 +67,10 @@ var allData = "PRODUCT_NUM="+PRODUCT_NUM;
 		<td>작성일</td>
 		<td>판매상태</td>
 		<td>조회수</td>
-		<td>재고</td>
-		<td>수량</td>
+		<td>재고수량</td>
 	</tr>
 
-<c:forEach var="list" items="${sellList}">
+<c:forEach var="list" items="${sellList}" varStatus="Index">
 	<tr>
 		<td>
 		<c:if test="${list.HOWTOSELL == '0'}">
@@ -87,20 +102,20 @@ var allData = "PRODUCT_NUM="+PRODUCT_NUM;
 		<td>판매완료 상품</td>
 		</c:if>
 		<td>${list.HITCOUNT }</td>
-		<td>${list.STOCK }</td> 
-		<td><span>수량 </span>
-							<input type="button" value="-" id="subBtn" onclick="location.href ='/picksell/mypage/stock/${list.PRODUCT_NUM}'"/>
-		    <span id="currentOrderView">${list.STOCK }</span>
-		    				<input type="button" value="+" id="addBtn" onclick="stock('${list.PRODUCT_NUM}')" /></td>
+	<td>
+	<input type="button" id="minusStock" value="-" onclick="minusStock(${list.PRODUCT_NUM},${Index.index})" />
+	    <span id="currentStock${Index.index}">${list.STOCK }</span>
+	<input type="button" id="pulsStock" value="+" onclick="pulsStock(${list.PRODUCT_NUM},${Index.index})" />
+	</td>
 	</tr>
 </c:forEach>
 </c:if>
-<c:if test="${fn:length(sellList) < 1}">
-<p>세션 아이디에 해당하는 판매 상품이 없습니다</p>
-</c:if>
+	<c:if test="${fn:length(sellList) < 1}">
+	<p>세션 아이디에 해당하는 판매 상품이 없습니다</p>
+	</c:if>
 </table>
-<div class="paging">
-			${pagingHtml} 페이지
-</div>
+	<div class="paging">
+	 ${pagingHtml} 페이지
+	</div>
 </body>
 </html>
