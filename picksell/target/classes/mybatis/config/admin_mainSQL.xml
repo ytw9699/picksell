@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC " - //mybatis.org//DTD Config 3.0//EN"
+      " http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="admin_Main">  
+  <select id="today" resultType="hashmap" parameterType="string">
+   select count(*) as COUNT from ps_member where to_char(regdate,'mmdd') = #{day} 
+  </select>
+  
+ 
+ </mapper>

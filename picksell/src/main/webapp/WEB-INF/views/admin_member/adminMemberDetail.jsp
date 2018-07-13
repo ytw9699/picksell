@@ -19,6 +19,7 @@
 hr{
  border: none;
  border : 1px solid grey;
+
  
 }
 button{
@@ -69,10 +70,16 @@ button:hover:before,button:hover:after{
 }
 .pimg{
 	display: none;
-
 	
 }
+.link{
 
+  
+}
+.link button{
+  
+   
+}
 </style>
 <script src="http://code.jquery.com/jquery-1.7.js"></script>
 <script>
@@ -97,10 +104,13 @@ $(document).ready(function(){
 </head>
 <body>
 <div class="main">
+<div class="pageSubject">
+ <h1>Member Page</h1>
+</div>
 <div class="memberInfo">
 아이디 : ${map.ID }
 <div class="pimg">
-<img src="/picksell/resources/img/main_logo.png" style="width: 200px;" />
+	<img src="/picksell/resources/img/main_logo.png" style="width: 200px;" />
 </div>
 <button class="profile_img">프로필 이미지</button>
 
@@ -123,6 +133,7 @@ $(document).ready(function(){
  로그인 제한
 </c:when>
 </c:choose>
+
 <div class="hiddenPage"> 
 
 	<c:choose>
@@ -146,39 +157,42 @@ $(document).ready(function(){
 
 
 알람 동의 여부 : ${map.ALARM_CONSENT }
-<hr>
 
+<hr>
 가입 일자 : <fmt:formatDate value="${map.REGDATE }" pattern="yyyy-MM-dd"/>
 <hr>
 권한 : <c:choose>
 	 <c:when test="${ '99' eq map.KIND}">
-	관리자
+	관리자  <img src="/picksell/resources/img/admin.png" width="20px" height="20px"/> 
 	 </c:when>
 	 <c:when test="${ '0' eq map.KIND }" >
-	개인회원
+	개인회원  <img src="/picksell/resources/img/personal.png"  width="20px" height="20px"/> 
 	 </c:when>
 	 <c:when test="${ '1' eq map.KIND }" >
-	사업자 회원
+	사업자 회원 <img src="/picksell/resources/img/business-icon.png" width="20px" height="20px"/>
 	</c:when>
 	</c:choose>
 <hr>
-
-<a href="/picksell/admin/member/orderList/${map.ID}">
+<div class="link">
+<button onclick="window.location='/picksell/admin/member/orderList/${map.ID}'">
 회원 주문 내역 리스트
-</a>
-<hr>
+</button>
+</div>
 
-<a href="/picksell/admin/member/sellHistory/${map.ID}">
-회원 판매 내역 리스트</a>
-<hr>
+<div class="link">
+<button onclick="window.location='/picksell/admin/member/sellHistory/${map.ID}'">
+회원 판매 내역 리스트</button>
+</div>
 
-<a href="/picksell/admin/member/purchaseHistory/${map.ID}">
-회원 구매 내역 리스트</a>
-<hr>
+<div class="link">
+<button onclick="window.location='/picksell/admin/member/purchaseHistory/${map.ID}'">
+회원 구매 내역 리스트</button>
+</div>
 
-<a href="/picksell/admin/member/products/${map.ID}">
-회원 판매 글 리스트</a>
-<hr>
+<div class="link">
+<button onclick="window.location='/picksell/admin/member/products/${map.ID}'">
+회원 판매 글 리스트</button>
+</div>
 </div>
 </div>
 

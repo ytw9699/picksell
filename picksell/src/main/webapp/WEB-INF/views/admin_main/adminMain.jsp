@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page import="java.text.SimpleDateFormat"%>
 <%@ page import="java.util.*,java.sql.*" %>
 <%@ page import="com.google.gson.Gson"%>
 <%@ page import="com.google.gson.JsonObject"%>
@@ -44,8 +45,36 @@ catch(SQLException e){
 
 </style>
 <head>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.3.0/Chart.bundle.js"></script>
 <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+<script type="text/javascript">
+google.charts.load('current', {'packages':['corechart']});
+google.charts.setOnLoadCallback(drawChart);
+function drawChart() {
+    var data = google.visualization.arrayToDataTable([
+      ['일자', 'Member'],
+      ['일주일전', 20 , ],
+      ['${daylist[6]}',  15, ],
+      ['${daylist[5]}',  20, ],
+      ['${daylist[4]}',  15, ],
+      ['${daylist[3]}',  17, ],
+      ['${daylist[2]}',  18, ],
+      ['${daylist[1]}',  19,  ],
+      [  '오늘' ,  20, ]
+    ]);
+
+    var options = {
+      title: '회원 가입 추이',
+      hAxis: {title: 'Day',  titleTextStyle: {color: '#333'}},
+      vAxis: {minValue: 0 , maxValue: 30}
+    };
+
+    var chart = new google.visualization.AreaChart(document.getElementById('chart_div'));
+    chart.draw(data, options);
+  }
+
+</script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 
@@ -53,7 +82,24 @@ catch(SQLException e){
 <body>
 <div class="main">
 <h1>메인가즈아~!</h1>
+<jsp:useBean id="toDay" class="java.util.Date" />
+지금은  <fmt:formatDate value="${toDay }" pattern="YYYY년 MM월 dd일"/>입니다.
 
+${daylist[0]}
+${daylist[1]}
+${daylist[2]}
+${daylist[3]}
+${daylist[4]}
+${daylist[5]}
+${daylist[6]}
+${daylist[7]}
+
+${countlist[0]}
+<div>
+
+ <div id="chart_div" style="width: 100%; height: 500px;"></div>
+
+</div>
 <div id="chartContainer" style="height: 370px; width: 100%;"></div>
 
 <br/><br/><br/><br/><br/>
