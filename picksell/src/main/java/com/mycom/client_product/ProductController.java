@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartRequest;
 
+import com.mycom.Mypage.mypageService;
 import com.mycom.client_basket.BasketService;
 import com.mycom.config.CommandMap;
 
@@ -206,10 +207,11 @@ public class ProductController {
 	}
 	
 	//상품 상세보기
-	@RequestMapping("/products/detail/{category_num}/{product_num}")
+	@RequestMapping("/products/detail/{category_num}/{product_num}/{ALARM_NUM}")
 	public String productsDetail(
 			@PathVariable("product_num") int product_num,
 			@PathVariable("category_num") int category_num,
+			@PathVariable("ALARM_NUM") int ALARM_NUM,
 			//@PathVariable("currentPage") int currentPage,
 			Model model,
 			HttpServletRequest request) {
@@ -284,6 +286,7 @@ public class ProductController {
 				}
 			}
 		}
+		productService.alarmRead(ALARM_NUM);//알람읽기
 		
 		//카테고리번호&상품글번호
 		model.addAttribute("category_num", category_num);

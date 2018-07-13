@@ -14,11 +14,34 @@
 <h2>알람 읽기</h2>
 </head>
 <body>
-<c:if test="${fn:length(alarmList) > 0}">
-	<c:forEach var="alarmMap" items="${alarmList}">
-			<a href="/picksell/products/detail/${alarmMap.ALARM_CATEGORY_NUM}/${alarmMap.ALARM_BOARD_NUM}">
-			새로운 알람
+<script>
+function alarmRead(ALARM_NUM){
+	var allData = "ALARM_NUM="+ALARM_NUM;
+			$.ajax({
+				type : "GET",
+				url : "/picksell/mypage/alarmRead",
+				dataType : 'json',
+				data : allData,
+				success : function(data){
+				
+				alert("알람을 읽었습니다");
+				}
+			});	
+}
+</script>
+<c:if test="${fn:length(alarmList) > 0}" >
+	<c:forEach var="alarmMap" items="${alarmList}" varStatus="Index">
+		<c:if test="${alarmMap.ALARM_KIND == '3'}">
+			<a href="/picksell/products/detail/${alarmMap.ALARM_CATEGORY_NUM}/${alarmMap.ALARM_BOARD_NUM}/${alarmMap.ALARM_NUM}">
+			${Index.index+1}.  ${alarmMap.ALARM_WRITER}님께서 구매신청을 하셨습니다.
 			</a>
+		<%-- <c:if test="${alarmMap.ALARM_CHECK == 'YES'}">
+		읽음
+		</c:if>
+		<c:if test="${alarmMap.ALARM_CHECK == 'NO'}">
+		안읽음
+		</c:if> --%>
+		</c:if>
 	</c:forEach>
 </c:if>
 

@@ -282,18 +282,19 @@ public class mypageController {
 		return parameterMap;//값을 이렇게 걍 아무거나 넘겨줘야 dataType : 'json',과 연관되서
 		//success : function(data) 안의 값이 실행됨
 }
+	
 	@ResponseBody
 	@RequestMapping(value="/mypage/alarmInsert", method=RequestMethod.GET)
-	public Map alarmInsert(HttpServletRequest Request) {//재고 1감소
+	public Map alarmInsert(
+			@RequestParam(value="seller_id") String seller_id,
+			@RequestParam(value="category_num") String category_num,
+			@RequestParam(value="product_num") String product_num,
+			@RequestParam(value="sessionId") String sessionId
+			) {
 		
 		Map<String, Object> parameterMap = new HashMap<String, Object>();
 		
-		String SELLER_ID = Request.getParameter("SELLER_ID");
-		String category_num = Request.getParameter("category_num");
-		String product_num = Request.getParameter("product_num");
-		String sessionId = Request.getParameter("sessionId");
-		
-		parameterMap.put("seller_id",SELLER_ID);
+		parameterMap.put("seller_id",seller_id);
 		parameterMap.put("category_num",category_num);
 		parameterMap.put("product_num",product_num);
 		parameterMap.put("sessionId",sessionId);
@@ -302,8 +303,8 @@ public class mypageController {
 		
 		return parameterMap;
 }
-	@RequestMapping(value="/mypage/alarmSelect", method=RequestMethod.GET)
-	public String alarmSelect(HttpSession session, Model model) {	
+	@RequestMapping("/mypage/alarmSelect")
+	public String alarmSelect(HttpSession session, Model model) {//알람 리스트
 		
 		String sessionId =(String)session.getAttribute("sessionId");
 		
