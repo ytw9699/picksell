@@ -123,7 +123,7 @@ public class ProductController {
 		
 		productService.insertProduct(map.getMap());
 		
-		return "resultJsp";
+		return "redirect:/main";
 	}
 	
 	//일반상품(일반판매) 리스트

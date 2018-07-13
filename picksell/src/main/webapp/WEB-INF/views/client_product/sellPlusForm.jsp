@@ -303,14 +303,7 @@ input.nextDisabled {
 			<span class="step2TEXT">제품의 재고를 입력해주세요</span>
 			<input type="hidden" id="contentSTOCK_HIDDEN" name="stock" value="" />
 			<input type="text" class="contentSTOCK_INPUT" id="contentSTOCK_INPUT" />
-			<!-- <input type="hidden" name="product_status" id="hid_status" value="" />
-			
-			<div class="step2_radioBtnWrap">
-				<input type="button" value="미사용" class="status_check_btn" onclick="selectStatus('0',this);" />
-				<input type="button" value="사용" class="status_check_btn" onclick="selectStatus('1',this);" />
-			</div> -->
-			
-			
+			<input type="hidden" name="product_status" id="hid_status" value="0" />
 			
 			<div class="step2_moveWrap">
 				<input type="button" class="step2_prevBtn" value="뒤로" onclick="Animate2id('#c1'); return false" class="c2_cancel" />
@@ -457,7 +450,6 @@ input.nextDisabled {
              return false;
             
         }else if(confirm("상품을 등록하시겠습니까?")){
-        	alert('ok!');
         	var productForm = document.getElementById("productForm");  
     		
     		productForm.action ="/picksell/sell/sellProc";              
@@ -492,7 +484,7 @@ input.nextDisabled {
 				$(this).val("").focus();
 			}else{
 				$('#contentSTOCK_HIDDEN').val($(this).val());
-				$(this).val(addComma($(this).val()+" 개"));
+				$(this).val(addComma($(this).val()+" 개 "));
 				step2_validation();
 			}
 		}

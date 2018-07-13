@@ -463,7 +463,7 @@ span.deliveryTEXT {
 			
 			<!-- 구매하기 + 구매수락일때를 생각해야함 -->
 			<c:choose>
-				<c:when test="${resultObject.HOWTOSELL == 2 }">
+				<c:when test="${resultObject.HOWTOSELL == 2 and isMyProducts != 'yes' }">
 					<input type="submit" class="purchase_go" value="구매하기" />
 				</c:when>
 			</c:choose>
