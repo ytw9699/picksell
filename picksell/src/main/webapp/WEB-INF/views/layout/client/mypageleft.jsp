@@ -14,9 +14,10 @@
 <p>마이페이지</p>
 <p><a href="/picksell/mypage/memberCheck">회원정보 확인/수정</a></p>
 <p><a href="/picksell/mypage/purchaseList/0">일반구매 신청 리스트</a></p>
-<p><a href="/picksell/mypage/sellList">판매글 관리</a></p>
+<p><a href="/picksell/mypage/sellList">판매글 조회</a></p>
 <p><a href="/picksell/mypage/saleList">판매 내역/배송 조회</a></p>
 <p><a href="/picksell/mypage/orderList">주문 내역/배송 조회</a></p>
-<p><a href="/picksell/mypage/memberCheck" onclick="alert('개발중');">알림 설정</a></p>
+<p><a href="/picksell/mypage/memberCheck">최근 본 상품</a></p>
+<p><a href="/picksell/mypage/memberCheck" onclick="alert('개발중');">알림 내용 및 설정</a></p>
 </body>
 </html>

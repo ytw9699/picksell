@@ -60,7 +60,9 @@ else if(NewPassword !== rePassword){//
 	상호명<input type="text" value="${resultMap.BUSINESS_NAME}" name="business_name" />
 	<br/>
 	</c:if>
-	가입일 <fmt:formatDate value="${resultMap.REGDATE}" pattern="yyyy년 MM월 dd일 hh:mm:ss" />
+	가입일: <fmt:formatDate value="${resultMap.REGDATE}" pattern="yyyy년 MM월 dd일 hh:mm:ss" />
+	<br/>
+	최근 로그인:
 	<br/>
 	계정상태: 
 	<c:if test="${resultMap.STATUS == '0'}">
@@ -73,8 +75,10 @@ else if(NewPassword !== rePassword){//
 	로그인 제한
 	</c:if>
 	<br/>
-	<input type="submit" value="변경하기"/>
+	<input type="submit" value="정보 수정하기"/>
+	<br/>
 </form>
+ <input type="button" value="탈퇴하기"/>
 </div>
 <c:if test="${Updated == 'Updated'}">
 <script>

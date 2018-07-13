@@ -189,7 +189,16 @@ li.mainCategoryLI:hover {
     float: right;
     margin-right: 10px;
 }
-
+#myAlarm { 
+    background-color: #e80935;
+    color: white;
+    border-radius: 30px;
+    width: 23px;
+    height: 23px;
+    line-height: 21px;
+    display: inline-block;
+    text-align: center;
+}
 
 
 
@@ -254,6 +263,8 @@ li.mainCategoryLI:hover {
 	</c:if> 
 	|<a href="/picksell/cart" class="menu_el">장바구니</a>
 	<span class="myBasketSum" id="myBasketSum">0</span>
+	|<a href="#" class="menu_el">알림
+	<span class="myAlarm" id="myAlarm">0</span></a>
 	<c:if test="${sessionKind == '99'}">
 	|<a href="/picksell/admin/main" class="menu_el">관리자</a>
 	</c:if> 
@@ -293,10 +304,11 @@ li.mainCategoryLI:hover {
 	<div id="menuBox-body">
 		<span class="menuBox-link"><a href="/picksell/mypage/memberCheck">개인정보확인/수정</a></span>
 		<span class="menuBox-link"><a href="/picksell/mypage/purchaseList/0">일반구매 신청리스트</a></span>
-		<span class="menuBox-link"><a href="/picksell/mypage/sellList">판매글 관리</a></span>
+		<span class="menuBox-link"><a href="/picksell/mypage/sellList">판매글 조회</a></span>
 		<span class="menuBox-link"><a href="/picksell/mypage/saleList">판매 내역/배송 조회</a></span>
 		<span class="menuBox-link"><a href="/picksell/mypage/orderList">주문 내역/배송 조회</a></span>
-		<span class="menuBox-link"><a href="#">알림설정</a></span>
+		<span class="menuBox-link"><a href="#">최근 본 상품</a></span>
+		<span class="menuBox-link"><a href="#">알림 내용 및 설정</a></span>
 	</div>
 </div>
 
