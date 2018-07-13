@@ -42,9 +42,10 @@ border: 0; left: 140px; top: 292px;}
 #c3{width:1200px; height:100%; float:left; background-color: white; padding-right: 20%;}
 #c4{width:1200px; height:100%; float:left; background-color: white; padding-right: 20%;}
 .contentDiv {
-    width: 80%;
+    width: 100%;
+    margin: 0 auto;
+    margin-top: 40px;
 }
-
 span.step1TEXT {
     display: block;
     font-size: 25px;
@@ -52,19 +53,16 @@ span.step1TEXT {
     margin-top: 20px;
     color: #7151fc;
 }
-
 img#mainPic {
     width: 100%;
     max-height: 360px;
 }
-
 .mainImg {
     width: 30%;
     margin: 0 auto;
     min-height: 300px;
     max-height: 300px;
 }
-
 /* 버튼업 */
 input.nextBtn {
     display: block;
@@ -77,14 +75,11 @@ input.nextBtn {
     padding: 15px;
     font-size: 15px;
 }
-input.nextDisabled {
-    background-color: #999;
-}
 span.step2TEXT {
     display: block;
     font-size: 25px;
     text-align: center;
-    margin-top: 20px;
+    margin-top: 70px;
     color: #7151fc;
 }
 select#categorySELECT {
@@ -104,7 +99,6 @@ select#categorySELECT {
     margin: 0 auto;
     margin-top: 30px;
 }
-
 input.status_check_btn {
     width: 48%;
     outline: none;
@@ -120,6 +114,88 @@ input.status_checked_btn{
     border: 1px solid #7151fc;
     color: #7151fc;
 }
+.step2_moveWrap {
+    width: 50%;
+    margin: 0 auto;
+    margin-top: 150px;
+}
+input.step2_prevBtn {
+    display: inline-block;
+    width: 48%;
+    margin: 0 auto;
+    /* margin-top: 23px; */
+    border: 1px solid #7151fc;
+    color: #7151fc;
+    background-color: white;
+    padding: 15px;
+    font-size: 15px;
+}
+
+input.step2_nextBtn {
+    display: inline-block;
+    width: 48%;
+    margin: 0 auto;
+    /* margin-top: 23px; */
+    margin-left: 5px;
+    border: none;
+    color: white;
+    background-color: #7151fc;
+    padding: 15px;
+    font-size: 15px;
+}
+/* step3 */
+span.step3TEXT {
+    display: block;
+    font-size: 25px;
+    text-align: center;
+    margin-top: 70px;
+    color: #7151fc;
+}
+input.contentINPUT {
+    border: 1px solid #d8d8d8;
+    display: block;
+    width: 50%;
+    margin: 0 auto;
+    margin-top: 20px;
+    padding: 15px;
+    padding-left: 30px;
+    font-size: 15px;
+}
+.step3_moveWrap {
+    width: 50%;
+    margin: 0 auto;
+    margin-top: 60px;
+}
+
+input.step3_nextBtn {
+    display: inline-block;
+    width: 48%;
+    margin: 0 auto;
+    /* margin-top: 23px; */
+    margin-left: 5px;
+    border: none;
+    color: white;
+    background-color: #7151fc;
+    padding: 15px;
+    font-size: 15px;
+}
+
+input.step3_prevBtn {
+    display: inline-block;
+    width: 48%;
+    margin: 0 auto;
+    /* margin-top: 23px; */
+    border: 1px solid #7151fc;
+    color: #7151fc;
+    background-color: white;
+    padding: 15px;
+    font-size: 15px;
+}
+/* 버튼disabled */
+input.nextDisabled {
+    background-color: #999;
+}
+
 </style>
 </head>
 <body>
@@ -172,10 +248,8 @@ input.status_checked_btn{
 			</div>
 			
 			<div class="step2_moveWrap">
-				<!-- <p><a href="#" onclick="Animate2id('#c3','easeInOutExpo'); return false" >아이디 찾기</a> -->
-				<input type="button" value="다음" onclick="Animate2id('#c3','easeInOutExpo'); return false" class="c2_button" />
-				<!-- <p><a href="#" onClick="Animate2id('#c1'); return false" >취소</a> -->
-				<input type="button" value="뒤로" onclick="Animate2id('#c1'); return false" class="c2_cancel" />
+				<input type="button" class="step2_prevBtn" value="뒤로" onclick="Animate2id('#c1'); return false" class="c2_cancel" />
+				<input type="button" class="step2_nextBtn nextDisabled" value="다음" onclick="Animate2id('#c3','easeInOutExpo'); return false" id="c2_button" class="c2_button" disabled="disabled" />	
 			</div>
 		</div>
 		
@@ -189,9 +263,8 @@ input.status_checked_btn{
 			</div>
 			
 			<div class="step3_moveWrap">
-				<input type="button" value="다음" onclick="Animate2id('#c4','easeInOutExpo'); return false" class="c2_button" />
-				<!-- <p><a href="#" onClick="Animate2id('#c1'); return false" >취소</a> -->
-				<input type="button" value="뒤로" onclick="Animate2id('#c2'); return false" class="c2_cancel" />
+				<input type="button" value="뒤로" class="step3_prevBtn" onclick="Animate2id('#c2'); return false" class="c2_cancel" />
+				<input type="button" value="다음" class="step3_nextBtn nextDisabled" onclick="Animate2id('#c4','easeInOutExpo'); return false" class="c2_button" />
 			</div>
 		</div>
 		
@@ -218,7 +291,7 @@ input.status_checked_btn{
 		var paddingValue = document.body.offsetWidth / 100 * 20;
 		$('.innerContentWrap').css('width', currentWindowWidth);
 		$('.innerContentWrap').css('padding-right', paddingValue);
-		//$('#c1').css('width', currentWindowWidth);
+		//$('#c1').css('width', currentWindowWidth);id를 이용한 연속css수정은 한번밖에 안되는부분이있음
 		//$('#c2').css('width', currentWindowWidth);
 		//$('#c3').css('width', currentWindowWidth);
 		//$('#c4').css('width', currentWindowWidth);
@@ -300,11 +373,42 @@ input.status_checked_btn{
 	
 	var onWrite = function(){
 		oEditors.getById["txtContent"].exec("UPDATE_CONTENTS_FIELD", []); // 에디터의 내용이 textarea에 적용됨
+		/* alert("밸류값"+document.getElementById('txtContent').value);
+		alert("이너html"+document.getElementById('txtContent').innerHTML);
+		alert("이너text"+document.getElementById('txtContent').innerTEXT); */
+		var sm_contentValue = $("#txtContent").val();
+
+        if( sm_contentValue == ""  || sm_contentValue == null || sm_contentValue == '&nbsp;' || sm_contentValue == '<p>&nbsp;</p>')  {
+             alert("상품의 상세내용을 입력하세요");
+             Animate2id('#c3');
+             oEditors.getById["txtContent"].exec("FOCUS"); //포커싱
+             return false;
+            
+        }
 		var productForm = document.getElementById("productForm");  
-		//var fileValue = document.getElementById("firstImg").value;
-		productForm.action ="/picksell/sell/sellProc";              
-		productForm.submit();
+		
+		//productForm.action ="/picksell/sell/sellProc";              
+		//productForm.submit();
 	}
+	
+	//step2 다음버튼 유효성검증
+	function step2_validation(){
+		if($('#categorySELECT').val() != '0' && $('#hid_status').val() != ''){
+			$('#c2_button').removeAttr("disabled");
+			$('#c2_button').removeClass("nextDisabled");
+		}else{
+			$('#c2_button').attr("disabled","disabled");
+			$('#c2_button').addClass('nextDisabled');
+		}
+	}
+	
+	//step2 체인지테스트
+	$('#categorySELECT').change(function(){
+		if(this.value == '0')
+			alert('카테고리를 선택해주세요');
+		
+		step2_validation();
+	});
 	
 	//step2 라디오기능
 	function selectStatus(status, elements){
@@ -312,10 +416,10 @@ input.status_checked_btn{
 		//alert(elements.value);
 		$('.status_check_btn').removeClass('status_checked_btn');
 		$(elements).addClass('status_checked_btn');
+		
+		step2_validation();
 	}
 	
-
-		
 	</script>
 </body>
 </html>
