@@ -94,6 +94,7 @@ import com.mycom.utils.FileUpload;
 		session.setAttribute("sessionKind", (String)resultMap.get("KIND"));//세션에 값저장
 		session.setAttribute("sessionPorfile_Img", (String)resultMap.get("PROFILE_IMG"));//세션에 값저장
 		session.setAttribute("sessionStatus", (String)resultMap.get("STATUS"));//세션에 값저장
+		session.setAttribute("sessionAlarm", (String)resultMap.get("ALARM_CONSENT"));//세션에 값저장
 		
 		
 		if((request.getParameter("idSave")) != null) {
