@@ -102,8 +102,12 @@ li.orderMethodLI.active > a {
     margin-left: 1%;
     margin-top: 60px;
 }
-.product_firstimg{
-	width: 100%;
+.product_firstimg {
+    width: 100%;
+    max-height: 260px;
+}
+.firstImgWrap {
+    height: 260px;
 }
 .writerWrap {
     height: 40px;
@@ -126,6 +130,7 @@ span.productSeller {
 span.productSubject {
     display: block;
     margin-bottom: 20px;
+    min-height: 50px;
 }
 span.productPrice {
     font-weight: 600;

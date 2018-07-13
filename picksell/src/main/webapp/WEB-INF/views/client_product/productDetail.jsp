@@ -159,7 +159,7 @@ input.basket_go {
 }
 
 input.purchase_go {
-    width: 48%;
+    width: 100%;
     border: none;
     color: white;
     box-sizing: border-box;
@@ -231,6 +231,15 @@ span.deliveryTEXT {
     color: #333;
     font-size: 14px;
 }
+input.purchase_apply, input.purchase_cancel {
+    width: 100%;
+    border: none;
+    color: white;
+    box-sizing: border-box;
+    padding: 16px;
+    font-size: 15px;
+    background-color: #7151fc;
+}
 </style>
 
 </head>
@@ -244,7 +253,7 @@ span.deliveryTEXT {
 			response.text().then(function(text){
 				if(response.status == '200'){
 					alert('구매신청이 완료되었습니다! \n판매자의 수락까지 기다려주세요');
-					var inner = "<input type='button' value='구매신청 취소하기' onclick='purchaseCancel()' />";
+					var inner = "<input type='button' value='구매신청 취소하기' class='purchase_cancel' onclick='purchaseCancel()' />";
 					document.getElementById('purchaseWrap').innerHTML = inner;		
 				}
 			})
@@ -256,7 +265,7 @@ span.deliveryTEXT {
 			response.text().then(function(text){
 				if(response.status == '200'){
 					alert('구매신청이 취소되었습니다!');
-					var inner = "<input type='button' value='구매신청하기' onclick='purchaseApply()' />";
+					var inner = "<input type='button' value='구매신청하기' class='purchase_apply' onclick='purchaseApply()' />";
 					document.getElementById('purchaseWrap').innerHTML = inner;
 				}
 			})
