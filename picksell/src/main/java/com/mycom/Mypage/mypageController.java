@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartRequest;
 
@@ -264,4 +265,10 @@ public class mypageController {
 			model.addAttribute("saleSubDetail", saleSubDetail);
 		return "saleDetail";
 	}
+	@ResponseBody
+	@RequestMapping(value="/mypage/stock", method=RequestMethod.GET)
+	public void stock(Model model, HttpServletRequest Request) {
+		String PRODUCT_NUM = Request.getParameter("PRODUCT_NUM");
+		mypageService.stock(PRODUCT_NUM);
+	}	
 }

@@ -17,10 +17,7 @@
 
 <script>
 var totalPRICE = Number(0);
-
 var subtotalPRICE = Number('${saleDetail.TOTAL_PRICE}');
-//alert('${saleDetail.TOTAL_PRICE}');
-   
 </script>
 		
 <h2>판매내역 상세 및 배송 조회</h2>
@@ -69,17 +66,14 @@ var subtotalPRICE = Number('${saleDetail.TOTAL_PRICE}');
 		/${joinMap.PRICE }원
 		/갯수: ${joinMap.ORDER_QUANTITY}개
 		<br>
-		
          <script>
          totalPRICE += Number('${joinMap.PRICE}');
-         alert(totalPRICE);
          </script>
          <c:if test="${status.last}">
     	 <script>
     	 subtotalPRICE = subtotalPRICE - totalPRICE -2500;
          </script>
          </c:if>
-         
         <%--  <c:if test="${status.last}">
           <script>
           printTotal();
@@ -110,14 +104,10 @@ var subtotalPRICE = Number('${saleDetail.TOTAL_PRICE}');
 		배송시 주의사항: ${saleDetail.PRECAUTIONS}<br>
 		택배사:  	${saleDetail.DELIVERY_COMPANY}<br>
 		송장번호:  ${saleDetail.INVOICE_NUM}<br>
-			
 </c:if>
 </table>
  <script>
   printTotal();
-  alert(totalPRICE);
-  alert(subtotalPRICE);
-  
   </script>
 </body>
 </html>
