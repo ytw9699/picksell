@@ -33,15 +33,15 @@ public class AdminMainController {
 		SimpleDateFormat sdf = new SimpleDateFormat("MMdd");
 	   	String day = sdf.format(c1.getTime());  //today
 	    daylist.add(day);
-	    System.out.println(AdminMainService.memberJoinCount(day));
-	     countlist.add((Integer)(AdminMainService.memberJoinCount(day).get("COUNT")));
-	    
+	    java.math.BigDecimal tempValue = (java.math.BigDecimal)AdminMainService.memberJoinCount(day).get("COUNT");
+	    countlist.add(Integer.valueOf(tempValue.toString()));
 		for(int i= 1; i < 8; i++) {
 		  c1.add(Calendar.DATE,-1);
 		  day = sdf.format(c1.getTime());
 		  daylist.add(day);
-		  countlist.add((Integer)(AdminMainService.memberJoinCount(day).get("COUNT")));
-		  System.out.println(countlist.get(i));
+		  tempValue = (java.math.BigDecimal)AdminMainService.memberJoinCount(day).get("COUNT");
+		  countlist.add(Integer.valueOf(tempValue.toString()));  
+		  
 		}
 		model.addAttribute("daylist",daylist);
 	    model.addAttribute("countlist",countlist);

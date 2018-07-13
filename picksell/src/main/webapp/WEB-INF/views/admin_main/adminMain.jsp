@@ -54,14 +54,14 @@ google.charts.setOnLoadCallback(drawChart);
 function drawChart() {
     var data = google.visualization.arrayToDataTable([
       ['일자', 'Member'],
-      ['일주일전', 20 , ],
-      ['${daylist[6]}',  15, ],
-      ['${daylist[5]}',  20, ],
-      ['${daylist[4]}',  15, ],
-      ['${daylist[3]}',  17, ],
-      ['${daylist[2]}',  18, ],
-      ['${daylist[1]}',  19,  ],
-      [  '오늘' ,  20, ]
+      ['일주일전', ${countlist[7]}, ],
+      ['${daylist[6]}',  ${countlist[6]}, ],
+      ['${daylist[5]}', ${countlist[5]}, ],
+      ['${daylist[4]}',  ${countlist[4]}, ],
+      ['${daylist[3]}',  ${coutlist[3]}, ],
+      ['${daylist[2]}',  ${countlist[2]}, ],
+      ['${daylist[1]}',  ${countlist[1]},  ],
+      [  '오늘' ,  ${countlist[0]}, ]
     ]);
 
     var options = {
@@ -85,16 +85,6 @@ function drawChart() {
 <jsp:useBean id="toDay" class="java.util.Date" />
 지금은  <fmt:formatDate value="${toDay }" pattern="YYYY년 MM월 dd일"/>입니다.
 
-${daylist[0]}
-${daylist[1]}
-${daylist[2]}
-${daylist[3]}
-${daylist[4]}
-${daylist[5]}
-${daylist[6]}
-${daylist[7]}
-
-${countlist[0]}
 <div>
 
  <div id="chart_div" style="width: 100%; height: 500px;"></div>
