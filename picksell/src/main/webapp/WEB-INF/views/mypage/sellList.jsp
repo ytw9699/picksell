@@ -20,14 +20,14 @@ var allData = "PRODUCT_NUM="+PRODUCT_NUM;
 		$.ajax({
 			type : "GET",
 			url : "/picksell/mypage/pulsStock",
-			dataType : 'json',
+			dataType : 'text',
 			data : allData,
 			success : function(data){
-			}
-		});	
 		var uppoint = Number(document.getElementById('currentStock'+index).innerHTML) + 1;
 		document.getElementById('currentStock'+index).innerHTML = uppoint;
 		alert("재고가 1개 증가되었습니다");
+			}
+		});	
 }
 function minusStock(PRODUCT_NUM, index){
 	var allData = "PRODUCT_NUM="+PRODUCT_NUM;
@@ -37,11 +37,11 @@ function minusStock(PRODUCT_NUM, index){
 				dataType : 'json',
 				data : allData,
 				success : function(data){
+	var uppoint = Number(document.getElementById('currentStock'+index).innerHTML) - 1;
+	document.getElementById('currentStock'+index).innerHTML = uppoint;
+	alert("재고가 1개 감소되었습니다");
 				}
 			});	
-			var uppoint = Number(document.getElementById('currentStock'+index).innerHTML) - 1;
-			document.getElementById('currentStock'+index).innerHTML = uppoint;
-			alert("재고가 1개 감소되었습니다");
 }
 </script>
 <h4>

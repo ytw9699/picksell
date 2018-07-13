@@ -267,15 +267,18 @@ public class mypageController {
 	}
 	@ResponseBody
 	@RequestMapping(value="/mypage/pulsStock", method=RequestMethod.GET)
-	public void pulsStock(HttpServletRequest Request) {//재고 1 증가
+	public String pulsStock(HttpServletRequest Request) {//재고 1 증가
 		String PRODUCT_NUM = Request.getParameter("PRODUCT_NUM");
 		mypageService.pulsStock(PRODUCT_NUM);
+		
+		return "String";//ajax에서 json이 아니라 text여야함
 	}	
-	
 	@ResponseBody
 	@RequestMapping(value="/mypage/minusStock", method=RequestMethod.GET)
-	public void minusStock(HttpServletRequest Request) {//재고 1감소
+	public Map minusStock(HttpServletRequest Request) {//재고 1감소
 		String PRODUCT_NUM = Request.getParameter("PRODUCT_NUM");
 		mypageService.minusStock(PRODUCT_NUM);
-	}
+			Map<String, Object> parameterMap = new HashMap<String, Object>();
+		return parameterMap;
+}
 }
