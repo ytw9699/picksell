@@ -297,24 +297,20 @@ public class mypageController {
 		parameterMap.put("category_num",category_num);
 		parameterMap.put("product_num",product_num);
 		parameterMap.put("sessionId",sessionId);
-		System.out.println(1);
+		
 		mypageService.alarmInsert(parameterMap);//알람 입력
-		System.out.println(2);
+		
 		return parameterMap;
 }
-	@RequestMapping(value="/mypage/modify",method=RequestMethod.GET)
-	public String alarmSelect(HttpSession session, Model model, HttpServletRequest request) {	
+	@RequestMapping(value="/mypage/alarmSelect", method=RequestMethod.GET)
+	public String alarmSelect(HttpSession session, Model model) {	
 		
 		String sessionId =(String)session.getAttribute("sessionId");
 		
-		resultMap = mypageService.userInfo(sessionId);//세션아이디에 해당하는 회원정보 한줄가져옴
+		List<Map<String, Object>> alarmList = mypageService.alarmSelect(sessionId);//세션아이디에 해당하는 알람 가져옴
 		
-		model.addAttribute("resultMap", resultMap);
+		model.addAttribute("alarmList", alarmList);
 		
-		String Updated =  request.getParameter("updated");
-		if(Updated != null) {
-			model.addAttribute("Updated", "Updated");
-		}
-		return "modify";
+		return "alarmSelect";
 	}
 }

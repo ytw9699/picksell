@@ -264,7 +264,7 @@ li.mainCategoryLI:hover {
 	|<a href="/picksell/cart" class="menu_el">장바구니</a>
 	<span class="myBasketSum" id="myBasketSum">0</span>
 	<c:if test="${sessionId != null}">
-	|<a href="#" class="menu_el">알림
+	|<a href="/picksell/mypage/alarmSelect" class="menu_el">알림
 	<span class="myAlarm" id="myAlarm">0</span></a>
 	</c:if> 
 	<c:if test="${sessionKind == '99'}">
@@ -310,7 +310,7 @@ li.mainCategoryLI:hover {
 		<span class="menuBox-link"><a href="/picksell/mypage/saleList">판매 내역/배송 조회</a></span>
 		<span class="menuBox-link"><a href="/picksell/mypage/orderList">주문 내역/배송 조회</a></span>
 		<span class="menuBox-link"><a href="#">최근 본 상품</a></span>
-		<span class="menuBox-link"><a href="#">알림 내용 및 설정</a></span>
+		<span class="menuBox-link"><a href="/picksell/mypage/alarmSelect">알림 내용 및 설정</a></span>
 	</div>
 </div>
 

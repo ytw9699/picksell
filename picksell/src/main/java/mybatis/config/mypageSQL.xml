@@ -215,6 +215,10 @@ select * from ps_product a, PS_ORDERLIST b where b.ORDER_NUM = #{order_num} and 
 									#{category_num},
 									'3',
 									sysdate)
-	</insert>
+</insert>
+
+<select id="alarmSelect" parameterType="String" resultType="hashmap">
+			select * from ps_alarm WHERE ALARM_TARGET = #{sessionId} order by ALARM_REGDATE desc
+</select>
 
 </mapper>
