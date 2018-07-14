@@ -13,6 +13,36 @@
 </style>
 </head>
 <body>
+<script>
+	//알람입력
+	function alarmInsert(ALARM_TARGET, ALARM_VARIABLE1, ALARM_VARIABLE2, ALARM_WRITER,ALARM_KIND){
+	var allData = "ALARM_TARGET="+ALARM_TARGET+"&ALARM_VARIABLE1="+ALARM_VARIABLE1+"&ALARM_VARIABLE2="+ALARM_VARIABLE2+"&ALARM_WRITER="+ALARM_WRITER+"&ALARM_KIND="+ALARM_KIND;
+			$.ajax({
+				type : "GET",
+				url : "/picksell/mypage/alarmInsert",
+				dataType : 'json',
+				data : allData,
+				success : function(data){
+					alert("알람입력완료");
+				}
+			});
+	}   
+	function canclePs_order(ORDER_NUM, BUYER_ID, SELLER_ID, PRODUCT_NUM){
+		alert("1");
+		var allData = "ORDER_NUM="+ORDER_NUM+"&PRODUCT_NUM="+PRODUCT_NUM;
+				$.ajax({
+					type : "GET",
+					url : "/picksell/mypage/canclePs_order",
+					dataType : 'json',
+					data : allData,
+					success : function(data){
+						alarmInsert(SELLER_ID, ORDER_NUM, ORDER_NUM, BUYER_ID, "10");
+						//location.reload();
+					}
+				});	
+	}
+	
+</script>
 <h2>주문 내역 상세 및 배송 조회</h2>
 <table>
 <c:if test="${fn:length(orderDetail) > 0}">
@@ -22,7 +52,8 @@
 			배송시작일: 		 <fmt:formatDate value="${orderDetail.STEP3_DATE}" pattern="yyyy년 MM월 dd일 hh:mm:ss" />  <br>
 			인수확인 및 거래 완료일:<fmt:formatDate value="${orderDetail.STEP4_DATE}" pattern="yyyy년 MM월 dd일 hh:mm:ss" />  <br>
 			주문취소일: 		 <fmt:formatDate value="${orderDetail.CANCEL_DATE}" pattern="yyyy년 MM월 dd일 hh:mm:ss" />  <br>
-			주문번호:    		${orderDetail.ORDER_NUM} /
+			판매자 아이디:      ${orderDetail.SELLER_ID} <br>
+			주문번호:    		${orderDetail.ORDER_NUM} <br>
 			<c:if test="${orderDetail.STATUS == '0'}">
 			거래상태:입금대기중
 			</c:if>
@@ -64,8 +95,9 @@
 			배송시 주의사항: ${orderDetail.PRECAUTIONS}<br>
 			택배사:  		${orderDetail.DELIVERY_COMPANY}<br>
 			송장번호:  	${orderDetail.INVOICE_NUM}<br>
-			
-</c:if>
+			<br>																								
+			<input type ="button" value="주문취소" onclick="canclePs_order('${orderDetail.ORDER_NUM}','${orderDetail.BUYER_ID}','${orderDetail.SELLER_ID}','${orderDetail.PRODUCT_NUM}')"/>
+</c:if>															
 </table>
 </body>
 </html>

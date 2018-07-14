@@ -245,20 +245,22 @@ public class mypageController {
 	model.addAttribute("pagingHtml", pagingHtml);
 	return "saleList";
 }
-	@RequestMapping(value="/mypage/orderDetail/{PRODUCT_NUM}", method=RequestMethod.GET)
-	public String orderDetail(Model model, @PathVariable("PRODUCT_NUM") int PRODUCT_NUM) {	
-		 //System.out.println(PRODUCT_NUM);
-			Map<String, Object> orderDetail = mypageService.orderDetail(PRODUCT_NUM);
+	@RequestMapping(value="/mypage/orderDetail/{ORDER_NUM}", method=RequestMethod.GET)
+	public String orderDetail(Model model, @PathVariable("ORDER_NUM") int ORDER_NUM) {	
+			
+		Map<String, Object> orderDetail = mypageService.orderDetail(ORDER_NUM);
 			model.addAttribute("orderDetail", orderDetail);
 			
-			List<Map<String, Object>> orderSubDetail = mypageService.orderSubDetail(PRODUCT_NUM);
+			List<Map<String, Object>> orderSubDetail = mypageService.orderSubDetail(ORDER_NUM);
 			model.addAttribute("orderSubDetail", orderSubDetail);
 		return "orderDetail";
 	}
-	@RequestMapping(value="/mypage/saleDetail/{PRODUCT_NUM}", method=RequestMethod.GET)
-	public String sailDetail(Model model, @PathVariable("PRODUCT_NUM") int PRODUCT_NUM, HttpSession session) {	
+	@RequestMapping(value="/mypage/saleDetail/{ORDER_NUM}", method=RequestMethod.GET)
+	public String sailDetail(Model model, @PathVariable("ORDER_NUM") int ORDER_NUM, HttpSession session,
+			@RequestParam(value="ALARM_NUM",required=false, defaultValue="0") int ALARM_NUM
+			) {	
 		
-			Map<String, Object> saleDetail = mypageService.saleDetail(PRODUCT_NUM);
+			Map<String, Object> saleDetail = mypageService.saleDetail(ORDER_NUM);
 			
 			model.addAttribute("saleDetail", saleDetail);
 			
@@ -267,13 +269,16 @@ public class mypageController {
 			String sessionId =(String)session.getAttribute("sessionId");
 			
 			parameterMap.put("sessionId", sessionId);
-			
 			parameterMap.put("ORDER_NUM",saleDetail.get("ORDER_NUM"));
-			System.out.println(saleDetail.get("ORDER_NUM"));
-			System.out.println(5);
+			
 			List<Map<String, Object>> saleSubDetail = mypageService.saleSubDetail(parameterMap);
-			System.out.println(6);
+			
 			model.addAttribute("saleSubDetail", saleSubDetail);
+			
+			if(ALARM_NUM != 0) {
+			mypageService.alarmRead(ALARM_NUM);//알람읽기	
+			}
+			
 		return "saleDetail";
 	}
 	@ResponseBody
@@ -332,6 +337,7 @@ public class mypageController {
 		return "alarmSelect";
     } 
 }
+	
 	@ResponseBody
 	@RequestMapping(value="/mypage/alarmDelete", method=RequestMethod.GET)
 	public int alarmDelete(@RequestParam(value="ALARM_NUM") String ALARM_NUM) {
@@ -343,5 +349,22 @@ public class mypageController {
 		int deleteReturn = mypageService.alarmDelete(parameterMap);//삭제되면 1리턴
 
 		return deleteReturn;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/mypage/canclePs_order", method=RequestMethod.GET)
+	public Map canclePs_order(@RequestParam(value="ORDER_NUM") String ORDER_NUM,
+							@RequestParam(value="PRODUCT_NUM") String PRODUCT_NUM) {
+		
+		Map<String, Object> parameterMap = new HashMap<String, Object>();
+		
+		parameterMap.put("ORDER_NUM",ORDER_NUM);
+		parameterMap.put("PRODUCT_NUM",PRODUCT_NUM);
+		
+		mypageService.canclePs_order(parameterMap);//주문번호를 결제취소 44로바꿈
+		mypageService.cancleDate(parameterMap);//Ps_order의 주문 취소날짜입력
+		mypageService.updateDeal_status(parameterMap);//Ps_product의 Deal_status를 (판매중) 으로 다시 되돌리기
+
+		return parameterMap;
 	}
 }

@@ -157,16 +157,16 @@ c.status = #{status}
 
 </select>
 
-<!-- 주문조회 상세보기 -->	
+<!-- 주문조회 상세보기 및 결제취소 및 알람값 위해 PS_ORDERLIST 조인-->	
 <select id="orderDetail" parameterType="Integer" resultType="hashmap">
 
-select * from ps_order where ORDER_NUM = #{order_num}
+select * from ps_order a, PS_ORDERLIST b where a.ORDER_NUM = #{ORDER_NUM} and a.ORDER_NUM = b.ORDER_NUM
 
 </select>
 <!-- 판매조회 상세보기 -->	
 <select id="saleDetail" parameterType="Integer" resultType="hashmap">
 
-select * from ps_order where ORDER_NUM = #{order_num}
+select * from ps_order where ORDER_NUM = #{ORDER_NUM}
 
 </select>
 <!-- 판매조회 상세보기 안에 관련 상품글 리스트 -->
@@ -178,7 +178,7 @@ select * from ps_product a, PS_ORDERLIST b where b.ORDER_NUM = #{ORDER_NUM} and 
 <!-- 주문조회 상세보기 안에 관련 상품글 리스트 -->
 <select id="orderSubDetail" parameterType="Integer" resultType="hashmap">
 
-select * from ps_product a, PS_ORDERLIST b where b.ORDER_NUM = #{order_num} and b.PRODUCT_NUM = a.PRODUCT_NUM
+select * from ps_product a, PS_ORDERLIST b where b.ORDER_NUM = #{ORDER_NUM} and b.PRODUCT_NUM = a.PRODUCT_NUM
 
 </select>
 
@@ -226,6 +226,19 @@ select * from ps_product a, PS_ORDERLIST b where b.ORDER_NUM = #{order_num} and 
 	delete from ps_purchase_list where purchase_num = #{PURCHASE_NUM}
 		
 </select>
+<!-- //주문번호를 결제취소 44로바꿈 -->
+<update id="canclePs_order" parameterType="hashmap">
+		update ps_order set status = '44' where ORDER_NUM = #{ORDER_NUM}
+</update>
+
+<update id="cancleDate" parameterType="hashmap">
+	update ps_order set CANCEL_DATE = sysdate where ORDER_NUM = #{ORDER_NUM}
+</update>
+
+<update id="updateDeal_status" parameterType="hashmap">
+		update PS_PRODUCT set DEAL_STATUS = '0' where PRODUCT_NUM = #{PRODUCT_NUM}
+</update>
+
 
 
 </mapper>
