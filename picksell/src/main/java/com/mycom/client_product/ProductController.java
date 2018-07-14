@@ -382,6 +382,12 @@ public class ProductController {
 			resultMap.put("resultCode", "success");
 			resultMap.put("resultMsg", buyerID+" 회원의 구매요청을 수락했습니다!");
 		}
+		
+		//버튼다시그려주기위함
+		//resultMap.put("product_num", product_num);
+		resultMap.put("purchase_num", purchase_num);
+		resultMap.put("buyerID", buyerID);
+		
 
 		return resultMap;
 	}
