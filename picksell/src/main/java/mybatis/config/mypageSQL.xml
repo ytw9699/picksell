@@ -92,12 +92,6 @@ ps_purchase_list b where a.product_num = b.product_num and b.buyer_id = #{sessio
       
 </select>
 
-<select id="deletePurchaseList" parameterType="int">
-	<!-- 구매리스트에서 구매신청번호에 해당하는거 한줄 삭제 -->
-	delete from ps_purchase_list where purchase_num = #{purchase_num}
-	
-</select>
-
 <!-- ps_order에서  리스트  반환-->
 <select id="saleList" resultType="hashmap" parameterType="hashmap">
 
@@ -222,11 +216,16 @@ select * from ps_product a, PS_ORDERLIST b where b.ORDER_NUM = #{order_num} and 
 			select * from ps_alarm WHERE ALARM_TARGET = #{sessionId} order by ALARM_REGDATE desc
 </select>
 
-<select id="alarmDelete" parameterType="int">
+<select id="alarmDelete" parameterType="hashmap">
 	<!-- 알람리스트에서 알람번호에 해당하는거 한줄 삭제 -->
 	delete from PS_ALARM where ALARM_NUM = #{ALARM_NUM}
 </select>
 
+<select id="deletePurchaseList" parameterType="hashmap">
+	<!-- 구매리스트에서 구매신청번호에 해당하는거 한줄 삭제 -->
+	delete from ps_purchase_list where purchase_num = #{PURCHASE_NUM}
+		
+</select>
 
 
 </mapper>

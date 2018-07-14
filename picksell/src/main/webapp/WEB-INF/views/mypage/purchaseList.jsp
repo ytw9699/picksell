@@ -15,6 +15,35 @@
 </style>
 </head>
 <body>
+<script>
+	//알람입력
+	function alarmInsert(ALARM_TARGET, ALARM_VARIABLE1, ALARM_VARIABLE2, ALARM_WRITER,ALARM_KIND){
+	var allData = "ALARM_TARGET="+ALARM_TARGET+"&ALARM_VARIABLE1="+ALARM_VARIABLE1+"&ALARM_VARIABLE2="+ALARM_VARIABLE2+"&ALARM_WRITER="+ALARM_WRITER+"&ALARM_KIND="+ALARM_KIND;
+			$.ajax({
+				type : "GET",
+				url : "/picksell/mypage/alarmInsert",
+				dataType : 'json',
+				data : allData,
+				success : function(data){
+					alert("알람입력완료");
+				}
+			});	
+	}
+	function deletePurchaseList(PURCHASE_NUM, SELLER_ID, CATEGORY_NUM, PRODUCT_NUM, BUYER_ID){
+		var allData = "PURCHASE_NUM="+PURCHASE_NUM;
+				$.ajax({
+					type : "GET",
+					url : "/picksell/mypage/deletePurchaseList",
+					dataType : 'json',
+					data : allData,
+					success : function(data){
+						alarmInsert(SELLER_ID, CATEGORY_NUM, PRODUCT_NUM, BUYER_ID, "7");
+						location.reload();
+					}
+				});	
+	}
+	
+</script>
 <h2>일반 상품 안전 구매 신청 리스트</h2> 
 <table>
 <c:if test="${fn:length(purchaseList) > 0}">
@@ -44,11 +73,11 @@
 		</c:if>
 		<c:if test="${purchase.STATUS == '1'}">
 		<td>구매 요청 수락 완료</td>
-		</c:if>
+		</c:if>																	
 		<td>${purchase.SELLER_ID }</td>
-		<td><input type="button" value="취소" id ="cancel" onclick="location.href = '/picksell/mypage/deletePurchaseList/${purchase.PURCHASE_NUM }'"/></td>
+		<td><input type="button" value="취소" id ="cancel" onclick="deletePurchaseList('${purchase.PURCHASE_NUM }','${purchase.SELLER_ID }','${purchase.CATEGORY_NUM }','${purchase.PRODUCT_NUM }','${purchase.BUYER_ID}');" /></td>
 		<td><input type="button" value="구매" id ="purchase" disabled="disabled" onclick="location.href = '/picksell/products/detail/${purchase.CATEGORY_NUM }/${purchase.PRODUCT_NUM }'"/></td>
-	</tr>
+	</tr> 
 	<c:if test="${purchase.STATUS == '1'}">
 <script>
 	document.getElementById("purchase").disabled = false;//

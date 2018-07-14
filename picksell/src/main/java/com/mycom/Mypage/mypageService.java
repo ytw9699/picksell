@@ -55,9 +55,6 @@ public class mypageService implements mypageDao {
 	public String userCheck(String string) {
 		return sqlMapper.selectOne("mypage.userCheck", string);
 	}
-	public void deletePurchaseList(int purchase_num) {
-		sqlMapper.delete("mypage.deletePurchaseList", purchase_num);
-	}
 	public Map<String, Object> saleDetail(int PRODUCT_NUM) {
 		return sqlMapper.selectOne("mypage.saleDetail", PRODUCT_NUM);
 	}
@@ -84,4 +81,12 @@ public class mypageService implements mypageDao {
 	public int alarmDelete(Map<String, Object> parameterMap) {
 		return sqlMapper.delete("mypage.alarmDelete",parameterMap);
 	}
+
+	public int deletePurchaseList(Map<String, Object> parameterMap) {
+
+		return sqlMapper.delete("mypage.deletePurchaseList",parameterMap);
+	}
+	/*public void deletePurchaseList(int purchase_num) {
+		sqlMapper.delete("mypage.deletePurchaseList", purchase_num);
+	}*/
 }
