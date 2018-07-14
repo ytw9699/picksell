@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartRequest;
 import org.springframework.web.servlet.ModelAndView;
@@ -111,6 +112,34 @@ import com.mycom.utils.FileUpload;
 		session.invalidate();//로그아웃후 다시 메인으로
 		return "redirect:/main";
 		}
+		
+		
+	@RequestMapping("/alarmChange")
+	@ResponseBody
+	public Map<String, Object> changeAlarmONOFF(
+			HttpServletRequest request){
+		
+		Map<String, Object> parameterMap = new HashMap<String, Object>();
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		
+	/*	System.out.println(request.getSession().getAttribute("sessionId"));
+		System.out.println(request.getSession().getAttribute("sessionAlarm"));
+		System.out.println(request.getParameter("currentAlarm"));*/
+		
+		//디비 알람상태 바꾸는 로직
+		parameterMap.put("sessionId", request.getSession().getAttribute("sessionId").toString());
+		parameterMap.put("currentAlarm", request.getParameter("currentAlarm"));
+		MemberService.changeMyAlarm(parameterMap);
+		
+		//현재 세션도 바꿔주어야하기때문에 [알람세션] 도 재설정
+		if(request.getParameter("currentAlarm").equals("ON"))
+			request.getSession().setAttribute("sessionAlarm", "OFF");
+		else if(request.getParameter("currentAlarm").equals("OFF"))
+			request.getSession().setAttribute("sessionAlarm", "ON");
+		
+		return resultMap;
+		}
+		
 	}
 	
 	

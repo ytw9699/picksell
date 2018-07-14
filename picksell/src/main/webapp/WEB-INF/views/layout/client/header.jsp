@@ -192,34 +192,93 @@ li.mainCategoryLI:hover {
     text-align: center;
 }
 
-/* tmp */
+/* 알람박스 */
 .bigsq {
     background-color: #999999;
-    /* margin-top: 35px; */
     width: 50px;
-    height: 20px;
+    height: 10px;
     padding: 5px;
+    margin-left: 80px;
     border-radius: 23px;
     transition: 0.3s;
     display: inline-block;
 }
 .smallsq {
-    width: 35px;
-    height: 35px;
+    width: 30px;
+    height: 30px;
     background-color: #efefef;
     display: inline-block;
-    margin-top: -8px;
+    margin-top: -10px;
     margin-left: -15px;
     border-radius: 35px;
     transition: 0.3s;
     border: none;
     outline: none;
 }
+#myAlarm_listBox {position: absolute; display: none; }
+#myAlarm-header {height: 32px;width: 20px;}
+#myAlarm-body {
+    width: 200px;
+    border: 1px solid #c2c2c2;
+    background-color: white;
+    padding: 13px;
+    margin-left: 12px;
+}
+span.alarm-setTEXT {
+    float: left;
+    font-size: 15px;
+    color: #666;
+}
+.alarm-set {
+    height: 40px;
+    padding-top: 10px;
+    border-bottom: 1px solid #dedede;
+}
 </style>
 </head>
 <script>
+//알람을 위한 전역변수
+var al_status = 0;
+var al_status_initialization = '${sessionScope.sessionAlarm}';
+
+//스위치 css무빙부분
+function moving(){
+	var allData = "currentAlarm=${sessionScope.sessionAlarm}";
+	$.ajax({
+		type: "GET",
+		url: "/picksell/alarmChange",
+		data: allData,
+		dataType: 'json',
+		success: function(data){
+			//alert('알람테스트');
+		}
+	});	
+	/* $.ajax({
+		type : "POST",
+		url : "/picksell/cart/countingMyBasket",
+		dataType : 'json',
+		//data : allData,
+		success : function(data){
+			//alert(data.currentCounting);
+			document.getElementById('myBasketSum').innerHTML = data.currentCounting;
+		}
+	});		 */
+	if(al_status == 0){
+		$('#smallsq').css('margin-left',25);
+		$('#smallsq').css('background-color', '#4285f4');
+		$('#bigsq').css('background-color', '#b3cefb');
+		al_status = 1;
+	}else{
+		$('#smallsq').css('margin-left', -15);
+		$('#smallsq').css('background-color', '#efefef');
+		$('#bigsq').css('background-color', '#999999');
+		al_status = 0;
+	}
+}
+
 	$(document).ready(function() {
 		
+		/* 전체카테고리hover 박스 */
 		$('.totalCategory').mouseenter(function(){
 			$(this).css({'background-color':'#7151fc','color':'white'});
 			$('.totalCategoryText').css('background','url(/picksell/resources/img/maincategory_hover.png) 2% 53% no-repeat');
@@ -238,6 +297,7 @@ li.mainCategoryLI:hover {
 			$(this).hide();
 		})
 		
+		/* 마이페이지hover 박스 */
 		$('#linkOfMypage').mouseenter(function() {
 			var height = $(this).height();
 			var top = $(this).offset().top * 3;
@@ -250,6 +310,21 @@ li.mainCategoryLI:hover {
 		$('#mypage_menuBox').mouseleave(function () {
 				$(this).hide();
 		});
+		
+		/* 알람hover 박스 */
+		$('#linkOfAlarm').mouseenter(function() {
+			var height = $(this).height();
+			var top = $(this).offset().top * 3;
+			//get the left and find the center value
+			var left = $(this).offset().left + ($(this).width() / 2) - ($('#myAlarm_listBox').width() / 2);
+			$('#myAlarm-header').height(height - 10);
+			$('#myAlarm_listBox').show();
+			$('#myAlarm_listBox').css({'top':top, 'left':left});
+		});
+		$('#myAlarm_listBox').mouseleave(function () {
+				$(this).hide();
+		});
+		
 		//var allData = "test1=1&test2=2";
 		$.ajax({
 			type : "POST",
@@ -262,38 +337,17 @@ li.mainCategoryLI:hover {
 			}
 		});		
 		
-		
-	});
-	var a = 0;
-	
-	//$('#smallsq').on('click', function(){
-		function moving(){
-		if(a == 0){
+		//알람스위치 초기화부분
+		//var al_status = 0;
+		//var al_status_initialization = '${sessionScope.sessionAlarm}';
+		if(al_status_initialization == 'ON'){
+			//alert('현재 알람상태는 on');
 			$('#smallsq').css('margin-left',25);
 			$('#smallsq').css('background-color', '#4285f4');
 			$('#bigsq').css('background-color', '#b3cefb');
-			a = 1;
-		}else{
-			$('#smallsq').css('margin-left', -15);
-			$('#smallsq').css('background-color', '#efefef');
-			$('#bigsq').css('background-color', '#999999');
-			a = 0;
-		}
-	}
-	//});
-/* 	function moving(){
-		if(a == 0){
-			$('#smallsq').css('margin-left',60);
-			$('#smallsq').css('background-color', '#4285f4');
-			$('#bigsq').css('background-color', '#b3cefb');
-			a = 1;
-		}else{
-			$('#smallsq').css('margin-left', 5);
-			$('#smallsq').css('background-color', '#efefef');
-			$('#bigsq').css('background-color', '#999999');
-			a = 0;
-		}
-	} */
+			al_status = 1;
+		} 
+	});
 </script>
 <body>
 
@@ -301,10 +355,8 @@ li.mainCategoryLI:hover {
 <div class="headerTop">
   <span class="headerTop_menu">
 	<c:if test="${sessionId != null}">
-	<a href="#" id="linkOfMypage" class="menu_el">마이페이지 ▼</a>|<a href="/picksell/logout" class="menu_el">로그아웃</a> | 
-		<div id="bigsq" class="bigsq">
-		<input type="button" id="smallsq" class="smallsq" onclick="moving();" />
-		</div>
+	<a href="#" id="linkOfMypage" class="menu_el">마이페이지 ▼</a>|<a href="/picksell/logout" class="menu_el">로그아웃</a>
+		
 	</c:if>
 	<c:if test="${sessionId == null}">
 	|<a href="/picksell/loginForm" class="menu_el">로그인</a>
@@ -312,7 +364,7 @@ li.mainCategoryLI:hover {
 	|<a href="/picksell/cart" class="menu_el">장바구니</a>
 	<span class="myBasketSum" id="myBasketSum">0</span>
 	<c:if test="${sessionId != null}">
-	|<a href="/picksell/mypage/alarmSelect" class="menu_el">알림
+	|<a href="/picksell/mypage/alarmSelect" id="linkOfAlarm" class="menu_el">알림
 	<span class="myAlarm" id="myAlarm">0</span></a>
 	</c:if> 
 	<c:if test="${sessionKind == '99'}">
@@ -377,6 +429,19 @@ li.mainCategoryLI:hover {
 			<li class="mainCategoryLI" onclick="location.href='/picksell/products?ca=9'">가구/인테리어</li>
 			<li class="mainCategoryLI" onclick="location.href='/picksell/products?ca=10'">생활/건강</li>
 		</ul>
+	</div>
+</div>
+
+<div id="myAlarm_listBox">
+	<div id="myAlarm-header"></div>
+	<div id="myAlarm-body">
+		<div class="alarm-set">
+			<span class="alarm-setTEXT">알람설정</span>
+			<div id="bigsq" class="bigsq">
+			<input type="button" id="smallsq" class="smallsq" onclick="moving();" />
+			</div>
+		</div>
+		알람상태 ${sessionScope.sessionAlarm }
 	</div>
 </div>
 
