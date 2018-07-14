@@ -157,10 +157,10 @@ c.status = #{status}
 
 </select>
 
-<!-- 주문조회 상세보기 및 결제취소 및 알람값 위해 PS_ORDERLIST 조인-->	
-<select id="orderDetail" parameterType="Integer" resultType="hashmap">
+<!-- 주문조회 상세보기 -->	
+<select id="orderDetail" parameterType="int" resultType="hashmap">
 
-select * from ps_order a, PS_ORDERLIST b where a.ORDER_NUM = #{ORDER_NUM} and a.ORDER_NUM = b.ORDER_NUM
+	select * from ps_order where ORDER_NUM = #{ORDER_NUM}
 
 </select>
 <!-- 판매조회 상세보기 -->	
