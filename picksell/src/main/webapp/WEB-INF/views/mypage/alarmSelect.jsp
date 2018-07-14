@@ -38,6 +38,7 @@ function alarmDelete(ALARM_NUM){
 				success : function(data){
 				
 				alert("알림을 삭제했습니다");
+				location.reload();//일단 새로고침으로 페이지 이동..ㅠㅠinnerhtml안쓰고..새로고침안하는방법을..찾아봅시당..
 				}
 			});	
 }
