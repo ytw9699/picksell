@@ -286,33 +286,39 @@ public class mypageController {
 	@ResponseBody
 	@RequestMapping(value="/mypage/alarmInsert", method=RequestMethod.GET)
 	public Map alarmInsert(
-			@RequestParam(value="seller_id") String seller_id,
-			@RequestParam(value="category_num") String category_num,
-			@RequestParam(value="product_num") String product_num,
-			@RequestParam(value="sessionId") String sessionId
+			@RequestParam(value="ALARM_TARGET") String ALARM_TARGET,
+			@RequestParam(value="ALARM_VARIABLE1", required=false, defaultValue="0") String ALARM_VARIABLE1,
+			@RequestParam(value="ALARM_VARIABLE2", required=false, defaultValue="0") String ALARM_VARIABLE2,
+			@RequestParam(value="ALARM_WRITER") String ALARM_WRITER,
+			@RequestParam(value="ALARM_KIND") String ALARM_KIND
 			) {
 		
 		Map<String, Object> parameterMap = new HashMap<String, Object>();
 		
-		parameterMap.put("seller_id",seller_id);
-		parameterMap.put("category_num",category_num);
-		parameterMap.put("product_num",product_num);
-		parameterMap.put("sessionId",sessionId);
+		parameterMap.put("ALARM_TARGET",ALARM_TARGET);
+		parameterMap.put("ALARM_VARIABLE1",ALARM_VARIABLE1);
+		parameterMap.put("ALARM_VARIABLE2",ALARM_VARIABLE2);
+		parameterMap.put("ALARM_WRITER",ALARM_WRITER);
+		parameterMap.put("ALARM_KIND",ALARM_KIND);
 		
-		System.out.println(1);
 		mypageService.alarmInsert(parameterMap);//알람 입력
-		System.out.println(2);
 		return parameterMap;
 }
 	@RequestMapping("/mypage/alarmSelect")
-	public String alarmSelect(HttpSession session, Model model) {//알람 리스트
+	public String alarmSelect(HttpSession session, Model model) {//알람을 허용한 사람만 리스트 가져오기
 		
-		String sessionId =(String)session.getAttribute("sessionId");
-		
+	String sessionId =(String)session.getAttribute("sessionId");//세션아이디값
+	String sessionAlarm =(String)session.getAttribute("sessionAlarm");//세션알람값
+	
+	if(!sessionAlarm.equals("ON")){
+	 return "alarmSelect";
+	}
+	else {//알림이 ON일때만 리스트 가져오자
 		List<Map<String, Object>> alarmList = mypageService.alarmSelect(sessionId);//세션아이디에 해당하는 알람 가져옴
 		
 		model.addAttribute("alarmList", alarmList);
 		
 		return "alarmSelect";
-	}
+    } 
+  }
 }

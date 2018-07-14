@@ -74,7 +74,7 @@ import com.mycom.utils.FileUpload;
 			)throws IOException{
 		
 		resultMap = MemberService.userCheck(map.getMap());
-		//SELECT ID,PASSWORD,NAME FROM PS_MEMBER WHERE ID = #{ID}
+		//SELECT * FROM PS_MEMBER WHERE ID = #{ID}
 		String PASSWORD = request.getParameter("PASSWORD");
 		String ID = request.getParameter("ID");
 		
@@ -90,11 +90,11 @@ import com.mycom.utils.FileUpload;
 			return "loginForm";
 		}
 		session.setAttribute("sessionId", ID);//세션에 값저장
-		session.setAttribute("sessionName", (String)resultMap.get("NAME"));//세션에 값저장
-		session.setAttribute("sessionKind", (String)resultMap.get("KIND"));//세션에 값저장
-		session.setAttribute("sessionPorfile_Img", (String)resultMap.get("PROFILE_IMG"));//세션에 값저장
-		session.setAttribute("sessionStatus", (String)resultMap.get("STATUS"));//세션에 값저장
-		session.setAttribute("sessionAlarm", (String)resultMap.get("ALARM_CONSENT"));//세션에 값저장
+		session.setAttribute("sessionName", (String)resultMap.get("NAME"));
+		session.setAttribute("sessionKind", (String)resultMap.get("KIND"));
+		session.setAttribute("sessionPorfile_Img", (String)resultMap.get("PROFILE_IMG"));
+		session.setAttribute("sessionStatus", (String)resultMap.get("STATUS"));
+		session.setAttribute("sessionAlarm", (String)resultMap.get("ALARM_CONSENT"));
 		
 		
 		if((request.getParameter("idSave")) != null) {

@@ -209,11 +209,11 @@ select * from ps_product a, PS_ORDERLIST b where b.ORDER_NUM = #{order_num} and 
 							ALARM_KIND,
 							ALARM_REGDATE
 							) values(ALARM_SEQ.NEXTVAL,
-									#{seller_id},
-									#{sessionId},
-									#{product_num},
-									#{category_num},
-									'3',
+									#{ALARM_TARGET},
+									#{ALARM_WRITER},
+									#{ALARM_VARIABLE1},
+									#{ALARM_VARIABLE2},
+									#{ALARM_KIND},
 									sysdate)
 									
 </insert>
