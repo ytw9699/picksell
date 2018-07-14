@@ -247,12 +247,15 @@ public class mypageController {
 }
 	@RequestMapping(value="/mypage/orderDetail/{ORDER_NUM}", method=RequestMethod.GET)
 	public String orderDetail(Model model, @PathVariable("ORDER_NUM") int ORDER_NUM) {	
-			
+			System.out.println(1);
 		Map<String, Object> orderDetail = mypageService.orderDetail(ORDER_NUM);
+		System.out.println(2);
 			model.addAttribute("orderDetail", orderDetail);
-			
+			System.out.println(3);
 			List<Map<String, Object>> orderSubDetail = mypageService.orderSubDetail(ORDER_NUM);
+			System.out.println(4);
 			model.addAttribute("orderSubDetail", orderSubDetail);
+			System.out.println(5);
 		return "orderDetail";
 	}
 	@RequestMapping(value="/mypage/saleDetail/{ORDER_NUM}", method=RequestMethod.GET)
@@ -354,7 +357,7 @@ public class mypageController {
 	@ResponseBody
 	@RequestMapping(value="/mypage/canclePs_order", method=RequestMethod.GET)
 	public Map canclePs_order(@RequestParam(value="ORDER_NUM") String ORDER_NUM,
-							@RequestParam(value="PRODUCT_NUM") String PRODUCT_NUM) {
+							@RequestParam(value="PRODUCT_NUM", required=false, defaultValue="0") String PRODUCT_NUM) {
 		
 		Map<String, Object> parameterMap = new HashMap<String, Object>();
 		
@@ -363,8 +366,11 @@ public class mypageController {
 		
 		mypageService.canclePs_order(parameterMap);//주문번호를 결제취소 44로바꿈
 		mypageService.cancleDate(parameterMap);//Ps_order의 주문 취소날짜입력
+		
+		if(!PRODUCT_NUM.equals("0")) {
 		mypageService.updateDeal_status(parameterMap);//Ps_product의 Deal_status를 (판매중) 으로 다시 되돌리기
-
+		}
+		
 		return parameterMap;
 	}
 }

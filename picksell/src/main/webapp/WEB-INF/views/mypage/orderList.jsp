@@ -61,26 +61,11 @@
 <img src="/picksell/resources/productUpload/${joinMap.FIRST_IMG }" style="width: 200px;" />
  /${joinMap.SUBJECT }
 </a>
- /${joinMap.PRICE }원
+ /<fmt:formatNumber value="${joinMap.PRICE }" pattern="#,###.##" /> 원
  /갯수: ${joinMap.ORDER_QUANTITY}개
  <br>
 </c:forEach>
-
 </c:forEach>
-
-	<%-- <c:forEach var="order" items="${orderList}">
-	<tr>
-		<br>${order.ORDER_NUM}</br>
-		<br>
-			<a href="/picksell/mypage/orderDetail/${order.PRODUCT_NUM }">
-			<img src="/picksell/resources/productUpload/${order.FIRST_IMG }" style="width: 200px;" />
-			</a>
-		</br>
-		<br><a href="/picksell/mypage/orderDetail/${order.PRODUCT_NUM }">${order.SUBJECT }</a></br>
-		<br><fmt:formatNumber value="${order.PRICE }" pattern="#,###.##" /> 원</br>
-		
-	</tr>
-	</c:forEach> --%>
 </c:if>
 <c:if test="${fn:length(orderList) < 1}">
 <p>내역이 없습니다</p>
