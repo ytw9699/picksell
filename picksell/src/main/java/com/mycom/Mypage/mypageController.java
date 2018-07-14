@@ -139,7 +139,7 @@ public class mypageController {
 		return "purchaseList";
 	}
 		
-	@RequestMapping("/mypage/deletePurchaseList/{purchase_num}")
+	/*@RequestMapping("/mypage/deletePurchaseList/{purchase_num}")
 	public String deletePurchaseList(@PathVariable("purchase_num") int purchase_num) {	
 			
 		System.out.println(purchase_num);
@@ -149,7 +149,18 @@ public class mypageController {
 		mypageService.deletePurchaseList(purchase_num);
 	
 		return  "redirect:/mypage/purchaseList/0";
+	}*/
+	
+	@ResponseBody
+	@RequestMapping(value="/mypage/deletePurchaseList", method=RequestMethod.GET)
+	public int deletePurchaseList(@RequestParam(value="PURCHASE_NUM") String PURCHASE_NUM) {
+		Map<String, Object> parameterMap = new HashMap<String, Object>();
+		parameterMap.put("PURCHASE_NUM",PURCHASE_NUM);
+		int deleteReturn = mypageService.deletePurchaseList(parameterMap);//삭제되면 1리턴
+		System.out.println(43);
+		return deleteReturn;
 	}
+	
 	
 	@RequestMapping(value="/mypage/orderList",method=RequestMethod.GET)
 	public String orderList(Model model, HttpSession session,

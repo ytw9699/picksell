@@ -264,13 +264,14 @@ span.deliveryTEXT {
 		})
 	}
 	//구매요청 취소
-	function purchaseCancel(){
+	function purchaseCancel(SELLER_ID, category_num, product_num, sessionId){
 		fetch('/picksell/products/purchseRequestCancel/${product_num}/${sessionScope.sessionId}').then(function(response){
 			response.text().then(function(text){
 				if(response.status == '200'){
 					alert('구매신청이 취소되었습니다!');
 					var inner = "<input type='button' value='구매신청하기' onclick='purchaseApply()' />";
 					document.getElementById('purchaseWrap').innerHTML = inner;
+					alarmInsert(SELLER_ID, category_num, product_num, sessionId, "7");
 				}
 			})
 		})
@@ -465,7 +466,7 @@ span.deliveryTEXT {
 					</c:when>
 					<c:when test="${alreadyPurchase == true }">
 						<div class="purchaseWrap" id="purchaseWrap">
-						<input type="button" class="purchase_cancel" value="구매신청 취소하기" onclick="purchaseCancel();" />
+						<input type="button" class="purchase_cancel" value="구매신청 취소하기" onclick="purchaseCancel('${resultObject.SELLER_ID}','${category_num}','${product_num}','${sessionId}');" />
 						</div>
 					</c:when>
 					<c:when test="${isMyProducts == 'yes' }">
