@@ -222,4 +222,11 @@ select * from ps_product a, PS_ORDERLIST b where b.ORDER_NUM = #{order_num} and 
 			select * from ps_alarm WHERE ALARM_TARGET = #{sessionId} order by ALARM_REGDATE desc
 </select>
 
+<select id="alarmDelete" parameterType="int">
+	<!-- 알람리스트에서 알람번호에 해당하는거 한줄 삭제 -->
+	delete from PS_ALARM where ALARM_NUM = #{ALARM_NUM}
+</select>
+
+
+
 </mapper>

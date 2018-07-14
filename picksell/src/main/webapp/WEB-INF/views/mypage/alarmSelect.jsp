@@ -28,11 +28,24 @@ function alarmRead(ALARM_NUM){
 				}
 			});	
 }
+function alarmDelete(ALARM_NUM){
+	var allData = "ALARM_NUM="+ALARM_NUM;
+			$.ajax({
+				type : "GET",
+				url : "/picksell/mypage/alarmDelete",
+				dataType : 'json',
+				data : allData,
+				success : function(data){
+				
+				alert("알림을 삭제했습니다");
+				}
+			});	
+}
 </script>
 <c:if test="${fn:length(alarmList) > 0}" >
 	<c:forEach var="alarmMap" items="${alarmList}" varStatus="Index">
 		
-		<td>${Index.index+1}. ${alarmMap.ALARM_REGDATE}에</td>
+		<td>${Index.index+1}.</td>
 		
 		<c:if test="${alarmMap.ALARM_KIND == '2'}">
 			<td>
@@ -49,6 +62,10 @@ function alarmRead(ALARM_NUM){
 				</a>
 				</td>
 	     </c:if>
+	     		<td>-<fmt:formatDate value="${alarmMap.ALARM_REGDATE}" pattern="yy-MM-dd HH:mm" /></td>
+	     		<td>
+	     		<input type="button" id="alarmDelete" value="삭제" onclick="alarmDelete('${alarmMap.ALARM_NUM}')" />
+	     		</td>
 		<br>
 	</c:forEach>
 </c:if>
