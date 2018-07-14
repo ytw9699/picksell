@@ -320,5 +320,17 @@ public class mypageController {
 		
 		return "alarmSelect";
     } 
-  }
+}
+	@ResponseBody
+	@RequestMapping(value="/mypage/alarmDelete", method=RequestMethod.GET)
+	public int alarmDelete(@RequestParam(value="ALARM_NUM") String ALARM_NUM) {
+		
+		Map<String, Object> parameterMap = new HashMap<String, Object>();
+		
+		parameterMap.put("ALARM_NUM",ALARM_NUM);
+		
+		int deleteReturn = mypageService.alarmDelete(parameterMap);//삭제되면 1리턴
+
+		return deleteReturn;
+	}
 }
