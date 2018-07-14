@@ -306,7 +306,7 @@ span.deliveryTEXT {
 			}
 		});
 	}
-	function purchaseApproveCancel(purchaseNumber,buyer){
+	function purchaseApproveCancel(purchaseNumber,buyer, category_num, product_num, sessionId){
 		var params = "pn=${product_num}&purnum="+purchaseNumber+"&buyer="+buyer;
 		$.ajax({
 			type : "POST",
@@ -316,6 +316,7 @@ span.deliveryTEXT {
 			success : function(data){
 				alert(data.resultMsg);
 				document.location.href='/picksell/products/detail/${category_num}/${product_num}';
+				alarmInsert(buyer, category_num, product_num,sessionId,"8");
 			}
 		});
 	}
@@ -372,7 +373,7 @@ span.deliveryTEXT {
 							<td><input type="button" value="수락" onclick="purchaseApprove('${sellerPurList.PURCHASE_NUM}','${sellerPurList.BUYER_ID }','${category_num}','${product_num}','${sessionId}');" /></td>
 						</c:when>
 						<c:when test="${sellerPurList.STATUS == 1 }">
-							<td><input type="button" value="수락취소" onclick="purchaseApproveCancel('${sellerPurList.PURCHASE_NUM}','${sellerPurList.BUYER_ID }');" /></td>
+							<td><input type="button" value="수락취소" onclick="purchaseApproveCancel('${sellerPurList.PURCHASE_NUM}','${sellerPurList.BUYER_ID }','${category_num}','${product_num}','${sessionId}');" /></td>
 						</c:when>
 					</c:choose>
 				</tr>
