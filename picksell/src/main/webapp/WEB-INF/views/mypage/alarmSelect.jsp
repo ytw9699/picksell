@@ -32,7 +32,7 @@ function alarmRead(ALARM_NUM){
 <c:if test="${fn:length(alarmList) > 0}" >
 	<c:forEach var="alarmMap" items="${alarmList}" varStatus="Index">
 		
-		<td>${Index.index+1}. ${alarmMap.ALARM_REGDATE}에</td>
+		<td>${Index.index+1}. <fmt:formatDate value="${alarmMap.ALARM_REGDATE}" pattern="yy-MM-dd HH:mm" />에</td>
 		
 		<c:if test="${alarmMap.ALARM_KIND == '2'}">
 			<td>
