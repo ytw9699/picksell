@@ -159,7 +159,7 @@ input.basket_go {
 }
 
 input.purchase_go {
-    width: 100%;
+    width: 48%;
     border: none;
     color: white;
     box-sizing: border-box;
@@ -231,30 +231,34 @@ span.deliveryTEXT {
     color: #333;
     font-size: 14px;
 }
-input.purchase_apply, input.purchase_cancel {
-    width: 100%;
-    border: none;
-    color: white;
-    box-sizing: border-box;
-    padding: 16px;
-    font-size: 15px;
-    background-color: #7151fc;
-}
 </style>
 
 </head>
 <body>
 
 <script>
-	
+	//알람입력
+	function alarmInsert(ALARM_TARGET, ALARM_VARIABLE1, ALARM_VARIABLE2, ALARM_WRITER,ALARM_KIND){
+	var allData = "ALARM_TARGET="+ALARM_TARGET+"&ALARM_VARIABLE1="+ALARM_VARIABLE1+"&ALARM_VARIABLE2="+ALARM_VARIABLE2+"&ALARM_WRITER="+ALARM_WRITER+"&ALARM_KIND="+ALARM_KIND;
+			$.ajax({
+				type : "GET",
+				url : "/picksell/mypage/alarmInsert",
+				dataType : 'json',
+				data : allData,
+				success : function(data){
+					alert("알람입력완료");
+				}
+			});	
+	}
 	//구매요청
-	function purchaseApply(){
+	function purchaseApply(SELLER_ID, category_num, product_num, sessionId){
 		fetch('/picksell/products/purchseRequest/${product_num}/${sessionScope.sessionId}').then(function(response){
 			response.text().then(function(text){
 				if(response.status == '200'){
 					alert('구매신청이 완료되었습니다! \n판매자의 수락까지 기다려주세요');
-					var inner = "<input type='button' value='구매신청 취소하기' class='purchase_cancel' onclick='purchaseCancel()' />";
-					document.getElementById('purchaseWrap').innerHTML = inner;		
+					var inner = "<input type='button' value='구매신청 취소하기' onclick='purchaseCancel()' />";
+					document.getElementById('purchaseWrap').innerHTML = inner;	
+					alarmInsert(SELLER_ID, category_num, product_num, sessionId, "3");
 				}
 			})
 		})
@@ -265,7 +269,7 @@ input.purchase_apply, input.purchase_cancel {
 			response.text().then(function(text){
 				if(response.status == '200'){
 					alert('구매신청이 취소되었습니다!');
-					var inner = "<input type='button' value='구매신청하기' class='purchase_apply' onclick='purchaseApply()' />";
+					var inner = "<input type='button' value='구매신청하기' onclick='purchaseApply()' />";
 					document.getElementById('purchaseWrap').innerHTML = inner;
 				}
 			})
@@ -286,7 +290,7 @@ input.purchase_apply, input.purchase_cancel {
 			})
 		})
 	}
-	function purchaseApprove(purchaseNumber,buyer){
+	function purchaseApprove(purchaseNumber, buyer, category_num, product_num, sessionId){
 		var params = "pn=${product_num}&purnum="+purchaseNumber+"&buyer="+buyer;
 		$.ajax({
 			type : "POST",
@@ -294,8 +298,10 @@ input.purchase_apply, input.purchase_cancel {
 			dataType : 'json',
 			data : params,
 			success : function(data){
+				alarmInsert(buyer, category_num, product_num,sessionId,"2");
 				alert(data.resultMsg);
 				document.location.href='/picksell/products/detail/${category_num}/${product_num}';
+				
 			}
 		});
 	}
@@ -362,7 +368,7 @@ input.purchase_apply, input.purchase_cancel {
 					
 					<c:choose>
 						<c:when test="${sellerPurList.STATUS == 0 }">
-							<td><input type="button" value="수락" onclick="purchaseApprove('${sellerPurList.PURCHASE_NUM}','${sellerPurList.BUYER_ID }');" /></td>
+							<td><input type="button" value="수락" onclick="purchaseApprove('${sellerPurList.PURCHASE_NUM}','${sellerPurList.BUYER_ID }','${category_num}','${product_num}','${sessionId}');" /></td>
 						</c:when>
 						<c:when test="${sellerPurList.STATUS == 1 }">
 							<td><input type="button" value="수락취소" onclick="purchaseApproveCancel('${sellerPurList.PURCHASE_NUM}','${sellerPurList.BUYER_ID }');" /></td>
@@ -449,7 +455,7 @@ input.purchase_apply, input.purchase_cancel {
 				<c:choose>
 					<c:when test="${resultObject.DEAL_STATUS == 0 and resultObject.HOWTOSELL != 2 and alreadyPurchase == false and isMyProducts == 'no' }">
 						<div class="purchaseWrap" id="purchaseWrap">
-						<input type="button" class="purchase_apply" value="구매신청하기" onclick="purchaseApply();" />
+						<input type="button" class="purchase_apply" value="구매신청하기" onclick="purchaseApply('${resultObject.SELLER_ID}','${category_num}','${product_num}','${sessionId}');" />
 						</div>
 					</c:when>
 					<c:when test="${isApprovedPC == 'yes' and alreadyPurchase == true }">
@@ -472,7 +478,7 @@ input.purchase_apply, input.purchase_cancel {
 			
 			<!-- 구매하기 + 구매수락일때를 생각해야함 -->
 			<c:choose>
-				<c:when test="${resultObject.HOWTOSELL == 2 and isMyProducts != 'yes' }">
+				<c:when test="${resultObject.HOWTOSELL == 2 }">
 					<input type="submit" class="purchase_go" value="구매하기" />
 				</c:when>
 			</c:choose>

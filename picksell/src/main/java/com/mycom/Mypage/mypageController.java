@@ -267,15 +267,58 @@ public class mypageController {
 	}
 	@ResponseBody
 	@RequestMapping(value="/mypage/pulsStock", method=RequestMethod.GET)
-	public void pulsStock(HttpServletRequest Request) {//재고 1 증가
+	public String pulsStock(HttpServletRequest Request) {//재고 1 증가
 		String PRODUCT_NUM = Request.getParameter("PRODUCT_NUM");
 		mypageService.pulsStock(PRODUCT_NUM);
+		
+		return "String";//ajax에서 json이 아니라 text여야함
 	}	
-	
-	@ResponseBody
+	@ResponseBody//이렇게 선언하고
 	@RequestMapping(value="/mypage/minusStock", method=RequestMethod.GET)
-	public void minusStock(HttpServletRequest Request) {//재고 1감소
+	public Map minusStock(HttpServletRequest Request) {//재고 1감소
 		String PRODUCT_NUM = Request.getParameter("PRODUCT_NUM");
 		mypageService.minusStock(PRODUCT_NUM);
+			Map<String, Object> parameterMap = new HashMap<String, Object>();
+		return parameterMap;//값을 이렇게 걍 아무거나 넘겨줘야 dataType : 'json',과 연관되서
+		//success : function(data) 안의 값이 실행됨
+}
+	
+	@ResponseBody
+	@RequestMapping(value="/mypage/alarmInsert", method=RequestMethod.GET)
+	public Map alarmInsert(
+			@RequestParam(value="ALARM_TARGET") String ALARM_TARGET,
+			@RequestParam(value="ALARM_VARIABLE1", required=false, defaultValue="0") String ALARM_VARIABLE1,
+			@RequestParam(value="ALARM_VARIABLE2", required=false, defaultValue="0") String ALARM_VARIABLE2,
+			@RequestParam(value="ALARM_WRITER") String ALARM_WRITER,
+			@RequestParam(value="ALARM_KIND") String ALARM_KIND
+			) {
+		
+		Map<String, Object> parameterMap = new HashMap<String, Object>();
+		
+		parameterMap.put("ALARM_TARGET",ALARM_TARGET);
+		parameterMap.put("ALARM_VARIABLE1",ALARM_VARIABLE1);
+		parameterMap.put("ALARM_VARIABLE2",ALARM_VARIABLE2);
+		parameterMap.put("ALARM_WRITER",ALARM_WRITER);
+		parameterMap.put("ALARM_KIND",ALARM_KIND);
+		
+		mypageService.alarmInsert(parameterMap);//알람 입력
+		return parameterMap;
+}
+	@RequestMapping("/mypage/alarmSelect")
+	public String alarmSelect(HttpSession session, Model model) {//알람을 허용한 사람만 리스트 가져오기
+		
+	String sessionId =(String)session.getAttribute("sessionId");//세션아이디값
+	String sessionAlarm =(String)session.getAttribute("sessionAlarm");//세션알람값
+	
+	if(!sessionAlarm.equals("ON")){
+	 return "alarmSelect";
 	}
+	else {//알림이 ON일때만 리스트 가져오자
+		List<Map<String, Object>> alarmList = mypageService.alarmSelect(sessionId);//세션아이디에 해당하는 알람 가져옴
+		
+		model.addAttribute("alarmList", alarmList);
+		
+		return "alarmSelect";
+    } 
+  }
 }

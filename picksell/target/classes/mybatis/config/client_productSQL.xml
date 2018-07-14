@@ -211,4 +211,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where product_num = #{product_num} and buyer_id = #{buyer_id}
 	</delete>
 	
+	<!-- 알람읽기 -->
+<update id="alarmRead" parameterType="int">
+		update PS_ALARM set ALARM_CHECK = 'YES' where ALARM_NUM = #{ALARM_NUM}
+</update>
+
 </mapper>
