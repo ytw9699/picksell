@@ -11,7 +11,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <title>알람 읽기</title>
-<h2>알람 읽기</h2>
+<h2>알림 읽기</h2>
 </head>
 <body>
 <script>
@@ -31,23 +31,34 @@ function alarmRead(ALARM_NUM){
 </script>
 <c:if test="${fn:length(alarmList) > 0}" >
 	<c:forEach var="alarmMap" items="${alarmList}" varStatus="Index">
-		<c:if test="${alarmMap.ALARM_KIND == '3'}">
+		
+		<td>${Index.index+1}. ${alarmMap.ALARM_REGDATE}에</td>
+		
+		<c:if test="${alarmMap.ALARM_KIND == '2'}">
 			<td>
 			<a href="/picksell/products/detail/${alarmMap.ALARM_VARIABLE1}/${alarmMap.ALARM_VARIABLE2}?ALARM_NUM=${alarmMap.ALARM_NUM}">
-			${Index.index+1}.  ${alarmMap.ALARM_WRITER}님께서 구매신청을 하셨습니다.
+			 		${alarmMap.ALARM_WRITER}님께서 구매신청을 수락하셨습니다.
 			</a>
 			</td>
-		<%-- <c:if test="${alarmMap.ALARM_CHECK == 'YES'}">
+		</c:if>
+		
+		 <c:if test="${alarmMap.ALARM_KIND == '3'}">
+				<td>
+				<a href="/picksell/products/detail/${alarmMap.ALARM_VARIABLE1}/${alarmMap.ALARM_VARIABLE2}?ALARM_NUM=${alarmMap.ALARM_NUM}">
+					${alarmMap.ALARM_WRITER}님께서 구매신청을 하셨습니다.
+				</a>
+				</td>
+	     </c:if>
+		<br>
+	</c:forEach>
+</c:if>
+
+<%-- <c:if test="${alarmMap.ALARM_CHECK == 'YES'}">
 		읽음
 		</c:if>
 		<c:if test="${alarmMap.ALARM_CHECK == 'NO'}">
 		안읽음
 		</c:if> --%>
-		</c:if>
-		<td>${alarmMap.ALARM_REGDATE}</td>
-		<br>
-	</c:forEach>
-</c:if>
 
 <c:if test="${fn:length(alarmList) < 1}">
 <p>알람이 없습니다</p>

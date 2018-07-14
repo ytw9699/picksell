@@ -24,6 +24,7 @@
 		<td>가격</td>
 		<td>신청날짜</td>
 		<td>구매 요청 상태</td>
+		<td>판매자 아이디</td>
 		<td>취소</td>
 		<td>구매하기</td>
 	</tr>
@@ -44,6 +45,7 @@
 		<c:if test="${purchase.STATUS == '1'}">
 		<td>구매 요청 수락 완료</td>
 		</c:if>
+		<td>${purchase.SELLER_ID }</td>
 		<td><input type="button" value="취소" id ="cancel" onclick="location.href = '/picksell/mypage/deletePurchaseList/${purchase.PURCHASE_NUM }'"/></td>
 		<td><input type="button" value="구매" id ="purchase" disabled="disabled" onclick="location.href = '/picksell/products/detail/${purchase.CATEGORY_NUM }/${purchase.PRODUCT_NUM }'"/></td>
 	</tr>

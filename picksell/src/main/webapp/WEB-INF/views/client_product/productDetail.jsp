@@ -238,17 +238,15 @@ span.deliveryTEXT {
 
 <script>
 	//알람입력
-	function alarmInsert(SELLER_ID, category_num, product_num, sessionId){
-		alert(1);
-		alert(category_num);
-		alert(product_num);
-	var allData = "seller_id="+SELLER_ID+"&category_num="+category_num+"&product_num="+product_num+"&sessionId="+sessionId;
+	function alarmInsert(ALARM_TARGET, ALARM_VARIABLE1, ALARM_VARIABLE2, ALARM_WRITER,ALARM_KIND){
+	var allData = "ALARM_TARGET="+ALARM_TARGET+"&ALARM_VARIABLE1="+ALARM_VARIABLE1+"&ALARM_VARIABLE2="+ALARM_VARIABLE2+"&ALARM_WRITER="+ALARM_WRITER+"&ALARM_KIND="+ALARM_KIND;
 			$.ajax({
 				type : "GET",
 				url : "/picksell/mypage/alarmInsert",
 				dataType : 'json',
 				data : allData,
 				success : function(data){
+					alert("알람입력완료");
 				}
 			});	
 	}
@@ -260,9 +258,7 @@ span.deliveryTEXT {
 					alert('구매신청이 완료되었습니다! \n판매자의 수락까지 기다려주세요');
 					var inner = "<input type='button' value='구매신청 취소하기' onclick='purchaseCancel()' />";
 					document.getElementById('purchaseWrap').innerHTML = inner;	
-					alarmInsert(SELLER_ID, category_num, product_num, sessionId);
-					alert(category_num);
-					alert(product_num);
+					alarmInsert(SELLER_ID, category_num, product_num, sessionId, "3");
 				}
 			})
 		})
@@ -294,7 +290,7 @@ span.deliveryTEXT {
 			})
 		})
 	}
-	function purchaseApprove(purchaseNumber,buyer){
+	function purchaseApprove(purchaseNumber, buyer, category_num, product_num, sessionId){
 		var params = "pn=${product_num}&purnum="+purchaseNumber+"&buyer="+buyer;
 		$.ajax({
 			type : "POST",
@@ -302,8 +298,10 @@ span.deliveryTEXT {
 			dataType : 'json',
 			data : params,
 			success : function(data){
+				alarmInsert(buyer, category_num, product_num,sessionId,"2");
 				alert(data.resultMsg);
 				document.location.href='/picksell/products/detail/${category_num}/${product_num}';
+				
 			}
 		});
 	}
@@ -370,7 +368,7 @@ span.deliveryTEXT {
 					
 					<c:choose>
 						<c:when test="${sellerPurList.STATUS == 0 }">
-							<td><input type="button" value="수락" onclick="purchaseApprove('${sellerPurList.PURCHASE_NUM}','${sellerPurList.BUYER_ID }');" /></td>
+							<td><input type="button" value="수락" onclick="purchaseApprove('${sellerPurList.PURCHASE_NUM}','${sellerPurList.BUYER_ID }','${category_num}','${product_num}','${sessionId}');" /></td>
 						</c:when>
 						<c:when test="${sellerPurList.STATUS == 1 }">
 							<td><input type="button" value="수락취소" onclick="purchaseApproveCancel('${sellerPurList.PURCHASE_NUM}','${sellerPurList.BUYER_ID }');" /></td>
