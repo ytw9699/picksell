@@ -48,8 +48,8 @@ public class mypageService implements mypageDao {
 		return sqlMapper.selectOne("mypage.orderDetail", PRODUCT_NUM);
 	}
 
-	public List<Map<String, Object>> orderSubDetail(int PRODUCT_NUM) {
-		return sqlMapper.selectList("mypage.orderSubDetail", PRODUCT_NUM);
+	public List<Map<String, Object>> orderSubDetail(int ORDER_NUM) {
+		return sqlMapper.selectList("mypage.orderSubDetail", ORDER_NUM);
 	}
 
 	public String userCheck(String string) {
@@ -86,7 +86,20 @@ public class mypageService implements mypageDao {
 
 		return sqlMapper.delete("mypage.deletePurchaseList",parameterMap);
 	}
-	/*public void deletePurchaseList(int purchase_num) {
-		sqlMapper.delete("mypage.deletePurchaseList", purchase_num);
-	}*/
+
+	public void canclePs_order(Map<String, Object> parameterMap) {
+		sqlMapper.update("mypage.canclePs_order", parameterMap);
+	}
+
+	public void cancleDate(Map<String, Object> parameterMap) {
+		sqlMapper.update("mypage.cancleDate", parameterMap);
+	}
+
+	public void updateDeal_status(Map<String, Object> parameterMap) {
+		sqlMapper.update("mypage.updateDeal_status", parameterMap);
+	}
+
+	public void alarmRead(int ALARM_NUM) {//알람읽기
+		sqlMapper.update("client_product.alarmRead", ALARM_NUM);
+	}
 }
