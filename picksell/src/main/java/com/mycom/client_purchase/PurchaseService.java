@@ -1,5 +1,7 @@
 package com.mycom.client_purchase;
 
+import java.util.Map;
+
 import javax.annotation.Resource;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -12,3 +14,4 @@ public class PurchaseService implements PurchaseDao {
 	private SqlSessionTemplate sqlMapper;
 	
 }
+
