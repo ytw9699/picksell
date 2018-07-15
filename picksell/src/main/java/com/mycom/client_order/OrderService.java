@@ -1,6 +1,7 @@
 package com.mycom.client_order;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -24,5 +25,7 @@ public class OrderService implements OrderDao {
 		}
 		
 	}
-	
+	public void deletePURCHASE_LIST(Map<String, Object> parameterMap) {//일반구매 완료시 오더리스트 한줄 삭제 by 태원
+		sqlMapper.update("client_order.deletePURCHASE_LIST", parameterMap);
+	}
 }

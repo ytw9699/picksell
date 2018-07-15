@@ -1,6 +1,9 @@
 애초에 테이블을 만들때 각각의 테이블에 중복된 컬럼값을 어느정도 적절하게 집어넣어주는것이
 전체적인 개발방향에 있어서 좋은것인지 
 중복을 줄인것인가 vs 복잡한 로직을 줄이고, 자유도높은 로직을 짤고, 가독성이 높은 로직을짤것인가
+alter table ps_orderlist drop (deleted); 테이블 컬럼 삭제
+ALTER TABLE PS_PURCHASE_LIST ADD(deleted VARCHAR2(30) DEFAULT 'NO'); 테이블 컬럼 추가
+
 select a.step1_date, a.order_num, a.status ,b.order_quantity, c.subject, c.price, c.first_img
 
 from ps_order a, ps_orderlist b, ps_product c
@@ -42,7 +45,7 @@ select a.seller_id, a.subject, a.first_img, a.price, a.category_num, b.purchase_
    from(select seller_id, subject, first_img, price, category_num, product_num  from ps_product)a, ps_purchase_list b , ps_order c where a.product_num = b.product_num and a.product_num = c.product_num
 order by b.regdate desc
    
-ALTER TABLE ps_order ADD(PRODUCT_NUM number); 
+ALTER TABLE PS_ORDERLIST ADD(deleted VARCHAR2(30));  SELLER_ID VARCHAR2(30)
 
 select a.seller_id, a.subject, a.first_img, a.price, a.category_num, b.purchase_num, b.product_num, b.buyer_id, b.regdate, b.status
    from(select seller_id, subject, first_img, price, category_num, product_num  from ps_product)a, ps_purchase_list b where a.product_num = b.product_num
@@ -98,6 +101,8 @@ CREATE TABLE PS_MEMBER (
     BUSINESS_NUMBER VARCHAR2(100),--사업자등록번호
     BUSINESS_NAME VARCHAR2(100),--상호명
     REGDATE DATE NOT NULL--가입일
+    
+    
 );
 
 DROP TABLE PS_MEMBER PURGE;
