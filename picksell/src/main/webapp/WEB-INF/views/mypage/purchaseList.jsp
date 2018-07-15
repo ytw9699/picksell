@@ -48,7 +48,7 @@
 <table>
 <c:if test="${fn:length(purchaseList) > 0}">
 	<tr>
-		<td>대표이미지</td>
+		<td>사진</td>
 		<td>제목</td>
 		<td>가격</td>
 		<td>신청날짜</td>
@@ -67,7 +67,7 @@
 		</td>
 		<td><a href="/picksell/products/detail/${purchase.CATEGORY_NUM }/${purchase.PRODUCT_NUM }">${purchase.SUBJECT }</a></td>
 		<td><fmt:formatNumber value="${purchase.PRICE }" pattern="#,###.##" /> 원</td>
-		<td>${purchase.REGDATE }</td>
+		<td><fmt:formatDate value="${purchase.REGDATE}" pattern="yy년 MM월 dd일 hh:mm" /></td>
 		<c:if test="${purchase.STATUS == '0'}">
 		<td>구매 요청 수락 대기중</td>
 		</c:if>
