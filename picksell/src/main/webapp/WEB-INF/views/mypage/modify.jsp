@@ -60,11 +60,11 @@ else if(NewPassword !== rePassword){//
 	상호명<input type="text" value="${resultMap.BUSINESS_NAME}" name="business_name" />
 	<br/>
 	</c:if>
-	가입일: <fmt:formatDate value="${resultMap.REGDATE}" pattern="yyyy년 MM월 dd일 hh:mm:ss" />
+	가입일: <fmt:formatDate value="${resultMap.REGDATE}" pattern="yy.MM.dd 일 hh:mm" />
 	<br/>
 	알람상태: ${resultMap.ALARM_CONSENT}
 	<br/>
-	최근 로그인:
+	최근 로그인: <fmt:formatDate value="${resultMap.LATESTLOGIN2}" pattern="yy.MM.dd 일 hh:mm" />
 	<br/>
 	계정상태: 
 	<c:if test="${resultMap.STATUS == '0'}">

@@ -31,5 +31,13 @@ public class MemberService implements MemberDao {
 	public void changeMyAlarm(Map<String, Object> map) {
 		sqlMapper.update("member.userAlarmChange", map);
 	}
+
+	public void insertDate(Map<String, Object> map) {
+		sqlMapper.insert("member.insertDate", map);
+	}
+
+	public void changeDate(Map<String, Object> resultMap) {
+		sqlMapper.update("member.changeDate",resultMap);
+	}
 	
 }

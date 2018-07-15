@@ -69,4 +69,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		 where id = #{sessionId}
 	</update>
 	
+	<update id="insertDate" parameterType="hashmap">
+	  	update ps_member set latestLogin1 = sysdate where id = #{ID}
+	</update>
+	
+	
+	<update id="changeDate" parameterType="hashmap">
+	  	update ps_member set latestLogin2 = #{LATESTLOGIN1} where id = #{ID}
+	</update>
+	
 </mapper>
