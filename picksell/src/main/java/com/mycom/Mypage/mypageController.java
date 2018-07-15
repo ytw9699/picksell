@@ -325,18 +325,20 @@ public class mypageController {
 }
 	@RequestMapping("/mypage/alarmSelect")
 	public String alarmSelect(HttpSession session, Model model) {//알람을 허용한 사람만 리스트 가져오기
-		
+		System.out.println(1);
 	String sessionId =(String)session.getAttribute("sessionId");//세션아이디값
+	System.out.println(2);
 	String sessionAlarm =(String)session.getAttribute("sessionAlarm");//세션알람값
-	
+	System.out.println(3);
 	if(!sessionAlarm.equals("ON")){
 	 return "alarmSelect";
 	}
 	else {//알림이 ON일때만 리스트 가져오자
+		System.out.println(4);
 		List<Map<String, Object>> alarmList = mypageService.alarmSelect(sessionId);//세션아이디에 해당하는 알람 가져옴
-		
+		System.out.println(5);
 		model.addAttribute("alarmList", alarmList);
-		
+		System.out.println(6);
 		return "alarmSelect";
     } 
 }

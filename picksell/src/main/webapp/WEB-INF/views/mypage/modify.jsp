@@ -62,6 +62,8 @@ else if(NewPassword !== rePassword){//
 	</c:if>
 	가입일: <fmt:formatDate value="${resultMap.REGDATE}" pattern="yyyy년 MM월 dd일 hh:mm:ss" />
 	<br/>
+	알람상태: ${resultMap.ALARM_CONSENT}
+	<br/>
 	최근 로그인:
 	<br/>
 	계정상태: 
