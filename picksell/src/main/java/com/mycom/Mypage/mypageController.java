@@ -138,18 +138,6 @@ public class mypageController {
 	
 		return "purchaseList";
 	}
-		
-	/*@RequestMapping("/mypage/deletePurchaseList/{purchase_num}")
-	public String deletePurchaseList(@PathVariable("purchase_num") int purchase_num) {	
-			
-		System.out.println(purchase_num);
-		
-    	//parameterMap.put("PURCHASE_NUM",PURCHASE_NUM);
-    	
-		mypageService.deletePurchaseList(purchase_num);
-	
-		return  "redirect:/mypage/purchaseList/0";
-	}*/
 	
 	@ResponseBody
 	@RequestMapping(value="/mypage/deletePurchaseList", method=RequestMethod.GET)
