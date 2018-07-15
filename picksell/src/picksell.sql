@@ -4,6 +4,8 @@
 alter table ps_orderlist drop (deleted); 테이블 컬럼 삭제
 ALTER TABLE PS_PURCHASE_LIST ADD(deleted VARCHAR2(30) DEFAULT 'NO'); 테이블 컬럼 추가
 
+ALTER TABLE PS_MEMBER ADD(latestLogin1 DATE); 테이블 컬럼 추가
+
 select a.step1_date, a.order_num, a.status ,b.order_quantity, c.subject, c.price, c.first_img
 
 from ps_order a, ps_orderlist b, ps_product c
