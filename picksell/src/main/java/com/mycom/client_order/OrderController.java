@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.mycom.client_purchase.PurchaseService;
+import com.mycom.Mypage.mypageService;
 
 @Controller
 public class OrderController {
@@ -27,6 +27,7 @@ public class OrderController {
 			HttpServletRequest request,
 			Model model,
 			@RequestParam(value="o_list[0].product_num", required=false, defaultValue="0") String product_num, //by 태원
+			@RequestParam(value="o_list[0].seller_id", required=false, defaultValue="0") String seller_id, //by 태원
 			@RequestParam(value="buyer_id", required=false, defaultValue="0") String buyer_id //by 태원
 			) {
 		List<OrderListModel> parameterList = orderModel.getO_list();
@@ -41,6 +42,15 @@ public class OrderController {
 		
 		if(!product_num.equals("0")) {
 		orderService.deletePURCHASE_LIST(parameterMap);//일반구매 완료시 오더리스트 한줄 삭제 by 태원
+		
+		parameterMap.put("ALARM_TARGET",seller_id);//by태원 알람입력추가
+		parameterMap.put("ALARM_VARIABLE1","empty");//by태원 알람입력추가
+		parameterMap.put("ALARM_VARIABLE2","empty");//by태원 알람입력추가
+		parameterMap.put("ALARM_WRITER",buyer_id);//by태원 알람입력추가
+		parameterMap.put("ALARM_KIND","9");//by태원 알람입력추가
+		
+		orderService.alarmInsert(parameterMap);//by태원 알람입력추가
+		
 		}
 		model.addAttribute("total_price", orderModel.getTotal_price());
 		
