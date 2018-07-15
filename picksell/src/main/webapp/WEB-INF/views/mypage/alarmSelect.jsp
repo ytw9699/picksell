@@ -64,6 +64,14 @@ function alarmDelete(ALARM_NUM){
 				</td>
 	     </c:if>
 	     
+	     <c:if test="${alarmMap.ALARM_KIND == '6'}">
+				<td>
+				<a href="/picksell/mypage/saleDetail/${alarmMap.ALARM_VARIABLE1}">
+					${alarmMap.ALARM_WRITER}님께서 인수확인 및 거래 종료 하셨습니다.
+				</a>
+				</td>
+	     </c:if>
+	     
 	     <c:if test="${alarmMap.ALARM_KIND == '7'}">
 				<td>
 				<a href="/picksell/products/detail/${alarmMap.ALARM_VARIABLE1}/${alarmMap.ALARM_VARIABLE2}?ALARM_NUM=${alarmMap.ALARM_NUM}">
@@ -104,6 +112,13 @@ function alarmDelete(ALARM_NUM){
 				</td>
 	     </c:if>
 	     
+	     <c:if test="${alarmMap.ALARM_KIND == '12'}">
+				<td>
+				<a href="/picksell/admin_order/list?searchNum=0&isSearch=${alarmMap.ALARM_WRITER}">
+					${alarmMap.ALARM_WRITER}님께서 입금 하셨습니다. 관리자는 확인후 입금완료 바랍니다.
+				</a>
+				</td>
+	     </c:if>
 	     		<td>-<fmt:formatDate value="${alarmMap.ALARM_REGDATE}" pattern="yy-MM-dd HH:mm" /></td>
 	     		<td>
 	     		<input type="button" id="alarmDelete" value="삭제" onclick="alarmDelete('${alarmMap.ALARM_NUM}')" />

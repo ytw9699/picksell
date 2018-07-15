@@ -235,15 +235,15 @@ public class mypageController {
 }
 	@RequestMapping(value="/mypage/orderDetail/{ORDER_NUM}", method=RequestMethod.GET)
 	public String orderDetail(Model model, @PathVariable("ORDER_NUM") int ORDER_NUM) {	
-			System.out.println(1);
-		Map<String, Object> orderDetail = mypageService.orderDetail(ORDER_NUM);
-		System.out.println(2);
+		
+			Map<String, Object> orderDetail = mypageService.orderDetail(ORDER_NUM);
+			
 			model.addAttribute("orderDetail", orderDetail);
-			System.out.println(3);
+			
 			List<Map<String, Object>> orderSubDetail = mypageService.orderSubDetail(ORDER_NUM);
-			System.out.println(4);
+			
 			model.addAttribute("orderSubDetail", orderSubDetail);
-			System.out.println(5);
+			
 		return "orderDetail";
 	}
 	@RequestMapping(value="/mypage/saleDetail/{ORDER_NUM}", method=RequestMethod.GET)
@@ -313,20 +313,18 @@ public class mypageController {
 }
 	@RequestMapping("/mypage/alarmSelect")
 	public String alarmSelect(HttpSession session, Model model) {//알람을 허용한 사람만 리스트 가져오기
-		System.out.println(1);
+		
 	String sessionId =(String)session.getAttribute("sessionId");//세션아이디값
-	System.out.println(2);
 	String sessionAlarm =(String)session.getAttribute("sessionAlarm");//세션알람값
-	System.out.println(3);
+	
 	if(!sessionAlarm.equals("ON")){
 	 return "alarmSelect";
 	}
 	else {//알림이 ON일때만 리스트 가져오자
-		System.out.println(4);
+		
 		List<Map<String, Object>> alarmList = mypageService.alarmSelect(sessionId);//세션아이디에 해당하는 알람 가져옴
-		System.out.println(5);
 		model.addAttribute("alarmList", alarmList);
-		System.out.println(6);
+		
 		return "alarmSelect";
     } 
 }
@@ -362,5 +360,34 @@ public class mypageController {
 		}
 		
 		return parameterMap;
+	}
+	
+	@RequestMapping(value="/mypage/completing", method=RequestMethod.GET)
+	public String completing( 
+			@RequestParam(value="ORDER_NUM",required=false, defaultValue="0") String ORDER_NUM,
+			@RequestParam(value="BUYER_ID",required=false, defaultValue="0") String BUYER_ID,
+			@RequestParam(value="SELLER_ID",required=false, defaultValue="0") String SELLER_ID
+			) {	
+			if(!ORDER_NUM.equals("0")) {
+			
+			Map<String, Object> parameterMap = new HashMap<String, Object>();
+			
+			parameterMap.put("ORDER_NUM", ORDER_NUM);
+		
+			mypageService.completing(parameterMap);
+			
+			mypageService.step4_date(parameterMap);
+			
+			parameterMap.put("ALARM_TARGET",SELLER_ID);
+			parameterMap.put("ALARM_VARIABLE1",ORDER_NUM);
+			parameterMap.put("ALARM_VARIABLE2","empty");
+			parameterMap.put("ALARM_WRITER", BUYER_ID);
+			parameterMap.put("ALARM_KIND","6");
+			
+			mypageService.alarmInsert(parameterMap);//알람 입력
+			
+			return "completing";//인수확인 및 거래 완료가 정상적으로 됬을때
+			}
+			return "completing";//인수확인 및 거래 완료가 정상적으로 안됬을때
 	}
 }
