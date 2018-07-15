@@ -92,12 +92,6 @@ ps_purchase_list b where a.product_num = b.product_num and b.buyer_id = #{sessio
       
 </select>
 
-<select id="deletePurchaseList" parameterType="int">
-	<!-- 구매리스트에서 구매신청번호에 해당하는거 한줄 삭제 -->
-	delete from ps_purchase_list where purchase_num = #{purchase_num}
-	
-</select>
-
 <!-- ps_order에서  리스트  반환-->
 <select id="saleList" resultType="hashmap" parameterType="hashmap">
 
@@ -164,15 +158,15 @@ c.status = #{status}
 </select>
 
 <!-- 주문조회 상세보기 -->	
-<select id="orderDetail" parameterType="Integer" resultType="hashmap">
+<select id="orderDetail" parameterType="int" resultType="hashmap">
 
-select * from ps_order where ORDER_NUM = #{order_num}
+	select * from ps_order where ORDER_NUM = #{ORDER_NUM}
 
 </select>
 <!-- 판매조회 상세보기 -->	
 <select id="saleDetail" parameterType="Integer" resultType="hashmap">
 
-select * from ps_order where ORDER_NUM = #{order_num}
+select * from ps_order where ORDER_NUM = #{ORDER_NUM}
 
 </select>
 <!-- 판매조회 상세보기 안에 관련 상품글 리스트 -->
@@ -184,7 +178,7 @@ select * from ps_product a, PS_ORDERLIST b where b.ORDER_NUM = #{ORDER_NUM} and 
 <!-- 주문조회 상세보기 안에 관련 상품글 리스트 -->
 <select id="orderSubDetail" parameterType="Integer" resultType="hashmap">
 
-select * from ps_product a, PS_ORDERLIST b where b.ORDER_NUM = #{order_num} and b.PRODUCT_NUM = a.PRODUCT_NUM
+select * from ps_product a, PS_ORDERLIST b where b.ORDER_NUM = #{ORDER_NUM} and b.PRODUCT_NUM = a.PRODUCT_NUM
 
 </select>
 
@@ -221,5 +215,30 @@ select * from ps_product a, PS_ORDERLIST b where b.ORDER_NUM = #{order_num} and 
 <select id="alarmSelect" parameterType="String" resultType="hashmap">
 			select * from ps_alarm WHERE ALARM_TARGET = #{sessionId} order by ALARM_REGDATE desc
 </select>
+
+<select id="alarmDelete" parameterType="hashmap">
+	<!-- 알람리스트에서 알람번호에 해당하는거 한줄 삭제 -->
+	delete from PS_ALARM where ALARM_NUM = #{ALARM_NUM}
+</select>
+
+<select id="deletePurchaseList" parameterType="hashmap">
+	<!-- 구매리스트에서 구매신청번호에 해당하는거 한줄 삭제 -->
+	delete from ps_purchase_list where purchase_num = #{PURCHASE_NUM}
+		
+</select>
+<!-- //주문번호를 결제취소 44로바꿈 -->
+<update id="canclePs_order" parameterType="hashmap">
+		update ps_order set status = '44' where ORDER_NUM = #{ORDER_NUM}
+</update>
+
+<update id="cancleDate" parameterType="hashmap">
+	update ps_order set CANCEL_DATE = sysdate where ORDER_NUM = #{ORDER_NUM}
+</update>
+
+<update id="updateDeal_status" parameterType="hashmap">
+		update PS_PRODUCT set DEAL_STATUS = '0' where PRODUCT_NUM = #{PRODUCT_NUM}
+</update>
+
+
 
 </mapper>

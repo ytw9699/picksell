@@ -14,6 +14,53 @@
 </style>
 </head>
 <body>
+<script>
+	//알람입력
+	function alarmInsert(ALARM_TARGET, ALARM_VARIABLE1, ALARM_VARIABLE2, ALARM_WRITER,ALARM_KIND){
+	var allData = "ALARM_TARGET="+ALARM_TARGET+"&ALARM_VARIABLE1="+ALARM_VARIABLE1+"&ALARM_VARIABLE2="+ALARM_VARIABLE2+"&ALARM_WRITER="+ALARM_WRITER+"&ALARM_KIND="+ALARM_KIND;
+			$.ajax({
+				type : "GET",
+				url : "/picksell/mypage/alarmInsert",
+				dataType : 'json',
+				data : allData,
+				success : function(data){
+					alert("알람입력완료");
+				}
+			});
+	}   
+	function canclePs_order(ORDER_NUM, BUYER_ID, SELLER_ID, PRODUCT_NUM){
+		alert("1");
+		var allData = "ORDER_NUM="+ORDER_NUM+"&PRODUCT_NUM="+PRODUCT_NUM;
+				$.ajax({
+					type : "GET",
+					url : "/picksell/mypage/canclePs_order",
+					
+					
+					dataType : 'json',
+					data : allData,
+					success : function(data){
+						alarmInsert(BUYER_ID, ORDER_NUM, ORDER_NUM, SELLER_ID, "11");
+						//location.reload();
+					}
+				});	
+	}
+	
+	function canclePs_order2(ORDER_NUM, BUYER_ID, SELLER_ID){
+		alert("2");
+		var allData = "ORDER_NUM="+ORDER_NUM;
+				$.ajax({
+					type : "GET",
+					url : "/picksell/mypage/canclePs_order",
+					dataType : 'json',
+					data : allData,
+					success : function(data){
+						alarmInsert(BUYER_ID, ORDER_NUM, ORDER_NUM, SELLER_ID, "11");
+						//location.reload();
+					}
+				});	
+	}
+	
+</script>
 
 <script>
 var totalPRICE = Number(0);
@@ -24,12 +71,12 @@ var subtotalPRICE = Number('${saleDetail.TOTAL_PRICE}');
 <table>
 <c:if test="${fn:length(saleDetail) > 0}">
 		<h4>
-		고객의 주문일: 		  <fmt:formatDate value="${saleDetail.STEP1_DATE}" pattern="yyyy년 MM월 dd일 hh:mm:ss" />  <br>
-		고객의 입금완료일:    <fmt:formatDate value="${saleDetail.STEP2_DATE}" pattern="yyyy년 MM월 dd일 hh:mm:ss" />  <br>
-		배송시작일: 		 <fmt:formatDate value="${saleDetail.STEP3_DATE}" pattern="yyyy년 MM월 dd일 hh:mm:ss" />  <br>
-		인수확인 및 거래 완료일:<fmt:formatDate value="${saleDetail.STEP4_DATE}" pattern="yyyy년 MM월 dd일 hh:mm:ss" />  <br>
+		고객의 주문일: 		  <fmt:formatDate value="${saleDetail.STEP1_DATE}" pattern="yy년 MM월 dd일 hh:mm" />  <br>
+		고객의 입금완료일:    <fmt:formatDate value="${saleDetail.STEP2_DATE}" pattern="yy년 MM월 dd일 hh:mm" />  <br>
+		배송시작일: 		 <fmt:formatDate value="${saleDetail.STEP3_DATE}" pattern="yy년 MM월 dd일 hh:mm" />  <br>
+		인수확인 및 거래 완료일:<fmt:formatDate value="${saleDetail.STEP4_DATE}" pattern="yy년 MM월 dd일 hh:mm" />  <br>
 		<c:if test="${saleDetail.CANCEL_DATE != null}">
-		주문취소일: 		 <fmt:formatDate value="${saleDetail.CANCEL_DATE}" pattern="yyyy년 MM월 dd일 hh:mm:ss" />  <br>
+		주문취소일: 		 <fmt:formatDate value="${saleDetail.CANCEL_DATE}" pattern="yy년 MM월 dd일 hh:mm" />  <br>
 		</c:if>
 		주문번호:    	${saleDetail.ORDER_NUM} /
 		<c:if test="${saleDetail.STATUS == '0'}">
@@ -45,9 +92,11 @@ var subtotalPRICE = Number('${saleDetail.TOTAL_PRICE}');
 		거래상태:인수확인 및 거래완료
 		</c:if>
 		<c:if test="${saleDetail.STATUS == '44'}">
-		거래상태:결제취소
+		거래상태:<font color = "Red">결제취소</font> 
 		</c:if>
 		</h4>
+		
+		
 		<c:if test="${fn:length(saleSubDetail ) > 0}">
 		<c:forEach var="joinMap" items="${saleSubDetail }" varStatus="status">
 		<c:if test="${status.first}">
@@ -61,10 +110,10 @@ var subtotalPRICE = Number('${saleDetail.TOTAL_PRICE}');
 		
 		<a href="/picksell/products/detail/${joinMap.CATEGORY_NUM }/${joinMap.PRODUCT_NUM }">
 	    <img src="/picksell/resources/productUpload/${joinMap.FIRST_IMG }" style="width: 200px;" />
-	    /${joinMap.SUBJECT }
+	    ${joinMap.SUBJECT }
 		</a>
-		/${joinMap.PRICE }원
-		/갯수: ${joinMap.ORDER_QUANTITY}개
+		/<fmt:formatNumber value="${joinMap.PRICE }" pattern="#,###.##" /> 원
+		/${joinMap.ORDER_QUANTITY}개
 		<br>
          <script>
          totalPRICE += Number('${joinMap.PRICE}');
@@ -74,27 +123,24 @@ var subtotalPRICE = Number('${saleDetail.TOTAL_PRICE}');
     	 subtotalPRICE = subtotalPRICE - totalPRICE -2500;
          </script>
          </c:if>
-        <%--  <c:if test="${status.last}">
-          <script>
-          printTotal();
-          </script>
-         </c:if> --%>
-		<!-- 	<script>
-			    var totalPRICE = 0;
-			    $(document).ready(function () {
-					var PRICE = '${joinMap.PRICE}';
-					totalPRICE = totalPRICE + eval(PRICE);
-					$('#myPrice').html(totalPRICE);
-			    });
-			</script> -->
+		 <c:if test="${status.last}">
+		 <c:if test="${saleDetail.STATUS != '44'}">	
+		 <c:if test="${joinMap.HOWTOSELL != '2'}">																							
+		<input type ="button" value="주문취소" onclick="canclePs_order('${saleDetail.ORDER_NUM}','${saleDetail.BUYER_ID}','${joinMap.SELLER_ID}','${joinMap.PRODUCT_NUM}')"/>
+		</c:if>
+		<c:if test="${joinMap.HOWTOSELL == '2'}">																							
+		<input type ="button" value="주문취소" onclick="canclePs_order2('${saleDetail.ORDER_NUM}','${saleDetail.BUYER_ID}','${joinMap.SELLER_ID}')"/>
+		</c:if>
+		</c:if>
+		</c:if>
 		</c:forEach>
+		</c:if>
 		<h4>고객 결제 정보</h4>
 		결제수단: 계좌이체
 		<br>내가 판매한 상품의 총 금액:<span id="myPrice"></span>원
 		<br>고객이 구매한 다른 판매자의 상품 금액:<span id="otherPrice"></span>원
-		<br>배송비: 2500 원
-		<br>고객의 총 결제 금액: ${saleDetail.TOTAL_PRICE} 원
-		</c:if>
+		<br>배송비: 2,500 원
+		<br>고객의 총 결제 금액:<fmt:formatNumber value="${saleDetail.TOTAL_PRICE }" pattern="#,###.##" /> 원 
 		<br>
 		<h4>받는사람 정보</h4>  
 		수령인 : ${saleDetail.ACCOUNT_NAME}<br>

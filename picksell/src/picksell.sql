@@ -1,3 +1,6 @@
+애초에 테이블을 만들때 각각의 테이블에 중복된 컬럼값을 어느정도 적절하게 집어넣어주는것이
+전체적인 개발방향에 있어서 좋은것인지 
+중복을 줄인것인가 vs 복잡한 로직을 줄이고, 자유도높은 로직을 짤고, 가독성이 높은 로직을짤것인가
 select a.step1_date, a.order_num, a.status ,b.order_quantity, c.subject, c.price, c.first_img
 
 from ps_order a, ps_orderlist b, ps_product c

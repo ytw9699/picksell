@@ -38,13 +38,14 @@
 		})
 	}
 	//구매요청 취소
-	function purchaseCancel(){
+	function purchaseCancel(SELLER_ID, category_num, product_num, sessionId){
 		fetch('/picksell/products/purchseRequestCancel/${product_num}/${sessionScope.sessionId}').then(function(response){
 			response.text().then(function(text){
 				if(response.status == '200'){
 					alert('구매신청이 취소되었습니다!');
 					var inner = "<input type='button' value='구매신청하기' onclick='purchaseApply()' />";
 					document.getElementById('purchaseWrap').innerHTML = inner;
+					alarmInsert(SELLER_ID, category_num, product_num, sessionId, "7");
 				}
 			})
 		})
@@ -90,8 +91,10 @@
 			}
 		});
 	}
+
 	//(판매자가)구매신청 수락 취소
 	function purchaseApproveCancel(eventElement, purchaseNumber, buyer, category_num, product_num, sessionId){
+
 		var params = "pn=${product_num}&purnum="+purchaseNumber+"&buyer="+buyer;
 		$.ajax({
 			type : "POST",
@@ -103,11 +106,13 @@
 				//만약에 수락취소가 정상적으로 이루어져서 임의로 만든 resultCode 가 'success' 를 담았다면,
 				if(data.resultCode == 'success'){
 					alert(data.resultMsg);
+          alarmInsert(buyer, category_num, product_num,sessionId,"8");
 					$(eventElement).parents('td').html('<input type="button" value="수락" onclick="purchaseApprove(this,'+purchaseNumber+','+buyer+','+category_num+','+product_num+','+sessionId+');" />');
 				//만약에 수락취소가 중복되어 임의로 만든 resultCode 가 'fail' 를 담았다면,
 				}else if(data.resultCode == 'fail'){
 					alert(data.resultMsg);
 				}
+
 			}
 		});
 	}
@@ -257,7 +262,7 @@
 					</c:when>
 					<c:when test="${alreadyPurchase == true }">
 						<div class="purchaseWrap" id="purchaseWrap">
-						<input type="button" class="purchase_cancel" value="구매신청 취소하기" onclick="purchaseCancel();" />
+						<input type="button" class="purchase_cancel" value="구매신청 취소하기" onclick="purchaseCancel('${resultObject.SELLER_ID}','${category_num}','${product_num}','${sessionId}');" />
 						</div>
 					</c:when>
 					<c:when test="${isMyProducts == 'yes' }">

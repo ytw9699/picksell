@@ -28,11 +28,25 @@ function alarmRead(ALARM_NUM){
 				}
 			});	
 }
+function alarmDelete(ALARM_NUM){
+	var allData = "ALARM_NUM="+ALARM_NUM;
+			$.ajax({
+				type : "GET",
+				url : "/picksell/mypage/alarmDelete",
+				dataType : 'json',
+				data : allData,
+				success : function(data){
+				
+				alert("알림을 삭제했습니다");
+				location.reload();//일단 새로고침으로 페이지 이동..ㅠㅠinnerhtml안쓰고..새로고침안하는방법을..찾아봅시당..
+				}
+			});	
+}
 </script>
 <c:if test="${fn:length(alarmList) > 0}" >
 	<c:forEach var="alarmMap" items="${alarmList}" varStatus="Index">
 		
-		<td>${Index.index+1}. ${alarmMap.ALARM_REGDATE}에</td>
+		<td>${Index.index+1}.</td>
 		
 		<c:if test="${alarmMap.ALARM_KIND == '2'}">
 			<td>
@@ -49,6 +63,43 @@ function alarmRead(ALARM_NUM){
 				</a>
 				</td>
 	     </c:if>
+	     
+	     <c:if test="${alarmMap.ALARM_KIND == '7'}">
+				<td>
+				<a href="/picksell/products/detail/${alarmMap.ALARM_VARIABLE1}/${alarmMap.ALARM_VARIABLE2}?ALARM_NUM=${alarmMap.ALARM_NUM}">
+					${alarmMap.ALARM_WRITER}님께서 구매신청을 다시 취소 하셨습니다.
+				</a>
+				</td>
+	     </c:if>
+	     
+	     <c:if test="${alarmMap.ALARM_KIND == '8'}">
+				<td>
+				<a href="/picksell/products/detail/${alarmMap.ALARM_VARIABLE1}/${alarmMap.ALARM_VARIABLE2}?ALARM_NUM=${alarmMap.ALARM_NUM}">
+					${alarmMap.ALARM_WRITER}님께서 구매신청 수락을 다시 취소 하셨습니다.
+				</a>
+				</td>
+	     </c:if>
+	     
+	     <c:if test="${alarmMap.ALARM_KIND == '10'}">
+				<td>
+				<a href="/picksell/mypage/saleDetail/${alarmMap.ALARM_VARIABLE1}?ALARM_NUM=${alarmMap.ALARM_NUM}">
+					${alarmMap.ALARM_WRITER}님께서 결제를 취소 하셨습니다.
+				</a>
+				</td>
+	     </c:if>
+	     
+	     <c:if test="${alarmMap.ALARM_KIND == '11'}">
+				<td>
+				<a href="/picksell/mypage/saleDetail/${alarmMap.ALARM_VARIABLE1}?ALARM_NUM=${alarmMap.ALARM_NUM}">
+					${alarmMap.ALARM_WRITER}님께서 결제를 취소 하셨습니다.
+				</a>
+				</td>
+	     </c:if>
+	     
+	     		<td>-<fmt:formatDate value="${alarmMap.ALARM_REGDATE}" pattern="yy-MM-dd HH:mm" /></td>
+	     		<td>
+	     		<input type="button" id="alarmDelete" value="삭제" onclick="alarmDelete('${alarmMap.ALARM_NUM}')" />
+	     		</td>
 		<br>
 	</c:forEach>
 </c:if>
