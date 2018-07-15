@@ -279,7 +279,7 @@ function moving(){
 	$(document).ready(function() {
 		
 		/* 전체카테고리hover 박스 */
-		$('.totalCategory').mouseenter(function(){
+		$('.totalCategory').click(function(){
 			$(this).css({'background-color':'#7151fc','color':'white'});
 			$('.totalCategoryText').css('background','url(/picksell/resources/img/maincategory_hover.png) 2% 53% no-repeat');
 		
