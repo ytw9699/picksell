@@ -75,7 +75,9 @@ import com.mycom.utils.FileUpload;
 			)throws IOException{
 		
 		resultMap = MemberService.userCheck(map.getMap());
+		if(resultMap.get("LATESTLOGIN1") != null ) {
 		MemberService.changeDate(resultMap);// 날짜를 바꿔서입력
+		}
 		MemberService.insertDate(resultMap);//새로운 현시점의 날짜 입력
 		//SELECT * FROM PS_MEMBER WHERE ID = #{ID}
 		String PASSWORD = request.getParameter("PASSWORD");
