@@ -124,7 +124,7 @@
 		</c:if>
 		</c:forEach>
 		</c:if>
-		
+		<input type ="button" value="입금완료" onclick="alarmInsert('admin','empty','empty','${sessionScope.sessionId}',12)"/>
 </c:if>															
 </table>
 </body>
