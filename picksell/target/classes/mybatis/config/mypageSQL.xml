@@ -239,6 +239,12 @@ select * from ps_product a, PS_ORDERLIST b where b.ORDER_NUM = #{ORDER_NUM} and 
 		update PS_PRODUCT set DEAL_STATUS = '0' where PRODUCT_NUM = #{PRODUCT_NUM}
 </update>
 
+<update id="completing" parameterType="hashmap">
+		update PS_ORDER set STATUS = '3' where ORDER_NUM = #{ORDER_NUM}
+</update>
 
+<update id="step4_date" parameterType="hashmap">
+	update ps_order set step4_date = sysdate where ORDER_NUM = #{ORDER_NUM}
+</update>
 
 </mapper>

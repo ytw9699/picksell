@@ -102,4 +102,12 @@ public class mypageService implements mypageDao {
 	public void alarmRead(int ALARM_NUM) {//알람읽기
 		sqlMapper.update("client_product.alarmRead", ALARM_NUM);
 	}
+
+	public void completing(Map<String, Object> parameterMap) {
+		sqlMapper.update("mypage.completing", parameterMap);
+	}
+
+	public void step4_date(Map<String, Object> parameterMap) {
+		sqlMapper.update("mypage.step4_date", parameterMap);
+	}
 }

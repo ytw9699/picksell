@@ -56,7 +56,7 @@
 					}
 				});	
 	}
-	
+
 </script>
 <h2>주문 내역 상세 및 배송 조회</h2>
 <table>
@@ -120,11 +120,12 @@
 		<c:if test="${joinMap.HOWTOSELL == '2'}">																							
 		<input type ="button" value="주문취소" onclick="canclePs_order2('${orderDetail.ORDER_NUM}','${orderDetail.BUYER_ID}','${joinMap.SELLER_ID}')"/>
 		</c:if>
-		</c:if>
+		<input type ="button" value="인수확인 및 거래완료" onclick="location.href ='/picksell/mypage/completing?ORDER_NUM=${orderDetail.ORDER_NUM}&BUYER_ID=${orderDetail.BUYER_ID}&SELLER_ID=${joinMap.SELLER_ID}'"/>
+		</c:if>									
 		</c:if>
 		</c:forEach>
 		</c:if>
-		<input type ="button" value="입금완료" onclick="alarmInsert('admin','empty','empty','${sessionScope.sessionId}',12)"/>
+		<input type ="button" value="입금확인" onclick="alarmInsert('admin','empty','empty','${sessionScope.sessionId}',12)"/>
 </c:if>															
 </table>
 </body>

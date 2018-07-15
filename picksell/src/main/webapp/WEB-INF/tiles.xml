@@ -195,6 +195,10 @@
 	<definition name="alarmSelect" extends="modify">
 		<put-attribute name="body" value="/WEB-INF/views/mypage/alarmSelect.jsp" />
 	</definition>
+	<!-- 인수확인 및 거래 종료 -->
+	<definition name="completing" extends="modify">
+		<put-attribute name="body" value="/WEB-INF/views/mypage/completing.jsp" />
+	</definition>
 	
 </tiles-definitions>
 	
