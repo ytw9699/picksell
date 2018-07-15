@@ -62,11 +62,11 @@
 <table>
 <c:if test="${fn:length(orderDetail) > 0}">
 		<h4>
-		주문일: 		     <fmt:formatDate value="${orderDetail.STEP1_DATE}" pattern="yyyy년 MM월 dd일 hh:mm:ss" />  <br>
-		입금완료일: 		 <fmt:formatDate value="${orderDetail.STEP2_DATE}" pattern="yyyy년 MM월 dd일 hh:mm:ss" />  <br>
-		배송시작일: 		 <fmt:formatDate value="${orderDetail.STEP3_DATE}" pattern="yyyy년 MM월 dd일 hh:mm:ss" />  <br>
-		인수확인 및 거래 완료일:<fmt:formatDate value="${orderDetail.STEP4_DATE}" pattern="yyyy년 MM월 dd일 hh:mm:ss" />  <br>
-		주문취소일: 		 <fmt:formatDate value="${orderDetail.CANCEL_DATE}" pattern="yyyy년 MM월 dd일 hh:mm:ss" />  <br>
+		주문일: 		     <fmt:formatDate value="${orderDetail.STEP1_DATE}" pattern="yy년 MM월 dd일 hh:mm" />  <br>
+		입금완료일: 		 <fmt:formatDate value="${orderDetail.STEP2_DATE}" pattern="yy년 MM월 dd일 hh:mm" />  <br>
+		배송시작일: 		 <fmt:formatDate value="${orderDetail.STEP3_DATE}" pattern="yy년 MM월 dd일 hh:mm" />  <br>
+		인수확인 및 거래 완료일:<fmt:formatDate value="${orderDetail.STEP4_DATE}" pattern="yy년 MM월 dd일 hh:mm" />  <br>
+		주문취소일: 		 <fmt:formatDate value="${orderDetail.CANCEL_DATE}" pattern="yy년 MM월 dd일 hh:mm" />  <br>
 		판매자 아이디:      ${orderDetail.SELLER_ID} <br>
 		주문번호:    		${orderDetail.ORDER_NUM} <br>
 		<c:if test="${orderDetail.STATUS == '0'}">
@@ -87,9 +87,11 @@
 		</h4>
 		<h4>결제 정보</h4>
 		결제수단: 계좌이체  
-		<br>총 상품 가격: ${orderDetail.TOTAL_PRICE - 2500} 원
-		<br>배송비: 2500 원
-		<br>총결제금액: ${orderDetail.TOTAL_PRICE} 원
+		
+		
+		<br>총 상품 가격:<fmt:formatNumber value="${orderDetail.TOTAL_PRICE - 2500}" pattern="#,###.##" /> 원 
+		<br>배송비: 2,500 원
+		<br>총결제금액: <fmt:formatNumber value="${orderDetail.TOTAL_PRICE}" pattern="#,###.##" /> 원 
 		<br>
 		<h4>받는사람 정보</h4>  
 		수령인 : ${orderDetail.ACCOUNT_NAME}<br>
@@ -107,8 +109,8 @@
 	    <img src="/picksell/resources/productUpload/${joinMap.FIRST_IMG }" style="width: 200px;" />
 	    /${joinMap.SUBJECT }
 		</a>
-		/${joinMap.PRICE }원
-		/갯수: ${joinMap.ORDER_QUANTITY}개
+		/<fmt:formatNumber value="${joinMap.PRICE}" pattern="#,###.##" /> 원 
+		/${joinMap.ORDER_QUANTITY}개
 		 <br>
 		 <c:if test="${status.last}">
 		 <c:if test="${orderDetail.STATUS != '44'}">	
