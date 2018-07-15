@@ -28,4 +28,9 @@ public class OrderService implements OrderDao {
 	public void deletePURCHASE_LIST(Map<String, Object> parameterMap) {//일반구매 완료시 오더리스트 한줄 삭제 by 태원
 		sqlMapper.update("client_order.deletePURCHASE_LIST", parameterMap);
 	}
+	
+	public void alarmInsert(Map<String, Object> parameterMap) {//by태원 알람입력추가
+		sqlMapper.insert("mypage.alarmInsert",parameterMap);
+	}
+	
 }

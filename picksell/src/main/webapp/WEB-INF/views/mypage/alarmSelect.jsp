@@ -80,6 +80,14 @@ function alarmDelete(ALARM_NUM){
 				</td>
 	     </c:if>
 	     
+	      <c:if test="${alarmMap.ALARM_KIND == '9'}">
+				<td>
+				<a href="/picksell/mypage/saleList">
+					${alarmMap.ALARM_WRITER}님께서 주문을 완료하셨습니다
+				</a>
+				</td>
+	     </c:if>
+	     
 	     <c:if test="${alarmMap.ALARM_KIND == '10'}">
 				<td>
 				<a href="/picksell/mypage/saleDetail/${alarmMap.ALARM_VARIABLE1}?ALARM_NUM=${alarmMap.ALARM_NUM}">
