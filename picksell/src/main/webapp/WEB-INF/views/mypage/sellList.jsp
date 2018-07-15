@@ -48,16 +48,16 @@ function minusStock(PRODUCT_NUM, index){
 }
 </script>
 <h4>
-<a href="/picksell/mypage/sellList">전체 상품 글</a>/
-<a href="/picksell/mypage/sellList?HowToSell=0">일반 안전 상품글</a>/
-<a href="/picksell/mypage/sellList?HowToSell=1">일반 안전 상품+직거래글</a>/
+<a href="/picksell/mypage/sellList">모든 종류의 글</a>/
+<a href="/picksell/mypage/sellList?HowToSell=0">중고 안전 상품글</a>/
+<a href="/picksell/mypage/sellList?HowToSell=1">중고 안전 상품+직거래글</a>/
 <a href="/picksell/mypage/sellList?HowToSell=2">픽셀플러스 상품글</a>/
 </h4>
 <h4>
-<a href="/picksell/mypage/sellList?HowToSell=${HowToSell}">모든 상품 글</a>/
-<a href="/picksell/mypage/sellList?HowToSell=${HowToSell}&deal_status=0">판매중 상품 글</a>/
-<a href="/picksell/mypage/sellList?HowToSell=${HowToSell}&deal_status=1">거래중 상품 글</a>/
-<a href="/picksell/mypage/sellList?HowToSell=${HowToSell}&deal_status=2">판매 종료 상품 글</a>/
+<a href="/picksell/mypage/sellList?HowToSell=${HowToSell}">모든 상태의 글</a>/
+<a href="/picksell/mypage/sellList?HowToSell=${HowToSell}&deal_status=0">판매중 글</a>/
+<a href="/picksell/mypage/sellList?HowToSell=${HowToSell}&deal_status=1">거래중 글</a>/
+<a href="/picksell/mypage/sellList?HowToSell=${HowToSell}&deal_status=2">종료된 글</a>/
 	
 </h4>
 <table>
@@ -78,10 +78,10 @@ function minusStock(PRODUCT_NUM, index){
 	<tr>
 		<td>
 		<c:if test="${list.HOWTOSELL == '0'}">
-			일반 안전 거래 상품
+			중고 안전 거래 상품
 		</c:if>
 		<c:if test="${list.HOWTOSELL == '1'}">
-			일반 안전거래+직거래 상품
+			중고 안전거래+직거래 상품
 		</c:if>
 		<c:if test="${list.HOWTOSELL == '2'}">
 			픽셀플러스 상품
@@ -96,7 +96,7 @@ function minusStock(PRODUCT_NUM, index){
 			거래중
 		</c:if>
 		<c:if test="${list.DEAL_STATUS == '2'}">
-			판매완료
+			판매종료
 		</c:if>
 		</td>
 		
