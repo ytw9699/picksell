@@ -71,12 +71,12 @@ var subtotalPRICE = Number('${saleDetail.TOTAL_PRICE}');
 <table>
 <c:if test="${fn:length(saleDetail) > 0}">
 		<h4>
-		고객의 주문일: 		  <fmt:formatDate value="${saleDetail.STEP1_DATE}" pattern="yy년 MM월 dd일 hh:mm" />  <br>
-		고객의 입금완료일:    <fmt:formatDate value="${saleDetail.STEP2_DATE}" pattern="yy년 MM월 dd일 hh:mm" />  <br>
-		배송시작일: 		 <fmt:formatDate value="${saleDetail.STEP3_DATE}" pattern="yy년 MM월 dd일 hh:mm" />  <br>
-		인수확인 및 거래 완료일:<fmt:formatDate value="${saleDetail.STEP4_DATE}" pattern="yy년 MM월 dd일 hh:mm" />  <br>
+		고객의 주문일: 		  <fmt:formatDate value="${saleDetail.STEP1_DATE}" pattern="yy. MM. dd일 hh:mm" />  <br>
+		고객의 입금완료일:    <fmt:formatDate value="${saleDetail.STEP2_DATE}" pattern="yy. MM. dd일 hh:mm" />  <br>
+		배송시작일: 		 <fmt:formatDate value="${saleDetail.STEP3_DATE}" pattern="yy. MM. dd일 hh:mm" />  <br>
+		인수확인 및 거래 완료일:<fmt:formatDate value="${saleDetail.STEP4_DATE}" pattern="yy. MM. dd일 hh:mm" />  <br>
 		<c:if test="${saleDetail.CANCEL_DATE != null}">
-		주문취소일: 		 <fmt:formatDate value="${saleDetail.CANCEL_DATE}" pattern="yy년 MM월 dd일 hh:mm" />  <br>
+		주문취소일: 		 <fmt:formatDate value="${saleDetail.CANCEL_DATE}" pattern="yy. MM. dd일 hh:mm" />  <br>
 		</c:if>
 		주문번호:    	${saleDetail.ORDER_NUM} /
 		<c:if test="${saleDetail.STATUS == '0'}">
@@ -126,11 +126,12 @@ var subtotalPRICE = Number('${saleDetail.TOTAL_PRICE}');
 		 <c:if test="${status.last}">
 		 <c:if test="${saleDetail.STATUS != '44'}">	
 		 <c:if test="${joinMap.HOWTOSELL != '2'}">																							
-		<input type ="button" value="주문취소" onclick="canclePs_order('${saleDetail.ORDER_NUM}','${saleDetail.BUYER_ID}','${joinMap.SELLER_ID}','${joinMap.PRODUCT_NUM}')"/>
+		<input type ="button" value="판매취소" onclick="canclePs_order('${saleDetail.ORDER_NUM}','${saleDetail.BUYER_ID}','${joinMap.SELLER_ID}','${joinMap.PRODUCT_NUM}')"/>
 		</c:if>
 		<c:if test="${joinMap.HOWTOSELL == '2'}">																							
-		<input type ="button" value="주문취소" onclick="canclePs_order2('${saleDetail.ORDER_NUM}','${saleDetail.BUYER_ID}','${joinMap.SELLER_ID}')"/>
+		<input type ="button" value="판매취소" onclick="canclePs_order2('${saleDetail.ORDER_NUM}','${saleDetail.BUYER_ID}','${joinMap.SELLER_ID}')"/>
 		</c:if>
+		<input type ="button" value="배송사항 입력" onclick=""/>
 		</c:if>
 		</c:if>
 		</c:forEach>
