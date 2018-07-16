@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page import="java.text.SimpleDateFormat"%>
 <%@ page import="java.util.*,java.sql.*" %>
 <%@ page import="com.google.gson.Gson"%>
 <%@ page import="com.google.gson.JsonObject"%>
@@ -11,7 +12,6 @@ Gson gsonObj = new Gson();
 Map<Object,Object> map = null;
 List<Map<Object,Object>> list = new ArrayList<Map<Object,Object>>();
 String dataPoints = null;
-
  
 try{
 	Class.forName("oracle.jdbc.driver.OracleDriver"); 
@@ -19,25 +19,20 @@ try{
 	Statement statement = connection.createStatement();
 	String xVal, yVal;
 	
-	ResultSet resultSet = statement.executeQuery("select to_char(step4_date, 'mmdd') as x,  sum(total_price) as y from ps_order where step4_date is not null group by to_char(step4_date, 'mmdd') order by to_char(step4_date, 'mmdd')"); 
+	ResultSet resultSet = statement.executeQuery("SELECT order_num, status FROM ps_order");
 	
 	while(resultSet.next()){
-		xVal = resultSet.getString("x");
-		yVal = resultSet.getString("y");
+		xVal = resultSet.getString("order_num");
+		yVal = resultSet.getString("status");
 		
-		map = new HashMap<Object,Object>(); 
-		map.put("x", Integer.parseInt(xVal)); 
-		map.put("y", Integer.parseInt(yVal)); 
-		list.add(map);
+		map = new HashMap<Object,Object>(); map.put("x", Integer.parseInt(xVal)); map.put("y", Integer.parseInt(yVal)); list.add(map);
 		dataPoints = gsonObj.toJson(list);
-		
 	}
 	connection.close();
 }
 catch(SQLException e){
 	out.println("<div  style='width: 50%; margin-left: auto; margin-right: auto; margin-top: 200px;'>Database has not been connected yet.</div>");
 	dataPoints = null;
-	
 }
 %>
 
@@ -45,26 +40,61 @@ catch(SQLException e){
 <html>
 <style>
 .main{
-	margin-left: 200px; 
+	margin-left: 300px; 
 }
 
 </style>
 <head>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.3.0/Chart.bundle.js"></script>
 <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+<script type="text/javascript">
+google.charts.load('current', {'packages':['corechart']});
+google.charts.setOnLoadCallback(drawChart);
+function drawChart() {
+    var data = google.visualization.arrayToDataTable([
+      ['일자', 'Member'],
+      ['일주일전', ${countlist[7]}, ],
+      ['${daylist[6]}',  ${countlist[6]}, ],
+      ['${daylist[5]}', ${countlist[5]}, ],
+      ['${daylist[4]}',  ${countlist[4]}, ],
+      ['${daylist[3]}',  ${coutlist[3]}, ],
+      ['${daylist[2]}',  ${countlist[2]}, ],
+      ['${daylist[1]}',  ${countlist[1]},  ],
+      [  '오늘' ,  ${countlist[0]}, ]
+    ]);
+
+    var options = {
+      title: '회원 가입 추이',
+      hAxis: {title: 'Day',  titleTextStyle: {color: '#333'}},
+      vAxis: {minValue: 0 , maxValue: 30}
+    };
+
+    var chart = new google.visualization.AreaChart(document.getElementById('chart_div'));
+    chart.draw(data, options);
+  }
+
+</script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 
 </head>
 <body>
 <div class="main">
-<h1>사업지표</h1>
+<h1>메인가즈아~!</h1>
+<jsp:useBean id="toDay" class="java.util.Date" />
+지금은  <fmt:formatDate value="${toDay }" pattern="YYYY년 MM월 dd일"/>입니다.
 
-<div id="chartContainer" style="height: 170px; width: 50%;"></div>
+<div>
 
+ <div id="chart_div" style="width: 100%; height: 500px;"></div>
 
-<canvas id="myChart" width="30" height="30"></canvas>  <canvas id="bar-chart"width="30" height="30"></canvas><br/>
-<canvas id="line-chart" width="30" height="30"></canvas><br/>
+</div>
+<div id="chartContainer" style="height: 370px; width: 100%;"></div>
+
+<br/><br/><br/><br/><br/>
+<canvas id="myChart" width="400" height="300"></canvas>  <canvas id="bar-chart" width="800" height="450"></canvas><br/>
+<canvas id="line-chart" width="800" height="450"></canvas><br/>
 <canvas id="pie-chart" width="800" height="450"></canvas><br/>
 <canvas id="radar-chart" width="800" height="600"></canvas><br/>
 <canvas id="polar-chart" width="800" height="450"></canvas><br/>
@@ -84,13 +114,13 @@ window.onload = function() {
 		animationEnabled: true,
 		exportEnabled: true,
 		title: {
-			text: "PICKSELL 날짜별 거래(판매) 금액 "
+			text: " 그래프 테스트 "
 		},
 		axisX: {
-			title: "날짜"
+			title: "order_num from ps_order"
 		},
 		axisY: {
-			title: "이익금"
+			title: "status from ps_order"
 		},
 
 		data: [{
@@ -100,9 +130,8 @@ window.onload = function() {
 	});
 	chart.render();
 	<% } %> 
-	
-}
-
+	 
+	}
 
 
 

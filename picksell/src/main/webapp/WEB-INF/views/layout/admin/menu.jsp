@@ -31,7 +31,7 @@
 #logoInput {
    padding-left: 7px;
    padding-bottom : 20px;
-   border-bottom : 1.5px  solid #770000;
+   border-bottom : 1.5px solid #770000;
 
 }
 
