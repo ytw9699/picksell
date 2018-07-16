@@ -46,7 +46,7 @@ else if(NewPassword !== rePassword){//
 	<c:if test="${resultMap.KIND == '1'}">
 	사업자회원
 	</c:if>
-	<c:if test="${resultMap.KIND == '2'}">
+	<c:if test="${resultMap.KIND == '99'}">
 	관리자
 	</c:if>
 	<br/>
@@ -73,9 +73,9 @@ else if(NewPassword !== rePassword){//
 	</c:if>
 	가입일: <fmt:formatDate value="${resultMap.REGDATE}" pattern="yy.MM.dd 일 hh:mm" />
 	<br/>
-	알람상태: ${resultMap.ALARM_CONSENT}
-	<br/>
 	최근 로그인: <fmt:formatDate value="${resultMap.LATESTLOGIN2}" pattern="yy.MM.dd 일 hh:mm" />
+	<br/>
+	알람상태: ${resultMap.ALARM_CONSENT}
 	<br/>
 	계정상태: 
 	<c:if test="${resultMap.STATUS == '0'}">

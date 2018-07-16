@@ -328,6 +328,24 @@ public class mypageController {
 		return "alarmSelect";
     } 
 }
+/*	@RequestMapping("/mypage/alarmCount")
+	public String alarmCount(HttpSession session, Model model) {//알람을 허용한 사람만 리스트 가져오기
+		
+	String sessionId =(String)session.getAttribute("sessionId");//세션아이디값
+	String sessionAlarm =(String)session.getAttribute("sessionAlarm");//세션알람값
+	
+	if(!sessionAlarm.equals("ON")){
+	 return "alarmCount";
+	}
+	else {//알림이 ON일때만 리스트 가져오자
+		
+		int alarmCount = mypageService.alarmCount(sessionId);//세션아이디에 해당하는 알람 가져옴
+		//select count(*) from ps_alarm where ALARM_TARGET = '2' and alarm_check = 'NO'
+		model.addAttribute("alarmCount", alarmCount);
+		
+		return "alarmCount";
+    } 
+}*/
 	
 	@ResponseBody
 	@RequestMapping(value="/mypage/alarmDelete", method=RequestMethod.GET)

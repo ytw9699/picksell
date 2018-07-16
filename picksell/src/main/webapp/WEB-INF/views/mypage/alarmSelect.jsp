@@ -10,8 +10,14 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-<title>알람 읽기</title>
+<title>알림 읽기</title>
 <h2>알림 읽기</h2>
+<br>
+<a href="#">전체 보기/</a>
+<a href="#">읽지 않은 알림/</a>
+<a href="#">읽은 알림/</a>
+<br>
+<br>
 </head>
 <body>
 <script>

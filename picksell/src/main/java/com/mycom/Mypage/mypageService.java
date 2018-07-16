@@ -114,4 +114,5 @@ public class mypageService implements mypageDao {
 	public List<Map<String, Object>> recentlist(String sessionId) {
 		return sqlMapper.selectList("mypage.recentlist", sessionId);
 	}
+
 }
