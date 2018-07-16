@@ -10,7 +10,7 @@ public class SessionInterceptor extends HandlerInterceptorAdapter {
 
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception{
 		
-		System.out.println("session인터셉터");
+		//System.out.println("session인터셉터");
 		//return true;
 		Object userId = request.getSession().getAttribute("sessionId");
 		

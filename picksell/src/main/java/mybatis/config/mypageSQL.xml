@@ -252,4 +252,8 @@ select * from ps_product a, PS_ORDERLIST b where b.ORDER_NUM = #{ORDER_NUM} and 
 	
 </select>
 
+<select id="alarmCount" resultType="int" parameterType="String">
+		select count(*) from ps_alarm where alarm_target = #{sessionId} and alarm_check = 'NO'
+</select>
+
 </mapper>

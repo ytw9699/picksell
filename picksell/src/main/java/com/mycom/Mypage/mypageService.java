@@ -115,4 +115,8 @@ public class mypageService implements mypageDao {
 		return sqlMapper.selectList("mypage.recentlist", sessionId);
 	}
 
+	public int alarmCount(String sessionId) {
+		return sqlMapper.selectOne("mypage.alarmCount", sessionId);
+	}
+
 }

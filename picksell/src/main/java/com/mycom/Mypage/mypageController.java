@@ -418,6 +418,22 @@ public class mypageController {
 		
 		return "recentProduct";
 	}
+	@RequestMapping("/mypage/alarmCount")
+	@ResponseBody
+	public Map<String, Object> alarmCount(HttpSession session){
+		
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		
+		String sessionId = (String)session.getAttribute("sessionId");
+		
+	if(sessionId != null) {
+		int alarmSum = mypageService.alarmCount(sessionId);
+		//select count(*) from ps_alarm where alarm_target = #{sessionId} and alarm_check = 'NO'
+		
+		resultMap.put("alarmSum", alarmSum);
+	}
+		return resultMap;
+}
 }
 
 		
