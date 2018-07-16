@@ -391,3 +391,9 @@ public class mypageController {
 			return "completing";//인수확인 및 거래 완료가 정상적으로 안됬을때
 	}
 }
+
+/*@RequestMapping(value="/mypage/recent_product", method=RequestMethod.GET)
+public String recent_product(
+		) {
+		
+}*/

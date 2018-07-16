@@ -127,15 +127,15 @@ function alarmDelete(ALARM_NUM){
 	</c:forEach>
 </c:if>
 
+<c:if test="${fn:length(alarmList) < 1}">
+<p>알람이 없습니다</p>
+</c:if>
+</body>
+</html>
+
 <%-- <c:if test="${alarmMap.ALARM_CHECK == 'YES'}">
 		읽음
 		</c:if>
 		<c:if test="${alarmMap.ALARM_CHECK == 'NO'}">
 		안읽음
 		</c:if> --%>
-
-<c:if test="${fn:length(alarmList) < 1}">
-<p>알람이 없습니다</p>
-</c:if>
-</body>
-</html>
