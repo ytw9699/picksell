@@ -409,7 +409,7 @@ function moving(){
 		<span class="menuBox-link"><a href="/picksell/mypage/sellList">판매글 조회</a></span>
 		<span class="menuBox-link"><a href="/picksell/mypage/saleList">판매 내역/배송 조회</a></span>
 		<span class="menuBox-link"><a href="/picksell/mypage/orderList">주문 내역/배송 조회</a></span>
-		<span class="menuBox-link"><a href="#">최근 본 상품</a></span>
+		<span class="menuBox-link"><a href="/picksell/mypage/recentProduct">최근 본 상품</a></span>
 		<span class="menuBox-link"><a href="/picksell/mypage/alarmSelect">알림 내용 및 설정</a></span>
 	</div>
 </div>

@@ -200,6 +200,12 @@
 		<put-attribute name="body" value="/WEB-INF/views/mypage/completing.jsp" />
 	</definition>
 	
+	<!-- 최근본상품 -->
+	<definition name="recentProduct" extends="modify">
+		<put-attribute name="body" value="/WEB-INF/views/mypage/recentProduct.jsp" />
+	</definition>
+	
+	
 </tiles-definitions>
 	
 	

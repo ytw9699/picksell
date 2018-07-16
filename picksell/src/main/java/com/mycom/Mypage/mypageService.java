@@ -110,4 +110,8 @@ public class mypageService implements mypageDao {
 	public void step4_date(Map<String, Object> parameterMap) {
 		sqlMapper.update("mypage.step4_date", parameterMap);
 	}
+
+	public List<Map<String, Object>> recentlist(String sessionId) {
+		return sqlMapper.selectList("mypage.recentlist", sessionId);
+	}
 }
