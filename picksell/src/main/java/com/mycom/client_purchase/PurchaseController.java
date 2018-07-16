@@ -38,6 +38,7 @@ public class PurchaseController {
 		tmp.setProduct_price(basketModel.getP_list().get(0).getProduct_price());
 		tmp.setProduct_subject(basketModel.getP_list().get(0).getProduct_subject());
 		tmp.setSeller_id(basketModel.getP_list().get(0).getSeller_id());
+		tmp.setProduct_howtosell(basketModel.getP_list().get(0).getProduct_howtosell());
 		
 		resultList.add(tmp);
 	

@@ -7,7 +7,17 @@ public class OrderListModel {
 	private String seller_id;
 	private int order_num;
 	
+	private int product_howtosell;
 	
+	
+	
+	
+	public int getProduct_howtosell() {
+		return product_howtosell;
+	}
+	public void setProduct_howtosell(int product_howtosell) {
+		this.product_howtosell = product_howtosell;
+	}
 	public int getOrder_num() {
 		return order_num;
 	}

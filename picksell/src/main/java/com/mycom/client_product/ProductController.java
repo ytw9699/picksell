@@ -286,14 +286,17 @@ public class ProductController {
 				}
 			}
 		}
-	
-		if(ALARM_NUM != 0) {
-		productService.alarmRead(ALARM_NUM);//알람읽기	
-		}
 		
-		parameterMap.put("currentID", currentID);
-		parameterMap.put("category_num", category_num);
-		productService.insertRecentProduct(parameterMap);
+		if(currentID != null) {
+			if(ALARM_NUM != 0) {
+			productService.alarmRead(ALARM_NUM);//알람읽기	
+			}
+			
+			
+			parameterMap.put("currentID", currentID);
+			parameterMap.put("category_num", category_num);
+			productService.insertRecentProduct(parameterMap);
+		}
 		
 		//카테고리번호&상품글번호
 		model.addAttribute("category_num", category_num);
