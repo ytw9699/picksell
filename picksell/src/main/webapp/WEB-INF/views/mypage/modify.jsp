@@ -35,29 +35,40 @@ else if(NewPassword !== rePassword){//
 	<input type="hidden" name="profile_img" value="${resultMap.PROFILE_IMG}"/>
 	<input type="hidden" name="alarm_consent" value="${resultMap.ALARM_CONSENT}"/>
 
-	아이디 ${resultMap.ID}
+	아이디: ${resultMap.ID}
 	 <br/>
-	이름 ${resultMap.NAME}
+	이름: ${resultMap.NAME}
 	<br/>
-        신규 비밀번호<input type="password" name="password" id="password" onkeyup="passwordsCheck()" value="${resultMap.PASSWORD}"/>
+	회원 종류:
+	<c:if test="${resultMap.KIND == '0'}">
+	일반회원
+	</c:if>
+	<c:if test="${resultMap.KIND == '1'}">
+	사업자회원
+	</c:if>
+	<c:if test="${resultMap.KIND == '2'}">
+	관리자
+	</c:if>
+	<br/>
+        신규 비밀번호:<input type="password" name="password" id="password" onkeyup="passwordsCheck()" value="${resultMap.PASSWORD}"/>
     <br/>
-	비밀번호 다시 입력<input type="password" name="passwordCheck" id="passwordCheck" onkeyup="passwordsCheck()" value="${resultMap.PASSWORD}"/>&nbsp;<span id="Innerpassword"></span>
+	비밀번호 다시 입력:<input type="password" name="passwordCheck" id="passwordCheck" onkeyup="passwordsCheck()" value="${resultMap.PASSWORD}"/>&nbsp;<span id="Innerpassword"></span>
 	<br/>
-	이메일<input type="text" value="${resultMap.EMAIL}" name="email" id="email" />
+	이메일:<input type="text" value="${resultMap.EMAIL}" name="email" id="email" />
 	<br/>
-	주소<input type="text" value="${resultMap.ADDRESS}" name="address" />
+	주소:<input type="text" value="${resultMap.ADDRESS}" name="address" />
 	<br/>
-	은행명<input type="text" value="${resultMap.BANK}" name="bank" />
+	은행명:<input type="text" value="${resultMap.BANK}" name="bank" />
 	<br/>
-	계좌번호<input type="text" value="${resultMap.ACCOUNT}" name="account" placeholder=" -를 빼고 입력해주세요"/>
+	계좌번호:<input type="text" value="${resultMap.ACCOUNT}" name="account" placeholder=" -를 빼고 입력해주세요"/>
 	<br/>
-	예금주<input type="text" value="${resultMap.ACCOUNT_NAME}" name="account_name" />
+	예금주:<input type="text" value="${resultMap.ACCOUNT_NAME}" name="account_name" />
 	<br/>
 	<!-- 사업자회원일 경우 보여주기-->
 	<c:if test="${resultMap.KIND == '1'}">
-	사업자등록번호<input type="text" value="${resultMap.BUSINESS_NUMBER}" name="business_number" />
+	사업자등록번호:<input type="text" value="${resultMap.BUSINESS_NUMBER}" name="business_number" />
 	<br/>
-	상호명<input type="text" value="${resultMap.BUSINESS_NAME}" name="business_name" />
+	상호명:<input type="text" value="${resultMap.BUSINESS_NAME}" name="business_name" />
 	<br/>
 	</c:if>
 	가입일: <fmt:formatDate value="${resultMap.REGDATE}" pattern="yy.MM.dd 일 hh:mm" />

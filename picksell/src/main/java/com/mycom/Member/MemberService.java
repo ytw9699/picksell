@@ -39,5 +39,8 @@ public class MemberService implements MemberDao {
 	public void changeDate(Map<String, Object> resultMap) {
 		sqlMapper.update("member.changeDate",resultMap);
 	}
-	
+
+	public int checkJoinId(String id) {
+		return sqlMapper.selectOne("member.checkJoinId",id);
+	}
 }
