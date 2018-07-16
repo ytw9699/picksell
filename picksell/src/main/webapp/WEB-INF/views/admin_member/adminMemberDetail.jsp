@@ -22,7 +22,7 @@ hr{
 
  
 }
-button{
+button .change, .profile_img{
   background: #337ab7;
   color:#fff;
   border:none;
@@ -33,11 +33,11 @@ button{
   transition:800ms ease all;
   outline:none;
 }
-button:hover{
+button .change:hover, .profile_img:hover{
   background:#fff;
   color:#337ab7;
 }
-button:before,button:after{
+button .change:after, .profile_img:before,button .change:after, .profile_img:after{
   content:'';
   position:absolute;
   top:0;
@@ -47,13 +47,14 @@ button:before,button:after{
   background: #337ab7;
   transition:400ms ease all;
 }
-button:after{
+button .change:after, .profile_img:after{
   right:inherit;
   top:inherit;
   left:0;
   bottom:0;
 }
-button:hover:before,button:hover:after{
+button .change:hover:before, .profile_img:hover:before,
+button .change:hover:after, .profile_img:hover:after{
   width:100%;
   transition:800ms ease all;
 }
@@ -72,14 +73,19 @@ button:hover:before,button:hover:after{
 	display: none;
 	
 }
-.link{
+button {
+  
+  background-color : white;
+  border : none;
+  margin : 10px;
+  display: inline-block;
+ 
+}
+.bbutton:hover{
+ box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
 
-  
-}
-.link button{
-  
-   
-}
+
 </style>
 <script src="http://code.jquery.com/jquery-1.7.js"></script>
 <script>
@@ -98,19 +104,22 @@ $(document).ready(function(){
 });
 
 
+
 </script>
+
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>관리자 회원 상세보기</title>
 </head>
 <body>
 <div class="main">
-<div class="pageSubject">
- <h1>Member Page</h1>
+
+<div class="pageSubject" >
+ <h1 style="margin-left: 17px;">회원 페이지</h1>
 </div>
 <div class="memberInfo">
 아이디 : ${map.ID }
 <div class="pimg">
-	<img src="/picksell/resources/img/main_logo.png" style="width: 200px;" />
+	<img src="/picksell/resources/profileImgUpload/freeprofileimg.jpg" style="width:130px; height:110px;"/>
 </div>
 <button class="profile_img">프로필 이미지</button>
 
@@ -154,10 +163,15 @@ $(document).ready(function(){
 </div>
 <button class="change">변경</button>
 <hr>
-
-
-알람 동의 여부 : ${map.ALARM_CONSENT }
-
+알람 동의 여부 :
+<c:choose>
+<c:when test="${'ON'  eq map.ALARM_CONSENT }">
+<img src="/picksell/resources/img/Alarm1.png" width="25px" height="25px">
+</c:when>
+<c:when test="${'OFF'  eq map.ALARM_CONSENT }">
+<img src="/picksell/resources/img/noAlarm.png" width="25px" height="25px">
+</c:when>
+</c:choose>
 <hr>
 가입 일자 : <fmt:formatDate value="${map.REGDATE }" pattern="yyyy-MM-dd"/>
 <hr>
@@ -173,28 +187,17 @@ $(document).ready(function(){
 	</c:when>
 	</c:choose>
 <hr>
-<div class="link">
-<button onclick="window.location='/picksell/admin/member/orderList/${map.ID}'">
-회원 주문 내역 리스트
+<div class="link" style="margin-left : 190px">
+<button class="bbutton" id="btn" type="submit" onclick="window.location='/picksell/admin/member/orderList/${map.ID}'"><img class="btn-img" src="/picksell/resources/img/orderlist.png" width="150px" height="150px"></button>
+<button class="bbutton" id="btn" type="submit" onclick="window.location='/picksell/admin/member/sellHistory/${map.ID}'"><img class="btn-img" src="/picksell/resources/img/sellHistory.png" width="150px" height="150px">
 </button>
+<button class="bbutton" id="btn" type="submit" onclick="window.location='/picksell/admin/member/purchaseHistory/${map.ID}'"><img class="btn-img" src="/picksell/resources/img/buying.png" width="150px" height="150px">
+</button>
+<button style="background-color : white;
+  border : none;" class="bbutton" id="btn" type="submit" onclick="window.location='/picksell/admin/member/products/${map.ID}'"><img class="btn-img" src="/picksell/resources/img/sell.png" width="150px" height="150px"></button>
 </div>
 
-<div class="link">
-<button onclick="window.location='/picksell/admin/member/sellHistory/${map.ID}'">
-회원 판매 내역 리스트</button>
-</div>
-
-<div class="link">
-<button onclick="window.location='/picksell/admin/member/purchaseHistory/${map.ID}'">
-회원 구매 내역 리스트</button>
-</div>
-
-<div class="link">
-<button onclick="window.location='/picksell/admin/member/products/${map.ID}'">
-회원 판매 글 리스트</button>
 </div>
 </div>
-</div>
-
 </body>
 </html>

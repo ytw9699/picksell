@@ -6,7 +6,7 @@
 <html>
 <style>
 .main{
- width: 300px;
+  margin-left : 250px;
 }
 
 </style>
@@ -17,11 +17,10 @@
 <body>
 <div class="main">
 <c:choose>
-<c:when test="${ 0  eq total }">
+<c:when test="${0 eq total }">
 구매 내역이 없습니다.
 </c:when>
-<c:when test="${ 0 lt total }">
-
+<c:when test="${0 lt total }">
 <table border="1px" align="center">
  	<tr>
  	    <th>번호</th>

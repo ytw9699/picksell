@@ -128,13 +128,13 @@ button:hover:before,button:hover:after{
 <button type="submit">Search</button>
 </form>
 </div>
-<h1>회원 목록</h1>
+<h1 style="margin-left:8px;">회원 목록</h1>
 <c:choose>
 <c:when test="${ 0 lt searchCount }">
-검색 결과는 ${searchCount }건 입니다.
+<h3>검색 결과는 ${searchCount }건 입니다.</h3>
 </c:when>
 <c:when test="${ 0 lt a }">
-전체 회원 수는 ${a}명 입니다.
+<h3 style="margin-left: 8px;">전체 회원 수는 ${a}명 입니다.</h3>
 </c:when>
 </c:choose>
 <table  class="adminMemeberList">
@@ -155,7 +155,14 @@ button:hover:before,button:hover:after{
      <td>${startNumber + i.index}</td>
    	 <td><a href="/picksell/admin/member/info/${memberslist.id}">${memberslist.id}</a></td>
 	 <td>${memberslist.name }</td>
-	 <td>${memberslist.profile_img }</td>
+	 <c:choose>
+	 <c:when test="${memberslist.profile_img != '' || memberslist.profile_img ne null }">
+	 <td><img src="/picksell/resources/profileImgUpload/freeprofileimg.jpg" style="width:32px; height:30px;"/></td>
+	 </c:when>
+	 <c:when test="${memberslist.profile_img eq null }">
+	  <td><img src="/picksell/resources/profileImgUpload/freeprofileimg.jpg" style="width:32px; height:30px;"/></td>
+	 </c:when>
+	 </c:choose>
 	 <td>${memberslist.email }</td>
      <c:choose>
 	 <c:when test="${ '99' eq memberslist.kind }">

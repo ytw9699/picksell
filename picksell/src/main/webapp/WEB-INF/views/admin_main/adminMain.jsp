@@ -49,16 +49,17 @@ catch(SQLException e){
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.3.0/Chart.bundle.js"></script>
 <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 <script type="text/javascript">
+
 google.charts.load('current', {'packages':['corechart']});
 google.charts.setOnLoadCallback(drawChart);
 function drawChart() {
     var data = google.visualization.arrayToDataTable([
       ['일자', 'Member'],
-      ['일주일전', ${countlist[7]}, ],
+      ['일주일전',  ${countlist[7]}, ],
       ['${daylist[6]}',  ${countlist[6]}, ],
       ['${daylist[5]}', ${countlist[5]}, ],
       ['${daylist[4]}',  ${countlist[4]}, ],
-      ['${daylist[3]}',  ${coutlist[3]}, ],
+      ['${daylist[3]}',  ${countlist[3]}, ],
       ['${daylist[2]}',  ${countlist[2]}, ],
       ['${daylist[1]}',  ${countlist[1]},  ],
       [  '오늘' ,  ${countlist[0]}, ]
@@ -73,8 +74,8 @@ function drawChart() {
     var chart = new google.visualization.AreaChart(document.getElementById('chart_div'));
     chart.draw(data, options);
   }
+ </script> 
 
-</script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 
@@ -82,10 +83,10 @@ function drawChart() {
 <body>
 <div class="main">
 <h1>메인가즈아~!</h1>
-<jsp:useBean id="toDay" class="java.util.Date" />
-지금은  <fmt:formatDate value="${toDay }" pattern="YYYY년 MM월 dd일"/>입니다.
 
-<div>
+
+<jsp:useBean id="toDay" class="java.util.Date" />
+<h2>오늘은  <fmt:formatDate value="${toDay }" pattern="YYYY년 MM월 dd일"/>입니다.</h2>
 
  <div id="chart_div" style="width: 100%; height: 500px;"></div>
 

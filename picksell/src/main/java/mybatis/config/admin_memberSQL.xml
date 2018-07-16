@@ -26,19 +26,20 @@ PUBLIC " - //mybatis.org//DTD Config 3.0//EN"
    </resultMap>
    
    <select id="membersList" resultMap="adminMemberRes">
-      SELECT * FROM PS_MEMBER ORDER BY regdate DESC
+      SELECT ID,NAME,PROFILE_IMG,EMAIL,KIND,STATUS,REGDATE FROM PS_MEMBER ORDER BY regdate DESC
    </select>
 
    <select id="searchName" resultMap="adminMemberRes" parameterType="string">
-       SELECT * FROM PS_MEMBER WHERE  name = #{name}  ORDER BY regdate DESC     
+       SELECT ID,NAME,PROFILE_IMG,EMAIL,KIND,STATUS,REGDATE FROM PS_MEMBER WHERE  name = #{name}  ORDER BY regdate DESC     
    </select>
    
    <select id="searchId" resultMap="adminMemberRes" parameterType="string">
-      SELECT * FROM PS_MEMBER WHERE id = #{id} ORDER BY regdate DESC
+      SELECT ID,NAME,PROFILE_IMG,EMAIL,KIND,STATUS,REGDATE FROM PS_MEMBER WHERE id = #{id} ORDER BY regdate DESC
    </select>
    
     <select id="selectOneMember" resultType="hashmap" parameterType="string">
-       SELECT * FROM PS_MEMBER WHERE id = #{id}
+       SELECT ID,NAME,EMAIL,ADDRESS,STATUS,ALARM_CONSENT,REGDATE,KIND
+       FROM PS_MEMBER WHERE id = #{id}
     </select>
     
     <select id="selectOrderList" resultType="hashmap" parameterType="string">
@@ -65,7 +66,7 @@ PUBLIC " - //mybatis.org//DTD Config 3.0//EN"
     
     <select id="adminSelling" resultType="hashmap" parameterType="string">
        SELECT * FROM ps_product WHERE seller_id = #{id} and 
-       deal_status = '0'
+       deal_status = '0' order by product_regdate desc
     </select>
     
     <update id="blindStatus" parameterType="HashMap">
