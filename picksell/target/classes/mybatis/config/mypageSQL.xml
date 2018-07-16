@@ -247,4 +247,9 @@ select * from ps_product a, PS_ORDERLIST b where b.ORDER_NUM = #{ORDER_NUM} and 
 	update ps_order set step4_date = sysdate where ORDER_NUM = #{ORDER_NUM}
 </update>
 
+<select id="recentlist" resultType="hashmap" parameterType="String">
+	select * from PS_RECENT_PRODUCT a, PS_PRODUCT b where a.RECENT_ID = #{sessionId} and a.RECENT_PRODUCT_NUM  = b.PRODUCT_NUM order by a.RECENT_REGDATE desc
+	
+</select>
+
 </mapper>

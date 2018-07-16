@@ -390,10 +390,16 @@ public class mypageController {
 			}
 			return "completing";//인수확인 및 거래 완료가 정상적으로 안됬을때
 	}
+	@RequestMapping("/mypage/recentProduct")
+	public String recentProduct(HttpSession session,Model model) {
+			
+			String sessionId =(String)session.getAttribute("sessionId");
+			
+				List<Map<String, Object>> recentlist = mypageService.recentlist(sessionId);
+				model.addAttribute("recentlist", recentlist);
+		
+		return "recentProduct";
+	}
 }
 
-/*@RequestMapping(value="/mypage/recent_product", method=RequestMethod.GET)
-public String recent_product(
-		) {
 		
-}*/
