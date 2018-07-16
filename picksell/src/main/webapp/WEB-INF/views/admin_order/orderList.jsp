@@ -48,7 +48,7 @@
 }
 
 .main{ 
- 	 margin-left: 160px;  
+ 	 margin-left: 200px;  
  	} 
 
 table {
