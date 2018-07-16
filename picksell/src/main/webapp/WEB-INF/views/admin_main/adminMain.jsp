@@ -11,6 +11,7 @@ Gson gsonObj = new Gson();
 Map<Object,Object> map = null;
 List<Map<Object,Object>> list = new ArrayList<Map<Object,Object>>();
 String dataPoints = null;
+
  
 try{
 	Class.forName("oracle.jdbc.driver.OracleDriver"); 
@@ -24,14 +25,19 @@ try{
 		xVal = resultSet.getString("x");
 		yVal = resultSet.getString("y");
 		
-		map = new HashMap<Object,Object>(); map.put("x", Integer.parseInt(xVal)); map.put("y", Integer.parseInt(yVal)); list.add(map);
+		map = new HashMap<Object,Object>(); 
+		map.put("x", Integer.parseInt(xVal)); 
+		map.put("y", Integer.parseInt(yVal)); 
+		list.add(map);
 		dataPoints = gsonObj.toJson(list);
+		
 	}
 	connection.close();
 }
 catch(SQLException e){
 	out.println("<div  style='width: 50%; margin-left: auto; margin-right: auto; margin-top: 200px;'>Database has not been connected yet.</div>");
 	dataPoints = null;
+	
 }
 %>
 
@@ -54,11 +60,11 @@ catch(SQLException e){
 <div class="main">
 <h1>사업지표</h1>
 
-<div id="chartContainer" style="height: 370px; width: 100%;"></div>
+<div id="chartContainer" style="height: 170px; width: 50%;"></div>
 
-<br/><br/><br/><br/><br/>
-<canvas id="myChart" width="400" height="300"></canvas>  <canvas id="bar-chart" width="800" height="450"></canvas><br/>
-<canvas id="line-chart" width="800" height="450"></canvas><br/>
+
+<canvas id="myChart" width="30" height="30"></canvas>  <canvas id="bar-chart"width="30" height="30"></canvas><br/>
+<canvas id="line-chart" width="30" height="30"></canvas><br/>
 <canvas id="pie-chart" width="800" height="450"></canvas><br/>
 <canvas id="radar-chart" width="800" height="600"></canvas><br/>
 <canvas id="polar-chart" width="800" height="450"></canvas><br/>
@@ -94,8 +100,9 @@ window.onload = function() {
 	});
 	chart.render();
 	<% } %> 
-	 
-	}
+	
+}
+
 
 
 
