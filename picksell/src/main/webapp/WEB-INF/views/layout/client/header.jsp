@@ -336,7 +336,8 @@ function moving(){
 				//alert(data.currentCounting);
 				document.getElementById('myBasketSum').innerHTML = data.currentCounting;
 			}
-		});		
+		});	
+		
 		
 		//알람스위치 초기화부분
 		//var al_status = 0;

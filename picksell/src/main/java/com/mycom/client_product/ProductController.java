@@ -39,7 +39,7 @@ public class ProductController {
 	//페이징
 	//private int currentPage = 1; //안쓰는변수 어노테이션으로 해결함
 	private int totalCount; 		 
-	private int blockCount = 10;	 
+	private int blockCount = 12;	 
 	private int blockPage = 5; 	 
 	private String pagingHtml;  
 	private ProductPaging page;
