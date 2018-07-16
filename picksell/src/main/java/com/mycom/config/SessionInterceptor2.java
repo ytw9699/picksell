@@ -10,10 +10,7 @@ public class SessionInterceptor2 extends HandlerInterceptorAdapter {
 
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception{
 		
-		System.out.println("인터셉터2 언제어디서나");
-		
-		
-		
+		//System.out.println("인터셉터2 언제어디서나");
 		return true;
 	}
 	
