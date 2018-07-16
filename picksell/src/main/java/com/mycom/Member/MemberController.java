@@ -144,6 +144,20 @@ import com.mycom.utils.FileUpload;
 		return resultMap;
 		}
 		
+	@RequestMapping("/checkJoinId")//아이디 중복확인
+	public String checkJoinId(Model model, @RequestParam(value="id", required=false, defaultValue="0") String id//기본값 0
+	){  
+		if(!id.equals("0")) {//기본값이 아니라면
+			
+		int resultNumber = MemberService.checkJoinId(id);//해당아이디의 카운트를 구해옴
+		//int의 기본값은 0
+		
+		model.addAttribute("resultNumber", resultNumber);//0을 넘기면 아이디 중복안되는것 //1이면 중복!
+		model.addAttribute("id", id);
+		
+		}
+		return "/join/checkJoinId";
+	}
 	}
 	
 	
