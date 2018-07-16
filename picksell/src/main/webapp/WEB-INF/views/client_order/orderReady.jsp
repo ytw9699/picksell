@@ -186,6 +186,7 @@ table td {
 				<input type="hidden" name="o_list[${status.index }].product_num" value="${product.product_num }" />
 				<input type="hidden" name="o_list[${status.index }].order_quantity" value="${product.orderSum }" />
 				<input type="hidden" name="o_list[${status.index }].seller_id" value="${product.seller_id }" />
+				<input type="hidden" name="o_list[${status.index }].product_howtosell" value="${product.product_howtosell }" />
 				<input type="hidden" name="buyer_id" value="${sessionScope.sessionId }" /> <!-- by 태원 -->
 				<tr>
 					<td class="product_imgTD">

@@ -63,4 +63,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		
 	</update>
 	
+	<!-- 일반상품 구매 시, 상품상태를 판매중 에서 거래중으로 바뀜 -->
+	<update id="updateProductStatus" parameterType="int">
+		update ps_product set product_status = 1 where product_num = #{product_num}
+	</update>
+	
 </mapper>

@@ -104,6 +104,7 @@ li.headerCategory {
     padding: 0 30px;
     font-size: 15px;
     color: #333333;
+    cursor: pointer;
 }
 .totalCategory {
     border-left: 1px solid #dbdbdb;
@@ -335,7 +336,8 @@ function moving(){
 				//alert(data.currentCounting);
 				document.getElementById('myBasketSum').innerHTML = data.currentCounting;
 			}
-		});		
+		});	
+		
 		
 		//알람스위치 초기화부분
 		//var al_status = 0;
