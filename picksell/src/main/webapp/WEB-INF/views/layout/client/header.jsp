@@ -104,6 +104,7 @@ li.headerCategory {
     padding: 0 30px;
     font-size: 15px;
     color: #333333;
+    cursor: pointer;
 }
 .totalCategory {
     border-left: 1px solid #dbdbdb;
