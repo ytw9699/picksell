@@ -25,7 +25,6 @@
  	<tr>
  	    <th>번호</th>
  		<th>판매 내역 번호</th>
- 		<th>판매자 ID</th>
  		<th>구매자 ID</th>
  		<th>상품 번호</th>
  		<th>판매 개수</th>
@@ -36,14 +35,13 @@
   <c:forEach var="maplist" items="${maplist }" varStatus="i">
 	<tr>
 	    <td>${i.count }</td>
-		<td>${maplist.SH_NUM }</td>
-		<td>${maplist.SELLER_ID }</td>
+		<td>${maplist.ORDERLIST_NUM  }</td>
 		<td>${maplist.BUYER_ID }</td>
 		<td>${maplist.PRODUCT_NUM}</td>
 		<td>${maplist.ORDER_QUANTITY }</td>
-		<td>${maplist.TOTAL_PRICE }</td>
-		<td>${maplist.STATUS}</td>
-		<td><fmt:formatDate value="${maplist.REGDATE}" pattern="yyyy-MM-dd"/></td>
+		<td>${maplist.TOTAL_PRICE }(원)</td>
+		<td>판매종료</td>
+		<td><fmt:formatDate value="${maplist.STEP4_DATE}" pattern="yyyy-MM-dd hh:mm"/></td>
 	</tr>
 </c:forEach>
 </table>

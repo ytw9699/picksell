@@ -49,7 +49,6 @@ table.PurchaseHistory td {
  	<tr>
  	    <th>번호</th>
  		<th>구매 내역 번호</th>
- 		<th>구매자 ID</th>
  		<th>판매자 ID</th>
  		<th>상품 번호</th>
  		<th>구매 개수</th>
@@ -60,15 +59,14 @@ table.PurchaseHistory td {
  	<c:forEach var="maplist" items="${maplist }" varStatus="i">
  		<tr>
  		<td>${i.count}</td>
- 		<td>${maplist.BH_NUM }</td>
- 		<td>${maplist.BUYER_ID }</td>
+ 		<td>${maplist.ORDERLIST_NUM }</td>
  		<td>${maplist.SELLER_ID }</td>
  		<td>${maplist.PRODUCT_NUM }</td>
  		<td>${maplist.ORDER_QUANTITY }</td>
  		<td>${maplist.TOTAL_PRICE }</td>
- 		<td>${maplist.STATUS }</td>
+ 		<td>구매완료</td>
  		<td>
- 			구매일자
+ 			<fmt:formatDate value="${maplist.STEP1_DATE }" pattern="yy-MM-dd hh:mm"></fmt:formatDate>
  		</td>
  		</tr>
  	</c:forEach>
