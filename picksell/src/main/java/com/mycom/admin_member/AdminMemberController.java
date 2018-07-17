@@ -1,5 +1,6 @@
 package com.mycom.admin_member;
 
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -25,9 +26,8 @@ import com.mycom.config.CommandMap;
 public class AdminMemberController {
     
 
-	//회원계정상태 변경처리
+	
 
-	//판매글 블라인드
 	
 	//회원검색
 	private int searchNum;
@@ -88,13 +88,14 @@ public class AdminMemberController {
 	}
 	
 	//회원 검색
-	@RequestMapping(value="/search")
+	@RequestMapping(value="/search",method=RequestMethod.POST)
 	public ModelAndView adminMemberSearch(HttpServletRequest request) throws Exception{
 		//name
         
 	  searchNum = Integer.parseInt(request.getParameter("searchNum"));
-	  isSearch = request.getParameter("isSearch");
-	
+	  isSearch =  request.getParameter("isSearch");
+	  
+	  
 	  
 	  if(request.getParameter("currentPage") == null || request.getParameter("currentPage").trim().isEmpty() || request.getParameter("currentPage").equals("0")) {
           currentPage = 1;
@@ -220,6 +221,7 @@ public class AdminMemberController {
 		return "redirect:/admin/member/products/" + request.getParameter("id");
 	}
 	
+	//회원계정상태 변경처리
 	@RequestMapping(value="/infoChangeProc")
 	public String memberStatus(HttpServletRequest request) throws Exception{
 		

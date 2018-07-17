@@ -10,29 +10,36 @@
    margin-left: 250px; /* Same as the width of the sidenav */
    
 }
+.oneline{
+	padding : 1px;
+	border : 1px;
+}
 
 </style>
-
-
 <head>
 <script src="http://code.jquery.com/jquery-1.7.js"></script>
+<script type="text/javascript">
+
+</script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
 <div class="main">
+<h1>주문 리스트</h1>
+<div class="totalOrder">
 <c:choose>
 <c:when test="${0 eq map.mapSize }">
-주문내역이 없습니다.
+<h3>주문 내역이 없습니다.</h3>
 </c:when>
 <c:when test="${0 lt map.mapSize }">
-주문건수는 총 ${map.mapSize }건 입니다.
+<h3>총 주문 수는 <font color="red">${map.mapSize }</font> 건 입니다.</h3>
 </c:when>
 </c:choose>
-
+</div>
 
 <c:forEach var="orderList" items="${orderList}" varStatus="orderListStatus">
-<div class="oneLine">
+<div class="oneLine" id="oneLine">
 <p>주문번호  : ${orderList.ORDER_NUM }
 <p>전체 주문 금액 : ${orderList.TOTAL_PRICE} (원)
  
@@ -65,10 +72,13 @@
 	 <fmt:formatDate value="${orderList.CANCEL_DATE }" pattern="yy-MM-dd HH:mm:ss"/>
 	  </c:when>
 	  </c:choose>	  	 
-	최초 주문 시간 :${orderList.STEP1_DATE} <!-- 주문일(입금대기날짜) -->              
-
+	
+	최초 주문 시간 : <fmt:formatDate value="${orderList.STEP1_DATE}" pattern="yy-MM-dd HH:mm"/><!-- 주문일(입금대기날짜) -->              
+	
 </div>
-   </c:forEach>
+<br>
+ </c:forEach>
+
 
 <%-- <table border="1px" align="center">
 	<thead>

@@ -8,7 +8,30 @@
 .main{
   margin-left : 250px;
 }
+table.PurchaseHistory{
+ border-collaspe : separate;
+ boarder-spacing : 1px;
+ text-align: center;
+ line-height : 1.5;
+ margin: 10px 5px;
 
+}
+table.PurchaseHistory th {
+    width: 200px;
+    padding: 10px;
+    font-weight: bold;
+    vertical-align: top;
+    color: #fff;
+    background: #337ab7;
+   
+}
+table.PurchaseHistory td {
+    width: 200px;
+    padding: 10px;
+    vertical-align: top;
+    border-bottom: 1px solid #ccc;
+    background: #fff;
+}
 </style>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -16,12 +39,13 @@
 </head>
 <body>
 <div class="main">
+<h1 style="margin-left: 208px;">관리자 구매 내역 리스트</h1>
 <c:choose>
 <c:when test="${0 eq total }">
 구매 내역이 없습니다.
 </c:when>
 <c:when test="${0 lt total }">
-<table border="1px" align="center">
+<table  class="PurchaseHistory">
  	<tr>
  	    <th>번호</th>
  		<th>구매 내역 번호</th>

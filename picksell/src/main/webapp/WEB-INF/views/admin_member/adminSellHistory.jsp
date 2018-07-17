@@ -15,7 +15,7 @@
 </head>
 <body>
 <div class="main">
-<h1>관리자 판매 내역 리스트</h1>
+<h1 style="margin-left: 208px;">관리자 판매 내역 리스트</h1>
 <c:choose>
 <c:when test="${0 eq total  }">
 판매내역이 없습니다.
