@@ -65,8 +65,9 @@ function checkbox(){
 <p><input type="button" value="이전" onclick="AnimateForm('#c1'); return false" />
 </div>
 
-<div id="c3">
-  <form method="post" name="joinForm">
+<div id="c3">check
+
+  <form method="post" name="joinForm" onsubmit="return check();">
 	<input type="hidden" id="kind" name="kind" value="1"/>
 	<!-- 기본 사업자회원  -->
 	<p>회원가입</p>
@@ -146,6 +147,49 @@ function checkWhere(where){
 		
 		$("#business").hide();
 	}
+}
+
+var idCheckNum = 0;//아이디 중복확인차 필요
+
+function check(){
+	
+	if(document.joinForm.id.value == ''){
+		alert('아이디를 입력하세요');
+		document.joinForm.id.focus();
+		return false;
+	}
+	else if(document.joinForm.password.value == ''){
+		alert('비밀번호를 입력하세요');
+		document.joinForm.password.focus();
+		return false;
+	}
+	else if(document.joinForm.passwordCheck.value == ''){
+		alert('비밀번호를 재입력하세요')
+		document.joinForm.passwordCheck.focus();
+		return false;
+	}
+	else if(document.joinForm.password.value != document.joinForm.passwordCheck.value){
+		alert('비밀번호가 일치하지 않습니다');
+		document.joinForm.passwordCheck.focus();
+		return false;
+	}
+	else if(document.joinForm.name.value == ''){
+		alert('이름을 입력하세요')
+		document.joinForm.name.focus();
+		return false;
+	}
+	else if(document.joinForm.email.value == ''){
+		alert('이메일을 입력하세요')
+		document.joinForm.email.focus();
+		return false;
+	}
+	else if(idCheckNum == 0){
+		alert('아이디 중복확인을 해주세요!');
+		document.joinForm.id.focus();
+		return false;
+	}else
+	 	alert('회원가입이 완료되었습니다.');
+		return true;
 }
 </script>
 </body>
