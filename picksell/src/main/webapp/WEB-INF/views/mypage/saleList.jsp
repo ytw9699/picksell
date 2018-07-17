@@ -31,7 +31,7 @@
 인수확인 및 거래완료/
 </a>
 <a href="/picksell/mypage/saleList?status=44">
-결제취소/
+결제취소 및 반품/
 </a>
 <c:if test="${fn:length(saleList) > 0}">
 <c:forEach var="ps_order" items="${saleList}" varStatus="saleListStatus">
