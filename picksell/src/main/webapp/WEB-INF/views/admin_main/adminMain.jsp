@@ -19,7 +19,7 @@ try{
 	Statement statement = connection.createStatement();
 	String xVal, yVal;
 	
-	ResultSet resultSet = statement.executeQuery("select to_char(step4_date, 'mmdd') AS x, sum(total_price) AS y from ps_order WHERE to_char(step4_date, 'mmdd') IS NOT NULL group by to_char(step4_date, 'mmdd')");
+	ResultSet resultSet = statement.executeQuery("select to_char(step4_date, 'mmdd') AS x, sum(total_price) AS y from ps_order WHERE to_char(step4_date, 'mmdd') IS NOT NULL group by to_char(step4_date, 'mmdd')  ORDER BY to_char(step4_date, 'mmdd')");
 	
 	while(resultSet.next()){
 		xVal = resultSet.getString("x");
