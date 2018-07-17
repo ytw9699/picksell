@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -434,6 +435,23 @@ public class mypageController {
 	}
 		return resultMap;
 }
+	
+	@RequestMapping("/mypage/headerAlarmList")
+	@ResponseBody
+	public List<Map<String, Object>> ajaxlistTest(
+			HttpServletRequest request){
+		
+		List<Map<String, Object>> resultAlarmList;
+		String currentID = request.getSession().getAttribute("sessionId").toString();
+		
+		if(currentID != null) {
+			resultAlarmList = mypageService.getMyAlarmHeaderList(currentID);
+		}else {
+			return Collections.EMPTY_LIST;
+		}
+		
+		return resultAlarmList;
+	}
 }
 
 		

@@ -235,6 +235,11 @@ span.alarm-setTEXT {
     padding-top: 10px;
     border-bottom: 1px solid #dedede;
 }
+span.myAlarmTEXT > a {
+    display: block;
+    font-size: 14px;
+    color: #333;
+}
 </style>
 </head>
 <script>
@@ -361,6 +366,36 @@ function moving(){
 			document.getElementById('myAlarm').innerHTML = data.alarmSum;
 		}
 	});	
+	
+	$.ajax({
+		type : "GET",
+		url : "/picksell/mypage/headerAlarmList",
+		dataType : 'json',
+		success : function(data){
+			
+			var htmlstr = '';
+			
+			$.each(data, function(key, value){
+				//kind2 > 나의글에 구매신청한경우
+				if(value.ALARM_KIND == 2)
+					htmlstr += '<span class="myAlarmTEXT"><a href="">'+value.ALARM_WRITER+' 님께서 구매신청을 수락했습니다</a></span>';
+				if(value.ALARM_KIND == 3)
+					htmlstr += '<span class="myAlarmTEXT"><a href="">'+value.ALARM_WRITER+' 님께서 구매신청을 하셨습니다</a></span>';
+				if(value.ALARM_KIND == 4)
+					htmlstr += '<span class="myAlarmTEXT"><a href="">'+value.ALARM_VARIABLE2+' 주문에 대한 배송이 시작되었습니다</a></span>';
+				//if(value.ALARM_KIND == 5)
+				//if(value.ALARM_KIND == 6)
+				if(value.ALARM_KIND == 7)
+					htmlstr += '<span class="myAlarmTEXT"><a href="">'+value.ALARM_WRITER+' 님께서 구매신청을 취소했습니다</a></span>';
+				//if(value.ALARM_KIND == 8)
+				//if(value.ALARM_KIND == 9)
+				//if(value.ALARM_KIND == 10)
+				if(value.ALARM_KIND == 11)
+					htmlstr += '<span class="myAlarmTEXT"><a href="">'+value.ALARM_VARIABLE2+' 주문을 취소했습니다</a></span>';
+			});
+			$('.alarm-list').html(htmlstr);
+		}
+	});
 </script>
 <body>
 
@@ -454,7 +489,9 @@ function moving(){
 			<input type="button" id="smallsq" class="smallsq" onclick="moving();" />
 			</div>
 		</div>
-		알람상태 ${sessionScope.sessionAlarm }
+		<div class="alarm-list">
+			
+		</div>
 	</div>
 </div>
 

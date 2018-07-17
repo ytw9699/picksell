@@ -118,5 +118,10 @@ public class mypageService implements mypageDao {
 	public int alarmCount(String sessionId) {
 		return sqlMapper.selectOne("mypage.alarmCount", sessionId);
 	}
+	
+	//헤더의 알람목록 가져오기(읽지않은알람)
+	public List<Map<String, Object>> getMyAlarmHeaderList(String currentID){
+		return sqlMapper.selectList("mypage.getMyAlarmList", currentID);
+	}
 
 }
