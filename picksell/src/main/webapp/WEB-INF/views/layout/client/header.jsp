@@ -400,12 +400,17 @@ function alarmReadOfHead(ALARM_NUM, kind, var1, var2){
 							if(value.ALARM_KIND == 4)
 								htmlstr += "<span class='myAlarmTEXT' onclick='alarmReadOfHead("+value.ALARM_NUM+","+value.ALARM_KIND+","+value.ALARM_VARIABLE1+","+value.ALARM_VARIABLE2+")'>"+value.ALARM_VARIABLE2+" 주문에 대한 배송이 시작되었습니다</span>";
 							//if(value.ALARM_KIND == 5)
-							//if(value.ALARM_KIND == 6)
+								//htmlstr += "<span class='myAlarmTEXT' onclick='alarmReadOfHead("+value.ALARM_NUM+","+value.ALARM_KIND+","+value.ALARM_VARIABLE1+","+value.ALARM_VARIABLE2+")'>"+value.ALARM_VARIABLE2+" 주문에 대한 배송이 시작되었습니다</span>";
+							if(value.ALARM_KIND == 6)
+								htmlstr += "<span class='myAlarmTEXT' onclick='alarmReadOfHead("+value.ALARM_NUM+","+value.ALARM_KIND+","+value.ALARM_VARIABLE1+","+value.ALARM_VARIABLE2+")'>"+value.ALARM_WRITER+" 님께서 인수확인 하셨습니다</span>";
 							if(value.ALARM_KIND == 7)
 								htmlstr += "<span class='myAlarmTEXT' onclick='alarmReadOfHead("+value.ALARM_NUM+","+value.ALARM_KIND+","+value.ALARM_VARIABLE1+","+value.ALARM_VARIABLE2+")'>"+value.ALARM_WRITER+" 님께서 구매신청을 취소했습니다</span>";
-							//if(value.ALARM_KIND == 8)
-							//if(value.ALARM_KIND == 9)
-							//if(value.ALARM_KIND == 10)
+							if(value.ALARM_KIND == 8)
+								htmlstr += "<span class='myAlarmTEXT' onclick='alarmReadOfHead("+value.ALARM_NUM+","+value.ALARM_KIND+","+value.ALARM_VARIABLE1+","+value.ALARM_VARIABLE2+")'>"+value.ALARM_WRITER+" 판매자가 구매수락을 취소했습니다</span>";
+							if(value.ALARM_KIND == 9)
+								htmlstr += "<span class='myAlarmTEXT' onclick='alarmReadOfHead("+value.ALARM_NUM+","+value.ALARM_KIND+","+value.ALARM_VARIABLE1+","+value.ALARM_VARIABLE2+")'>"+value.ALARM_WRITER+" 구매자가 주문신청을 했습니다</span>";
+							if(value.ALARM_KIND == 10)
+								htmlstr += "<span class='myAlarmTEXT' onclick='alarmReadOfHead("+value.ALARM_NUM+","+value.ALARM_KIND+","+value.ALARM_VARIABLE1+","+value.ALARM_VARIABLE2+")'>"+value.ALARM_VARIABLE2+" 주문을 취소했습니다</span>";
 							if(value.ALARM_KIND == 11)
 								htmlstr += "<span class='myAlarmTEXT' onclick='alarmReadOfHead("+value.ALARM_NUM+","+value.ALARM_KIND+","+value.ALARM_VARIABLE1+","+value.ALARM_VARIABLE2+")'>"+value.ALARM_VARIABLE2+" 주문을 취소했습니다</span>";
 						});
