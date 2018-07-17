@@ -74,8 +74,8 @@ public class mypageService implements mypageDao {
 		sqlMapper.insert("mypage.alarmInsert",parameterMap);
 	}
 	
-	public List<Map<String, Object>> alarmSelect(String sessionId) {
-		return sqlMapper.selectList("mypage.alarmSelect", sessionId);
+	public List<Map<String, Object>> alarmSelect(Map<String, Object> parameterMap) {
+		return sqlMapper.selectList("mypage.alarmSelect", parameterMap);
 	}
 
 	public int alarmDelete(Map<String, Object> parameterMap) {
@@ -118,9 +118,17 @@ public class mypageService implements mypageDao {
 	public int alarmCount(String sessionId) {
 		return sqlMapper.selectOne("mypage.alarmCount", sessionId);
 	}
+	
+	//헤더의 알람목록 가져오기(읽지않은알람)
+	public List<Map<String, Object>> getMyAlarmHeaderList(String currentID){
+		return sqlMapper.selectList("mypage.getMyAlarmList", currentID);
+	}
 
 	public void deliveryInsert(Map<String, Object> parameterMap) {
 		sqlMapper.update("mypage.deliveryInsert",parameterMap);
 	}
 
-}
+	public void profile(Map<String, Object> map) {
+		sqlMapper.update("mypage.profile",map);
+		}
+	}

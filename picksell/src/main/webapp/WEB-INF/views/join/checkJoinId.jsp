@@ -120,7 +120,7 @@ span.cannotUSE {
 <script>
 
 function setID(){
-	//opener.idCheckNumber = 1;//나중에 값빠진거 유효성검사때 추가필요
+	opener.idCheckNum = 1;//아이디 중복확인 확인차 필요
 	opener.document.joinForm.id.value = ${id};
 	self.close();
 }

@@ -5,8 +5,6 @@
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
     <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-    <!-- 수정 -->
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -25,7 +23,7 @@
 				dataType : 'json',
 				data : allData,
 				success : function(data){
-					alert("알람입력완료");
+					//alert("알람입력완료");
 				}
 			});	
 	}
@@ -58,7 +56,7 @@
 		<td>구매하기</td>
 	</tr>
 
-	<c:forEach var="purchase" items="${purchaseList}">
+	<c:forEach var="purchase" items="${purchaseList}" varStatus="status">
 	<tr>
 		<td>
 			<a href="/picksell/products/detail/${purchase.CATEGORY_NUM }/${purchase.PRODUCT_NUM }">
@@ -67,20 +65,20 @@
 		</td>
 		<td><a href="/picksell/products/detail/${purchase.CATEGORY_NUM }/${purchase.PRODUCT_NUM }">${purchase.SUBJECT }</a></td>
 		<td><fmt:formatNumber value="${purchase.PRICE }" pattern="#,###.##" /> 원</td>
-		<td><fmt:formatDate value="${purchase.REGDATE}" pattern="yy년 MM월 dd일 hh:mm" /></td>
+		<td><fmt:formatDate value="${purchase.REGDATE}" pattern="yy. MM. dd. hh:mm" /></td>
 		<c:if test="${purchase.STATUS == '0'}">
-		<td>구매 요청 수락 대기중</td>
+		<td>요청 수락 대기중</td>
 		</c:if>
 		<c:if test="${purchase.STATUS == '1'}">
-		<td>구매 요청 수락 완료</td>
+		<td>요청 수락 완료</td>
 		</c:if>																	
 		<td>${purchase.SELLER_ID }</td>
 		<td><input type="button" value="취소" id ="cancel" onclick="deletePurchaseList('${purchase.PURCHASE_NUM }','${purchase.SELLER_ID }','${purchase.CATEGORY_NUM }','${purchase.PRODUCT_NUM }','${purchase.BUYER_ID}');" /></td>
-		<td><input type="button" value="구매" id ="purchase" disabled="disabled" onclick="location.href = '/picksell/products/detail/${purchase.CATEGORY_NUM }/${purchase.PRODUCT_NUM }'"/></td>
+		<td><input type="button" value="구매" id ="purchase${status.index+1}" disabled="disabled" onclick="location.href = '/picksell/products/detail/${purchase.CATEGORY_NUM }/${purchase.PRODUCT_NUM }'"/></td>
 	</tr> 
 	<c:if test="${purchase.STATUS == '1'}">
 <script>
-	document.getElementById("purchase").disabled = false;//
+	document.getElementById("purchase"+${status.index+1}).disabled = false;
 </script>
 </c:if>
 	</c:forEach>

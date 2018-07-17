@@ -9,6 +9,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from PS_MEMBER WHERE ID = #{sessionId}
 </select>
 
+<select id="getMyAlarmList" resultType="hashmap" parameterType="hashmap">
+	select * from ps_alarm 
+	where alarm_target = #{currentID} and alarm_check = 'NO' 
+	order by alarm_regdate desc
+</select>
+
 <update id="updateBusiness" parameterType="hashmap">
 		update PS_MEMBER set 
 		password = #{password},
@@ -212,8 +218,21 @@ select * from ps_product a, PS_ORDERLIST b where b.ORDER_NUM = #{ORDER_NUM} and 
 									
 </insert>
 <!-- 알람가져오기 -->
-<select id="alarmSelect" parameterType="String" resultType="hashmap">
-			select * from ps_alarm WHERE ALARM_TARGET = #{sessionId} order by ALARM_REGDATE desc
+<select id="alarmSelect" parameterType="hashmap" resultType="hashmap">
+			select * from ps_alarm WHERE ALARM_TARGET = #{sessionId}
+			
+			<if test='ALARM_CHECK == "ALL" '>
+			</if>
+			
+			<if test='ALARM_CHECK == "NO" '>
+			and ALARM_CHECK = #{ALARM_CHECK} 
+			</if>
+			
+			<if test='ALARM_CHECK == "YES" '>
+			and ALARM_CHECK = #{ALARM_CHECK} 
+			</if>
+			
+			order by ALARM_REGDATE desc
 </select>
 
 <select id="alarmDelete" parameterType="hashmap">
@@ -264,6 +283,9 @@ select * from ps_product a, PS_ORDERLIST b where b.ORDER_NUM = #{ORDER_NUM} and 
 	INVOICE_NUM = #{INVOICE_NUM}
 	where ORDER_NUM = #{ORDER_NUM}
 </update>
-
+ 
+<update id="profile" parameterType="hashmap">
+	update ps_member set PROFILE_IMG = #{PROFILE_IMG} where ID = #{sessionId}
+</update>
 
 </mapper>
