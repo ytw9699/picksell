@@ -29,8 +29,7 @@ function alarmRead(ALARM_NUM){
 				dataType : 'json',
 				data : allData,
 				success : function(data){
-				
-				alert("알람을 읽었습니다");
+				//alert("알람을 읽었습니다");
 				}
 			});	
 }
@@ -56,7 +55,7 @@ function alarmDelete(ALARM_NUM){
 		
 		<c:if test="${alarmMap.ALARM_KIND == '2'}">
 			<td>
-			<a href="/picksell/products/detail/${alarmMap.ALARM_VARIABLE1}/${alarmMap.ALARM_VARIABLE2}?ALARM_NUM=${alarmMap.ALARM_NUM}">
+			<a href="/picksell/products/detail/${alarmMap.ALARM_VARIABLE1}/${alarmMap.ALARM_VARIABLE2}" onclick="alarmRead('${alarmMap.ALARM_NUM}')">
 			 		${alarmMap.ALARM_WRITER}님께서 구매신청을 수락하셨습니다.
 			</a>
 			</td>
