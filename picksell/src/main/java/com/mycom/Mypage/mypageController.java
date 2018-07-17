@@ -435,7 +435,7 @@ public class mypageController {
 		return resultMap;
 }
 	@RequestMapping("/mypage/deliveryInsert")
-	public String deliveryInsert(Model model,
+	public String deliveryInsert(Model model,//배송사항 입력
 	@RequestParam(value="ORDER_NUM",required=false, defaultValue="0") String ORDER_NUM,
 	@RequestParam(value="DELIVERY_COMPANY",required=false, defaultValue="0") String DELIVERY_COMPANY,
 	@RequestParam(value="INVOICE_NUM",required=false, defaultValue="0") String INVOICE_NUM,

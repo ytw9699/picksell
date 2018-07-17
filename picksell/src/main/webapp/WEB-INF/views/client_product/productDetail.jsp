@@ -33,7 +33,7 @@
 				dataType : 'json',
 				data : allData,
 				success : function(data){
-					alert("알람입력완료");
+					//alert("알람입력완료");
 				}
 			});	
 	}
