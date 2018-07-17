@@ -40,6 +40,7 @@ public class mypageController {
 	private String pagingHtml;  
 	private ProductPaging page;
 	private orderListPaging page2;
+	private alarmSelectPaging page3;
 			
 	Map<String, Object> resultMap = new HashMap<String, Object>();//공통사용
 	
@@ -315,18 +316,38 @@ public class mypageController {
 		mypageService.alarmInsert(parameterMap);//알람 입력
 		return parameterMap;
 }
-	@RequestMapping("/mypage/alarmSelect")
-	public String alarmSelect(HttpSession session, Model model) {//알람을 허용한 사람만 리스트 가져오기
+	@RequestMapping("/mypage/alarmSelect")//알람을 허용한 사람만 리스트 가져오기
+	public String alarmSelect(HttpSession session, Model model, 
+	@RequestParam(value="ALARM_CHECK", required=false, defaultValue="ALL") String ALARM_CHECK,//기본값 ALL 은 전체보기
+	@RequestParam(value="p", required=false, defaultValue="1") int currentPageNumber
+	) {	
+		Map<String, Object> parameterMap = new HashMap<String, Object>();
 		
-	String sessionId =(String)session.getAttribute("sessionId");//세션아이디값
-	String sessionAlarm =(String)session.getAttribute("sessionAlarm");//세션알람값
+		String sessionId =(String)session.getAttribute("sessionId");//세션아이디값
+		String sessionAlarm =(String)session.getAttribute("sessionAlarm");//세션알람값
+		System.out.println(sessionAlarm);
+		parameterMap.put("ALARM_CHECK", ALARM_CHECK);
+		parameterMap.put("sessionId", sessionId);
 	
 	if(!sessionAlarm.equals("ON")){
 	 return "alarmSelect";
 	}
 	else {//알림이 ON일때만 리스트 가져오자
+		List<Map<String, Object>> alarmList = mypageService.alarmSelect(parameterMap);//세션아이디에 해당하는 알람 가져옴
+		totalCount = alarmList.size();
+	    page3 = new alarmSelectPaging(currentPageNumber, totalCount, blockCount, blockPage, "/picksell/mypage/alarmSelect", ALARM_CHECK);
 		
-		List<Map<String, Object>> alarmList = mypageService.alarmSelect(sessionId);//세션아이디에 해당하는 알람 가져옴
+		pagingHtml = page3.getPagingHtml().toString();
+		
+		int lastCount = totalCount;
+		
+		if(page3.getEndCount() < totalCount)
+			lastCount = page3.getEndCount() + 1;
+		
+		alarmList = alarmList.subList(page3.getStartCount(), lastCount);
+	   
+	    model.addAttribute("pagingHtml", pagingHtml);
+		
 		model.addAttribute("alarmList", alarmList);
 		
 		return "alarmSelect";

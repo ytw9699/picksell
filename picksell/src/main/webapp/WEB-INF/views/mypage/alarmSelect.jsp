@@ -11,11 +11,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <title>알림 읽기</title>
-<h2>알림 읽기</h2>
+<h2>알림</h2>
 <br>
-<a href="#">전체 보기/</a>
-<a href="#">읽지 않은 알림/</a>
-<a href="#">읽은 알림/</a>
+<a href="/picksell/mypage/alarmSelect">전체 보기/</a>
+<a href="/picksell/mypage/alarmSelect?ALARM_CHECK=YES">읽은 알림/</a>
+<a href="/picksell/mypage/alarmSelect?ALARM_CHECK=NO">읽지 않은 알림/</a>
 <br>
 <br>
 </head>
@@ -140,7 +140,7 @@ function alarmDelete(ALARM_NUM){
 		<br>
 	</c:forEach>
 </c:if>
-
+${pagingHtml} 페이지
 <c:if test="${fn:length(alarmList) < 1}">
 <p>알람이 없습니다</p>
 </c:if>
