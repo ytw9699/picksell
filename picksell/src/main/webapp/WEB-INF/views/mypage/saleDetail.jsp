@@ -131,7 +131,18 @@ var subtotalPRICE = Number('${saleDetail.TOTAL_PRICE}');
 		<c:if test="${joinMap.HOWTOSELL == '2'}">																							
 		<input type ="button" value="판매취소" onclick="canclePs_order2('${saleDetail.ORDER_NUM}','${saleDetail.BUYER_ID}','${joinMap.SELLER_ID}')"/>
 		</c:if>
-		<input type ="button" value="배송사항 입력" onclick=""/>
+		<input type ="button" value="배송사항 입력" onclick="$('.deliveryDiv').show();"/>
+			<div class="deliveryDiv">
+			   <form action="/picksell/mypage/deliveryInsert" method="GET" id="deliveryForm">
+					<input type="hidden" name="ORDER_NUM" value="${saleDetail.ORDER_NUM}" />
+					<!-- 아래 2개의 값은 알람을 위해 전송 -->
+					<input type="hidden" name="ALARM_TARGET" value="${saleDetail.BUYER_ID}" />
+					<input type="hidden" name="ALARM_WRITER" value="${joinMap.SELLER_ID}" />
+					택배사<input type="text" name="DELIVERY_COMPANY" /><br>
+					송장번호<input type="text" name="INVOICE_NUM" />
+					<input type="submit" value="입력" />
+			   </form>
+			</div>
 		</c:if>
 		</c:if>
 		</c:forEach>
@@ -156,5 +167,12 @@ var subtotalPRICE = Number('${saleDetail.TOTAL_PRICE}');
  <script>
   printTotal();
   </script>
+  
+  <script> 
+  $(document).ready(function(){
+	  $(".deliveryDiv").hide();
+  });
+  </script>
+  
 </body>
 </html>
