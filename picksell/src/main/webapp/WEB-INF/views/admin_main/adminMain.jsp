@@ -19,13 +19,16 @@ try{
 	Statement statement = connection.createStatement();
 	String xVal, yVal;
 	
-	ResultSet resultSet = statement.executeQuery("SELECT order_num, status FROM ps_order");
+	ResultSet resultSet = statement.executeQuery("select to_char(step4_date, 'mmdd') AS x, sum(total_price) AS y from ps_order WHERE to_char(step4_date, 'mmdd') IS NOT NULL group by to_char(step4_date, 'mmdd')");
 	
 	while(resultSet.next()){
-		xVal = resultSet.getString("order_num");
-		yVal = resultSet.getString("status");
+		xVal = resultSet.getString("x");
+		yVal = resultSet.getString("y");
 		
-		map = new HashMap<Object,Object>(); map.put("x", Integer.parseInt(xVal)); map.put("y", Integer.parseInt(yVal)); list.add(map);
+		map = new HashMap<Object,Object>(); 
+		map.put("x", Integer.parseInt(xVal)); 
+		map.put("y", Integer.parseInt(yVal)); 
+		list.add(map);
 		dataPoints = gsonObj.toJson(list);
 	}
 	connection.close();
@@ -90,8 +93,8 @@ function drawChart() {
 
  <div id="chart_div" style="width: 100%; height: 500px;"></div>
 
-</div>
-<div id="chartContainer" style="height: 370px; width: 100%;"></div>
+
+<div id="chartContainer" style="height: 100%; width: 500px%;"></div>
 
 <br/><br/><br/><br/><br/>
 <canvas id="myChart" width="400" height="300"></canvas>  <canvas id="bar-chart" width="800" height="450"></canvas><br/>
@@ -115,13 +118,13 @@ window.onload = function() {
 		animationEnabled: true,
 		exportEnabled: true,
 		title: {
-			text: " 그래프 테스트 "
+			text: " PICKSELL 날짜 별 거래량 "
 		},
 		axisX: {
-			title: "order_num from ps_order"
+			title: "날짜"
 		},
 		axisY: {
-			title: "status from ps_order"
+			title: "총 거래량 "
 		},
 
 		data: [{
