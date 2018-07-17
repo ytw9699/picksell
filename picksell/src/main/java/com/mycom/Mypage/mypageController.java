@@ -26,6 +26,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartRequest;
 
 import com.mycom.Member.CookieBox;
+import com.mycom.client_product.ProductService;
 import com.mycom.config.CommandMap;
 import com.mycom.utils.FileUpload;
 
@@ -44,6 +45,9 @@ public class mypageController {
 	
 	@Resource(name="mypageService")
 	private mypageService mypageService;
+	
+	@Resource(name="productService")
+	private ProductService productService;
 	
 	@RequestMapping(value="/mypage/memberCheck", method=RequestMethod.GET)
 	public String memberCheck(){
@@ -462,6 +466,15 @@ public class mypageController {
 		}
 	return "redirect:/mypage/saleDetail/"+ORDER_NUM;
     } 
+	
+	@RequestMapping("/mypage/alarmRead")
+	@ResponseBody
+	public Map<String, Object> alarmRead(
+			@RequestParam(value="ALARM_NUM",required=false, defaultValue="0") int ALARM_NUM
+			){
+		productService.alarmRead(ALARM_NUM);
+		return resultMap;
+}
 }
 
 		
