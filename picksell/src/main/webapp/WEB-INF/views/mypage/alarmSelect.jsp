@@ -140,7 +140,7 @@ function alarmDelete(ALARM_NUM){
 		<br>
 	</c:forEach>
 </c:if>
-${pagingHtml} 페이지
+${pagingHtml} page
 <c:if test="${fn:length(alarmList) < 1}">
 <p>알람이 없습니다</p>
 </c:if>
