@@ -52,7 +52,7 @@ function alarmDelete(ALARM_NUM){
 	<c:forEach var="alarmMap" items="${alarmList}" varStatus="Index">
 		
 		<td>${Index.index+1}.</td>
-		
+			 
 		<c:if test="${alarmMap.ALARM_KIND == '2'}">
 			<td>
 			<a href="/picksell/products/detail/${alarmMap.ALARM_VARIABLE1}/${alarmMap.ALARM_VARIABLE2}" onclick="alarmRead('${alarmMap.ALARM_NUM}')">
@@ -63,23 +63,24 @@ function alarmDelete(ALARM_NUM){
 		
 		 <c:if test="${alarmMap.ALARM_KIND == '3'}">
 				<td>
-				<a href="/picksell/products/detail/${alarmMap.ALARM_VARIABLE1}/${alarmMap.ALARM_VARIABLE2}?ALARM_NUM=${alarmMap.ALARM_NUM}">
+				<a href="/picksell/products/detail/${alarmMap.ALARM_VARIABLE1}/${alarmMap.ALARM_VARIABLE2}" onclick="alarmRead('${alarmMap.ALARM_NUM}')">
 					${alarmMap.ALARM_WRITER}님께서 구매신청을 하셨습니다.
 				</a>
 				</td>
 	     </c:if>
 	     
-	      <c:if test="${alarmMap.ALARM_KIND == '4'}">
+	      <c:if test="${alarmMap.ALARM_KIND == '4'}"> 
 				<td>
-				<a href="/picksell/mypage/orderDetail/${alarmMap.ALARM_VARIABLE1}">
+				<a href="/picksell/mypage/orderDetail/${alarmMap.ALARM_VARIABLE1}" onclick="alarmRead('${alarmMap.ALARM_NUM}')">
 					${alarmMap.ALARM_WRITER}님께서 배송을 시작하셨습니다.
+					
 				</a>
 				</td>
 	     </c:if>
 	     
 	     <c:if test="${alarmMap.ALARM_KIND == '6'}">
 				<td>
-				<a href="/picksell/mypage/saleDetail/${alarmMap.ALARM_VARIABLE1}">
+				<a href="/picksell/mypage/saleDetail/${alarmMap.ALARM_VARIABLE1}" onclick="alarmRead('${alarmMap.ALARM_NUM}')">
 					${alarmMap.ALARM_WRITER}님께서 인수확인 및 거래 종료 하셨습니다.
 				</a>
 				</td>
@@ -87,7 +88,7 @@ function alarmDelete(ALARM_NUM){
 	     
 	     <c:if test="${alarmMap.ALARM_KIND == '7'}">
 				<td>
-				<a href="/picksell/products/detail/${alarmMap.ALARM_VARIABLE1}/${alarmMap.ALARM_VARIABLE2}?ALARM_NUM=${alarmMap.ALARM_NUM}">
+				<a href="/picksell/products/detail/${alarmMap.ALARM_VARIABLE1}/${alarmMap.ALARM_VARIABLE2}" onclick="alarmRead('${alarmMap.ALARM_NUM}')">
 					${alarmMap.ALARM_WRITER}님께서 구매신청을 다시 취소 하셨습니다.
 				</a>
 				</td>
@@ -95,7 +96,7 @@ function alarmDelete(ALARM_NUM){
 	     
 	     <c:if test="${alarmMap.ALARM_KIND == '8'}">
 				<td>
-				<a href="/picksell/products/detail/${alarmMap.ALARM_VARIABLE1}/${alarmMap.ALARM_VARIABLE2}?ALARM_NUM=${alarmMap.ALARM_NUM}">
+				<a href="/picksell/products/detail/${alarmMap.ALARM_VARIABLE1}/${alarmMap.ALARM_VARIABLE2}" onclick="alarmRead('${alarmMap.ALARM_NUM}')">
 					${alarmMap.ALARM_WRITER}님께서 구매신청 수락을 다시 취소 하셨습니다.
 				</a>
 				</td>
@@ -103,7 +104,7 @@ function alarmDelete(ALARM_NUM){
 	     
 	      <c:if test="${alarmMap.ALARM_KIND == '9'}">
 				<td>
-				<a href="/picksell/mypage/saleList">
+				<a href="/picksell/mypage/saleList" onclick="alarmRead('${alarmMap.ALARM_NUM}')">
 					${alarmMap.ALARM_WRITER}님께서 주문을 완료하셨습니다
 				</a>
 				</td>
@@ -111,7 +112,7 @@ function alarmDelete(ALARM_NUM){
 	     
 	     <c:if test="${alarmMap.ALARM_KIND == '10'}">
 				<td>
-				<a href="/picksell/mypage/saleDetail/${alarmMap.ALARM_VARIABLE1}?ALARM_NUM=${alarmMap.ALARM_NUM}">
+				<a href="/picksell/mypage/saleDetail/${alarmMap.ALARM_VARIABLE1}" onclick="alarmRead('${alarmMap.ALARM_NUM}')">
 					${alarmMap.ALARM_WRITER}님께서 결제를 취소 하셨습니다.
 				</a>
 				</td>
@@ -119,7 +120,7 @@ function alarmDelete(ALARM_NUM){
 	     
 	     <c:if test="${alarmMap.ALARM_KIND == '11'}">
 				<td>
-				<a href="/picksell/mypage/saleDetail/${alarmMap.ALARM_VARIABLE1}?ALARM_NUM=${alarmMap.ALARM_NUM}">
+				<a href="/picksell/mypage/saleDetail/${alarmMap.ALARM_VARIABLE1}" onclick="alarmRead('${alarmMap.ALARM_NUM}')">
 					${alarmMap.ALARM_WRITER}님께서 결제를 취소 하셨습니다.
 				</a>
 				</td>
@@ -127,7 +128,7 @@ function alarmDelete(ALARM_NUM){
 	     
 	     <c:if test="${alarmMap.ALARM_KIND == '12'}">
 				<td>
-				<a href="/picksell/admin_order/list?searchNum=0&isSearch=${alarmMap.ALARM_WRITER}">
+				<a href="/picksell/admin_order/list?searchNum=0&isSearch=${alarmMap.ALARM_WRITER}" onclick="alarmRead('${alarmMap.ALARM_NUM}')">
 					${alarmMap.ALARM_WRITER}님께서 입금 하셨습니다. 관리자는 확인후 입금완료 바랍니다.
 				</a>
 				</td>
