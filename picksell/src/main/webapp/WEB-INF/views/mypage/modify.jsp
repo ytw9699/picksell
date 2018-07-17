@@ -12,6 +12,24 @@
 <title>내정보</title>
 <h2>회원정보수정</h2>
 </head>
+<style>
+#profile { /* 파일 필드 숨기기 */
+display:none;
+}
+#profileSearch {
+    background-color: white;
+    border: 1px solid #7151fc;
+    width: 160px;
+    color: #7151fc;
+    display: block;
+}
+.PROFILE_IMG{
+  width: 100%;
+}
+.imgWrapper{
+ width: 200px;
+}
+</style>
 <body>
 <script>
 
@@ -30,8 +48,16 @@ else if(NewPassword !== rePassword){//
 
 </script>
 <div>
-
-<%-- <a href="javascript:openProfileMod();">
+<div class="imgWrapper">
+<img src="/picksell/resources/profileImgUpload/${resultMap.PROFILE_IMG}" class="PROFILE_IMG"/>
+</div>
+<form action="/picksell/mypage/profile" id="profileForm" method="post" enctype="multipart/form-data">
+<label for="profile" id="profileSearch">프로필 이미지 찾기</label>
+<input type="file" name="PROFILE_IMG" id="profile" /><br>
+<input type="submit" value="이미지 수정" /><br>
+</form>
+<%-- 
+<a href="javascript:openProfileMod();">
 	<s:if test='%{myInfomation.profile_img.equals("0")}'>
 		<img src="/picksell/resources/img/basicProfile.png" class="profileImgViewer" />
 	</s:if>
@@ -56,8 +82,8 @@ else if(NewPassword !== rePassword){//
 		<input type="submit" class="profileButtons" id="profileConfirm" value="확인" />
 		<input type="button" class="profileButtons" value="기본이미지 사용하기" onclick="javascript:location.href='modMyDefaultImg.action'" />
 		<input type="button" class="profileButtons" value="취소" onclick="javascript:closeProfileMod();" />
-	</form> --%>
-	
+	</form>
+	 --%>
 <form action="/picksell/mypage/modify" method="post" onsubmit = "return passwordsCheck()">
 	<input type="hidden" name="id" value="${resultMap.ID}"/>
 	<input type="hidden" name="profile_img" value="${resultMap.PROFILE_IMG}"/>

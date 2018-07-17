@@ -123,4 +123,7 @@ public class mypageService implements mypageDao {
 		sqlMapper.update("mypage.deliveryInsert",parameterMap);
 	}
 
-}
+	public void profile(Map<String, Object> map) {
+		sqlMapper.update("mypage.profile",map);
+		}
+	}

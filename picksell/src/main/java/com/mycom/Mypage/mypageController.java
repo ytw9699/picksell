@@ -495,6 +495,34 @@ public class mypageController {
 		productService.alarmRead(ALARM_NUM);
 		return resultMap;
 }
+	
+	//프로필 이미지 업로
+		@RequestMapping(value="/mypage/profile", method=RequestMethod.POST)
+		public String profile(
+				CommandMap map,
+				@RequestParam("PROFILE_IMG") MultipartFile file,
+				HttpServletRequest request) throws IOException {
+			
+			String sessionId = (String) request.getSession().getAttribute("sessionId");
+			
+			//자신의아이디+현재시간+타입
+			String imgFileName = file.getOriginalFilename();
+			String imgFileType = imgFileName.substring(imgFileName.lastIndexOf("."), imgFileName.length());
+			Calendar cal = Calendar.getInstance();
+			String replaceName = sessionId+cal.getTimeInMillis()+imgFileType;
+			
+			//이미지 업로드
+			String path = request.getSession().getServletContext().getRealPath("/")+File.separator+"resources/profileImgUpload";
+			File uploadPROFILE_IMG = new File(path, replaceName);
+			file.transferTo(uploadPROFILE_IMG);
+			System.out.println(path); //경로확인
+			map.put("PROFILE_IMG", replaceName);
+			map.put("sessionId", sessionId);
+			
+			mypageService.profile(map.getMap());
+			
+			return "redirect:/mypage/modify";
+		}
 }
 
 		
