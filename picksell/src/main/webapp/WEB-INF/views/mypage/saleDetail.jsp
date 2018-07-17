@@ -76,6 +76,7 @@
 	}
 	
 	function canclePs_order2(ORDER_NUM, BUYER_ID, SELLER_ID){
+		 if(confirm('정말 판매 취소하시겠습니까?')){
 		var allData = "ORDER_NUM="+ORDER_NUM;
 				$.ajax({
 					type : "GET",
@@ -84,9 +85,11 @@
 					data : allData,
 					success : function(data){
 						alarmInsert(BUYER_ID, ORDER_NUM, ORDER_NUM, SELLER_ID, "11");
-						//location.reload();
+						location.reload();
+						alert("판매 취소 되었습니다");
 					}
 				});	
+		 }
 	}
 	
 </script>
