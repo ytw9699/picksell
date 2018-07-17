@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -435,23 +434,34 @@ public class mypageController {
 	}
 		return resultMap;
 }
-	
-	@RequestMapping("/mypage/headerAlarmList")
-	@ResponseBody
-	public List<Map<String, Object>> ajaxlistTest(
-			HttpServletRequest request){
+	@RequestMapping("/mypage/deliveryInsert")
+	public String deliveryInsert(Model model,//배송사항 입력
+	@RequestParam(value="ORDER_NUM",required=false, defaultValue="0") String ORDER_NUM,
+	@RequestParam(value="DELIVERY_COMPANY",required=false, defaultValue="0") String DELIVERY_COMPANY,
+	@RequestParam(value="INVOICE_NUM",required=false, defaultValue="0") String INVOICE_NUM,
+	@RequestParam(value="ALARM_TARGET",required=false, defaultValue="0") String ALARM_TARGET,
+	@RequestParam(value="ALARM_WRITER",required=false, defaultValue="0") String ALARM_WRITER
+	) {	
+		if(!ORDER_NUM.equals("0")) {
+		Map<String, Object> parameterMap = new HashMap<String, Object>();
 		
-		List<Map<String, Object>> resultAlarmList;
-		String currentID = request.getSession().getAttribute("sessionId").toString();
+		parameterMap.put("ORDER_NUM",ORDER_NUM);
+		parameterMap.put("DELIVERY_COMPANY",DELIVERY_COMPANY);
+		parameterMap.put("INVOICE_NUM",INVOICE_NUM);
+		parameterMap.put("ALARM_TARGET",ALARM_TARGET);
+		parameterMap.put("ALARM_WRITER",ALARM_WRITER);
 		
-		if(currentID != null) {
-			resultAlarmList = mypageService.getMyAlarmHeaderList(currentID);
-		}else {
-			return Collections.EMPTY_LIST;
+		mypageService.deliveryInsert(parameterMap);//배송사항 입력
+		
+		parameterMap.put("ALARM_VARIABLE1",ORDER_NUM);
+		parameterMap.put("ALARM_VARIABLE2",ORDER_NUM);
+		parameterMap.put("ALARM_KIND","4");
+		
+		mypageService.alarmInsert(parameterMap);//알람 입력
+		
 		}
-		
-		return resultAlarmList;
-	}
+	return "redirect:/mypage/saleDetail/"+ORDER_NUM;
+    } 
 }
 
 		

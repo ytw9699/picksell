@@ -11,10 +11,41 @@
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <title>판매내역 상세 및 배송 조회</title>
 <style>
+.deliveryDiv{
+	display: none;
+	width: 300px;
+    background-color: white;
+    position: fixed;
+    top: 40%;
+    left: 40%;
+    height: 100px;
+    text-align: center;
+    padding:20px;
+}
+.hiddenBackGround{
+    width: 100%;
+    background-color: #262626;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    opacity: 0.7;
+    display: none;
+}
 </style>
 </head>
 <body>
 <script>
+	function closeDeliveryDiv(){
+		$(".deliveryDiv").hide();
+		$(".hiddenBackGround").hide();
+		
+	}
+	function delivery(){
+		$(".deliveryDiv").show();
+		$(".hiddenBackGround").show();
+		deliveryForm.DELIVERY_COMPANY.focus();
+	}
 	//알람입력
 	function alarmInsert(ALARM_TARGET, ALARM_VARIABLE1, ALARM_VARIABLE2, ALARM_WRITER,ALARM_KIND){
 	var allData = "ALARM_TARGET="+ALARM_TARGET+"&ALARM_VARIABLE1="+ALARM_VARIABLE1+"&ALARM_VARIABLE2="+ALARM_VARIABLE2+"&ALARM_WRITER="+ALARM_WRITER+"&ALARM_KIND="+ALARM_KIND;
@@ -24,12 +55,11 @@
 				dataType : 'json',
 				data : allData,
 				success : function(data){
-					alert("알람입력완료");
+					//alert("알람입력완료");
 				}
 			});
 	}   
 	function canclePs_order(ORDER_NUM, BUYER_ID, SELLER_ID, PRODUCT_NUM){
-		alert("1");
 		var allData = "ORDER_NUM="+ORDER_NUM+"&PRODUCT_NUM="+PRODUCT_NUM;
 				$.ajax({
 					type : "GET",
@@ -46,7 +76,6 @@
 	}
 	
 	function canclePs_order2(ORDER_NUM, BUYER_ID, SELLER_ID){
-		alert("2");
 		var allData = "ORDER_NUM="+ORDER_NUM;
 				$.ajax({
 					type : "GET",
@@ -131,7 +160,20 @@ var subtotalPRICE = Number('${saleDetail.TOTAL_PRICE}');
 		<c:if test="${joinMap.HOWTOSELL == '2'}">																							
 		<input type ="button" value="판매취소" onclick="canclePs_order2('${saleDetail.ORDER_NUM}','${saleDetail.BUYER_ID}','${joinMap.SELLER_ID}')"/>
 		</c:if>
-		<input type ="button" value="배송사항 입력" onclick=""/>
+		<input type ="button" value="배송사항 입력" onclick="delivery();"/> 
+		<div class="hiddenBackGround" onclick="closeDeliveryDiv()"></div>
+			<div class="deliveryDiv">
+			   <form action="/picksell/mypage/deliveryInsert" method="GET" id="deliveryForm">
+					<input type="hidden" name="ORDER_NUM" value="${saleDetail.ORDER_NUM}" />
+					<!-- 아래 2개의 값은 알람을 위해 전송 -->
+					<input type="hidden" name="ALARM_TARGET" value="${saleDetail.BUYER_ID}" />
+					<input type="hidden" name="ALARM_WRITER" value="${joinMap.SELLER_ID}" />
+					택배사<input type="text" name="DELIVERY_COMPANY"/><br>
+					송장번호<input type="text" name="INVOICE_NUM" /><br>
+					<input type="submit" value="입력" />
+					<input type="button" value="취소" onclick="closeDeliveryDiv()"/>
+			   </form>
+			</div>
 		</c:if>
 		</c:if>
 		</c:forEach>
@@ -156,5 +198,11 @@ var subtotalPRICE = Number('${saleDetail.TOTAL_PRICE}');
  <script>
   printTotal();
   </script>
+ <!--  <script> 
+  $(document).ready(function(){
+	  $(".deliveryDiv").hide();
+  });
+  </script> -->
+  
 </body>
 </html>

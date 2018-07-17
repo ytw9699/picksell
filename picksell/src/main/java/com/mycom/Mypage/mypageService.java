@@ -124,4 +124,8 @@ public class mypageService implements mypageDao {
 		return sqlMapper.selectList("mypage.getMyAlarmList", currentID);
 	}
 
+	public void deliveryInsert(Map<String, Object> parameterMap) {
+		sqlMapper.update("mypage.deliveryInsert",parameterMap);
+	}
+
 }
