@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -151,7 +150,6 @@ public class mypageController {
 		Map<String, Object> parameterMap = new HashMap<String, Object>();
 		parameterMap.put("PURCHASE_NUM",PURCHASE_NUM);
 		int deleteReturn = mypageService.deletePurchaseList(parameterMap);//삭제되면 1리턴
-		System.out.println(43);
 		return deleteReturn;
 	}
 	
@@ -498,20 +496,33 @@ public class mypageController {
 		return resultMap;
 }
 	
-	@RequestMapping("/mypage/headerAlarmList")
-	@ResponseBody
-	public List<Map<String, Object>> getMyAlarmHeaderList(
-			HttpServletRequest request){
-		List<Map<String, Object>> resultHeaderAlarmList;
-		String currentID = request.getSession().getAttribute("sessionId").toString();
-		
-		if(currentID != null) {
-			resultHeaderAlarmList = mypageService.getMyAlarmHeaderList(currentID);
-			return resultHeaderAlarmList;
-		}else {
-			return new ArrayList<Map<String,Object>>();
+	//프로필 이미지 업로
+		@RequestMapping(value="/mypage/profile", method=RequestMethod.POST)
+		public String profile(
+				CommandMap map,
+				@RequestParam("PROFILE_IMG") MultipartFile file,
+				HttpServletRequest request) throws IOException {
+			
+			String sessionId = (String) request.getSession().getAttribute("sessionId");
+			
+			//자신의아이디+현재시간+타입
+			String imgFileName = file.getOriginalFilename();
+			String imgFileType = imgFileName.substring(imgFileName.lastIndexOf("."), imgFileName.length());
+			Calendar cal = Calendar.getInstance();
+			String replaceName = sessionId+cal.getTimeInMillis()+imgFileType;
+			
+			//이미지 업로드
+			String path = request.getSession().getServletContext().getRealPath("/")+File.separator+"resources/profileImgUpload";
+			File uploadPROFILE_IMG = new File(path, replaceName);
+			file.transferTo(uploadPROFILE_IMG);
+			System.out.println(path); //경로확인
+			map.put("PROFILE_IMG", replaceName);
+			map.put("sessionId", sessionId);
+			
+			mypageService.profile(map.getMap());
+			
+			return "redirect:/mypage/modify";
 		}
-	}
 }
 
 		

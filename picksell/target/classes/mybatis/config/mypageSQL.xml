@@ -283,6 +283,9 @@ select * from ps_product a, PS_ORDERLIST b where b.ORDER_NUM = #{ORDER_NUM} and 
 	INVOICE_NUM = #{INVOICE_NUM}
 	where ORDER_NUM = #{ORDER_NUM}
 </update>
-
+ 
+<update id="profile" parameterType="hashmap">
+	update ps_member set PROFILE_IMG = #{PROFILE_IMG} where ID = #{sessionId}
+</update>
 
 </mapper>
