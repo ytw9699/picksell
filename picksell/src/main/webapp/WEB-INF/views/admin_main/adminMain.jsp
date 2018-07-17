@@ -43,7 +43,7 @@ catch(SQLException e){
 <html>
 <style>
 .main{
-	margin-left: 300px; 
+	margin-left: 250px; 
 }
 
 </style>
@@ -81,20 +81,19 @@ function drawChart() {
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-
 </head>
 <body>
 <div class="main">
-<h1>메인가즈아~!</h1>
-
-
+<div class="subject" style="padding:50px;">
+<h1 style="display:inline;">관리자 메인 메뉴</h1>
 <jsp:useBean id="toDay" class="java.util.Date" />
-<h2>오늘은  <fmt:formatDate value="${toDay }" pattern="YYYY년 MM월 dd일"/>입니다.</h2>
+<h2 style="display:inline;float:right">오늘은 <font style="color:red;background-color:#eee;"><fmt:formatDate value="${toDay }" pattern="YYYY년 MM월 dd일"/></font> 입니다.</h2>
+</div>
 
- <div id="chart_div" style="width: 100%; height: 500px;"></div>
+ <div id="chart_div" style="width: 100%; height: 400px;"></div>
 
 
-<div id="chartContainer" style="height: 100%; width: 500px%;"></div>
+<div id="chartContainer" style="height: 500px; width: 100%;"></div>
 
 
 <%-- <canvas id="myChart" width="400" height="300"></canvas>  <br/> --%>

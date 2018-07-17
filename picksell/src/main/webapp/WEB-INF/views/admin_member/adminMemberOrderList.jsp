@@ -33,13 +33,13 @@
 <h3>주문 내역이 없습니다.</h3>
 </c:when>
 <c:when test="${0 lt map.mapSize }">
-<h3>총 주문 수는 <font color="red">${map.mapSize }</font> 건 입니다.</h3>
+<h3>총 주문 수는 <font color="red">${map.mapSize }</font> 건 입니다. (최신순)</h3>
 </c:when>
 </c:choose>
 </div>
 
 <c:forEach var="orderList" items="${orderList}" varStatus="orderListStatus">
-<div class="oneLine" id="oneLine">
+<div class="oneLine" id="oneLine" style="padding:8px;background-color:#fbfbfb;border-radius:25px;">
 <p>주문번호  : ${orderList.ORDER_NUM }
 <p>전체 주문 금액 : ${orderList.TOTAL_PRICE} (원)
  
@@ -50,25 +50,26 @@
  			외 ${fn:length(adminOrderSubList[orderListStatus.index])-1}건
  		</c:if>
     </c:forEach>
+     거래 상태 :
       <c:choose>
 	  <c:when test="${orderList.STATUS eq '0' }">
-	 입금대기
+	<font color="red">입금대기</font>
 	<fmt:formatDate value="${orderList.STEP1_DATE }" pattern="yy-MM-dd HH:mm:ss"/>
 	  </c:when>
 	  <c:when test="${orderList.STATUS eq '1' }">
-	  입금완료 및 배송대기중 
+	<font color="red">입금완료 및 배송대기중</font> 
 	  <fmt:formatDate value="${orderList.STEP2_DATE }" pattern="yy-MM-dd HH:mm:ss"/>
 	  </c:when> 
 	  <c:when test="${orderList.STATUS eq '2' }">
-	   배송 및 인수확인 대기
+	  <font color="red"> 배송 및 인수확인 대기</font>
 	   <fmt:formatDate value="${orderList.STEP3_DATE }" pattern="yy-MM-dd HH:mm:ss"/>
 	  </c:when>
 	   <c:when test="${orderList.STATUS eq '3' }">
-	인수확인 및 거래완료
+	 <font color="red">인수확인 및 거래완료</font>
 	  <fmt:formatDate value="${orderList.STEP4_DATE }" pattern="yy-MM-dd HH:mm:ss"/>
 	  </c:when>
 	   <c:when test="${orderList.STATUS eq '44' }">
-	  결제 취소
+	 <font color="red">결제 취소</font>
 	 <fmt:formatDate value="${orderList.CANCEL_DATE }" pattern="yy-MM-dd HH:mm:ss"/>
 	  </c:when>
 	  </c:choose>	  	 
