@@ -150,7 +150,6 @@ public class mypageController {
 		Map<String, Object> parameterMap = new HashMap<String, Object>();
 		parameterMap.put("PURCHASE_NUM",PURCHASE_NUM);
 		int deleteReturn = mypageService.deletePurchaseList(parameterMap);//삭제되면 1리턴
-		System.out.println(43);
 		return deleteReturn;
 	}
 	
