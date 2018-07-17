@@ -74,8 +74,8 @@ public class mypageService implements mypageDao {
 		sqlMapper.insert("mypage.alarmInsert",parameterMap);
 	}
 	
-	public List<Map<String, Object>> alarmSelect(String sessionId) {
-		return sqlMapper.selectList("mypage.alarmSelect", sessionId);
+	public List<Map<String, Object>> alarmSelect(Map<String, Object> parameterMap) {
+		return sqlMapper.selectList("mypage.alarmSelect", parameterMap);
 	}
 
 	public int alarmDelete(Map<String, Object> parameterMap) {

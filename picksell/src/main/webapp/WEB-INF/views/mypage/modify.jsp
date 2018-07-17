@@ -30,11 +30,39 @@ else if(NewPassword !== rePassword){//
 
 </script>
 <div>
+
+<%-- <a href="javascript:openProfileMod();">
+	<s:if test='%{myInfomation.profile_img.equals("0")}'>
+		<img src="/picksell/resources/img/basicProfile.png" class="profileImgViewer" />
+	</s:if>
+	<s:else>
+		<img src="/picksell/resources/img/${resultMap.PROFILE_IMG}" class="profileImgViewer" />
+	</s:else>
+	</a>
+<form action="modMyImg.action" method="post" enctype="multipart/form-data">
+		<div class="mainImg">
+			<!-- <img id="mainPic" src='#' /> -->
+			<s:if test='%{myInfomation.profile_img.equals("0")}'>
+				<img src="/SQUARE/static/img/basicProfile.png" id="mainPic" />
+			</s:if>
+			<s:else>
+				<img src="/SQUARE/static/img/profile_img/<s:property value='myInfomation.profile_img' />" id="mainPic" />
+			</s:else>
+		</div>
+     	
+     	<label for="ex_file1" class="profileButtons" id="profileSearch">이미지 찾기</label>
+     		<!-- <input type="file" id="ex_file1" /> -->
+		<input type="file" name="upload" id="ex_file1" />
+		<input type="submit" class="profileButtons" id="profileConfirm" value="확인" />
+		<input type="button" class="profileButtons" value="기본이미지 사용하기" onclick="javascript:location.href='modMyDefaultImg.action'" />
+		<input type="button" class="profileButtons" value="취소" onclick="javascript:closeProfileMod();" />
+	</form> --%>
+	
 <form action="/picksell/mypage/modify" method="post" onsubmit = "return passwordsCheck()">
 	<input type="hidden" name="id" value="${resultMap.ID}"/>
 	<input type="hidden" name="profile_img" value="${resultMap.PROFILE_IMG}"/>
 	<input type="hidden" name="alarm_consent" value="${resultMap.ALARM_CONSENT}"/>
-
+		
 	아이디: ${resultMap.ID}
 	 <br/>
 	이름: ${resultMap.NAME}
@@ -75,7 +103,7 @@ else if(NewPassword !== rePassword){//
 	<br/>
 	최근 로그인: <fmt:formatDate value="${resultMap.LATESTLOGIN2}" pattern="yy.MM.dd. hh:mm" />
 	<br/>
-	알람상태: ${resultMap.ALARM_CONSENT}
+	알림상태: ${resultMap.ALARM_CONSENT}
 	<br/>
 	계정상태: 
 	<c:if test="${resultMap.STATUS == '0'}">
@@ -91,7 +119,7 @@ else if(NewPassword !== rePassword){//
 	<input type="submit" value="정보 수정하기"/>
 	<br/>
 </form>
- <input type="button" value="탈퇴하기"/>
+ <!-- <input type="button" value="탈퇴하기"/> -->
 </div>
 <c:if test="${Updated == 'Updated'}">
 <script>
