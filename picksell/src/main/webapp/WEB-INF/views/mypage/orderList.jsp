@@ -14,30 +14,22 @@
 </style>
 </head>
 <body>
-<table>
-<a href="/picksell/mypage/orderList">
-전체보기/
-</a>
-<a href="/picksell/mypage/orderList?status=0">
-입금대기/
-</a>
-<a href="/picksell/mypage/orderList?status=1">
-입금완료 및 배송대기중/
-</a>
-<a href="/picksell/mypage/orderList?status=2">
-배송 및 인수확인 대기/
-</a>
-<a href="/picksell/mypage/orderList?status=3">
-인수확인 및 거래완료/
-</a>
-<a href="/picksell/mypage/orderList?status=44">
-결제취소/
-</a>
+<div>
+<a href="/picksell/mypage/orderList">전체보기/</a>
+<a href="/picksell/mypage/orderList?status=0">입금대기/</a>
+<a href="/picksell/mypage/orderList?status=1">입금완료 및 배송대기중/</a>
+<a href="/picksell/mypage/orderList?status=2">배송 및 인수확인 대기/</a>
+<a href="/picksell/mypage/orderList?status=3">인수확인 및 거래완료/</a>
+<a href="/picksell/mypage/orderList?status=44">결제취소 및 반품/</a>
+</div>
+
+<div> 현재 총${fn:length(orderList)}건이 있습니다</div>
+
 <c:if test="${fn:length(orderList) > 0}">
 <c:forEach var="ps_order" items="${orderList}" varStatus="orderListStatus">
-    <br><h3>주문일:<fmt:formatDate value="${ps_order.STEP1_DATE}" pattern="yyyy년 MM월 dd일 hh:mm:ss" />
+    <br><h3>주문일:<fmt:formatDate value="${ps_order.STEP1_DATE}" pattern="yy년 MM월 dd일 hh:mm" />
 	<a href="/picksell/mypage/orderDetail/${ps_order.ORDER_NUM }">
-		<font color = "red">주문 내역 상세보기</font>
+		<font color = "red">-상세보기</font>
 		</a></h3>
     	<c:if test="${ps_order.STATUS == '0'}">
 		거래상태:입금대기중
@@ -59,28 +51,13 @@
 <c:forEach var="joinMap" items="${orderSubList[orderListStatus.index]}">
 <a href="/picksell/products/detail/${joinMap.CATEGORY_NUM }/${joinMap.PRODUCT_NUM }">
 <img src="/picksell/resources/productUpload/${joinMap.FIRST_IMG }" style="width: 200px;" />
- /${joinMap.SUBJECT }
+ ${joinMap.SUBJECT }
 </a>
- /${joinMap.PRICE }원
- /갯수: ${joinMap.ORDER_QUANTITY}개
+ /<fmt:formatNumber value="${joinMap.PRICE }" pattern="#,###.##" /> 원
+ /${joinMap.ORDER_QUANTITY}개
  <br>
 </c:forEach>
-
 </c:forEach>
-
-	<%-- <c:forEach var="order" items="${orderList}">
-	<tr>
-		<br>${order.ORDER_NUM}</br>
-		<br>
-			<a href="/picksell/mypage/orderDetail/${order.PRODUCT_NUM }">
-			<img src="/picksell/resources/productUpload/${order.FIRST_IMG }" style="width: 200px;" />
-			</a>
-		</br>
-		<br><a href="/picksell/mypage/orderDetail/${order.PRODUCT_NUM }">${order.SUBJECT }</a></br>
-		<br><fmt:formatNumber value="${order.PRICE }" pattern="#,###.##" /> 원</br>
-		
-	</tr>
-	</c:forEach> --%>
 </c:if>
 <c:if test="${fn:length(orderList) < 1}">
 <p>내역이 없습니다</p>
@@ -88,6 +65,5 @@
 <div class="paging">
 			${pagingHtml} 페이지
 </div>
-</table>
 </body>
 </html>

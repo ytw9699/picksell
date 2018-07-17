@@ -6,258 +6,59 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
-<style>
-.hiddenBackGround{
-    width: 100%;
-    background-color: #262626;
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100%;
-    opacity: 0.7;
-    display: none;
-}
-.hiddenCommentForm{
-	display: none;
-	width: 300px;
-    background-color: white;
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100px;
-}
-.hiddenPurchaseListForm{
-	display: none;
-	width: 300px;
-    background-color: white;
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100px;
-}
-
-/* 상품시작 */
-a.link_wholeList {
-    font-size: 19px;
-}
-a.link_wholeList:hover{
-	text-decoration: underline;
-}
-
-span.letterGT {
-    font-size: 20px;
-    color: #7f7f7f;
-    font-weight: 600;
-    margin: 0 8px;
-}
-
-a.link_productList {
-    font-size: 18px;
-}
-a.link_productList:hover{
-	text-decoration: underline;
-}
-.seller_info {
-    display: inline-block;
-    width: 40%;
-    margin-left: 50px;
-    border: 1px solid red;
-}
-img.sellerProfileImg {
-    width: 100%;
-}
-.categoryMoveWrap {
-    margin-bottom: 80px;
-    margin-top: 30px;
-}
-.product_info {
-    float: right;
-    width: 50%;
-}
-span.sellerId {
-    display: block;
-    box-sizing: border-box;
-    border-bottom: 1px solid #ececec;
-    padding-bottom: 30px;
-}
-span.product_info_subject {
-    display: block;
-    font-size: 30px;
-    margin-top: 35px;
-}
-
-span.product_info_number {
-    color: #999999;
-    font-size: 16px;
-    margin-top: 5px;
-    display: block;
-}
-
-span.product_info_priceTEXT {
-    color: #999;
-    font-size: 15px;
-}
-
-span#currentPriceText {
-    font-size: 35px;
-    font-weight: 600;
-    margin-left: 20px;
-}
-
-.button_wrap {
-    width: 100%;
-    text-align: center;
-}
-
-div#basketWrap {
-    display: inline-block;
-    width: 48%;
-}
-input.basket_disabled {
-    width: 100%;
-    border: none;
-    color: white;
-    box-sizing: border-box;
-    padding: 16px;
-    font-size: 15px;
-    background-color: #dbdbdb;
-}
-
-div#purchaseWrap {
-    display: inline-block;
-    width: 48%;
-}
-
-input.purchase_confirm {
-    width: 100%;
-    border: none;
-    color: white;
-    box-sizing: border-box;
-    padding: 16px;
-    font-size: 15px;
-    background-color: #7151fc;
-}
-p.product_phr {
-    display: block;
-    height: 100px;
-    border-bottom: 1px solid #ececec;
-}
-span.product_info_wonTEXT {
-    color: #666;
-    font-size: 20px;
-}
-
-input.basket_go {
-    width: 100%;
-    border: none;
-    color: white;
-    box-sizing: border-box;
-    padding: 16px;
-    font-size: 15px;
-    background-color: #dbdbdb;
-}
-
-input.purchase_go {
-    width: 48%;
-    border: none;
-    color: white;
-    box-sizing: border-box;
-    padding: 16px;
-    font-size: 15px;
-    background-color: #7151fc;
-}
-
-input.basket_abled {
-    width: 100%;
-    border: 1px solid #7151fc;
-    color: #7151fc;
-    box-sizing: border-box;
-    padding: 16px;
-    font-size: 15px;
-    background-color: white;
-}
-.product_info_quanWrap {
-    height: 80px;
-}
-
-span.product_info_quanTEXT {
-    color: #999;
-    font-size: 15px;
-    margin-right: 30px;
-    float: left;
-    line-height: 30px;
-}
-input.subQuanBtn {
-    float: left;
-    width: 35px;
-    height: 35px;
-    border-radius: 33px;
-    background: url(/picksell/resources/img/sub.png) 50% 50% no-repeat;
-    background-size: 20px;
-    border: 1px solid #ececec;
-}
-span#currentOrderView {
-    float: left;
-    font-size: 22px;
-    color: #726e6e;
-    margin: 0 20px;
-}
-input.addQuanBtn {
-    float: left;
-    width: 35px;
-    height: 35px;
-    border-radius: 33px;
-    background: url(/picksell/resources/img/add.png) 50% 50% no-repeat;
-    background-size: 20px;
-    border: 1px solid #ececec;
-}
-.product_detail {
-    margin-top: 100px;
-}
-.product_content {
-    min-height: 400px;
-}
-span.product_contentTEXT {
-    display: block;
-    color: #333;
-    font-size: 20px;
-    margin-top: 70px;
-}
-span.deliveryTEXT {
-    display: block;
-    margin-left: 15px;
-    margin-top: 15px;
-    color: #333;
-    font-size: 14px;
-}
-</style>
-
+<link rel="stylesheet" href="/picksell/resources/clientcss/productDetail.css" type="text/css" />
 </head>
 <body>
 
 <script>
 	
+	//일반상품이면판매중인지
+	$(document).ready(function(){
+		
+		var thisHowToSell = '${resultObject.PRODUCT_STATUS}';
+		if(thisHowToSell == '1'){
+			$('.status_on').width($('.status_on').parents('.product_info').width());
+			$('.status_on').height($('.status_on').parents('.product_info').height());
+			$('.status_on').show();
+		}
+		
+	});
+
+	//알람입력
+	function alarmInsert(ALARM_TARGET, ALARM_VARIABLE1, ALARM_VARIABLE2, ALARM_WRITER,ALARM_KIND){
+	var allData = "ALARM_TARGET="+ALARM_TARGET+"&ALARM_VARIABLE1="+ALARM_VARIABLE1+"&ALARM_VARIABLE2="+ALARM_VARIABLE2+"&ALARM_WRITER="+ALARM_WRITER+"&ALARM_KIND="+ALARM_KIND;
+			$.ajax({
+				type : "GET",
+				url : "/picksell/mypage/alarmInsert",
+				dataType : 'json',
+				data : allData,
+				success : function(data){
+					alert("알람입력완료");
+				}
+			});	
+	}
 	//구매요청
-	function purchaseApply(){
+	function purchaseApply(SELLER_ID, category_num, product_num, sessionId){
 		fetch('/picksell/products/purchseRequest/${product_num}/${sessionScope.sessionId}').then(function(response){
 			response.text().then(function(text){
 				if(response.status == '200'){
 					alert('구매신청이 완료되었습니다! \n판매자의 수락까지 기다려주세요');
 					var inner = "<input type='button' value='구매신청 취소하기' onclick='purchaseCancel()' />";
-					document.getElementById('purchaseWrap').innerHTML = inner;		
+					document.getElementById('purchaseWrap').innerHTML = inner;	
+					alarmInsert(SELLER_ID, category_num, product_num, sessionId, "3");
 				}
 			})
 		})
 	}
 	//구매요청 취소
-	function purchaseCancel(){
+	function purchaseCancel(SELLER_ID, category_num, product_num, sessionId){
 		fetch('/picksell/products/purchseRequestCancel/${product_num}/${sessionScope.sessionId}').then(function(response){
 			response.text().then(function(text){
 				if(response.status == '200'){
 					alert('구매신청이 취소되었습니다!');
 					var inner = "<input type='button' value='구매신청하기' onclick='purchaseApply()' />";
 					document.getElementById('purchaseWrap').innerHTML = inner;
+					alarmInsert(SELLER_ID, category_num, product_num, sessionId, "7");
 				}
 			})
 		})
@@ -277,7 +78,8 @@ span.deliveryTEXT {
 			})
 		})
 	}
-	function purchaseApprove(purchaseNumber,buyer){
+	//(판매자가)구매신청 수락
+	function purchaseApprove(eventElement, purchaseNumber, buyer, category_num, product_num, sessionId){
 		var params = "pn=${product_num}&purnum="+purchaseNumber+"&buyer="+buyer;
 		$.ajax({
 			type : "POST",
@@ -285,12 +87,27 @@ span.deliveryTEXT {
 			dataType : 'json',
 			data : params,
 			success : function(data){
-				alert(data.resultMsg);
-				document.location.href='/picksell/products/detail/${category_num}/${product_num}';
+				
+				//만약에 수락이 정상적으로 이루어져서 임의로 만든 resultCode 가 'success' 를 담았다면,
+				if(data.resultCode == 'success'){
+					alarmInsert(buyer, category_num, product_num,sessionId,"2");
+					alert(data.resultMsg);
+					$(eventElement).parents('td').html('<input type="button" value="수락취소" onclick="purchaseApproveCancel(this,'+data.purchase_num+','+data.buyerID+');" />');
+				//만약에 수락이 중복되어 임의로 만든 resultCode 가 'fail' 를 담았다면,
+				}else if(data.resultCode == 'fail'){
+					alert(data.resultMsg);
+				}
+				
+				//document.location.href='/picksell/products/detail/${category_num}/${product_num}';
+				
+				
 			}
 		});
 	}
-	function purchaseApproveCancel(purchaseNumber,buyer){
+
+	//(판매자가)구매신청 수락 취소
+	function purchaseApproveCancel(eventElement, purchaseNumber, buyer, category_num, product_num, sessionId){
+
 		var params = "pn=${product_num}&purnum="+purchaseNumber+"&buyer="+buyer;
 		$.ajax({
 			type : "POST",
@@ -298,15 +115,23 @@ span.deliveryTEXT {
 			dataType : 'json',
 			data : params,
 			success : function(data){
-				alert(data.resultMsg);
-				document.location.href='/picksell/products/detail/${category_num}/${product_num}';
+				
+				//만약에 수락취소가 정상적으로 이루어져서 임의로 만든 resultCode 가 'success' 를 담았다면,
+				if(data.resultCode == 'success'){
+					alert(data.resultMsg);
+          alarmInsert(buyer, category_num, product_num,sessionId,"8");
+					$(eventElement).parents('td').html('<input type="button" value="수락" onclick="purchaseApprove(this,'+purchaseNumber+','+buyer+','+category_num+','+product_num+','+sessionId+');" />');
+				//만약에 수락취소가 중복되어 임의로 만든 resultCode 가 'fail' 를 담았다면,
+				}else if(data.resultCode == 'fail'){
+					alert(data.resultMsg);
+				}
+
 			}
 		});
 	}
 	
-	
-	
 </script>
+
 <!-- 모달div background -->
 <div class="hiddenBackGround" onclick="closeCommentForm()"></div>
 <!-- 문의댓글 모달div -->
@@ -353,10 +178,10 @@ span.deliveryTEXT {
 					
 					<c:choose>
 						<c:when test="${sellerPurList.STATUS == 0 }">
-							<td><input type="button" value="수락" onclick="purchaseApprove('${sellerPurList.PURCHASE_NUM}','${sellerPurList.BUYER_ID }');" /></td>
+							<td><input type="button" value="수락" onclick="purchaseApprove(this,'${sellerPurList.PURCHASE_NUM}','${sellerPurList.BUYER_ID }','${category_num}','${product_num}','${sessionId}');" /></td>
 						</c:when>
 						<c:when test="${sellerPurList.STATUS == 1 }">
-							<td><input type="button" value="수락취소" onclick="purchaseApproveCancel('${sellerPurList.PURCHASE_NUM}','${sellerPurList.BUYER_ID }');" /></td>
+							<td><input type="button" value="수락취소" onclick="purchaseApproveCancel(this, '${sellerPurList.PURCHASE_NUM}','${sellerPurList.BUYER_ID }','${category_num}','${product_num}','${sessionId}');" /></td>
 						</c:when>
 					</c:choose>
 				</tr>
@@ -369,7 +194,6 @@ span.deliveryTEXT {
 	<!-- 컨텐츠 시작 -->
 	<div class="contentWrap">
 	<form action="/picksell/purchase/order/single" method="post">
-	
 	<div class="categoryMoveWrap">
 		<c:if test="${resultObject.HOWTOSELL != 2 }">
 			<a class="link_wholeList" href="/picksell/products/goods">전체목록</a>
@@ -388,6 +212,11 @@ span.deliveryTEXT {
 			<img src="/picksell/resources/img/imgready.gif" class="sellerProfileImg" />
 		</div>
 		<div class="product_info">
+			<!-- 이미판매중입니다 레이아웃 -->
+			<div class="status_on">
+				<span class="status_onTEXT">※ 현재 거래중인 제품입니다</span>
+			</div>
+			
 			<span class="sellerId">${resultObject.SELLER_ID }</span>
 			<span class="product_info_subject">${resultObject.SUBJECT }</span>
 			<span class="product_info_number">상품번호: ${resultObject.PRODUCT_NUM } / [${resultObject.CATEGORY_NAME }]</span>
@@ -404,6 +233,7 @@ span.deliveryTEXT {
 			<input type="hidden" name="p_list[0].product_img" value="${resultObject.FIRST_IMG }" />
 			<input type="hidden" name="p_list[0].product_subject" value="${resultObject.SUBJECT }" />
 			<input type="hidden" name="p_list[0].product_num" value="${resultObject.PRODUCT_NUM }" />
+			<input type="hidden" name="p_list[0].product_howtosell" value="${resultObject.HOWTOSELL }" />
 			
 			<!-- 플러스판매일경우 수량체크 -->
 			<c:if test="${resultObject.HOWTOSELL == 2 }">
@@ -440,7 +270,7 @@ span.deliveryTEXT {
 				<c:choose>
 					<c:when test="${resultObject.DEAL_STATUS == 0 and resultObject.HOWTOSELL != 2 and alreadyPurchase == false and isMyProducts == 'no' }">
 						<div class="purchaseWrap" id="purchaseWrap">
-						<input type="button" class="purchase_apply" value="구매신청하기" onclick="purchaseApply();" />
+						<input type="button" class="purchase_apply" value="구매신청하기" onclick="purchaseApply('${resultObject.SELLER_ID}','${category_num}','${product_num}','${sessionId}');" />
 						</div>
 					</c:when>
 					<c:when test="${isApprovedPC == 'yes' and alreadyPurchase == true }">
@@ -450,7 +280,7 @@ span.deliveryTEXT {
 					</c:when>
 					<c:when test="${alreadyPurchase == true }">
 						<div class="purchaseWrap" id="purchaseWrap">
-						<input type="button" class="purchase_cancel" value="구매신청 취소하기" onclick="purchaseCancel();" />
+						<input type="button" class="purchase_cancel" value="구매신청 취소하기" onclick="purchaseCancel('${resultObject.SELLER_ID}','${category_num}','${product_num}','${sessionId}');" />
 						</div>
 					</c:when>
 					<c:when test="${isMyProducts == 'yes' }">

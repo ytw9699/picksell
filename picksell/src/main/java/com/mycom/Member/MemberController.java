@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartRequest;
 import org.springframework.web.servlet.ModelAndView;
@@ -74,7 +75,11 @@ import com.mycom.utils.FileUpload;
 			)throws IOException{
 		
 		resultMap = MemberService.userCheck(map.getMap());
-		//SELECT ID,PASSWORD,NAME FROM PS_MEMBER WHERE ID = #{ID}
+		if(resultMap.get("LATESTLOGIN1") != null ) {
+		MemberService.changeDate(resultMap);// 날짜를 바꿔서입력
+		}
+		MemberService.insertDate(resultMap);//새로운 현시점의 날짜 입력
+		//SELECT * FROM PS_MEMBER WHERE ID = #{ID}
 		String PASSWORD = request.getParameter("PASSWORD");
 		String ID = request.getParameter("ID");
 		
@@ -90,10 +95,11 @@ import com.mycom.utils.FileUpload;
 			return "loginForm";
 		}
 		session.setAttribute("sessionId", ID);//세션에 값저장
-		session.setAttribute("sessionName", (String)resultMap.get("NAME"));//세션에 값저장
-		session.setAttribute("sessionKind", (String)resultMap.get("KIND"));//세션에 값저장
-		session.setAttribute("sessionPorfile_Img", (String)resultMap.get("PROFILE_IMG"));//세션에 값저장
-		session.setAttribute("sessionStatus", (String)resultMap.get("STATUS"));//세션에 값저장
+		session.setAttribute("sessionName", (String)resultMap.get("NAME"));
+		session.setAttribute("sessionKind", (String)resultMap.get("KIND"));
+		session.setAttribute("sessionPorfile_Img", (String)resultMap.get("PROFILE_IMG"));
+		session.setAttribute("sessionStatus", (String)resultMap.get("STATUS"));
+		session.setAttribute("sessionAlarm", (String)resultMap.get("ALARM_CONSENT"));
 		
 		
 		if((request.getParameter("idSave")) != null) {
@@ -110,6 +116,48 @@ import com.mycom.utils.FileUpload;
 		session.invalidate();//로그아웃후 다시 메인으로
 		return "redirect:/main";
 		}
+		
+		
+	@RequestMapping("/alarmChange")
+	@ResponseBody
+	public Map<String, Object> changeAlarmONOFF(
+			HttpServletRequest request){
+		
+		Map<String, Object> parameterMap = new HashMap<String, Object>();
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		
+	/*	System.out.println(request.getSession().getAttribute("sessionId"));
+		System.out.println(request.getSession().getAttribute("sessionAlarm"));
+		System.out.println(request.getParameter("currentAlarm"));*/
+		
+		//디비 알람상태 바꾸는 로직
+		parameterMap.put("sessionId", request.getSession().getAttribute("sessionId").toString());
+		parameterMap.put("currentAlarm", request.getParameter("currentAlarm"));
+		MemberService.changeMyAlarm(parameterMap);
+		
+		//현재 세션도 바꿔주어야하기때문에 [알람세션] 도 재설정
+		if(request.getParameter("currentAlarm").equals("ON"))
+			request.getSession().setAttribute("sessionAlarm", "OFF");
+		else if(request.getParameter("currentAlarm").equals("OFF"))
+			request.getSession().setAttribute("sessionAlarm", "ON");
+		
+		return resultMap;
+		}
+		
+	@RequestMapping("/checkJoinId")//아이디 중복확인
+	public String checkJoinId(Model model, @RequestParam(value="id", required=false, defaultValue="0") String id//기본값 0
+	){  
+		if(!id.equals("0")) {//기본값이 아니라면
+			
+		int resultNumber = MemberService.checkJoinId(id);//해당아이디의 카운트를 구해옴
+		//int의 기본값은 0
+		
+		model.addAttribute("resultNumber", resultNumber);//0을 넘기면 아이디 중복안되는것 //1이면 중복!
+		model.addAttribute("id", id);
+		
+		}
+		return "/join/checkJoinId";
+	}
 	}
 	
 	

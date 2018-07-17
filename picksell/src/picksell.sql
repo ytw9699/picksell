@@ -1,3 +1,11 @@
+애초에 테이블을 만들때 각각의 테이블에 중복된 컬럼값을 어느정도 적절하게 집어넣어주는것이
+전체적인 개발방향에 있어서 좋은것인지 
+중복을 줄인것인가 vs 복잡한 로직을 줄이고, 자유도높은 로직을 짤고, 가독성이 높은 로직을짤것인가
+alter table ps_orderlist drop (deleted); 테이블 컬럼 삭제
+ALTER TABLE PS_PURCHASE_LIST ADD(deleted VARCHAR2(30) DEFAULT 'NO'); 테이블 컬럼 추가
+
+ALTER TABLE PS_MEMBER ADD(latestLogin1 DATE); 테이블 컬럼 추가
+
 select a.step1_date, a.order_num, a.status ,b.order_quantity, c.subject, c.price, c.first_img
 
 from ps_order a, ps_orderlist b, ps_product c
@@ -39,7 +47,7 @@ select a.seller_id, a.subject, a.first_img, a.price, a.category_num, b.purchase_
    from(select seller_id, subject, first_img, price, category_num, product_num  from ps_product)a, ps_purchase_list b , ps_order c where a.product_num = b.product_num and a.product_num = c.product_num
 order by b.regdate desc
    
-ALTER TABLE ps_order ADD(PRODUCT_NUM number); 
+ALTER TABLE PS_ORDERLIST ADD(deleted VARCHAR2(30));  SELLER_ID VARCHAR2(30)
 
 select a.seller_id, a.subject, a.first_img, a.price, a.category_num, b.purchase_num, b.product_num, b.buyer_id, b.regdate, b.status
    from(select seller_id, subject, first_img, price, category_num, product_num  from ps_product)a, ps_purchase_list b where a.product_num = b.product_num
@@ -95,6 +103,8 @@ CREATE TABLE PS_MEMBER (
     BUSINESS_NUMBER VARCHAR2(100),--사업자등록번호
     BUSINESS_NAME VARCHAR2(100),--상호명
     REGDATE DATE NOT NULL--가입일
+    
+    
 );
 
 DROP TABLE PS_MEMBER PURGE;
@@ -126,6 +136,26 @@ CREATE TABLE PS_PRODUCT (
     PRODUCT_STATUS VARCHAR2(10) NOT NULL,
     PRICE NUMBER NOT NULL
 );
+create table ITEM_DETAIL13(
+ITEM_ID2 number not null,
+DETAIL varchar2(200),  --상세정보
+constraint ITEM_DETAIL_PK13 primary key(ITEM_ID2),
+constraint ITEM_DETAIL_FK13 foreign key(ITEM_ID2) references ITEM13(ITEM_ID)  --위에서 등록된 상품의 아이디 or 번호를 ITEM_ID2칼럼에 넣겠다고 제약
+);
+
+
+CREATE TABLE PS_RECENT_PRODUCT (--최근본상품 테이블
+RECENT_NUM NUMBER NOT NULL PRIMARY KEY,
+RECENT_PRODUCT_NUM NUMBER NOT NULL,
+RECENT_CATEGORY_NUM NUMBER NOT NULL,
+RECENT_REGDATE DATE NOT NULL,
+RECENT_ID VARCHAR2(30) NOT NULL,
+constraint PRODUCT_NUM_FK foreign key(RECENT_PRODUCT_NUM) references PS_PRODUCT(PRODUCT_NUM),
+constraint CATEGORY_NUM_FK foreign key(RECENT_CATEGORY_NUM) references PS_CATEGORY(CATEGORY_NUM)
+);
+CREATE SEQUENCE RECENT_PRODUCT_SEQ
+    START WITH 1
+    INCREMENT BY 1;
 
 CREATE SEQUENCE PRODUCT_SEQ
     START WITH 1
@@ -530,11 +560,23 @@ DROP TABLE PS_ALARM PURGE;
 
 CREATE TABLE PS_ALARM( 
     ALARM_NUM NUMBER NOT NULL PRIMARY KEY,
-    ALARM_CHECK VARCHAR2(10) NOT NULL,
+    ALARM_CHECK VARCHAR2(10) DEFAULT 'NO',
+    ALARM_TARGET VARCHAR2(30) NOT NULL,
+    ALARM_WRITER VARCHAR2(30) NOT NULL,
+    ALARM_VARIABLE1 VARCHAR2(20) NOT NULL,
+    ALARM_VARIABLE2 VARCHAR2(20) NOT NULL,
+    ALARM_KIND VARCHAR2(10) NOT NULL,
+    ALARM_REGDATE DATE NOT NULL
+);
+
+CREATE TABLE PS_ALARM( 
+    ALARM_NUM NUMBER NOT NULL PRIMARY KEY,
+    ALARM_CHECK VARCHAR2(10) DEFAULT 'NO',
     ALARM_TARGET VARCHAR2(30) NOT NULL,
     ALARM_WRITER VARCHAR2(30) NOT NULL,
     ALARM_BOARD_NUM NUMBER NOT NULL,
-    ALARM_KIND VARCHAR2(10) NOT NULL
+    ALARM_KIND VARCHAR2(10) NOT NULL,
+    ALARM_REGDATE DATE NOT NULL
 );
 
 CREATE SEQUENCE ALARM_SEQ

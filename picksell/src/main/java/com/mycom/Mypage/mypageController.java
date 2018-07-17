@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartRequest;
 
@@ -137,18 +138,17 @@ public class mypageController {
 	
 		return "purchaseList";
 	}
-		
-	@RequestMapping("/mypage/deletePurchaseList/{purchase_num}")
-	public String deletePurchaseList(@PathVariable("purchase_num") int purchase_num) {	
-			
-		System.out.println(purchase_num);
-		
-    	//parameterMap.put("PURCHASE_NUM",PURCHASE_NUM);
-    	
-		mypageService.deletePurchaseList(purchase_num);
 	
-		return  "redirect:/mypage/purchaseList/0";
+	@ResponseBody
+	@RequestMapping(value="/mypage/deletePurchaseList", method=RequestMethod.GET)
+	public int deletePurchaseList(@RequestParam(value="PURCHASE_NUM") String PURCHASE_NUM) {
+		Map<String, Object> parameterMap = new HashMap<String, Object>();
+		parameterMap.put("PURCHASE_NUM",PURCHASE_NUM);
+		int deleteReturn = mypageService.deletePurchaseList(parameterMap);//삭제되면 1리턴
+		System.out.println(43);
+		return deleteReturn;
 	}
+	
 	
 	@RequestMapping(value="/mypage/orderList",method=RequestMethod.GET)
 	public String orderList(Model model, HttpSession session,
@@ -233,20 +233,25 @@ public class mypageController {
 	model.addAttribute("pagingHtml", pagingHtml);
 	return "saleList";
 }
-	@RequestMapping(value="/mypage/orderDetail/{PRODUCT_NUM}", method=RequestMethod.GET)
-	public String orderDetail(Model model, @PathVariable("PRODUCT_NUM") int PRODUCT_NUM) {	
-		 //System.out.println(PRODUCT_NUM);
-			Map<String, Object> orderDetail = mypageService.orderDetail(PRODUCT_NUM);
+	@RequestMapping(value="/mypage/orderDetail/{ORDER_NUM}", method=RequestMethod.GET)
+	public String orderDetail(Model model, @PathVariable("ORDER_NUM") int ORDER_NUM) {	
+		
+			Map<String, Object> orderDetail = mypageService.orderDetail(ORDER_NUM);
+			
 			model.addAttribute("orderDetail", orderDetail);
 			
-			List<Map<String, Object>> orderSubDetail = mypageService.orderSubDetail(PRODUCT_NUM);
+			List<Map<String, Object>> orderSubDetail = mypageService.orderSubDetail(ORDER_NUM);
+			
 			model.addAttribute("orderSubDetail", orderSubDetail);
+			
 		return "orderDetail";
 	}
-	@RequestMapping(value="/mypage/saleDetail/{PRODUCT_NUM}", method=RequestMethod.GET)
-	public String sailDetail(Model model, @PathVariable("PRODUCT_NUM") int PRODUCT_NUM, HttpSession session) {	
+	@RequestMapping(value="/mypage/saleDetail/{ORDER_NUM}", method=RequestMethod.GET)
+	public String sailDetail(Model model, @PathVariable("ORDER_NUM") int ORDER_NUM, HttpSession session,
+			@RequestParam(value="ALARM_NUM",required=false, defaultValue="0") int ALARM_NUM
+			) {	
 		
-			Map<String, Object> saleDetail = mypageService.saleDetail(PRODUCT_NUM);
+			Map<String, Object> saleDetail = mypageService.saleDetail(ORDER_NUM);
 			
 			model.addAttribute("saleDetail", saleDetail);
 			
@@ -255,13 +260,208 @@ public class mypageController {
 			String sessionId =(String)session.getAttribute("sessionId");
 			
 			parameterMap.put("sessionId", sessionId);
-			
 			parameterMap.put("ORDER_NUM",saleDetail.get("ORDER_NUM"));
-			System.out.println(saleDetail.get("ORDER_NUM"));
-			System.out.println(5);
+			
 			List<Map<String, Object>> saleSubDetail = mypageService.saleSubDetail(parameterMap);
-			System.out.println(6);
+			
 			model.addAttribute("saleSubDetail", saleSubDetail);
+			
+			if(ALARM_NUM != 0) {
+			mypageService.alarmRead(ALARM_NUM);//알람읽기	
+			}
+			
 		return "saleDetail";
 	}
+	@ResponseBody
+	@RequestMapping(value="/mypage/pulsStock", method=RequestMethod.GET)
+	public String pulsStock(HttpServletRequest Request) {//재고 1 증가
+		String PRODUCT_NUM = Request.getParameter("PRODUCT_NUM");
+		mypageService.pulsStock(PRODUCT_NUM);
+		
+		return "String";//ajax에서 json이 아니라 text여야함
+	}	
+	@ResponseBody//이렇게 선언하고
+	@RequestMapping(value="/mypage/minusStock", method=RequestMethod.GET)
+	public Map minusStock(HttpServletRequest Request) {//재고 1감소
+		String PRODUCT_NUM = Request.getParameter("PRODUCT_NUM");
+		mypageService.minusStock(PRODUCT_NUM);
+			Map<String, Object> parameterMap = new HashMap<String, Object>();
+		return parameterMap;//값을 이렇게 걍 아무거나 넘겨줘야 dataType : 'json',과 연관되서
+		//success : function(data) 안의 값이 실행됨
 }
+	
+	@ResponseBody
+	@RequestMapping(value="/mypage/alarmInsert", method=RequestMethod.GET)
+	public Map alarmInsert(
+			@RequestParam(value="ALARM_TARGET") String ALARM_TARGET,
+			@RequestParam(value="ALARM_VARIABLE1", required=false, defaultValue="0") String ALARM_VARIABLE1,
+			@RequestParam(value="ALARM_VARIABLE2", required=false, defaultValue="0") String ALARM_VARIABLE2,
+			@RequestParam(value="ALARM_WRITER") String ALARM_WRITER,
+			@RequestParam(value="ALARM_KIND") String ALARM_KIND
+			) {
+		
+		Map<String, Object> parameterMap = new HashMap<String, Object>();
+		
+		parameterMap.put("ALARM_TARGET",ALARM_TARGET);
+		parameterMap.put("ALARM_VARIABLE1",ALARM_VARIABLE1);
+		parameterMap.put("ALARM_VARIABLE2",ALARM_VARIABLE2);
+		parameterMap.put("ALARM_WRITER",ALARM_WRITER);
+		parameterMap.put("ALARM_KIND",ALARM_KIND);
+		
+		mypageService.alarmInsert(parameterMap);//알람 입력
+		return parameterMap;
+}
+	@RequestMapping("/mypage/alarmSelect")
+	public String alarmSelect(HttpSession session, Model model) {//알람을 허용한 사람만 리스트 가져오기
+		
+	String sessionId =(String)session.getAttribute("sessionId");//세션아이디값
+	String sessionAlarm =(String)session.getAttribute("sessionAlarm");//세션알람값
+	
+	if(!sessionAlarm.equals("ON")){
+	 return "alarmSelect";
+	}
+	else {//알림이 ON일때만 리스트 가져오자
+		
+		List<Map<String, Object>> alarmList = mypageService.alarmSelect(sessionId);//세션아이디에 해당하는 알람 가져옴
+		model.addAttribute("alarmList", alarmList);
+		
+		return "alarmSelect";
+    } 
+}
+/*	@RequestMapping("/mypage/alarmCount")
+	public String alarmCount(HttpSession session, Model model) {//알람을 허용한 사람만 리스트 가져오기
+		
+	String sessionId =(String)session.getAttribute("sessionId");//세션아이디값
+	String sessionAlarm =(String)session.getAttribute("sessionAlarm");//세션알람값
+	
+	if(!sessionAlarm.equals("ON")){
+	 return "alarmCount";
+	}
+	else {//알림이 ON일때만 리스트 가져오자
+		
+		int alarmCount = mypageService.alarmCount(sessionId);//세션아이디에 해당하는 알람 가져옴
+		//select count(*) from ps_alarm where ALARM_TARGET = '2' and alarm_check = 'NO'
+		model.addAttribute("alarmCount", alarmCount);
+		
+		return "alarmCount";
+    } 
+}*/
+	
+	@ResponseBody
+	@RequestMapping(value="/mypage/alarmDelete", method=RequestMethod.GET)
+	public int alarmDelete(@RequestParam(value="ALARM_NUM") String ALARM_NUM) {
+		
+		Map<String, Object> parameterMap = new HashMap<String, Object>();
+		
+		parameterMap.put("ALARM_NUM",ALARM_NUM);
+		
+		int deleteReturn = mypageService.alarmDelete(parameterMap);//삭제되면 1리턴
+
+		return deleteReturn;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/mypage/canclePs_order", method=RequestMethod.GET)
+	public Map canclePs_order(@RequestParam(value="ORDER_NUM") String ORDER_NUM,
+							@RequestParam(value="PRODUCT_NUM", required=false, defaultValue="0") String PRODUCT_NUM) {
+		
+		Map<String, Object> parameterMap = new HashMap<String, Object>();
+		
+		parameterMap.put("ORDER_NUM",ORDER_NUM);
+		parameterMap.put("PRODUCT_NUM",PRODUCT_NUM);
+		
+		mypageService.canclePs_order(parameterMap);//주문번호를 결제취소 44로바꿈
+		mypageService.cancleDate(parameterMap);//Ps_order의 주문 취소날짜입력
+		
+		if(!PRODUCT_NUM.equals("0")) {
+		mypageService.updateDeal_status(parameterMap);//Ps_product의 Deal_status를 (판매중) 으로 다시 되돌리기
+		}
+		
+		return parameterMap;
+	}
+	
+	@RequestMapping(value="/mypage/completing", method=RequestMethod.GET)
+	public String completing( 
+			@RequestParam(value="ORDER_NUM",required=false, defaultValue="0") String ORDER_NUM,
+			@RequestParam(value="BUYER_ID",required=false, defaultValue="0") String BUYER_ID,
+			@RequestParam(value="SELLER_ID",required=false, defaultValue="0") String SELLER_ID
+			) {	
+			if(!ORDER_NUM.equals("0")) {
+			
+			Map<String, Object> parameterMap = new HashMap<String, Object>();
+			
+			parameterMap.put("ORDER_NUM", ORDER_NUM);
+		
+			mypageService.completing(parameterMap);
+			
+			mypageService.step4_date(parameterMap);
+			
+			parameterMap.put("ALARM_TARGET",SELLER_ID);
+			parameterMap.put("ALARM_VARIABLE1",ORDER_NUM);
+			parameterMap.put("ALARM_VARIABLE2","empty");
+			parameterMap.put("ALARM_WRITER", BUYER_ID);
+			parameterMap.put("ALARM_KIND","6");
+			
+			mypageService.alarmInsert(parameterMap);//알람 입력
+			
+			return "completing";//인수확인 및 거래 완료가 정상적으로 됬을때
+			}
+			return "completing";//인수확인 및 거래 완료가 정상적으로 안됬을때
+	}
+	@RequestMapping("/mypage/recentProduct")
+	public String recentProduct(HttpSession session,Model model) {
+			
+			String sessionId =(String)session.getAttribute("sessionId");
+			
+				List<Map<String, Object>> recentlist = mypageService.recentlist(sessionId);
+				model.addAttribute("recentlist", recentlist);
+		
+		return "recentProduct";
+	}
+	@RequestMapping("/mypage/alarmCount")
+	@ResponseBody
+	public Map<String, Object> alarmCount(HttpSession session){
+		
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		
+		String sessionId = (String)session.getAttribute("sessionId");
+		
+	if(sessionId != null) {
+		int alarmSum = mypageService.alarmCount(sessionId);
+		//select count(*) from ps_alarm where alarm_target = #{sessionId} and alarm_check = 'NO'
+		
+		resultMap.put("alarmSum", alarmSum);
+	}
+		return resultMap;
+}
+	@RequestMapping("/mypage/deliveryInsert")
+	public String deliveryInsert(Model model,
+	@RequestParam(value="ORDER_NUM",required=false, defaultValue="0") String ORDER_NUM,
+	@RequestParam(value="DELIVERY_COMPANY",required=false, defaultValue="0") String DELIVERY_COMPANY,
+	@RequestParam(value="INVOICE_NUM",required=false, defaultValue="0") String INVOICE_NUM,
+	@RequestParam(value="ALARM_TARGET",required=false, defaultValue="0") String ALARM_TARGET,
+	@RequestParam(value="ALARM_WRITER",required=false, defaultValue="0") String ALARM_WRITER
+	) {	
+		if(!ORDER_NUM.equals("0")) {
+		Map<String, Object> parameterMap = new HashMap<String, Object>();
+		
+		parameterMap.put("ORDER_NUM",ORDER_NUM);
+		parameterMap.put("DELIVERY_COMPANY",DELIVERY_COMPANY);
+		parameterMap.put("INVOICE_NUM",INVOICE_NUM);
+		parameterMap.put("ALARM_TARGET",ALARM_TARGET);
+		parameterMap.put("ALARM_WRITER",ALARM_WRITER);
+		
+		mypageService.deliveryInsert(parameterMap);//배송사항 입력
+		
+		parameterMap.put("ALARM_VARIABLE1",ORDER_NUM);
+		parameterMap.put("ALARM_VARIABLE2",ORDER_NUM);
+		parameterMap.put("ALARM_KIND","4");
+		
+		mypageService.alarmInsert(parameterMap);//알람 입력
+		
+		}
+	return "redirect:/mypage/saleDetail/"+ORDER_NUM;
+    } 
+}
+
+		

@@ -35,9 +35,9 @@
 </a>
 <c:if test="${fn:length(saleList) > 0}">
 <c:forEach var="ps_order" items="${saleList}" varStatus="saleListStatus">
-    <br><h3>주문일:<fmt:formatDate value="${ps_order.STEP1_DATE}" pattern="yyyy년 MM월 dd일 hh:mm:ss" />
+    <br><h3>주문일:<fmt:formatDate value="${ps_order.STEP1_DATE}" pattern="yy년 MM월 dd일 hh:mm" />
 	<a href="/picksell/mypage/saleDetail/${ps_order.ORDER_NUM }">
-		<font color = "red">판매 내역 상세보기</font>
+		<font color = "red">-상세보기</font>
 		</a></h3>
     	<c:if test="${ps_order.STATUS == '0'}">
 		거래상태:입금대기중
@@ -59,13 +59,12 @@
 <c:forEach var="joinMap" items="${saleSubList[saleListStatus.index]}">
 <a href="/picksell/products/detail/${joinMap.CATEGORY_NUM }/${joinMap.PRODUCT_NUM }">
 <img src="/picksell/resources/productUpload/${joinMap.FIRST_IMG }" style="width: 200px;" />
- /${joinMap.SUBJECT }
+ ${joinMap.SUBJECT }
 </a>
- /${joinMap.PRICE }원
- /갯수: ${joinMap.ORDER_QUANTITY}개
+ /<fmt:formatNumber value="${joinMap.PRICE }" pattern="#,###.##" /> 원
+ /${joinMap.ORDER_QUANTITY}개
  <br>
 </c:forEach>
-================================================================================ 
 </c:forEach>
 
 	<%-- <c:forEach var="order" items="${saleList}">

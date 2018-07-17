@@ -191,6 +191,20 @@
 		<put-attribute name="body" value="/WEB-INF/views/mypage/saleDetail.jsp" />
 	</definition>
 	
+	<!-- 개인정보 확인 및 수정 -->
+	<definition name="alarmSelect" extends="modify">
+		<put-attribute name="body" value="/WEB-INF/views/mypage/alarmSelect.jsp" />
+	</definition>
+	<!-- 인수확인 및 거래 종료 -->
+	<definition name="completing" extends="modify">
+		<put-attribute name="body" value="/WEB-INF/views/mypage/completing.jsp" />
+	</definition>
+	
+	<!-- 최근본상품 -->
+	<definition name="recentProduct" extends="modify">
+		<put-attribute name="body" value="/WEB-INF/views/mypage/recentProduct.jsp" />
+	</definition>
+	
 	
 </tiles-definitions>
 	

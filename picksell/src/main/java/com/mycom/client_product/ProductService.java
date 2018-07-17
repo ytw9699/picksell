@@ -82,5 +82,10 @@ public class ProductService implements ProductDao {
 	public List<Map<String, Object>> getCategoryList(){
 		return sqlMapper.selectList("client_product.getCategoryList");
 	}
-		
+	public void alarmRead(int ALARM_NUM) {//알람읽기
+		sqlMapper.update("client_product.alarmRead", ALARM_NUM);
+	}
+	public void insertRecentProduct(Map<String, Object> parameterMap) {
+		sqlMapper.insert("client_product.insertRecentProduct", parameterMap);
+	}
 }

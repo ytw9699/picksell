@@ -44,25 +44,83 @@ public class mypageService implements mypageDao {
 	public List<Map<String, Object>> orderSubList(Map<String, Object> parameterMap) {
 		return sqlMapper.selectList("mypage.orderSubList", parameterMap);
 	}
-	public Map<String, Object> orderDetail(int PRODUCT_NUM) {
-		return sqlMapper.selectOne("mypage.orderDetail", PRODUCT_NUM);
+	public Map<String, Object> orderDetail(int ORDER_NUM) {
+		return sqlMapper.selectOne("mypage.orderDetail", ORDER_NUM);
 	}
 
-	public List<Map<String, Object>> orderSubDetail(int PRODUCT_NUM) {
-		return sqlMapper.selectList("mypage.orderSubDetail", PRODUCT_NUM);
+	public List<Map<String, Object>> orderSubDetail(int ORDER_NUM) {
+		return sqlMapper.selectList("mypage.orderSubDetail", ORDER_NUM);
 	}
 
 	public String userCheck(String string) {
 		return sqlMapper.selectOne("mypage.userCheck", string);
-	}
-	public void deletePurchaseList(int purchase_num) {
-		sqlMapper.delete("mypage.deletePurchaseList", purchase_num);
 	}
 	public Map<String, Object> saleDetail(int PRODUCT_NUM) {
 		return sqlMapper.selectOne("mypage.saleDetail", PRODUCT_NUM);
 	}
 	public List<Map<String, Object>> saleSubDetail(Map<String, Object> parameterMap) {
 		return sqlMapper.selectList("mypage.saleSubDetail", parameterMap);
+	}
+
+	public void pulsStock(String PRODUCT_NUM) {
+			sqlMapper.update("mypage.pulsStock", PRODUCT_NUM);
+	}
+
+	public void minusStock(String PRODUCT_NUM) {
+		sqlMapper.update("mypage.minusStock", PRODUCT_NUM);
+	}
+
+	public void alarmInsert(Map<String, Object> parameterMap) {
+		sqlMapper.insert("mypage.alarmInsert",parameterMap);
+	}
+	
+	public List<Map<String, Object>> alarmSelect(String sessionId) {
+		return sqlMapper.selectList("mypage.alarmSelect", sessionId);
+	}
+
+	public int alarmDelete(Map<String, Object> parameterMap) {
+		return sqlMapper.delete("mypage.alarmDelete",parameterMap);
+	}
+
+	public int deletePurchaseList(Map<String, Object> parameterMap) {
+
+		return sqlMapper.delete("mypage.deletePurchaseList",parameterMap);
+	}
+
+	public void canclePs_order(Map<String, Object> parameterMap) {
+		sqlMapper.update("mypage.canclePs_order", parameterMap);
+	}
+
+	public void cancleDate(Map<String, Object> parameterMap) {
+		sqlMapper.update("mypage.cancleDate", parameterMap);
+	}
+
+	public void updateDeal_status(Map<String, Object> parameterMap) {
+		sqlMapper.update("mypage.updateDeal_status", parameterMap);
+	}
+
+	public void alarmRead(int ALARM_NUM) {//알람읽기
+		sqlMapper.update("client_product.alarmRead", ALARM_NUM);
+	}
+
+	public void completing(Map<String, Object> parameterMap) {
+		sqlMapper.update("mypage.completing", parameterMap);
+	}
+
+	public void step4_date(Map<String, Object> parameterMap) {
+		sqlMapper.update("mypage.step4_date", parameterMap);
+	}
+
+	public List<Map<String, Object>> recentlist(String sessionId) {
+		return sqlMapper.selectList("mypage.recentlist", sessionId);
+	}
+
+	public int alarmCount(String sessionId) {
+		return sqlMapper.selectOne("mypage.alarmCount", sessionId);
+	}
+
+	public void deliveryInsert(Map<String, Object> parameterMap) {
+		sqlMapper.update("mypage.deliveryInsert",parameterMap);
 	}
 
 }

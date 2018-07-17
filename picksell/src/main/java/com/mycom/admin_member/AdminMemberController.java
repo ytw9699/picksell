@@ -162,6 +162,7 @@ public class AdminMemberController {
 			numm.put("ORDER_NUM",String.valueOf(orderList.get(i).get("ORDER_NUM")));
 			adminOrderSubList.add(adminMemberService.adminOrderSubList(numm));
 			
+			
 		}
 	
 		

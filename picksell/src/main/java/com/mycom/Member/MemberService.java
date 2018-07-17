@@ -27,4 +27,20 @@ public class MemberService implements MemberDao {
 		return sqlMapper.selectOne("member.userCheck", map);
 	}
 	
+	//알람ONOFF 설정(update)
+	public void changeMyAlarm(Map<String, Object> map) {
+		sqlMapper.update("member.userAlarmChange", map);
+	}
+
+	public void insertDate(Map<String, Object> map) {
+		sqlMapper.insert("member.insertDate", map);
+	}
+
+	public void changeDate(Map<String, Object> resultMap) {
+		sqlMapper.update("member.changeDate",resultMap);
+	}
+
+	public int checkJoinId(String id) {
+		return sqlMapper.selectOne("member.checkJoinId",id);
+	}
 }

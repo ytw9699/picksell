@@ -1,0 +1,241 @@
+@charset "EUC-KR";
+.hiddenBackGround{
+    width: 100%;
+    background-color: #262626;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    opacity: 0.7;
+    display: none;
+}
+.hiddenCommentForm{
+	display: none;
+	width: 300px;
+    background-color: white;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100px;
+}
+.hiddenPurchaseListForm{
+	display: none;
+	width: 300px;
+    background-color: white;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100px;
+}
+
+/* 상품시작 */
+a.link_wholeList {
+    font-size: 19px;
+}
+a.link_wholeList:hover{
+	text-decoration: underline;
+}
+
+span.letterGT {
+    font-size: 20px;
+    color: #7f7f7f;
+    font-weight: 600;
+    margin: 0 8px;
+}
+
+a.link_productList {
+    font-size: 18px;
+}
+a.link_productList:hover{
+	text-decoration: underline;
+}
+.seller_info {
+    display: inline-block;
+    width: 40%;
+    margin-left: 50px;
+    border: 1px solid red;
+}
+img.sellerProfileImg {
+    width: 100%;
+}
+.categoryMoveWrap {
+    margin-bottom: 80px;
+    margin-top: 30px;
+}
+.product_info {
+    float: right;
+    width: 50%;
+}
+span.sellerId {
+    display: block;
+    box-sizing: border-box;
+    border-bottom: 1px solid #ececec;
+    padding-bottom: 30px;
+}
+span.product_info_subject {
+    display: block;
+    font-size: 30px;
+    margin-top: 35px;
+}
+
+span.product_info_number {
+    color: #999999;
+    font-size: 16px;
+    margin-top: 5px;
+    display: block;
+}
+
+span.product_info_priceTEXT {
+    color: #999;
+    font-size: 15px;
+}
+
+span#currentPriceText {
+    font-size: 35px;
+    font-weight: 600;
+    margin-left: 20px;
+}
+
+.button_wrap {
+    width: 100%;
+    text-align: center;
+}
+
+div#basketWrap {
+    display: inline-block;
+    width: 48%;
+}
+input.basket_disabled {
+    width: 100%;
+    border: none;
+    color: white;
+    box-sizing: border-box;
+    padding: 16px;
+    font-size: 15px;
+    background-color: #dbdbdb;
+}
+
+div#purchaseWrap {
+    display: inline-block;
+    width: 48%;
+}
+
+input.purchase_confirm {
+    width: 100%;
+    border: none;
+    color: white;
+    box-sizing: border-box;
+    padding: 16px;
+    font-size: 15px;
+    background-color: #7151fc;
+}
+p.product_phr {
+    display: block;
+    height: 100px;
+    border-bottom: 1px solid #ececec;
+}
+span.product_info_wonTEXT {
+    color: #666;
+    font-size: 20px;
+}
+
+input.basket_go {
+    width: 100%;
+    border: none;
+    color: white;
+    box-sizing: border-box;
+    padding: 16px;
+    font-size: 15px;
+    background-color: #dbdbdb;
+}
+
+input.purchase_go {
+    width: 48%;
+    border: none;
+    color: white;
+    box-sizing: border-box;
+    padding: 16px;
+    font-size: 15px;
+    background-color: #7151fc;
+}
+
+input.basket_abled {
+    width: 100%;
+    border: 1px solid #7151fc;
+    color: #7151fc;
+    box-sizing: border-box;
+    padding: 16px;
+    font-size: 15px;
+    background-color: white;
+}
+.product_info_quanWrap {
+    height: 80px;
+}
+
+span.product_info_quanTEXT {
+    color: #999;
+    font-size: 15px;
+    margin-right: 30px;
+    float: left;
+    line-height: 30px;
+}
+input.subQuanBtn {
+    float: left;
+    width: 35px;
+    height: 35px;
+    border-radius: 33px;
+    background: url(/picksell/resources/img/sub.png) 50% 50% no-repeat;
+    background-size: 20px;
+    border: 1px solid #ececec;
+}
+span#currentOrderView {
+    float: left;
+    font-size: 22px;
+    color: #726e6e;
+    margin: 0 20px;
+}
+input.addQuanBtn {
+    float: left;
+    width: 35px;
+    height: 35px;
+    border-radius: 33px;
+    background: url(/picksell/resources/img/add.png) 50% 50% no-repeat;
+    background-size: 20px;
+    border: 1px solid #ececec;
+}
+.product_detail {
+    margin-top: 100px;
+}
+.product_content {
+    min-height: 400px;
+}
+span.product_contentTEXT {
+    display: block;
+    color: #333;
+    font-size: 20px;
+    margin-top: 70px;
+}
+span.deliveryTEXT {
+    display: block;
+    margin-left: 15px;
+    margin-top: 15px;
+    color: #333;
+    font-size: 14px;
+}
+/*판매중입니다 레이아웃*/
+.status_on {
+    width: 100%;
+    position: absolute;
+    height: 60%;
+    background-color: #ffffff;
+    opacity: 0.8;
+    display: none;
+}
+span.status_onTEXT {
+    font-size: 30px;
+    display: inline-block;
+    margin-top: 25%;
+    margin-left: 10%;
+    font-weight: 600;
+    color: #840000;
+}

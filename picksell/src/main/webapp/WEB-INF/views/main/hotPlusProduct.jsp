@@ -40,6 +40,7 @@ span.product_category.active a {
 .categoryList {
     width: 82%;
     padding-top: 25px;
+    padding-bottom: 25px;
     display: inline-block;
     box-sizing: border-box;
 }
@@ -52,8 +53,9 @@ span.product_category.active a {
 
 .categoryWrap {
     border: 1px solid #ececec;
-    height: 150px;
+    /* height: 150px; */
 }
+
 .categoryTitle {
     float: left;
     color: #999999;
@@ -99,8 +101,12 @@ li.orderMethodLI.active > a {
     margin-left: 1%;
     margin-top: 60px;
 }
-.product_firstimg{
-	width: 100%;
+.firstImgWrap {
+    height: 260px;
+}
+.product_firstimg {
+    width: 100%;
+    max-height: 260px;
 }
 .writerWrap {
     height: 40px;
@@ -123,6 +129,7 @@ span.productSeller {
 span.productSubject {
     display: block;
     margin-bottom: 20px;
+    min-height: 50px;
 }
 span.productPrice {
     font-weight: 600;
@@ -228,7 +235,7 @@ a.paging {
 					</div>
 					<div class="firstImgWrap">
 						<a href="/picksell/products/detail/${product.CATEGORY_NUM }/${product.PRODUCT_NUM }">
-						<img src="/picksell/resources/productUpload/${product.FIRST_IMG }" style="width: 200px;" onerror="this.src='/picksell/resources/img/imgready.gif'" />
+						<img src="/picksell/resources/productUpload/${product.FIRST_IMG }" class="product_firstimg" onerror="this.src='/picksell/resources/img/imgready.gif'" />
 						</a>
 					</div>
 					<div class="infoWrap">

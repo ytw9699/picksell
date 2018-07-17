@@ -60,6 +60,27 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			SELECT * FROM PS_MEMBER WHERE ID = #{ID}
 	</select>
 	
+	<update id="userAlarmChange" parameterType="hashmap">
+		update ps_member set alarm_consent = 
+		<choose>
+			<when test="currentAlarm == 'ON'">'OFF'</when>
+			<when test="currentAlarm == 'OFF'">'ON'</when>
+		</choose>
+		 where id = #{sessionId}
+	</update>
 	
+	<update id="insertDate" parameterType="hashmap">
+	  	update ps_member set latestLogin1 = sysdate where id = #{ID}
+	</update>
+	
+	
+	<update id="changeDate" parameterType="hashmap">
+	  	update ps_member set latestLogin2 = #{LATESTLOGIN1} where id = #{ID}
+	</update>
+	
+	<!-- 아이디 중복확인 -->
+	<select id="checkJoinId" parameterType="String" resultType="int">
+			SELECT count(*) FROM PS_MEMBER WHERE ID = #{id}
+	</select>
 	
 </mapper>

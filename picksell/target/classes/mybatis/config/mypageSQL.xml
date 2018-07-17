@@ -88,14 +88,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	select a.seller_id, a.subject, a.first_img, a.price, a.category_num, b.purchase_num, b.product_num, b.buyer_id, b.regdate,
  b.status
    from(select seller_id, subject, first_img, price, category_num, product_num  from ps_product)a, 
-ps_purchase_list b where a.product_num = b.product_num and b.buyer_id = #{sessionId} order by b.regdate desc
+ps_purchase_list b where b.deleted = 'NO' and a.product_num = b.product_num and b.buyer_id = #{sessionId} order by b.regdate desc
       
-</select>
-
-<select id="deletePurchaseList" parameterType="int">
-	<!-- 구매리스트에서 구매신청번호에 해당하는거 한줄 삭제 -->
-	delete from ps_purchase_list where purchase_num = #{purchase_num}
-	
 </select>
 
 <!-- ps_order에서  리스트  반환-->
@@ -164,15 +158,15 @@ c.status = #{status}
 </select>
 
 <!-- 주문조회 상세보기 -->	
-<select id="orderDetail" parameterType="Integer" resultType="hashmap">
+<select id="orderDetail" parameterType="int" resultType="hashmap">
 
-select * from ps_order where ORDER_NUM = #{order_num}
+	select * from ps_order where ORDER_NUM = #{ORDER_NUM}
 
 </select>
 <!-- 판매조회 상세보기 -->	
 <select id="saleDetail" parameterType="Integer" resultType="hashmap">
 
-select * from ps_order where ORDER_NUM = #{order_num}
+select * from ps_order where ORDER_NUM = #{ORDER_NUM}
 
 </select>
 <!-- 판매조회 상세보기 안에 관련 상품글 리스트 -->
@@ -184,12 +178,92 @@ select * from ps_product a, PS_ORDERLIST b where b.ORDER_NUM = #{ORDER_NUM} and 
 <!-- 주문조회 상세보기 안에 관련 상품글 리스트 -->
 <select id="orderSubDetail" parameterType="Integer" resultType="hashmap">
 
-select * from ps_product a, PS_ORDERLIST b where b.ORDER_NUM = #{order_num} and b.PRODUCT_NUM = a.PRODUCT_NUM
+select * from ps_product a, PS_ORDERLIST b where b.ORDER_NUM = #{ORDER_NUM} and b.PRODUCT_NUM = a.PRODUCT_NUM
 
 </select>
 
 <select id="userCheck" parameterType="String" resultType="String">
 			SELECT password FROM PS_MEMBER WHERE ID = #{ID}
 </select>
+<!-- 재고 1 증가 -->
+<update id="pulsStock" parameterType="String">
+		update PS_PRODUCT set stock = stock+1 where PRODUCT_NUM = #{PRODUCT_NUM}
+</update>
+<!-- 재고 1 감소 -->
+<update id="minusStock" parameterType="String">
+		update PS_PRODUCT set stock = stock-1 where PRODUCT_NUM = #{PRODUCT_NUM}
+</update>
+<!-- 알람입력 -->
+<insert id="alarmInsert" parameterType="hashmap">
+		insert into PS_ALARM(ALARM_NUM,
+							ALARM_TARGET,
+							ALARM_WRITER,
+							ALARM_VARIABLE1,
+							ALARM_VARIABLE2,
+							ALARM_KIND,
+							ALARM_REGDATE
+							) values(ALARM_SEQ.NEXTVAL,
+									#{ALARM_TARGET},
+									#{ALARM_WRITER},
+									#{ALARM_VARIABLE1},
+									#{ALARM_VARIABLE2},
+									#{ALARM_KIND},
+									sysdate)
+									
+</insert>
+<!-- 알람가져오기 -->
+<select id="alarmSelect" parameterType="String" resultType="hashmap">
+			select * from ps_alarm WHERE ALARM_TARGET = #{sessionId} order by ALARM_REGDATE desc
+</select>
+
+<select id="alarmDelete" parameterType="hashmap">
+	<!-- 알람리스트에서 알람번호에 해당하는거 한줄 삭제 -->
+	delete from PS_ALARM where ALARM_NUM = #{ALARM_NUM}
+</select>
+
+<select id="deletePurchaseList" parameterType="hashmap">
+	<!-- 구매리스트에서 구매신청번호에 해당하는거 한줄 삭제 -->
+	delete from ps_purchase_list where purchase_num = #{PURCHASE_NUM}
+		
+</select>
+<!-- //주문번호를 결제취소 44로바꿈 -->
+<update id="canclePs_order" parameterType="hashmap">
+		update ps_order set status = '44' where ORDER_NUM = #{ORDER_NUM}
+</update>
+
+<update id="cancleDate" parameterType="hashmap">
+	update ps_order set CANCEL_DATE = sysdate where ORDER_NUM = #{ORDER_NUM}
+</update>
+
+<update id="updateDeal_status" parameterType="hashmap">
+		update PS_PRODUCT set DEAL_STATUS = '0' where PRODUCT_NUM = #{PRODUCT_NUM}
+</update>
+
+<update id="completing" parameterType="hashmap">
+		update PS_ORDER set STATUS = '3' where ORDER_NUM = #{ORDER_NUM}
+</update>
+
+<update id="step4_date" parameterType="hashmap">
+	update ps_order set step4_date = sysdate where ORDER_NUM = #{ORDER_NUM}
+</update>
+
+<select id="recentlist" resultType="hashmap" parameterType="String">
+	select * from PS_RECENT_PRODUCT a, PS_PRODUCT b where a.RECENT_ID = #{sessionId} and a.RECENT_PRODUCT_NUM  = b.PRODUCT_NUM order by a.RECENT_REGDATE desc
+	
+</select>
+
+<select id="alarmCount" resultType="int" parameterType="String">
+		select count(*) from ps_alarm where alarm_target = #{sessionId} and alarm_check = 'NO'
+</select>
+
+<update id="deliveryInsert" parameterType="hashmap">
+	update ps_order set
+	step3_date = sysdate,
+	STATUS = '2',
+	DELIVERY_COMPANY = #{DELIVERY_COMPANY},
+	INVOICE_NUM = #{INVOICE_NUM}
+	where ORDER_NUM = #{ORDER_NUM}
+</update>
+
 
 </mapper>

@@ -10,6 +10,15 @@ public class BasketProductModel {
 	private int orderSum; // 주문수량
 	private String seller_id; // 판매자아이디
 	
+	private int product_howtosell;
+	
+	
+	public int getProduct_howtosell() {
+		return product_howtosell;
+	}
+	public void setProduct_howtosell(int product_howtosell) {
+		this.product_howtosell = product_howtosell;
+	}
 	public int getProduct_num() {
 		return product_num;
 	}

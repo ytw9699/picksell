@@ -102,8 +102,12 @@ li.orderMethodLI.active > a {
     margin-left: 1%;
     margin-top: 60px;
 }
-.product_firstimg{
-	width: 100%;
+.product_firstimg {
+    width: 100%;
+    max-height: 260px;
+}
+.firstImgWrap {
+    height: 260px;
 }
 .writerWrap {
     height: 40px;
@@ -126,6 +130,7 @@ span.productSeller {
 span.productSubject {
     display: block;
     margin-bottom: 20px;
+    min-height: 50px;
 }
 span.productPrice {
     font-weight: 600;
@@ -160,7 +165,26 @@ a.paging {
     border-radius: 21px;
     font-size: 23px;
 }
-
+/* 판매중인지 */
+.productStatusWrap {
+    position: absolute;
+    width: 248.203px;
+    background-color: white;
+    opacity: 0.8;
+    height: 260px;
+}
+span.productStatusTEXT {
+    font-size: 25px;
+    margin: 0 auto;
+    margin-top: 30%;
+    text-align: center;
+    font-weight: 600;
+    color: #840000;
+    display: block;
+    width: 40%;
+    border: 2px solid #840000;
+    border-radius: 6px;
+}
 </style>
 </head>
 <body>
@@ -232,6 +256,12 @@ a.paging {
 					</div>
 					<div class="firstImgWrap">
 						<a href="/picksell/products/detail/${product.CATEGORY_NUM }/${product.PRODUCT_NUM }">
+						<!-- 만약 거래중이면 -->
+						<c:if test="${product.PRODUCT_STATUS == 1 }">
+							<div class="productStatusWrap">
+								<span class="productStatusTEXT">거래중</span>
+							</div>
+						</c:if>
 						<img src="/picksell/resources/productUpload/${product.FIRST_IMG }" onerror="this.src='/picksell/resources/img/imgready.gif'" class="product_firstimg" />
 						</a>
 					</div>
@@ -255,6 +285,12 @@ a.paging {
 			</c:when>
 		</c:choose>
 	</div>
-	
+	<script>
+	//일반상품이면판매중인지
+	$(document).ready(function(){
+		$('.productStatusWrap').width($('.productStatusWrap').parents('.firstImgWrap').width());
+		$('.productStatusWrap').height($('.productStatusWrap').parents('.firstImgWrap').height());
+	});
+	</script>
 </body>
 </html>
