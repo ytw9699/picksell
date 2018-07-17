@@ -239,6 +239,14 @@ span.myAlarmTEXT {
     display: block;
     font-size: 14px;
     color: #333;
+    cursor: pointer;
+}
+span.myAlarmNoTEXT {
+    text-align: center;
+    display: block;
+    margin-top: 10px;
+    font-size: 15px;
+    color: #333;
 }
 </style>
 </head>
@@ -296,6 +304,11 @@ function alarmReadOfHead(ALARM_NUM, kind, var1, var2){
 
 
 	$(document).ready(function() {
+		
+		var sessions = '${sessionScope.sessionId}';
+		
+		/* if(sessions == '')
+			alert('no'); */
 		
 		/* 전체카테고리hover 박스 */
 		$('.totalCategory').click(function(){
@@ -367,48 +380,60 @@ function alarmReadOfHead(ALARM_NUM, kind, var1, var2){
 		} 
 		
 		//알람리스트
-		$.ajax({
-			type : "GET",
-			url : "/picksell/mypage/headerAlarmList",
-			dataType : 'json',
-			success : function(data){
-				
-				var htmlstr = '';
-				
-				$.each(data, function(key, value){
-					//kind2 > 나의글에 구매신청한경우
-					if(value.ALARM_KIND == 2)
-						htmlstr += "<span class='myAlarmTEXT' onclick='alarmReadOfHead("+value.ALARM_NUM+","+value.ALARM_KIND+","+value.ALARM_VARIABLE1+","+value.ALARM_VARIABLE2+")'>"+value.ALARM_WRITER+" 님께서 구매신청을 수락했습니다</span>";
-					if(value.ALARM_KIND == 3)
-						htmlstr += "<span class='myAlarmTEXT' onclick='alarmReadOfHead("+value.ALARM_NUM+","+value.ALARM_KIND+","+value.ALARM_VARIABLE1+","+value.ALARM_VARIABLE2+")'>"+value.ALARM_WRITER+" 님께서 구매신청을 하셨습니다</span>";
-					if(value.ALARM_KIND == 4)
-						htmlstr += "<span class='myAlarmTEXT' onclick='alarmReadOfHead("+value.ALARM_NUM+","+value.ALARM_KIND+","+value.ALARM_VARIABLE1+","+value.ALARM_VARIABLE2+")'>"+value.ALARM_VARIABLE2+" 주문에 대한 배송이 시작되었습니다</span>";
-					//if(value.ALARM_KIND == 5)
-					//if(value.ALARM_KIND == 6)
-					if(value.ALARM_KIND == 7)
-						htmlstr += "<span class='myAlarmTEXT' onclick='alarmReadOfHead("+value.ALARM_NUM+","+value.ALARM_KIND+","+value.ALARM_VARIABLE1+","+value.ALARM_VARIABLE2+")'>"+value.ALARM_WRITER+" 님께서 구매신청을 취소했습니다</span>";
-					//if(value.ALARM_KIND == 8)
-					//if(value.ALARM_KIND == 9)
-					//if(value.ALARM_KIND == 10)
-					if(value.ALARM_KIND == 11)
-						htmlstr += "<span class='myAlarmTEXT' onclick='alarmReadOfHead("+value.ALARM_NUM+","+value.ALARM_KIND+","+value.ALARM_VARIABLE1+","+value.ALARM_VARIABLE2+")'>"+value.ALARM_VARIABLE2+" 주문을 취소했습니다</span>";
-				});
-				$('.alarm-list').html(htmlstr);
-			}
-		});
+		if(sessions != ''){
+			$.ajax({
+				type : "GET",
+				url : "/picksell/mypage/headerAlarmList",
+				dataType : 'json',
+				success : function(data){
+					
+					var htmlstr = '';
+					
+					if(data.length > 0){
+						$.each(data, function(key, value){
+							
+							//kind2 > 나의글에 구매신청한경우
+							if(value.ALARM_KIND == 2)
+								htmlstr += "<span class='myAlarmTEXT' onclick='alarmReadOfHead("+value.ALARM_NUM+","+value.ALARM_KIND+","+value.ALARM_VARIABLE1+","+value.ALARM_VARIABLE2+")'>"+value.ALARM_WRITER+" 님께서 구매신청을 수락했습니다</span>";
+							if(value.ALARM_KIND == 3)
+								htmlstr += "<span class='myAlarmTEXT' onclick='alarmReadOfHead("+value.ALARM_NUM+","+value.ALARM_KIND+","+value.ALARM_VARIABLE1+","+value.ALARM_VARIABLE2+")'>"+value.ALARM_WRITER+" 님께서 구매신청을 하셨습니다</span>";
+							if(value.ALARM_KIND == 4)
+								htmlstr += "<span class='myAlarmTEXT' onclick='alarmReadOfHead("+value.ALARM_NUM+","+value.ALARM_KIND+","+value.ALARM_VARIABLE1+","+value.ALARM_VARIABLE2+")'>"+value.ALARM_VARIABLE2+" 주문에 대한 배송이 시작되었습니다</span>";
+							//if(value.ALARM_KIND == 5)
+							//if(value.ALARM_KIND == 6)
+							if(value.ALARM_KIND == 7)
+								htmlstr += "<span class='myAlarmTEXT' onclick='alarmReadOfHead("+value.ALARM_NUM+","+value.ALARM_KIND+","+value.ALARM_VARIABLE1+","+value.ALARM_VARIABLE2+")'>"+value.ALARM_WRITER+" 님께서 구매신청을 취소했습니다</span>";
+							//if(value.ALARM_KIND == 8)
+							//if(value.ALARM_KIND == 9)
+							//if(value.ALARM_KIND == 10)
+							if(value.ALARM_KIND == 11)
+								htmlstr += "<span class='myAlarmTEXT' onclick='alarmReadOfHead("+value.ALARM_NUM+","+value.ALARM_KIND+","+value.ALARM_VARIABLE1+","+value.ALARM_VARIABLE2+")'>"+value.ALARM_VARIABLE2+" 주문을 취소했습니다</span>";
+						});
+						$('.alarm-list').html(htmlstr);
+					}
+					if(data.length == 0){
+						$('.alarm-list').html("<span class='myAlarmNoTEXT'>새로운 알람이 없습니다</span>");
+					}
+				} // success f end
+			});// ajax end
+		}// alarm if end
+		
+		if(sessions != ''){
+			$.ajax({
+				type : "POST",
+				url : "/picksell/mypage/alarmCount",
+				dataType : 'json',
+				//data : allData,
+				success : function(data){
+					//alert(data.alarmSum);
+					document.getElementById('myAlarm').innerHTML = data.alarmSum;
+				}
+			});	
+		}// alarm count end
 		
 	}); //on ready end
 	
-	$.ajax({
-		type : "POST",
-		url : "/picksell/mypage/alarmCount",
-		dataType : 'json',
-		//data : allData,
-		success : function(data){
-			//alert(data.alarmSum);
-			document.getElementById('myAlarm').innerHTML = data.alarmSum;
-		}
-	});	
+	
 	
 	
 	

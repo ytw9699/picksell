@@ -488,10 +488,8 @@ public class mypageController {
 			resultHeaderAlarmList = mypageService.getMyAlarmHeaderList(currentID);
 			return resultHeaderAlarmList;
 		}else {
-			return Collections.EMPTY_LIST;
+			return new ArrayList<Map<String,Object>>();
 		}
-		
-		
 	}
 }
 
