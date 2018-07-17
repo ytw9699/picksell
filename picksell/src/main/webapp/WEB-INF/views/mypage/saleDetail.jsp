@@ -55,12 +55,11 @@
 				dataType : 'json',
 				data : allData,
 				success : function(data){
-					alert("알람입력완료");
+					//alert("알람입력완료");
 				}
 			});
 	}   
 	function canclePs_order(ORDER_NUM, BUYER_ID, SELLER_ID, PRODUCT_NUM){
-		alert("1");
 		var allData = "ORDER_NUM="+ORDER_NUM+"&PRODUCT_NUM="+PRODUCT_NUM;
 				$.ajax({
 					type : "GET",
@@ -77,7 +76,6 @@
 	}
 	
 	function canclePs_order2(ORDER_NUM, BUYER_ID, SELLER_ID){
-		alert("2");
 		var allData = "ORDER_NUM="+ORDER_NUM;
 				$.ajax({
 					type : "GET",
