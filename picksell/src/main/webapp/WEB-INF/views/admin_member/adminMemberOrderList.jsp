@@ -10,29 +10,36 @@
    margin-left: 250px; /* Same as the width of the sidenav */
    
 }
+.oneline{
+	padding : 1px;
+	border : 1px;
+}
 
 </style>
-
-
 <head>
 <script src="http://code.jquery.com/jquery-1.7.js"></script>
+<script type="text/javascript">
+
+</script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
 <div class="main">
+<h1>주문 리스트</h1>
+<div class="totalOrder">
 <c:choose>
 <c:when test="${0 eq map.mapSize }">
-주문내역이 없습니다.
+<h3>주문 내역이 없습니다.</h3>
 </c:when>
 <c:when test="${0 lt map.mapSize }">
-주문건수는 총 ${map.mapSize }건 입니다.
+<h3>총 주문 수는 <font color="red">${map.mapSize }</font> 건 입니다.</h3>
 </c:when>
 </c:choose>
-
+</div>
 
 <c:forEach var="orderList" items="${orderList}" varStatus="orderListStatus">
-<div class="oneLine">
+<div class="oneLine" id="oneLine">
 <p>주문번호  : ${orderList.ORDER_NUM }
 <p>전체 주문 금액 : ${orderList.TOTAL_PRICE} (원)
  
@@ -65,69 +72,15 @@
 	 <fmt:formatDate value="${orderList.CANCEL_DATE }" pattern="yy-MM-dd HH:mm:ss"/>
 	  </c:when>
 	  </c:choose>	  	 
-	최초 주문 시간 :${orderList.STEP1_DATE} <!-- 주문일(입금대기날짜) -->              
-
+	
+	최초 주문 시간 : <fmt:formatDate value="${orderList.STEP1_DATE}" pattern="yy-MM-dd HH:mm"/><!-- 주문일(입금대기날짜) -->              
+	
 </div>
-   </c:forEach>
+<br>
+ </c:forEach>
 
-<%-- <table border="1px" align="center">
-	<thead>
-	<tr>
-	<th>주문 번호</th>
-	<th>주문자 ID</th>
-	<th>상품 번호</th>
-	<th>상품 명</th>
-	<th>판매자 ID</th>
-	<th>총 주문 금액</th>
-	<th>주문 상태</th>
-	<th>주문 일자</th>
 
-	 </tr>
-	</thead>
- <tr>
-<c:forEach var="i" items="${orderList}" varStatus="orderListStatus">
-	
-	 <td>${i.ORDER_NUM}</td>
-	 <td>${i.BUYER_ID }</td>
-	 <td>${i.PRODUCT_NUM }</td>
-	
-	
-	<td id="PRODUCT_NUM">
-	<c:forEach var = "j" items="${adminOrderSubList}" varStatus="${map.mapSize.index }">
-	${adminOrderSubList.SUBJECT }
-	</c:forEach>
-	</td>
 
-	 <td>판매자 ID</td>
-	 <td>총 주문 금액 </td>
-	  <c:choose>
-	  <c:when test="${i.STATUS eq '0' }">
-	  <td>입금대기</td>
-	  <td><fmt:formatDate value="${i.STEP1_DATE }" pattern="yy-MM-dd HH:mm:ss"/></td>
-	  </c:when>
-	  <c:when test="${i.STATUS eq '1' }">
-	  <td>입금완료 및 배송대기중</td>
-	  <td><fmt:formatDate value="${i.STEP2_DATE }" pattern="yy-MM-dd HH:mm:ss"/></td>
-	  </c:when> 
-	  <c:when test="${i.STATUS eq '2' }">
-	  <td>배송 및 인수확인 대기</td>
-	  <td><fmt:formatDate value="${i.STEP3_DATE }" pattern="yy-MM-dd HH:mm:ss"/></td>
-	  </c:when>
-	   <c:when test="${i.STATUS eq '3' }">
-	  <td>인수확인 및 거래완료</td>
-	  <td><fmt:formatDate value="${i.STEP4_DATE }" pattern="yy-MM-dd HH:mm:ss"/></td>
-	  </c:when>
-	   <c:when test="${i.STATUS eq '44' }">
-	  <td>결제 취소</td>
-	  <td><fmt:formatDate value="${i.CANCEL_DATE }" pattern="yy-MM-dd HH:mm:ss"/></td>
-	  </c:when>
-	  </c:choose>	 
-     </tr>
-    
-    </c:forEach>
-
-</table>
---%>
 </div>
 </body>
 </html>

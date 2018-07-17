@@ -8,6 +8,14 @@
 <style>
 .main{
    margin-left: 200px; /* Same as the width of the sidenav */
+  
+}
+.pageSubject{
+	 border: 1px solid;
+    padding: 10px;
+    box-shadow: 5px 10px #888888;
+    text-align : center;
+
 }
 .hiddenPage{
 
@@ -85,7 +93,7 @@ button {
  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 }
 
-
+.
 </style>
 <script src="http://code.jquery.com/jquery-1.7.js"></script>
 <script>
@@ -123,13 +131,16 @@ $(document).ready(function(){
 </div>
 <button class="profile_img">프로필 이미지</button>
 
-<hr>
+<div class="name">
 이름 : ${map.NAME }
-<hr>
+</div>
+<div class="email">
 이메일 : ${map.EMAIL }
-<hr>
+</div>
+<div class="address">
 주소 : ${map.ADDRESS }
-<hr>
+</div>
+<div class="status">
 계정 상태 :
 <c:choose>
 <c:when test="${ '0' eq map.STATUS }">
@@ -142,6 +153,7 @@ $(document).ready(function(){
  로그인 제한
 </c:when>
 </c:choose>
+
 
 <div class="hiddenPage"> 
 
@@ -162,19 +174,22 @@ $(document).ready(function(){
    
 </div>
 <button class="change">변경</button>
-<hr>
+</div>
+<div class="alarm">
 알람 동의 여부 :
 <c:choose>
-<c:when test="${'ON'  eq map.ALARM_CONSENT }">
-<img src="/picksell/resources/img/Alarm1.png" width="25px" height="25px">
+<c:when test="${ map.ALARM_CONSENT eq 'ON'  }">
+<img src="/picksell/resources/img/Alram1.png" width="25px" height="25px">
 </c:when>
-<c:when test="${'OFF'  eq map.ALARM_CONSENT }">
+<c:when test="${map.ALARM_CONSENT  eq 'OFF'}">
 <img src="/picksell/resources/img/noAlarm.png" width="25px" height="25px">
 </c:when>
 </c:choose>
-<hr>
+</div>
+<div class="regdate">
 가입 일자 : <fmt:formatDate value="${map.REGDATE }" pattern="yyyy-MM-dd"/>
-<hr>
+</div>
+<div class="kind">
 권한 : <c:choose>
 	 <c:when test="${ '99' eq map.KIND}">
 	관리자  <img src="/picksell/resources/img/admin.png" width="20px" height="20px"/> 
@@ -186,7 +201,7 @@ $(document).ready(function(){
 	사업자 회원 <img src="/picksell/resources/img/business-icon.png" width="20px" height="20px"/>
 	</c:when>
 	</c:choose>
-<hr>
+</div>
 <div class="link" style="margin-left : 190px">
 <button class="bbutton" id="btn" type="submit" onclick="window.location='/picksell/admin/member/orderList/${map.ID}'"><img class="btn-img" src="/picksell/resources/img/orderlist.png" width="150px" height="150px"></button>
 <button class="bbutton" id="btn" type="submit" onclick="window.location='/picksell/admin/member/sellHistory/${map.ID}'"><img class="btn-img" src="/picksell/resources/img/sellHistory.png" width="150px" height="150px">

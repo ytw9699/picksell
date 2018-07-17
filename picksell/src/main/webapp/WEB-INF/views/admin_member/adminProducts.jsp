@@ -50,10 +50,7 @@ input[type=submit]:hover {
   color:#fff;		
     
 }
-.blind{
- font-style: 
 
-}
 </style>
 <head>
 <script src="http://code.jquery.com/jquery-1.7.js"></script>
@@ -96,11 +93,11 @@ setInterval(function(){
  	 <td>${maplist.SELLER_ID }</td>
  	 <td>판매중</td>
  	 <c:choose>
- 	 <c:when test="${3 gt fn:length(maplist.SUBJECT)}">
+ 	 <c:when test="${fn:length(maplist.SUBJECT) gt 3}">
  	 <td>
  	 <a href="/picksell/products/detail/${maplist.CATEGORY_NUM }/${maplist.PRODUCT_NUM}">${fn:substring(maplist.SUBJECT,0,3)}...</a></td>
  	 </c:when>
- 	 <c:when test="${3 le fn:length(maplist.SUBJECT)}">
+ 	 <c:when test="${fn:length(maplist.SUBJECT) le 3}">
  	 <td><a href="/picksell/products/detail/${maplist.CATEGORY_NUM }/${maplist.PRODUCT_NUM}">${maplist.SUBJECT }</a></td>
  	 </c:when>
  	 </c:choose>

@@ -53,16 +53,21 @@ PUBLIC " - //mybatis.org//DTD Config 3.0//EN"
     </select>
     
     <select id="adminSellHistory" resultType="hashmap" parameterType="string">
-      SELECT * FROM ps_orderlist a,ps_seller_history b,ps_order c 
-      WHERE a.orderlist_num = b.orderlist_num  
-      AND c.order_num = a.order_num and a.seller_id = #{id}
+   		SELECT * FROM ps_orderlist a,ps_product b,ps_order c 
+		WHERE  c.order_num = a.order_num and a.seller_id = #{id} and b.product_num = a.product_num
+		AND step4_date is not null AND cancel_date is null AND status = '3'
+		order by step1_date desc
     </select>
     
     <select id="adminPurchaseHistory" resultType="hashmap" parameterType="string">
-       SELECT * FROM ps_buyer_history a,ps_order b,ps_orderlist c 
-      WHERE a.order_num = b.order_num and b.buyer_id = #{id} 
-      AND b.order_num = c.order_num
-    </select>
+      SELECT a.order_num,a.total_price,a.step1_date,a.step4_date,b.orderlist_num,a.order_num,b.product_num,b.seller_id,b.order_quantity FROM ps_order a,ps_orderlist b 
+      WHERE a.buyer_id = #{id}
+      AND a.order_num = b.order_num 
+      AND a.step4_date is not null 
+      AND a.cancel_date is null and a.status = '3'
+      group by a.order_num,a.total_price,a.step1_date,a.step4_date,b.orderlist_num,a.order_num,b.product_num,b.seller_id,b.order_quantity
+	  order by a.step4_date desc  
+	</select>
     
     <select id="adminSelling" resultType="hashmap" parameterType="string">
        SELECT * FROM ps_product WHERE seller_id = #{id} and 
