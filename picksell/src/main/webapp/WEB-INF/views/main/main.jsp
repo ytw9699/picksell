@@ -22,7 +22,7 @@
 	<div class="productWrap">
 	<div class="firstImgWrap">
 		<a href="/picksell/products/detail/${hotProduct.CATEGORY_NUM }/${hotProduct.PRODUCT_NUM }">
-		<img src="/picksell/resources/productUpload/${hotProduct.FIRST_IMG }" style="width: 200px;" />
+		<img src="/picksell/resources/productUpload/${hotProduct.FIRST_IMG }" style="width: 200px;" onerror="this.src='/picksell/resources/img/imgready.gif'" />
 		</a>
 	</div>
 	<div class="infoWrap">
@@ -39,7 +39,7 @@
 	<div class="productWrap">
 	<div class="firstImgWrap">
 		<a href="/picksell/products/plus?ca=${hotCategory.CATEGORY_NUM }">
-		<img src="/picksell/" style="width: 200px;" />
+		<img src="/picksell/" style="width: 200px;" onerror="this.src='/picksell/resources/img/imgready.gif'" />
 		</a>
 	</div>
 	<div class="infoWrap">
@@ -54,7 +54,7 @@
 	<div class="productWrap">
 	<div class="firstImgWrap">
 		<a href="/picksell/products/detail/${pulsProduct.CATEGORY_NUM }/${pulsProduct.PRODUCT_NUM }">
-		<img src="/picksell/resources/productUpload/${pulsProduct.FIRST_IMG }" style="width: 200px;" />
+		<img src="/picksell/resources/productUpload/${pulsProduct.FIRST_IMG }" style="width: 200px;" onerror="this.src='/picksell/resources/img/imgready.gif'" />
 		</a>
 	</div>
 	<div class="infoWrap">
@@ -70,7 +70,7 @@
 <div class="productWrap">
 <div class="firstImgWrap">
 	<a href="/picksell/products/detail/${nomalProduct.CATEGORY_NUM }/${nomalProduct.PRODUCT_NUM }">
-	<img src="/picksell/resources/productUpload/${nomalProduct.FIRST_IMG }" style="width: 200px;" />
+	<img src="/picksell/resources/productUpload/${nomalProduct.FIRST_IMG }" style="width: 200px;" onerror="this.src='/picksell/resources/img/imgready.gif'" />
 	</a>
 </div>
 <div class="infoWrap">
