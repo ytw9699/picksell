@@ -216,7 +216,7 @@ li.mainCategoryLI:hover {
     border: none;
     outline: none;
 }
-#myAlarm_listBox {position: absolute; display: none; }
+#myAlarm_listBox {position: absolute; display: none; z-index: 1; }
 #myAlarm-header {height: 32px;width: 20px;}
 #myAlarm-body {
     width: 200px;
@@ -235,10 +235,23 @@ span.alarm-setTEXT {
     padding-top: 10px;
     border-bottom: 1px solid #dedede;
 }
+span.myAlarmTEXT {
+    display: block;
+    font-size: 14px;
+    color: #333;
+    cursor: pointer;
+}
+span.myAlarmNoTEXT {
+    text-align: center;
+    display: block;
+    margin-top: 10px;
+    font-size: 15px;
+    color: #333;
+}
 </style>
 </head>
 <script>
-//알람을 위한 전역변수
+//알람 css를 위한 전역변수
 var al_status = 0;
 var al_status_initialization = '${sessionScope.sessionAlarm}';
 
@@ -254,16 +267,7 @@ function moving(){
 			//alert('알람테스트');
 		}
 	});	
-	/* $.ajax({
-		type : "POST",
-		url : "/picksell/cart/countingMyBasket",
-		dataType : 'json',
-		//data : allData,
-		success : function(data){
-			//alert(data.currentCounting);
-			document.getElementById('myBasketSum').innerHTML = data.currentCounting;
-		}
-	});		 */
+	
 	if(al_status == 0){
 		$('#smallsq').css('margin-left',25);
 		$('#smallsq').css('background-color', '#4285f4');
@@ -277,7 +281,34 @@ function moving(){
 	}
 }
 
+//알람 읽고 처리부분
+function alarmReadOfHead(ALARM_NUM, kind, var1, var2){
+	var allData = "ALARM_NUM="+ALARM_NUM;
+			$.ajax({
+				type : "GET",
+				url : "/picksell/mypage/alarmRead",
+				dataType : 'json',
+				data : allData,
+				success : function(data){
+					if(kind == '0' || kind == '1' || kind == '2' || kind == '3' || kind == '4' || kind == '7' || kind == '8'){
+						location.href='/picksell/products/detail/'+var1+'/'+var2;
+					}
+					if(kind == '4' || kind == '5' || kind == '6' || kind == '10' || kind == '11'){
+						location.href='/picksell/mypage/orderDetail/'+var1;
+					}
+						//alert('주문상세보기');
+						
+				}
+			});	
+}
+
+
 	$(document).ready(function() {
+		
+		var sessions = '${sessionScope.sessionId}';
+		
+		/* if(sessions == '')
+			alert('no'); */
 		
 		/* 전체카테고리hover 박스 */
 		$('.totalCategory').click(function(){
@@ -340,8 +371,6 @@ function moving(){
 		
 		
 		//알람스위치 초기화부분
-		//var al_status = 0;
-		//var al_status_initialization = '${sessionScope.sessionAlarm}';
 		if(al_status_initialization == 'ON'){
 			//alert('현재 알람상태는 on');
 			$('#smallsq').css('margin-left',25);
@@ -349,18 +378,65 @@ function moving(){
 			$('#bigsq').css('background-color', '#b3cefb');
 			al_status = 1;
 		} 
-	});
+		
+		//알람리스트
+		if(sessions != ''){
+			$.ajax({
+				type : "GET",
+				url : "/picksell/mypage/headerAlarmList",
+				dataType : 'json',
+				success : function(data){
+					
+					var htmlstr = '';
+					
+					if(data.length > 0){
+						$.each(data, function(key, value){
+							
+							//kind2 > 나의글에 구매신청한경우
+							if(value.ALARM_KIND == 2)
+								htmlstr += "<span class='myAlarmTEXT' onclick='alarmReadOfHead("+value.ALARM_NUM+","+value.ALARM_KIND+","+value.ALARM_VARIABLE1+","+value.ALARM_VARIABLE2+")'>"+value.ALARM_WRITER+" 님께서 구매신청을 수락했습니다</span>";
+							if(value.ALARM_KIND == 3)
+								htmlstr += "<span class='myAlarmTEXT' onclick='alarmReadOfHead("+value.ALARM_NUM+","+value.ALARM_KIND+","+value.ALARM_VARIABLE1+","+value.ALARM_VARIABLE2+")'>"+value.ALARM_WRITER+" 님께서 구매신청을 하셨습니다</span>";
+							if(value.ALARM_KIND == 4)
+								htmlstr += "<span class='myAlarmTEXT' onclick='alarmReadOfHead("+value.ALARM_NUM+","+value.ALARM_KIND+","+value.ALARM_VARIABLE1+","+value.ALARM_VARIABLE2+")'>"+value.ALARM_VARIABLE2+" 주문에 대한 배송이 시작되었습니다</span>";
+							//if(value.ALARM_KIND == 5)
+							//if(value.ALARM_KIND == 6)
+							if(value.ALARM_KIND == 7)
+								htmlstr += "<span class='myAlarmTEXT' onclick='alarmReadOfHead("+value.ALARM_NUM+","+value.ALARM_KIND+","+value.ALARM_VARIABLE1+","+value.ALARM_VARIABLE2+")'>"+value.ALARM_WRITER+" 님께서 구매신청을 취소했습니다</span>";
+							//if(value.ALARM_KIND == 8)
+							//if(value.ALARM_KIND == 9)
+							//if(value.ALARM_KIND == 10)
+							if(value.ALARM_KIND == 11)
+								htmlstr += "<span class='myAlarmTEXT' onclick='alarmReadOfHead("+value.ALARM_NUM+","+value.ALARM_KIND+","+value.ALARM_VARIABLE1+","+value.ALARM_VARIABLE2+")'>"+value.ALARM_VARIABLE2+" 주문을 취소했습니다</span>";
+						});
+						$('.alarm-list').html(htmlstr);
+					}
+					if(data.length == 0){
+						$('.alarm-list').html("<span class='myAlarmNoTEXT'>새로운 알람이 없습니다</span>");
+					}
+				} // success f end
+			});// ajax end
+		}// alarm if end
+		
+		if(sessions != ''){
+			$.ajax({
+				type : "POST",
+				url : "/picksell/mypage/alarmCount",
+				dataType : 'json',
+				//data : allData,
+				success : function(data){
+					//alert(data.alarmSum);
+					document.getElementById('myAlarm').innerHTML = data.alarmSum;
+				}
+			});	
+		}// alarm count end
+		
+	}); //on ready end
 	
-	$.ajax({
-		type : "POST",
-		url : "/picksell/mypage/alarmCount",
-		dataType : 'json',
-		//data : allData,
-		success : function(data){
-			//alert(data.alarmSum);
-			document.getElementById('myAlarm').innerHTML = data.alarmSum;
-		}
-	});	
+	
+	
+	
+	
 </script>
 <body>
 
@@ -454,7 +530,9 @@ function moving(){
 			<input type="button" id="smallsq" class="smallsq" onclick="moving();" />
 			</div>
 		</div>
-		알람상태 ${sessionScope.sessionAlarm }
+		<div class="alarm-list">
+			
+		</div>
 	</div>
 </div>
 
