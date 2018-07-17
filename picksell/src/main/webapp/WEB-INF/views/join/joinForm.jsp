@@ -20,9 +20,11 @@ body{
 #c1{width:3000px; height:100%; float:left; background-color: white; padding: 25px;}
 #c2{width:3000px; height:100%; float:left; background-color: white; padding: 50px;}
 #c3{width:3000px; height:100%; float:left; background-color: white; padding: 50px;}
+
 .contentDiv {
     width: 80%;
 }
+
 </style>
 </head>
 <body>
@@ -36,28 +38,43 @@ function openCheckID(u){
 	url = "checkJoinId?id="+u.id.value;
 	open(url,"confirm","toolbar=no, location=no, status=no, menubar=no, scrollbars=no, resizable=no, width=500, height=500");
 }
-function checkbox(){ 
-	if(document.getElementById("checkbox").checked ){
-	  document.getElementById("c1_next").disabled = false;
-	}  else {
-	document.getElementById("c1_next").disabled = true;
-	}
-}
 </script>
 
 <div id="container">
 
 <div id="c1">
-	<p> 회원가입 </p>
-	<p> 1.약관동의 2.가입방법선택 3.정보입력 </p>
-	   <input type="checkbox" id="checkbox" name="agree" onchange="checkbox()"/>동의
-	<p><input type="button" value="다음" id ="c1_next" onclick="AnimateForm('#c2','easeInOutExpo'); return false" disabled="disabled" />
-	</p>
+	<h2> 회원가입 </h2>
+	<h3> 1.약관동의 2.가입방법선택 3.정보입력 </h3> 
+  <form name='checkbox_form'>
+    <input type="checkbox" id="checkbox" name="mycheck" onchange="check_all();"/>모두 동의
+    <input type="checkbox" id="checkbox" name="mycheck" onchange="uncheck_all();"/>모두 해제<br>
+    <input type='checkbox' name='mycheck' />픽셀 이용 약관에 대한 동의(필수)<br>
+    <input type='checkbox' name='mycheck'  />개인정보 수집 및 이용에 대한 동의(필수)<br>
+    <input type='checkbox' name='mycheck'  />개인정보 국외 이전에 대한 동의(필수)<br>
+    <br>
+  </form>
+  <input type="button" id="c1_next" onclick="AnimateForm('#c2','easeInOutExpo'); return false" value="작성" disabled="disabled" />
+
+<script>
+	function check_all() {
+		for(i=0; i < checkbox_form.mycheck.length; i++) {
+			checkbox_form.mycheck[i].checked = true;
+			 document.getElementById("c1_next").disabled = false;
+		}
+	}
+	function uncheck_all() {
+		for(i=0; i < checkbox_form.mycheck.length; i++) {
+			checkbox_form.mycheck[i].checked = false;
+			checkbox_form.mycheck[0].checked = false;
+			document.getElementById("c1_next").disabled = true;
+		}
+	}
+</script>
 </div>
 
 <div id="c2">
- <p>회원가입</p>
- <p> 1.약관동의 2.가입방법선택 3.정보입력</p>
+<h2> 회원가입 </h2>
+<h3>1.약관동의 2.가입방법선택 3.정보입력</h3>
  <p>
  <img src="/picksell/resources/img/personalPurchase.png" onclick="AnimateForm('#c3','easeInOutExpo','nomal'); return false"  >
  <img src="/picksell/resources/img/businessPurchase.png" onclick="AnimateForm('#c3','easeInOutExpo','business'); return false"  >
@@ -65,8 +82,9 @@ function checkbox(){
 <p><input type="button" value="이전" onclick="AnimateForm('#c1'); return false" />
 </div>
 
-<div id="c3">
-  <form method="post" name="joinForm">
+<div id="c3">check
+
+  <form method="post" name="joinForm" onsubmit="return check();">
 	<input type="hidden" id="kind" name="kind" value="1"/>
 	<!-- 기본 사업자회원  -->
 	<p>회원가입</p>
@@ -146,6 +164,49 @@ function checkWhere(where){
 		
 		$("#business").hide();
 	}
+}
+
+var idCheckNum = 0;//아이디 중복확인차 필요
+
+function check(){
+	
+	if(document.joinForm.id.value == ''){
+		alert('아이디를 입력하세요');
+		document.joinForm.id.focus();
+		return false;
+	}
+	else if(document.joinForm.password.value == ''){
+		alert('비밀번호를 입력하세요');
+		document.joinForm.password.focus();
+		return false;
+	}
+	else if(document.joinForm.passwordCheck.value == ''){
+		alert('비밀번호를 재입력하세요')
+		document.joinForm.passwordCheck.focus();
+		return false;
+	}
+	else if(document.joinForm.password.value != document.joinForm.passwordCheck.value){
+		alert('비밀번호가 일치하지 않습니다');
+		document.joinForm.passwordCheck.focus();
+		return false;
+	}
+	else if(document.joinForm.name.value == ''){
+		alert('이름을 입력하세요')
+		document.joinForm.name.focus();
+		return false;
+	}
+	else if(document.joinForm.email.value == ''){
+		alert('이메일을 입력하세요')
+		document.joinForm.email.focus();
+		return false;
+	}
+	else if(idCheckNum == 0){
+		alert('아이디 중복확인을 해주세요!');
+		document.joinForm.id.focus();
+		return false;
+	}else
+	 	alert('회원가입이 완료되었습니다.');
+		return true;
 }
 </script>
 </body>
