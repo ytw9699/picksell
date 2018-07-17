@@ -222,3 +222,20 @@ span.deliveryTEXT {
     color: #333;
     font-size: 14px;
 }
+/*판매중입니다 레이아웃*/
+.status_on {
+    width: 100%;
+    position: absolute;
+    height: 60%;
+    background-color: #ffffff;
+    opacity: 0.8;
+    display: none;
+}
+span.status_onTEXT {
+    font-size: 30px;
+    display: inline-block;
+    margin-top: 25%;
+    margin-left: 10%;
+    font-weight: 600;
+    color: #840000;
+}

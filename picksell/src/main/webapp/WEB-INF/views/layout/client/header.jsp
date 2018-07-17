@@ -104,6 +104,7 @@ li.headerCategory {
     padding: 0 30px;
     font-size: 15px;
     color: #333333;
+    cursor: pointer;
 }
 .totalCategory {
     border-left: 1px solid #dbdbdb;
@@ -335,7 +336,8 @@ function moving(){
 				//alert(data.currentCounting);
 				document.getElementById('myBasketSum').innerHTML = data.currentCounting;
 			}
-		});		
+		});	
+		
 		
 		//알람스위치 초기화부분
 		//var al_status = 0;
@@ -348,6 +350,17 @@ function moving(){
 			al_status = 1;
 		} 
 	});
+	
+	$.ajax({
+		type : "POST",
+		url : "/picksell/mypage/alarmCount",
+		dataType : 'json',
+		//data : allData,
+		success : function(data){
+			//alert(data.alarmSum);
+			document.getElementById('myAlarm').innerHTML = data.alarmSum;
+		}
+	});	
 </script>
 <body>
 
@@ -362,10 +375,10 @@ function moving(){
 	|<a href="/picksell/loginForm" class="menu_el">로그인</a>
 	</c:if> 
 	|<a href="/picksell/cart" class="menu_el">장바구니</a>
-	<span class="myBasketSum" id="myBasketSum">0</span>
+	<span class="myBasketSum" id="myBasketSum"></span>
 	<c:if test="${sessionId != null}">
-	|<a href="/picksell/mypage/alarmSelect" id="linkOfAlarm" class="menu_el">알림
-	<span class="myAlarm" id="myAlarm">0</span></a>
+	|<a href="/picksell/mypage/alarmSelect" id="linkOfAlarm" class="menu_el">알림</a>
+	<span class="myAlarm" id="myAlarm"></span>
 	</c:if> 
 	<c:if test="${sessionKind == '99'}">
 	|<a href="/picksell/admin/main" class="menu_el">관리자</a>
@@ -404,13 +417,13 @@ function moving(){
 <div id="mypage_menuBox">
 	<div id="menuBox-header" class="menuheader"></div>
 	<div id="menuBox-body">
-		<span class="menuBox-link"><a href="/picksell/mypage/memberCheck">개인정보확인/수정</a></span>
+		<span class="menuBox-link"><a href="/picksell/mypage/memberCheck">회원정보 확인/수정</a></span>
 		<span class="menuBox-link"><a href="/picksell/mypage/purchaseList/0">중고구매 신청리스트</a></span>
 		<span class="menuBox-link"><a href="/picksell/mypage/sellList">판매글 조회</a></span>
 		<span class="menuBox-link"><a href="/picksell/mypage/saleList">판매 내역/배송 조회</a></span>
 		<span class="menuBox-link"><a href="/picksell/mypage/orderList">주문 내역/배송 조회</a></span>
 		<span class="menuBox-link"><a href="/picksell/mypage/recentProduct">최근 본 상품</a></span>
-		<span class="menuBox-link"><a href="/picksell/mypage/alarmSelect">알림 내용 및 설정</a></span>
+		<span class="menuBox-link"><a href="/picksell/mypage/alarmSelect">알림 및 설정</a></span>
 	</div>
 </div>
 

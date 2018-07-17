@@ -10,8 +10,14 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-<title>알람 읽기</title>
+<title>알림 읽기</title>
 <h2>알림 읽기</h2>
+<br>
+<a href="#">전체 보기/</a>
+<a href="#">읽지 않은 알림/</a>
+<a href="#">읽은 알림/</a>
+<br>
+<br>
 </head>
 <body>
 <script>
@@ -60,6 +66,14 @@ function alarmDelete(ALARM_NUM){
 				<td>
 				<a href="/picksell/products/detail/${alarmMap.ALARM_VARIABLE1}/${alarmMap.ALARM_VARIABLE2}?ALARM_NUM=${alarmMap.ALARM_NUM}">
 					${alarmMap.ALARM_WRITER}님께서 구매신청을 하셨습니다.
+				</a>
+				</td>
+	     </c:if>
+	     
+	      <c:if test="${alarmMap.ALARM_KIND == '4'}">
+				<td>
+				<a href="/picksell/mypage/orderDetail/${alarmMap.ALARM_VARIABLE1}">
+					${alarmMap.ALARM_WRITER}님께서 배송을 시작하셨습니다.
 				</a>
 				</td>
 	     </c:if>

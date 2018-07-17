@@ -328,6 +328,24 @@ public class mypageController {
 		return "alarmSelect";
     } 
 }
+/*	@RequestMapping("/mypage/alarmCount")
+	public String alarmCount(HttpSession session, Model model) {//알람을 허용한 사람만 리스트 가져오기
+		
+	String sessionId =(String)session.getAttribute("sessionId");//세션아이디값
+	String sessionAlarm =(String)session.getAttribute("sessionAlarm");//세션알람값
+	
+	if(!sessionAlarm.equals("ON")){
+	 return "alarmCount";
+	}
+	else {//알림이 ON일때만 리스트 가져오자
+		
+		int alarmCount = mypageService.alarmCount(sessionId);//세션아이디에 해당하는 알람 가져옴
+		//select count(*) from ps_alarm where ALARM_TARGET = '2' and alarm_check = 'NO'
+		model.addAttribute("alarmCount", alarmCount);
+		
+		return "alarmCount";
+    } 
+}*/
 	
 	@ResponseBody
 	@RequestMapping(value="/mypage/alarmDelete", method=RequestMethod.GET)
@@ -400,6 +418,50 @@ public class mypageController {
 		
 		return "recentProduct";
 	}
+	@RequestMapping("/mypage/alarmCount")
+	@ResponseBody
+	public Map<String, Object> alarmCount(HttpSession session){
+		
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		
+		String sessionId = (String)session.getAttribute("sessionId");
+		
+	if(sessionId != null) {
+		int alarmSum = mypageService.alarmCount(sessionId);
+		//select count(*) from ps_alarm where alarm_target = #{sessionId} and alarm_check = 'NO'
+		
+		resultMap.put("alarmSum", alarmSum);
+	}
+		return resultMap;
+}
+	@RequestMapping("/mypage/deliveryInsert")
+	public String deliveryInsert(Model model,//배송사항 입력
+	@RequestParam(value="ORDER_NUM",required=false, defaultValue="0") String ORDER_NUM,
+	@RequestParam(value="DELIVERY_COMPANY",required=false, defaultValue="0") String DELIVERY_COMPANY,
+	@RequestParam(value="INVOICE_NUM",required=false, defaultValue="0") String INVOICE_NUM,
+	@RequestParam(value="ALARM_TARGET",required=false, defaultValue="0") String ALARM_TARGET,
+	@RequestParam(value="ALARM_WRITER",required=false, defaultValue="0") String ALARM_WRITER
+	) {	
+		if(!ORDER_NUM.equals("0")) {
+		Map<String, Object> parameterMap = new HashMap<String, Object>();
+		
+		parameterMap.put("ORDER_NUM",ORDER_NUM);
+		parameterMap.put("DELIVERY_COMPANY",DELIVERY_COMPANY);
+		parameterMap.put("INVOICE_NUM",INVOICE_NUM);
+		parameterMap.put("ALARM_TARGET",ALARM_TARGET);
+		parameterMap.put("ALARM_WRITER",ALARM_WRITER);
+		
+		mypageService.deliveryInsert(parameterMap);//배송사항 입력
+		
+		parameterMap.put("ALARM_VARIABLE1",ORDER_NUM);
+		parameterMap.put("ALARM_VARIABLE2",ORDER_NUM);
+		parameterMap.put("ALARM_KIND","4");
+		
+		mypageService.alarmInsert(parameterMap);//알람 입력
+		
+		}
+	return "redirect:/mypage/saleDetail/"+ORDER_NUM;
+    } 
 }
 
 		

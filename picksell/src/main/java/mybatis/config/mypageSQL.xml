@@ -252,4 +252,18 @@ select * from ps_product a, PS_ORDERLIST b where b.ORDER_NUM = #{ORDER_NUM} and 
 	
 </select>
 
+<select id="alarmCount" resultType="int" parameterType="String">
+		select count(*) from ps_alarm where alarm_target = #{sessionId} and alarm_check = 'NO'
+</select>
+
+<update id="deliveryInsert" parameterType="hashmap">
+	update ps_order set
+	step3_date = sysdate,
+	STATUS = '2',
+	DELIVERY_COMPANY = #{DELIVERY_COMPANY},
+	INVOICE_NUM = #{INVOICE_NUM}
+	where ORDER_NUM = #{ORDER_NUM}
+</update>
+
+
 </mapper>

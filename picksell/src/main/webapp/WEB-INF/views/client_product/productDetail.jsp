@@ -11,6 +11,19 @@
 <body>
 
 <script>
+	
+	//일반상품이면판매중인지
+	$(document).ready(function(){
+		
+		var thisHowToSell = '${resultObject.PRODUCT_STATUS}';
+		if(thisHowToSell == '1'){
+			$('.status_on').width($('.status_on').parents('.product_info').width());
+			$('.status_on').height($('.status_on').parents('.product_info').height());
+			$('.status_on').show();
+		}
+		
+	});
+
 	//알람입력
 	function alarmInsert(ALARM_TARGET, ALARM_VARIABLE1, ALARM_VARIABLE2, ALARM_WRITER,ALARM_KIND){
 	var allData = "ALARM_TARGET="+ALARM_TARGET+"&ALARM_VARIABLE1="+ALARM_VARIABLE1+"&ALARM_VARIABLE2="+ALARM_VARIABLE2+"&ALARM_WRITER="+ALARM_WRITER+"&ALARM_KIND="+ALARM_KIND;
@@ -20,7 +33,7 @@
 				dataType : 'json',
 				data : allData,
 				success : function(data){
-					alert("알람입력완료");
+					//alert("알람입력완료");
 				}
 			});	
 	}
@@ -181,7 +194,6 @@
 	<!-- 컨텐츠 시작 -->
 	<div class="contentWrap">
 	<form action="/picksell/purchase/order/single" method="post">
-	
 	<div class="categoryMoveWrap">
 		<c:if test="${resultObject.HOWTOSELL != 2 }">
 			<a class="link_wholeList" href="/picksell/products/goods">전체목록</a>
@@ -200,6 +212,11 @@
 			<img src="/picksell/resources/img/imgready.gif" class="sellerProfileImg" />
 		</div>
 		<div class="product_info">
+			<!-- 이미판매중입니다 레이아웃 -->
+			<div class="status_on">
+				<span class="status_onTEXT">※ 현재 거래중인 제품입니다</span>
+			</div>
+			
 			<span class="sellerId">${resultObject.SELLER_ID }</span>
 			<span class="product_info_subject">${resultObject.SUBJECT }</span>
 			<span class="product_info_number">상품번호: ${resultObject.PRODUCT_NUM } / [${resultObject.CATEGORY_NAME }]</span>
@@ -216,6 +233,7 @@
 			<input type="hidden" name="p_list[0].product_img" value="${resultObject.FIRST_IMG }" />
 			<input type="hidden" name="p_list[0].product_subject" value="${resultObject.SUBJECT }" />
 			<input type="hidden" name="p_list[0].product_num" value="${resultObject.PRODUCT_NUM }" />
+			<input type="hidden" name="p_list[0].product_howtosell" value="${resultObject.HOWTOSELL }" />
 			
 			<!-- 플러스판매일경우 수량체크 -->
 			<c:if test="${resultObject.HOWTOSELL == 2 }">
