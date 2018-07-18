@@ -57,7 +57,7 @@ font-size: 18px;
 <script>
 function openCheckID(u){
 	if(u.id.value == ''){
-		alert('아이디를 입력하세요!');
+		alert('아이디를 입력하세요!');//
 		u.id.focus();
 		return false;
 	}
