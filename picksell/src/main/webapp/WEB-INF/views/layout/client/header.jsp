@@ -491,7 +491,7 @@ function alarmReadOfHead(ALARM_NUM, kind, var1, var2){
 		<li class="headerCategory menuCategory"><a href="/picksell/products/plus" class="menuLink <c:if test="${forwardingListKind == '0' }">active</c:if>">픽셀 플러스</a></li>
 		<li class="headerCategory menuCategory"><a href="/picksell/hotPlusProduct" class="menuLink <c:if test="${forwardingListKind == '1' }">active</c:if>">인기상품</a></li>
 		<li class="headerCategory menuCategory"><a href="/picksell/products/goods" class="menuLink <c:if test="${forwardingListKind == '2' }">active</c:if>">일반상품</a></li>
-		<li class="headerCategory menuCategory"><a href="#" class="menuLink">무료나눔</a></li>
+		<li class="headerCategory menuCategory"><a href="/picksell/free_board/list" class="menuLink">무료나눔</a></li>
 		<li class="headerCategory menuCategory" style="float: right;"><a href="/picksell/sell/howto" class="sellLink">물건 판매하기</a></li>
 	</ul>
 </div>
