@@ -1,0 +1,173 @@
+@charset "utf-8";
+/* CSS Document */
+
+body{margin:0;}
+.all{margin: 0; margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px;} 
+#header .hh{position: relative; width: 970px; height: 78px; margin: 0 auto; z-index: 10000; float: center;}
+.tab {overflow: hidden;}
+#content1 .tab button {background-color: inherit;border: none;outline: none;cursor: pointer;
+padding: 14px 16px;transition: 0.3s;    font-size: 25px;
+    color: #555;}
+#content1 .tab button:hover {background-color: #ddd;}
+#content1 .tab button.active {background-color: #ddd;}
+#content1 .tabcontent {display: none; padding: 6px 12px; border: 1px;}
+#content1 .tabcontent li{float: left; width: 298px; height: 10x; border:1px solid #ccc;}
+li{overflow : hidden; list-style : none;}
+#donate {display : block;}
+#content1 .centerrr{margin : 0 auto;}
+#modprofile{    display: none;
+    width: 400px;
+    border-radius: 8px;
+    position: absolute;
+    top: 25%;
+    left: 35%;
+    padding: 50px;
+    background-color: white;}
+.profileButtons{background-color: #ddd;
+	border: none;
+    width: 50%;
+    margin: 0 auto;
+    text-align: center;
+    font-size: 17px;
+    margin-top: 15px;
+    padding: 5px;
+    border-radius: 8px;}
+#profileConfirm{background-color: #12b9ff;
+    color: white;}
+.chargeText{font-size: 20px;
+    color: #555;
+    font-weight: 600;}
+#howDot{padding: 5px;
+    font-size: 20px;
+    width: 44%;}
+.chargeWon{font-size: 80px; color: #ff7e00;}
+#profileSearch{background-color: #bd081c;
+    color: white;}
+#chargeDOT{display: none;   width: 250px;
+    border-radius: 8px;
+    position: fixed;
+    top: 25%;
+    left: 35%;
+    padding: 50px;
+    background-color: white;}
+
+#rechargeDOT{display: none;   width: 250px;
+    border-radius: 8px;
+    position: fixed;
+    top: 25%;
+    left: 35%;
+    padding: 50px;
+    background-color: white;}
+.mainImg {height: 250px; */
+    border: 1px solid #ddd;
+    left: 203px;
+    top: 179px;
+    text-align: center;
+    vertical-align: middle;}
+#mainPic{max-height:250px; max-width:450px;}
+/* .exlabel {display: inline-block; padding: .5em .75em; color: #999; font-size: inherit; line-height: normal;
+vertical-align: middle; background-color: #fdfdfd; cursor: pointer; border: 1px solid #ebebeb; border-bottom-color: #e2e2e2;
+border-radius: .25em;} */
+.profileButtons{display: block;}
+#ex_file1 { /* 파일 필드 숨기기 */
+position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0);
+border: 0; left: 140px; top: 292px;}
+#profileGray{position: fixed; width: 100%; height: 100%; top: 0; left: 0; background-color: #000; opacity: 0.6; display: none;}
+.contentWrap{box-sizing: border-box;
+    padding-top: 48px;
+    padding-left: 20px;
+    padding-right: 20px;
+    width: 75%;
+    height: 400px;
+    margin: 0 auto;
+    border-top: 2px solid #aeaeae;}
+.bottomContentWrap{box-sizing: border-box;
+    padding-top: 48px;
+    padding-left: 20px;
+    padding-right: 20px;
+    width: 75%;
+	min-height: 750px;
+    margin: 0 auto;
+ }
+#infomation{    margin-bottom: 200px; }
+.infoSubmit{    font-size: 19px;
+    background-color: #555;
+    border: 1px solid #555;
+    color: white;
+    padding: 8px;
+    border-radius: 8px;
+    width: 100px;}
+.contentName{display: inline-block;}
+.contentProfile{float: right;
+    display: inline-block;}
+.bigName{color: #555;
+    font-size: 84px;}
+.smallName{color: #555;
+    font-size: 50px;}
+.profileImgViewer{width: 280px;}
+.infoInput{margin-top: 3px;
+    font-size: 20px;
+    color: #555;
+    padding: 8px;
+    width: 45%;
+    border-radius: 8px;
+    border: 1px solid #b5b5b5;
+    height: 30px;}
+.tableText{width: 10%;
+    font-size: 20px;
+    color: #272727;}
+.tableValue{    height: 50px;
+    font-size: 18px;
+    color: #555;}
+.green{    color: #3ead3e;
+    font-weight: 600;}
+.red{    color: red;
+    font-weight: 600;}
+.dotContentWrap{ width: 50%;
+    margin: 0 auto;
+    }
+.dotText{ font-size: 30px;
+    font-weight: 600;}
+.dotValue{color: #ff7e00;
+    font-size: 100px;}
+.dotButtonWrap{width: 55%;
+    margin: 0 auto;}
+.dotButtons{font-size: 20px;
+    display: block;
+    padding: 8px;
+    border-radius: 8px;
+    border: none;
+    margin-top: 18px;
+    background-color: #555;
+    color: white;
+    width: 200px;}
+#rechargeInput{    font-size: 24px;
+    width: 80%;
+    color: #555;
+    padding: 5px;
+    padding-left: 18px;
+    box-sizing: border-box;
+    border-radius: 8px;
+    border: 2px solid #ddd;
+    margin: 20px 0;
+    display: block;}
+.chargeSubmit{  font-size: 20px;
+    border: none;
+    padding: 8px;
+    width: 80%;
+    margin: 0 auto;
+    margin-top: 10px;
+    display: block;
+    border-radius: 8px;
+    color: white;
+    background-color: #12b9ff;}
+.chargeCancel{    font-size: 20px;
+    border: none;
+    padding: 8px;
+    width: 80%;
+    margin: 0 auto;
+    margin-top: 10px;
+    display: block;
+    border-radius: 8px;
+    color: white;
+    background-color: #bd081c;}

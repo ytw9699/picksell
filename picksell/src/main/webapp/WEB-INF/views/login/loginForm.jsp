@@ -9,6 +9,18 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <title>로그인1</title>
+<style>
+.next {
+    width:150px;
+    margin: 0 auto; 
+    margin-left: 10px;
+    border: none;
+    color: white;
+    background-color: #7151fc;
+    padding: 15px;
+    font-size: 15px;
+}
+</style>
 </head>
 <body>
 <script>
@@ -67,14 +79,14 @@ function formIdSave(){
 }	
 </script>
 <center>
-	로그인 하기
+	<h2>로그인 하기</h2>
 	<form action="login" name="loginForm" id="loginForm" method="post" onsubmit="return mberValiCheck('${resultID}')">
 	     <input type="hidden" name=formID id="formID" value="${formID}"/>
-		<p>아이디 <input type="text" name="ID" id="ID" value="${cookieID}"/>&nbsp;<span id="userIdCheckText"></span>
-		<p>비밀번호 <input type="password" name="PASSWORD" id="PASSWORD" value="${cookiePW}"/>&nbsp;<span id="passwordCheckText"></span>
-		<p><input type="checkbox" name="idSave" id="idSave" value="save" />아이디/비밀번호 유지
-		<P><input type="submit" value="로그인" /></P>
-		<p><a href="#">아이디/비밀번호 찾기</a></p>
+		<h4>아이디 <input type="text" name="ID" id="ID" value="${cookieID}"/>&nbsp;<span id="userIdCheckText"></span></h4>
+		<h4>비밀번호 <input type="password" name="PASSWORD" id="PASSWORD" value="${cookiePW}"/>&nbsp;<span id="passwordCheckText"></span></h4>
+		<h4><input type="checkbox" name="idSave" id="idSave" value="save" />아이디/비밀번호 유지</h4>
+		<h4><input type="submit" class="next" value="로그인" /><input type="button" class="next" value="회원가입" onclick="location.href='/picksell/joinForm'"/></h4>
+		<h4><a href="#">아이디/비밀번호 찾기</a></h4>
 	</form>
 </center>
 <c:if test="${formID != null}">
