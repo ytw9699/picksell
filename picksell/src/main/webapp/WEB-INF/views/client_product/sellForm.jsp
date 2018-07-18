@@ -263,7 +263,7 @@ input.nextDisabled {
 			<div class="mainImg">
 				<img class="mainImgtag" src="/picksell/resources/img/for_first_img.png" id="mainPic" />
 			</div>
-	
+	  
 			<label for="ex_file1" class="profileButtons" id="profileSearch">이미지 찾기</label>	
 			<input type="file" name="first_img" id="ex_file1" />
 
