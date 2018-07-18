@@ -5,7 +5,6 @@
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
     <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-    <!-- 수정 -->
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -15,23 +14,24 @@
 </head>
 <body>
 <table>
+
 <a href="/picksell/mypage/saleList">
-전체보기/
+전체보기[${saleCount.five}]/
 </a>
 <a href="/picksell/mypage/saleList?status=0">
-입금대기/
+입금대기[${saleCount.zero}]/
 </a>
 <a href="/picksell/mypage/saleList?status=1">
-입금완료 및 배송대기중/
+입금완료 및 배송대기중[${saleCount.one}]/
 </a>
 <a href="/picksell/mypage/saleList?status=2">
-배송 및 인수확인 대기/
+배송 및 인수확인 대기[${saleCount.two}]/
 </a>
 <a href="/picksell/mypage/saleList?status=3">
-인수확인 및 거래완료/
+인수확인 및 거래완료[${saleCount.three}]/
 </a>
 <a href="/picksell/mypage/saleList?status=44">
-결제취소 및 반품/
+결제취소 및 반품[${saleCount.fourfour}]/
 </a>
 <c:if test="${fn:length(saleList) > 0}">
 <c:forEach var="ps_order" items="${saleList}" varStatus="saleListStatus">

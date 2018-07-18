@@ -148,27 +148,15 @@ public class mypageService implements mypageDao {
 		 return map;
 	}
 	
-	public int orderCount5(String sessionId) {
-		return sqlMapper.selectOne("mypage.orderCount5", sessionId);
-	}
 
-	public int orderCount0(String sessionId) {
-		return sqlMapper.selectOne("mypage.orderCount0", sessionId);
-	}
-
-	public int orderCount1(String sessionId) {
-		return sqlMapper.selectOne("mypage.orderCount1", sessionId);
-	}
-
-	public int orderCount2(String sessionId) {
-		return sqlMapper.selectOne("mypage.orderCount2", sessionId);
-	}
-
-	public int orderCount3(String sessionId) {
-		return sqlMapper.selectOne("mypage.orderCount3", sessionId);
-	}
-
-	public int orderCount44(String sessionId) {
-		return sqlMapper.selectOne("mypage.orderCount44", sessionId);
+	public Map<String, Object> saleCount(String sessionId) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("five",sqlMapper.selectOne("mypage.saleCount5", sessionId));
+		map.put("zero",sqlMapper.selectOne("mypage.saleCount0", sessionId));
+		map.put("one",sqlMapper.selectOne("mypage.saleCount1", sessionId));
+		map.put("two",sqlMapper.selectOne("mypage.saleCount2", sessionId));
+		map.put("three",sqlMapper.selectOne("mypage.saleCount3", sessionId));
+		map.put("fourfour",sqlMapper.selectOne("mypage.saleCount44", sessionId));
+		 return map;
 	}
 	}
