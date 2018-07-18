@@ -14,6 +14,7 @@ table.PurchaseHistory{
  text-align: center;
  line-height : 1.5;
  margin: 10px 5px;
+ padding-right: 36px;
 
 }
 table.PurchaseHistory th {
@@ -39,7 +40,9 @@ table.PurchaseHistory td {
 </head>
 <body>
 <div class="main">
-<h1 style="margin-left:6px;">관리자 구매 내역 리스트</h1>
+<h1 style="margin-left:6px;border-bottom: 2px solid #7151fc;
+    padding: 10px;
+    text-align: center;">관리자 구매 내역 리스트</h1>
 <c:choose>
 <c:when test="${0 eq total }">
 구매 내역이 없습니다.
@@ -63,7 +66,7 @@ table.PurchaseHistory td {
  		<td>${maplist.SELLER_ID }</td>
  		<td>${maplist.PRODUCT_NUM }</td>
  		<td>${maplist.ORDER_QUANTITY }</td>
- 		<td>${maplist.TOTAL_PRICE }</td>
+ 		<td>${maplist.TOTAL_PRICE }(원)</td>
  		<td>구매완료</td>
  		<td>
  			<fmt:formatDate value="${maplist.STEP1_DATE }" pattern="yy-MM-dd hh:mm"></fmt:formatDate>

@@ -9,61 +9,20 @@
 .main{
     margin-left: 200px;
     height: 100%;
-  
+    min-width: 1024px;
 }
 .pageSubject{
-	border: 1px solid;
+	border-bottom: 2px solid #7151fc;
     padding: 10px;
-    box-shadow: 5px 10px #888888;
-    text-align : center;
+    text-align: center;
 
 }
-.hiddenPage{
-    text-align: center;
-    background-color: lightgrey;
-    
-}
+
 hr{
  border: none;
  border : 1px solid grey;
 
  
-}
-button .change, .profile_img{
-  background: #337ab7;
-  color:#fff;
-  border:none;
-  position:relative;
-  height:22px;
-  padding:0 2em;
-  cursor:pointer;
-  transition:800ms ease all;
-  outline:none;
-}
-button .change:hover, .profile_img:hover{
-  background:#fff;
-  color:#337ab7;
-}
-button .change:after, .profile_img:before,button .change:after, .profile_img:after{
-  content:'';
-  position:absolute;
-  top:0;
-  right:0;
-  height:2px;
-  width:0;
-  background: #337ab7;
-  transition:400ms ease all;
-}
-button .change:after, .profile_img:after{
-  right:inherit;
-  top:inherit;
-  left:0;
-  bottom:0;
-}
-button .change:hover:before, .profile_img:hover:before,
-button .change:hover:after, .profile_img:hover:after{
-  width:100%;
-  transition:800ms ease all;
 }
 
 .memberInfo{
@@ -73,8 +32,8 @@ button .change:hover:after, .profile_img:hover:after{
 .hiddenPage{
  display : none;
  border : 1px;
- background-color : white;
- 
+ background-color : #e8e7e7;
+  text-align: center;
 }
 .pimg{
 	/*display: none;*/
@@ -82,12 +41,14 @@ button .change:hover:after, .profile_img:hover:after{
 }
 button {
   
-  background-color : white;
-  border : none;
-  margin : 10px;
+  background-color: white;
+  border : 1px solid white;
+  margin : 11px;
   display: inline-block;
+  font-weight: bold;
  
 }
+ button:focus { outline:0 !important; }
 .bbutton:hover{
  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 }
@@ -106,10 +67,12 @@ button {
 }
 .link{
     margin-left: 190px;
-    margin-right: 190px;
-    padding: 5px;
-}
+    margin-right: 160px;
+    padding: 14px;
+    background-color: white;
 
+   
+}
 
 </style>
 <script src="http://code.jquery.com/jquery-1.7.js"></script>
@@ -120,15 +83,7 @@ $(document).ready(function(){
         $("div.hiddenPage").css('display','inline')
     });
 });
-/*
-$(document).ready(function(){
-    $("button.profile_img").click(function(){
-        $("div.pimg").toggle("slow");
-        $("div.pimg").css('display','inline')
-    });
-});
 
-*/
 
 </script>
 
@@ -138,12 +93,12 @@ $(document).ready(function(){
 <body>
 <div class="main">
 <div class="pageSubject" >
- <h1 style="margin-left: 17px;margin-right:17px;">회원 페이지</h1>
+ <h1 style="margin-left:17px;margin-right:17px;">회원 페이지</h1>
 </div>
 <div class="memberInfo">
-<div class="profile" style="background-color:#fbfbfb;border-radius:25px;">
+<div class="profile" style="background-color:#e8e7e7;border-radius:25px;">
 <div class="d" style="display:inline;">
-<div class="id" style="float:right;"><img src="/picksell/resources/profileImgUpload/freeprofileimg.jpg" style="width:130px; height:110px;"/></div>
+<div class="id" style="float:right;"><img src="/picksell/resources/profileImgUpload/freeprofileimg.jpg" style="width:150px; height:130px;"/></div>
 아이디 : ${map.ID }</div>
 <div class="name">
 이름 : ${map.NAME }
@@ -155,7 +110,7 @@ $(document).ready(function(){
 주소 : ${map.ADDRESS }
 </div>
 <div class="status">
-계정 상태 :
+계정 상태 : 
 <c:choose>
 <c:when test="${ '0' eq map.STATUS }">
  정상
@@ -167,6 +122,7 @@ $(document).ready(function(){
  로그인 제한
 </c:when>
 </c:choose>
+<button class="change">변경</button>
 </div>
 
 <div class="hiddenPage"> 
@@ -185,16 +141,16 @@ $(document).ready(function(){
 		   	<input type="submit" value="게시글 제한" onclick="location.href='/picksell/admin/member/infoChangeProc?id=${map.ID}&status=1'" >
 		</c:when>
 	</c:choose> 
-<button class="change">변경</button>
+
 </div>
 <div class="alarm">
 알람 동의 여부 :
 <c:choose>
 <c:when test="${ map.ALARM_CONSENT eq 'ON'  }">
-<img src="/picksell/resources/img/Alram1.png" width="20px" height="20px">
+<img src="/picksell/resources/img/Alram1.png" width="20px" height="18px" >
 </c:when>
 <c:when test="${map.ALARM_CONSENT  eq 'OFF'}">
-<img src="/picksell/resources/img/noAlarm.png" width="20px" height="20px">
+<img src="/picksell/resources/img/noAlarm.png" width="20px" height="18px">
 </c:when>
 </c:choose>
 </div>
@@ -202,7 +158,8 @@ $(document).ready(function(){
 가입 일자 : <fmt:formatDate value="${map.REGDATE }" pattern="yyyy-MM-dd"/>
 </div>
 <div class="kind">
-권한 : <c:choose>
+권한 :
+   <c:choose>
 	 <c:when test="${ '99' eq map.KIND}">
 	관리자  <img src="/picksell/resources/img/admin.png" width="20px" height="20px"/> 
 	 </c:when>
@@ -218,13 +175,17 @@ $(document).ready(function(){
 </div>
 
 <div class="link" >
-<button class="bbutton" id="btn" type="submit" onclick="window.location='/picksell/admin/member/orderList/${map.ID}'"><img class="btn-img" src="/picksell/resources/img/orderlist.png" width="150px" height="150px"></button>
-<button class="bbutton" id="btn" type="submit" onclick="window.location='/picksell/admin/member/sellHistory/${map.ID}'"><img class="btn-img" src="/picksell/resources/img/sellHistory.png" width="150px" height="150px">
-</button>
+
+<button class="bbutton" id="btn" type="submit" onclick="window.location='/picksell/admin/member/orderList/${map.ID}'"><img class="btn-img"src="/picksell/resources/img/orderlist.png" width="150px" height="150px"></button>
+주문 내역 리스트
+
+<button class="bbutton" id="btn" type="submit" onclick="window.location='/picksell/admin/member/sellHistory/${map.ID}'"><img class="btn-img" src="/picksell/resources/img/sellHistory.png" width="150px" height="150px"></button>
+판매 내역 리스트
 <button class="bbutton" id="btn" type="submit" onclick="window.location='/picksell/admin/member/purchaseHistory/${map.ID}'"><img class="btn-img" src="/picksell/resources/img/buying.png" width="150px" height="150px">
 </button>
-<button style="background-color : white;
-  border : none;" class="bbutton" id="btn" type="submit" onclick="window.location='/picksell/admin/member/products/${map.ID}'"><img class="btn-img" src="/picksell/resources/img/sell.png" width="150px" height="150px"></button>
+구매 내역 리스트
+<button style="
+  border : none;" class="bbutton" id="btn" type="submit" onclick="window.location='/picksell/admin/member/products/${map.ID}'"><img class="btn-img"  src="/picksell/resources/img/sell.png" width="150px" height="150px"></button>현재 판매 글
 </div>
 </div>
 </body>
