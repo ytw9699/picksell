@@ -570,7 +570,7 @@ public class mypageController {
 		      }else {
 		         return new ArrayList<Map<String,Object>>();
 		      }
-		   }
+		  }
 
 		
 }
