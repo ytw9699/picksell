@@ -32,7 +32,10 @@ public class FreeController {
 	
 	@RequestMapping("/list")
 	public ModelAndView freeList(HttpServletRequest request) {
-		System.out.println("dd");
+		
+		List<Map<String, Object>> mp = freeService.freeList();
+		
+		mav.addObject("mp", mp);
 		mav.setViewName("client_free/freeBoard");
 		return mav;
 		

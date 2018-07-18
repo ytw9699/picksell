@@ -16,7 +16,7 @@ public class FreeService implements FreeDAO {
 	
 	//무료나눔 게시판 리스트 
 	public List<Map<String, Object>> freeList(){
-		return null;
+		return sqlSessionTemplate.selectList("freeBoard.freeItem-all");
 	}
 		
 	//게시글 상세보기 
