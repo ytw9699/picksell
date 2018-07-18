@@ -523,6 +523,13 @@ public class mypageController {
 			
 			return "redirect:/mypage/modify";
 		}
+		@RequestMapping("/mypage/defaultProfile")
+		public String profile(HttpSession session){
+			String sessionId = (String) session.getAttribute("sessionId");
+			
+			mypageService.defaultProfile(sessionId);
+			return "redirect:/mypage/modify";
+		}
 }
 
 		

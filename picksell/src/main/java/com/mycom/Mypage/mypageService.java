@@ -131,4 +131,8 @@ public class mypageService implements mypageDao {
 	public void profile(Map<String, Object> map) {
 		sqlMapper.update("mypage.profile",map);
 		}
+
+	public void defaultProfile(String sessionId) {
+		sqlMapper.update("mypage.defaultProfile",sessionId);
+	}
 	}

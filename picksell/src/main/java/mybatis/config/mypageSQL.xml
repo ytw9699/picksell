@@ -288,4 +288,8 @@ select * from ps_product a, PS_ORDERLIST b where b.ORDER_NUM = #{ORDER_NUM} and 
 	update ps_member set PROFILE_IMG = #{PROFILE_IMG} where ID = #{sessionId}
 </update>
 
+<update id="defaultProfile" parameterType="string">
+		update ps_member set PROFILE_IMG = 'default' WHERE id = #{sessionId}
+</update>
+	
 </mapper>
