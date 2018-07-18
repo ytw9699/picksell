@@ -15,15 +15,13 @@
 </head>
 <body>
 <div>
-<a href="/picksell/mypage/orderList">전체보기/</a>
-<a href="/picksell/mypage/orderList?status=0">입금대기/</a>
-<a href="/picksell/mypage/orderList?status=1">입금완료 및 배송대기중/</a>
-<a href="/picksell/mypage/orderList?status=2">배송 및 인수확인 대기/</a>
-<a href="/picksell/mypage/orderList?status=3">인수확인 및 거래완료/</a>
-<a href="/picksell/mypage/orderList?status=44">결제취소 및 반품/</a>
+<a href="/picksell/mypage/orderList">전체보기[${orderCount5}]/</a>
+<a href="/picksell/mypage/orderList?status=0">입금대기[${orderCount0}]/</a>
+<a href="/picksell/mypage/orderList?status=1">입금완료 및 배송대기중[${orderCount1}]/</a>
+<a href="/picksell/mypage/orderList?status=2">배송 및 인수확인 대기[${orderCount2}]/</a>
+<a href="/picksell/mypage/orderList?status=3">인수확인 및 거래완료[${orderCount3}]/</a>
+<a href="/picksell/mypage/orderList?status=44">결제취소 및 반품[${orderCount44}]/</a>
 </div>
-
-<div> 현재 총${fn:length(orderList)}건이 있습니다</div>
 
 <c:if test="${fn:length(orderList) > 0}">
 <c:forEach var="ps_order" items="${orderList}" varStatus="orderListStatus">

@@ -291,5 +291,29 @@ select * from ps_product a, PS_ORDERLIST b where b.ORDER_NUM = #{ORDER_NUM} and 
 <update id="defaultProfile" parameterType="string">
 		update ps_member set PROFILE_IMG = 'default' WHERE id = #{sessionId}
 </update>
+<!-- 오더리스트 전체 카운트 -->
+<select id="orderCount5" resultType="int" parameterType="String">
+		select count(*) from  ps_order where buyer_id =  #{sessionId} and status != '5'
+</select>
+<!-- 오더리스트 입금대기 카운트 -->
+<select id="orderCount0" resultType="int" parameterType="String">
+		select count(*) from  ps_order where buyer_id =  #{sessionId} and status = '0'
+</select>
+<!-- 오더리스트 입금완료 및 배송대기중-->
+<select id="orderCount1" resultType="int" parameterType="String">
+		select count(*) from  ps_order where buyer_id =  #{sessionId} and status = '1'
+</select>
+<!-- 오더리스트 배송 및 인수확인 대기 -->
+<select id="orderCount2" resultType="int" parameterType="String">
+		select count(*) from  ps_order where buyer_id =  #{sessionId} and status = '2'
+</select>
+<!-- 오더리스트 인수확인 및 거래완료 -->
+<select id="orderCount3" resultType="int" parameterType="String">
+		select count(*) from  ps_order where buyer_id =  #{sessionId} and status = '3'
+</select>
+<!-- 오더리스트 결체취소 -->
+<select id="orderCount44" resultType="int" parameterType="String">
+		select count(*) from  ps_order where buyer_id =  #{sessionId} and status = '44'
+</select>
 	
 </mapper>
