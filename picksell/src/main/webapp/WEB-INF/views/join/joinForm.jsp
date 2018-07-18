@@ -24,6 +24,22 @@ body{
 .contentDiv {
     width: 80%;
 }
+.nextWrap {
+    right: 200px;
+    width: 30%;
+    margin: 0 auto;
+    margin-top: 60px;
+}
+.next {
+    width: 10%;
+    margin: 0 auto;
+    margin-left: -1050px;
+    border: none;
+    color: white;
+    background-color: #7151fc;
+    padding: 15px;
+    font-size: 15px;
+}
 
 </style>
 </head>
@@ -48,17 +64,20 @@ function openCheckID(u){
   <form name='checkbox_form'>
     <input type="checkbox" id="checkbox" name="mycheck" onchange="check_all();"/>모두 동의
     <input type="checkbox" id="checkbox" name="mycheck" onchange="uncheck_all();"/>모두 해제<br>
-    <input type='checkbox' name='mycheck' />픽셀 이용 약관에 대한 동의(필수)<br>
-    <input type='checkbox' name='mycheck'  />개인정보 수집 및 이용에 대한 동의(필수)<br>
-    <input type='checkbox' name='mycheck'  />개인정보 국외 이전에 대한 동의(필수)<br>
+    <input type='checkbox' id="cbox1" name='mycheck' onchange="check_each();"/>픽셀 이용 약관에 대한 동의(필수)<br>
+    <input type='checkbox' id="cbox2" name='mycheck' onchange="check_each();"/>개인정보 수집 및 이용에 대한 동의(필수)<br>
+    <input type='checkbox' id="cbox3" name='mycheck' onchange="check_each();"/>개인정보 국외 이전에 대한 동의(필수)<br>
     <br>
-  </form>
-  <input type="button" id="c1_next" onclick="AnimateForm('#c2','easeInOutExpo'); return false" value="작성" disabled="disabled" />
-
+  </form> 
+<div class="nextWrap">
+  <input type="button" id="c1_next" class="next" onclick="AnimateForm('#c2','easeInOutExpo'); return false" value="다음" disabled="disabled" />
+</div>
+			
 <script>
 	function check_all() {
 		for(i=0; i < checkbox_form.mycheck.length; i++) {
 			checkbox_form.mycheck[i].checked = true;
+			var a = document.getElementById("c1_next");
 			 document.getElementById("c1_next").disabled = false;
 		}
 	}
@@ -67,6 +86,14 @@ function openCheckID(u){
 			checkbox_form.mycheck[i].checked = false;
 			checkbox_form.mycheck[0].checked = false;
 			document.getElementById("c1_next").disabled = true;
+		}
+	}
+	function check_each() {
+		var cbox1 = document.getElementById("cbox1");
+		var cbox2 = document.getElementById("cbox2");
+		var cbox3 = document.getElementById("cbox3");
+		if(cbox1.checked && cbox2.checked && cbox3.checked){
+			document.getElementById("c1_next").disabled = false;
 		}
 	}
 </script>
@@ -79,18 +106,22 @@ function openCheckID(u){
  <img src="/picksell/resources/img/personalPurchase.png" onclick="AnimateForm('#c3','easeInOutExpo','nomal'); return false"  >
  <img src="/picksell/resources/img/businessPurchase.png" onclick="AnimateForm('#c3','easeInOutExpo','business'); return false"  >
  </p>
-<p><input type="button" value="이전" onclick="AnimateForm('#c1'); return false" />
+<p>
+<div class="nextWrap">
+<input type="button" class="next" value="이전" onclick="AnimateForm('#c1'); return false" />
+</div>
+</p>
 </div>
 
-<div id="c3">check
+<div id="c3">
 
   <form method="post" name="joinForm" onsubmit="return check();">
 	<input type="hidden" id="kind" name="kind" value="1"/>
 	<!-- 기본 사업자회원  -->
-	<p>회원가입</p>
-    <p> 1.약관동의 2.가입방법선택 3.정보입력</p>
+	<h2>회원가입</h2>
+    <h3> 1.약관동의 2.가입방법선택 3.정보입력 </h3>
 	<br/>
-	*선택정보는 입력하지 않아도 아래 완료 버튼을 통해 가입하실 수 있습니다		
+	<h3>*선택정보는 입력하지 않아도 아래 완료 버튼을 통해 가입하실 수 있습니다</h3>		
 	<br/>
 	<br/>
 	 아이디<input type="text" name="id" />
@@ -121,7 +152,9 @@ function openCheckID(u){
 	</div>
 	<input type="submit" value="가입완료"/>
 	</form>
-<p><input type="button" value="이전" onclick="AnimateForm('#c2'); return false" /></p>
+<div class="nextWrap">
+<p><input type="button" class="next" value="이전" onclick="AnimateForm('#c2'); return false" /></p>
+</div>
 </div>
 </div>
 <script type="text/javascript" src="/picksell/resources/js/jquery.easing.1.3.js"></script>
@@ -205,7 +238,7 @@ function check(){
 		document.joinForm.id.focus();
 		return false;
 	}else
-	 	alert('회원가입이 완료되었습니다.');
+	 	alert('회원가입이 완료되었습니다.로그인 해주세요');
 		return true;
 }
 </script>
