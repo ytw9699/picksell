@@ -46,14 +46,13 @@ function openCheckID(u){
 	<h2> 회원가입 </h2>
 	<h3> 1.약관동의 2.가입방법선택 3.정보입력 </h3> 
   <form name='checkbox_form'>
-    <input type="checkbox" name="mycheck" onchange="check_all();"/>모두 동의
-    <input type="checkbox" name="mycheck" onchange="uncheck_all();"/>모두 해제<br>
-    <input type='checkbox' id="checkbox1" name='mycheck' />픽셀 이용 약관에 대한 동의(필수)<br>
-    <input type='checkbox' id="checkbox2" name='mycheck'  />개인정보 수집 및 이용에 대한 동의(필수)<br>
-    <input type='checkbox' id="checkbox3" name='mycheck'  />개인정보 국외 이전에 대한 동의(필수)<br>
-    <input type='checkbox' id="checkbox4" name='mycheck'  />세일 정보 푸시 알림 동의 (선택)<br>
+    <input type="checkbox" id="checkbox" name="mycheck" onchange="check_all();"/>모두 동의
+    <input type="checkbox" id="checkbox" name="mycheck" onchange="uncheck_all();"/>모두 해제<br>
+    <input type='checkbox' id="cbox1" name='mycheck' onchange="check_each();"/>픽셀 이용 약관에 대한 동의(필수)<br>
+    <input type='checkbox' id="cbox2" name='mycheck' onchange="check_each();"/>개인정보 수집 및 이용에 대한 동의(필수)<br>
+    <input type='checkbox' id="cbox3" name='mycheck' onchange="check_each();"/>개인정보 국외 이전에 대한 동의(필수)<br>
     <br>
-  </form>
+  </form> 
   <input type="button" id="c1_next" onclick="AnimateForm('#c2','easeInOutExpo'); return false" value="작성" disabled="disabled" />
 
 <script>
@@ -68,6 +67,14 @@ function openCheckID(u){
 			checkbox_form.mycheck[i].checked = false;
 			checkbox_form.mycheck[0].checked = false;
 			document.getElementById("c1_next").disabled = true;
+		}
+	}
+	function check_each() {
+		var cbox1 = document.getElementById("cbox1");
+		var cbox2 = document.getElementById("cbox2");
+		var cbox3 = document.getElementById("cbox3");
+		if(cbox1.checked && cbox2.checked && cbox3.checked){
+			document.getElementById("c1_next").disabled = false;
 		}
 	}
 </script>
