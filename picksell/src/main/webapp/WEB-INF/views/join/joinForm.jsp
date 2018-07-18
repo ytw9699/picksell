@@ -36,7 +36,7 @@ body{
     margin-left: -1050px;
     border: none;
     color: white;
-    background-color: #7151fc;
+    background-color: #999;
     padding: 15px;
     font-size: 15px;
 }
@@ -54,6 +54,41 @@ function openCheckID(u){
 	url = "checkJoinId?id="+u.id.value;
 	open(url,"confirm","toolbar=no, location=no, status=no, menubar=no, scrollbars=no, resizable=no, width=500, height=500");
 }
+
+//var step1_nextValue = 0;
+
+function checkBoxes(){
+	for(i=0; i < checkbox_form.mycheck.length; i++) {
+		if(!checkbox_form.mycheck[i].checked){
+			$('#c1_next').attr("disabled","disabled").css('background-color','#999');
+			//step1_nextValue = 0;
+			return false;
+		}
+	}
+	$('#c1_next').removeAttr("disabled").css('background-color','#7151fc');
+}
+function check_all(){
+	var allBox = document.getElementById('checkbox');
+	if(allBox.checked){
+		for(i=0; i < checkbox_form.mycheck.length; i++) {
+			checkbox_form.mycheck[i].checked = true;
+		}
+		checkBoxes();
+	}
+	if(!allBox.checked){
+		for(i=0; i < checkbox_form.mycheck.length; i++) {
+			checkbox_form.mycheck[i].checked = false;
+		}
+		checkBoxes();
+	}
+}
+
+$(document).ready(function(){
+	$('.mycheck').on('click',function(){
+		checkBoxes();
+	});
+});
+
 </script>
 
 <div id="container">
@@ -62,41 +97,17 @@ function openCheckID(u){
 	<h2> 회원가입 </h2>
 	<h3> 1.약관동의 2.가입방법선택 3.정보입력 </h3> 
   <form name='checkbox_form'>
-    <input type="checkbox" id="checkbox" name="mycheck" onchange="check_all();"/>모두 동의
-    <input type="checkbox" id="checkbox" name="mycheck" onchange="uncheck_all();"/>모두 해제<br>
-    <input type='checkbox' id="cbox1" name='mycheck' onchange="check_each();"/>픽셀 이용 약관에 대한 동의(필수)<br>
-    <input type='checkbox' id="cbox2" name='mycheck' onchange="check_each();"/>개인정보 수집 및 이용에 대한 동의(필수)<br>
-    <input type='checkbox' id="cbox3" name='mycheck' onchange="check_each();"/>개인정보 국외 이전에 대한 동의(필수)<br>
+    <input type="checkbox" id="checkbox"  onclick="check_all();"/>모두 동의
+<!--     <input type="checkbox" id="checkbox" name="mycheck" onchange="uncheck_all();"/>모두 해제<br> -->
+    <input type='checkbox' id="cbox1" class="mycheck" name='mycheck'  />픽셀 이용 약관에 대한 동의(필수)<br>
+    <input type='checkbox' id="cbox2" class="mycheck" name='mycheck'  />개인정보 수집 및 이용에 대한 동의(필수)<br>
+    <input type='checkbox' id="cbox3" class="mycheck" name='mycheck'  />개인정보 국외 이전에 대한 동의(필수)<br>
     <br>
   </form> 
 <div class="nextWrap">
   <input type="button" id="c1_next" class="next" onclick="AnimateForm('#c2','easeInOutExpo'); return false" value="다음" disabled="disabled" />
 </div>
 			
-<script>
-	function check_all() {
-		for(i=0; i < checkbox_form.mycheck.length; i++) {
-			checkbox_form.mycheck[i].checked = true;
-			var a = document.getElementById("c1_next");
-			 document.getElementById("c1_next").disabled = false;
-		}
-	}
-	function uncheck_all() {
-		for(i=0; i < checkbox_form.mycheck.length; i++) {
-			checkbox_form.mycheck[i].checked = false;
-			checkbox_form.mycheck[0].checked = false;
-			document.getElementById("c1_next").disabled = true;
-		}
-	}
-	function check_each() {
-		var cbox1 = document.getElementById("cbox1");
-		var cbox2 = document.getElementById("cbox2");
-		var cbox3 = document.getElementById("cbox3");
-		if(cbox1.checked && cbox2.checked && cbox3.checked){
-			document.getElementById("c1_next").disabled = false;
-		}
-	}
-</script>
 </div>
 
 <div id="c2">
