@@ -32,5 +32,8 @@
 <c:if test="${empty mp}">
 	<tr><td colspan="9" style="text-align:center;">등록된 상품이 없습니다</td></tr>
 </c:if> 
+
+<input type="button" value="글쓰기" onclick="#">
+
 </body>
 </html>
