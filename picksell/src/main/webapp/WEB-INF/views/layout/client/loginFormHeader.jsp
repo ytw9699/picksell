@@ -15,8 +15,7 @@
 <body>
 <center>
 <p>
-<a href="joinForm">회원가입</a>
-<hr/>
+<!-- <a href="joinForm">회원가입</a> -->
 <p/>
 </center>
 </body>
