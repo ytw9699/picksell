@@ -13,7 +13,7 @@ body{
     #container {
 	position: relative;
 	left: 0;
-	width: 10000px
+	width: 10000px;
 	top: 0;
 	min-height: 500px;
 	} 
@@ -27,13 +27,12 @@ body{
 .nextWrap {
     right: 200px;
     width: 30%;
-    margin: 0 auto;
+    margin: 0;
     margin-top: 60px;
 }
 .next {
-    width: 10%;
-    margin: 0 auto;
-    margin-left: -1050px;
+    width: 30%;
+    margin: 0;
     border: none;
     color: white;
     background-color: #999;
@@ -105,7 +104,7 @@ $(document).ready(function(){
 
 <div id="container">
 
-<div id="c1">
+<div id="c1" class="innerContentWrap">
 	<h2> 회원가입 </h2>
 	<h3> 1.약관동의 2.가입방법선택 3.정보입력 </h3> 
   <form name='checkbox_form'>
@@ -133,9 +132,10 @@ $(document).ready(function(){
 <div class="terms-btitle">개인정보 국외 이전 동의</div>
 <div>주식회사 셀잇은 안정적인 서비스 제공을 위하여 아마존 웹서버를 이용하고 있으며 이에 사용자의 개인 정보를 국외 서버에 이전할 수 있습니다.</div><ul class="indent-l1"><li><p></p><div><strong>이전받는 자</strong></div><div>Amazon Web Service, Inc</div><p></p></li><li><p></p><div><strong>이전받는 자가 소재하는 국가</strong></div><div>미국</div><p></p></li><li><p></p><div><strong>개인 정보 보호 책임자 연락처</strong></div><div>dhkim@withsellit.com</div><p></p></li><li><p></p><div><strong>이전 받는 자의 개인 정보 이용 목적</strong></div><div>시스템 제공자로써 해당 정보의 단순 저장</div><p></p></li><li><p></p><div><strong>이전하는 개인정보의 항목</strong></div><div>이름, 이메일, 비밀번호, 거래내역, 주소, 계좌정보</div><p></p></li><li><p></p><div><strong>이전 시기 및 이전 방법</strong></div></div>
 <!-- 이용약관 2부분 -->
+</div>
 
 
-<div id="c2">
+<div id="c2" class="innerContentWrap">
 <h2> 회원가입 </h2>
 <h3>1.약관동의 2.가입방법선택 3.정보입력</h3>
  <p>
@@ -146,10 +146,9 @@ $(document).ready(function(){
 <div class="nextWrap">
 <input type="button" class="next" value="이전" onclick="AnimateForm('#c1'); return false" />
 </div>
-</p>
 </div>
 
-<div id="c3">
+<div id="c3" class="innerContentWrap">
 
   <form method="post" name="joinForm" onsubmit="return check();">
 	<input type="hidden" id="kind" name="kind" value="1"/>
@@ -192,7 +191,7 @@ $(document).ready(function(){
 <p><input type="button" class="next" value="이전" onclick="AnimateForm('#c2'); return false" /></p>
 </div>
 </div>
-</div>
+</div> 
 <script type="text/javascript" src="/picksell/resources/js/jquery.easing.1.3.js"></script>
 <script>
 function AnimateForm(id,ease,where){ //the id to animate, the easing type
@@ -277,6 +276,13 @@ function check(){
 	 	alert('회원가입이 완료되었습니다.로그인 해주세요');
 		return true;
 }
+
+$(document).ready(function(){
+	
+	var currentWindowWidth = document.body.offsetWidth;
+	$('.innerContentWrap').css('width', currentWindowWidth);
+ });
+ 
 </script>
 </body>
 </html>
