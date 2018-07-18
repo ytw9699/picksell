@@ -135,4 +135,28 @@ public class mypageService implements mypageDao {
 	public void defaultProfile(String sessionId) {
 		sqlMapper.update("mypage.defaultProfile",sessionId);
 	}
+
+	public int orderCount5(String sessionId) {
+		return sqlMapper.selectOne("mypage.orderCount5", sessionId);
+	}
+
+	public int orderCount0(String sessionId) {
+		return sqlMapper.selectOne("mypage.orderCount0", sessionId);
+	}
+
+	public int orderCount1(String sessionId) {
+		return sqlMapper.selectOne("mypage.orderCount1", sessionId);
+	}
+
+	public int orderCount2(String sessionId) {
+		return sqlMapper.selectOne("mypage.orderCount2", sessionId);
+	}
+
+	public int orderCount3(String sessionId) {
+		return sqlMapper.selectOne("mypage.orderCount3", sessionId);
+	}
+
+	public int orderCount44(String sessionId) {
+		return sqlMapper.selectOne("mypage.orderCount44", sessionId);
+	}
 	}
