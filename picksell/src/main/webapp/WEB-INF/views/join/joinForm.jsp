@@ -24,6 +24,22 @@ body{
 .contentDiv {
     width: 80%;
 }
+.next1Wrap {
+    right: 200px;
+    width: 30%;
+    margin: 0 auto;
+    margin-top: 60px;
+}
+.next1 {
+    width: 10%;
+    margin: 0 auto;
+    margin-left: -1050px;
+    border: none;
+    color: white;
+    background-color: #7151fc;
+    padding: 15px;
+    font-size: 15px;
+}
 
 </style>
 </head>
@@ -53,12 +69,15 @@ function openCheckID(u){
     <input type='checkbox' id="cbox3" name='mycheck' onchange="check_each();"/>개인정보 국외 이전에 대한 동의(필수)<br>
     <br>
   </form> 
-  <input type="button" id="c1_next" onclick="AnimateForm('#c2','easeInOutExpo'); return false" value="작성" disabled="disabled" />
-
+<div class="next1Wrap">
+  <input type="button" id="c1_next" class="next1" onclick="AnimateForm('#c2','easeInOutExpo'); return false" value="다음" disabled="disabled" />
+</div>
+			
 <script>
 	function check_all() {
 		for(i=0; i < checkbox_form.mycheck.length; i++) {
 			checkbox_form.mycheck[i].checked = true;
+			var a = document.getElementById("c1_next");
 			 document.getElementById("c1_next").disabled = false;
 		}
 	}
