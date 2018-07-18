@@ -37,24 +37,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
       from ps_orderlist
       group by product_num
       order by count(*) desc
-      )a order by a.total desc )b, ps_product c where b.product_num = c.product_num and c.howtosell ='2' order by c.product_regdate desc
+      )a order by a.total desc )b, ps_product c where b.product_num = c.product_num and c.howtosell ='2' order by b.total desc, c.product_regdate desc
       
      ]]>
    </select>
    
    <select id="hotPlusProduct" resultType="hashmap" parameterType="hashmap">
 		<if test='category == "0" '>
-			select r, b.total, b.product_num, c.content, c.first_img, c.subject ,c.price, c.PRODUCT_REGDATE, c.CATEGORY_NUM, c. SELLER_ID
-      from(
-      select rownum r, a.total, a.product_num from(
-      select count(*) as total, product_num
-      from ps_orderlist
-      group by product_num
-      order by count(*) desc
-      )a order by a.total desc )b, ps_product c where b.product_num = c.product_num and c.howtosell ='2'
+		select r, b.total, b.product_num, c.content, c.first_img, c.subject ,c.price, c.PRODUCT_REGDATE, 
+		c.CATEGORY_NUM, c.SELLER_ID, d.profile_img from(
+     	select rownum r, a.total, a.product_num from(
+      	select count(*) as total, product_num from ps_orderlist
+      	group by product_num
+      	order by count(*) desc)a order by a.total desc )b, ps_product c, ps_member d 
+		where c.seller_id = d.id and b.product_num = c.product_num and c.howtosell ='2' 
 			<choose>
 				<when test='orderMethod == "0" '>
-				order by c.product_regdate desc
+				order by b.total desc
 				</when>
 				<when test='orderMethod == "1" '>
 				order by c.price asc
@@ -65,17 +64,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			</choose>
 		</if>
 		<if test='category != "0" '>
-		select r, b.total, b.product_num, c.content, c.first_img, c.subject ,c.price, c.PRODUCT_REGDATE, c.CATEGORY_NUM, c. SELLER_ID
-      from(
-      select rownum r, a.total, a.product_num from(
-      select count(*) as total, product_num
-      from ps_orderlist
-      group by product_num
-      order by count(*) desc
-      )a order by a.total desc )b, ps_product c where b.product_num = c.product_num and c.howtosell ='2' and category_num = #{category}
+		select r, b.total, b.product_num, c.content, c.first_img, c.subject ,c.price, c.PRODUCT_REGDATE, 
+		c.CATEGORY_NUM, c.SELLER_ID, d.profile_img from(
+     	select rownum r, a.total, a.product_num from(
+      	select count(*) as total, product_num from ps_orderlist
+      	group by product_num
+      	order by count(*) desc)a order by a.total desc )b, ps_product c, ps_member d 
+		where c.seller_id = d.id and b.product_num = c.product_num and c.howtosell ='2' and c.category_num = #{category} 
 			<choose>
 				<when test='orderMethod == "0" '>
-				order by c.product_regdate desc
+				order by b.total desc
 				</when>
 				<when test='orderMethod == "1" '>
 				order by c.price asc
