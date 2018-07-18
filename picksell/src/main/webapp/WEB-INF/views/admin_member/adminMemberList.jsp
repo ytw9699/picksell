@@ -127,13 +127,13 @@ button:hover:before,button:hover:after{
 <button type="submit">Search</button>
 </form>
 </div>
-<h1 style="margin-left:8px;">회원 목록</h1>
+<h1 style="margin-left:8px;min-width: 1024px;">회원 목록</h1>
 <c:choose>
 <c:when test="${ 0 lt searchCount }">
-<h3>검색 결과는 ${searchCount }건 입니다.</h3>
+<h3 style="maring-left:8px;min-width: 1024px;">검색 결과는 ${searchCount }건 입니다.</h3>
 </c:when>
 <c:when test="${ 0 lt a }">
-<h3 style="margin-left: 8px;">전체 회원 수는 ${a}명 입니다.</h3>
+<h3 style="margin-left:8px;min-width: 1024px;">전체 회원 수는 <font size="5px" color="red">${a}</font>명 입니다.</h3>
 </c:when>
 </c:choose>
 <table  class="adminMemeberList">
@@ -186,6 +186,6 @@ button:hover:before,button:hover:after{
 </div>
 
 <button onclick="window.location='/picksell/admin/member/list'">목록</button>
-
+</div>
 </body>
 </html>

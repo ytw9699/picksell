@@ -35,7 +35,7 @@ public class mypageController {
 	
 	//페이징
 	private int totalCount; 		 
-	private int blockCount = 10;	 
+	private int blockCount = 5;	 
 	private int blockPage = 5; 	 
 	private String pagingHtml;  
 	private ProductPaging page;
@@ -188,26 +188,38 @@ public class mypageController {
     	
     	orderSubList.add(mypageService.orderSubList(parameterMap));//리스트하나를 GET하고 다시 맵에서 GET
     }
-    int orderCount5 = mypageService.orderCount5(sessionId);//오더리스트 전체 카운트
-    int orderCount0 = mypageService.orderCount0(sessionId);//오더리스트 입금대기 카운트 
-    int orderCount1 = mypageService.orderCount1(sessionId);//오더리스트 입금완료 및 배송대기중
-    int orderCount2 = mypageService.orderCount2(sessionId);//오더리스트 배송 및 인수확인 대기
-    int orderCount3 = mypageService.orderCount3(sessionId);// 오더리스트 인수확인 및 거래완료 
-    int orderCount44 = mypageService.orderCount44(sessionId);//오더리스트 결체취소
     
-    model.addAttribute("orderCount5", orderCount5);
-    model.addAttribute("orderCount0", orderCount0);
-    model.addAttribute("orderCount1", orderCount1);
-    model.addAttribute("orderCount2", orderCount2);
-    model.addAttribute("orderCount3", orderCount3);
-    model.addAttribute("orderCount44", orderCount44);
-    
+    //int orderCount5 = 
+    Map<String, Object> orderCount =  mypageService.orderCount(sessionId);
+  
+    model.addAttribute("orderCount", orderCount);
     model.addAttribute("orderList", orderList);
     model.addAttribute("orderSubList", orderSubList);
     model.addAttribute("pagingHtml", pagingHtml);
 
 	return "orderList";
+	
+	
 }
+	/*for(int i = 0 ; i <  6 ; i++) {
+		   
+	    int orderCount0 = mypageService.orderCount+i(sessionId);//오더리스트 입금대기 카운트 
+	    int orderCount1 = mypageService.orderCount1(sessionId);//오더리스트 입금완료 및 배송대기중
+	    int orderCount2 = mypageService.orderCount2(sessionId);//오더리스트 배송 및 인수확인 대기
+	    int orderCount3 = mypageService.orderCount3(sessionId);// 오더리스트 인수확인 및 거래완료 
+	    int orderCount4 = mypageService.orderCount4(sessionId);//오더리스트 결체취소
+	    int orderCount5 = mypageService.orderCount5(sessionId);//오더리스트 전체 카운트
+	    
+	    model.addAttribute("orderCount0", orderCount0);
+	    model.addAttribute("orderCount1", orderCount1);
+	    model.addAttribute("orderCount2", orderCount2);
+	    model.addAttribute("orderCount3", orderCount3);
+	    model.addAttribute("orderCount4", orderCount4);
+	    model.addAttribute("orderCount5", orderCount5);
+	    }
+	    model.addAttribute("orderList", orderList);
+	    model.addAttribute("orderSubList", orderSubList);
+	    model.addAttribute("pagingHtml", pagingHtml);*/
 	
 	@RequestMapping("/mypage/saleList")
 	public String saleList(Model model, HttpSession session	,
@@ -544,6 +556,23 @@ public class mypageController {
 			mypageService.defaultProfile(sessionId);
 			return "redirect:/mypage/modify";
 		}
+		
+		@RequestMapping("/mypage/headerAlarmList")
+		@ResponseBody
+		  public List<Map<String, Object>> getMyAlarmHeaderList(
+		         HttpServletRequest request){
+		      List<Map<String, Object>> resultHeaderAlarmList;
+		      String currentID = request.getSession().getAttribute("sessionId").toString();
+		      
+		      if(currentID != null) {
+		         resultHeaderAlarmList = mypageService.getMyAlarmHeaderList(currentID);
+		         return resultHeaderAlarmList;
+		      }else {
+		         return new ArrayList<Map<String,Object>>();
+		      }
+		  }
+
+		
 }
 
 		

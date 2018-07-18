@@ -17,11 +17,12 @@
 }
 
 .sidenav a {
-    padding: 6px 8px 6px 16px;
+    padding: 10px 8px 1px 16px;
     text-decoration: none;
     font-size: 25px;
     color: #818181;
     display: block;
+    margin-top: 0px;
 }
 
 .sidenav a:hover {
@@ -32,7 +33,7 @@
    padding-left: 7px;
    padding-bottom : 20px;
    border-bottom : 1.5px solid #770000;
-
+   height: 43px;
 }
 
 

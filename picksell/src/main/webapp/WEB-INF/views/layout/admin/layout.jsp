@@ -5,7 +5,7 @@
 <html>
 <head>
 <style>
-@font-face{font-family:'Cute'; src:url('/picksell/resources/admincss/font/THE_Oegyeinseolmyeongseo.ttf')}
+@font-face{font-family:'Cute'; src:url('/picksell/resources/admincss/font/busan.ttf')}
 body, table, div, p {font-family:'Cute';}
 
 .menuWrap{
