@@ -544,6 +544,23 @@ public class mypageController {
 			mypageService.defaultProfile(sessionId);
 			return "redirect:/mypage/modify";
 		}
+		
+		@RequestMapping("/mypage/headerAlarmList")
+		@ResponseBody
+		  public List<Map<String, Object>> getMyAlarmHeaderList(
+		         HttpServletRequest request){
+		      List<Map<String, Object>> resultHeaderAlarmList;
+		      String currentID = request.getSession().getAttribute("sessionId").toString();
+		      
+		      if(currentID != null) {
+		         resultHeaderAlarmList = mypageService.getMyAlarmHeaderList(currentID);
+		         return resultHeaderAlarmList;
+		      }else {
+		         return new ArrayList<Map<String,Object>>();
+		      }
+		   }
+
+		
 }
 
 		

@@ -36,8 +36,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<select id="selectNomalProductList" resultType="hashmap" parameterType="hashmap">
 		<if test='category == "0" '>
-			select * from ps_product 
-			where howtosell != 2 
+			select * from(
+			select b.seller_id, a.subject, count(b.orderlist_num) as sell, a.product_regdate, a.product_num ,
+			a.category_num, a.howtosell, a.hitcount, a.stock, a.deal_status, a.board_status, 
+			a.content, a.first_img, a.product_status, a.price from(
+			select * from ps_product where howtosell != 2) a left outer join ps_orderlist b on a.seller_id = b.seller_id 
+			group by b.seller_id, a.subject, a.product_regdate, a.product_num, a.category_num, a.howtosell, a.hitcount, 
+			a.stock, a.deal_status, a.board_status, a.content, a.first_img, a.product_status, a.price) c, ps_member d 
+			where c.seller_id = d.id 
 			<choose>
 				<when test='orderMethod == "0" '>
 				order by product_regdate desc
@@ -51,8 +57,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			</choose>
 		</if>
 		<if test='category != "0" '>
-			select * from ps_product 
-			where howtosell != 2 and category_num = #{category}
+			select * from(
+			select b.seller_id, a.subject, count(b.orderlist_num) as sell, a.product_regdate, a.product_num ,
+			a.category_num, a.howtosell, a.hitcount, a.stock, a.deal_status, a.board_status, 
+			a.content, a.first_img, a.product_status, a.price from(
+			select * from ps_product where howtosell != 2 and category_num = #{category}) a left outer join ps_orderlist b on a.seller_id = b.seller_id 
+			group by b.seller_id, a.subject, a.product_regdate, a.product_num, a.category_num, a.howtosell, a.hitcount, 
+			a.stock, a.deal_status, a.board_status, a.content, a.first_img, a.product_status, a.price) c, ps_member d 
+			where c.seller_id = d.id 		
 			<choose>
 				<when test='orderMethod == "0" '>
 				order by product_regdate desc
@@ -70,8 +82,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<select id="selectPlusProductList" resultType="hashmap" parameterType="hashmap">
 		<if test='category == "0" '>
-			select * from ps_product 
-			where howtosell = 2
+			select * from(
+			select b.seller_id, a.subject, count(b.orderlist_num) as sell, a.product_regdate, a.product_num ,
+			a.category_num, a.howtosell, a.hitcount, a.stock, a.deal_status, a.board_status, 
+			a.content, a.first_img, a.product_status, a.price from(
+			select * from ps_product where howtosell = 2) a left outer join ps_orderlist b on a.seller_id = b.seller_id 
+			group by b.seller_id, a.subject, a.product_regdate, a.product_num, a.category_num, a.howtosell, a.hitcount, 
+			a.stock, a.deal_status, a.board_status, a.content, a.first_img, a.product_status, a.price) c, ps_member d 
+			where c.seller_id = d.id 
 			<choose>
 				<when test='orderMethod == "0" '>
 				order by product_regdate desc
@@ -85,8 +103,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			</choose>
 		</if>
 		<if test='category != "0" '>
-			select * from ps_product 
-			where howtosell = 2 and category_num = #{category}
+			select * from(
+			select b.seller_id, a.subject, count(b.orderlist_num) as sell, a.product_regdate, a.product_num ,
+			a.category_num, a.howtosell, a.hitcount, a.stock, a.deal_status, a.board_status, 
+			a.content, a.first_img, a.product_status, a.price from(
+			select * from ps_product where howtosell = 2 and category_num = #{category}) a left outer join ps_orderlist b on a.seller_id = b.seller_id 
+			group by b.seller_id, a.subject, a.product_regdate, a.product_num, a.category_num, a.howtosell, a.hitcount, 
+			a.stock, a.deal_status, a.board_status, a.content, a.first_img, a.product_status, a.price) c, ps_member d 
+			where c.seller_id = d.id 
 			<choose>
 				<when test='orderMethod == "0" '>
 				order by product_regdate desc
