@@ -46,11 +46,12 @@ function openCheckID(u){
 	<h2> 회원가입 </h2>
 	<h3> 1.약관동의 2.가입방법선택 3.정보입력 </h3> 
   <form name='checkbox_form'>
-    <input type="checkbox" id="checkbox" name="mycheck" onchange="check_all();"/>모두 동의
-    <input type="checkbox" id="checkbox" name="mycheck" onchange="uncheck_all();"/>모두 해제<br>
-    <input type='checkbox' name='mycheck' />픽셀 이용 약관에 대한 동의(필수)<br>
-    <input type='checkbox' name='mycheck'  />개인정보 수집 및 이용에 대한 동의(필수)<br>
-    <input type='checkbox' name='mycheck'  />개인정보 국외 이전에 대한 동의(필수)<br>
+    <input type="checkbox" name="mycheck" onchange="check_all();"/>모두 동의
+    <input type="checkbox" name="mycheck" onchange="uncheck_all();"/>모두 해제<br>
+    <input type='checkbox' id="checkbox1" name='mycheck' />픽셀 이용 약관에 대한 동의(필수)<br>
+    <input type='checkbox' id="checkbox2" name='mycheck'  />개인정보 수집 및 이용에 대한 동의(필수)<br>
+    <input type='checkbox' id="checkbox3" name='mycheck'  />개인정보 국외 이전에 대한 동의(필수)<br>
+    <input type='checkbox' id="checkbox4" name='mycheck'  />세일 정보 푸시 알림 동의 (선택)<br>
     <br>
   </form>
   <input type="button" id="c1_next" onclick="AnimateForm('#c2','easeInOutExpo'); return false" value="작성" disabled="disabled" />
