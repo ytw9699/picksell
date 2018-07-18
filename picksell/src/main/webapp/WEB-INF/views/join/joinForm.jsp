@@ -55,13 +55,10 @@ function openCheckID(u){
 	open(url,"confirm","toolbar=no, location=no, status=no, menubar=no, scrollbars=no, resizable=no, width=500, height=500");
 }
 
-//var step1_nextValue = 0;
-
 function checkBoxes(){
 	for(i=0; i < checkbox_form.mycheck.length; i++) {
 		if(!checkbox_form.mycheck[i].checked){
 			$('#c1_next').attr("disabled","disabled").css('background-color','#999');
-			//step1_nextValue = 0;
 			return false;
 		}
 	}
@@ -69,16 +66,20 @@ function checkBoxes(){
 }
 function check_all(){
 	var allBox = document.getElementById('checkbox');
+	var cbox4 = document.getElementById('cbox4');
+	
 	if(allBox.checked){
 		for(i=0; i < checkbox_form.mycheck.length; i++) {
 			checkbox_form.mycheck[i].checked = true;
+			cbox4.checked = true; 
 		}
 		checkBoxes();
 	}
 	if(!allBox.checked){
 		for(i=0; i < checkbox_form.mycheck.length; i++) {
 			checkbox_form.mycheck[i].checked = false;
-		}
+			cbox4.checked = false; 
+		} 
 		checkBoxes();
 	}
 }
@@ -98,17 +99,19 @@ $(document).ready(function(){
 	<h3> 1.약관동의 2.가입방법선택 3.정보입력 </h3> 
   <form name='checkbox_form'>
     <input type="checkbox" id="checkbox"  onclick="check_all();"/>모두 동의
-<!--     <input type="checkbox" id="checkbox" name="mycheck" onchange="uncheck_all();"/>모두 해제<br> -->
     <input type='checkbox' id="cbox1" class="mycheck" name='mycheck'  />픽셀 이용 약관에 대한 동의(필수)<br>
     <input type='checkbox' id="cbox2" class="mycheck" name='mycheck'  />개인정보 수집 및 이용에 대한 동의(필수)<br>
     <input type='checkbox' id="cbox3" class="mycheck" name='mycheck'  />개인정보 국외 이전에 대한 동의(필수)<br>
+    <input type='checkbox' id="cbox4" />세일 정보 푸시 알림 동의 (선택)<br>
     <br>
-  </form> 
+  </form>  
 <div class="nextWrap">
   <input type="button" id="c1_next" class="next" onclick="AnimateForm('#c2','easeInOutExpo'); return false" value="다음" disabled="disabled" />
 </div>
-			
+<div class="">
 </div>
+</div>
+
 
 <div id="c2">
 <h2> 회원가입 </h2>
