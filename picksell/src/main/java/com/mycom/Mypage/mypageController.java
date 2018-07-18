@@ -236,9 +236,12 @@ public class mypageController {
 	    	saleSubList.add(mypageService.saleSubList(parameterMap));//리스트하나를 GET하고 다시 맵에서 GET
 	    }
 		
+		Map<String, Object> saleCount =  mypageService.saleCount(sessionId);
+		  
+	    model.addAttribute("saleCount", saleCount);
+	    
 	model.addAttribute("saleList", saleList);
 	model.addAttribute("saleSubList", saleSubList);
-	System.out.println(saleSubList);
 	model.addAttribute("pagingHtml", pagingHtml);
 	return "saleList";
 }

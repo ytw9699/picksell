@@ -291,8 +291,46 @@ select * from ps_product a, PS_ORDERLIST b where b.ORDER_NUM = #{ORDER_NUM} and 
 <update id="defaultProfile" parameterType="string">
 		update ps_member set PROFILE_IMG = 'default' WHERE id = #{sessionId}
 </update>
+
 <!-- 오더리스트 전체 카운트 -->
-<select id="orderCount5" resultType="int" parameterType="String">
+<select id="saleCount5" resultType="int" parameterType="hashmap">
+	select count(*) from(
+	select distinct a.status, b.order_num, a.step1_date from ps_order a, ps_orderlist b 
+	where b.seller_id = #{sessionId} and a.order_num = b.order_num and a.status != 5 order by a.step1_date desc) where status != '5'
+</select>
+
+<select id="saleCount0" resultType="int" parameterType="hashmap">
+	select count(*) from(
+	select distinct a.status, b.order_num, a.step1_date from ps_order a, ps_orderlist b 
+	where b.seller_id = #{sessionId} and a.order_num = b.order_num and a.status != 5 order by a.step1_date desc) where status = '0'
+</select>
+
+<select id="saleCount1" resultType="int" parameterType="hashmap">
+	select count(*) from(
+	select distinct a.status, b.order_num, a.step1_date from ps_order a, ps_orderlist b 
+	where b.seller_id = #{sessionId} and a.order_num = b.order_num and a.status != 5 order by a.step1_date desc) where status = '1'
+</select>
+
+<select id="saleCount2" resultType="int" parameterType="hashmap">
+	select count(*) from(
+	select distinct a.status, b.order_num, a.step1_date from ps_order a, ps_orderlist b 
+	where b.seller_id = #{sessionId} and a.order_num = b.order_num and a.status != 5 order by a.step1_date desc) where status = '2'
+</select>
+
+<select id="saleCount3" resultType="int" parameterType="hashmap">
+	select count(*) from(
+	select distinct a.status, b.order_num, a.step1_date from ps_order a, ps_orderlist b 
+	where b.seller_id = #{sessionId} and a.order_num = b.order_num and a.status != 5 order by a.step1_date desc) where status = '3'
+</select>
+
+<select id="saleCount44" resultType="int" parameterType="hashmap">
+	select count(*) from(
+	select distinct a.status, b.order_num, a.step1_date from ps_order a, ps_orderlist b 
+	where b.seller_id = #{sessionId} and a.order_num = b.order_num and a.status != 5 order by a.step1_date desc) where status = '44'
+</select>
+
+<!-- 오더리스트 전체 카운트 -->
+<select id="orderCount5" resultType="int" parameterType="hashmap">
 		select count(*) from  ps_order where buyer_id =  #{sessionId} and status != '5'
 </select>
 <!-- 오더리스트 입금대기 카운트 -->
@@ -300,19 +338,19 @@ select * from ps_product a, PS_ORDERLIST b where b.ORDER_NUM = #{ORDER_NUM} and 
 		select count(*) from  ps_order where buyer_id =  #{sessionId} and status = '0'
 </select>
 <!-- 오더리스트 입금완료 및 배송대기중-->
-<select id="orderCount1" resultType="int" parameterType="String">
+<select id="orderCount1" resultType="int" parameterType="hashmap">
 		select count(*) from  ps_order where buyer_id =  #{sessionId} and status = '1'
 </select>
 <!-- 오더리스트 배송 및 인수확인 대기 -->
-<select id="orderCount2" resultType="int" parameterType="String">
+<select id="orderCount2" resultType="int" parameterType="hashmap">
 		select count(*) from  ps_order where buyer_id =  #{sessionId} and status = '2'
 </select>
 <!-- 오더리스트 인수확인 및 거래완료 -->
-<select id="orderCount3" resultType="int" parameterType="String">
+<select id="orderCount3" resultType="int" parameterType="hashmap">
 		select count(*) from  ps_order where buyer_id =  #{sessionId} and status = '3'
 </select>
 <!-- 오더리스트 결체취소 -->
-<select id="orderCount44" resultType="int" parameterType="String">
+<select id="orderCount44" resultType="int" parameterType="hashmap">
 		select count(*) from  ps_order where buyer_id =  #{sessionId} and status = '44'
 </select>
 	
