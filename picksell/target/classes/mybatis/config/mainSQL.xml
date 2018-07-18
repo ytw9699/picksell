@@ -37,7 +37,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
       from ps_orderlist
       group by product_num
       order by count(*) desc
-      )a order by a.total desc )b, ps_product c where b.product_num = c.product_num and c.howtosell ='2' order by b.total desc
+      )a order by a.total desc )b, ps_product c where b.product_num = c.product_num and c.howtosell ='2' order by b.total desc, c.product_regdate desc
       
      ]]>
    </select>

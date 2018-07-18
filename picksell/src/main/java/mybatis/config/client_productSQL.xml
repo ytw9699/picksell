@@ -24,13 +24,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				where c.seller_id = d.id 
 				</when>
 				<when test='ls == "1" '>
-				where and howtosell = 2 and category_num = #{ca}) a left outer join ps_orderlist b on a.seller_id = b.seller_id 
+				where howtosell = 2 and category_num = #{ca}) a left outer join ps_orderlist b on a.seller_id = b.seller_id 
 				group by b.seller_id, a.subject, a.product_regdate, a.product_num, a.category_num, a.howtosell, a.hitcount, 
 				a.stock, a.deal_status, a.board_status, a.content, a.first_img, a.product_status, a.price) c, ps_member d 
 				where c.seller_id = d.id 
 				</when>
 				<when test='ls == "2" '>
-				where and howtosell != 2 and category_num = #{ca}) a left outer join ps_orderlist b on a.seller_id = b.seller_id 
+				where howtosell != 2 and category_num = #{ca}) a left outer join ps_orderlist b on a.seller_id = b.seller_id 
 				group by b.seller_id, a.subject, a.product_regdate, a.product_num, a.category_num, a.howtosell, a.hitcount, 
 				a.stock, a.deal_status, a.board_status, a.content, a.first_img, a.product_status, a.price) c, ps_member d 
 				where c.seller_id = d.id 
