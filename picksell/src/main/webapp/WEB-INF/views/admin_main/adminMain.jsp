@@ -7,6 +7,7 @@
 <%@ page import="com.google.gson.Gson"%>
 <%@ page import="com.google.gson.JsonObject"%>
 
+
 <%
 Gson gsonObj = new Gson();
 Map<Object,Object> map = null;
@@ -86,6 +87,7 @@ function drawChart() {
 <body>
 <div class="main">
 <h1>메인가즈아~!</h1>
+
 
 
 <jsp:useBean id="toDay" class="java.util.Date" />
