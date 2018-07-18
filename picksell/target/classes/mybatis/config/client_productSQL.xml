@@ -11,27 +11,34 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="selectProductListMain" resultType="hashmap" parameterType="hashmap">
-		select * from ps_product 
-		where category_num = #{ca} 
-		<choose>
-			<when test='ls == "1" '>
-			and howtosell = 2 
-			</when>
-			<when test='ls == "2" '>
-			and howtosell != 2 
-			</when>
-		</choose>
-		<choose>
-			<when test='od == "0" '>
-			order by product_regdate desc
-			</when>
-			<when test='od == "1" '>
-			order by price asc
-			</when>
-			<when test='od == "2" '>
-			order by price desc
-			</when>
-		</choose>
+			select * from(
+			select b.seller_id, a.subject, count(b.orderlist_num) as sell, a.product_regdate, a.product_num ,
+			a.category_num, a.howtosell, a.hitcount, a.stock, a.deal_status, a.board_status, 
+			a.content, a.first_img, a.product_status, a.price from(
+			select * from ps_product 
+			<choose>
+				<when test='ls == "1" '>
+				where and howtosell = 2 and category_num = #{ca}
+				</when>
+				<when test='ls == "2" '>
+				where and howtosell != 2 and category_num = #{ca}
+				</when>
+			</choose> 
+			) a left outer join ps_orderlist b on a.seller_id = b.seller_id 
+			group by b.seller_id, a.subject, a.product_regdate, a.product_num, a.category_num, a.howtosell, a.hitcount, 
+			a.stock, a.deal_status, a.board_status, a.content, a.first_img, a.product_status, a.price) c, ps_member d 
+			where c.seller_id = d.id 
+			<choose>
+				<when test='od == "0" '>
+				order by product_regdate desc
+				</when>
+				<when test='od == "1" '>
+				order by price asc
+				</when>
+				<when test='od == "2" '>
+				order by price desc
+				</when>
+			</choose>
 	</select>
 	
 	<select id="selectNomalProductList" resultType="hashmap" parameterType="hashmap">
