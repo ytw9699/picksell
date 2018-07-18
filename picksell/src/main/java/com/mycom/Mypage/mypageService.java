@@ -1,5 +1,6 @@
 package com.mycom.Mypage;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -135,7 +136,18 @@ public class mypageService implements mypageDao {
 	public void defaultProfile(String sessionId) {
 		sqlMapper.update("mypage.defaultProfile",sessionId);
 	}
-
+	
+	public Map<String, Object> orderCount(String sessionId) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("five",sqlMapper.selectOne("mypage.orderCount5", sessionId));
+		map.put("zero",sqlMapper.selectOne("mypage.orderCount0", sessionId));
+		map.put("one",sqlMapper.selectOne("mypage.orderCount1", sessionId));
+		map.put("two",sqlMapper.selectOne("mypage.orderCount2", sessionId));
+		map.put("three",sqlMapper.selectOne("mypage.orderCount3", sessionId));
+		map.put("fourfour",sqlMapper.selectOne("mypage.orderCount44", sessionId));
+		 return map;
+	}
+	
 	public int orderCount5(String sessionId) {
 		return sqlMapper.selectOne("mypage.orderCount5", sessionId);
 	}

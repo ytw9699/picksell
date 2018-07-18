@@ -5,7 +5,6 @@
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
     <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-    <!-- 수정 -->
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -15,17 +14,17 @@
 </head>
 <body>
 <div>
-<a href="/picksell/mypage/orderList">전체보기[${orderCount5}]/</a>
-<a href="/picksell/mypage/orderList?status=0">입금대기[${orderCount0}]/</a>
-<a href="/picksell/mypage/orderList?status=1">입금완료 및 배송대기중[${orderCount1}]/</a>
-<a href="/picksell/mypage/orderList?status=2">배송 및 인수확인 대기[${orderCount2}]/</a>
-<a href="/picksell/mypage/orderList?status=3">인수확인 및 거래완료[${orderCount3}]/</a>
-<a href="/picksell/mypage/orderList?status=44">결제취소 및 반품[${orderCount44}]/</a>
+<a href="/picksell/mypage/orderList">전체보기[${orderCount.five}]/</a>
+<a href="/picksell/mypage/orderList?status=0">입금대기[${orderCount.zero}]/</a>
+<a href="/picksell/mypage/orderList?status=1">입금완료 및 배송대기중[${orderCount.one}]/</a>
+<a href="/picksell/mypage/orderList?status=2">배송 및 인수확인 대기[${orderCount.two}]/</a>
+<a href="/picksell/mypage/orderList?status=3">인수확인 및 거래완료[${orderCount.three}]/</a>
+<a href="/picksell/mypage/orderList?status=44">결제취소 및 반품[${orderCount.fourfour}]/</a>
 </div>
 
 <c:if test="${fn:length(orderList) > 0}">
 <c:forEach var="ps_order" items="${orderList}" varStatus="orderListStatus">
-    <br><h3>주문일:<fmt:formatDate value="${ps_order.STEP1_DATE}" pattern="yy년 MM월 dd일 hh:mm" />
+    <br><h3>주문일:<fmt:formatDate value="${ps_order.STEP1_DATE}" pattern="yy. MM. dd. hh:mm" />
 	<a href="/picksell/mypage/orderDetail/${ps_order.ORDER_NUM }">
 		<font color = "red">-상세보기</font>
 		</a></h3>

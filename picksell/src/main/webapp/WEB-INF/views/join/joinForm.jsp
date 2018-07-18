@@ -67,6 +67,7 @@ function openCheckID(u){
     <input type='checkbox' id="cbox1" name='mycheck' onchange="check_each();"/>픽셀 이용 약관에 대한 동의(필수)<br>
     <input type='checkbox' id="cbox2" name='mycheck' onchange="check_each();"/>개인정보 수집 및 이용에 대한 동의(필수)<br>
     <input type='checkbox' id="cbox3" name='mycheck' onchange="check_each();"/>개인정보 국외 이전에 대한 동의(필수)<br>
+    <input type='checkbox' id="cbox4" name='mycheck' onchange="check_each();"/>개인정보 국외 이전에 대한 동의(선택)<br>
     <br>
   </form> 
 <div class="nextWrap">
@@ -78,14 +79,18 @@ function openCheckID(u){
 		for(i=0; i < checkbox_form.mycheck.length; i++) {
 			checkbox_form.mycheck[i].checked = true;
 			var a = document.getElementById("c1_next");
-			 document.getElementById("c1_next").disabled = false;
+			 //document.getElementById("c1_next").disabled = false;
+			 $('#c1_next').removeAttr("disabled").css('background-color','#7151fc');
+
 		}
 	}
 	function uncheck_all() {
 		for(i=0; i < checkbox_form.mycheck.length; i++) {
 			checkbox_form.mycheck[i].checked = false;
 			checkbox_form.mycheck[0].checked = false;
-			document.getElementById("c1_next").disabled = true;
+			//document.getElementById("c1_next").disabled = true;
+			 $('#c1_next').attr("disabled","disabled").css('background-color','#999');
+
 		}
 	}
 	function check_each() {
@@ -93,7 +98,12 @@ function openCheckID(u){
 		var cbox2 = document.getElementById("cbox2");
 		var cbox3 = document.getElementById("cbox3");
 		if(cbox1.checked && cbox2.checked && cbox3.checked){
-			document.getElementById("c1_next").disabled = false;
+			//document.getElementById("c1_next").disabled = false;
+			 $('#c1_next').removeAttr("disabled").css('background-color','#7151fc');
+		}
+		else{
+			//document.getElementById("c1_next").disabled = true;
+			$('#c1_next').attr("disabled","disabled").css('background-color','#999');
 		}
 	}
 </script>
