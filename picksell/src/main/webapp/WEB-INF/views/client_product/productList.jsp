@@ -253,6 +253,11 @@ span.productStatusTEXT {
 							<img src="/picksell/resources/img/basicProfile.png" class="profileImg"/>
 						</div>
 						<span class="productSeller">${product.SELLER_ID }</span>
+						<c:choose>
+							<c:when test="${product.SELL > 0 }">
+								<img src="/picksell/resources/img/icoGradeF.png" />
+							</c:when>
+						</c:choose>
 					</div>
 					<div class="firstImgWrap">
 						<a href="/picksell/products/detail/${product.CATEGORY_NUM }/${product.PRODUCT_NUM }">
