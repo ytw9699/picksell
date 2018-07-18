@@ -43,7 +43,13 @@ catch(SQLException e){
 <html>
 <style>
 .main{
-	margin-left: 250px; 
+	margin-left: 230px; 
+	 min-width : 1024px;
+}
+.subject{
+  border-bottom: 2px solid #7151fc;
+
+
 }
 
 </style>
@@ -57,7 +63,7 @@ google.charts.load('current', {'packages':['corechart']});
 google.charts.setOnLoadCallback(drawChart);
 function drawChart() {
     var data = google.visualization.arrayToDataTable([
-      ['일자', 'Member'],
+      ['일자', '회원'],
       ['일주일전',  ${countlist[7]}, ],
       ['${daylist[6]}',  ${countlist[6]}, ],
       ['${daylist[5]}', ${countlist[5]}, ],
@@ -87,13 +93,19 @@ function drawChart() {
 <div class="subject" style="padding:50px;">
 <h1 style="display:inline;">관리자 메인 메뉴</h1>
 <jsp:useBean id="toDay" class="java.util.Date" />
-<h2 style="display:inline;float:right">오늘은 <font style="color:red;background-color:#eee;"><fmt:formatDate value="${toDay }" pattern="YYYY년 MM월 dd일"/></font> 입니다.</h2>
+<h2 style="display:inline;float:right">오늘은 <font style="color:red;"><fmt:formatDate value="${toDay }" pattern="YYYY"/></font>년  
+<font style="color:red;"><fmt:formatDate value="${toDay }" pattern="MM"/></font>월 
+<font style="color:red;"><fmt:formatDate value="${toDay }" pattern="dd"/></font>일</h2>
 </div>
 
- <div id="chart_div" style="width: 100%; height: 400px;"></div>
+ <div id="chart_div" style="border: 2px solid #eee;
+    width: 95%;
+    margin-top: 27px;
+    height: 400px;
+    margin-left: 20px;"></div>
 
 
-<div id="chartContainer" style="height: 500px; width: 100%;"></div>
+<div id="chartContainer" style="height: 500px; width: 95%;border:2px solid #eee;margin-left: 20px;margin-top: 27px;"></div>
 
 
 <%-- <canvas id="myChart" width="400" height="300"></canvas>  <br/> --%>

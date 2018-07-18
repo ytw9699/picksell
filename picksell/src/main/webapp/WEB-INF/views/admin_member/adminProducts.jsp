@@ -74,7 +74,7 @@ setInterval(function(){
 
 <table class="adminProductList"  style="text-align:center">
  	<tr>
- 	 	<th>INDEX</th>
+ 	 	<th>번호</th>
  	    <th>상품 번호</th>
  		<th>판매자 ID</th>
  		<th>판매 상태</th>
