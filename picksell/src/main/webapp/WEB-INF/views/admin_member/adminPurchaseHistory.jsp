@@ -39,7 +39,7 @@ table.PurchaseHistory td {
 </head>
 <body>
 <div class="main">
-<h1 style="margin-left: 208px;">관리자 구매 내역 리스트</h1>
+<h1 style="margin-left:6px;">관리자 구매 내역 리스트</h1>
 <c:choose>
 <c:when test="${0 eq total }">
 구매 내역이 없습니다.

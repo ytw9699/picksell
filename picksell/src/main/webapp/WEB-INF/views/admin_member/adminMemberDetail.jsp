@@ -7,19 +7,18 @@
 <head>
 <style>
 .main{
-   margin-left: 200px; /* Same as the width of the sidenav */
+    margin-left: 200px;
+    height: 100%;
   
 }
 .pageSubject{
-	 border: 1px solid;
+	border: 1px solid;
     padding: 10px;
     box-shadow: 5px 10px #888888;
     text-align : center;
 
 }
 .hiddenPage{
-
-
     text-align: center;
     background-color: lightgrey;
     
@@ -78,7 +77,7 @@ button .change:hover:after, .profile_img:hover:after{
  
 }
 .pimg{
-	display: none;
+	/*display: none;*/
 	
 }
 button {
@@ -92,8 +91,26 @@ button {
 .bbutton:hover{
  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 }
+.id{
+ display: inline-block;
+}
+.profile{
+    margin-top: 50px;
+    padding: 52px;
+    padding-right: 170px;
+    margin-left: 50px;
+    margin-right: 50px;
+    margin-bottom: 50px;
+    padding-left: 120px;
 
-.
+}
+.link{
+    margin-left: 190px;
+    margin-right: 190px;
+    padding: 5px;
+}
+
+
 </style>
 <script src="http://code.jquery.com/jquery-1.7.js"></script>
 <script>
@@ -103,7 +120,7 @@ $(document).ready(function(){
         $("div.hiddenPage").css('display','inline')
     });
 });
-
+/*
 $(document).ready(function(){
     $("button.profile_img").click(function(){
         $("div.pimg").toggle("slow");
@@ -111,7 +128,7 @@ $(document).ready(function(){
     });
 });
 
-
+*/
 
 </script>
 
@@ -120,17 +137,14 @@ $(document).ready(function(){
 </head>
 <body>
 <div class="main">
-
 <div class="pageSubject" >
- <h1 style="margin-left: 17px;">회원 페이지</h1>
+ <h1 style="margin-left: 17px;margin-right:17px;">회원 페이지</h1>
 </div>
 <div class="memberInfo">
-아이디 : ${map.ID }
-<div class="pimg">
-	<img src="/picksell/resources/profileImgUpload/freeprofileimg.jpg" style="width:130px; height:110px;"/>
-</div>
-<button class="profile_img">프로필 이미지</button>
-
+<div class="profile" style="background-color:#fbfbfb;border-radius:25px;">
+<div class="d" style="display:inline;">
+<div class="id" style="float:right;"><img src="/picksell/resources/profileImgUpload/freeprofileimg.jpg" style="width:130px; height:110px;"/></div>
+아이디 : ${map.ID }</div>
 <div class="name">
 이름 : ${map.NAME }
 </div>
@@ -153,7 +167,7 @@ $(document).ready(function(){
  로그인 제한
 </c:when>
 </c:choose>
-
+</div>
 
 <div class="hiddenPage"> 
 
@@ -171,18 +185,16 @@ $(document).ready(function(){
 		   	<input type="submit" value="게시글 제한" onclick="location.href='/picksell/admin/member/infoChangeProc?id=${map.ID}&status=1'" >
 		</c:when>
 	</c:choose> 
-   
-</div>
 <button class="change">변경</button>
 </div>
 <div class="alarm">
 알람 동의 여부 :
 <c:choose>
 <c:when test="${ map.ALARM_CONSENT eq 'ON'  }">
-<img src="/picksell/resources/img/Alram1.png" width="25px" height="25px">
+<img src="/picksell/resources/img/Alram1.png" width="20px" height="20px">
 </c:when>
 <c:when test="${map.ALARM_CONSENT  eq 'OFF'}">
-<img src="/picksell/resources/img/noAlarm.png" width="25px" height="25px">
+<img src="/picksell/resources/img/noAlarm.png" width="20px" height="20px">
 </c:when>
 </c:choose>
 </div>
@@ -202,7 +214,10 @@ $(document).ready(function(){
 	</c:when>
 	</c:choose>
 </div>
-<div class="link" style="margin-left : 190px">
+</div>
+</div>
+
+<div class="link" >
 <button class="bbutton" id="btn" type="submit" onclick="window.location='/picksell/admin/member/orderList/${map.ID}'"><img class="btn-img" src="/picksell/resources/img/orderlist.png" width="150px" height="150px"></button>
 <button class="bbutton" id="btn" type="submit" onclick="window.location='/picksell/admin/member/sellHistory/${map.ID}'"><img class="btn-img" src="/picksell/resources/img/sellHistory.png" width="150px" height="150px">
 </button>
@@ -210,8 +225,6 @@ $(document).ready(function(){
 </button>
 <button style="background-color : white;
   border : none;" class="bbutton" id="btn" type="submit" onclick="window.location='/picksell/admin/member/products/${map.ID}'"><img class="btn-img" src="/picksell/resources/img/sell.png" width="150px" height="150px"></button>
-</div>
-
 </div>
 </div>
 </body>

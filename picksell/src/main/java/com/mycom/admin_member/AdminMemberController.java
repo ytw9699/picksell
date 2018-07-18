@@ -1,6 +1,6 @@
 package com.mycom.admin_member;
 
-import java.net.URLDecoder;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -25,9 +25,6 @@ import com.mycom.config.CommandMap;
 @RequestMapping("/admin/member")
 public class AdminMemberController {
     
-
-	
-
 	
 	//회원검색
 	private int searchNum;
