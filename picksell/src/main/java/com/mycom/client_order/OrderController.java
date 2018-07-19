@@ -37,21 +37,28 @@ public class OrderController {
 		
 		Map<String, Object> parameterMap = new HashMap<String, Object>();//by 태원
 		
-		parameterMap.put("PRODUCT_NUM",product_num);//by 태원
-		parameterMap.put("BUYER_ID", buyer_id);//by 태원
+		
+		//여기서부터
+		parameterMap.put("PRODUCT_NUM",product_num);//and 현우 지울 구매신청리스트를 위한 상품번호
+		parameterMap.put("BUYER_ID", buyer_id);//and 현우 지울 구매신청리스트를 위한 바이어아이디
 		
 		if(!product_num.equals("0")) {
 		orderService.deletePURCHASE_LIST(parameterMap);//일반구매 완료시 오더리스트 한줄 삭제 by 태원
-		
-		parameterMap.put("ALARM_TARGET",seller_id);//by태원 알람입력추가
-		parameterMap.put("ALARM_VARIABLE1","empty");//by태원 알람입력추가
-		parameterMap.put("ALARM_VARIABLE2","empty");//by태원 알람입력추가
-		parameterMap.put("ALARM_WRITER",buyer_id);//by태원 알람입력추가
-		parameterMap.put("ALARM_KIND","9");//by태원 알람입력추가
-		
-		orderService.alarmInsert(parameterMap);//by태원 알람입력추가
-		
 		}
+		for(int i = 0 ; i < orderModel.getO_list().size() ; i++) {
+			
+			
+			parameterMap.put("ALARM_TARGET", orderModel.getO_list().get(i).getSeller_id());//by태원 알람입력추가 + 각각의 판매자
+			parameterMap.put("ALARM_VARIABLE1","empty");//by태원 알람입력추가 + 별도의 타겟링크는 없음
+			parameterMap.put("ALARM_VARIABLE2","empty");//by태원 알람입력추가 + 별도의 타겟링크는 없음
+			parameterMap.put("ALARM_WRITER", orderModel.getBuyer_id());//by태원 알람입력추가 + 구매자(나의아이디)
+			parameterMap.put("ALARM_KIND","9");//by태원 알람입력추가
+			
+			orderService.alarmInsert(parameterMap);//by태원 알람입력추가
+			
+		}
+		//여기까지
+		
 		model.addAttribute("total_price", orderModel.getTotal_price());
 		
 		return "orderSuccess";

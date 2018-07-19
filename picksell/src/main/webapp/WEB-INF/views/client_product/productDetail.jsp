@@ -43,7 +43,7 @@
 			response.text().then(function(text){
 				if(response.status == '200'){
 					alert('구매신청이 완료되었습니다! \n판매자의 수락까지 기다려주세요');
-					var inner = "<input type='button' value='구매신청 취소하기' onclick='purchaseCancel()' />";
+					var inner = "<input type='button' class='purchase_cancel' value='구매신청 취소하기' onclick=purchaseCancel('"+SELLER_ID+"','"+category_num+"','"+product_num+"','"+sessionId+"'); />";
 					document.getElementById('purchaseWrap').innerHTML = inner;	
 					alarmInsert(SELLER_ID, category_num, product_num, sessionId, "3");
 				}
@@ -56,7 +56,7 @@
 			response.text().then(function(text){
 				if(response.status == '200'){
 					alert('구매신청이 취소되었습니다!');
-					var inner = "<input type='button' value='구매신청하기' onclick='purchaseApply()' />";
+					var inner = "<input type='button' class='purchase_apply' value='구매신청하기' onclick=purchaseApply('"+SELLER_ID+"','"+category_num+"','"+product_num+"','"+sessionId+"'); />";
 					document.getElementById('purchaseWrap').innerHTML = inner;
 					alarmInsert(SELLER_ID, category_num, product_num, sessionId, "7");
 				}
@@ -92,7 +92,9 @@
 				if(data.resultCode == 'success'){
 					alarmInsert(buyer, category_num, product_num,sessionId,"2");
 					alert(data.resultMsg);
-					$(eventElement).parents('td').html('<input type="button" value="수락취소" onclick="purchaseApproveCancel(this,'+data.purchase_num+','+data.buyerID+');" />');
+					var recreatingHTML = "<input type='button' class='purchaseXbtn' value='수락취소' onclick=purchaseApproveCancel(this,"+purchaseNumber+",'"+buyer+"',"+category_num+","+product_num+",'"+sessionId+"'); />";
+					$(eventElement).parents('td').html(recreatingHTML);
+					$(eventElement).parents('tr').children('.purchaseStatus').text('수락상태');
 				//만약에 수락이 중복되어 임의로 만든 resultCode 가 'fail' 를 담았다면,
 				}else if(data.resultCode == 'fail'){
 					alert(data.resultMsg);
@@ -119,8 +121,10 @@
 				//만약에 수락취소가 정상적으로 이루어져서 임의로 만든 resultCode 가 'success' 를 담았다면,
 				if(data.resultCode == 'success'){
 					alert(data.resultMsg);
-          alarmInsert(buyer, category_num, product_num,sessionId,"8");
-					$(eventElement).parents('td').html('<input type="button" value="수락" onclick="purchaseApprove(this,'+purchaseNumber+','+buyer+','+category_num+','+product_num+','+sessionId+');" />');
+          			alarmInsert(buyer, category_num, product_num,sessionId,"8");
+					var recreatingHTML = "<input type='button' class='purchaseObtn' value='수락' onclick=purchaseApprove(this,"+purchaseNumber+",'"+buyer+"',"+category_num+","+product_num+",'"+sessionId+"'); />";
+          			$(eventElement).parents('td').html(recreatingHTML);
+          			$(eventElement).parents('tr').children('.purchaseStatus').text('요청대기중');
 				//만약에 수락취소가 중복되어 임의로 만든 resultCode 가 'fail' 를 담았다면,
 				}else if(data.resultCode == 'fail'){
 					alert(data.resultMsg);
@@ -156,32 +160,34 @@
 <div class="hiddenPurchaseListForm">
 	<div class="purchaseList">
 		<c:if test="${isMyProducts == 'yes' }">
-			<table>
+			<span class="purchaseHeaderTEXT">구매신청 리스트</span>
+			<span class="purchaseHeaderSubTEXT">* 구매신청 수락 후 구매가 진행됩니다</span>
+			<table class="purchaseTABLE" cellpadding="0" cellspacing="0">
 				<tr>
-					<td>구매요청 아이디</td>
-					<td>신청날짜</td>
-					<td colspan="2">신청상태</td>
+					<td class="purchaseHeader">구매요청 아이디</td>
+					<td class="purchaseHeader">신청날짜</td>
+					<td class="purchaseHeader" colspan="2">신청상태</td>
 				</tr>
 			<c:forEach var="sellerPurList" items="${sellerPurList }">
 				<tr>
-					<td>${sellerPurList.BUYER_ID }</td>
-					<td>${sellerPurList.REGDATE }</td>
+					<td class="purchaseContent">${sellerPurList.BUYER_ID }</td>
+					<td class="purchaseContent">${sellerPurList.REGDATE }</td>
 					
 					<c:choose>
 						<c:when test="${sellerPurList.STATUS == 0 }">
-						<td>요청대기중</td>
+						<td class="purchaseContent purchaseStatus">요청대기중</td>
 						</c:when>
 						<c:when test="${sellerPurList.STATUS == 1 }">
-						<td>수락상태</td>
+						<td class="purchaseContent purchaseStatus">수락상태</td>
 						</c:when>
 					</c:choose>
 					
 					<c:choose>
 						<c:when test="${sellerPurList.STATUS == 0 }">
-							<td><input type="button" value="수락" onclick="purchaseApprove(this,'${sellerPurList.PURCHASE_NUM}','${sellerPurList.BUYER_ID }','${category_num}','${product_num}','${sessionId}');" /></td>
+							<td class="purchaseContent"><input type="button" class="purchaseObtn" value="수락" onclick="purchaseApprove(this,'${sellerPurList.PURCHASE_NUM}','${sellerPurList.BUYER_ID }','${category_num}','${product_num}','${sessionId}');" /></td>
 						</c:when>
 						<c:when test="${sellerPurList.STATUS == 1 }">
-							<td><input type="button" value="수락취소" onclick="purchaseApproveCancel(this, '${sellerPurList.PURCHASE_NUM}','${sellerPurList.BUYER_ID }','${category_num}','${product_num}','${sessionId}');" /></td>
+							<td class="purchaseContent"><input type="button" class="purchaseXbtn" value="수락취소" onclick="purchaseApproveCancel(this, '${sellerPurList.PURCHASE_NUM}','${sellerPurList.BUYER_ID }','${category_num}','${product_num}','${sessionId}');" /></td>
 						</c:when>
 					</c:choose>
 				</tr>
