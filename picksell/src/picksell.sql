@@ -3,8 +3,11 @@
 중복을 줄인것인가 vs 복잡한 로직을 줄이고, 자유도높은 로직을 짤고, 가독성이 높은 로직을짤것인가
 alter table ps_orderlist drop (deleted); 테이블 컬럼 삭제
 ALTER TABLE PS_PURCHASE_LIST ADD(deleted VARCHAR2(30) DEFAULT 'NO'); 테이블 컬럼 추가
-
+alter table PS_MEMBER add(phoneNum varchar2(40) default '""');
 ALTER TABLE PS_MEMBER ADD(latestLogin1 DATE); 테이블 컬럼 추가
+
+ALTER TABLE PS_MEMBER DROP COLUMN phoneNum;
+
 
 select a.step1_date, a.order_num, a.status ,b.order_quantity, c.subject, c.price, c.first_img
 
@@ -102,6 +105,7 @@ CREATE TABLE PS_MEMBER (
     ALARM_CONSENT VARCHAR2(100) DEFAULT 'ON',--알람 ON / OFF//대문자
     BUSINESS_NUMBER VARCHAR2(100),--사업자등록번호
     BUSINESS_NAME VARCHAR2(100),--상호명
+    phoneNum varchar2(40),
     REGDATE DATE NOT NULL--가입일
     
     
