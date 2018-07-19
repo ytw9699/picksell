@@ -145,7 +145,7 @@ public class mypageController {
 	}
 	//중고구매 판매리스트
 	@RequestMapping("/mypage/secondSellList")
-	public String secondSellList(Model model, HttpSession session) {	
+	public String secondSellList(Model model, HttpSession session) {
 		
 		String sessionId =(String)session.getAttribute("sessionId");
 		
@@ -607,8 +607,24 @@ public class mypageController {
 		         return new ArrayList<Map<String,Object>>();
 		      }
 		  }
-
 		
+		//구매신청 거부
+		@ResponseBody
+		@RequestMapping("/mypage/refusalApprove")
+		public Map<String, Object> refusalApprove(Model model,
+		@RequestParam(value="PRODUCT_NUM",required=false, defaultValue="0") int PRODUCT_NUM,
+		@RequestParam(value="BUYER_ID",required=false, defaultValue="0") String BUYER_ID
+			){
+			
+		Map<String, Object> parameterMap = new HashMap<String, Object>();
+		
+		parameterMap.put("product_num", PRODUCT_NUM);
+		
+		parameterMap.put("buyer_id", BUYER_ID);
+		
+		productService.deleteProductPurchaseList(parameterMap);
+		return parameterMap;
+}
 }
 
 		
