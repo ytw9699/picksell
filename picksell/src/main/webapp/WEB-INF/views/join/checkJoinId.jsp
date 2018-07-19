@@ -121,7 +121,7 @@ span.cannotUSE {
 
 function setID(){
 	opener.idCheckNum = 1;//아이디 중복확인 확인차 필요
-	opener.document.joinForm.id.value = ${id};
+	opener.document.joinForm.id.value = '${id}';//id를 이렇게 묶어줘야 오브젝트가 아니라 스트링으로 자스는 인식한댄다..에효
 	self.close();
 }
 </script>
