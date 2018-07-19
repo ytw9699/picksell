@@ -45,7 +45,7 @@
 <p>주문번호  : ${orderList.ORDER_NUM }
 <p>전체 주문 금액 : ${orderList.TOTAL_PRICE} (원)
  
-    <c:forEach items="${adminOrderSubList[orderListStatus.index]}" var="i" varStatus="Sub" >
+    <c:forEach items="${adminOrderSubList[orderListStatus.index]}" var="i" varStatus="Sub" begin="0" end="0" >
 	
   	 <!-- 상품 주문번호 -->
 <p>제품명 : ${i.SUBJECT }

@@ -93,8 +93,7 @@ $(document).ready(function(){
 <body>
 <div class="main">
 <div class="pageSubject" >
- <h1 style="margin-left:17px;margin-right:17px;">회원 페이지</h1>
-</div>
+ <h1 style="margin-left:17px;margin-right:17px;">회원 페이지</h1></div>
 <div class="memberInfo">
 <div class="profile" style="background-color:#e8e7e7;border-radius:25px;">
 <div class="d" style="display:inline;">
@@ -124,7 +123,6 @@ $(document).ready(function(){
 </c:choose>
 <button class="change">변경</button>
 </div>
-
 <div class="hiddenPage"> 
 
 	<c:choose>

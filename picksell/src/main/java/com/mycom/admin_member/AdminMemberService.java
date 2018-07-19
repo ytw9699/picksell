@@ -71,4 +71,11 @@ public class AdminMemberService implements AdminMemberDAO {
 		 sqlSessionTemplate.update("admin_Member.adminMemberStatus", map);
 	
 	}
+	
+	
+	@Override
+	public List<Map<String,Object>> adminSubList(Map<String,Object> map){
+		return sqlSessionTemplate.selectList("admin_Member.adminSubList", map);
+	}
+	
 }

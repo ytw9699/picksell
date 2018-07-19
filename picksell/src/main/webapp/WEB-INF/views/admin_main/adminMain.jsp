@@ -76,7 +76,7 @@ function drawChart() {
     ]);
 
     var options = {
-      title: '회원 가입 추이',
+      title: 'PICKSELL 신규 회원 가입 추이',
       hAxis: {title: 'Day',  titleTextStyle: {color: '#333'}},
       vAxis: {minValue: 0 , maxValue: 30}
     };
@@ -92,16 +92,13 @@ function drawChart() {
 <body>
 <div class="main">
 
-<h1>메인가즈아~!</h1>
-
-
 
 
 <div class="subject" style="padding:50px;">
-<h1 style="display:inline;">관리자 메인 메뉴</h1>
+<h1 style="display:inline;text-shadow:5px 10px 1px #eee;">오늘의 PICKSELL</h1>
 
 <jsp:useBean id="toDay" class="java.util.Date" />
-<h2 style="display:inline;float:right">오늘은 <font style="color:red;"><fmt:formatDate value="${toDay }" pattern="YYYY"/></font>년  
+<h2 style="display:inline;float:right">날짜 : <font style="color:red;"><fmt:formatDate value="${toDay }" pattern="YYYY"/></font>년  
 <font style="color:red;"><fmt:formatDate value="${toDay }" pattern="MM"/></font>월 
 <font style="color:red;"><fmt:formatDate value="${toDay }" pattern="dd"/></font>일</h2>
 </div>
