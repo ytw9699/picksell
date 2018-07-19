@@ -173,6 +173,8 @@ $(document).ready(function(){
 	<br/>
 	주소(선택)<input type="text" name="address" />
 	<br/>
+	핸드폰 번호(선택)<input type="text" name="phoneNum" placeholder=" -를 빼고 입력해주세요"/>
+	<br/>
 	계좌번호(선택)<input type="text" name="account" placeholder=" -를 빼고 입력해주세요"/>
 	<br/>
 	예금주(선택)<input type="text" name="account_name" />

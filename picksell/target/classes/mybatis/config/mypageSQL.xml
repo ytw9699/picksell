@@ -23,6 +23,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		account = #{account},
 		account_name = #{account_name},
 		bank = #{bank},
+		phonenum = #{phoneNum},
 		profile_img = #{profile_img},
 		alarm_consent = #{alarm_consent},
 		business_number = #{business_number},

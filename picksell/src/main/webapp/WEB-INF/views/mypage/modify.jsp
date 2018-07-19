@@ -148,6 +148,8 @@ else if(NewPassword !== rePassword){//
 	<br/>
 	주소:<input type="text" value="${resultMap.ADDRESS}" name="address" />
 	<br/>
+	핸드폰 번호:<input type="text" value="${resultMap.PHONENUM}" name="phoneNum" />
+	<br/>
 	은행명:<input type="text" value="${resultMap.BANK}" name="bank" />
 	<br/>
 	계좌번호:<input type="text" value="${resultMap.ACCOUNT}" name="account" placeholder=" -를 빼고 입력해주세요"/>
