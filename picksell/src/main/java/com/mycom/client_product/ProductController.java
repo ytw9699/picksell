@@ -127,6 +127,7 @@ public class ProductController {
 		return "redirect:/main";
 	}
 	
+	
 	//일반상품(일반판매) 리스트
 	@RequestMapping("/products/goods")
 	public String productList(
