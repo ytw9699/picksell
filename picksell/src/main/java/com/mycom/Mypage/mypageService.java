@@ -28,8 +28,11 @@ public class mypageService implements mypageDao {
 	public List<Map<String, Object>> sellList(Map<String, Object> map){
 		return sqlMapper.selectList("mypage.sellList", map);
 	}
-	public List<Map<String, Object>> purchaseList0(String sessionId) {
+	public List<Map<String, Object>> purchaseList(String sessionId) {
 		return sqlMapper.selectList("mypage.purchaseList", sessionId);
+	}
+	public List<Map<String, Object>> secondSellList(String sessionId) {
+		return sqlMapper.selectList("mypage.secondSellList", sessionId);
 	}
 
 	public List<Map<String, Object>> orderList(Map<String, Object> parameterMap) {
