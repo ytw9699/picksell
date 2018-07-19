@@ -158,9 +158,13 @@
 		<put-attribute name="body" value="/WEB-INF/views/mypage/sellList.jsp" />
 	</definition>
 	
-	<!-- 구매내역-->
+	<!-- 중고구매 신청리스트-->
 	<definition name="purchaseList" extends="modify">
 		<put-attribute name="body" value="/WEB-INF/views/mypage/purchaseList.jsp" />
+	</definition>
+	
+	<definition name="secondSellList" extends="modify">
+		<put-attribute name="body" value="/WEB-INF/views/mypage/secondSellList.jsp" />
 	</definition>
 	
 	<!-- 주문조회-->

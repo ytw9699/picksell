@@ -131,18 +131,29 @@ public class mypageController {
 	
 	return "sellList";
 }
-
-	@RequestMapping(value="/mypage/purchaseList/{STATUS}",method=RequestMethod.GET)
-	public String purchaseList(Model model, HttpSession session, @PathVariable("STATUS") String STATUS) {	
+	//중고구매 신청 리스트
+	@RequestMapping("/mypage/purchaseList")
+	public String purchaseList(Model model, HttpSession session) {	
 		
 		String sessionId =(String)session.getAttribute("sessionId");
 		
-		if(STATUS.equals("0")) {
-			List<Map<String, Object>> purchaseList = mypageService.purchaseList0(sessionId);
-			model.addAttribute("purchaseList", purchaseList);
-		}
-	
+		List<Map<String, Object>> purchaseList = mypageService.purchaseList(sessionId);
+		
+		model.addAttribute("purchaseList", purchaseList);
+		
 		return "purchaseList";
+	}
+	//중고구매 판매리스트
+	@RequestMapping("/mypage/secondSellList")
+	public String secondSellList(Model model, HttpSession session) {	
+		
+		String sessionId =(String)session.getAttribute("sessionId");
+		
+		List<Map<String, Object>> secondSellList = mypageService.secondSellList(sessionId);
+		
+		model.addAttribute("secondSellList", secondSellList);
+		
+		return "secondSellList";
 	}
 	
 	@ResponseBody

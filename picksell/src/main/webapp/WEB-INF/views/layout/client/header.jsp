@@ -499,7 +499,8 @@ function alarmReadOfHead(ALARM_NUM, kind, var1, var2){
 	<div id="menuBox-header" class="menuheader"></div>
 	<div id="menuBox-body">
 		<span class="menuBox-link"><a href="/picksell/mypage/memberCheck">회원정보 확인/수정</a></span>
-		<span class="menuBox-link"><a href="/picksell/mypage/purchaseList/0">중고구매 신청리스트</a></span>
+		<span class="menuBox-link"><a href="/picksell/mypage/purchaseList">중고구매 신청리스트</a></span>
+		<span class="menuBox-link"><a href="/picksell/mypage/secondSellList">중고구매 판매리스트</a></span>
 		<span class="menuBox-link"><a href="/picksell/mypage/sellList">판매글 조회</a></span>
 		<span class="menuBox-link"><a href="/picksell/mypage/saleList">판매 내역/배송 조회</a></span>
 		<span class="menuBox-link"><a href="/picksell/mypage/orderList">주문 내역/배송 조회</a></span>
