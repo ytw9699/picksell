@@ -59,7 +59,6 @@ td.purchaseHeader {
 td.purchaseContent {
     text-align: center;
     padding: 10px;
-    width: 40%;
 }
 
 input.purchaseXbtn {
@@ -77,9 +76,11 @@ input.purchaseObtn {
     padding: 7px;
     width: 70px;
 }
-td.purchaseContent.purchaseStatus {
+span.purchaseStatusTEXT {
     font-size: 15px;
     color: #7151fc;
+    display: inline-block;
+    width: 90px;
 }
 
 
