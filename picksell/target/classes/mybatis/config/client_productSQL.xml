@@ -5,6 +5,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="client_product">
 	
+	<select id="countingForSingo" resultType="int" parameterType="hashmap">
+		select count(*) from ps_singo 
+		where product_num = #{product_num} and singo_writer = #{currentID}
+	</select>
+	
 	<select id="selectProductOne" resultType="hashmap" parameterType="hashmap">
 		select * from ps_product a, ps_category b 
 		where a.product_num = #{product_num} and a.category_num = b.category_num
@@ -229,6 +234,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 														#{buyer_id},
 														sysdate,
 														0)
+	</insert>
+	
+	<insert id="insertSingoProcess" parameterType="hashmap">
+		insert into ps_singo(singo_num,
+							product_num,
+							singoee,
+							singo_writer,
+							singo_regdate,
+							singo_content) values(SINGO_SEQ.NEXTVAL,
+													#{product_num},
+													#{singoee},
+													#{singo_writer},
+													sysdate,
+													#{singo_content})
 	</insert>
 	
 	<update id="updateProductHitcount" parameterType="hashmap">

@@ -208,10 +208,33 @@
 	</div>
 </div><!-- hiddenPurchaseListForm end -->
 
-<!-- <div class="hiddenSingoForm">
-	
+<div id="hiddenSingoForm" class="hiddenSingoForm">
+	<form action="/picksell/products/singoProc" method="post">
+	<input type="hidden" name="singo_writer" value="${sessionScope.sessionId }" />
+	<input type="hidden" name="singoee" value="${resultObject.SELLER_ID }" />
+	<input type="hidden" name="product_num" value="${resultObject.PRODUCT_NUM }" />
+	<input type="hidden" name="category_num" value="${resultObject.CATEGORY_NUM }" />
+	<span class="singoHeaderTEXT">신고하기</span>
+	<span class="singoSubHeaderTEXT">* 허위신고는 사이트 이용에 불이익이 있을 수 있습니다</span>
+	<table class="singoTABLE" cellpadding="0" cellspacing="0">
+		<tr>
+			<td class="singoHeadTD">신고자</td>
+			<td class="singoBodyTD">${sessionScope.sessionId }</td>
+		</tr>
+		<tr>
+			<td class="singoHeadTD">신고대상자</td>
+			<td class="singoBodyTD">${resultObject.SELLER_ID }</td>
+		</tr>
+		<tr>
+			<td class="singoReasonTD"></td>
+			<td class="singoTextareaTD">
+			<textarea name="singo_content" class="singoTA"></textarea>
+			</td>
+		</tr>
+	</table>
+	<input type="submit" value="신고하기" />
+	</form>
 </div>
- -->
 	<!-- 컨텐츠 시작 -->
 	<div class="contentWrap">
 	<form action="/picksell/purchase/order/single" method="post">
@@ -321,6 +344,7 @@
 			
 			</c:if><!-- 세션조건 끝 -->
 		</div>
+			<input type="button" id="singoOPEN" class="singoOPEN" value="신고하기" onclick="singoAccessing();" />
 		</div>
 		
 		<div class="product_detail">
@@ -365,12 +389,35 @@
 	function closeCommentForm(){
 		$(".hiddenBackGround").hide();
 		$(".hiddenCommentForm").hide();
-		
 		$(".hiddenPurchaseListForm").hide();
+		$(".hiddenSingoForm").hide();
 	}
 	function openPurchaseList(){
 		$(".hiddenPurchaseListForm").show();
 		$(".hiddenBackGround").show();
+	}
+	function openSingoForm(){
+		$(".hiddenSingoForm").show();
+		$(".hiddenBackGround").show();
+	}
+	
+	function singoAccessing(){
+		var param = "singoee=${resultObject.SELLER_ID}&pn=${resultObject.PRODUCT_NUM }";
+		$.ajax({
+			type : "GET",
+			url : "/picksell/products/isAbledSingo",
+			dataType : 'json',
+			data : param,
+			success : function(data){
+				if(data.statusCode == '0'){
+					alert(data.msg);
+				}else if(data.statusCode == '1'){
+					alert(data.msg);
+				}else if(data.statusCode == '2'){
+					openSingoForm();
+				}
+			}
+		});	
 	}
 
 	var product_stock = Number('${resultObject.STOCK}');

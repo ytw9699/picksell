@@ -440,5 +440,46 @@ public class ProductController {
 		
 		return "proudctListMainCategory";
 	}
+	
+	@RequestMapping("/products/isAbledSingo")
+	@ResponseBody
+	public Map<String, Object> isAbledToSingo(HttpServletRequest request){
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		Map<String, Object> parameterMap = new HashMap<String, Object>();
+		String currentID = request.getSession().getAttribute("sessionId").toString();
+		String singoee = request.getParameter("singoee");
+		String product_num = request.getParameter("pn");
+		parameterMap.put("currentID", currentID);
+		parameterMap.put("product_num", product_num);
+		int singoCountingValue = productService.isAbledSingo(parameterMap);
+		
+		//현재 신고대상자랑 내 아이디랑 같으면
+		if(currentID.equals(singoee)) {
+			resultMap.put("statusCode", "0");
+			resultMap.put("msg", "자신의 글은 신고할 수 없습니다");
+			return resultMap;
+			//이미 신고를 했으면
+		}else if(singoCountingValue > 0) {
+			resultMap.put("statusCode", "1");
+			resultMap.put("msg", "이미 신고한 글입니다");
+			return resultMap;
+			//신고를 한적이 없으면
+		}else {
+			resultMap.put("statusCode", "2");
+			resultMap.put("msg", "정상");
+			return resultMap;
+		}
+	}
+	
+	@RequestMapping(value="/products/singoProc", method=RequestMethod.POST)
+	public String singoProc(CommandMap map, Model model) {
+		
+		String pn = map.getMap().get("product_num").toString();
+		String cn = map.getMap().get("category_num").toString();
+		
+		productService.singoProcess(map.getMap());
+		
+		return "redirect:/products/detail/"+cn+"/"+pn;
+	}
 		
 }
