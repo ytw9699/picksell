@@ -23,4 +23,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 													0)
 	</insert>
 	
+	<select id="freeItem-detail" resultType="hashmap" parameterType="int">
+		select * from ps_free_board where fb_num = #{fb_num}
+	</select>
+	
 </mapper>

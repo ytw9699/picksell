@@ -42,7 +42,7 @@
 	<c:forEach var="freeItemList" items="${mp}" varStatus="stat">
 	<tr>
 		<td style="text-align:center;vertical-align:middle;">${freeItemList.FB_NUM}</td>
-		<td style="text-align:center;vertical-align:middle;">${freeItemList.FB_SUBJECT}</td>
+		<td style="text-align:center;vertical-align:middle;"><a href="/picksell/free_board/detail/${freeItemList.FB_NUM}">${freeItemList.FB_SUBJECT}</a></td>
 		<td style="text-align:center;vertical-align:middle;">${freeItemList.FB_WRITER}</td>
 		<td style="text-align:center;vertical-align:middle;">${freeItemList.FB_REGDATE}</td>
 		<td style="text-align:center;vertical-align:middle;">${freeItemList.FB_HITCOUNT}</td> 

@@ -21,7 +21,7 @@ public class FreeService implements FreeDAO {
 		
 	//게시글 상세보기 
 	public Map<String, Object> freeDetail(int fb_num){
-		return null;
+		return sqlSessionTemplate.selectOne("freeBoard.freeItem-detail", fb_num);
 	}
 		
 	//게시글 생성
