@@ -47,11 +47,11 @@
 		<td>사진</td>
 		<td>제목</td>
 		<td>가격</td>
+		<td>구매자 아이디</td>
 		<td>요청 날짜</td>
 		<td>요청 상태</td>
-		<td>구매자 아이디</td>
-		<td>취소</td>
-		<td>수락하기</td>
+		<td>수락</td>
+		<td>거부</td>
 	</tr>
 
 	<c:forEach var="purchase" items="${secondSellList}" varStatus="status">
@@ -63,16 +63,16 @@
 		</td>
 		<td><a href="/picksell/products/detail/${purchase.CATEGORY_NUM }/${purchase.PRODUCT_NUM }">${purchase.SUBJECT }</a></td>
 		<td><fmt:formatNumber value="${purchase.PRICE }" pattern="#,###.##" /> 원</td>
+		<td>${purchase.BUYER_ID}</td>
 		<td><fmt:formatDate value="${purchase.REGDATE}" pattern="yy. MM. dd. hh:mm" /></td>
 		<c:if test="${purchase.STATUS == '0'}">
 		<td>수락 대기중</td>
 		</c:if>
 		<c:if test="${purchase.STATUS == '1'}">
 		<td>수락 완료</td>
-		</c:if>																	
-		<td>${purchase.SELLER_ID }</td>
-		<td><input type="button" value="취소" id ="cancel" onclick="deletesecondSellList('${purchase.PURCHASE_NUM }','${purchase.SELLER_ID }','${purchase.CATEGORY_NUM }','${purchase.PRODUCT_NUM }','${purchase.BUYER_ID}');" /></td>
+		</c:if>														
 		<td><input type="button" value="수락" id ="purchase${status.index+1}" disabled="disabled" onclick="location.href = '/picksell/products/detail/${purchase.CATEGORY_NUM }/${purchase.PRODUCT_NUM }'"/></td>
+		<td><input type="button" value="거부" id ="cancel" onclick="deletesecondSellList('${purchase.PURCHASE_NUM }','${purchase.SELLER_ID }','${purchase.CATEGORY_NUM }','${purchase.PRODUCT_NUM }','${purchase.BUYER_ID}');" /></td>
 	</tr> 
 	<c:if test="${purchase.STATUS == '1'}">
 <script>
