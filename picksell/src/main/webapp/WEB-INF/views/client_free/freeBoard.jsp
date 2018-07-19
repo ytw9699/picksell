@@ -7,11 +7,29 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+
+<style type="text/css">
+
+	table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+    border: 1px solid #ddd;
+}
+
+	th, td {
+    text-align: left;
+    padding: 8px;
+}
+	
+
+</style>
 </head>
 <body>
 무료나눔 게시판 
 
 <table>
+	<thead>
 	<tr>
 		<th style="text-align:center;">글번호</th>
 		<th style="text-align:center;">제목</th>
@@ -19,15 +37,18 @@
 		<th style="text-align:center;">작성시간</th>
 		<th style="text-align:center;">조회수</th>
 	</tr>
-</table>
+	</thead>
+	
 	<c:forEach var="freeItemList" items="${mp}" varStatus="stat">
+	<tr>
 		<td style="text-align:center;vertical-align:middle;">${freeItemList.FB_NUM}</td>
 		<td style="text-align:center;vertical-align:middle;">${freeItemList.FB_SUBJECT}</td>
 		<td style="text-align:center;vertical-align:middle;">${freeItemList.FB_WRITER}</td>
 		<td style="text-align:center;vertical-align:middle;">${freeItemList.FB_REGDATE}</td>
-		<td style="text-align:center;vertical-align:middle;">${freeItemList.FB_HITCOUNT}</td>
+		<td style="text-align:center;vertical-align:middle;">${freeItemList.FB_HITCOUNT}</td> 
+	</tr>
 	</c:forEach>
-	
+</table>	
 <!--  등록된 상품이 없을때 -->
 <c:if test="${empty mp}">
 	<tr><td colspan="9" style="text-align:center;">등록된 상품이 없습니다</td></tr>

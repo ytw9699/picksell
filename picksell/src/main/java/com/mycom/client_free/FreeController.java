@@ -53,11 +53,13 @@ public class FreeController {
 		return mav;
 	}
 	
-	@RequestMapping("/freeWrite")
-	public ModelAndView freeWrite(CommandMap map,
-			@RequestParam("images") MultipartFile file,
+	@RequestMapping(value="/freeWrite", method=RequestMethod.POST)
+	public String freeWrite(CommandMap map,
 			HttpServletRequest request) throws IOException {
-		return null;
+		System.out.println(map.getMap());
+		freeService.freeCreate(map.getMap());
+		
+		return "redirect:/free_board/list";
 	}
 	
 }

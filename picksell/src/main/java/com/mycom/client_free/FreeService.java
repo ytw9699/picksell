@@ -25,17 +25,17 @@ public class FreeService implements FreeDAO {
 	}
 		
 	//게시글 생성
-	public void freeCreate(Map map) {
-		
+	public void freeCreate(Map<String, Object> map) {
+		sqlSessionTemplate.insert("freeBoard.freeItem-insert",map);
 	}
 		
 	//게시글 수정
-	public void freeUpdate(Map map) {
+	public void freeUpdate(Map<String, Object> map) {
 		
 	}
 		
 	//게시글 삭제
-	public void freeDelete(Map map) {
+	public void freeDelete(Map<String, Object> map) {
 		
 	}
 	
