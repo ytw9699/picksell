@@ -83,7 +83,7 @@ function purchaseApproveCancel(eventElement, purchaseNumber, buyer, category_num
 }
 	
 </script>
-<h2>중고 구매 판매 리스트</h2> 
+<h2>중고 판매 요청 리스트</h2> 
 <table>
 <c:if test="${fn:length(secondSellList) > 0}">
 	<tr>
