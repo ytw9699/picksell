@@ -245,7 +245,7 @@ span.productStatusTEXT {
 	
 		<c:choose>
 			<c:when test="${!empty resultProductList }" >
-			<c:forEach var="product" items="${resultProductList }" varStatus="status">
+			<c:forEach var="product" items="${resultProductList}" varStatus="status">
 				
 				<div class="productWrap">
 					<div class="writerWrap">
@@ -266,10 +266,10 @@ span.productStatusTEXT {
 						</a>
 					</div>
 					<div class="infoWrap">
-						<span class="productSubject">${product.SUBJECT }</span>
+						<span class="productSubject">${product.SUBJECT}</span>
 						
 							<span class="priceTEXT">
-							<fmt:formatNumber value="${product.PRICE }" pattern="#,###.##" />
+							<fmt:formatNumber value="${product.PRICE}" pattern="#,###.##" />
 							</span>
 							<span class="wonTEXT">원</span>
 					</div>

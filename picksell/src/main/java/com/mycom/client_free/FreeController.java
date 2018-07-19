@@ -41,6 +41,14 @@ public class FreeController {
 		
 	}
 	
+	@RequestMapping("/writeForm")
+	public ModelAndView freeWriteFrom() {
+		
+		mav.setViewName("client_free/freeWrite");
+		
+		return null;
+	}
+	
 }
 
 
