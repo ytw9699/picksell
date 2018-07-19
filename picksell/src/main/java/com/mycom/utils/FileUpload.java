@@ -17,6 +17,7 @@ public class FileUpload {
 		String contentType = fileData.getContentType();
 		long fileSize = fileData.getSize();
 		
+		System.out.println(path);
 		//이미지 업로드 패스 확인
 		/*System.out.println("file Info");
 		System.out.println("fileName " + fileName);
