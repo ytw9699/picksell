@@ -7,9 +7,19 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 
 import javax.annotation.Resource;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeUtility;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.http.HttpRequest;
@@ -24,6 +34,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartRequest;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.mycom.Member.CookieBox;
 import com.mycom.client_product.ProductService;
@@ -145,7 +156,7 @@ public class mypageController {
 	}
 	//중고구매 판매리스트
 	@RequestMapping("/mypage/secondSellList")
-	public String secondSellList(Model model, HttpSession session) {	
+	public String secondSellList(Model model, HttpSession session) {
 		
 		String sessionId =(String)session.getAttribute("sessionId");
 		
@@ -608,8 +619,101 @@ public class mypageController {
 		         return new ArrayList<Map<String,Object>>();
 		      }
 		  }
-
 		
+		//구매신청 거부
+		@ResponseBody
+		@RequestMapping("/mypage/refusalApprove")
+		public Map<String, Object> refusalApprove(Model model,
+		@RequestParam(value="PRODUCT_NUM",required=false, defaultValue="0") int PRODUCT_NUM,
+		@RequestParam(value="BUYER_ID",required=false, defaultValue="0") String BUYER_ID
+			){
+			
+		Map<String, Object> parameterMap = new HashMap<String, Object>();
+		
+		parameterMap.put("product_num", PRODUCT_NUM);
+		
+		parameterMap.put("buyer_id", BUYER_ID);
+		
+		productService.deleteProductPurchaseList(parameterMap);
+		return parameterMap;
+}
+		
+		@RequestMapping("emailAuth")
+	     public ModelAndView emailAuth(HttpServletResponse reponse, HttpServletRequest request) throws Exception{
+	    	 
+	    	 String email = request.getParameter("email");
+	    	 String authNum = "";
+	    	 int check = 0;
+	    	 
+	    	 authNum = RandomNum();
+	    	 
+	    	 sendEmail(email.toString(), authNum);
+	    	 
+	    	 ModelAndView mv = new ModelAndView();
+	    	 mv.setViewName("/member/emailAuth");
+	    	 mv.addObject("email",email);
+	    	 mv.addObject("authNum",authNum);
+	    	 
+	    	 return mv;
+	    	 
+	     }
+	   //이메일 인증 소스
+			public void sendEmail(String email, String authNum) {
+				String host = "smtp.gmail.com"; // smtp 서버
+				String subject = "yourtour 인증번호 전달";
+				String fromName = "yourtour 관리자";
+				String from = "kh18final2@gmail.com"; //보내는 메일
+				String to1 = email;
+				final String username = "kh18final2@gmail.com";
+				final String password = "khacademy";
+				
+				
+				String content = "인증번호 [" + authNum + "]";
+				
+				try {
+					Properties props = new Properties();
+					props.put("mail.smtp.starttls.enable", "true");
+					props.put("mail.transport.protocol", "smtp");
+					props.put("mail.smtp.host", host);
+					props.setProperty("mail.smtp.socketFactory.class","javax.net.ssl.SSLSocketFactory");
+					props.put("mail.smtp.port", "465");
+					props.put("mail.smtp.user", from);
+					props.put("mail.smtp.auth", "true");
+					
+					Session mailSession = Session.getInstance(props, new javax.mail.Authenticator() {
+						protected PasswordAuthentication getPasswordAuthentication() {
+							String un = username;
+							String pw = password;
+							return new PasswordAuthentication(un,pw);
+						}
+					});
+					
+					Message msg = new MimeMessage(mailSession);
+					msg.setFrom(new InternetAddress(from, MimeUtility.encodeText(fromName, "UTF-8", "B")));
+					
+					InternetAddress[] address1 = {new InternetAddress(to1)};
+					msg.setRecipients(Message.RecipientType.TO, address1);
+					msg.setSubject(subject);
+					msg.setSentDate(new java.util.Date());
+					msg.setContent(content, "text/html;charset=utf-8");
+					
+					Transport.send(msg);
+				}catch(MessagingException e) {
+					e.printStackTrace();
+				}catch(Exception e) {
+					e.printStackTrace();
+				}
+			}
+			public String RandomNum() {
+				StringBuffer buffer = new StringBuffer();
+				for(int i = 0; i<=6; i++) {
+					int n = (int) (Math.random() * 10);
+					buffer.append(n);
+				}
+				return buffer.toString();
+			}
+	     
+	     private static final String filePath = "C:\\Java\\App\\yourtour\\src\\main\\webapp\\resources\\mem_img\\"; 
 }
 
 		

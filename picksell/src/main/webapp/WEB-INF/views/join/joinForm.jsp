@@ -55,6 +55,11 @@ font-size: 18px;
 </head>
 <body>
 <script>
+function emailAuth(joinForm){
+	var url="emailAuth?email="+document.joinForm.email2.value;
+	
+	open(url,"confirm","toolbar=no,location=no,status=no,menubar=no,scrollbars=no,resizable=no,width=300,height=400");
+}
 function openCheckID(u){
 	if(u.id.value == ''){
 		alert('아이디를 입력하세요!');//
@@ -180,6 +185,12 @@ $(document).ready(function(){
 	예금주(선택)<input type="text" name="account_name" />
 	<br/>
 	은행명(선택)<input type="text" name="bank" />
+	<br/>
+	<br/>
+	<input type="text" class="form-control" name="email2" placeholder="Confirm Email">
+		<br/>
+	<button onclick="emailAuth(this.form)" name="confirmemail"
+					type="button" class="btn btn-primary">Confirm Email</button>
 	<br/>
 	<div id="business">
 	사업자등록번호<input type="text" name="business_number" />
