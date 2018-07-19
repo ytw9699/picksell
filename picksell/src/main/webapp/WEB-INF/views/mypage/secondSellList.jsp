@@ -15,7 +15,6 @@
 <body>
 <script>
 	function refusalApprove(SELLER_ID, CATEGORY_NUM, PRODUCT_NUM, BUYER_ID){
-		alert(1);
 		var allData = "PRODUCT_NUM="+PRODUCT_NUM+"&BUYER_ID="+BUYER_ID;
 		$.ajax({
 			type : "GET",
