@@ -109,7 +109,9 @@ a.link_productList:hover{
     display: inline-block;
     width: 40%;
     margin-left: 50px;
-    border: 1px solid red;
+    min-height: 350px;
+    padding: 5% 0;
+    box-sizing: border-box;
 }
 img.sellerProfileImg {
     width: 100%;
@@ -313,4 +315,14 @@ span.status_onTEXT {
     margin-left: 10%;
     font-weight: 600;
     color: #840000;
+}
+/* ½Å°í */
+.hiddenSingoForm{
+	display: none;
+    width: 40%;
+    background-color: white;
+    position: fixed;
+    top: 10%;
+    left: 30%;
+    border: 3px solid #7151fc;
 }

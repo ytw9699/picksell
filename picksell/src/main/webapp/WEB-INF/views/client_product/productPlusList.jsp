@@ -164,6 +164,19 @@ a.paging {
     border-radius: 21px;
     font-size: 23px;
 }
+.productHR {
+    border: 1px solid #f1f1f1;
+    margin-top: 50px;
+}
+span.hasNoProductInThisCategory {
+    display: block;
+    margin: 100px auto;
+    width: 70%;
+    font-size: 20px;
+    text-align: center;
+    box-sizing: border-box;
+    color: #999;
+}
 </style>
 </head>
 <body>
@@ -222,7 +235,7 @@ a.paging {
 	<div class="contentWrap">
 	<c:choose>
 		<c:when test="${!empty resultProductList }" >
-			<c:forEach var="product" items="${resultProductList }">
+			<c:forEach var="product" items="${resultProductList }" varStatus="status">
 				<div class="productWrap">
 					<div class="writerWrap">
 						<div class="profileWrap">
@@ -244,13 +257,18 @@ a.paging {
 					</div>
 		
 				</div>
+				<c:if test="${status.index == 3 or status.index == 7 }">
+					<hr class="productHR">
+				</c:if>
 			</c:forEach>
 			<div class="paging">
 			${pagingHtml}
 			</div>
 		</c:when>
 		<c:when test="${empty resultProductList }">
-			등록된 상품이 없습니다!
+			<span class="hasNoProductInThisCategory">
+				등록된 상품이 없습니다!
+			</span>
 		</c:when>
 	</c:choose>
 	</div>

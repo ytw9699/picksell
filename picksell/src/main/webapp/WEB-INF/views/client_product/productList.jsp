@@ -185,6 +185,28 @@ span.productStatusTEXT {
     border: 2px solid #840000;
     border-radius: 6px;
 }
+span.sellerRating {
+    position: absolute;
+    z-index: 1;
+    width: 75px;
+    opacity: 0.5;
+}
+img.ratingImg {
+    width: 100%;
+}
+.productHR {
+    border: 1px solid #f1f1f1;
+    margin-top: 50px;
+}
+span.hasNoProductInThisCategory {
+    display: block;
+    margin: 100px auto;
+    width: 70%;
+    font-size: 20px;
+    text-align: center;
+    box-sizing: border-box;
+    color: #999;
+}
 </style>
 </head>
 <body>
@@ -245,7 +267,7 @@ span.productStatusTEXT {
 	
 		<c:choose>
 			<c:when test="${!empty resultProductList }" >
-			<c:forEach var="product" items="${resultProductList}" varStatus="status">
+			<c:forEach var="product" items="${resultProductList }" varStatus="status">
 				
 				<div class="productWrap">
 					<div class="writerWrap">
@@ -253,13 +275,28 @@ span.productStatusTEXT {
 							<img src="/picksell/resources/img/basicProfile.png" class="profileImg"/>
 						</div>
 						<span class="productSeller">${product.SELLER_ID }</span>
-						<c:choose>
-							<c:when test="${product.SELL > 0 }">
-								<img src="/picksell/resources/img/icoGradeF.png" />
-							</c:when>
-						</c:choose>
+						<%-- <span class="sellerRating">
+								<c:choose>
+									<c:when test="${product.SELL > 0 and product.SELL < 2}">
+										<img src="/picksell/resources/img/icoGradeF.png" class="ratingImg"/>
+									</c:when>
+									<c:when test="${product.SELL > 2 and product.SELL < 4}">
+										<img src="/picksell/resources/img/icoGradeS.png" class="ratingImg"/>
+									</c:when>
+									<c:when test="${product.SELL > 4 and product.SELL < 4}">
+										<img src="/picksell/resources/img/icoGradeG.png" class="ratingImg"/>
+									</c:when>
+									<c:when test="${product.SELL > 6 and product.SELL < 8}">
+										<img src="/picksell/resources/img/icoGradeP.png" class="ratingImg"/>
+									</c:when>
+									<c:when test="${product.SELL > 8}">
+										<img src="/picksell/resources/img/icoGradeV.png" class="ratingImg"/>
+									</c:when>
+								</c:choose>
+							</span> --%>
 					</div>
 					<div class="firstImgWrap">
+							
 						<a href="/picksell/products/detail/${product.CATEGORY_NUM }/${product.PRODUCT_NUM }">
 						<!-- 만약 거래중이면 -->
 						<c:if test="${product.PRODUCT_STATUS == 1 }">
@@ -271,22 +308,30 @@ span.productStatusTEXT {
 						</a>
 					</div>
 					<div class="infoWrap">
-						<span class="productSubject">${product.SUBJECT}</span>
 						
+						<span class="productSubject">${product.SUBJECT }</span>
+						
+							
 							<span class="priceTEXT">
-							<fmt:formatNumber value="${product.PRICE}" pattern="#,###.##" />
+							<fmt:formatNumber value="${product.PRICE }" pattern="#,###.##" />
 							</span>
 							<span class="wonTEXT">원</span>
 					</div>
 				
 				</div>
+				
+				<c:if test="${status.index == 3 or status.index == 7 }">
+					<hr class="productHR">
+				</c:if>
 			</c:forEach>
 			<div class="paging">
 			${pagingHtml}
 			</div>
 			</c:when>
 			<c:when test="${empty resultProductList }">
+				<span class="hasNoProductInThisCategory">
 				등록된 상품이 없습니다!
+				</span>
 			</c:when>
 		</c:choose>
 	</div>

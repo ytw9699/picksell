@@ -89,4 +89,14 @@ public class ProductService implements ProductDao {
 	public void insertRecentProduct(Map<String, Object> parameterMap) {
 		sqlMapper.insert("client_product.insertRecentProduct", parameterMap);
 	}// 최근본상품 로직 by태원 
+	
+	//신고유효성
+	public int isAbledSingo(Map<String, Object> map) {
+		return sqlMapper.selectOne("client_product.countingForSingo", map);
+	}
+	
+	//신고처리
+	public void singoProcess(Map<String, Object> map) {
+		sqlMapper.insert("client_product.insertSingoProcess", map);
+	}
 }

@@ -55,4 +55,10 @@ public interface ProductDao {
 	
 	//카테고리 긁어오기
 	public List<Map<String, Object>> getCategoryList();
+	
+	//신고유효성
+	public int isAbledSingo(Map<String, Object> map);
+	
+	//신고처리
+	public void singoProcess(Map<String, Object> map);
 }
