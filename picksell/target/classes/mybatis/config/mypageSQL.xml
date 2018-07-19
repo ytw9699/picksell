@@ -353,5 +353,16 @@ select * from ps_product a, PS_ORDERLIST b where b.ORDER_NUM = #{ORDER_NUM} and 
 <select id="orderCount44" resultType="int" parameterType="hashmap">
 		select count(*) from  ps_order where buyer_id =  #{sessionId} and status = '44'
 </select>
+
+<!-- 최근본상품 전체삭제 -->
+<select id="deleteRecenPd" resultType="int" parameterType="String">
+	delete from PS_RECENT_PRODUCT where recent_id = #{sessionId}
+</select>
+
+<!-- 최근본상품 각각삭제 -->
+<select id="EachdeleteRecenPd" resultType="int" parameterType="int">
+	delete from PS_RECENT_PRODUCT where RECENT_NUM = #{RECENT_NUM}
+</select>
+
 	
 </mapper>
