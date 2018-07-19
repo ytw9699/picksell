@@ -18,15 +18,70 @@
     left: 0;
     height: 100px;
 }
-.hiddenPurchaseListForm{
-	display: none;
-	width: 300px;
+.hiddenPurchaseListForm {
+    display: none;
+    width: 40%;
     background-color: white;
     position: fixed;
-    top: 0;
-    left: 0;
-    height: 100px;
+    top: 10%;
+    left: 30%;
+    border: 3px solid #7151fc;
 }
+/* 구매신청리스트 */
+span.purchaseHeaderTEXT {
+    display: block;
+    color: #23231f;
+    background-color: #f2f2f4;
+    padding: 8px;
+    font-size: 16px;
+}
+
+span.purchaseHeaderSubTEXT {
+    display: block;
+    color: #888888;
+    font-size: 13px;
+    padding: 10px;
+}
+
+table.purchaseTABLE {
+    width: 100%;
+    margin-top: 10px;
+}
+
+td.purchaseHeader {
+    text-align: center;
+    border-top: 2px solid #e3e3e6;
+    color: #464646;
+    padding: 8px;
+    background-color: #f3f2f2;
+}
+
+td.purchaseContent {
+    text-align: center;
+    padding: 10px;
+    width: 40%;
+}
+
+input.purchaseXbtn {
+    border: 1px solid #7151fc;
+    color: #7151fc;
+    background-color: white;
+    padding: 7px;
+    width: 70px;
+}
+
+input.purchaseObtn {
+    border: none;
+    color: white;
+    background-color: #7151fc;
+    padding: 7px;
+    width: 70px;
+}
+td.purchaseContent.purchaseStatus {
+    font-size: 15px;
+    color: #7151fc;
+}
+
 
 /* 상품시작 */
 a.link_wholeList {
