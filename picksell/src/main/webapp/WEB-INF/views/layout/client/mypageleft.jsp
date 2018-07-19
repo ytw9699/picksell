@@ -13,12 +13,12 @@
 <body>
 <p>마이페이지</p>
 <p><a href="/picksell/mypage/memberCheck">회원정보 확인/수정</a></p>
-<p><a href="/picksell/mypage/purchaseList">중고구매 신청 리스트</a></p>
-<p><a href="/picksell/mypage/secondSellList">중고구매 판매 리스트</a></p>
-<p><a href="/picksell/mypage/sellList">판매글 조회</a></p>
-<p><a href="/picksell/mypage/saleList">판매 내역/배송 조회</a></p>
 <p><a href="/picksell/mypage/orderList">주문 내역/배송 조회</a></p>
+<p><a href="/picksell/mypage/saleList">판매 내역/배송 조회</a></p>
+<p><a href="/picksell/mypage/sellList">판매글 조회</a></p>
+<p><a href="/picksell/mypage/purchaseList">중고구매 요청 리스트</a></p>
+<p><a href="/picksell/mypage/secondSellList">중고판매 요청 리스트</a></p>
 <p><a href="/picksell/mypage/recentProduct">최근 본 상품</a></p>
-<p><a href="/picksell/mypage/alarmSelect">알림 보기</a></p>
+<p><a href="/picksell/mypage/alarmSelect">알림 조회</a></p>
 </body>
 </html>
