@@ -7,6 +7,11 @@
 <title>Insert title here</title>
 </head>
 <body>
+무료나눔 글쓰기 <br/>
+
+	<form id="freeItemForm" mothod="post" onsubmit="freeWrite" enctype="multipart/form-data">
+		<
+	</form>
 
 </body>
 </html>
