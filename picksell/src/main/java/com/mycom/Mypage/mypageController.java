@@ -333,7 +333,6 @@ public class mypageController {
 		
 		String sessionId =(String)session.getAttribute("sessionId");//세션아이디값
 		String sessionAlarm =(String)session.getAttribute("sessionAlarm");//세션알람값
-		System.out.println(sessionAlarm);
 		parameterMap.put("ALARM_CHECK", ALARM_CHECK);
 		parameterMap.put("sessionId", sessionId);
 	
@@ -379,7 +378,7 @@ public class mypageController {
 		return "alarmCount";
     } 
 }*/
-	
+	//알람 하나삭제
 	@ResponseBody
 	@RequestMapping(value="/mypage/alarmDelete", method=RequestMethod.GET)
 	public int alarmDelete(@RequestParam(value="ALARM_NUM") String ALARM_NUM) {
@@ -391,6 +390,16 @@ public class mypageController {
 		int deleteReturn = mypageService.alarmDelete(parameterMap);//삭제되면 1리턴
 
 		return deleteReturn;
+	}
+	//알람 전체삭제
+	@RequestMapping("/mypage/AllAlarmDelete")
+	public String AllAlarmDelete(HttpSession session) {
+		
+		String sessionId = (String)session.getAttribute("sessionId");
+		
+		mypageService.AllAlarmDelete(sessionId);
+
+		return "redirect:/mypage/alarmSelect";
 	}
 	
 	@ResponseBody

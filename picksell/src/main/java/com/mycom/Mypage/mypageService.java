@@ -167,4 +167,7 @@ public class mypageService implements mypageDao {
 		return sqlMapper.delete("mypage.EachdeleteRecenPd",RECENT_NUM);
 		
 	}
+	public int AllAlarmDelete(String sessionId) {
+		return sqlMapper.delete("mypage.AllAlarmDelete",sessionId);
+	}
 	}
