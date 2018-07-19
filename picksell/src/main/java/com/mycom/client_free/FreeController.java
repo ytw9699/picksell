@@ -1,5 +1,6 @@
 package com.mycom.client_free;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -55,7 +56,7 @@ public class FreeController {
 	@RequestMapping("/freeWrite")
 	public ModelAndView freeWrite(CommandMap map,
 			@RequestParam("images") MultipartFile file,
-			HttpServletRequest request) {
+			HttpServletRequest request) throws IOException {
 		return null;
 	}
 	
