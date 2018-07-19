@@ -37,6 +37,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		email = #{email},
 		address = #{address},
 		account = #{account},
+		phonenum = #{phoneNum},
 		account_name = #{account_name},
 		bank = #{bank},
 		profile_img = #{profile_img},
