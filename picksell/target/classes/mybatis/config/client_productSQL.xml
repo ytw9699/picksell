@@ -254,7 +254,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <update id="alarmRead" parameterType="int">
 		update PS_ALARM set ALARM_CHECK = 'YES' where ALARM_NUM = #{ALARM_NUM}
 </update>
-
+<!-- 최근본상품 로직 by태원 -->
 <insert id="insertRecentProduct" parameterType="hashmap">
 		insert into PS_RECENT_PRODUCT(RECENT_NUM,
 								RECENT_PRODUCT_NUM,
@@ -267,5 +267,5 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 												#{currentID}
 												)
 </insert>
-
+<!-- 최근본상품 로직 by태원 -->
 </mapper>

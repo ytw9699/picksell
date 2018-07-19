@@ -85,7 +85,8 @@ public class ProductService implements ProductDao {
 	public void alarmRead(int ALARM_NUM) {//알람읽기
 		sqlMapper.update("client_product.alarmRead", ALARM_NUM);
 	}
+	// 최근본상품 로직 by태원 
 	public void insertRecentProduct(Map<String, Object> parameterMap) {
 		sqlMapper.insert("client_product.insertRecentProduct", parameterMap);
-	}
+	}// 최근본상품 로직 by태원 
 }
