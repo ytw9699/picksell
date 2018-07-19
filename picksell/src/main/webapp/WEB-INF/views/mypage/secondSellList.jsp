@@ -40,31 +40,47 @@
 	}
 	
 	//(판매자가)구매신청 수락
-	function purchaseApprove(eventElement, purchaseNumber, buyer, category_num, product_num, sessionId){
-		var params = "pn="+product_num+"&purnum="+purchaseNumber+"&buyer="+buyer;
-		$.ajax({
-			type : "POST",
-			url : "/picksell/products/purchaseApproveProc",
-			dataType : 'json',
-			data : params,
-			success : function(data){
-				
-				//만약에 수락이 정상적으로 이루어져서 임의로 만든 resultCode 가 'success' 를 담았다면,
-				if(data.resultCode == 'success'){
-					alarmInsert(buyer, category_num, product_num,sessionId,"2");
-					alert(data.resultMsg);
-					$(eventElement).parents('td').html('<input type="button" value="수락취소" onclick="purchaseApproveCancel(this,'+data.purchase_num+','+data.buyerID+');" />');
-				//만약에 수락이 중복되어 임의로 만든 resultCode 가 'fail' 를 담았다면,
-				}else if(data.resultCode == 'fail'){
-					alert(data.resultMsg);
-				}
-				
-				//document.location.href='/picksell/products/detail/${category_num}/${product_num}';
-				
-				
-			}
-		});
+function purchaseApprove(eventElement, purchaseNumber, buyer, category_num, product_num, sessionId){
+	var params = "pn="+product_num+"&purnum="+purchaseNumber+"&buyer="+buyer;
+	$.ajax({
+		type : "POST",
+		url : "/picksell/products/purchaseApproveProc",
+		dataType : 'json',
+		data : params,
+		success : function(data){
+			
+	if(data.resultCode == 'success'){
+		alarmInsert(buyer, category_num, product_num,sessionId,"2");
+		alert(data.resultMsg);
+		$(eventElement).parents('td').html('<input type="button" value="수락 취소" onclick="purchaseApproveCancel(this,'+purchaseNumber+','+buyer+','+category_num+','+product_num+','+sessionId+');" />');
+																											
+	}else if(data.resultCode == 'fail'){
+		alert(data.resultMsg);
 	}
+		}
+	});
+}
+	
+//(판매자가)구매신청 수락 취소
+function purchaseApproveCancel(eventElement, purchaseNumber, buyer, category_num, product_num, sessionId){
+
+	var params = "pn="+product_num+"&purnum="+purchaseNumber+"&buyer="+buyer;
+	$.ajax({
+		type : "POST",
+		url : "/picksell/products/purchaseApproveCancelProc",
+		dataType : 'json',
+		data : params,
+		success : function(data){
+			if(data.resultCode == 'success'){
+				alert(data.resultMsg);
+     		 alarmInsert(buyer, category_num, product_num,sessionId,"8");
+				$(eventElement).parents('td').html('<input type="button" value="요청 수락" onclick="purchaseApprove(this,'+purchaseNumber+','+buyer+','+category_num+','+product_num+','+sessionId+');" />');
+			}else if(data.resultCode == 'fail'){
+				alert(data.resultMsg);
+			}
+		}
+	});
+}
 	
 </script>
 <h2>중고 구매 판매 리스트</h2> 
@@ -77,7 +93,7 @@
 		<td>구매자 아이디</td>
 		<td>요청 날짜</td>
 		<td>요청 상태</td>
-		<td>수락</td>
+		<td>수락or취소</td>
 		<td>거부</td>
 	</tr>
 
@@ -98,10 +114,15 @@
 		<c:if test="${purchase.STATUS == '1'}">
 		<td>수락 완료</td>
 		</c:if>								
-														
-	<td><input type="button" value="수락" id ="accept" onclick="purchaseApprove(this,'${purchase.PURCHASE_NUM}','${purchase.BUYER_ID }','${purchase.CATEGORY_NUM }','${purchase.PRODUCT_NUM }','${purchase.SELLER_ID }');" /></td>
-	<td><input type="button" value="취소" id ="cancel" onclick="deletePurchaseList('${purchase.PURCHASE_NUM }','${purchase.SELLER_ID }','${purchase.CATEGORY_NUM }','${purchase.PRODUCT_NUM }','${purchase.BUYER_ID}');" /></td>
-	<td><input type="button" value="거부" id ="refusal" onclick="deletesecondSellList('${purchase.PURCHASE_NUM }','${purchase.SELLER_ID }','${purchase.CATEGORY_NUM }','${purchase.PRODUCT_NUM }','${purchase.BUYER_ID}');" /></td>
+		
+		
+	<c:if test="${purchase.STATUS == 0 }">							
+	<td><input type="button" value="요청 수락" id ="accept" onclick="purchaseApprove(this,'${purchase.PURCHASE_NUM}','${purchase.BUYER_ID }','${purchase.CATEGORY_NUM }','${purchase.PRODUCT_NUM }','${purchase.SELLER_ID }');" /></td>
+	</c:if>
+	<c:if test="${purchase.STATUS == 1 }">	
+	<td><input type="button" value="수락 취소" onclick="purchaseApproveCancel(this, '${purchase.PURCHASE_NUM}','${purchase.BUYER_ID }','${purchase.CATEGORY_NUM }','${purchase.PRODUCT_NUM }','${purchase.SELLER_ID }');" /></td>
+	</c:if>
+	<td><input type="button" value="수락 거부" id ="refusal" onclick="deletesecondSellList('${purchase.PURCHASE_NUM }','${purchase.SELLER_ID }','${purchase.CATEGORY_NUM }','${purchase.PRODUCT_NUM }','${purchase.BUYER_ID}');" /></td>
 	</tr> 
 	<c:if test="${purchase.STATUS == '1'}">
 <script>
