@@ -159,4 +159,12 @@ public class mypageService implements mypageDao {
 		map.put("fourfour",sqlMapper.selectOne("mypage.saleCount44", sessionId));
 		 return map;
 	}
+
+	public int deleteRecenPd(String sessionId) {
+		return sqlMapper.delete("mypage.deleteRecenPd",sessionId);
+	}
+	public int EachdeleteRecenPd(int RECENT_NUM) {
+		return sqlMapper.delete("mypage.EachdeleteRecenPd",RECENT_NUM);
+		
+	}
 	}

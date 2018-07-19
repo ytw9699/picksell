@@ -15,7 +15,7 @@
 </head>
 <body>
 <h2>최근 본 상품</h2>
-최근 본 상품을 기준으로 최대 60개까지 저장됩니다.
+최근 본 상품을 기준으로 최대 50개까지 저장됩니다.
 
 <table>
 <c:if test="${fn:length(recentlist) > 0}">
@@ -24,7 +24,7 @@
 <td>제목</td>
 <td>가격</td>
 <td>본 날짜</td>
-<td><a href="/picksell/products/detail">전체 삭제</a></td>
+<td><a href="/picksell/mypage/deleteRecenPd">전체 삭제</a></td>
 </tr> 
 	<c:forEach var="recentProduct" items="${recentlist}">
 	<tr>
@@ -36,8 +36,8 @@
 		<td><a href="/picksell/products/detail/${recentProduct.RECENT_CATEGORY_NUM }/${recentProduct.RECENT_PRODUCT_NUM }">${recentProduct.SUBJECT }</a></td>
 		<td><fmt:formatNumber value="${recentProduct.PRICE }" pattern="#,###.##" /> 원</td>
 		<td><fmt:formatDate value="${recentProduct.RECENT_REGDATE}" pattern="yy. MM. dd. hh:mm" /></td>
-		<td><input type="button" id="recentProductDelete" value="삭제" onclick="" /></td>
-	</tr> 
+		<td><input type="button" id="recentProductDelete" value="삭제" onclick="location.href='/picksell/mypage/EachdeleteRecenPd?RECENT_NUM=${recentProduct.RECENT_NUM }'" /></td>
+	</tr> 													
 	
 	</c:forEach>
 

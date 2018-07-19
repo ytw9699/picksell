@@ -450,6 +450,22 @@ public class mypageController {
 		
 		return "recentProduct";
 	}
+	/*최근본상품 전체삭제*/
+	@RequestMapping("/mypage/deleteRecenPd")
+	public String deleteRecenPd(HttpSession session,Model model) {
+		
+		String sessionId =(String)session.getAttribute("sessionId");
+			
+		mypageService.deleteRecenPd(sessionId);
+		
+		return "redirect:/mypage/recentProduct";
+	}
+	@RequestMapping("/mypage/EachdeleteRecenPd")
+	public String EachdeleteRecenPd(@RequestParam(value="RECENT_NUM",required=false, defaultValue="0") int RECENT_NUM
+			) {
+		mypageService.EachdeleteRecenPd(RECENT_NUM);
+		return "redirect:/mypage/recentProduct";
+	}
 	@RequestMapping("/mypage/alarmCount")
 	@ResponseBody
 	public Map<String, Object> alarmCount(HttpSession session){
