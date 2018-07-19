@@ -222,6 +222,25 @@ span.deliveryTEXT {
     color: #333;
     font-size: 14px;
 }
+input.purchase_cancel {
+    width: 100%;
+    border: none;
+    color: white;
+    box-sizing: border-box;
+    padding: 16px;
+    font-size: 15px;
+    background-color: #7151fc;
+}
+
+input.purchase_apply {
+    width: 100%;
+    border: none;
+    color: white;
+    box-sizing: border-box;
+    padding: 16px;
+    font-size: 15px;
+    background-color: #7151fc;
+}
 /*판매중입니다 레이아웃*/
 .status_on {
     width: 100%;
