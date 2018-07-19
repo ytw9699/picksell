@@ -285,8 +285,11 @@ public class ProductController {
 				}
 			}
 		}
-		
-		
+		/*최근본상품 로직 누군가에 의해 지워졌었음ㅠㅠ이부분 삭제 ㄴㄴby태원*/
+		parameterMap.put("currentID", currentID);
+		parameterMap.put("category_num", category_num);
+		productService.insertRecentProduct(parameterMap);
+		/*최근본상품 로직 누군가에 의해 지워졌었음ㅠㅠ이부분 삭제 ㄴㄴby태원*/
 		
 		//카테고리번호&상품글번호
 		model.addAttribute("category_num", category_num);
