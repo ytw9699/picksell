@@ -41,6 +41,38 @@ import com.mycom.client_product.ProductService;
 import com.mycom.config.CommandMap;
 import com.mycom.utils.FileUpload;
 
+
+//
+import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Properties;
+import java.util.UUID;
+
+import javax.annotation.Resource;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeUtility;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
+
 @Controller
 public class mypageController {
 	
@@ -638,7 +670,7 @@ public class mypageController {
 		return parameterMap;
 }
 		
-		@RequestMapping("emailAuth")
+		@RequestMapping("/emailAuth")
 	     public ModelAndView emailAuth(HttpServletResponse reponse, HttpServletRequest request) throws Exception{
 	    	 
 	    	 String email = request.getParameter("email");
@@ -646,11 +678,11 @@ public class mypageController {
 	    	 int check = 0;
 	    	 
 	    	 authNum = RandomNum();
-	    	 
+	    	 System.out.println(email);
 	    	 sendEmail(email.toString(), authNum);
 	    	 
 	    	 ModelAndView mv = new ModelAndView();
-	    	 mv.setViewName("/member/emailAuth");
+	    	 mv.setViewName("/login/emailAuth");
 	    	 mv.addObject("email",email);
 	    	 mv.addObject("authNum",authNum);
 	    	 

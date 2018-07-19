@@ -56,6 +56,7 @@ font-size: 18px;
 <body>
 <script>
 function emailAuth(joinForm){
+	alert(document.joinForm.email2.value);
 	var url="emailAuth?email="+document.joinForm.email2.value;
 	
 	open(url,"confirm","toolbar=no,location=no,status=no,menubar=no,scrollbars=no,resizable=no,width=300,height=400");
@@ -187,11 +188,8 @@ $(document).ready(function(){
 	은행명(선택)<input type="text" name="bank" />
 	<br/>
 	<br/>
-	<input type="text" class="form-control" name="email2" placeholder="Confirm Email">
-		<br/>
-	<button onclick="emailAuth(this.form)" name="confirmemail"
-					type="button" class="btn btn-primary">Confirm Email</button>
-	<br/>
+	<input type="text" class="form-control" name="email2" placeholder="Confirm Email"><br/>
+	<button onclick="emailAuth(this.form)" name="confirmemail" type="button" class="btn btn-primary">Confirm Email</button><br/>
 	<div id="business">
 	사업자등록번호<input type="text" name="business_number" />
 	<br/>
