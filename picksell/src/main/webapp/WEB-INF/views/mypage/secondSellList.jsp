@@ -40,7 +40,10 @@
 	}
 	
 	//(판매자가)구매신청 수락
-function purchaseApprove(eventElement, purchaseNumber, buyer, category_num, product_num, sessionId){
+//onclick="purchaseApprove(this,'${purchase.PURCHASE_NUM}','${purchase.BUYER_ID }','${purchase.CATEGORY_NUM }','${purchase.PRODUCT_NUM }','${purchase.SELLER_ID }','watingAccept${status.index+1}','completedAccept${status.index+1}');" /></td>
+function purchaseApprove(eventElement, purchaseNumber, buyer, category_num, product_num, sessionId,watingAccept,completedAccept){
+	var target = document.getElementById(watingAccept);
+	alert(target);
 	var params = "pn="+product_num+"&purnum="+purchaseNumber+"&buyer="+buyer;
 	$.ajax({
 		type : "POST",
@@ -52,8 +55,9 @@ function purchaseApprove(eventElement, purchaseNumber, buyer, category_num, prod
 	if(data.resultCode == 'success'){
 		alarmInsert(buyer, category_num, product_num,sessionId,"2");
 		alert(data.resultMsg);
-		$(eventElement).parents('td').html('<input type="button" value="수락 취소" onclick="purchaseApproveCancel(this,'+purchaseNumber+','+buyer+','+category_num+','+product_num+','+sessionId+');" />');
-																											
+		alert(target);
+		$(eventElement).parents('td').html("<input type='button' value='수락 취소' onclick=purchaseApproveCancel(this,"+purchaseNumber+",'"+buyer+"',"+category_num+","+product_num+",'"+sessionId+"','"+completedAccept+"','"+watingAccept+"'); />");
+		$(target).parents('td').html("<div id='"+completedAccept+"'>수락 완료</div>");
 	}else if(data.resultCode == 'fail'){
 		alert(data.resultMsg);
 	}
@@ -62,23 +66,25 @@ function purchaseApprove(eventElement, purchaseNumber, buyer, category_num, prod
 }
 	
 //(판매자가)구매신청 수락 취소
-function purchaseApproveCancel(eventElement, purchaseNumber, buyer, category_num, product_num, sessionId){
-
+function purchaseApproveCancel(eventElement, purchaseNumber, buyer, category_num, product_num, sessionId,completedAccept,watingAccept){
+	var target = document.getElementById(completedAccept);
 	var params = "pn="+product_num+"&purnum="+purchaseNumber+"&buyer="+buyer;
 	$.ajax({
-		type : "POST",
-		url : "/picksell/products/purchaseApproveCancelProc",
-		dataType : 'json',
-		data : params,
-		success : function(data){
-			if(data.resultCode == 'success'){
-				alert(data.resultMsg);
-     		 alarmInsert(buyer, category_num, product_num,sessionId,"8");
-				$(eventElement).parents('td').html('<input type="button" value="요청 수락" onclick="purchaseApprove(this,'+purchaseNumber+','+buyer+','+category_num+','+product_num+','+sessionId+');" />');
-			}else if(data.resultCode == 'fail'){
-				alert(data.resultMsg);
-			}
+	type : "POST",
+	url : "/picksell/products/purchaseApproveCancelProc",
+	dataType : 'json',
+	data : params,
+	success : function(data){
+		if(data.resultCode == 'success'){
+			alert(data.resultMsg);
+    		 alarmInsert(buyer, category_num, product_num,sessionId,"8");        
+    		 
+			$(eventElement).parents('td').html("<input type='button' value='요청 수락' onclick=purchaseApprove(this,"+purchaseNumber+",'"+buyer+"',"+category_num+","+product_num+",'"+sessionId+"','"+watingAccept+"','"+completedAccept+"'); />");
+			$(target).parents('td').html("<div id='"+watingAccept+"'>수락 대기중</div>");
+		}else if(data.resultCode == 'fail'){
+			alert(data.resultMsg);
 		}
+	}
 	});
 }
 	
@@ -109,25 +115,24 @@ function purchaseApproveCancel(eventElement, purchaseNumber, buyer, category_num
 		<td>${purchase.BUYER_ID}</td>
 		<td><fmt:formatDate value="${purchase.REGDATE}" pattern="yy. MM. dd. hh:mm" /></td>
 		<c:if test="${purchase.STATUS == '0'}">
-		<td>수락 대기중</td>
+		<td><div id="watingAccept${status.index+1}">수락 대기중</div></td>
 		</c:if>
-		<c:if test="${purchase.STATUS == '1'}">
-		<td>수락 완료</td>
+		<c:if test="${purchase.STATUS == '1'}"> 
+		<td><div id="completedAccept${status.index+1}">수락 완료</div></td>
 		</c:if>								
 		
-		
 	<c:if test="${purchase.STATUS == 0 }">							
-	<td><input type="button" value="요청 수락" id ="accept" onclick="purchaseApprove(this,'${purchase.PURCHASE_NUM}','${purchase.BUYER_ID }','${purchase.CATEGORY_NUM }','${purchase.PRODUCT_NUM }','${purchase.SELLER_ID }');" /></td>
+	<td><input type="button" value="요청 수락" id ="accept" onclick="purchaseApprove(this,'${purchase.PURCHASE_NUM}','${purchase.BUYER_ID }','${purchase.CATEGORY_NUM }','${purchase.PRODUCT_NUM }','${purchase.SELLER_ID }','watingAccept${status.index+1}','completedAccept${status.index+1}');" /></td>
 	</c:if>
-	<c:if test="${purchase.STATUS == 1 }">	
-	<td><input type="button" value="수락 취소" onclick="purchaseApproveCancel(this, '${purchase.PURCHASE_NUM}','${purchase.BUYER_ID }','${purchase.CATEGORY_NUM }','${purchase.PRODUCT_NUM }','${purchase.SELLER_ID }');" /></td>
-	</c:if>
-	<td><input type="button" value="수락 거부" id ="refusal" onclick="deletesecondSellList('${purchase.PURCHASE_NUM }','${purchase.SELLER_ID }','${purchase.CATEGORY_NUM }','${purchase.PRODUCT_NUM }','${purchase.BUYER_ID}');" /></td>
+	<c:if test="${purchase.STATUS == 1 }">																		
+	<td><input type="button" value="수락 취소" onclick="purchaseApproveCancel(this, '${purchase.PURCHASE_NUM}','${purchase.BUYER_ID }','${purchase.CATEGORY_NUM }','${purchase.PRODUCT_NUM }','${purchase.SELLER_ID }','completedAccept${status.index+1}','watingAccept${status.index+1}');" /></td>
+	</c:if>  										
+	<td><input type="button" value="수락 거부" id ="refusal" onclick="deletesecondSellList('${purchase.PURCHASE_NUM }','${purchase.SELLER_ID }','${purchase.CATEGORY_NUM }','${purchase.PRODUCT_NUM }','${purchase.BUYER_ID}','completedAccept${status.index+1}','watingAccept${status.index+1}');" /></td>
 	</tr> 
 	<c:if test="${purchase.STATUS == '1'}">
-<script>
+<!-- <script>
 	document.getElementById("purchase"+${status.index+1}).disabled = false;
-</script>
+</script> -->
 </c:if>
 	</c:forEach>
 
