@@ -431,7 +431,12 @@ function alarmReadOfHead(ALARM_NUM, kind, var1, var2){
 				//data : allData,
 				success : function(data){
 					//alert(data.alarmSum);
-					document.getElementById('myAlarm').innerHTML = data.alarmSum;
+					var isONOFF = '${sessionScope.sessionAlarm}';
+					if(isONOFF == 'ON'){
+						document.getElementById('myAlarm').innerHTML = data.alarmSum;
+					}else if(isONOFF == 'OFF'){
+						document.getElementById('myAlarm').innerHTML = "0";
+					}
 				}
 			});	
 		}// alarm count end

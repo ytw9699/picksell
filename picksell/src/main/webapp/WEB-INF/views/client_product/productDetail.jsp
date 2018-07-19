@@ -208,6 +208,10 @@
 	</div>
 </div><!-- hiddenPurchaseListForm end -->
 
+<!-- <div class="hiddenSingoForm">
+	
+</div>
+ -->
 	<!-- 컨텐츠 시작 -->
 	<div class="contentWrap">
 	<form action="/picksell/purchase/order/single" method="post">
@@ -226,7 +230,7 @@
 		
 		<!-- 상품판매정보 시작 -->
 		<div class="seller_info">
-			<img src="/picksell/resources/img/imgready.gif" class="sellerProfileImg" />
+			<img src="/picksell/resources/productUpload/${resultObject.FIRST_IMG }" onerror="this.src='/picksell/resources/img/imgready.gif'" class="sellerProfileImg" />
 		</div>
 		<div class="product_info">
 			<!-- 이미판매중입니다 레이아웃 -->

@@ -599,8 +599,9 @@ public class mypageController {
 		         HttpServletRequest request){
 		      List<Map<String, Object>> resultHeaderAlarmList;
 		      String currentID = request.getSession().getAttribute("sessionId").toString();
+		      String currentONOFF = request.getSession().getAttribute("sessionAlarm").toString();
 		      
-		      if(currentID != null) {
+		      if(currentID != null && currentONOFF.equals("ON")) {
 		         resultHeaderAlarmList = mypageService.getMyAlarmHeaderList(currentID);
 		         return resultHeaderAlarmList;
 		      }else {

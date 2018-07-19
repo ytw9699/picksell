@@ -181,6 +181,12 @@ input.disab {
 .textTopWrapper {
     margin-top: 40px;
 }
+td.hasNoMyBasketProducts {
+    text-align: center;
+    padding: 70px 0;
+    font-size: 20px;
+    color: #999;
+}
 </style>
 </head>
 <body>
@@ -300,7 +306,6 @@ input.disab {
 	}
 </script>
 	<form action="/picksell/purchase/batchOrder" method="post">
-	<!-- <input type="button" value="에이젝스 버튼" id="btn" onclick="wow()" /> -->
 	<div class="textTopWrapper">
 		<span class="basketTEXT">장바구니</span> <span class="basketTotalTEXT">${listSize }</span>
 	</div>
@@ -314,7 +319,7 @@ input.disab {
 		<c:choose>
 		<c:when test="${empty resultList }">
 			<tr>
-				<td colspan="6">장바구니에 담은 상품이 없습니다</td>
+				<td colspan="6" class="hasNoMyBasketProducts">장바구니에 담은 상품이 없습니다</td>
 			</tr>
 		</c:when>
 		<c:when test="${!empty resultList }">

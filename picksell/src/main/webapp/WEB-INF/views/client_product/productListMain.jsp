@@ -9,6 +9,8 @@
 <style>
 .categoryWrap {
     border: 1px solid #ececec;
+    height: 50px;
+    padding: 20px;
 }
 span.product_category > a {
     border: 1px solid #dbdbdb;
