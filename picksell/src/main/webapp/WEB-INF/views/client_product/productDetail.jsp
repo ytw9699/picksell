@@ -43,7 +43,7 @@
 			response.text().then(function(text){
 				if(response.status == '200'){
 					alert('구매신청이 완료되었습니다! \n판매자의 수락까지 기다려주세요');
-					var inner = "<input type='button' value='구매신청 취소하기' onclick='purchaseCancel()' />";
+					var inner = "<input type='button' class='purchase_cancel' value='구매신청 취소하기' onclick=purchaseCancel('"+SELLER_ID+"','"+category_num+"','"+product_num+"','"+sessionId+"'); />";
 					document.getElementById('purchaseWrap').innerHTML = inner;	
 					alarmInsert(SELLER_ID, category_num, product_num, sessionId, "3");
 				}
@@ -56,7 +56,7 @@
 			response.text().then(function(text){
 				if(response.status == '200'){
 					alert('구매신청이 취소되었습니다!');
-					var inner = "<input type='button' value='구매신청하기' onclick='purchaseApply()' />";
+					var inner = "<input type='button' class='purchase_apply' value='구매신청하기' onclick=purchaseApply('"+SELLER_ID+"','"+category_num+"','"+product_num+"','"+sessionId+"'); />";
 					document.getElementById('purchaseWrap').innerHTML = inner;
 					alarmInsert(SELLER_ID, category_num, product_num, sessionId, "7");
 				}
