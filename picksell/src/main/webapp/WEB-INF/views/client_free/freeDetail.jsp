@@ -7,7 +7,13 @@
 <title>Insert title here</title>
 </head>
 <body>
-가즈아 
-
+무료나눔 게시글 상세보기 <br/>
+글 번호 : ${map.FB_NUM}<br/>
+글 제목 : ${map.FB_SUBJECT}<br/>
+작성자 : ${map.FB_WRITER}<br/>
+작성 일시 :${map.FB_REGDATE} <br/>
+내용 : ${map.FB_CONTENT}<br/>
+조회수 : ${map.FB_HITCOUNT}<br/>
+<br/>
 </body>
 </html>
