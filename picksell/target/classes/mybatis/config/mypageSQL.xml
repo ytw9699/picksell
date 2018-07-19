@@ -240,6 +240,11 @@ select * from ps_product a, PS_ORDERLIST b where b.ORDER_NUM = #{ORDER_NUM} and 
 	delete from PS_ALARM where ALARM_NUM = #{ALARM_NUM}
 </select>
 
+<!-- 알림,알람 전체삭제 -->
+<select id="AllAlarmDelete" resultType="int" parameterType="String">
+	delete from PS_ALARM where ALARM_TARGET = #{sessionId}
+</select>
+
 <select id="deletePurchaseList" parameterType="hashmap">
 	<!-- 구매리스트에서 구매신청번호에 해당하는거 한줄 삭제 -->
 	delete from ps_purchase_list where purchase_num = #{PURCHASE_NUM}

@@ -16,6 +16,7 @@
 <a href="/picksell/mypage/alarmSelect">전체 보기/</a>
 <a href="/picksell/mypage/alarmSelect?ALARM_CHECK=YES">읽은 알림/</a>
 <a href="/picksell/mypage/alarmSelect?ALARM_CHECK=NO">읽지 않은 알림/</a>
+<td><input type="button" value="전체 삭제" onclick="location.href='/picksell/mypage/AllAlarmDelete'"/></td>
 <br>
 <br>
 </head>
