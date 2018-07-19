@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="freeBoard">
+	
+	<select id="freeItem-all" resultType="hashmap">
+		SELECT * FROM PS_FREE_BOARD ORDER BY FB_NUM DESC
+	</select>
+	
+	<insert id="freeItem-insert" parameterType="hashmap">
+		insert into ps_free_board(fb_num, 
+								fb_subject, 
+								fb_writer, 
+								fb_regdate, 
+								fb_content, 
+								fb_hitcount) values(fb_seq.NEXTVAL, 
+													#{FB_SUBJECT}, 
+													#{FB_WRITER},
+													sysdate, 
+													#{FB_CONTENT}, 
+													0)
+	</insert>
+	
+	<select id="freeItem-detail" resultType="hashmap" parameterType="int">
+		select * from ps_free_board where fb_num = #{fb_num}
+	</select>
+	
+</mapper>

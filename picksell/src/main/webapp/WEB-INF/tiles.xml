@@ -77,6 +77,16 @@
 		<put-attribute name="body" value="/WEB-INF/views/client_free/freeBoard.jsp" />
 	</definition>
 	
+	<!-- 무료나눔 글쓰기-->
+	<definition name="client_free/freeWrite" extends="default">
+		<put-attribute name="body" value="/WEB-INF/views/client_free/freeWrite.jsp" />
+	</definition>
+	
+	<!-- 무료나눔 디테일-->
+	<definition name="client_free/freeDetail" extends="default">
+		<put-attribute name="body" value="/WEB-INF/views/client_free/freeDetail.jsp" />
+	</definition>
+	
 	<!-- 판매하기(판매방식선택) -->
 	<definition name="howtosell" extends="default">
 		<put-attribute name="body" value="/WEB-INF/views/client_product/howtosell.jsp" />
