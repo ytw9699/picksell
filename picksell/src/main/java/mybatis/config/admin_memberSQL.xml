@@ -53,22 +53,27 @@ PUBLIC " - //mybatis.org//DTD Config 3.0//EN"
     </select>
     
     <select id="adminSellHistory" resultType="hashmap" parameterType="string">
-   		SELECT c.order_num,c.buyer_id,c.total_price,c.step4_date,c.status,b.deal_status,a.product_num,a.order_quantity 
+   		SELECT c.order_num,c.buyer_id,c.total_price,c.step4_date,c.status,b.deal_status
    		FROM ps_orderlist a,ps_product b,ps_order c 
 		WHERE  c.order_num = a.order_num AND a.seller_id = #{id} AND b.product_num = a.product_num
 		AND c.step4_date is not null AND c.cancel_date is null AND status = '3'
-		group by c.order_num,c.buyer_id,c.total_price,c.step4_date,c.status,b.deal_status,a.product_num,a.order_quantity
+		group by c.order_num,c.buyer_id,c.total_price,c.step4_date,c.status,b.deal_status
         order by step4_date desc
     </select>
     
     <select id="adminPurchaseHistory" resultType="hashmap" parameterType="string">
-      SELECT a.order_num,a.total_price,a.step1_date,a.step4_date,b.orderlist_num,a.order_num,b.product_num,b.seller_id,b.order_quantity FROM ps_order a,ps_orderlist b 
+      SELECT a.order_num,a.total_price,a.step1_date,a.step4_date,b.seller_id FROM ps_order a,ps_orderlist b 
       WHERE a.buyer_id = #{id}
       AND a.order_num = b.order_num 
       AND a.step4_date is not null 
       AND a.cancel_date is null and a.status = '3'
-      group by a.order_num,a.total_price,a.step1_date,a.step4_date,b.orderlist_num,a.order_num,b.product_num,b.seller_id,b.order_quantity
-	  order by a.step4_date desc  
+      group by a.order_num,a.total_price,a.step1_date,a.step4_date,b.seller_id
+      order by a.order_num desc
+	</select>
+	
+	<select id="adminSubList" resultType="hashmap" parameterType="hashmap">
+	select b.category_num,b.subject from ps_orderlist a,ps_product b
+ 	where a.order_num = #{ORDER_NUM} and a.product_num = b.product_num
 	</select>
     
     <select id="adminSelling" resultType="hashmap" parameterType="string">

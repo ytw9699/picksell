@@ -178,6 +178,16 @@ public class AdminMemberController {
 	 
 		//판매내역개수
 		maplist = adminMemberService.adminSellHistory(id);
+		Map<String,Object> ordernum = new HashMap<String,Object>(); 
+		List sellSubList = new ArrayList();
+		for(int i=0; i<maplist.size(); i++) {
+			ordernum.put("ORDER_NUM",String.valueOf(maplist.get(i).get("ORDER_NUM")));
+			sellSubList.add(adminMemberService.adminSubList(ordernum));
+			
+		}
+		
+		
+		model.addAttribute("SubList",sellSubList);
 		model.addAttribute("total",maplist.size());
 		model.addAttribute("maplist", maplist);
 		return "adminSellHistory";
@@ -187,6 +197,16 @@ public class AdminMemberController {
 	@RequestMapping(value="/purchaseHistory/{memberId}") 
 	public String adminPurchaseHistory(@PathVariable("memberId") String id,Model model) throws Exception {
 		maplist = adminMemberService.adminPurchaseHistory(id);
+		Map<String,Object> order_num = new HashMap<String,Object>(); 
+		List purchaseList = new ArrayList();
+		
+		for(int i=0; i<maplist.size();i++) {
+			order_num.put("ORDER_NUM",String.valueOf(maplist.get(i).get("ORDER_NUM")));
+			purchaseList.add(adminMemberService.adminSubList(order_num));
+			
+		
+		}
+		model.addAttribute("SubList",purchaseList);
 		model.addAttribute("total",maplist.size());
 		model.addAttribute("maplist",maplist);
 		return "adminPurchaseHistory";
