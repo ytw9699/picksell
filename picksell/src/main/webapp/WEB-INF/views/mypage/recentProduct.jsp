@@ -24,7 +24,7 @@
 <td>제목</td>
 <td>가격</td>
 <td>본 날짜</td>
-<td><a href="/picksell/mypage/deleteRecenPd">전체 삭제</a></td>
+<td><input type="button" value="전체 삭제" onclick="location.href='/picksell/mypage/deleteRecenPd'"/></td>
 </tr> 
 	<c:forEach var="recentProduct" items="${recentlist}">
 	<tr>
@@ -40,7 +40,7 @@
 	</tr> 													
 	
 	</c:forEach>
-
+<tr><td>${pagingHtml} page</td></tr>
 </c:if>
 <c:if test="${fn:length(recentlist) < 1}">
 <p>최근 본 상품이 없습니다.</p>

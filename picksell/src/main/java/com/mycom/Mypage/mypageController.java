@@ -35,12 +35,13 @@ public class mypageController {
 	
 	//페이징
 	private int totalCount; 		 
-	private int blockCount = 5;	 
+	private int blockCount = 10;	 
 	private int blockPage = 5; 	 
 	private String pagingHtml;  
 	private ProductPaging page;
 	private orderListPaging page2;
 	private alarmSelectPaging page3;
+	private recentProductPaging page4;
 			
 	Map<String, Object> resultMap = new HashMap<String, Object>();//공통사용
 	
@@ -441,11 +442,28 @@ public class mypageController {
 			return "completing";//인수확인 및 거래 완료가 정상적으로 안됬을때
 	}
 	@RequestMapping("/mypage/recentProduct")
-	public String recentProduct(HttpSession session,Model model) {
+	public String recentProduct(HttpSession session,Model model,
+			@RequestParam(value="p", required=false, defaultValue="1") int currentPageNumber) {
 			
 			String sessionId =(String)session.getAttribute("sessionId");
 			
 				List<Map<String, Object>> recentlist = mypageService.recentlist(sessionId);
+				
+				totalCount = recentlist.size();
+				
+				page4 = new recentProductPaging(currentPageNumber, totalCount, blockCount, blockPage, "/picksell/mypage/recentProduct");
+				
+				pagingHtml = page4.getPagingHtml().toString();
+				
+				int lastCount = totalCount;
+				
+				if(page4.getEndCount() < totalCount)
+					lastCount = page4.getEndCount() + 1;
+				
+				recentlist = recentlist.subList(page4.getStartCount(), lastCount);
+				
+				model.addAttribute("pagingHtml", pagingHtml);
+				model.addAttribute("currentPage", currentPageNumber);
 				model.addAttribute("recentlist", recentlist);
 		
 		return "recentProduct";
