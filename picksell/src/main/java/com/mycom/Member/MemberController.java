@@ -267,8 +267,9 @@ import com.mycom.utils.FileUpload;
 		return "/join/findId";
 	}
 	
+	@ResponseBody
 	@RequestMapping("/join/findPassword")
-    public ModelAndView findPassword(HttpServletResponse reponse, HttpServletRequest request) throws Exception{
+    public Map<String, Object> findPassword(HttpServletResponse reponse, HttpServletRequest request) throws Exception{
    	 
    	 String email = request.getParameter("email");
    	 String name = request.getParameter("name"); 
@@ -285,13 +286,9 @@ import com.mycom.utils.FileUpload;
    	 
    	String findPasswordEmail = MemberService.findPassword(paramMap);
    	
-   	 sendEmail(findPasswordEmail, findPasswordEmail);
+   	sendEmail(findPasswordEmail, findPasswordEmail);//url메일 보내기
    	 
-   	 ModelAndView mv = new ModelAndView();
-   	 mv.setViewName("/join/findPassword");
-   	 mv.addObject("email",findPasswordEmail);
-   	 mv.addObject("authNum",findPasswordEmail);
-   	 return mv;
+   	return paramMap;
     }
 	}
 	

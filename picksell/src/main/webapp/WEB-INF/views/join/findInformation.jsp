@@ -12,6 +12,23 @@
 </head>
 <body>
 <script>
+
+function alarmDelete(ALARM_NUM){
+	var allData = "ALARM_NUM="+ALARM_NUM;
+			$.ajax({
+				type : "GET",
+				url : "/picksell/mypage/alarmDelete",
+				dataType : 'json',
+				data : allData,
+				success : function(data){
+				
+				alert("알림을 삭제했습니다");
+				location.reload();//일단 새로고침으로 페이지 이동..ㅠㅠinnerhtml안쓰고..새로고침안하는방법을..찾아봅시당..
+				}
+			});	
+}
+
+
 /* 다시 리팩토링
  function findCommon(paramObject){
 	if(document.paramObject.findId.name.value == ''){
