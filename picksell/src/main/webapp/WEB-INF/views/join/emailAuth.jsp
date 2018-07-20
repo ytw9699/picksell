@@ -9,7 +9,7 @@
 
 <script type="text/javascript">
 function windowclose(){
-	opener.document.joinForm.mailCheck.value="인증완료";
+	//opener.document.joinForm.mailCheck.value="인증완료";
 	window.close();
 }
 function check(){
