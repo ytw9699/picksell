@@ -28,6 +28,11 @@ public class FreeService implements FreeDAO {
 	public void freeCreate(Map<String, Object> map) {
 		sqlSessionTemplate.insert("freeBoard.freeItem-insert",map);
 	}
+	
+	//조회수 업데이트 
+	public void freeHitUpdate(int fb_num) {
+		sqlSessionTemplate.update("freeBoard.freeItem-hitUpdate",fb_num);
+	}
 		
 	//게시글 수정
 	public void freeUpdate(Map<String, Object> map) {

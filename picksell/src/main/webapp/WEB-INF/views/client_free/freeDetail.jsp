@@ -7,7 +7,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-무료나눔 게시글 상세보기 <br/>
+<form action="/picksell/free_board/list">
+    <input type="submit" value="목록보기" />
+</form><br/>
+무료나눔 게시글 상세보기 <br/><br/><br/>
 글 번호 : ${map.FB_NUM}<br/>
 글 제목 : ${map.FB_SUBJECT}<br/>
 작성자 : ${map.FB_WRITER}<br/>
@@ -15,5 +18,7 @@
 내용 : ${map.FB_CONTENT}<br/>
 조회수 : ${map.FB_HITCOUNT}<br/>
 <br/>
+
+
 </body>
 </html>

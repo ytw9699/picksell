@@ -70,6 +70,7 @@ public class FreeController {
 		System.out.println(fb_num);
 		
 		Map<String, Object> map = freeService.freeDetail(fb_num);
+		freeService.freeHitUpdate(fb_num);
 		System.out.println(map.size());
 		mav.addObject("map", map);
 		mav.setViewName("client_free/freeDetail");
