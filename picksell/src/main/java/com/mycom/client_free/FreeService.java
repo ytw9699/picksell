@@ -18,7 +18,22 @@ public class FreeService implements FreeDAO {
 	public List<Map<String, Object>> freeList(){
 		return sqlSessionTemplate.selectList("freeBoard.freeItem-all");
 	}
-		
+
+	//무료나눔 게시글 내 댓글 리스트 
+	public List<Map<String,Object>> commentList(int fb_num){
+		return sqlSessionTemplate.selectList("freeBoard.freeItem-comment",fb_num);
+	}
+	
+	//댓글 쓰기 
+	public void commentCreate(Map<String, Object> map) {
+		 sqlSessionTemplate.insert("freeBoard.freeItem-commentInsert", map);
+	}
+	
+	//댓글 삭제 
+	public void commentDelete(int fc_num) {
+		sqlSessionTemplate.delete("freeBoard.deleteComment", fc_num);
+	}
+	
 	//게시글 상세보기 
 	public Map<String, Object> freeDetail(int fb_num){
 		return sqlSessionTemplate.selectOne("freeBoard.freeItem-detail", fb_num);

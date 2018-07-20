@@ -132,13 +132,32 @@ public class FreeController {
 		
 		Map<String, Object> map = freeService.freeDetail(fb_num);
 		freeService.freeHitUpdate(fb_num);
+		List<Map<String,Object>> commentMap = freeService.commentList(fb_num);
 		System.out.println(map.size());
+		mav.addObject("commentMap", commentMap);
 		mav.addObject("map", map);
 		mav.setViewName("client_free/freeDetail");
 		
 		return mav;
 		
 	}
+	
+	@RequestMapping(value="/commentWrite/{fb_num}", method=RequestMethod.POST)
+	public String commentWrite(@PathVariable("fb_num") int fb_num, CommandMap map) throws IOException{
+		
+		freeService.commentCreate(map.getMap());
+		System.out.println(map);
+		return "redirect:/free_board/detail/"+fb_num;
+		
+		
+	}
+	
+	@RequestMapping("/deleteComment/{fc_num}/{fb_num}")
+	public String deleteComment(@PathVariable("fc_num") int fc_num, @PathVariable("fb_num") int fb_num) {
+		freeService.commentDelete(fc_num);
+		return "redirect:/free_board/detail/"+fb_num;
+	}
+	
 	
 }
 
