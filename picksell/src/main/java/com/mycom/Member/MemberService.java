@@ -52,7 +52,11 @@ public class MemberService implements MemberDao {
 		return sqlMapper.selectOne("member.findPassword", paramMap);
 	}
 	public void insertRePs(Map<String, Object> map) {//새로운비밀번호 설정
-		sqlMapper.update("member.insertRePs", map);
+		 sqlMapper.update("member.insertRePs", map);
+	}
+
+	public String selectRePs(Map<String, Object> map) {
+		return sqlMapper.selectOne("member.selectRePs", map);
 	}
 	
 }

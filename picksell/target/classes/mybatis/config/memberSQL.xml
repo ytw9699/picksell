@@ -97,6 +97,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		update PS_MEMBER set password = #{password1} 
 		where email = #{email} and id = #{id} and name = #{name}
 	</update>
-	
+
+	<select id="selectRePs" parameterType="hashmap" resultType="String">
+		SELECT password FROM PS_MEMBER where email = #{email} and id = #{id} and name = #{name}
+	</select>
 	
 </mapper>
