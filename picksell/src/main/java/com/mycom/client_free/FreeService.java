@@ -44,4 +44,13 @@ public class FreeService implements FreeDAO {
 		
 	}
 	
+	//특정오더 검색 (글제목 / 기부자)
+	public List<Map<String,Object>> freeSearch1(String search){
+		return null;
+	}
+	
+	public List<Map<String,Object>> freeSearch2(String search){
+		return null;
+	}
+	
 }

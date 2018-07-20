@@ -34,8 +34,26 @@ public class FreeController {
 	
 	ModelAndView mav = new ModelAndView();
 	
+	private int searchNum;
+	private String isSearch;
+	
+	private int currentPage = 1;
+	private int totalCount;
+	private int blockCount = 10;
+	private int blockPage = 5;
+	private String pagingHtml;
+	private Paging page;
+	
 	@RequestMapping("/list")
 	public ModelAndView freeList(HttpServletRequest request) {
+		
+		if(request.getParameter("currentPage") == null || request.getParameter("currentPage").trim().isEmpty() || request.getParameter("currentPage").equals("0")) {
+            currentPage = 1;
+        } else {
+            currentPage = Integer.parseInt(request.getParameter("currentPage"));
+        }
+		
+		
 		
 		List<Map<String, Object>> mp = freeService.freeList();
 		
