@@ -9,7 +9,7 @@
 
 <script type="text/javascript">
 function windowclose(){
-	opener.document.joinForm.mailCheck.value="인증완료";
+	//opener.document.commonForm.mailCheck.value="인증완료";
 	window.close();
 }
 function check(){
@@ -30,8 +30,8 @@ function check(){
 	}
 	if(form.authnum.value==authNum){
 		alert("인증완료");
-		opener.document.joinForm.mailCheck.value="인증완료";
-		opener.document.joinForm.email2.value=email2;
+		opener.document.commonForm.mailCheck.value="인증완료";
+		opener.document.commonForm.email2.value=email2;
 		window.close();
 	}
 }

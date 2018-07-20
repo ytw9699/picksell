@@ -86,7 +86,7 @@ function formIdSave(){
 		<h4>비밀번호 <input type="password" name="PASSWORD" id="PASSWORD" value="${cookiePW}"/>&nbsp;<span id="passwordCheckText"></span></h4>
 		<h4><input type="checkbox" name="idSave" id="idSave" value="save" />아이디/비밀번호 유지</h4>
 		<h4><input type="submit" class="next" value="로그인" /><input type="button" class="next" value="회원가입" onclick="location.href='/picksell/joinForm'"/></h4>
-		<h4><a href="/picksell/findInformation">아이디/비밀번호 찾기</a></h4>
+		<h4><a href="/picksell/findIdForm">아이디 찾기</a>/<a href="/picksell/resetPasswordForm">비밀번호 찾기</a></h4>
 	</form>
 </center>
 <c:if test="${formID != null}">
