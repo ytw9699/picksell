@@ -55,10 +55,10 @@ font-size: 18px;
 </head>
 <body>
 <script>
-function emailAuth(joinForm){
-	//alert(document.joinForm.email.value);
-	var url="emailAuth?email="+document.joinForm.email.value;
-	var reg=document.joinForm;
+function emailAuth(commonForm){
+	//alert(document.commonForm.email.value);
+	var url="emailAuth?email="+document.commonForm.email.value;
+	var reg=document.commonForm;
 	
 	if(reg.email.value==""){
 		alert("이메일을 입력해주세요");
@@ -163,7 +163,7 @@ $(document).ready(function(){
 
 <div id="c3" class="innerContentWrap">
 
-  <form method="post" name="joinForm" onsubmit="return check();">
+  <form method="post" name="commonForm" onsubmit="return check();">
 	<input type="hidden" id="kind" name="kind" value="1"/>
 	<!-- 기본 사업자회원  -->
 	<h2>회원가입</h2>
@@ -255,49 +255,49 @@ var idCheckNum = 0;//아이디 중복확인차 필요
 
 function check(){
 	
-	if(document.joinForm.id.value == ''){
+	if(document.commonForm.id.value == ''){
 		alert('아이디를 입력하세요');
-		document.joinForm.id.focus();
+		document.commonForm.id.focus();
 		return false;
 	}
-	else if(document.joinForm.password.value == ''){
+	else if(document.commonForm.password.value == ''){
 		alert('비밀번호를 입력하세요');
-		document.joinForm.password.focus();
+		document.commonForm.password.focus();
 		return false;
 	}
-	else if(document.joinForm.passwordCheck.value == ''){
+	else if(document.commonForm.passwordCheck.value == ''){
 		alert('비밀번호를 재입력하세요')
-		document.joinForm.passwordCheck.focus();
+		document.commonForm.passwordCheck.focus();
 		return false;
 	}
-	else if(document.joinForm.password.value != document.joinForm.passwordCheck.value){
+	else if(document.commonForm.password.value != document.commonForm.passwordCheck.value){
 		alert('비밀번호가 일치하지 않습니다');
-		document.joinForm.passwordCheck.focus();
+		document.commonForm.passwordCheck.focus();
 		return false;
 	}
-	else if(document.joinForm.name.value == ''){
+	else if(document.commonForm.name.value == ''){
 		alert('이름을 입력하세요')
-		document.joinForm.name.focus();
+		document.commonForm.name.focus();
 		return false;
 	}
-	else if(document.joinForm.email.value == ''){
+	else if(document.commonForm.email.value == ''){
 		alert('이메일을 입력하세요')
-		document.joinForm.email.focus();
+		document.commonForm.email.focus();
 		return false;
 	}
-	else if(document.joinForm.mailCheck.value != '인증완료'){
+	else if(document.commonForm.mailCheck.value != '인증완료'){
 		alert('이메일 인증을 해주세요') 
-		document.joinForm.email.focus();
+		document.commonForm.email.focus();
 		return false;
 	}
-	else if(document.joinForm.email.value != document.joinForm.email2.value){
+	else if(document.commonForm.email.value != document.commonForm.email2.value){
 		alert('인증한 이메일을 입력하세요')
-		document.joinForm.email.focus();
+		document.commonForm.email.focus();
 		return false;
 	}
 	else if(idCheckNum == 0){
 		alert('아이디 중복확인을 해주세요!');
-		document.joinForm.id.focus();
+		document.commonForm.id.focus();
 		return false;
 	}else
 	 	alert('회원가입이 완료되었습니다.로그인 해주세요');

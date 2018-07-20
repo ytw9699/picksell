@@ -244,9 +244,14 @@ import com.mycom.utils.FileUpload;
 		return buffer.toString();
 	}
 	
-	@RequestMapping("/findInformation")
-	public String findInformation() throws IOException{
-		return "/join/findForm";//계정찾기폼
+	@RequestMapping("/findIdForm")
+	public String findId() throws IOException{
+		return "/join/findIdForm";//계정찾기폼
+	}
+	
+	@RequestMapping("/findPasswordForm")
+	public String findPassword() throws IOException{
+		return "/join/findPasswordForm";//계정찾기폼
 	}
 	
 	@RequestMapping("/join/findId")
