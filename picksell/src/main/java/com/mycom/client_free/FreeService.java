@@ -44,13 +44,17 @@ public class FreeService implements FreeDAO {
 		
 	}
 	
-	//특정오더 검색 (글제목 / 기부자)
+	//특정오더 검색 (글제목)
 	public List<Map<String,Object>> freeSearch1(String search){
-		return null;
+		return sqlSessionTemplate.selectList("freeBoard.freeSearch1", search);
 	}
-	
+	//제목 + 내용
 	public List<Map<String,Object>> freeSearch2(String search){
-		return null;
+		return sqlSessionTemplate.selectList("freeBoard.freeSearch2", search);
+	}
+	//작성자
+	public List<Map<String,Object>> freeSearch3(String search){
+		return sqlSessionTemplate.selectList("freeBoard.freeSearch3", search);
 	}
 	
 }

@@ -31,4 +31,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		update ps_free_board set fb_hitcount = fb_hitcount + 1 where fb_num = #{FB_NUM}
 	</update>
 	
+	<!-- 제목 -->
+	<select id="freeSearch1" resultType="hashmap" parameterType="String">
+		select * from ps_free_board
+		where fb_subject LIKE  '%'||#{FB_SUBJECT}||'%'  
+		order by fb_num desc
+	</select>
+	
+	<!--제목 + 내용 -->
+	<select id="freeSearch2" resultType="hashmap" parameterType="String">
+		select * from ps_free_board
+		where fb_subject LIKE '%'||#{FB_SUBJECT}||'%' or fb_content LIKE '%'||#{FB_CONTENT}||'%'
+		order by fb_num desc
+	</select>
+	<!-- 작성자 -->
+	<select id="freeSearch3" resultType="hashmap" parameterType="String">
+		select * from ps_free_board
+		where fb_writer LIKE '%'||#{FB_WRITER}||'%'
+		order by fb_num desc
+	</select>
 </mapper>

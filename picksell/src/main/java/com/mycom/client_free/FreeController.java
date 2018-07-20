@@ -18,10 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.mycom.admin_order.AdminPaymentModel;
-import com.mycom.admin_order.AdminPaymentListModel;
-import com.mycom.admin_order.AdminPaymentService;
-import com.mycom.admin_products.AdminSellService;
+
 import com.mycom.common.Paging;
 import com.mycom.config.CommandMap;
 
@@ -53,14 +50,60 @@ public class FreeController {
             currentPage = Integer.parseInt(request.getParameter("currentPage"));
         }
 		
-		
-		
 		List<Map<String, Object>> mp = freeService.freeList();
 		
+		isSearch = request.getParameter("isSearch");
+		
+		if(isSearch != null) {
+			searchNum = Integer.parseInt(request.getParameter("searchNum"));
+			
+			if(searchNum==0) //제목 
+				mp = freeService.freeSearch1(isSearch);
+			else if(searchNum == 1) // 제목 + 내용
+				mp = freeService.freeSearch2(isSearch);
+			else if(searchNum == 2) // 기부자 
+				mp = freeService.freeSearch3(isSearch);
+			
+			totalCount = mp.size();
+			page = new Paging(currentPage, totalCount, blockCount, blockPage, "list", searchNum, isSearch);
+			pagingHtml = page.getPagingHtml().toString(); 
+			int lastCount = totalCount;
+			if (page.getEndCount() < totalCount)
+				lastCount = page.getEndCount() + 1;
+			
+			mp =mp.subList(page.getStartCount(), lastCount);
+			
+		
+		
+		mav.addObject("isSearch", isSearch);
+		mav.addObject("searchNum",searchNum);
+		mav.addObject("totalCount", totalCount);
+		mav.addObject("pagingHtml", pagingHtml);
+		mav.addObject("currentPage", currentPage);
 		mav.addObject("mp", mp);
 		mav.setViewName("client_free/freeBoard");
+		
 		return mav;
 		
+		}
+		
+		totalCount = mp.size();
+		page = new Paging(currentPage, totalCount, blockCount, blockPage, "list");
+		pagingHtml = page.getPagingHtml().toString(); 
+		int lastCount = totalCount;
+		if (page.getEndCount() < totalCount)
+			lastCount = page.getEndCount() + 1;
+		
+		mp =mp.subList(page.getStartCount(), lastCount);
+		
+		
+		mav.addObject("totalCount", totalCount);
+		mav.addObject("pagingHtml", pagingHtml);
+		mav.addObject("currentPage", currentPage);
+		mav.addObject("mp", mp);
+		mav.setViewName("client_free/freeBoard");
+		System.out.println(isSearch+searchNum+totalCount+pagingHtml+currentPage);
+		return mav;
 	}
 	
 	@RequestMapping("/writeForm")
