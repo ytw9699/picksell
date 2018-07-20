@@ -47,4 +47,8 @@ public class MemberService implements MemberDao {
 	public String findId(Map<String, Object> paramMap) {
 		return sqlMapper.selectOne("member.findId",paramMap);
 	}
+
+	public String findPassword(Map<String, Object> paramMap) {
+		return sqlMapper.selectOne("member.findPassword",paramMap);
+	}
 }

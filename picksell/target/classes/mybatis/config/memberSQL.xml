@@ -89,5 +89,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			SELECT ID FROM PS_MEMBER WHERE NAME = #{name} and EMAIL = #{email}
 	</select>
 	
+	<select id="findPassword" parameterType="hashmap" resultType="String">
+		SELECT EMAIL FROM PS_MEMBER WHERE NAME = #{name} and EMAIL = #{email} and ID = #{id}
+	</select>
+	
 	
 </mapper>

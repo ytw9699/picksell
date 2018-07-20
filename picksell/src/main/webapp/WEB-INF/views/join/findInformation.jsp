@@ -57,6 +57,17 @@ function findPsvali(){
 	alert("입력하신 이메일로 비밀번호 재설정 URL을 전송하였습니다");
 	return true;
 }
+function emailAuth(joinForm){
+	findPsvali();
+	var url="join/findPassword?email="+document.joinForm.email.value"&name="+document.joinForm.name.value"&id="+document.joinForm.id.value;
+	var reg=document.joinForm;
+/* 	if(reg.email.value==""){
+		alert("이메일을 입력해주세요");
+		reg.email.focus();
+		return false;
+	} */
+	open(url,"confirm","toolbar=no,location=no,status=no,menubar=no,scrollbars=no,resizable=no,width=300,height=400");
+}
 </script>
 <div><h3>아이디찾기</h3></div>
 <div><h3>입력한 이메일과 이름으로 아이디를 찾습니다</h3></div>
@@ -68,11 +79,11 @@ function findPsvali(){
 
 <div><h3>비밀번호찾기</h3></div>
 <div><h3>입력한 이메일로 비밀번호 재설정 URL이 전송됩니다</h3></div>
-<form action="join/findPassword" name="findPassword" method="GET" onsubmit="return findPsvali()">
+<form action="join/findPassword" name="findPassword" method="GET" onsubmit="return emailAuth(this.form)">
 <p><input type="text" name="id" placeholder="아이디를 입력해주세요" />
 <p><input type="text" name="email" placeholder="이메일을 입력해주세요" />
-<p><input type="text" name="name" placeholder="이름을 입력해주세요" />
-<input type="submit" value="이메일로 URL 전송" />
+<p><input type="text" name="name" placeholder="이름을 입력해주세요" />.
+<input type="submit"  value="이메일로 URL 전송"/>
 </form> 
 </body>
 </html>
