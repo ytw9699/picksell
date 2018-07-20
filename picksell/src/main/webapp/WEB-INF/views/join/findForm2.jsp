@@ -12,6 +12,9 @@
 </head>
 <body>
 <script>
+
+
+
 /* 다시 리팩토링
  function findCommon(paramObject){
 	if(document.paramObject.findId.name.value == ''){
@@ -25,7 +28,7 @@
 		return false;
 	}
 } */
-function findIdvali(){
+function findId222(){
 	if(document.findId.email.value == ''){
 		alert('이메일을 입력하세요');
 		document.findId.email.focus();
@@ -71,7 +74,7 @@ function emailAuth(joinForm){
 </script>
 <div><h3>아이디찾기</h3></div>
 <div><h3>입력한 이메일과 이름으로 아이디를 찾습니다</h3></div>
-<form action="join/findId" name="findId"  method="GET" onsubmit="return findIdvali()">
+<form action="join/findIds" name="findId"  method="GET" onsubmit="return mberValiCheck()">
 <p><input type="text" name="email" placeholder="이메일을 입력해주세요" />
 <p><input type="text" name="name" placeholder="이름을 입력해주세요" />
 <input type="submit" value="찾기" />
@@ -87,18 +90,3 @@ function emailAuth(joinForm){
 </form> 
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

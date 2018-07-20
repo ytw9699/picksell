@@ -191,15 +191,15 @@ import com.mycom.utils.FileUpload;
 	//이메일 인증 소스
 	public void sendEmail(String email, String authNum) {
 		String host = "smtp.gmail.com"; // smtp 서버
-		String subject = "yourtour 인증번호 전달";
-		String fromName = "yourtour 관리자";
+		String subject = "picksell";
+		String fromName = "picksell 관리자";
 		String from = "khiclass@gmail.com"; //보내는 메일
 		String to1 = email;
 		final String username = "khiclass@gmail.com";
 		final String password = "khacademy";
 		
 		
-		String content = "인증번호 = " +authNum;
+		String content =  authNum;
 		
 		try {
 			Properties props = new Properties();
@@ -246,7 +246,7 @@ import com.mycom.utils.FileUpload;
 	
 	@RequestMapping("/findInformation")
 	public String findInformation() throws IOException{
-		return "/join/findInformation";//계정찾기폼
+		return "/join/findForm";//계정찾기폼
 	}
 	
 	@RequestMapping("/join/findId")
@@ -267,8 +267,9 @@ import com.mycom.utils.FileUpload;
 		return "/join/findId";
 	}
 	
+	@ResponseBody
 	@RequestMapping("/join/findPassword")
-    public ModelAndView findPassword(HttpServletResponse reponse, HttpServletRequest request) throws Exception{
+    public Map<String, Object> findPassword(HttpServletResponse reponse, HttpServletRequest request) throws Exception{
    	 
    	 String email = request.getParameter("email");
    	 String name = request.getParameter("name"); 
@@ -282,20 +283,43 @@ import com.mycom.utils.FileUpload;
 	
  	 paramMap.put("id", id);
 	 
-   	 
    	String findPasswordEmail = MemberService.findPassword(paramMap);
    	
-   	 sendEmail(findPasswordEmail, findPasswordEmail);
+    String test = "http://localhost:8080/picksell/insertRePs?email="+email+"&name="+name+"&id="+id;
+   	sendEmail(findPasswordEmail, test);//url메일 보내기
    	 
-   	 ModelAndView mv = new ModelAndView();
-   	 mv.setViewName("/join/findPassword");
-   	 mv.addObject("email",findPasswordEmail);
-   	 mv.addObject("authNum",findPasswordEmail);
-   	 return mv;
+   	return paramMap;
     }
+	
+	@RequestMapping(value="/insertRePs",method=RequestMethod.GET)
+	public String insertRePs(HttpServletRequest request, Model model) throws IOException{
+		
+		 String email = request.getParameter("email");
+	   	 String name = request.getParameter("name"); 
+	   	 String id = request.getParameter("id"); 
+		
+		 Map<String, Object> paramMap = new HashMap<String, Object>();
+		
+		 paramMap.put("email", email);
+			
+	 	 paramMap.put("name", name);
+		
+	 	 paramMap.put("id", id);
+	 	 
+	 	model.addAttribute("paramMap", paramMap);
+	 	 
+		return "/join/insertRePs";//비밀번호 재입력
 	}
 	
+	@RequestMapping(value="/insertRePs",method=RequestMethod.POST)
+	public String insertRePs(CommandMap map, Model model) {	
+		
+		MemberService.insertRePs(map.getMap());//새로운비밀번호 설정
+		
+		return "redirect:/loginForm";
+	}
 	
+	}	
    	 
 	
 	

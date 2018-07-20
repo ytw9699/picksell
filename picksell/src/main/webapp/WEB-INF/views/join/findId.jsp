@@ -15,10 +15,10 @@
 <h3>
 <div>아이디찾기 결과</div>
 
-아이디는 ${findId}입니다
+<p>아이디는 ${findId}입니다</p>
 
-<p><a href="/picksell/loginForm" >로그인 하러가기 </a></p>
-<p><a href="/picksell/findInformation" >비밀번호 찾으러가기 </a></p>
+<p><a href="/picksell/loginForm" >로그인 </a></p>
+<p><a href="/picksell/findInformation" >비밀번호 찾기 </a></p>
 </h3>
 </body>
 </html>

@@ -93,5 +93,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT EMAIL FROM PS_MEMBER WHERE NAME = #{name} and EMAIL = #{email} and ID = #{id}
 	</select>
 	
+	<update id="insertRePs" parameterType="hashmap">
+		update PS_MEMBER set password = #{password1} 
+		where email = #{email} and id = #{id} and name = #{name}
+	</update>
+	
 	
 </mapper>

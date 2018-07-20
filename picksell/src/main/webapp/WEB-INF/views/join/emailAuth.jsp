@@ -16,8 +16,8 @@ function check(){
 	var form = document.authenform;
 	var authNum = ${authNum}; 
 	var email2 = '${email}';
-	alert(authNum);
-	alert(email2);
+	//alert(authNum);
+	//alert(email2);
 	
 	if(!form.authnum.value){
 		alert("인증번호를 입력하세요");

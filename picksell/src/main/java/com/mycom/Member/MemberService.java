@@ -45,10 +45,14 @@ public class MemberService implements MemberDao {
 	}
 
 	public String findId(Map<String, Object> paramMap) {
-		return sqlMapper.selectOne("member.findId",paramMap);
+		return sqlMapper.selectOne("member.findId", paramMap);
 	}
 
 	public String findPassword(Map<String, Object> paramMap) {
-		return sqlMapper.selectOne("member.findPassword",paramMap);
+		return sqlMapper.selectOne("member.findPassword", paramMap);
 	}
+	public void insertRePs(Map<String, Object> map) {//새로운비밀번호 설정
+		sqlMapper.update("member.insertRePs", map);
+	}
+	
 }
