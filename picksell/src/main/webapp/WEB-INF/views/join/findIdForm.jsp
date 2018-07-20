@@ -24,15 +24,13 @@ function findIdvali(){
 	return true;
 }
 </script>
-
 <div><h3>아이디찾기</h3></div>
 <div><h3>입력한 이메일과 이름으로 아이디를 찾습니다</h3></div>
-<form action="join/findId" name="findingId" method="GET" onsubmit="return findIdvali()">
-	<p>이메일: <input type="text" name="email" placeholder="이메일을 입력해주세요" />
-	<p>이름: <input type="text" name="name" placeholder="이름을 입력해주세요" />
+<form action="findIdResult" name="findingId" method="GET" onsubmit="return findIdvali()">
+	<p><h4>이메일:  <input type="text" name="email" placeholder="이메일을 입력해주세요" /></h4>
+	<p><h4>이름:    <input type="text" name="name" placeholder="이름을 입력해주세요" /></h4>
 	<input type="submit" value="찾기" />
 </form>
-
 
 </body>
 </html>

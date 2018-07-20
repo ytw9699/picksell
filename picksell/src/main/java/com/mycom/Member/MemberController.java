@@ -246,15 +246,10 @@ import com.mycom.utils.FileUpload;
 	
 	@RequestMapping("/findIdForm")
 	public String findId() throws IOException{
-		return "/join/findIdForm";//계정찾기폼
+		return "/join/findIdForm";//아이디 찾기폼
 	}
 	
-	@RequestMapping("/findPasswordForm")
-	public String findPassword() throws IOException{
-		return "/join/findPasswordForm";//계정찾기폼
-	}
-	
-	@RequestMapping("/join/findId")
+	@RequestMapping("/findIdResult")//아이디 찾기 결과
 	public String findId(HttpServletRequest request, Model model) throws IOException{
 	
 		String email = request.getParameter("email");
@@ -266,11 +261,24 @@ import com.mycom.utils.FileUpload;
 		
 		paramMap.put("name", name);
 		
-		String findId =  MemberService.findId(paramMap);
+		String findId = MemberService.findId(paramMap);
 		
-		model.addAttribute("findId", findId);
-		return "/join/findId";
+		if(findId == null) {
+			return "/join/findIdResult";
+		}
+		else {
+		model.addAttribute("findIdResult", findId);
+		}
+		return "/join/findIdResult";
 	}
+	
+	
+	@RequestMapping("/findPasswordForm")
+	public String findPassword() throws IOException{
+		return "/join/findPasswordForm";//패스워드 찾기폼
+	}
+	
+	
 	
 	@ResponseBody
 	@RequestMapping("/join/findPassword")
