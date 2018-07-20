@@ -24,7 +24,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 	
 	<select id="freeItem-detail" resultType="hashmap" parameterType="int">
-		select * from ps_free_board where fb_num = #{fb_num}
+		select * from ps_free_board where fb_num = #{FB_NUM}
 	</select>
+	
+	<update id="freeItem-hitUpdate" parameterType="int">
+		update ps_free_board set fb_hitcount = fb_hitcount + 1 where fb_num = #{FB_NUM}
+	</update>
 	
 </mapper>

@@ -28,6 +28,11 @@ public class FreeService implements FreeDAO {
 	public void freeCreate(Map<String, Object> map) {
 		sqlSessionTemplate.insert("freeBoard.freeItem-insert",map);
 	}
+	
+	//조회수 업데이트 
+	public void freeHitUpdate(int fb_num) {
+		sqlSessionTemplate.update("freeBoard.freeItem-hitUpdate",fb_num);
+	}
 		
 	//게시글 수정
 	public void freeUpdate(Map<String, Object> map) {
@@ -37,6 +42,15 @@ public class FreeService implements FreeDAO {
 	//게시글 삭제
 	public void freeDelete(Map<String, Object> map) {
 		
+	}
+	
+	//특정오더 검색 (글제목 / 기부자)
+	public List<Map<String,Object>> freeSearch1(String search){
+		return null;
+	}
+	
+	public List<Map<String,Object>> freeSearch2(String search){
+		return null;
 	}
 	
 }
