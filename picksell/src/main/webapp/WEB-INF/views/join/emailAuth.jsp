@@ -14,7 +14,10 @@ function windowclose(){
 }
 function check(){
 	var form = document.authenform;
-	var authNum = ${authNum};
+	var authNum = ${authNum}; 
+	var email2 = '${email}';
+	alert(authNum);
+	alert(email2);
 	
 	if(!form.authnum.value){
 		alert("인증번호를 입력하세요");
@@ -28,6 +31,7 @@ function check(){
 	if(form.authnum.value==authNum){
 		alert("인증완료");
 		opener.document.joinForm.mailCheck.value="인증완료";
+		opener.document.joinForm.email2.value=email2;
 		window.close();
 	}
 }

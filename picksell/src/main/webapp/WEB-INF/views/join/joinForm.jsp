@@ -56,8 +56,15 @@ font-size: 18px;
 <body>
 <script>
 function emailAuth(joinForm){
-	alert(document.joinForm.email2.value);
-	var url="emailAuth?email="+document.joinForm.email2.value;
+	//alert(document.joinForm.email.value);
+	var url="emailAuth?email="+document.joinForm.email.value;
+	var reg=document.joinForm;
+	
+	if(reg.email.value==""){
+		alert("이메일을 입력해주세요");
+		reg.email.focus();
+		return false;
+	}
 	
 	open(url,"confirm","toolbar=no,location=no,status=no,menubar=no,scrollbars=no,resizable=no,width=300,height=400");
 }
@@ -166,7 +173,6 @@ $(document).ready(function(){
 	<br/>
 	<br/>
 	 아이디<input type="text" name="id" />
-	<br/>
     <input type="button" value="중복확인" class="idCheckButton" onclick="openCheckID(this.form);" />
 	<br/>
         비밀번호<input type="password" name="password" id="password2"  onkeyup="passwordsCheck2()" />
@@ -175,7 +181,10 @@ $(document).ready(function(){
 	<br/>
 	이름<input type="text" name="name" />
 	<br/>
-	이메일<input type="text" name="email" id="email" />
+	이메일<input type="text" name="email" id="email"/>
+	<input type="hidden" name="email2" id="email2"/>
+	<input type="button" onclick="emailAuth(this.form)" value="본인 인증"/>
+	<input type="text" name="mailCheck" placeholder="인증이 완료되지 않았습니다" readonly/>
 	<br/>
 	주소(선택)<input type="text" name="address" />
 	<br/>
@@ -187,9 +196,6 @@ $(document).ready(function(){
 	<br/>
 	은행명(선택)<input type="text" name="bank" />
 	<br/>
-	<br/>
-	<input type="text" class="form-control" name="email2" placeholder="Confirm Email"><br/>
-	<button onclick="emailAuth(this.form)" name="confirmemail" type="button" class="btn btn-primary">Confirm Email</button><br/>
 	<div id="business">
 	사업자등록번호<input type="text" name="business_number" />
 	<br/>
@@ -276,6 +282,16 @@ function check(){
 	}
 	else if(document.joinForm.email.value == ''){
 		alert('이메일을 입력하세요')
+		document.joinForm.email.focus();
+		return false;
+	}
+	else if(document.joinForm.mailCheck.value != '인증완료'){
+		alert('이메일 인증을 해주세요') 
+		document.joinForm.email.focus();
+		return false;
+	}
+	else if(document.joinForm.email.value != document.joinForm.email2.value){
+		alert('인증한 이메일을 입력하세요')
 		document.joinForm.email.focus();
 		return false;
 	}
