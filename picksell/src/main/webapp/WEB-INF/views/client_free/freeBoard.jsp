@@ -21,7 +21,20 @@
     text-align: left;
     padding: 8px;
 }
-	
+
+.paging{text-align:center;height:32px;margin-top:5px;margin-bottom:15px;}
+.paging a,
+.paging strong{display:inline-block;width:36px;height:32px;line-height:28px;font-size:14px;border:1px solid #e0e0e0;margin-left:5px;
+-webkit-border-radius:3px;
+   -moz-border-radius:3px;
+		border-radius:3px;
+-webkit-box-shadow:1px 1px 1px 0px rgba(235,235,235,1);
+	-moz-box-shadow:1px 1px 1px 0px rgba(235,235,235,1);
+		  box-shadow:1px 1px 1px 0px rgba(235,235,235,1);
+}
+.paging a:first-child{margin-left:0;}
+.paging strong{color:#fff;background:#337AB7;border:1px solid #337AB7;}
+.paging .page_arw{font-size:11px;line-height:30px;}
 
 </style>
 </head>
@@ -56,5 +69,36 @@
 <br/>
 <input type="button" value="글쓰기" onclick="javascript:location.href='writeForm'">
 
+<div class="paging">
+		${pagingHtml}
+</div>
+
+<div class="row">
+		<div style="text-align:center;">
+			<div id="dataTables-example_filter" class="dataTables_filter">
+				<form action=""> 
+					<select class="form-control" name="searchNum" id="searchNum">
+						<option value="0">제목</option>
+						<option value="1">제목+내용</option>
+						<option value="2">기부자</option>
+					</select>
+					<input class="form-control" type="text" name="isSearch" id="isSearch"/>
+					<span>
+						<button type="submit" class="btn btn-default">검색</button>
+					</span>
+				</form>
+			</div>							
+		</div>				
+	</div>
+
 </body>
 </html>
+
+
+
+
+
+
+
+
+
