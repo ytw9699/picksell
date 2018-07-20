@@ -243,6 +243,27 @@ import com.mycom.utils.FileUpload;
 		}
 		return buffer.toString();
 	}
+	
+	@RequestMapping("/findInformation")
+	public String findInformation(HttpServletRequest request, Model model) throws IOException{
+		
+		
+		return "/join/findInformation";
+	}
+	
+	@RequestMapping("/join/findId")
+	public String findId(HttpServletRequest request, Model model) throws IOException{
+		
+		
+		return "/join/findId";
+	}
+	@RequestMapping("/join/findPassword")
+	public String findPassword(HttpServletRequest request, Model model) throws IOException{
+		
+		
+		
+		return "/join/findPassword";
+	}
 	}
 	
 	
