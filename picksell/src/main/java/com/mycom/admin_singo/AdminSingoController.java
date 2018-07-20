@@ -103,6 +103,7 @@ public class AdminSingoController {
 		
 		mav.addObject("singoList",singoList);
 		mav.addObject("singoList2", singoList2);
+		
 		mav.setViewName("admin_singo/list");
 		
 		return mav;
