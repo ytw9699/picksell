@@ -245,22 +245,32 @@ import com.mycom.utils.FileUpload;
 	}
 	
 	@RequestMapping("/findInformation")
-	public String findInformation(HttpServletRequest request, Model model) throws IOException{
-		
-		
-		return "/join/findInformation";
+	public String findInformation() throws IOException{
+		return "/join/findInformation";//계정찾기폼
 	}
 	
 	@RequestMapping("/join/findId")
 	public String findId(HttpServletRequest request, Model model) throws IOException{
+	
+		String email = request.getParameter("email");
+		String name = request.getParameter("name"); 
+	
+		Map<String, Object> paramMap = new HashMap<String, Object>();
 		
+		paramMap.put("email", email);
 		
+		paramMap.put("name", name);
+		
+		String findId =  MemberService.findId(paramMap);
+		
+		System.out.println(5);
+		model.addAttribute("findId", findId);
+		System.out.println(6);
 		return "/join/findId";
 	}
+	
 	@RequestMapping("/join/findPassword")
 	public String findPassword(HttpServletRequest request, Model model) throws IOException{
-		
-		
 		
 		return "/join/findPassword";
 	}

@@ -60,7 +60,7 @@ function findPsvali(){
 </script>
 <div><h3>아이디찾기</h3></div>
 <div><h3>입력한 이메일과 이름으로 아이디를 찾습니다</h3></div>
-<form action="join/findId" name="findId"  method="post" onsubmit="return findIdvali()">
+<form action="join/findId" name="findId"  method="GET" onsubmit="return findIdvali()">
 <p><input type="text" name="email" placeholder="이메일을 입력해주세요" />
 <p><input type="text" name="name" placeholder="이름을 입력해주세요" />
 <input type="submit" value="찾기" />
@@ -68,7 +68,7 @@ function findPsvali(){
 
 <div><h3>비밀번호찾기</h3></div>
 <div><h3>입력한 이메일로 비밀번호 재설정 URL이 전송됩니다</h3></div>
-<form action="join/findPassword" name="findPassword" method="post" onsubmit="return findPsvali()">
+<form action="join/findPassword" name="findPassword" method="GET" onsubmit="return findPsvali()">
 <p><input type="text" name="id" placeholder="아이디를 입력해주세요" />
 <p><input type="text" name="email" placeholder="이메일을 입력해주세요" />
 <p><input type="text" name="name" placeholder="이름을 입력해주세요" />
