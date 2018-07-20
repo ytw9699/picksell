@@ -694,9 +694,9 @@ public class mypageController {
 				String host = "smtp.gmail.com"; // smtp 서버
 				String subject = "yourtour 인증번호 전달";
 				String fromName = "yourtour 관리자";
-				String from = "kh18final2@gmail.com"; //보내는 메일
+				String from = "khiclass@gmail.com"; //보내는 메일
 				String to1 = email;
-				final String username = "kh18final2@gmail.com";
+				final String username = "khiclass@gmail.com";
 				final String password = "khacademy";
 				
 				
