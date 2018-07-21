@@ -10,29 +10,57 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>판매내역/배송조회</title>
 <style>
+.orderkind {
+    background-color: #7151fc;
+    color: white;
+    border-radius: 0px;
+    width: 180px;
+    height: 120px;
+    line-height: 21px;
+    display: inline-block;
+    text-align: center;
+    margin: -1px;
+}
+.my__stat__num-font {
+    color: #fff;
+    font-size: 50px;
+    line-height: 83px;
+}
+.my__i-stat1 {
+    font-size: 17px;
+    line-height: 28px;
+}
 </style>
 </head>
 <body>
-<table>
 
+<div>
 <a href="/picksell/mypage/saleList">
-전체보기[${saleCount.five}]/
-</a>
+<span class="orderkind"><div class="my__i-stat1">전체보기</div>
+<span class="my__stat__num-font">${saleCount.five}</span>개</span></a>
+
 <a href="/picksell/mypage/saleList?status=0">
-입금대기[${saleCount.zero}]/
-</a>
+<span class="orderkind" ><div class="my__i-stat1">입금대기</div>
+<span class="my__stat__num-font">${saleCount.zero}</span>개</span></a>
+
 <a href="/picksell/mypage/saleList?status=1">
-입금완료 및 배송대기중[${saleCount.one}]/
-</a>
+<span class="orderkind" ><div class="my__i-stat1">입금완료 및 배송대기중</div>
+<span class="my__stat__num-font">${saleCount.one}</span>개</span></a>
+
 <a href="/picksell/mypage/saleList?status=2">
-배송 및 인수확인 대기[${saleCount.two}]/
-</a>
+<span class="orderkind" ><div class="my__i-stat1">배송중 및 인수확인 대기</div>
+<span class="my__stat__num-font">${saleCount.two}</span>개</span></a>
+
 <a href="/picksell/mypage/saleList?status=3">
-인수확인 및 거래완료[${saleCount.three}]/
-</a>
+<span class="orderkind"><div class="my__i-stat1">인수확인 및 거래완료</div>
+<span class="my__stat__num-font">${saleCount.three}</span>개</span></a>
+
 <a href="/picksell/mypage/saleList?status=44">
-결제취소 및 반품[${saleCount.fourfour}]/
-</a>
+<span class="orderkind" ><div class="my__i-stat1">결제취소 및 반품</div>
+<span class="my__stat__num-font">${saleCount.fourfour}</span>개</span></a>
+
+</div>
+
 <c:if test="${fn:length(saleList) > 0}">
 <c:forEach var="ps_order" items="${saleList}" varStatus="saleListStatus">
     <br><h3>주문일:<fmt:formatDate value="${ps_order.STEP1_DATE}" pattern="yy년 MM월 dd일 hh:mm" />
@@ -87,6 +115,5 @@
 <div class="paging">
 			${pagingHtml} 페이지
 </div>
-</table>
 </body>
 </html>

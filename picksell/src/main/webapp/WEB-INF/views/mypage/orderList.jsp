@@ -10,15 +10,16 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>주문내역/배송조회</title>
 <style>
-span#myBasketSum {
-    background-color: #b3a1fe;
+.orderkind {
+    background-color: #7151fc;
     color: white;
     border-radius: 0px;
-    width: 104px;
-    height: 106px;
+    width: 180px;
+    height: 120px;
     line-height: 21px;
     display: inline-block;
     text-align: center;
+    margin: -1px;
 }
 .my__stat__num-font {
     color: #fff;
@@ -34,27 +35,27 @@ span#myBasketSum {
 <body>
 <div>
 <a href="/picksell/mypage/orderList">
-<span class="myBasketSum" id="myBasketSum"><span class="my__i-stat1">전체보기</span>
+<span class="orderkind"><div class="my__i-stat1">전체보기</div>
 <span class="my__stat__num-font">${orderCount.five}</span>개</span></a>
 
 <a href="/picksell/mypage/orderList?status=0">
-<span class="myBasketSum" id="myBasketSum"><span class="my__i-stat1">입금대기</span>
+<span class="orderkind" ><div class="my__i-stat1">입금대기</div>
 <span class="my__stat__num-font">${orderCount.zero}</span>개</span></a>
 
 <a href="/picksell/mypage/orderList?status=1">
-<span class="myBasketSum" id="myBasketSum"><span class="my__i-stat1">입금완료 및 배송대기중</span>
+<span class="orderkind" ><div class="my__i-stat1">입금완료 및 배송대기중</div>
 <span class="my__stat__num-font">${orderCount.one}</span>개</span></a>
 
 <a href="/picksell/mypage/orderList?status=2">
-<span class="myBasketSum" id="myBasketSum"><span class="my__i-stat1">배송중 및 인수확인 대기</span>
+<span class="orderkind" ><div class="my__i-stat1">배송중 및 인수확인 대기</div>
 <span class="my__stat__num-font">${orderCount.two}</span>개</span></a>
 
 <a href="/picksell/mypage/orderList?status=3">
-<span class="myBasketSum" id="myBasketSum"><span class="my__i-stat1">인수확인 및 거래완료</span>
+<span class="orderkind"><div class="my__i-stat1">인수확인 및 거래완료</div>
 <span class="my__stat__num-font">${orderCount.three}</span>개</span></a>
 
 <a href="/picksell/mypage/orderList?status=44">
-<span class="myBasketSum" id="myBasketSum"><span class="my__i-stat1">결제취소 및 반품</span>
+<span class="orderkind" ><div class="my__i-stat1">결제취소 및 반품</div>
 <span class="my__stat__num-font">${orderCount.fourfour}</span>개</span></a>
 
 </div>
