@@ -11,6 +11,27 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>최근 본 상품</title>
 <style>
+.paging {
+    margin-top: 40px;
+    text-align: center;
+}
+span.currentPaging {
+    width: 40px;
+    height: 40px;
+    display: inline-block;
+    background-color: #7151fc;
+    color: white;
+    border-radius: 30px;
+    font-size: 23px;
+}
+a.paging {
+    width: 40px;
+    height: 40px;
+    display: inline-block;
+    color: #666;
+    border-radius: 21px;
+    font-size: 23px;
+}
 </style>
 </head>
 <body>
@@ -40,11 +61,13 @@
 	</tr> 													
 	
 	</c:forEach>
-<tr><td>${pagingHtml} page</td></tr>
 </c:if>
 <c:if test="${fn:length(recentlist) < 1}">
 <p>최근 본 상품이 없습니다.</p>
 </c:if>
 </table>
+<div class="paging">
+ ${pagingHtml}
+</div>
 </body>
 </html>

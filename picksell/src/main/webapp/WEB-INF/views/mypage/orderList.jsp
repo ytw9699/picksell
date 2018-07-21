@@ -83,6 +83,27 @@
     left: 467px;
     bottom: 226px;
 }
+.paging {
+    margin-top: 40px;
+    text-align: center;
+}
+span.currentPaging {
+    width: 40px;
+    height: 40px;
+    display: inline-block;
+    background-color: #7151fc;
+    color: white;
+    border-radius: 30px;
+    font-size: 23px;
+}
+a.paging {
+    width: 40px;
+    height: 40px;
+    display: inline-block;
+    color: #666;
+    border-radius: 21px;
+    font-size: 23px;
+}
 </style>
 </head>
 <body>
@@ -153,7 +174,7 @@
 <p>내역이 없습니다</p>
 </c:if>
 <div class="paging">
-			${pagingHtml} 페이지
+			${pagingHtml}
 </div>
 </body>
 </html>

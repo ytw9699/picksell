@@ -10,7 +10,29 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-<title>알림 읽기</title>
+<style>
+.paging {
+    margin-top: 40px;
+    text-align: center;
+}
+span.currentPaging {
+    width: 40px;
+    height: 40px;
+    display: inline-block;
+    background-color: #7151fc;
+    color: white;
+    border-radius: 30px;
+    font-size: 23px;
+}
+a.paging {
+    width: 40px;
+    height: 40px;
+    display: inline-block;
+    color: #666;
+    border-radius: 21px;
+    font-size: 23px;
+}
+</style>
 <h2>알림</h2>
 <br>
 <a href="/picksell/mypage/alarmSelect">전체 보기/</a>
@@ -157,7 +179,9 @@ function alarmDelete(ALARM_NUM){
 <c:if test="${fn:length(alarmList) < 1}">
 <p>알람이 없습니다</p>
 </c:if>
-${pagingHtml} page
+<div class="paging">
+${pagingHtml}
+</div>
 </body>
 </html>
 
