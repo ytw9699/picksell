@@ -10,16 +10,54 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>주문내역/배송조회</title>
 <style>
+.orderkind {
+    background-color: #7151fc;
+    color: white;
+    border-radius: 0px;
+    width: 180px;
+    height: 120px;
+    line-height: 21px;
+    display: inline-block;
+    text-align: center;
+    margin: -1px;
+}
+.my__stat__num-font {
+    color: #fff;
+    font-size: 50px;
+    line-height: 83px;
+}
+.my__i-stat1 {
+    font-size: 17px;
+    line-height: 28px;
+}
 </style>
 </head>
 <body>
 <div>
-<a href="/picksell/mypage/orderList">전체보기[${orderCount.five}]/</a>
-<a href="/picksell/mypage/orderList?status=0">입금대기[${orderCount.zero}]/</a>
-<a href="/picksell/mypage/orderList?status=1">입금완료 및 배송대기중[${orderCount.one}]/</a>
-<a href="/picksell/mypage/orderList?status=2">배송 및 인수확인 대기[${orderCount.two}]/</a>
-<a href="/picksell/mypage/orderList?status=3">인수확인 및 거래완료[${orderCount.three}]/</a>
-<a href="/picksell/mypage/orderList?status=44">결제취소 및 반품[${orderCount.fourfour}]/</a>
+<a href="/picksell/mypage/orderList">
+<span class="orderkind"><div class="my__i-stat1">전체보기</div>
+<span class="my__stat__num-font">${orderCount.five}</span>개</span></a>
+
+<a href="/picksell/mypage/orderList?status=0">
+<span class="orderkind" ><div class="my__i-stat1">입금대기</div>
+<span class="my__stat__num-font">${orderCount.zero}</span>개</span></a>
+
+<a href="/picksell/mypage/orderList?status=1">
+<span class="orderkind" ><div class="my__i-stat1">입금완료 및 배송대기중</div>
+<span class="my__stat__num-font">${orderCount.one}</span>개</span></a>
+
+<a href="/picksell/mypage/orderList?status=2">
+<span class="orderkind" ><div class="my__i-stat1">배송중 및 인수확인 대기</div>
+<span class="my__stat__num-font">${orderCount.two}</span>개</span></a>
+
+<a href="/picksell/mypage/orderList?status=3">
+<span class="orderkind"><div class="my__i-stat1">인수확인 및 거래완료</div>
+<span class="my__stat__num-font">${orderCount.three}</span>개</span></a>
+
+<a href="/picksell/mypage/orderList?status=44">
+<span class="orderkind" ><div class="my__i-stat1">결제취소 및 반품</div>
+<span class="my__stat__num-font">${orderCount.fourfour}</span>개</span></a>
+
 </div>
 
 <c:if test="${fn:length(orderList) > 0}">
