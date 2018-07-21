@@ -110,5 +110,10 @@ function formIdSave(){
 	idSaveCheck();
    </script>
 </c:if>
+<c:if test="${resetSuccess != null}">
+	<script>
+	alert("비밀번호를 변경하였습니다.")
+   </script>
+</c:if>
 </body>
 </html>

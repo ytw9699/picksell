@@ -275,7 +275,7 @@ import com.mycom.utils.FileUpload;
 		return "/join/resetPasswordForm";
 	}
 	
-	@RequestMapping(value="/insertRePs",method=RequestMethod.POST)//비밀번호 재설정 결과
+	@RequestMapping(value="/resetPassword",method=RequestMethod.POST)//비밀번호 재설정 결과
 	public String insertRePs(CommandMap map, Model model) {	
 		
 	String selectRePs = MemberService.selectRePs(map.getMap());//해당하는 정보가있는지부터확인
@@ -286,8 +286,9 @@ import com.mycom.utils.FileUpload;
 		return "redirect:/resetPasswordForm";
 	}
 	else {
-	MemberService.insertRePs(map.getMap());//새로운비밀번호 설정
-	return "redirect:/loginForm";
+	MemberService.resetPassword(map.getMap());//새로운비밀번호 설정
+	model.addAttribute("resetSuccess", "resetSuccess");
+	return "loginForm";
 	}
 	}
 	}	

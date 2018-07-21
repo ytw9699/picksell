@@ -102,11 +102,12 @@ function check(){
 	});
 	}
 }  */
+
 </script>
 
 <div><h3>비밀번호 재설정</h3></div>
 <div><h3>이메일 인증후  비밀번호를 재설정 해주세요.</h3></div>
-<form action="/picksell/insertRePs" name="commonForm" method="POST" onsubmit="return check()">
+<form action="/picksell/resetPassword" name="commonForm" method="POST" onsubmit="return check()">
 	<p>아이디: <input type="text" name="id" />
 	<p>이름:  <input type="text" name="name"  />
 	<p>이메일: <input type="text" name="email"  />
