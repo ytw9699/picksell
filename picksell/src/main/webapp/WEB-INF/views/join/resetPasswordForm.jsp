@@ -119,5 +119,10 @@ function check(){
 	<p><input type="submit" value="재설정" />
 </form>
 
+<c:if test="${resetFail != null}">
+	<script>
+	alert("해당하는 정보가 없어 비밀번호 변경에 실패하였습니다.입력정보를 다시 확인해주세요.");
+   </script> 
+</c:if>
 </body>
 </html>
