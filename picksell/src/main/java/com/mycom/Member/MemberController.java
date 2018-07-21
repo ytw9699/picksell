@@ -277,13 +277,17 @@ import com.mycom.utils.FileUpload;
 	
 	@RequestMapping(value="/resetPassword",method=RequestMethod.POST)//비밀번호 재설정 결과
 	public String insertRePs(CommandMap map, Model model) {	
+	
+		
+	System.out.println(1);
 		
 	String selectRePs = MemberService.selectRePs(map.getMap());//해당하는 정보가있는지부터확인
 		
-	//System.out.println(selectRePs);
+	System.out.println(selectRePs);
 	
 	if(selectRePs == null) {
-		return "redirect:/resetPasswordForm";
+		model.addAttribute("resetFail", "resetFail");//해당하는 정보를 못가져옴
+		return "/join/resetPasswordForm";
 	}
 	else {
 	MemberService.resetPassword(map.getMap());//새로운비밀번호 설정
