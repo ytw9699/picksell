@@ -226,13 +226,13 @@
 			<td class="singoBodyTD">${resultObject.SELLER_ID }</td>
 		</tr>
 		<tr>
-			<td class="singoReasonTD"></td>
+			<td class="singoReasonTD">신고사유</td>
 			<td class="singoTextareaTD">
 			<textarea name="singo_content" class="singoTA"></textarea>
 			</td>
 		</tr>
 	</table>
-	<input type="submit" value="신고하기" />
+	<input type="submit" class="singoSUBMIT" value="신고하기" />
 	</form>
 </div>
 	<!-- 컨텐츠 시작 -->
