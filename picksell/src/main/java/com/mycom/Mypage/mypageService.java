@@ -150,7 +150,13 @@ public class mypageService implements mypageDao {
 		map.put("fourfour",sqlMapper.selectOne("mypage.orderCount44", sessionId));
 		 return map;
 	}
-	
+	public Map<String, Object> alarmCountKind(String sessionId) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("one",sqlMapper.selectOne("mypage.alarmCountKind1", sessionId));
+		map.put("two",sqlMapper.selectOne("mypage.alarmCountKind2", sessionId));
+		map.put("three",sqlMapper.selectOne("mypage.alarmCountKind3", sessionId));
+		 return map;
+	}
 
 	public Map<String, Object> saleCount(String sessionId) {
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -173,4 +179,5 @@ public class mypageService implements mypageDao {
 	public int AllAlarmDelete(String sessionId) {
 		return sqlMapper.delete("mypage.AllAlarmDelete",sessionId);
 	}
+
 	}

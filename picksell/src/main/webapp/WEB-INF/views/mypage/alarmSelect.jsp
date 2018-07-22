@@ -32,17 +32,113 @@ a.paging {
     border-radius: 21px;
     font-size: 23px;
 }
+.orderkind {
+    background-color: #7151fc;
+    color: white;
+    border-radius: 0px;
+    width: 180px;
+    height: 120px;
+    line-height: 21px;
+    display: inline-block;
+    text-align: center;
+    margin: -1px;
+}
+.my__stat__num-font {
+    color: #fff;
+    font-size: 50px;
+    line-height: 83px;
+}
+.my__i-stat1 {
+    font-size: 17px;
+    line-height: 28px;
+}
+.alarm1 {
+    display: inline-block;
+    width: 28%;
+    text-align: left;
+    margin: 1%;
+    margin-right: -13%;
+}
+.alarm2 {
+    display: inline-block;
+    width: 3%;
+    text-align: center;
+    margin: 0%;
+    margin-right: 0%;
+}
+.alarm3 {
+    display: inline-block;
+    width: 22%;
+    text-align: center;
+    margin: 1%;
+    margin-left: 7%;
+}
+.alarm4 {
+    display: inline-block;
+    width: 22%;
+    text-align: center;
+    margin: 1%;
+    margin-left: -15%;
+}
+.alarm0 {
+    font-size: 17px;
+}
+.next {
+    width: 86px;
+    margin: 0 auto;
+    margin-left: 42px;
+    border: none;
+    color: white;
+    background-color: #7151fc;
+    padding: 5px;
+    font-size: 12px;
+}
+#myAlarm2 {
+    margin-right: -180px;
+    background-color: #e80935;
+    color: white;
+    font-size: 12px;
+    border-radius: 203px;
+    width: 20px;
+    height: 21px;
+    line-height: 21px;
+    display: inline-block;
+    text-align: center;
+    margin-left: 178px;
+}
+#myAlarm3 {
+    margin-right: -180px;
+    color: white;
+    font-size: 12px;
+    border-radius: 203px;
+    width: 20px;
+    height: 21px;
+    line-height: 21px;
+    display: inline-block;
+    text-align: center;
+    margin-left: 178px;
+}
 </style>
-<h2>알림</h2>
-<br>
-<a href="/picksell/mypage/alarmSelect">전체 보기/</a>
-<a href="/picksell/mypage/alarmSelect?ALARM_CHECK=YES">읽은 알림/</a>
-<a href="/picksell/mypage/alarmSelect?ALARM_CHECK=NO">읽지 않은 알림/</a>
-<td><input type="button" value="전체 삭제" onclick="AllAlarmDelete()"/></td>
-<br>
-<br>
 </head>
 <body>
+<div>
+<a href="/picksell/mypage/alarmSelect">
+<span class="orderkind"><div class="my__i-stat1">알림 전체</div>
+<span class="my__stat__num-font">${alarmCountKind.one}</span>개</span></a>
+
+<a href="/picksell/mypage/alarmSelect?ALARM_CHECK=YES">
+<span class="orderkind"><div class="my__i-stat1">읽음</div>
+<span class="my__stat__num-font">${alarmCountKind.three}</span>개</span></a>
+
+<a href="/picksell/mypage/alarmSelect?ALARM_CHECK=NO">
+<span class="orderkind"><div class="my__i-stat1">읽지 않음</div>
+<span class="my__stat__num-font">${alarmCountKind.two}</span>개</span></a>
+
+<a href="#" onclick="AllAlarmDelete()"/>
+<span class="orderkind"><div class="my__i-stat1">알림 전체 삭제</div>
+<span class="my__stat__num-font">${alarmCountKind.one}</span>개</span></a>
+</div>
+
 <script>
 function AllAlarmDelete(){
 	if (confirm("정말 모두 삭제하시겠습니까?")) {
@@ -76,108 +172,116 @@ function alarmDelete(ALARM_NUM){
 			});	
 }
 </script>
+<div class="alarm0">
 <c:if test="${fn:length(alarmList) > 0}" >
 	<c:forEach var="alarmMap" items="${alarmList}" varStatus="Index">
-		
-		<td>${Index.index+1}.</td>
+	<div class="alarm2"> ${Index.index+1} </div>
 			 
 		<c:if test="${alarmMap.ALARM_KIND == '2'}">
-			<td>
+			<div class="alarm1">
 			<a href="/picksell/products/detail/${alarmMap.ALARM_VARIABLE1}/${alarmMap.ALARM_VARIABLE2}" onclick="alarmRead('${alarmMap.ALARM_NUM}')">
 			 		${alarmMap.ALARM_WRITER}님께서 구매신청을 수락하셨습니다.
 			</a>
-			</td>
+			</div>
 		</c:if>
 		
 		 <c:if test="${alarmMap.ALARM_KIND == '3'}">
-				<td>
+				<div class="alarm1">
 				<a href="/picksell/products/detail/${alarmMap.ALARM_VARIABLE1}/${alarmMap.ALARM_VARIABLE2}" onclick="alarmRead('${alarmMap.ALARM_NUM}')">
 					${alarmMap.ALARM_WRITER}님께서 구매신청을 하셨습니다.
 				</a>
-				</td>
+				</div>
 	     </c:if>
+	    
 	     
 	      <c:if test="${alarmMap.ALARM_KIND == '4'}"> 
-				<td>
+				<div class="alarm1">
 				<a href="/picksell/mypage/orderDetail/${alarmMap.ALARM_VARIABLE1}" onclick="alarmRead('${alarmMap.ALARM_NUM}')">
 					${alarmMap.ALARM_WRITER}님께서 배송을 시작하셨습니다.
 					
 				</a>
-				</td>
+				</div>
 	     </c:if>
 	     
 	     <c:if test="${alarmMap.ALARM_KIND == '5'}">
-				<td>
+				<div class="alarm1">
 				<a href="/picksell/products/detail/${alarmMap.ALARM_VARIABLE1}/${alarmMap.ALARM_VARIABLE2}" onclick="alarmRead('${alarmMap.ALARM_NUM}')">
 					${alarmMap.ALARM_WRITER}님께서 구매신청을 거부 하셨습니다.
 				</a>
-				</td>
+				</div>
 	     </c:if>
 	     
 	     <c:if test="${alarmMap.ALARM_KIND == '6'}">
-				<td>
+				<div class="alarm1">
 				<a href="/picksell/mypage/saleDetail/${alarmMap.ALARM_VARIABLE1}" onclick="alarmRead('${alarmMap.ALARM_NUM}')">
 					${alarmMap.ALARM_WRITER}님께서 인수확인 및 거래 종료 하셨습니다.
 				</a>
-				</td>
+				</div>
 	     </c:if>
 	     
 	     <c:if test="${alarmMap.ALARM_KIND == '7'}">
-				<td>
+				<div class="alarm1">
 				<a href="/picksell/products/detail/${alarmMap.ALARM_VARIABLE1}/${alarmMap.ALARM_VARIABLE2}" onclick="alarmRead('${alarmMap.ALARM_NUM}')">
-					${alarmMap.ALARM_WRITER}님께서 구매신청을 다시 취소 하셨습니다.
+					${alarmMap.ALARM_WRITER}님께서 구매신청을 취소 하셨습니다.
 				</a>
-				</td>
+				</div>
 	     </c:if>
 	     
 	     <c:if test="${alarmMap.ALARM_KIND == '8'}">
-				<td>
+				<div class="alarm1">
 				<a href="/picksell/products/detail/${alarmMap.ALARM_VARIABLE1}/${alarmMap.ALARM_VARIABLE2}" onclick="alarmRead('${alarmMap.ALARM_NUM}')">
 					${alarmMap.ALARM_WRITER}님께서 구매신청 수락을 다시 취소 하셨습니다.
 				</a>
-				</td>
+				</div>
 	     </c:if>
 	     
 	      <c:if test="${alarmMap.ALARM_KIND == '9'}">
-				<td>
+				<div class="alarm1">
 				<a href="/picksell/mypage/saleList" onclick="alarmRead('${alarmMap.ALARM_NUM}')">
 					${alarmMap.ALARM_WRITER}님께서 주문을 완료하셨습니다
 				</a>
-				</td>
+				</div>
 	     </c:if>
 	     
 	     <c:if test="${alarmMap.ALARM_KIND == '10'}">
-				<td>
+				<div class="alarm1">
 				<a href="/picksell/mypage/saleDetail/${alarmMap.ALARM_VARIABLE1}" onclick="alarmRead('${alarmMap.ALARM_NUM}')">
 					${alarmMap.ALARM_WRITER}님께서 결제를 취소 하셨습니다.
 				</a>
-				</td>
+				</div>
 	     </c:if>
 	     
 	     <c:if test="${alarmMap.ALARM_KIND == '11'}">
-				<td>
+				<div class="alarm1">
 				<a href="/picksell/mypage/saleDetail/${alarmMap.ALARM_VARIABLE1}" onclick="alarmRead('${alarmMap.ALARM_NUM}')">
 					${alarmMap.ALARM_WRITER}님께서 결제를 취소 하셨습니다.
 				</a>
-				</td>
+				</div>
 	     </c:if>
 	     
 	     <c:if test="${alarmMap.ALARM_KIND == '12'}">
-				<td>
+				<div class="alarm1">
 				<a href="/picksell/admin_order/list?searchNum=0&isSearch=${alarmMap.ALARM_WRITER}" onclick="alarmRead('${alarmMap.ALARM_NUM}')">
 					${alarmMap.ALARM_WRITER}님께서 입금 하셨습니다. 관리자는 확인후 입금완료 바랍니다.
 				</a>
-				</td>
+				</div>
 	     </c:if>
-	     		<td>-<fmt:formatDate value="${alarmMap.ALARM_REGDATE}" pattern="yy-MM-dd HH:mm" /></td>
-	     		<td>
-	     		<input type="button" id="alarmDelete" value="삭제" onclick="alarmDelete('${alarmMap.ALARM_NUM}')" />
-	     		</td>
+	     		<c:if test="${alarmMap.ALARM_CHECK == 'NO'}">
+	     		<span class="myAlarm2" id="myAlarm2">1</span>
+	     		</c:if>
+	     		<c:if test="${alarmMap.ALARM_CHECK == 'YES'}">
+	     		<span class="myAlarm3" id="myAlarm3"></span>
+	     		</c:if>
+	     		<div class="alarm3"><fmt:formatDate value="${alarmMap.ALARM_REGDATE}" pattern="yy-MM-dd HH:mm" /></div>
+	     		<div class="alarm4">
+	     		<input type="button" class="next" id="alarmDelete" value="삭제" onclick="alarmDelete('${alarmMap.ALARM_NUM}')" />
+	     		</div>
 		<br>
 	</c:forEach>
 </c:if>
+</div>
 <c:if test="${fn:length(alarmList) < 1}">
-<p>알람이 없습니다</p>
+<div>알람이 없습니다</div>
 </c:if>
 <div class="paging">
 ${pagingHtml}

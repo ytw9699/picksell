@@ -11,23 +11,26 @@
 <title>구매내역</title>
 <style>
 table.purchaseTABLE {
-    width: 80%;
-    margin-top: 10px;
+    width: 95%; 
 }
 .next {
-    width: 150px;
+    width: 80%;
     margin: 0 auto;
-    margin-left: 10px;
+    margin-left: 0%;
     border: none;
     color: white;
     background-color: #7151fc;
-    padding: 12px;
+    padding: 8%;
     font-size: 14px;
 }
-.tdtd {
-    width: 10%;
+.subjectTd {
+    width: 16%;
     font-size: 17px;
-    margin: 0px auto;
+    text-align: center;
+}
+.tdtd {
+    width: 12%;
+    font-size: 17px;
     text-align: center;
 }
 .tbodys{
@@ -76,17 +79,17 @@ margin-top: 10%;
 	<tr>
 		<td class="tdtd">
 			<a href="/picksell/products/detail/${purchase.CATEGORY_NUM }/${purchase.PRODUCT_NUM }">
-				<img src="/picksell/resources/productUpload/${purchase.FIRST_IMG }" style="width: 170px; margin: 5px;" onerror="this.src='/picksell/resources/img/imgready.gif'" />
+<img src="/picksell/resources/productUpload/${purchase.FIRST_IMG }" style="width: 90%; margin: 1%;" onerror="this.src='/picksell/resources/img/imgready.gif'" />
 			</a>
 		</td>
-		<td class="tdtd"><a href="/picksell/products/detail/${purchase.CATEGORY_NUM }/${purchase.PRODUCT_NUM }">${purchase.SUBJECT }</a></td>
+		<td class="subjectTd"><a href="/picksell/products/detail/${purchase.CATEGORY_NUM }/${purchase.PRODUCT_NUM }">${purchase.SUBJECT }</a></td>
 		<td class="tdtd"><fmt:formatNumber value="${purchase.PRICE }" pattern="#,###.##" /> 원</td>
 		<td class="tdtd"><fmt:formatDate value="${purchase.REGDATE}" pattern="yy. MM. dd. hh:mm" /></td>
 		<c:if test="${purchase.STATUS == '0'}">
-		<td class="tdtd">요청 수락 대기중</td>
+		<td class="tdtd">수락 대기중</td>
 		</c:if>
 		<c:if test="${purchase.STATUS == '1'}">
-		<td class="tdtd">요청 수락 완료</td>
+		<td class="tdtd">수락 완료</td>
 		</c:if>																	
 		<td class="tdtd">${purchase.SELLER_ID }</td>
 		<td class="tdtd"><input type="button" value="취소" class="next" id ="cancel" onclick="deletePurchaseList('${purchase.PURCHASE_NUM }','${purchase.SELLER_ID }','${purchase.CATEGORY_NUM }','${purchase.PRODUCT_NUM }','${purchase.BUYER_ID}');" /></td>

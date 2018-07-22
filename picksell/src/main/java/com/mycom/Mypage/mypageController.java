@@ -383,6 +383,7 @@ public class mypageController {
 	@RequestParam(value="ALARM_CHECK", required=false, defaultValue="ALL") String ALARM_CHECK,//기본값 ALL 은 전체보기
 	@RequestParam(value="p", required=false, defaultValue="1") int currentPageNumber
 	) {	
+		
 		Map<String, Object> parameterMap = new HashMap<String, Object>();
 		
 		String sessionId =(String)session.getAttribute("sessionId");//세션아이디값
@@ -406,10 +407,14 @@ public class mypageController {
 			lastCount = page3.getEndCount() + 1;
 		
 		alarmList = alarmList.subList(page3.getStartCount(), lastCount);
-	   
-	    model.addAttribute("pagingHtml", pagingHtml);
 		
+		Map<String, Object> alarmCountKind =  mypageService.alarmCountKind(sessionId);
+	    System.out.println(alarmCountKind);
+	    model.addAttribute("pagingHtml", pagingHtml);
+		 
 		model.addAttribute("alarmList", alarmList);
+		
+		model.addAttribute("alarmCountKind", alarmCountKind);
 		
 		return "alarmSelect";
     } 
