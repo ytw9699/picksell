@@ -326,3 +326,77 @@ span.status_onTEXT {
     left: 30%;
     border: 3px solid #7151fc;
 }
+span.singoHeaderTEXT {
+    color: #23231f;
+    display: block;
+    background-color: #f2f2f4;
+    padding: 10px;
+    font-size: 18px;
+}
+span.singoSubHeaderTEXT {
+    display: block;
+    color: #8f918f;
+    font-size: 14px;
+    padding: 10px;
+}
+td.singoHeadTD {
+    background-color: #f2f2f4;
+    padding: 10px;
+    width: 20%;
+    border-top: 1px solid #d6d6d6;
+}
+td.singoBodyTD {
+    padding: 10px;
+    border-top: 1px solid #d6d6d6;
+}
+td.singoReasonTD {
+    background-color: #f2f2f4;
+    padding: 10px;
+    border-top: 1px solid #d6d6d6;
+}
+td.singoTextareaTD {
+    border-top: 1px solid #d6d6d6;
+}
+textarea.singoTA {
+    width: 100%;
+    height: 200px;
+    resize: none;
+    font-size: 15px;
+    color: #666;
+    padding: 9px;
+    box-sizing: border-box;
+    border: none;
+}
+table.singoTABLE {
+    width: 90%;
+    display: block;
+    margin: 0 auto;
+    margin-top: 30px;
+}
+
+
+.singoSUBMIT{
+    display: block;
+    border: 1px solid #7151fc;
+    
+    background-color: white;
+    color: #7151fc;
+    padding: 10px;
+    font-size: 15px;
+    width: 30%;
+    margin: 40px auto;
+}
+
+input#singoOPEN {
+    background: url(/picksell/resources/img/singoBtnBack.png) 50% 30% no-repeat;
+    border: 1px solid #dedede;
+    color: #666;
+    display: block;
+    margin: 0 auto;
+    margin-top: 40px;
+    width: 100px;
+    height: 100px;
+    border-radius: 85px;
+    outline: none;
+    padding-top: 20px;
+}
