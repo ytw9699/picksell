@@ -378,10 +378,25 @@ table.singoTABLE {
 .singoSUBMIT{
     display: block;
     border: 1px solid #7151fc;
+    
     background-color: white;
     color: #7151fc;
     padding: 10px;
     font-size: 15px;
     width: 30%;
     margin: 40px auto;
+}
+
+input#singoOPEN {
+    background: url(/picksell/resources/img/singoBtnBack.png) 50% 30% no-repeat;
+    border: 1px solid #dedede;
+    color: #666;
+    display: block;
+    margin: 0 auto;
+    margin-top: 40px;
+    width: 100px;
+    height: 100px;
+    border-radius: 85px;
+    outline: none;
+    padding-top: 20px;
 }
