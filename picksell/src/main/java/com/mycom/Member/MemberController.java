@@ -6,8 +6,17 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 
 import javax.annotation.Resource;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeUtility;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -158,6 +167,135 @@ import com.mycom.utils.FileUpload;
 		}
 		return "/join/checkJoinId";
 	}
+	
+	@RequestMapping("/emailAuth")
+     public ModelAndView emailAuth(HttpServletResponse reponse, HttpServletRequest request) throws Exception{
+    	 
+    	 String email = request.getParameter("email");
+    	 String authNum = "";
+    	 //int check = 0;
+    	 
+    	 authNum = RandomNum();
+    	 //System.out.println(email);
+    	 sendEmail(email.toString(), authNum);
+    	 
+    	 ModelAndView mv = new ModelAndView();
+    	 mv.setViewName("/join/emailAuth");
+    	 mv.addObject("email",email);
+    	 mv.addObject("authNum",authNum);
+    	 
+    	 return mv;
+    	 
+     }
+	//이메일 인증 소스
+	public void sendEmail(String email, String authNum) {
+		String host = "smtp.gmail.com"; // smtp 서버
+		String subject = "picksell 인증";
+		String fromName = "picksell 관리자";
+		String from = "khiclass@gmail.com"; //보내는 메일
+		String to1 = email;
+		final String username = "khiclass@gmail.com";
+		final String password = "khacademy";
+		
+		String content = "인증번호는 "+authNum+" 입니다.";
+		
+		try {
+			Properties props = new Properties();
+			props.put("mail.smtp.starttls.enable", "true");
+			props.put("mail.transport.protocol", "smtp");
+			props.put("mail.smtp.host", host);
+			props.setProperty("mail.smtp.socketFactory.class","javax.net.ssl.SSLSocketFactory");
+			props.put("mail.smtp.port", "465");
+			props.put("mail.smtp.user", from);
+			props.put("mail.smtp.auth", "true");
+			
+			Session mailSession = Session.getInstance(props, new javax.mail.Authenticator() {
+				protected PasswordAuthentication getPasswordAuthentication() {
+					String un = username;
+					String pw = password;
+					return new PasswordAuthentication(un,pw);
+				}
+			});
+			
+			Message msg = new MimeMessage(mailSession);
+			msg.setFrom(new InternetAddress(from, MimeUtility.encodeText(fromName, "UTF-8", "B")));
+			
+			InternetAddress[] address1 = {new InternetAddress(to1)};
+			msg.setRecipients(Message.RecipientType.TO, address1);
+			msg.setSubject(subject);
+			msg.setSentDate(new java.util.Date());
+			msg.setContent(content, "text/html;charset=utf-8");
+			
+			Transport.send(msg);
+		}catch(MessagingException e) { 
+			e.printStackTrace(); 
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
+	public String RandomNum() {
+		StringBuffer buffer = new StringBuffer();
+		for(int i = 0; i<=6; i++) {
+			int n = (int) (Math.random() * 10);
+			buffer.append(n);
+		}
+		return buffer.toString();
+	}
+	
+	@RequestMapping("/findIdForm")
+	public String findId() throws IOException{
+		return "/join/findIdForm";//아이디 찾기폼
+	}
+	
+	@RequestMapping("/findIdResult")//아이디 찾기 결과
+	public String findId(HttpServletRequest request, Model model) throws IOException{
+	
+		String email = request.getParameter("email");
+		String name = request.getParameter("name"); 
+	
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		
+		paramMap.put("email", email);
+		
+		paramMap.put("name", name);
+		
+		String findId = MemberService.findId(paramMap);
+		
+		if(findId == null) {
+			return "/join/findIdResult";
+		}
+		else {
+		model.addAttribute("findIdResult", findId);
+		}
+		return "/join/findIdResult";
+	}
+	
+	@RequestMapping("/resetPasswordForm")//비밀번호 재설정폼
+	public String resetPasswordForm() throws IOException{
+		return "/join/resetPasswordForm";
+	}
+	
+	@RequestMapping(value="/resetPassword",method=RequestMethod.POST)//비밀번호 재설정 결과
+	public String insertRePs(CommandMap map, Model model) {	
+	
+		
+	System.out.println(1);
+		
+	String selectRePs = MemberService.selectRePs(map.getMap());//해당하는 정보가있는지부터확인
+		
+	System.out.println(selectRePs);
+	
+	if(selectRePs == null) {
+		model.addAttribute("resetFail", "resetFail");//해당하는 정보를 못가져옴
+		return "/join/resetPasswordForm";
+	}
+	else {
+	MemberService.resetPassword(map.getMap());//새로운비밀번호 설정
+	model.addAttribute("resetSuccess", "resetSuccess");
+	return "loginForm";
+	}
+	}
+	}	
+   	 
 	
 	

@@ -11,40 +11,100 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>최근 본 상품</title>
 <style>
+.paging {
+    margin-top: 40px;
+    text-align: center;
+}
+span.currentPaging {
+    width: 40px;
+    height: 40px;
+    display: inline-block;
+    background-color: #7151fc;
+    color: white;
+    border-radius: 30px;
+    font-size: 23px;
+}
+a.paging {
+    width: 40px;
+    height: 40px;
+    display: inline-block;
+    color: #666;
+    border-radius: 21px;
+    font-size: 23px;
+}
+.tdtd {
+    width: 12%;
+    font-size: 17px;
+    text-align: center;
+}
+table.purchaseTABLE {
+    width: 75%;
+}
+.next {
+    width: 65%;
+    margin: 0 auto;
+    margin-left: 0%;
+    border: none;
+    color: white;
+    background-color: #7151fc;
+    padding: 6%;
+    font-size: 14px;
+}
+.alldelete {
+    width: 65%;
+    margin: 0 auto;
+    margin-left: 0%;
+    border: none;
+    color: white;
+    background-color: #e80935;
+    padding: 6%;
+    font-size: 14px;
+}
+.subjectTd {
+    width: 16%;
+    font-size: 17px;
+    text-align: center;
+}
+.tbodys{
+width: 10%;
+margin-top: 10%;
+}
 </style>
 </head>
 <body>
 <h2>최근 본 상품</h2>
 최근 본 상품을 기준으로 최대 50개까지 저장됩니다.
 
-<table>
+
+<div class="purchaseList">	
+<table class="purchaseTABLE" cellpadding="0" cellspacing="0">
 <c:if test="${fn:length(recentlist) > 0}">
-<tr>
-<td>사진</td>
-<td>제목</td>
-<td>가격</td>
-<td>본 날짜</td>
-<td><input type="button" value="전체 삭제" onclick="location.href='/picksell/mypage/deleteRecenPd'"/></td>
-</tr> 
-	<c:forEach var="recentProduct" items="${recentlist}">
 	<tr>
-		<td>
+	<td class="tdtd"></td><td class="tdtd"></td><td class="tdtd"></td><td class="tdtd"></td><td class="tdtd"><input type="button" value="전체 삭제" class="alldelete" onclick="location.href='/picksell/mypage/deleteRecenPd'"/></td>
+	</tr>
+	<c:forEach var="recentProduct" items="${recentlist}"> 
+	<tbody class="tbodys">
+	<tr>
+		<td class="tdtd">
 			<a href="/picksell/products/detail/${recentProduct.RECENT_CATEGORY_NUM }/${recentProduct.RECENT_PRODUCT_NUM }">
-			<img src="/picksell/resources/productUpload/${purchase.FIRST_IMG }" style="width: 200px;" />
+			<img src="/picksell/resources/productUpload/${purchase.FIRST_IMG }" style="width: 150px; margin: 1%;" onerror="this.src='/picksell/resources/img/imgready.gif'" />
 			</a>
 		</td>
-		<td><a href="/picksell/products/detail/${recentProduct.RECENT_CATEGORY_NUM }/${recentProduct.RECENT_PRODUCT_NUM }">${recentProduct.SUBJECT }</a></td>
-		<td><fmt:formatNumber value="${recentProduct.PRICE }" pattern="#,###.##" /> 원</td>
-		<td><fmt:formatDate value="${recentProduct.RECENT_REGDATE}" pattern="yy. MM. dd. hh:mm" /></td>
-		<td><input type="button" id="recentProductDelete" value="삭제" onclick="location.href='/picksell/mypage/EachdeleteRecenPd?RECENT_NUM=${recentProduct.RECENT_NUM }'" /></td>
+		<td class="tdtd"><a href="/picksell/products/detail/${recentProduct.RECENT_CATEGORY_NUM }/${recentProduct.RECENT_PRODUCT_NUM }">${recentProduct.SUBJECT }</a></td>
+		<td class="tdtd"><fmt:formatNumber value="${recentProduct.PRICE }" pattern="#,###.##" /> 원</td>
+		<td class="tdtd"><fmt:formatDate value="${recentProduct.RECENT_REGDATE}" pattern="yy. MM. dd. hh:mm" /></td>
+		<td class="tdtd"><input type="button" class="next" id="recentProductDelete" value="삭제" onclick="location.href='/picksell/mypage/EachdeleteRecenPd?RECENT_NUM=${recentProduct.RECENT_NUM }'" /></td>
 	</tr> 													
-	
+	</tbody>
 	</c:forEach>
-<tr><td>${pagingHtml} page</td></tr>
 </c:if>
 <c:if test="${fn:length(recentlist) < 1}">
 <p>최근 본 상품이 없습니다.</p>
 </c:if>
 </table>
+</div>
+<div class="paging">
+ ${pagingHtml}
+</div>
 </body>
 </html>

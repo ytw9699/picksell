@@ -5,8 +5,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="freeBoard">
 	
+	<!-- 기부 전체리스트 -->
 	<select id="freeItem-all" resultType="hashmap">
 		SELECT * FROM PS_FREE_BOARD ORDER BY FB_NUM DESC
+	</select>
+	
+	<!-- 기부글 내부 댓글 -->
+	<select id="freeItem-comment" resultType="hashmap" parameterType="int">
+		SELECT * FROM PS_FREE_COMMENT WHERE FB_NUM = #{FB_NUM} ORDER BY FC_NUM ASC
 	</select>
 	
 	<insert id="freeItem-insert" parameterType="hashmap">
@@ -23,8 +29,55 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 													0)
 	</insert>
 	
+	<insert id="freeItem-commentInsert" parameterType="hashmap">
+		insert into ps_free_comment(fc_num,
+									fb_num,
+									fc_writer,
+									fc_content,
+									fc_regdate,
+									fc_group_num,
+									fc_step_num)values(fc_seq.NEXTVAL,
+														#{FB_NUM},
+														#{FC_WRITER},
+														#{FC_CONTENT},
+														sysdate,
+														0,
+														0)
+	</insert>
+	
+<!-- 	코멘트 삭제  -->
+	<delete id="deleteComment" parameterType="int">
+		delete from ps_free_comment 
+		where fc_num = #{FC_NUM} 
+	</delete>
+	
 	<select id="freeItem-detail" resultType="hashmap" parameterType="int">
-		select * from ps_free_board where fb_num = #{fb_num}
+		select * from ps_free_board where fb_num = #{FB_NUM}
 	</select>
+	
+	<update id="freeItem-hitUpdate" parameterType="int">
+		update ps_free_board set fb_hitcount = fb_hitcount + 1 where fb_num = #{FB_NUM}
+	</update>
+	
+	<!-- 제목 -->
+	<select id="freeSearch1" resultType="hashmap" parameterType="String">
+		select * from ps_free_board
+		where fb_subject LIKE  '%'||#{FB_SUBJECT}||'%'  
+		order by fb_num desc
+	</select>
+	
+	<!--제목 + 내용 -->
+	<select id="freeSearch2" resultType="hashmap" parameterType="String">
+		select * from ps_free_board
+		where fb_subject LIKE '%'||#{FB_SUBJECT}||'%' or fb_content LIKE '%'||#{FB_CONTENT}||'%'
+		order by fb_num desc
+	</select>
+	<!-- 작성자 -->
+	<select id="freeSearch3" resultType="hashmap" parameterType="String">
+		select * from ps_free_board
+		where fb_writer LIKE '%'||#{FB_WRITER}||'%'
+		order by fb_num desc
+	</select>
+	
 	
 </mapper>
