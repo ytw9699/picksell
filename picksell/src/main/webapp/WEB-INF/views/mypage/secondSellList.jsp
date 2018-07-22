@@ -91,7 +91,7 @@ function purchaseApprove(eventElement, purchaseNumber, buyer, category_num, prod
 	if(data.resultCode == 'success'){
 		alarmInsert(buyer, category_num, product_num,sessionId,"2");
 		alert(data.resultMsg);
-		$(eventElement).parents('td').html("<input type='button' value='수락 취소' onclick=purchaseApproveCancel(this,"+purchaseNumber+",'"+buyer+"',"+category_num+","+product_num+",'"+sessionId+"','"+completedAccept+"','"+watingAccept+"'); />");
+		$(eventElement).parents('td').html("<input type='button' value='수락 취소' class='next' onclick=purchaseApproveCancel(this,"+purchaseNumber+",'"+buyer+"',"+category_num+","+product_num+",'"+sessionId+"','"+completedAccept+"','"+watingAccept+"'); />");
 		$(target).parents('td').html("<div id='"+completedAccept+"'>수락 완료</div>");
 	}else if(data.resultCode == 'fail'){
 		alert(data.resultMsg);
@@ -114,7 +114,7 @@ function purchaseApproveCancel(eventElement, purchaseNumber, buyer, category_num
 			alert(data.resultMsg);
     		 alarmInsert(buyer, category_num, product_num,sessionId,"8");        
     		 
-			$(eventElement).parents('td').html("<input type='button' value='요청 수락' onclick=purchaseApprove(this,"+purchaseNumber+",'"+buyer+"',"+category_num+","+product_num+",'"+sessionId+"','"+watingAccept+"','"+completedAccept+"'); />");
+			$(eventElement).parents('td').html("<input type='button' value='요청 수락' class='next' onclick=purchaseApprove(this,"+purchaseNumber+",'"+buyer+"',"+category_num+","+product_num+",'"+sessionId+"','"+watingAccept+"','"+completedAccept+"'); />");
 			$(target).parents('td').html("<div id='"+watingAccept+"'>수락 대기중</div>");
 		}else if(data.resultCode == 'fail'){
 			alert(data.resultMsg);
@@ -133,7 +133,7 @@ function purchaseApproveCancel(eventElement, purchaseNumber, buyer, category_num
 	<tr>
 		<td class="tdtd">
 			<a href="/picksell/products/detail/${purchase.CATEGORY_NUM }/${purchase.PRODUCT_NUM }">
-			<img src="/picksell/resources/productUpload/${purchase.FIRST_IMG }" style="width: 200px;" onerror="this.src='/picksell/resources/img/imgready.gif'" />
+			<img src="/picksell/resources/productUpload/${purchase.FIRST_IMG }" style="width: 170px; margin: 5px;" onerror="this.src='/picksell/resources/img/imgready.gif'" />
 			</a>
 		</td>
 		<td class="tdtd"><a href="/picksell/products/detail/${purchase.CATEGORY_NUM }/${purchase.PRODUCT_NUM }">${purchase.SUBJECT }</a></td>
@@ -155,11 +155,6 @@ function purchaseApproveCancel(eventElement, purchaseNumber, buyer, category_num
 	<td class="tdtd"><input type="button" value="수락 거부" class="next" id="refusal" onclick="refusalApprove('${purchase.SELLER_ID }','${purchase.CATEGORY_NUM }','${purchase.PRODUCT_NUM }','${purchase.BUYER_ID}');" /></td>
 	</tr>
 	</tbody>														
-	<c:if test="${purchase.STATUS == '1'}">
-<!-- <script>
-	document.getElementById("purchase"+${status.index+1}).disabled = false;
-</script> -->
-</c:if>
 	</c:forEach>
 </c:if>
 </table>

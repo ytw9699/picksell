@@ -76,7 +76,7 @@ margin-top: 10%;
 	<tr>
 		<td class="tdtd">
 			<a href="/picksell/products/detail/${purchase.CATEGORY_NUM }/${purchase.PRODUCT_NUM }">
-			<img src="/picksell/resources/productUpload/${purchase.FIRST_IMG }" style="width: 200px;" onerror="this.src='/picksell/resources/img/imgready.gif'" />
+				<img src="/picksell/resources/productUpload/${purchase.FIRST_IMG }" style="width: 170px; margin: 5px;" onerror="this.src='/picksell/resources/img/imgready.gif'" />
 			</a>
 		</td>
 		<td class="tdtd"><a href="/picksell/products/detail/${purchase.CATEGORY_NUM }/${purchase.PRODUCT_NUM }">${purchase.SUBJECT }</a></td>
@@ -97,13 +97,18 @@ margin-top: 10%;
 <script>
 	document.getElementById("purchase"+${status.index+1}).disabled = false;
 </script>
-</c:if>
+	</c:if>
+	<c:if test="${purchase.STATUS == '0'}">
+<script>
+	document.getElementById("purchase"+${status.index+1}).style="background-color: gray";
+</script>
+	</c:if>
 	</c:forEach>
 </c:if>
 </table>
 </div>
 <c:if test="${fn:length(purchaseList) < 1}">
-<p>구매 요청 내역이 없습니다. 일반상품글에서 구매 요청을 해주시기 바랍니다.</p>
+<p>구매 요청 내역이 없습니다.</p>
 </c:if>
 </body>
 </html>
