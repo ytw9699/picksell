@@ -10,6 +10,30 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>구매내역</title>
 <style>
+table.purchaseTABLE {
+    width: 80%;
+    margin-top: 10px;
+}
+.next {
+    width: 150px;
+    margin: 0 auto;
+    margin-left: 10px;
+    border: none;
+    color: white;
+    background-color: #7151fc;
+    padding: 12px;
+    font-size: 14px;
+}
+.tdtd {
+    width: 10%;
+    font-size: 17px;
+    margin: 0px auto;
+    text-align: center;
+}
+.tbodys{
+width: 10%;
+margin-top: 10%;
+}
 </style>
 </head>
 <body>
@@ -43,50 +67,48 @@
 	
 </script>
 <h2>중고 구매 요청 리스트</h2> 
-<table>
-<c:if test="${fn:length(purchaseList) > 0}">
-	<tr>
-		<td>사진</td>
-		<td>제목</td>
-		<td>가격</td>
-		<td>신청날짜</td>
-		<td>구매 요청 상태</td>
-		<td>판매자 아이디</td>
-		<td>취소</td>
-		<td>구매하기</td>
-	</tr>
 
+<div class="purchaseList">	
+<table class="purchaseTABLE" cellpadding="0" cellspacing="0">
+<c:if test="${fn:length(purchaseList) > 0}">
 	<c:forEach var="purchase" items="${purchaseList}" varStatus="status">
+	<tbody class="tbodys">
 	<tr>
-		<td>
+		<td class="tdtd">
 			<a href="/picksell/products/detail/${purchase.CATEGORY_NUM }/${purchase.PRODUCT_NUM }">
-			<img src="/picksell/resources/productUpload/${purchase.FIRST_IMG }" style="width: 200px;" />
+				<img src="/picksell/resources/productUpload/${purchase.FIRST_IMG }" style="width: 170px; margin: 5px;" onerror="this.src='/picksell/resources/img/imgready.gif'" />
 			</a>
 		</td>
-		<td><a href="/picksell/products/detail/${purchase.CATEGORY_NUM }/${purchase.PRODUCT_NUM }">${purchase.SUBJECT }</a></td>
-		<td><fmt:formatNumber value="${purchase.PRICE }" pattern="#,###.##" /> 원</td>
-		<td><fmt:formatDate value="${purchase.REGDATE}" pattern="yy. MM. dd. hh:mm" /></td>
+		<td class="tdtd"><a href="/picksell/products/detail/${purchase.CATEGORY_NUM }/${purchase.PRODUCT_NUM }">${purchase.SUBJECT }</a></td>
+		<td class="tdtd"><fmt:formatNumber value="${purchase.PRICE }" pattern="#,###.##" /> 원</td>
+		<td class="tdtd"><fmt:formatDate value="${purchase.REGDATE}" pattern="yy. MM. dd. hh:mm" /></td>
 		<c:if test="${purchase.STATUS == '0'}">
-		<td>요청 수락 대기중</td>
+		<td class="tdtd">요청 수락 대기중</td>
 		</c:if>
 		<c:if test="${purchase.STATUS == '1'}">
-		<td>요청 수락 완료</td>
+		<td class="tdtd">요청 수락 완료</td>
 		</c:if>																	
-		<td>${purchase.SELLER_ID }</td>
-		<td><input type="button" value="취소" id ="cancel" onclick="deletePurchaseList('${purchase.PURCHASE_NUM }','${purchase.SELLER_ID }','${purchase.CATEGORY_NUM }','${purchase.PRODUCT_NUM }','${purchase.BUYER_ID}');" /></td>
-		<td><input type="button" value="구매" id ="purchase${status.index+1}" disabled="disabled" onclick="location.href = '/picksell/products/detail/${purchase.CATEGORY_NUM }/${purchase.PRODUCT_NUM }'"/></td>
+		<td class="tdtd">${purchase.SELLER_ID }</td>
+		<td class="tdtd"><input type="button" value="취소" class="next" id ="cancel" onclick="deletePurchaseList('${purchase.PURCHASE_NUM }','${purchase.SELLER_ID }','${purchase.CATEGORY_NUM }','${purchase.PRODUCT_NUM }','${purchase.BUYER_ID}');" /></td>
+		<td class="tdtd"><input type="button" value="구매" class="next" id ="purchase${status.index+1}" disabled="disabled" onclick="location.href = '/picksell/products/detail/${purchase.CATEGORY_NUM }/${purchase.PRODUCT_NUM }'"/></td>
 	</tr> 
+	</tbody>
 	<c:if test="${purchase.STATUS == '1'}">
 <script>
 	document.getElementById("purchase"+${status.index+1}).disabled = false;
 </script>
-</c:if>
+	</c:if>
+	<c:if test="${purchase.STATUS == '0'}">
+<script>
+	document.getElementById("purchase"+${status.index+1}).style="background-color: gray";
+</script>
+	</c:if>
 	</c:forEach>
-
-</c:if>
-<c:if test="${fn:length(purchaseList) < 1}">
-<p>구매 요청 내역이 없습니다. 일반상품글에서 구매 요청을 해주시기 바랍니다.</p>
 </c:if>
 </table>
+</div>
+<c:if test="${fn:length(purchaseList) < 1}">
+<p>구매 요청 내역이 없습니다.</p>
+</c:if>
 </body>
 </html>

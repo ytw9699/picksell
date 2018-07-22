@@ -10,6 +10,27 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>판매글 관리</title>
 <style>
+.paging {
+    margin-top: 40px;
+    text-align: center;
+}
+span.currentPaging {
+    width: 40px;
+    height: 40px;
+    display: inline-block;
+    background-color: #7151fc;
+    color: white;
+    border-radius: 30px;
+    font-size: 23px;
+}
+a.paging {
+    width: 40px;
+    height: 40px;
+    display: inline-block;
+    color: #666;
+    border-radius: 21px;
+    font-size: 23px;
+}
 </style>
 </head>
 <body>
@@ -155,7 +176,7 @@ function minusStock(PRODUCT_NUM, index){
 	</c:if>
 </table>
 	<div class="paging">
-	 ${pagingHtml} 페이지
+	 ${pagingHtml}
 	</div>
 </body>
 </html>
