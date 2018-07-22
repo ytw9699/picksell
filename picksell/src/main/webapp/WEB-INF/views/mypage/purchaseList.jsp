@@ -11,8 +11,7 @@
 <title>구매내역</title>
 <style>
 table.purchaseTABLE {
-    width: 80%;
-    margin-top: 10px;
+    width: 95%; 
 }
 .next {
     width: 80%;
@@ -23,6 +22,11 @@ table.purchaseTABLE {
     background-color: #7151fc;
     padding: 8%;
     font-size: 14px;
+}
+.subjectTd {
+    width: 16%;
+    font-size: 17px;
+    text-align: center;
 }
 .tdtd {
     width: 12%;
@@ -78,7 +82,7 @@ margin-top: 10%;
 <img src="/picksell/resources/productUpload/${purchase.FIRST_IMG }" style="width: 90%; margin: 1%;" onerror="this.src='/picksell/resources/img/imgready.gif'" />
 			</a>
 		</td>
-		<td class="tdtd"><a href="/picksell/products/detail/${purchase.CATEGORY_NUM }/${purchase.PRODUCT_NUM }">${purchase.SUBJECT }</a></td>
+		<td class="subjectTd"><a href="/picksell/products/detail/${purchase.CATEGORY_NUM }/${purchase.PRODUCT_NUM }">${purchase.SUBJECT }</a></td>
 		<td class="tdtd"><fmt:formatNumber value="${purchase.PRICE }" pattern="#,###.##" /> 원</td>
 		<td class="tdtd"><fmt:formatDate value="${purchase.REGDATE}" pattern="yy. MM. dd. hh:mm" /></td>
 		<c:if test="${purchase.STATUS == '0'}">
