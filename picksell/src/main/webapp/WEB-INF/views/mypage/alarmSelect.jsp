@@ -61,10 +61,10 @@ a.paging {
 }
 .alarm2 {
     display: inline-block;
-    width: 22%;
+    width: 3%;
     text-align: center;
-    margin: 1%;
-    margin-right: -10%;
+    margin: 0%;
+    margin-right: 0%;
 }
 .alarm3 {
     display: inline-block;
@@ -82,13 +82,11 @@ a.paging {
 }
 .alarm0 {
     font-size: 17px;
-    position: relative;
-    left: -11%;
 }
 .next {
     width: 86px;
     margin: 0 auto;
-    margin-left: 66px;
+    margin-left: 42px;
     border: none;
     color: white;
     background-color: #7151fc;
