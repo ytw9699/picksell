@@ -327,8 +327,10 @@ public class ProductController {
 	@RequestMapping(value="/products/commentProc", method=RequestMethod.POST)
 	public String writeComment(CommandMap map, Model model) {
 		
-		//System.out.println(map.getMap());
-		productService.insertProductComment(map.getMap());
+		Map<String, Object> insertParameterMap = map.getMap();
+		//String contents = qnaModel.getContents().replaceAll("\r\n", "<br />");
+		//qnaModel.setContents(contents);
+		productService.insertProductComment(insertParameterMap);
 		
 		//상품문의후 리다이렉트
 		String pn = map.getMap().get("product_num").toString();
@@ -341,6 +343,20 @@ public class ProductController {
 		return "redirect:/products/detail/"+cn+"/"+pn;
 	}
 	
+	//상품문의 리코멘트작성
+	@RequestMapping(value="/products/recommentProc", method=RequestMethod.POST)
+	public String writeRecomment(CommandMap map, Model model) {
+		
+		Map<String, Object> insertParameterMap = map.getMap();
+		
+		productService.insertProductReComment(insertParameterMap);
+		
+		//상품문의후 리다이렉트
+		String pn = map.getMap().get("product_num").toString();
+		String cn = map.getMap().get("category_num").toString();
+		
+		return "redirect:/products/detail/"+cn+"/"+pn;
+	}
 	//구매신청하기
 	@RequestMapping("/products/purchseRequest/{pn}/{sessionID}")
 	public String purchaseRequest(

@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+    <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -145,7 +146,7 @@
 <!-- 문의댓글 모달div -->
 <div class="hiddenCommentForm">
 	<div class="formTop">
-		<span class="cancel"><a href="#" onclick="closeCommentForm()">X</a></span>
+		<span class="cancel"><a href="#" class="closeAnchor" onclick="closeCommentForm()"></a></span>
 	</div>
 	<div class="formBody">
 		<form action="/picksell/products/commentProc" method="post" id="commentForm">
@@ -154,6 +155,26 @@
 			<input type="hidden" name="category_num" value="${category_num }" />
 			<input type="hidden" name="comment_writer" value="${sessionScope.sessionId }" />
 			<input type="hidden" name="step_num" value="0" />
+			<textarea name="comment_content" class="comment_content" placeholder="상품문의를 작성하세요. 판매자 외에는 볼 수 없습니다."></textarea>
+			<!-- <input type="text" name="comment_content" /> -->
+			<input type="submit" class="commentSUBMIT" value="작성" />
+		</form>
+	</div>
+</div><!-- hiddenCommentForm end -->
+
+<!-- 문의댓글리플 모달div -->
+<div class="hiddenReCommentForm">
+	<div class="formTop">
+		<span class="cancel"><a href="#" class="closeAnchor" onclick="closeCommentForm()"></a></span>
+	</div>
+	<div class="formBody">
+		<form action="/picksell/products/recommentProc" method="post" id="commentForm">
+			<input type="hidden" name="product_num" value="${product_num }" />
+			<input type="hidden" name="currentPage" value="${currentPage }" />
+			<input type="hidden" name="category_num" value="${category_num }" />
+			<input type="hidden" name="comment_writer" value="${sessionScope.sessionId }" />
+			<input type="hidden" name="step_num" value="0" />
+			<input type="hidden" name="group_num" value="0" id="group_num" />
 			<textarea name="comment_content" class="comment_content" placeholder="상품문의를 작성하세요. 판매자 외에는 볼 수 없습니다."></textarea>
 			<!-- <input type="text" name="comment_content" /> -->
 			<input type="submit" class="commentSUBMIT" value="작성" />
@@ -361,18 +382,20 @@
 			<span class="deliveryTEXT">3. 제품인수 후 3일 이내에 구매자가 인수확인하지 않으면 자동 인수확인처리 됩니다.</span>
 		</div>
 		<div class="commentWrap">
-			<span class="product_contentTEXT">상품 문의</span><span class="commentSumTEXT">[개수]</span>
+			<span class="product_contentTEXT">상품 문의</span><span class="commentSumTEXT">${fn:length(resultCommentList) }</span>
 			<input type="button" class="commentBTN" value="상품 문의하기" onclick="openCommentForm()" />
 			<div class="commentListWrap">
 				<c:choose>
 					<c:when test="${empty resultCommentList }">
-						상품문의
-						<p>
-						내가쓴 상품문의는 판매자외의 다른사람이 볼 수 없습니다!
+						<span class="hasNoCommentTEXT">상품문의를 작성하세요</span>
+						<span class="hasNoCommentTEXT">내가쓴 상품문의는 판매자외의 다른사람이 볼 수 없습니다!</span>
 					</c:when>
 					<c:when test="${!empty resultCommentList }">
 						<c:forEach var="comment" items="${resultCommentList }">
-							<p>${comment.COMMENT_WRITER } .. ${comment.COMMENT_REGDATE } .. ${comment.COMMENT_CONTENT }
+							<p>${comment.COMMENT_WRITER } .. ${comment.COMMENT_REGDATE } .. ${comment.COMMENT_CONTENT } 
+							<c:if test="${comment.STEP_NUM == 0 }">
+								<input type="button" class="replyBTN" value="답변달기" onclick="openRecommentForm('${comment.GROUP_NUM}');" />
+							</c:if>
 						</c:forEach>
 					</c:when>
 				</c:choose>
@@ -390,6 +413,7 @@
 	function closeCommentForm(){
 		$(".hiddenBackGround").hide();
 		$(".hiddenCommentForm").hide();
+		$(".hiddenReCommentForm").hide();
 		$(".hiddenPurchaseListForm").hide();
 		$(".hiddenSingoForm").hide();
 	}
@@ -401,6 +425,12 @@
 		$(".hiddenSingoForm").show();
 		$(".hiddenBackGround").show();
 	}
+	function openRecommentForm(group_num){
+		$(".hiddenBackGround").show();
+		$(".hiddenReCommentForm").show();
+		$('#group_num').val(group_num);
+	}
+	
 	
 	function singoAccessing(){
 		var param = "singoee=${resultObject.SELLER_ID}&pn=${resultObject.PRODUCT_NUM }";
