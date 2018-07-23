@@ -366,7 +366,7 @@
 			<div class="commentListWrap">
 				<c:choose>
 					<c:when test="${empty resultCommentList }">
-						등록된 상품문의가 없습니다
+						상품문의
 						<p>
 						내가쓴 상품문의는 판매자외의 다른사람이 볼 수 없습니다!
 					</c:when>
