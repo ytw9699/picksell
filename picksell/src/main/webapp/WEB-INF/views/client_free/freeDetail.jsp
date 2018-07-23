@@ -5,9 +5,29 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <title>Insert title here</title>
 </head>
 <body>
+
+<script>
+
+function modify(){
+
+	alert("진짜 수정 하실거에요?");
+
+};
+
+function dele(){
+	alert("진짜 삭제 하실거죠?!");
+};
+
+function confirmDele(){
+	alert("정말 댓글을 삭제할거죠?!");
+};
+
+</script>
+
 <form action="/picksell/free_board/list">
     <input type="submit" value="목록보기" />
 </form>
@@ -15,18 +35,21 @@
 <!-- 수정 삭제는 기부자 이름과 세션아이딕 값이 같을 때 보인다.  -->
 <c:if test="${map.FB_WRITER == sessionScope.sessionId}">
 <form action="/picksell/free_board/modifyForm/${map.FB_NUM}" method="post">
-<%-- 	<input type="hidden"  name="FB_NUM" value="${map.FB_NUM}"/> --%>
+	<input type="hidden" id="fb_num" name="FB_NUM" value="${map.FB_NUM}"/>
 <%-- 	<input type="hidden"  name="FB_SUBJECT" value="${map.FB_SUBJECT}"/> --%>
 <%-- 	<input type="hidden"  name="FB_WRITER" value="${map.FB_WRITER}"/> --%>
 <%-- 	<input type="hidden"  name="FB_REGDATE" value="${map.FB_REGDATE}"/> --%>
 <%-- 	<input type="hidden"  name="FB_CONTENT" value="${map.FB_CONTENT}"/> --%>
 <%-- 	<input type="hidden"  name="FB_HITCOUNT" value="${map.FB_HITCOUNT}"/> --%>
-    <input type="submit" value="수정하기" />
+    <input type="submit"  value="수정하기" onclick="modify()" />
+<!--    	<button onclick="modify()">수정하기</button><br/> -->
 </form>
 <form action="/picksell/free_board/deleteEverything/${map.FB_NUM}" method="post">
-    <input type="submit" value="삭제하기" />
-</form><br/>
+    <input type="submit" value="삭제하기" onclick="dele()" />
+</form>
+
 </c:if>
+
 무료나눔 게시글 상세보기 <br/><br/><br/>
 글 번호 : ${map.FB_NUM}<br/>
 글 제목 : ${map.FB_SUBJECT}<br/>
@@ -46,9 +69,13 @@
 		<td style="text-align:center;vertical-align:middle;">댓글 내용 : ${commentMap.FC_CONTENT}</td>
 		<td style="text-align:center;vertical-align:middle;">작성 시간 : ${commentMap.FC_REGDATE}</td> 
 		<td style="text-align:center;vertical-align:middle;">
+		
+		<c:if test="${commentMap.FC_WRITER == sessionScope.sessionId}">
 			<form action="/picksell/free_board/deleteComment/${commentMap.FC_NUM}/${commentMap.FB_NUM}">
-   			 <input type="submit" value="삭제" />
-</form>
+   			 <input type="submit" value="삭제" onclick="confirmDele()" />
+			</form>
+		</c:if>
+			
 		</td>
 	</tr>
 	</c:forEach>
@@ -63,7 +90,7 @@
            <input type="hidden" value="${sessionScope.sessionId}" name="FC_WRITER"/>
          <textarea  placeholder="댓글을 작성 하실 수 있습니다." name="FC_CONTENT" rows="20" style="width:100%;"></textarea>
  		<br/> <br/>       
-         <input type="submit"  value="작성" />
+         <input type="submit"  value="작성"  />
       </form>
 
 
