@@ -8,7 +8,7 @@
 <style>
 
 .main{
-   margin-left: 200px; /* Same as the width of the sidenav */
+   margin-left: 230px; /* Same as the width of the sidenav */
 
 }
 
@@ -63,7 +63,9 @@ setInterval(function(){
 <title>판매 중 리스트</title>
 </head>
 <body>
-<h1 style="margin-left: 208px;">현재 판매 중인 상품 글 리스트</h1>
+<h1 style="margin-left:208px;border-bottom: 2px solid #7151fc;
+    padding: 10px;
+    text-align: center;">현재 판매 중인 상품 글 리스트</h1>
 <div class="main">
 <c:choose>
 	<c:when test="${ 0 eq total }">

@@ -60,7 +60,7 @@ button {
     padding: 52px;
     padding-right: 170px;
     margin-left: 50px;
-    margin-right: 50px;
+    margin-right:  83px;
     margin-bottom: 50px;
     padding-left: 120px;
 
@@ -97,7 +97,7 @@ $(document).ready(function(){
 <div class="memberInfo">
 <div class="profile" style="background-color:#e8e7e7;border-radius:25px;">
 <div class="d" style="display:inline;">
-<div class="id" style="float:right;"><img src="/picksell/resources/profileImgUpload/freeprofileimg.jpg" style="width:150px; height:130px;"/></div>
+<div class="id" style="float:right;"><img src="/picksell/resources/profileImgUpload/freeprofileimg.jpg" style="width:220px; height:200px;border:1px solid white;"/></div>
 아이디 : ${map.ID }</div>
 <div class="name">
 이름 : ${map.NAME }

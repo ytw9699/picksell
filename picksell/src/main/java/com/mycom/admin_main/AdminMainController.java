@@ -43,6 +43,8 @@ public class AdminMainController {
 		  countlist.add(Integer.valueOf(tempValue.toString()));  
 		  
 		}
+		
+	
 		model.addAttribute("daylist",daylist);
 	    model.addAttribute("countlist",countlist);
 		return "adminMain";

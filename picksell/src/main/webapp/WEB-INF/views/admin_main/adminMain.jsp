@@ -91,9 +91,6 @@ function drawChart() {
 </head>
 <body>
 <div class="main">
-
-
-
 <div class="subject" style="padding:50px;">
 <h1 style="display:inline;text-shadow:5px 10px 1px #eee;">오늘의 PICKSELL</h1>
 
@@ -102,6 +99,13 @@ function drawChart() {
 <font style="color:red;"><fmt:formatDate value="${toDay }" pattern="MM"/></font>월 
 <font style="color:red;"><fmt:formatDate value="${toDay }" pattern="dd"/></font>일</h2>
 </div>
+
+<div class="board" style="border=:1px;">
+
+
+</div>
+
+
 
  <div id="chart_div" style="border: 2px solid #eee;
     width: 95%;

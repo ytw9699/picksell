@@ -72,7 +72,6 @@ public class AdminMemberService implements AdminMemberDAO {
 	
 	}
 	
-	
 	@Override
 	public List<Map<String,Object>> adminSubList(Map<String,Object> map){
 		return sqlSessionTemplate.selectList("admin_Member.adminSubList", map);

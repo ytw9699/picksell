@@ -20,7 +20,8 @@
    
    <!-- 빈자동설정 범위 -->
    <context:component-scan base-package="com.mycom" />
-
+   
+	
    <!-- 정적자원처리를 위한 리소스경로 -->
    <resources mapping="/resources/**" location="/resources/" />
 
@@ -44,6 +45,7 @@
    
    <!-- 다운로드뷰  -->
    <beans:bean id="download" class="com.mycom.utils.DownloadView" />
+	
    
    <!-- 파일 업로드 resolver -->
    <beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
@@ -72,7 +74,7 @@
       <beans:property name="defaultEncoding" value="UTF-8" />
    </beans:bean>
    
-   
+  
    <!-- 로그인체크 인터셉터 -->
    <interceptors> 
         <interceptor> 
@@ -88,10 +90,6 @@
    			<mapping path="/**"/>
    			<beans:bean class="com.mycom.config.SessionInterceptor2" />
    		</interceptor>
-   		 
-   </interceptors>
-      
-   
-   
+   </interceptors>  
    
 </beans:beans>

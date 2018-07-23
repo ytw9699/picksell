@@ -7,7 +7,7 @@
 <html>
 <style>
 .main{
-  margin-left : 250px;
+  margin-left : 230px;
 }
 table.PurchaseHistory{
  border-collaspe : separate;

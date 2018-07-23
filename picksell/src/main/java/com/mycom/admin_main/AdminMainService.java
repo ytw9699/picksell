@@ -14,7 +14,8 @@ public class AdminMainService {
 	
 	@Resource(name="sqlSessionTemplate")
 	private SqlSessionTemplate sqlSessionTemplate;
-
+	
+	
 	public Map<String,Object> memberJoinCount(String day){
 	      return sqlSessionTemplate.selectOne("admin_Main.today",day);
 	}

@@ -54,6 +54,7 @@ public class AdminMemberController {
 	public ModelAndView adminMemberList(HttpServletRequest request) throws Exception{
 	   
 		memberslist= adminMemberService.AdminMemberList();
+		
 		if(request.getParameter("currentPage") == null || request.getParameter("currentPage").trim().isEmpty() || request.getParameter("currentPage").equals("0")) {
             currentPage = 1;
         } else {
@@ -160,13 +161,13 @@ public class AdminMemberController {
 			numm.put("ORDER_NUM",String.valueOf(orderList.get(i).get("ORDER_NUM")));
 			adminOrderSubList.add(adminMemberService.adminOrderSubList(numm));
 			
-			
 		}
-	
-		
-		map.put("mapSize", orderList.size());
-		model.addAttribute("map",map);
 		model.addAttribute("orderList",orderList);
+		map.put("mapSize", orderList.size());
+		
+		
+	
+		model.addAttribute("map",map);
 		model.addAttribute("adminOrderSubList",adminOrderSubList);
 		return "adminMemberOrderList";
 	}
@@ -186,10 +187,17 @@ public class AdminMemberController {
 			
 		}
 		
-		
 		model.addAttribute("SubList",sellSubList);
 		model.addAttribute("total",maplist.size());
 		model.addAttribute("maplist", maplist);
+		
+		
+		
+		
+		
+		
+		
+		
 		return "adminSellHistory";
 	}
 

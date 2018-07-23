@@ -184,7 +184,6 @@ button:hover:before,button:hover:after{
 <div class="paging">
 		${pagingHtml}
 </div>
-
 <button onclick="window.location='/picksell/admin/member/list'">목록</button>
 </div>
 </body>

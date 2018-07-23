@@ -43,7 +43,7 @@
 //onclick="purchaseApprove(this,'${purchase.PURCHASE_NUM}','${purchase.BUYER_ID }','${purchase.CATEGORY_NUM }','${purchase.PRODUCT_NUM }','${purchase.SELLER_ID }','watingAccept${status.index+1}','completedAccept${status.index+1}');" /></td>
 function purchaseApprove(eventElement, purchaseNumber, buyer, category_num, product_num, sessionId,watingAccept,completedAccept){
 	var target = document.getElementById(watingAccept);
-	alert(target);
+	//alert(target);
 	var params = "pn="+product_num+"&purnum="+purchaseNumber+"&buyer="+buyer;
 	$.ajax({
 		type : "POST",
@@ -55,7 +55,7 @@ function purchaseApprove(eventElement, purchaseNumber, buyer, category_num, prod
 	if(data.resultCode == 'success'){
 		alarmInsert(buyer, category_num, product_num,sessionId,"2");
 		alert(data.resultMsg);
-		alert(target);
+		//alert(target);
 		$(eventElement).parents('td').html("<input type='button' value='수락 취소' onclick=purchaseApproveCancel(this,"+purchaseNumber+",'"+buyer+"',"+category_num+","+product_num+",'"+sessionId+"','"+completedAccept+"','"+watingAccept+"'); />");
 		$(target).parents('td').html("<div id='"+completedAccept+"'>수락 완료</div>");
 	}else if(data.resultCode == 'fail'){
