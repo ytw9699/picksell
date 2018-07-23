@@ -10,8 +10,23 @@
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <title>마이페이지 초안</title>
 <style>
-.mypage{
-border:1px solid gray;
+.mypage {
+    border-top: 1px solid #dadada;
+    padding: 10px;
+    box-sizing: border-box;
+    width: 170px;
+    color: #666;
+}
+.myWrapper {
+    border-left: 1px solid #dadada;
+    border-right: 1px solid #dadada;
+    border-bottom: 1px solid #dadada;
+}
+.mypage:hover > a, .mypage:hover {
+    color: #7151fc;
+}
+.mypage a {
+    color: #666;
 }
 </style>
 </head>

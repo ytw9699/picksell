@@ -14,7 +14,7 @@
     background-color: white;
     color: #7151fc;
     border-radius: 0px;
-    width: 16%;
+    width: 15%;
     border: 1px solid #7151fc;
     line-height: 21px;
     display: inline-block;
@@ -32,7 +32,7 @@ span.orderkind:hover {
     line-height: 83px;
 } 
 .my__i-stat1 {
-    font-size: 17px;
+    font-size: 14px;
     line-height: 28px;
 }
 span.my__i-stat1.i-stat1-title {
@@ -40,6 +40,7 @@ span.my__i-stat1.i-stat1-title {
     margin-bottom: 10px;
     margin-top: 7px;
 }
+
 span.my__i-stat1.i-stat1-number {
     font-size: 40px;
 }
@@ -115,7 +116,7 @@ a.paging {
     font-size: 23px;
 }
 .orderWrapper{
-	margin-top: 40px;
+	/* margin-top: 40px; */
 }
 </style>
 </head>
