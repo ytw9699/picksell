@@ -383,12 +383,19 @@
 		</div>
 		<div class="commentWrap">
 			<span class="product_contentTEXT">상품 문의</span><span class="commentSumTEXT">${fn:length(resultCommentList) }</span>
+			<c:if test="${sessionScope.sessionId != null }">
 			<input type="button" class="commentBTN" value="상품 문의하기" onclick="openCommentForm()" />
+			</c:if>
 			<div class="commentListWrap">
 				<c:choose>
 					<c:when test="${empty resultCommentList }">
-						<span class="hasNoCommentTEXT">상품문의를 작성하세요</span>
-						<span class="hasNoCommentTEXT">내가쓴 상품문의는 판매자외의 다른사람이 볼 수 없습니다!</span>
+						<c:if test="${sessionScope.sessionId != null }">
+							<span class="hasNoCommentTEXT">상품문의를 작성하세요</span>
+							<span class="hasNoCommentTEXT">내가쓴 상품문의는 판매자외의 다른사람이 볼 수 없습니다!</span>
+						</c:if>
+						<c:if test="${sessionScope.sessionId == null }">
+							<span class="hasNoCommentTEXT">로그인 후에 상품문의를 작성할 수 있습니다</span>
+						</c:if>
 					</c:when>
 					<c:when test="${!empty resultCommentList }">
 						<c:forEach var="comment" items="${resultCommentList }">
