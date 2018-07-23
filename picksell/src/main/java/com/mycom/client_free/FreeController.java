@@ -123,6 +123,23 @@ public class FreeController {
 		return "redirect:/free_board/list";
 	}
 	
+	@RequestMapping("/modifyForm/{fb_num}")
+	public ModelAndView freeModifyForm(@PathVariable("fb_num") int fb_num) {
+		
+		Map<String, Object> map = freeService.freeDetail(fb_num);
+		mav.addObject("map", map);
+		mav.setViewName("client_free/freeModify");
+		return mav;
+	}
+	
+	@RequestMapping(value="/freeModify")
+	public String freeModify(CommandMap map) {
+		
+		System.out.println(map.getMap());
+		freeService.freeUpdate(map.getMap());
+		return "redirect:/free_board/detail/" + map.get("FB_NUM");
+	}
+	
 	@RequestMapping("/detail/{fb_num}")
 	public ModelAndView freeDetail(@PathVariable("fb_num") int fb_num,
 			HttpServletRequest request) {

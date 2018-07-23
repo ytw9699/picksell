@@ -59,6 +59,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		update ps_free_board set fb_hitcount = fb_hitcount + 1 where fb_num = #{FB_NUM}
 	</update>
 	
+	<update id="freeItem-modify" parameterType="hashmap">
+		update ps_free_board set fb_subject = #{FB_SUBJECT}, fb_regdate = sysdate, fb_content = #{FB_CONTENT} 
+		 		where fb_num = #{FB_NUM}
+	</update>
+	
 	<!-- 제목 -->
 	<select id="freeSearch1" resultType="hashmap" parameterType="String">
 		select * from ps_free_board

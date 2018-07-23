@@ -51,7 +51,7 @@ public class FreeService implements FreeDAO {
 		
 	//게시글 수정
 	public void freeUpdate(Map<String, Object> map) {
-		
+		sqlSessionTemplate.update("freeBoard.freeItem-modify",map);
 	}
 		
 	//게시글 삭제
