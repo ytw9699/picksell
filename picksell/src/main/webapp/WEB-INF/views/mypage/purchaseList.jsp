@@ -84,14 +84,14 @@ margin-top: 10%;
 		</td>
 		<td class="subjectTd"><a href="/picksell/products/detail/${purchase.CATEGORY_NUM }/${purchase.PRODUCT_NUM }">${purchase.SUBJECT }</a></td>
 		<td class="tdtd"><fmt:formatNumber value="${purchase.PRICE }" pattern="#,###.##" /> 원</td>
-		<td class="tdtd"><fmt:formatDate value="${purchase.REGDATE}" pattern="yy. MM. dd. hh:mm" /></td>
+		<td class="tdtd">요청일 <fmt:formatDate value="${purchase.REGDATE}" pattern="yy. MM. dd" /></td>
 		<c:if test="${purchase.STATUS == '0'}">
 		<td class="tdtd">수락 대기중</td>
 		</c:if>
 		<c:if test="${purchase.STATUS == '1'}">
 		<td class="tdtd">수락 완료</td>
 		</c:if>																	
-		<td class="tdtd">${purchase.SELLER_ID }</td>
+		<td class="tdtd">판매자 ${purchase.SELLER_ID }</td>
 		<td class="tdtd"><input type="button" value="취소" class="next" id ="cancel" onclick="deletePurchaseList('${purchase.PURCHASE_NUM }','${purchase.SELLER_ID }','${purchase.CATEGORY_NUM }','${purchase.PRODUCT_NUM }','${purchase.BUYER_ID}');" /></td>
 		<td class="tdtd"><input type="button" value="구매" class="next" id ="purchase${status.index+1}" disabled="disabled" onclick="location.href = '/picksell/products/detail/${purchase.CATEGORY_NUM }/${purchase.PRODUCT_NUM }'"/></td>
 	</tr> 
