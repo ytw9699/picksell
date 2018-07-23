@@ -152,10 +152,11 @@
 			<input type="hidden" name="product_num" value="${product_num }" />
 			<input type="hidden" name="currentPage" value="${currentPage }" />
 			<input type="hidden" name="category_num" value="${category_num }" />
-			<input type="hidden" name="comment_writer" value="상품문의작성자" />
+			<input type="hidden" name="comment_writer" value="${sessionScope.sessionId }" />
 			<input type="hidden" name="step_num" value="0" />
-			<input type="text" name="comment_content" />
-			<input type="submit" value="작성" />
+			<textarea name="comment_content" class="comment_content" placeholder="상품문의를 작성하세요. 판매자 외에는 볼 수 없습니다."></textarea>
+			<!-- <input type="text" name="comment_content" /> -->
+			<input type="submit" class="commentSUBMIT" value="작성" />
 		</form>
 	</div>
 </div><!-- hiddenCommentForm end -->
@@ -361,11 +362,11 @@
 		</div>
 		<div class="commentWrap">
 			<span class="product_contentTEXT">상품 문의</span><span class="commentSumTEXT">[개수]</span>
-			<input type="button" value="상품 문의하기" onclick="openCommentForm()" />
+			<input type="button" class="commentBTN" value="상품 문의하기" onclick="openCommentForm()" />
 			<div class="commentListWrap">
 				<c:choose>
 					<c:when test="${empty resultCommentList }">
-						등록된 상품문의가 없습니다
+						상품문의
 						<p>
 						내가쓴 상품문의는 판매자외의 다른사람이 볼 수 없습니다!
 					</c:when>

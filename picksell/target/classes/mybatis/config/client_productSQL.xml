@@ -146,10 +146,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</if>
 	</select>
 	
-	<select id="selectProductComment" resultType="hashmap" parameterType="int">
+	<select id="selectProductCommentOfSeller" resultType="hashmap" parameterType="int">
 		select * from ps_pro_comment 
-		where product_num = #{product_num}
+		where product_num = #{product_num} 
 		order by group_num desc, step_num asc
+	</select>
+	
+	<select id="selectProductCommentOfBuyer" resultType="hashmap" parameterType="hashmap">
+		select * from ps_pro_comment 
+		where product_num = #{product_num} and owner = #{owner} or comment_writer = #{seller}
+		order by group_num desc, step_num asc 
 	</select>
 	
 	<select id="selectPurchaseList" resultType="hashmap" parameterType="int">
@@ -215,13 +221,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 									group_num,
 									step_num,
 									comment_regdate,
-									comment_content) values(comment_seq.NEXTVAL,
+									comment_content,
+									owner) values(comment_seq.NEXTVAL,
 															#{product_num},
-															'임시작성자',
+															#{comment_writer},
 															comment_seq.CURRVAL,
 															#{step_num},
 															sysdate,
-															#{comment_content})
+															#{comment_content},
+															#{comment_writer})
 	</insert>
 	
 	<insert id="insertPurchaseList" parameterType="hashmap">
