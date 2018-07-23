@@ -328,8 +328,8 @@ public class ProductController {
 	public String writeComment(CommandMap map, Model model) {
 		
 		Map<String, Object> insertParameterMap = map.getMap();
-		//String contents = qnaModel.getContents().replaceAll("\r\n", "<br />");
-		//qnaModel.setContents(contents);
+		String contents = insertParameterMap.get("comment_content").toString().replaceAll("\r\n", "<br />");
+		insertParameterMap.put("comment_content", contents);
 		productService.insertProductComment(insertParameterMap);
 		
 		//상품문의후 리다이렉트
@@ -348,7 +348,8 @@ public class ProductController {
 	public String writeRecomment(CommandMap map, Model model) {
 		
 		Map<String, Object> insertParameterMap = map.getMap();
-		
+		String contents = insertParameterMap.get("comment_content").toString().replaceAll("\r\n", "<br />");
+		insertParameterMap.put("comment_content", contents);
 		productService.insertProductReComment(insertParameterMap);
 		
 		//상품문의후 리다이렉트

@@ -14,7 +14,12 @@
 body, table, div, p {font-family:'NotoSansLight';}
 body{margin:0;}
 .headerWrap{width:100%;}
-.bodyWrap {width: 80%;margin: 0 auto;/* display: inline-block; */}
+.bodyWrap {
+    width: 70%;
+    display: inline-block;
+    margin-left: 25px;
+    min-height: 500px;
+}
 .footerWrap {
     border-top: 2px solid #dbdbdb;
     width: 80%;
@@ -22,13 +27,18 @@ body{margin:0;}
     margin-top: 2%;
     padding-top: 2%;
 }
+.leftWrap {
+    margin-left: 10%;
+    display: inline-block;
+    float: left;
+}
 </style>
 </head>
 <body>
 	<div class="headerWrap">
 		<tiles:insertAttribute name="header"/><!-- // header -->
 	</div>
-	<div class="leftWrap" style="float: left;">
+	<div class="leftWrap">
 		<tiles:insertAttribute name="left"/><!-- // left -->
 	</div>
 	<div class="bodyWrap">
