@@ -14,10 +14,16 @@
 
 <!-- 수정 삭제는 기부자 이름과 세션아이딕 값이 같을 때 보인다.  -->
 <c:if test="${map.FB_WRITER == sessionScope.sessionId}">
-<form action="#">
+<form action="/picksell/free_board/modifyForm/${map.FB_NUM}" method="post">
+<%-- 	<input type="hidden"  name="FB_NUM" value="${map.FB_NUM}"/> --%>
+<%-- 	<input type="hidden"  name="FB_SUBJECT" value="${map.FB_SUBJECT}"/> --%>
+<%-- 	<input type="hidden"  name="FB_WRITER" value="${map.FB_WRITER}"/> --%>
+<%-- 	<input type="hidden"  name="FB_REGDATE" value="${map.FB_REGDATE}"/> --%>
+<%-- 	<input type="hidden"  name="FB_CONTENT" value="${map.FB_CONTENT}"/> --%>
+<%-- 	<input type="hidden"  name="FB_HITCOUNT" value="${map.FB_HITCOUNT}"/> --%>
     <input type="submit" value="수정하기" />
 </form>
-<form action="#">
+<form action="/picksell/free_board/deleteEverything/${map.FB_NUM}" method="post">
     <input type="submit" value="삭제하기" />
 </form><br/>
 </c:if>
