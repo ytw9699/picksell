@@ -11,24 +11,37 @@
 <title>주문내역/배송조회</title>
 <style>
 .orderkind {
-    background-color: #7151fc;
-    color: white;
+    background-color: white;
+    color: #7151fc;
     border-radius: 0px;
-    width: 180px;
-    height: 120px;
+    width: 16%;
+    border: 1px solid #7151fc;
     line-height: 21px;
     display: inline-block;
     text-align: center;
-    margin: -1px;
+    transition: 0.3s;
+    height: 100px;
+}
+span.orderkind:hover {
+    background-color: #7151fc;
+    color: white;
 }
 .my__stat__num-font {
-    color: #fff;
+    color: #7151fc;
     font-size: 50px;
     line-height: 83px;
-}
+} 
 .my__i-stat1 {
     font-size: 17px;
     line-height: 28px;
+}
+span.my__i-stat1.i-stat1-title {
+    display: block;
+    margin-bottom: 10px;
+    margin-top: 7px;
+}
+span.my__i-stat1.i-stat1-number {
+    font-size: 40px;
 }
 .test {
     border: 1px solid #cecece;
@@ -83,10 +96,7 @@
     left: 467px;
     bottom: 226px;
 }
-.paging {
-    margin-top: 40px;
-    text-align: center;
-}
+.paging {margin-top: 40px;text-align: center;}
 span.currentPaging {
     width: 40px;
     height: 40px;
@@ -104,33 +114,42 @@ a.paging {
     border-radius: 21px;
     font-size: 23px;
 }
+.orderWrapper{
+	margin-top: 40px;
+}
 </style>
 </head>
 <body>
-<div>
+<div class="orderWrapper">
 <a href="/picksell/mypage/orderList">
-<span class="orderkind"><div class="my__i-stat1">전체보기</div>
-<span class="my__stat__num-font">${orderCount.five}</span>개</span></a>
+	<span class="orderkind">
+		<span class="my__i-stat1 i-stat1-title">전체보기</span>
+		<span class="my__i-stat1 i-stat1-number">${orderCount.five}</span>개
+	</span>
+</a>
 
 <a href="/picksell/mypage/orderList?status=0">
-<span class="orderkind" ><div class="my__i-stat1">입금대기</div>
-<span class="my__stat__num-font">${orderCount.zero}</span>개</span></a>
+	<span class="orderkind" >
+		<span class="my__i-stat1 i-stat1-title">입금대기</span>
+		<span class="my__i-stat1 i-stat1-number">${orderCount.zero}</span>개
+	</span>
+</a>
 
 <a href="/picksell/mypage/orderList?status=1">
-<span class="orderkind" ><div class="my__i-stat1">입금완료 및 배송대기중</div>
-<span class="my__stat__num-font">${orderCount.one}</span>개</span></a>
+<span class="orderkind" ><span class="my__i-stat1 i-stat1-title">입금완료 및 배송대기중</span>
+<span class="my__i-stat1 i-stat1-number">${orderCount.one}</span>개</span></a>
 
 <a href="/picksell/mypage/orderList?status=2">
-<span class="orderkind" ><div class="my__i-stat1">배송중 및 인수확인 대기</div>
-<span class="my__stat__num-font">${orderCount.two}</span>개</span></a>
+<span class="orderkind" ><span class="my__i-stat1 i-stat1-title">배송중 및 인수확인 대기</span>
+<span class="my__i-stat1 i-stat1-number">${orderCount.two}</span>개</span></a>
 
 <a href="/picksell/mypage/orderList?status=3">
-<span class="orderkind"><div class="my__i-stat1">인수확인 및 거래완료</div>
-<span class="my__stat__num-font">${orderCount.three}</span>개</span></a>
+<span class="orderkind"><span class="my__i-stat1 i-stat1-title">인수확인 및 거래완료</span>
+<span class="my__i-stat1 i-stat1-number">${orderCount.three}</span>개</span></a>
 
 <a href="/picksell/mypage/orderList?status=44">
-<span class="orderkind" ><div class="my__i-stat1">결제취소 및 반품</div>
-<span class="my__stat__num-font">${orderCount.fourfour}</span>개</span></a>
+<span class="orderkind" ><span class="my__i-stat1 i-stat1-title">결제취소 및 반품</span>
+<span class="my__i-stat1 i-stat1-number">${orderCount.fourfour}</span>개</span></a>
 </div>
 <c:if test="${fn:length(orderList) > 0}">
 <c:forEach var="ps_order" items="${orderList}" varStatus="orderListStatus">
