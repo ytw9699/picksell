@@ -11,6 +11,18 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <style>
+a.deleteA {
+    color: #999999;
+    height: 50px;
+    width: 40px;
+    line-height: 80px;
+    background: url(/picksell/resources/img/cancel2.png) 50% 30% no-repeat;
+    background-size: 15px;
+    display: block;
+    font-size: 15px;
+    text-align: center;
+    margin: 0 auto;
+}
 .paging {
     margin-top: 40px;
     text-align: center;
@@ -275,7 +287,8 @@ function alarmDelete(ALARM_NUM){
 	     		</c:if>
 	     		<div class="alarm3"><fmt:formatDate value="${alarmMap.ALARM_REGDATE}" pattern="yy-MM-dd HH:mm" /></div>
 	     		<div class="alarm4">
-	     		<input type="button" class="next" id="alarmDelete" value="삭제" onclick="alarmDelete('${alarmMap.ALARM_NUM}')" />
+	     		<a href="#" onclick="alarmDelete('${alarmMap.ALARM_NUM}')" id="alarmDelete" class="deleteA">삭제</a>
+	     		<%-- <input type="button" class="next" id="alarmDelete" value="삭제" onclick="alarmDelete('${alarmMap.ALARM_NUM}')" /> --%>
 	     		</div>
 		<br>
 	</c:forEach>
