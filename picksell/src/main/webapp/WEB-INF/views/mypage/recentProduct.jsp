@@ -38,7 +38,7 @@ a.paging {
     text-align: center;
 }
 table.purchaseTABLE {
-    width: 75%;
+    width: 90%;
 }
 .next {
     width: 65%;
@@ -61,7 +61,7 @@ table.purchaseTABLE {
     font-size: 14px;
 }
 .subjectTd {
-    width: 16%;
+    width: 27%;
     font-size: 17px;
     text-align: center;
 }
@@ -90,7 +90,7 @@ margin-top: 10%;
 			<img src="/picksell/resources/productUpload/${purchase.FIRST_IMG }" style="width: 150px; margin: 1%;" onerror="this.src='/picksell/resources/img/imgready.gif'" />
 			</a>
 		</td>
-		<td class="tdtd"><a href="/picksell/products/detail/${recentProduct.RECENT_CATEGORY_NUM }/${recentProduct.RECENT_PRODUCT_NUM }">${recentProduct.SUBJECT }</a></td>
+		<td class="subjectTd"><a href="/picksell/products/detail/${recentProduct.RECENT_CATEGORY_NUM }/${recentProduct.RECENT_PRODUCT_NUM }">${recentProduct.SUBJECT }</a></td>
 		<td class="tdtd"><fmt:formatNumber value="${recentProduct.PRICE }" pattern="#,###.##" /> 원</td>
 		<td class="tdtd"><fmt:formatDate value="${recentProduct.RECENT_REGDATE}" pattern="yy. MM. dd. hh:mm" /></td>
 		<td class="tdtd"><input type="button" class="next" id="recentProductDelete" value="삭제" onclick="location.href='/picksell/mypage/EachdeleteRecenPd?RECENT_NUM=${recentProduct.RECENT_NUM }'" /></td>
