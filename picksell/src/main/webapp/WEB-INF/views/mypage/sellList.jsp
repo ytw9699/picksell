@@ -10,6 +10,65 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>판매글 관리</title>
 <style>
+input.subQuanBtn {
+    width: 25px;
+    height: 25px;
+    border-radius: 33px;
+    background: url(/picksell/resources/img/sub.png) 50% 50% no-repeat;
+    background-size: 20px;
+    border: 1px solid #ececec;
+}
+input.addQuanBtn {
+    width: 25px;
+    height: 25px;
+    border-radius: 33px;
+    background: url(/picksell/resources/img/add.png) 50% 50% no-repeat;
+    background-size: 20px;
+    border: 1px solid #ececec;
+}
+.proquan {
+    font-size: 17px;
+    color: #726e6e;
+    margin: 0px 7px;
+}
+.paging {
+    margin-top: 40px;
+    text-align: center;
+}
+span.currentPaging {
+    width: 40px;
+    height: 40px;
+    display: inline-block;
+    background-color: #7151fc;
+    color: white;
+    border-radius: 30px;
+    font-size: 23px;
+}
+a.paging {
+    width: 40px;
+    height: 40px;
+    display: inline-block;
+    color: #666;
+    border-radius: 21px;
+    font-size: 23px;
+}
+table.purchaseTABLE {
+    width: 99%; 
+}
+.subjectTd {
+    width: 13%;
+    font-size: 17px;
+    text-align: center;
+}
+.tdtd {
+    width: 5%;
+    font-size: 17px;
+    text-align: center;
+}
+.purchaseList {
+    width: 110%;
+}
+   
 </style>
 </head>
 <body>
@@ -60,47 +119,47 @@ function minusStock(PRODUCT_NUM, index){
 <a href="/picksell/mypage/sellList?HowToSell=${HowToSell}&deal_status=2">종료된 글</a>/
 	
 </h4>
-<table>
+<div class="purchaseList">
+<table class="purchaseTABLE" cellpadding="0" cellspacing="0">
 <c:if test="${fn:length(sellList) > 0}">
-	<tr>
-		<td>판매 종류</td>
-		<td>판매 상태</td>
-		<td>카테고리</td>
-		<td>사진</td>
-		<td>제목</td>
-		<td>가격</td>
-		<td>작성일</td>
-		<td>조회수</td>
-		<td>재고수량</td>
-	</tr>
-
 <c:forEach var="list" items="${sellList}" varStatus="Index">
 	<tr>
-		<td>
-		<c:if test="${list.HOWTOSELL == '0'}">
-			중고 안전 거래 상품
-		</c:if>
-		<c:if test="${list.HOWTOSELL == '1'}">
-			중고 안전거래+직거래 상품
-		</c:if>
-		<c:if test="${list.HOWTOSELL == '2'}">
-			픽셀플러스 상품
-		</c:if>
+		<td class="tdtd">
+			<a href="/picksell/products/detail/${list.CATEGORY_NUM }/${list.PRODUCT_NUM }">
+			<img src="/picksell/resources/productUpload/${list.FIRST_IMG }" style="width: 90%; margin: 1%;" onerror="this.src='/picksell/resources/img/imgready.gif'" />
+			</a>
 		</td>
 		
-		<td>
-		<c:if test="${list.DEAL_STATUS == '0'}">
-			판매중
-		</c:if>
-		<c:if test="${list.DEAL_STATUS == '1'}">
-			거래중
-		</c:if>
-		<c:if test="${list.DEAL_STATUS == '2'}">
-			판매종료
-		</c:if>
+		<td class="subjectTd"><a href="/picksell/products/detail/${list.CATEGORY_NUM }/${list.PRODUCT_NUM }">${list.SUBJECT }</a></td>
+		
+		
+		<td class="tdtd"><fmt:formatNumber value="${list.PRICE }" pattern="#,###.##" /> 원</td>
+		
+		<td class="tdtd">
+			<c:if test="${list.HOWTOSELL == '0'}">
+				중고 안전 거래
+			</c:if>
+			<c:if test="${list.HOWTOSELL == '1'}">
+				중고 안전거래+직거래
+			</c:if>
+			<c:if test="${list.HOWTOSELL == '2'}">
+				픽셀플러스
+			</c:if>
 		</td>
 		
-		<td>
+		<td class="tdtd">
+			<c:if test="${list.DEAL_STATUS == '0'}">
+				판매중
+			</c:if>
+			<c:if test="${list.DEAL_STATUS == '1'}">
+				거래중
+			</c:if>
+			<c:if test="${list.DEAL_STATUS == '2'}">
+				판매종료
+			</c:if>
+		</td>
+		
+		<td class="tdtd">
 		<c:if test="${list.CATEGORY_NUM == 1}">
 		전자제품
 		</c:if>
@@ -133,20 +192,13 @@ function minusStock(PRODUCT_NUM, index){
 		</c:if>
 		</td>
 		
-		<td>
-			<a href="/picksell/products/detail/${list.CATEGORY_NUM }/${list.PRODUCT_NUM }">
-			<img src="/picksell/resources/productUpload/${list.FIRST_IMG }" style="width: 200px;" />
-			</a>
-		</td>
-		<td><a href="/picksell/products/detail/${list.CATEGORY_NUM }/${list.PRODUCT_NUM }">${list.SUBJECT }</a></td>
-		<td><fmt:formatNumber value="${list.PRICE }" pattern="#,###.##" /> 원</td>
-		<td><fmt:formatDate value="${list.PRODUCT_REGDATE}" pattern="yy년 MM월 dd일 hh:mm" /></td>
-		<td>&nbsp;&nbsp;${list.HITCOUNT }</td>
-	<td>
-	<input type="button" id="minusStock" value="-" onclick="minusStock(${list.PRODUCT_NUM},${Index.index})" />
-	    <span id="currentStock${Index.index}">${list.STOCK }</span>
-	<input type="button" id="pulsStock" value="+" onclick="pulsStock(${list.PRODUCT_NUM},${Index.index})" />
+		<td class="tdtd">조회수<br> ${list.HITCOUNT }</td>
+	<td class="tdtd">재고량<br>
+	<input type="button" id="minusStock" class="subQuanBtn" onclick="minusStock(${list.PRODUCT_NUM},${Index.index})" />
+	    <span class="proquan" id="currentStock${Index.index}">${list.STOCK }</span>
+	<input type="button" id="pulsStock" class="addQuanBtn" onclick="pulsStock(${list.PRODUCT_NUM},${Index.index})" />
 	</td>
+	<td class="tdtd">등록일<br><fmt:formatDate value="${list.PRODUCT_REGDATE}" pattern="yy. MM. dd." /></td>
 	</tr>
 </c:forEach>
 </c:if>
@@ -154,8 +206,9 @@ function minusStock(PRODUCT_NUM, index){
 	<p>세션 아이디에 해당하는 판매 상품이 없습니다</p>
 	</c:if>
 </table>
+</div>
 	<div class="paging">
-	 ${pagingHtml} 페이지
+	 ${pagingHtml}
 	</div>
 </body>
 </html>

@@ -5,6 +5,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="client_product">
 	
+	<select id="countingForSingo" resultType="int" parameterType="hashmap">
+		select count(*) from ps_singo 
+		where product_num = #{product_num} and singo_writer = #{currentID}
+	</select>
+	
 	<select id="selectProductOne" resultType="hashmap" parameterType="hashmap">
 		select * from ps_product a, ps_category b 
 		where a.product_num = #{product_num} and a.category_num = b.category_num
@@ -141,9 +146,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</if>
 	</select>
 	
-	<select id="selectProductComment" resultType="hashmap" parameterType="int">
+	<select id="selectProductCommentOfSeller" resultType="hashmap" parameterType="int">
 		select * from ps_pro_comment 
-		where product_num = #{product_num}
+		where product_num = #{product_num} 
+		order by group_num desc, step_num asc
+	</select>
+	
+	<select id="selectProductCommentOfBuyer" resultType="hashmap" parameterType="hashmap">
+		select * from(
+		select * from ps_pro_comment where product_num = #{product_num}) 
+		where owner = #{owner} or comment_writer = #{seller} 
 		order by group_num desc, step_num asc
 	</select>
 	
@@ -210,13 +222,38 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 									group_num,
 									step_num,
 									comment_regdate,
-									comment_content) values(comment_seq.NEXTVAL,
+									comment_content,
+									owner) values(comment_seq.NEXTVAL,
 															#{product_num},
-															'임시작성자',
+															#{comment_writer},
 															comment_seq.CURRVAL,
 															#{step_num},
 															sysdate,
-															#{comment_content})
+															#{comment_content},
+															#{comment_writer})
+	</insert>
+	
+	<!-- 문의 리플작성 -->
+	<select id="getCurrentStepNumber" resultType="int" parameterType="hashmap">
+		select max(step_num) from ps_pro_comment where group_num = #{group_num}
+	</select>
+	
+	<insert id="insertProductReComment" parameterType="hashmap">
+		insert into ps_pro_comment(comment_num,
+									product_num,
+									comment_writer,
+									group_num,
+									step_num,
+									comment_regdate,
+									comment_content,
+									owner) values(comment_seq.NEXTVAL,
+															#{product_num},
+															#{comment_writer},
+															#{group_num},
+															#{step_num},
+															sysdate,
+															#{comment_content},
+															#{comment_writer})
 	</insert>
 	
 	<insert id="insertPurchaseList" parameterType="hashmap">
@@ -229,6 +266,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 														#{buyer_id},
 														sysdate,
 														0)
+	</insert>
+	
+	<insert id="insertSingoProcess" parameterType="hashmap">
+		insert into ps_singo(singo_num,
+							product_num,
+							singoee,
+							singo_writer,
+							singo_regdate,
+							singo_content) values(SINGO_SEQ.NEXTVAL,
+													#{product_num},
+													#{singoee},
+													#{singo_writer},
+													sysdate,
+													#{singo_content})
 	</insert>
 	
 	<update id="updateProductHitcount" parameterType="hashmap">

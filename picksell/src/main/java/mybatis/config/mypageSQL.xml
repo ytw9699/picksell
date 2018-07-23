@@ -370,6 +370,19 @@ select * from ps_product a, PS_ORDERLIST b where b.ORDER_NUM = #{ORDER_NUM} and 
 		select count(*) from  ps_order where buyer_id =  #{sessionId} and status = '44'
 </select>
 
+<select id="alarmCountKind1" resultType="int" parameterType="String">
+		select count(*) from ps_alarm where alarm_target = #{sessionId}
+</select>
+
+<select id="alarmCountKind2" resultType="int" parameterType="String">
+		select count(*) from ps_alarm where alarm_target = #{sessionId} and alarm_check = 'NO'
+</select>
+
+<select id="alarmCountKind3" resultType="int" parameterType="String">
+		select count(*) from ps_alarm where alarm_target = #{sessionId} and alarm_check = 'YES'
+</select>
+
+
 <!-- 최근본상품 전체삭제 -->
 <select id="deleteRecenPd" resultType="int" parameterType="String">
 	delete from PS_RECENT_PRODUCT where recent_id = #{sessionId}

@@ -9,6 +9,43 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>mainSearch</title>
+<style>
+.paging {
+    margin-top: 40px;
+    text-align: center;
+}
+span.currentPaging {
+    width: 40px;
+    height: 40px;
+    display: inline-block;
+    background-color: #7151fc;
+    color: white;
+    border-radius: 30px;
+    font-size: 23px;
+}
+a.paging {
+    width: 40px;
+    height: 40px;
+    display: inline-block;
+    color: #666;
+    border-radius: 21px;
+    font-size: 23px;
+}
+.subjectTd {
+    width: 27%;
+    font-size: 17px;
+    text-align: center;
+}
+table.purchaseTABLE {
+    width: 90%;
+}
+.tdtd {
+    width: 12%;
+    font-size: 17px;
+    text-align: center;
+}
+
+</style>
 </head>
 <body>
 <h4>
@@ -25,42 +62,44 @@
 <a href="/picksell/mainSearchList?searchKeyword=${searchKeyword}&HowToSell=${HowToSell}&order=2">낮은가격순</a>/
 <a href="/picksell/mainSearchList?searchKeyword=${searchKeyword}&HowToSell=${HowToSell}&order=3">높은가격순</a>/
 </h4> 
-<table>
-<tr>
-<td>상품종류/</td>
-<td>사진/</td>
-<td>제목/</td>
-<td>가격/</td>
-<td>날짜/</td>
-<c:if test="${HowToSell == '2' || HowToSell == '3'}">
-<td>판매량/</td>
-</c:if>
-</tr>
-</table>
+
+<div class="purchaseList">	
+<table class="purchaseTABLE" cellpadding="0" cellspacing="0">
 <c:forEach var="mainSearch" items="${mainSearchList}"> 
-<table>
 <tr>
-	<c:if test="${mainSearch.HOWTOSELL == '0'}">
-	<td>일반안전거래/</td>
-	</c:if>
-	<c:if test="${mainSearch.HOWTOSELL == '1'}">
-	<td>일반안전거래+직거래/</td>
-	</c:if>
-	<c:if test="${mainSearch.HOWTOSELL == '2'}">
-	<td>사업자안전거래/</td>
-	</c:if>
-	<td><a href="/picksell/products/detail/${mainSearch.CATEGORY_NUM }/${mainSearch.PRODUCT_NUM }">
-		<img src="/picksell/resources/productUpload/${mainSearch.FIRST_IMG }" style="width: 200px;" />
+	<td class="tdtd">
+		<a href="/picksell/products/detail/${mainSearch.CATEGORY_NUM }/${mainSearch.PRODUCT_NUM }">
+			<img src="/picksell/resources/productUpload/${mainSearch.FIRST_IMG }" style="width: 150px; margin: 1%;" onerror="this.src='/picksell/resources/img/imgready.gif'" />
 		</a>
 	</td>
-	<td>${mainSearch.SUBJECT}/</td>
-	<td><fmt:formatNumber value="${mainSearch.PRICE}" pattern="#,###.##" /> 원/</td>
-	<td>${mainSearch.PRODUCT_REGDATE}/</td>
+	
+	<td class="subjectTd">${mainSearch.SUBJECT}</td>
+	
+	<td class="tdtd"><fmt:formatNumber value="${mainSearch.PRICE}" pattern="#,###.##" /> 원</td>
+	
 	<c:if test="${mainSearch.TOTAL != null}">
-	<td>${mainSearch.TOTAL}개/</td>
+	<td class="tdtd">${mainSearch.TOTAL}개</td>
 	</c:if>
-</tr>		
-</table>
+	
+	<td class="tdtd">
+		<c:if test="${mainSearch.HOWTOSELL == '0'}">
+		일반안전거래
+		</c:if>
+		<c:if test="${mainSearch.HOWTOSELL == '1'}">
+		일반안전거래+직거래
+		</c:if>
+		<c:if test="${mainSearch.HOWTOSELL == '2'}">
+		사업자안전거래
+		</c:if>
+	</td>
+	
+	<td class="tdtd">등록일 <fmt:formatDate value="${mainSearch.PRODUCT_REGDATE}" pattern="yy. MM. dd" /></td>
+</tr>	
 </c:forEach>
+</table>
+</div>
+<div class="paging">
+ ${pagingHtml}
+</div>
 </body>
 </html>

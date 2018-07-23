@@ -151,7 +151,7 @@
 			<artifactId>log4j</artifactId>
 			<version>1.2.15</version>
 			<exclusions>
-				<exclusion>
+			    <exclusion>
 					<groupId>javax.mail</groupId>
 					<artifactId>mail</artifactId>
 				</exclusion>
@@ -178,6 +178,20 @@
 			<version>1</version>
 		</dependency>
 				
+		<!-- mail -->
+		<dependency>
+		    <groupId>javax.mail</groupId>
+		    <artifactId>mail</artifactId>
+		    <version>1.4.7</version>
+	    </dependency>
+	    
+	     <!-- 메일 발송 지원 기능 포함 -->
+	    <dependency>
+	    	<groupId>org.springframework</groupId>
+	    	<artifactId>spring-context-support</artifactId>
+	    	<version>4.0.4.RELEASE</version>
+	    </dependency>
+	 
 		<!-- Servlet -->
 		<dependency>
 			<groupId>javax.servlet</groupId>

@@ -9,16 +9,38 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <title>마이페이지 초안</title>
+<style>
+.mypage {
+    border-top: 1px solid #dadada;
+    padding: 10px;
+    box-sizing: border-box;
+    width: 170px;
+    color: #666;
+}
+.myWrapper {
+    border-left: 1px solid #dadada;
+    border-right: 1px solid #dadada;
+    border-bottom: 1px solid #dadada;
+}
+.mypage:hover > a, .mypage:hover {
+    color: #7151fc;
+}
+.mypage a {
+    color: #666;
+}
+</style>
 </head>
 <body>
-<p>마이페이지</p>
-<p><a href="/picksell/mypage/memberCheck">회원정보 확인/수정</a></p>
-<p><a href="/picksell/mypage/orderList">주문 내역/배송 조회</a></p>
-<p><a href="/picksell/mypage/saleList">판매 내역/배송 조회</a></p>
-<p><a href="/picksell/mypage/sellList">판매글 조회</a></p>
-<p><a href="/picksell/mypage/purchaseList">중고구매 요청 리스트</a></p>
-<p><a href="/picksell/mypage/secondSellList">중고판매 요청 리스트</a></p>
-<p><a href="/picksell/mypage/recentProduct">최근 본 상품</a></p>
-<p><a href="/picksell/mypage/alarmSelect">알림 조회</a></p>
+<div class="myWrapper">
+<div class="mypage">마이페이지</div>
+<div class="mypage"><a href="/picksell/mypage/memberCheck">회원정보 확인/수정</a></div>
+<div class="mypage"><a href="/picksell/mypage/orderList">주문 내역/배송 조회</a></div>
+<div class="mypage"><a href="/picksell/mypage/saleList">판매 내역/배송 조회</a></div>
+<div class="mypage"><a href="/picksell/mypage/sellList">판매글 조회</a></div>
+<div class="mypage"><a href="/picksell/mypage/purchaseList">중고구매 요청 리스트</a></div>
+<div class="mypage"><a href="/picksell/mypage/secondSellList">중고판매 요청 리스트</a></div>
+<div class="mypage"><a href="/picksell/mypage/recentProduct">최근 본 상품</a></div>
+<div class="mypage"><a href="/picksell/mypage/alarmSelect">알림 조회</a></div>
+</div>
 </body>
 </html>

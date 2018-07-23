@@ -14,6 +14,28 @@
 <h2>회원정보수정</h2>
 </head>
 <style>
+.next {
+    width: 80%;
+    margin: 0 auto;
+    margin-left: 0%;
+    border: none;
+    color: white;
+    background-color: #7151fc;
+    padding: 8%;
+    font-size: 14px;
+}
+.next1 {
+    width: 32%;
+    margin: 0 auto;
+    margin-left: 0%;
+    border: none;
+    color: white;
+    background-color: #7151fc;
+    padding: 8%;
+    font-size: 14px;
+    height: 0px;
+    line-height: 0;
+   }
 #profile { /* 파일 필드 숨기기 */
 display:none;
 }
@@ -28,8 +50,10 @@ display:none;
 .PROFILE_IMG{
   width: 100%;
 }
-.imgWrapper{
- width: 150px;
+.imgWrapper {
+    width: 14%;
+    float: right;
+    height: 147px;
 }
 #profileGray{
 position: fixed; 
@@ -66,14 +90,33 @@ color: #7151fc;
     max-height: 300px;
 }
 img#mainPic {
-    width: 100%;
+    width: 92%;
     max-height: 360px;
 }
 img#mainPic2 {
     width: 100%;
     max-height: 360px;
 }
-   
+.bigdiv {
+    width: 50%;
+}
+.information {
+    font-size: 19px;
+    padding: 1px;
+    margin: 0px;
+    width: 47%;
+    margin: 8%;
+    text-align: left;
+    height: 29px;
+}
+.information2 {
+    font-size: 20px;
+    padding: 1px;
+    margin: 1px;
+    width: 54%;
+    margin: 0%;
+    height: 30px;
+}
 </style>
 <body>
 <script>
@@ -114,22 +157,32 @@ else if(NewPassword !== rePassword){//
 			</div>
 	        <label for="profile" id="profileSearch">프로필 이미지 찾기</label>
 			<input type="file" name="PROFILE_IMG" id="profile" /><br>
-			<input type="submit" class="profileButtons" id="profileConfirm" value="확인" />
-			<input type="button" class="profileButtons" value="기본이미지 사용하기" onclick="location.href='/picksell/mypage/defaultProfile'"/>
-			<input type="button" class="profileButtons" value="취소" onclick="javascript:closeProfileMod();" />
+			<input type="submit" class="next1" id="profileConfirm" value="확인" />
+			<input type="button" class="next1" value="기본이미지 사용하기" onclick="location.href='/picksell/mypage/defaultProfile'"/>
+			<input type="button" class="next1" value="취소" onclick="javascript:closeProfileMod();" />
 		</form>
 	</div>
 
 <form action="/picksell/mypage/modify" method="post" onsubmit = "return passwordsCheck()">
+	<div class="bigdiv">
+	<table>
 	<input type="hidden" name="id" value="${resultMap.ID}"/>
 	<input type="hidden" name="profile_img" value="${resultMap.PROFILE_IMG}"/>
 	<input type="hidden" name="alarm_consent" value="${resultMap.ALARM_CONSENT}"/>
 		
-	아이디: ${resultMap.ID}
-	 <br/>
-	이름: ${resultMap.NAME}
-	<br/>
-	회원 종류:
+	<tr>
+	<td class="information">아이디</td>
+	<td class="information2">${resultMap.ID}</td>
+	</tr>
+	
+	<tr>
+	<td class="information">이름</td>
+	<td class="information2">${resultMap.NAME}</td>
+	</tr>
+	
+	<tr>
+	<td class="information">회원 종류</td>
+	<td class="information2">
 	<c:if test="${resultMap.KIND == '0'}">
 	일반회원
 	</c:if>
@@ -138,38 +191,84 @@ else if(NewPassword !== rePassword){//
 	</c:if>
 	<c:if test="${resultMap.KIND == '99'}">
 	관리자
-	</c:if>
-	<br/>
-        신규 비밀번호:<input type="password" name="password" id="password" onkeyup="passwordsCheck()" value="${resultMap.PASSWORD}"/>
-    <br/>
-	비밀번호 다시 입력:<input type="password" name="passwordCheck" id="passwordCheck" onkeyup="passwordsCheck()" value="${resultMap.PASSWORD}"/>&nbsp;<span id="Innerpassword"></span>
-	<br/>
-	이메일:<input type="text" value="${resultMap.EMAIL}" name="email" id="email" />
-	<br/>
-	주소:<input type="text" value="${resultMap.ADDRESS}" name="address" />
-	<br/>
-	핸드폰 번호:<input type="text" value="${resultMap.PHONENUM}" name="phoneNum" />
-	<br/>
-	은행명:<input type="text" value="${resultMap.BANK}" name="bank" />
-	<br/>
-	계좌번호:<input type="text" value="${resultMap.ACCOUNT}" name="account" placeholder=" -를 빼고 입력해주세요"/>
-	<br/>
-	예금주:<input type="text" value="${resultMap.ACCOUNT_NAME}" name="account_name" />
-	<br/>
+	</c:if></td>
+	</tr>
+	
+	<tr>
+	<td class="information">신규 비밀번호</td>
+	<td class="information2"><input type="password" name="password" id="password" onkeyup="passwordsCheck()" value="${resultMap.PASSWORD}"/></td>
+	</tr>
+	
+	<tr>
+	<td class="information">비밀번호 재입력</td>
+	<td class="information2"><input type="password" name="passwordCheck" id="passwordCheck" onkeyup="passwordsCheck()" value="${resultMap.PASSWORD}"/>&nbsp;<span id="Innerpassword"></span></td>
+	</tr>
+	
+	<tr>
+	<td class="information">이메일</td>
+	<td class="information2"><input type="text" value="${resultMap.EMAIL}" name="email" id="email" /></td>
+	</tr>
+	
+	<tr>
+	<td class="information">주소</td>
+	<td class="information2"><input type="text" value="${resultMap.ADDRESS}" name="address" /></td>
+	</tr>
+	
+	<tr>
+	<td class="information">핸드폰 번호</td>
+	<td class="information2"><input type="text" value="${resultMap.PHONENUM}" name="phoneNum" /></td>
+	</tr>
+	
+	<tr>
+	<td class="information">은행명</td>
+	<td class="information2"><input type="text" value="${resultMap.BANK}" name="bank" /></td>
+	</tr>
+	
+	<tr>
+	<td class="information">계좌번호</td>
+	<td><input type="text" value="${resultMap.ACCOUNT}" name="account" placeholder=" -를 빼고 입력해주세요"/></td>
+	</tr>
+	
+	<tr>
+	<td class="information">예금주:</td>
+	<td class="information2"><input type="text" value="${resultMap.ACCOUNT_NAME}" name="account_name" /></td>
+	</tr>
 	<!-- 사업자회원일 경우 보여주기-->
 	<c:if test="${resultMap.KIND == '1'}">
-	사업자등록번호:<input type="text" value="${resultMap.BUSINESS_NUMBER}" name="business_number" />
-	<br/>
-	상호명:<input type="text" value="${resultMap.BUSINESS_NAME}" name="business_name" />
-	<br/>
+	<tr>
+	<td class="information">사업자등록번호</td>
+	<td class="information2"><input type="text" value="${resultMap.BUSINESS_NUMBER}" name="business_number" /></td>
+	</tr>
+	
+	<tr>
+	<td class="information">상호명</td>
+	<td class="information2"><input type="text" value="${resultMap.BUSINESS_NAME}" name="business_name" /></td>
+	</tr>
 	</c:if>
-	가입일: <fmt:formatDate value="${resultMap.REGDATE}" pattern="yy.MM.dd. hh:mm" />
-	<br/>
-	최근 로그인: <fmt:formatDate value="${resultMap.LATESTLOGIN2}" pattern="yy.MM.dd. hh:mm" />
-	<br/>
-	알림상태: ${resultMap.ALARM_CONSENT}
-	<br/>
-	계정상태: 
+	
+	<tr>
+	<td class="information">상호명</td>
+	<td class="information2"><input type="text" value="${resultMap.BUSINESS_NAME}" name="business_name" /></td>
+	</tr>
+	
+	<tr>
+	<td class="information">가입일</td>
+	<td class="information2"><fmt:formatDate value="${resultMap.REGDATE}" pattern="yy.MM.dd. hh:mm" /></td>
+	</tr>
+	
+	<tr>
+	<td class="information">최근 로그인</td>
+	<td class="information2"><fmt:formatDate value="${resultMap.LATESTLOGIN2}" pattern="yy.MM.dd. hh:mm" /></td>
+	</tr>
+	
+	<tr>
+	<td class="information">알림상태</td>
+	<td class="information2">${resultMap.ALARM_CONSENT}</td>
+	</tr>
+	
+	<tr>
+	<td class="information">계정상태</td>
+	<td class="information2">
 	<c:if test="${resultMap.STATUS == '0'}">
 	정상
 	</c:if>
@@ -179,9 +278,14 @@ else if(NewPassword !== rePassword){//
 	<c:if test="${resultMap.STATUS == '2' }">
 	로그인 제한
 	</c:if>
-	<br/>
-	<input type="submit" value="정보 수정하기"/>
-	<br/>
+	</td>
+	</tr>
+	
+	<tr>
+	<td class="information"><input type="submit" class="next" value="정보 수정하기"/></td>
+	</tr>
+	</table>
+	</div>
 </form>
  <!-- <input type="button" value="탈퇴하기"/> -->
 </div>

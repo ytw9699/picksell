@@ -10,10 +10,50 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title></title>
 <style>
+table.purchaseTABLE {
+    width: 95%; 
+}
+.next {
+    width: 80%;
+    margin: 0 auto;
+    margin-left: 0%;
+    border: none;
+    color: white;
+    background-color: #7151fc;
+    padding: 8%;
+    font-size: 14px;
+}
+.subjectTd {
+    width: 16%;
+    font-size: 17px;
+    text-align: center;
+}
+.tdtd {
+    width: 12%;
+    font-size: 17px;
+    text-align: center;
+}
+.tbodys{
+width: 10%;
+margin-top: 10%;
+}
 </style>
 </head>
 <body>
 <script>
+	function refusalApprove(SELLER_ID, CATEGORY_NUM, PRODUCT_NUM, BUYER_ID){
+		var allData = "PRODUCT_NUM="+PRODUCT_NUM+"&BUYER_ID="+BUYER_ID;
+		$.ajax({
+			type : "GET",
+			url : "/picksell/mypage/refusalApprove",
+			dataType : 'json',
+			data : allData,
+			success : function(data){
+				alarmInsert(BUYER_ID, CATEGORY_NUM, PRODUCT_NUM, SELLER_ID, "5");
+				location.reload();
+			}
+		});	
+	}
 	function alarmInsert(ALARM_TARGET, ALARM_VARIABLE1, ALARM_VARIABLE2, ALARM_WRITER,ALARM_KIND){
 	var allData = "ALARM_TARGET="+ALARM_TARGET+"&ALARM_VARIABLE1="+ALARM_VARIABLE1+"&ALARM_VARIABLE2="+ALARM_VARIABLE2+"&ALARM_WRITER="+ALARM_WRITER+"&ALARM_KIND="+ALARM_KIND;
 			$.ajax({
@@ -43,7 +83,6 @@
 //onclick="purchaseApprove(this,'${purchase.PURCHASE_NUM}','${purchase.BUYER_ID }','${purchase.CATEGORY_NUM }','${purchase.PRODUCT_NUM }','${purchase.SELLER_ID }','watingAccept${status.index+1}','completedAccept${status.index+1}');" /></td>
 function purchaseApprove(eventElement, purchaseNumber, buyer, category_num, product_num, sessionId,watingAccept,completedAccept){
 	var target = document.getElementById(watingAccept);
-	//alert(target);
 	var params = "pn="+product_num+"&purnum="+purchaseNumber+"&buyer="+buyer;
 	$.ajax({
 		type : "POST",
@@ -55,8 +94,7 @@ function purchaseApprove(eventElement, purchaseNumber, buyer, category_num, prod
 	if(data.resultCode == 'success'){
 		alarmInsert(buyer, category_num, product_num,sessionId,"2");
 		alert(data.resultMsg);
-		//alert(target);
-		$(eventElement).parents('td').html("<input type='button' value='수락 취소' onclick=purchaseApproveCancel(this,"+purchaseNumber+",'"+buyer+"',"+category_num+","+product_num+",'"+sessionId+"','"+completedAccept+"','"+watingAccept+"'); />");
+		$(eventElement).parents('td').html("<input type='button' value='수락 취소' class='next' onclick=purchaseApproveCancel(this,"+purchaseNumber+",'"+buyer+"',"+category_num+","+product_num+",'"+sessionId+"','"+completedAccept+"','"+watingAccept+"'); />");
 		$(target).parents('td').html("<div id='"+completedAccept+"'>수락 완료</div>");
 	}else if(data.resultCode == 'fail'){
 		alert(data.resultMsg);
@@ -79,7 +117,7 @@ function purchaseApproveCancel(eventElement, purchaseNumber, buyer, category_num
 			alert(data.resultMsg);
     		 alarmInsert(buyer, category_num, product_num,sessionId,"8");        
     		 
-			$(eventElement).parents('td').html("<input type='button' value='요청 수락' onclick=purchaseApprove(this,"+purchaseNumber+",'"+buyer+"',"+category_num+","+product_num+",'"+sessionId+"','"+watingAccept+"','"+completedAccept+"'); />");
+			$(eventElement).parents('td').html("<input type='button' value='요청 수락' class='next' onclick=purchaseApprove(this,"+purchaseNumber+",'"+buyer+"',"+category_num+","+product_num+",'"+sessionId+"','"+watingAccept+"','"+completedAccept+"'); />");
 			$(target).parents('td').html("<div id='"+watingAccept+"'>수락 대기중</div>");
 		}else if(data.resultCode == 'fail'){
 			alert(data.resultMsg);
@@ -87,59 +125,45 @@ function purchaseApproveCancel(eventElement, purchaseNumber, buyer, category_num
 	}
 	});
 }
-	
 </script>
 <h2>중고 판매 요청 리스트</h2> 
-<table>
-<c:if test="${fn:length(secondSellList) > 0}">
-	<tr>
-		<td>사진</td>
-		<td>제목</td>
-		<td>가격</td>
-		<td>구매자 아이디</td>
-		<td>요청 날짜</td>
-		<td>요청 상태</td>
-		<td>수락or취소</td>
-		<td>거부</td>
-	</tr>
 
+<div class="purchaseList">	
+<table class="purchaseTABLE" cellpadding="0" cellspacing="0">
+<c:if test="${fn:length(secondSellList) > 0}">
 	<c:forEach var="purchase" items="${secondSellList}" varStatus="status">
+	<tbody class="tbodys">
 	<tr>
-		<td>
+		<td class="tdtd">
 			<a href="/picksell/products/detail/${purchase.CATEGORY_NUM }/${purchase.PRODUCT_NUM }">
-			<img src="/picksell/resources/productUpload/${purchase.FIRST_IMG }" style="width: 200px;" />
+			<img src="/picksell/resources/productUpload/${purchase.FIRST_IMG }" style="width: 90%; margin: 1%;" onerror="this.src='/picksell/resources/img/imgready.gif'" />
 			</a>
 		</td>
-		<td><a href="/picksell/products/detail/${purchase.CATEGORY_NUM }/${purchase.PRODUCT_NUM }">${purchase.SUBJECT }</a></td>
-		<td><fmt:formatNumber value="${purchase.PRICE }" pattern="#,###.##" /> 원</td>
-		<td>${purchase.BUYER_ID}</td>
-		<td><fmt:formatDate value="${purchase.REGDATE}" pattern="yy. MM. dd. hh:mm" /></td>
+		<td class="subjectTd"><a href="/picksell/products/detail/${purchase.CATEGORY_NUM }/${purchase.PRODUCT_NUM }">${purchase.SUBJECT }</a></td>
+		<td class="tdtd"><fmt:formatNumber value="${purchase.PRICE }" pattern="#,###.##" /> 원</td>
+		<td class="tdtd">요청일 <fmt:formatDate value="${purchase.REGDATE}" pattern="yy. MM. dd " /></td>
 		<c:if test="${purchase.STATUS == '0'}">
-		<td><div id="watingAccept${status.index+1}">수락 대기중</div></td>
+		<td class="tdtd"><div id="watingAccept${status.index+1}">수락 대기중</div></td>
 		</c:if>
 		<c:if test="${purchase.STATUS == '1'}"> 
-		<td><div id="completedAccept${status.index+1}">수락 완료</div></td>
+		<td class="tdtd"><div id="completedAccept${status.index+1}">수락 완료</div></td>
 		</c:if>								
-		
+		<td class="tdtd">구매자 ${purchase.BUYER_ID}</td>
 	<c:if test="${purchase.STATUS == 0 }">							
-	<td><input type="button" value="요청 수락" id ="accept" onclick="purchaseApprove(this,'${purchase.PURCHASE_NUM}','${purchase.BUYER_ID }','${purchase.CATEGORY_NUM }','${purchase.PRODUCT_NUM }','${purchase.SELLER_ID }','watingAccept${status.index+1}','completedAccept${status.index+1}');" /></td>
+	<td class="tdtd"><input type="button" value="요청 수락" class="next" id ="accept" onclick="purchaseApprove(this,'${purchase.PURCHASE_NUM}','${purchase.BUYER_ID }','${purchase.CATEGORY_NUM }','${purchase.PRODUCT_NUM }','${purchase.SELLER_ID }','watingAccept${status.index+1}','completedAccept${status.index+1}');" /></td>
 	</c:if>
 	<c:if test="${purchase.STATUS == 1 }">																		
-	<td><input type="button" value="수락 취소" onclick="purchaseApproveCancel(this, '${purchase.PURCHASE_NUM}','${purchase.BUYER_ID }','${purchase.CATEGORY_NUM }','${purchase.PRODUCT_NUM }','${purchase.SELLER_ID }','completedAccept${status.index+1}','watingAccept${status.index+1}');" /></td>
+	<td class="tdtd"><input type="button" value="수락 취소" class="next" onclick="purchaseApproveCancel(this,'${purchase.PURCHASE_NUM}','${purchase.BUYER_ID }','${purchase.CATEGORY_NUM }','${purchase.PRODUCT_NUM }','${purchase.SELLER_ID }','completedAccept${status.index+1}','watingAccept${status.index+1}');" /></td>
 	</c:if>  										
-	<td><input type="button" value="수락 거부" id ="refusal" onclick="deletesecondSellList('${purchase.PURCHASE_NUM }','${purchase.SELLER_ID }','${purchase.CATEGORY_NUM }','${purchase.PRODUCT_NUM }','${purchase.BUYER_ID}','completedAccept${status.index+1}','watingAccept${status.index+1}');" /></td>
-	</tr> 
-	<c:if test="${purchase.STATUS == '1'}">
-<!-- <script>
-	document.getElementById("purchase"+${status.index+1}).disabled = false;
-</script> -->
-</c:if>
+	<td class="tdtd"><input type="button" value="수락 거부" class="next" id="refusal" onclick="refusalApprove('${purchase.SELLER_ID }','${purchase.CATEGORY_NUM }','${purchase.PRODUCT_NUM }','${purchase.BUYER_ID}');" /></td>
+	</tr>
+	</tbody>														
 	</c:forEach>
-
 </c:if>
+</table>
+</div>
 <c:if test="${fn:length(secondSellList) < 1}">
 <p>요청 내역이 없습니다.</p>
 </c:if>
-</table>
 </body>
 </html>

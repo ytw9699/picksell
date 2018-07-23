@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+    <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -145,17 +146,38 @@
 <!-- 문의댓글 모달div -->
 <div class="hiddenCommentForm">
 	<div class="formTop">
-		<span class="cancel"><a href="#" onclick="closeCommentForm()">X</a></span>
+		<span class="cancel"><a href="#" class="closeAnchor" onclick="closeCommentForm()"></a></span>
 	</div>
 	<div class="formBody">
 		<form action="/picksell/products/commentProc" method="post" id="commentForm">
 			<input type="hidden" name="product_num" value="${product_num }" />
 			<input type="hidden" name="currentPage" value="${currentPage }" />
 			<input type="hidden" name="category_num" value="${category_num }" />
-			<input type="hidden" name="comment_writer" value="상품문의작성자" />
+			<input type="hidden" name="comment_writer" value="${sessionScope.sessionId }" />
 			<input type="hidden" name="step_num" value="0" />
-			<input type="text" name="comment_content" />
-			<input type="submit" value="작성" />
+			<textarea name="comment_content" class="comment_content" placeholder="상품문의를 작성하세요. 판매자 외에는 볼 수 없습니다."></textarea>
+			<!-- <input type="text" name="comment_content" /> -->
+			<input type="submit" class="commentSUBMIT" value="작성" />
+		</form>
+	</div>
+</div><!-- hiddenCommentForm end -->
+
+<!-- 문의댓글리플 모달div -->
+<div class="hiddenReCommentForm">
+	<div class="formTop">
+		<span class="cancel"><a href="#" class="closeAnchor" onclick="closeCommentForm()"></a></span>
+	</div>
+	<div class="formBody">
+		<form action="/picksell/products/recommentProc" method="post" id="commentForm">
+			<input type="hidden" name="product_num" value="${product_num }" />
+			<input type="hidden" name="currentPage" value="${currentPage }" />
+			<input type="hidden" name="category_num" value="${category_num }" />
+			<input type="hidden" name="comment_writer" value="${sessionScope.sessionId }" />
+			<input type="hidden" name="step_num" value="0" />
+			<input type="hidden" name="group_num" value="0" id="group_num" />
+			<textarea name="comment_content" class="comment_content" placeholder="상품문의를 작성하세요. 판매자 외에는 볼 수 없습니다."></textarea>
+			<!-- <input type="text" name="comment_content" /> -->
+			<input type="submit" class="commentSUBMIT" value="작성" />
 		</form>
 	</div>
 </div><!-- hiddenCommentForm end -->
@@ -208,6 +230,33 @@
 	</div>
 </div><!-- hiddenPurchaseListForm end -->
 
+<div id="hiddenSingoForm" class="hiddenSingoForm">
+	<form action="/picksell/products/singoProc" method="post">
+	<input type="hidden" name="singo_writer" value="${sessionScope.sessionId }" />
+	<input type="hidden" name="singoee" value="${resultObject.SELLER_ID }" />
+	<input type="hidden" name="product_num" value="${resultObject.PRODUCT_NUM }" />
+	<input type="hidden" name="category_num" value="${resultObject.CATEGORY_NUM }" />
+	<span class="singoHeaderTEXT">신고하기</span>
+	<span class="singoSubHeaderTEXT">* 허위신고는 사이트 이용에 불이익이 있을 수 있습니다</span>
+	<table class="singoTABLE" cellpadding="0" cellspacing="0">
+		<tr>
+			<td class="singoHeadTD">신고자</td>
+			<td class="singoBodyTD">${sessionScope.sessionId }</td>
+		</tr>
+		<tr>
+			<td class="singoHeadTD">신고대상자</td>
+			<td class="singoBodyTD">${resultObject.SELLER_ID }</td>
+		</tr>
+		<tr>
+			<td class="singoReasonTD">신고사유</td>
+			<td class="singoTextareaTD">
+			<textarea name="singo_content" class="singoTA"></textarea>
+			</td>
+		</tr>
+	</table>
+	<input type="submit" class="singoSUBMIT" value="신고하기" />
+	</form>
+</div>
 	<!-- 컨텐츠 시작 -->
 	<div class="contentWrap">
 	<form action="/picksell/purchase/order/single" method="post">
@@ -226,7 +275,7 @@
 		
 		<!-- 상품판매정보 시작 -->
 		<div class="seller_info">
-			<img src="/picksell/resources/img/imgready.gif" class="sellerProfileImg" />
+			<img src="/picksell/resources/productUpload/${resultObject.FIRST_IMG }" onerror="this.src='/picksell/resources/img/imgready.gif'" class="sellerProfileImg" />
 		</div>
 		<div class="product_info">
 			<!-- 이미판매중입니다 레이아웃 -->
@@ -317,6 +366,7 @@
 			
 			</c:if><!-- 세션조건 끝 -->
 		</div>
+			<input type="button" id="singoOPEN" class="singoOPEN" value="신고하기" onclick="singoAccessing();" />
 		</div>
 		
 		<div class="product_detail">
@@ -332,18 +382,20 @@
 			<span class="deliveryTEXT">3. 제품인수 후 3일 이내에 구매자가 인수확인하지 않으면 자동 인수확인처리 됩니다.</span>
 		</div>
 		<div class="commentWrap">
-			<span class="product_contentTEXT">상품 문의</span><span class="commentSumTEXT">[개수]</span>
-			<input type="button" value="상품 문의하기" onclick="openCommentForm()" />
+			<span class="product_contentTEXT">상품 문의</span><span class="commentSumTEXT">${fn:length(resultCommentList) }</span>
+			<input type="button" class="commentBTN" value="상품 문의하기" onclick="openCommentForm()" />
 			<div class="commentListWrap">
 				<c:choose>
 					<c:when test="${empty resultCommentList }">
-						등록된 상품문의가 없습니다
-						<p>
-						내가쓴 상품문의는 판매자외의 다른사람이 볼 수 없습니다!
+						<span class="hasNoCommentTEXT">상품문의를 작성하세요</span>
+						<span class="hasNoCommentTEXT">내가쓴 상품문의는 판매자외의 다른사람이 볼 수 없습니다!</span>
 					</c:when>
 					<c:when test="${!empty resultCommentList }">
 						<c:forEach var="comment" items="${resultCommentList }">
-							<p>${comment.COMMENT_WRITER } .. ${comment.COMMENT_REGDATE } .. ${comment.COMMENT_CONTENT }
+							<p>${comment.COMMENT_WRITER } .. ${comment.COMMENT_REGDATE } .. ${comment.COMMENT_CONTENT } 
+							<c:if test="${comment.STEP_NUM == 0 }">
+								<input type="button" class="replyBTN" value="답변달기" onclick="openRecommentForm('${comment.GROUP_NUM}');" />
+							</c:if>
 						</c:forEach>
 					</c:when>
 				</c:choose>
@@ -361,12 +413,42 @@
 	function closeCommentForm(){
 		$(".hiddenBackGround").hide();
 		$(".hiddenCommentForm").hide();
-		
+		$(".hiddenReCommentForm").hide();
 		$(".hiddenPurchaseListForm").hide();
+		$(".hiddenSingoForm").hide();
 	}
 	function openPurchaseList(){
 		$(".hiddenPurchaseListForm").show();
 		$(".hiddenBackGround").show();
+	}
+	function openSingoForm(){
+		$(".hiddenSingoForm").show();
+		$(".hiddenBackGround").show();
+	}
+	function openRecommentForm(group_num){
+		$(".hiddenBackGround").show();
+		$(".hiddenReCommentForm").show();
+		$('#group_num').val(group_num);
+	}
+	
+	
+	function singoAccessing(){
+		var param = "singoee=${resultObject.SELLER_ID}&pn=${resultObject.PRODUCT_NUM }";
+		$.ajax({
+			type : "GET",
+			url : "/picksell/products/isAbledSingo",
+			dataType : 'json',
+			data : param,
+			success : function(data){
+				if(data.statusCode == '0'){
+					alert(data.msg);
+				}else if(data.statusCode == '1'){
+					alert(data.msg);
+				}else if(data.statusCode == '2'){
+					openSingoForm();
+				}
+			}
+		});	
 	}
 
 	var product_stock = Number('${resultObject.STOCK}');

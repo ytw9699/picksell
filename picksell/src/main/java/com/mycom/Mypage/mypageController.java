@@ -7,9 +7,19 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 
 import javax.annotation.Resource;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeUtility;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.http.HttpRequest;
@@ -24,11 +34,44 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartRequest;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.mycom.Member.CookieBox;
 import com.mycom.client_product.ProductService;
 import com.mycom.config.CommandMap;
 import com.mycom.utils.FileUpload;
+
+
+//
+import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Properties;
+import java.util.UUID;
+
+import javax.annotation.Resource;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeUtility;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class mypageController {
@@ -145,7 +188,7 @@ public class mypageController {
 	}
 	//중고구매 판매리스트
 	@RequestMapping("/mypage/secondSellList")
-	public String secondSellList(Model model, HttpSession session) {	
+	public String secondSellList(Model model, HttpSession session) {
 		
 		String sessionId =(String)session.getAttribute("sessionId");
 		
@@ -340,6 +383,7 @@ public class mypageController {
 	@RequestParam(value="ALARM_CHECK", required=false, defaultValue="ALL") String ALARM_CHECK,//기본값 ALL 은 전체보기
 	@RequestParam(value="p", required=false, defaultValue="1") int currentPageNumber
 	) {	
+		
 		Map<String, Object> parameterMap = new HashMap<String, Object>();
 		
 		String sessionId =(String)session.getAttribute("sessionId");//세션아이디값
@@ -363,10 +407,14 @@ public class mypageController {
 			lastCount = page3.getEndCount() + 1;
 		
 		alarmList = alarmList.subList(page3.getStartCount(), lastCount);
-	   
-	    model.addAttribute("pagingHtml", pagingHtml);
 		
+		Map<String, Object> alarmCountKind =  mypageService.alarmCountKind(sessionId);
+	    System.out.println(alarmCountKind);
+	    model.addAttribute("pagingHtml", pagingHtml);
+		 
 		model.addAttribute("alarmList", alarmList);
+		
+		model.addAttribute("alarmCountKind", alarmCountKind);
 		
 		return "alarmSelect";
     } 
@@ -599,16 +647,33 @@ public class mypageController {
 		         HttpServletRequest request){
 		      List<Map<String, Object>> resultHeaderAlarmList;
 		      String currentID = request.getSession().getAttribute("sessionId").toString();
+		      String currentONOFF = request.getSession().getAttribute("sessionAlarm").toString();
 		      
-		      if(currentID != null) {
+		      if(currentID != null && currentONOFF.equals("ON")) {
 		         resultHeaderAlarmList = mypageService.getMyAlarmHeaderList(currentID);
 		         return resultHeaderAlarmList;
 		      }else {
 		         return new ArrayList<Map<String,Object>>();
 		      }
 		  }
-
 		
+		//구매신청 거부
+		@ResponseBody
+		@RequestMapping("/mypage/refusalApprove")
+		public Map<String, Object> refusalApprove(Model model,
+		@RequestParam(value="PRODUCT_NUM",required=false, defaultValue="0") int PRODUCT_NUM,
+		@RequestParam(value="BUYER_ID",required=false, defaultValue="0") String BUYER_ID
+			){
+			
+		Map<String, Object> parameterMap = new HashMap<String, Object>();
+		
+		parameterMap.put("product_num", PRODUCT_NUM);
+		
+		parameterMap.put("buyer_id", BUYER_ID);
+		
+		productService.deleteProductPurchaseList(parameterMap);
+		return parameterMap;
+}
 }
 
 		

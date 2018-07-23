@@ -58,15 +58,15 @@ tr:nth-child(even){background-color: #f2f2f2}
 	</thead>
 	
 	<div class="singoList">
- 		<c:forEach var="singoList" items="${singoList2}" varStatus="stat">
+ 		<c:forEach var="singoList2" items="${singoList2}" varStatus="stat">
  			<tr class="orderListContents" role="row">
- 				<td style="text-align:center;vertical-align:middle;">${singoList2.singo_num}</td>
- 				<td style="text-align:center;vertical-align:middle;">${singoList2.product_num}</td>
- 				<td style="text-align:center;vertical-align:middle;">${singoList2.singoee}</td>
- 				<td style="text-align:center;vertical-align:middle;">${singoList2.singo_writer}</td>
- 				<td style="text-align:center;vertical-align:middle;">${singoList2.singo_regdate}</td>
- 				<td style="text-align:center;vertical-align:middle;">${singoList2.singo_content}</td>
- 				<td style="text-align:center;vertical-align:middle;">${singoList2.board_status}</td>
+ 				<td style="text-align:center;vertical-align:middle;">${singoList2.SINGO_NUM}</td>
+ 				<td style="text-align:center;vertical-align:middle;">${singoList2.PRODUCT_NUM}</td>
+ 				<td style="text-align:center;vertical-align:middle;">${singoList2.SINGOEE}</td>
+ 				<td style="text-align:center;vertical-align:middle;">${singoList2.SINGO_WRITER}</td>
+ 				<td style="text-align:center;vertical-align:middle;">${singoList2.SINGO_REGDATE}</td>
+ 				<td style="text-align:center;vertical-align:middle;">${singoList2.SINGO_CONTENT}</td>
+ 				<td style="text-align:center;vertical-align:middle;">${singoList2.BOARD_STATUS}</td>
  				<br/>
  			</tr>
  		</c:forEach>

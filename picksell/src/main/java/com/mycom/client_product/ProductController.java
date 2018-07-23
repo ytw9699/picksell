@@ -2,6 +2,7 @@ package com.mycom.client_product;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
@@ -231,7 +232,9 @@ public class ProductController {
 		resultMap = productService.getProductDetail(parameterMap);
 	
 		//코멘트리스트++
-		List<Map<String, Object>> resultCommentList = productService.getProductCommentList(product_num);
+		List<Map<String, Object>> resultCommentList = new ArrayList<Map<String,Object>>();
+				
+		//productService.getProductCommentList(product_num);
 
 		//구매신청리스트++
 		List<Map<String, Object>> resultPurchaseList = productService.getProductPurchaseList(product_num);
@@ -263,8 +266,12 @@ public class ProductController {
 		//이 게시글이 나의것인지(내것이면 구매신청리스트 확인(판매자))
 		if(currentID != null) {
 			if((resultMap.get("SELLER_ID").equals(currentID))) {
-				model.addAttribute("isMyProducts", "yes");
 				
+				//상품문의리스트 뽑기(판매자용)
+				resultCommentList = productService.getProductCommentListOfSeller(product_num);
+				//model.addAttribute("resultCommentList", resultCommentList);
+				
+				model.addAttribute("isMyProducts", "yes");
 				List<Map<String, Object>> sellerPurList = productService.getProductSellerPurchaseList(product_num);
 				model.addAttribute("sellerPurList", sellerPurList);
 			}
@@ -272,6 +279,16 @@ public class ProductController {
 		//이 게시글이 내것이아닌지(아니면 구매신청리스트 확인(판매자))
 		if(currentID != null) {
 			if((!resultMap.get("SELLER_ID").equals(currentID))) {
+				
+				//상품문의리스트 뽑기(구매자용)
+				Map<String, Object> commentListParameterMap = new HashMap<String, Object>();
+				commentListParameterMap.put("product_num", product_num);
+				commentListParameterMap.put("owner", currentID);
+				commentListParameterMap.put("seller", resultMap.get("SELLER_ID"));
+				
+				resultCommentList = productService.getProductCommentListOfBuyer(commentListParameterMap);
+				//model.addAttribute("resultCommentList", resultCommentList);
+				
 				model.addAttribute("isMyProducts", "no");
 				if(purchaseApplying) {
 				
@@ -298,7 +315,8 @@ public class ProductController {
 
 		//상품상세정보
 		model.addAttribute("resultObject", resultMap);
-		//상품문의리스트
+		
+		//상품문의리스트(7월23일 기준 아직 냅둡니다)
 		model.addAttribute("resultCommentList", resultCommentList);
 		
 		model.addAttribute("sessionId", currentID);
@@ -309,17 +327,37 @@ public class ProductController {
 	@RequestMapping(value="/products/commentProc", method=RequestMethod.POST)
 	public String writeComment(CommandMap map, Model model) {
 		
-		System.out.println(map.getMap());
-		productService.insertProductComment(map.getMap());
+		Map<String, Object> insertParameterMap = map.getMap();
+		String contents = insertParameterMap.get("comment_content").toString().replaceAll("\r\n", "<br />");
+		insertParameterMap.put("comment_content", contents);
+		productService.insertProductComment(insertParameterMap);
 		
-		model.addAttribute("redirect", 1);
+		//상품문의후 리다이렉트
+		String pn = map.getMap().get("product_num").toString();
+		String cn = map.getMap().get("category_num").toString();
+		
+		/*model.addAttribute("redirect", 1);
 		model.addAttribute("category_num", map.getMap().get("category_num"));
 		model.addAttribute("product_num", map.getMap().get("product_num"));
-		model.addAttribute("currentPage", map.getMap().get("currentPage"));
-		//return "redirect:/products/detail/"+map.getMap().get("category_num")+"/"+map.getMap().get("product_num")+"/"+map.getMap().get("currentPage");
-		return "client_product/redirecting";
+		model.addAttribute("currentPage", map.getMap().get("currentPage"));*/
+		return "redirect:/products/detail/"+cn+"/"+pn;
 	}
 	
+	//상품문의 리코멘트작성
+	@RequestMapping(value="/products/recommentProc", method=RequestMethod.POST)
+	public String writeRecomment(CommandMap map, Model model) {
+		
+		Map<String, Object> insertParameterMap = map.getMap();
+		String contents = insertParameterMap.get("comment_content").toString().replaceAll("\r\n", "<br />");
+		insertParameterMap.put("comment_content", contents);
+		productService.insertProductReComment(insertParameterMap);
+		
+		//상품문의후 리다이렉트
+		String pn = map.getMap().get("product_num").toString();
+		String cn = map.getMap().get("category_num").toString();
+		
+		return "redirect:/products/detail/"+cn+"/"+pn;
+	}
 	//구매신청하기
 	@RequestMapping("/products/purchseRequest/{pn}/{sessionID}")
 	public String purchaseRequest(
@@ -440,6 +478,47 @@ public class ProductController {
 		model.addAttribute("resultProductList", resultList);
 		
 		return "proudctListMainCategory";
+	}
+	
+	@RequestMapping("/products/isAbledSingo")
+	@ResponseBody
+	public Map<String, Object> isAbledToSingo(HttpServletRequest request){
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		Map<String, Object> parameterMap = new HashMap<String, Object>();
+		String currentID = request.getSession().getAttribute("sessionId").toString();
+		String singoee = request.getParameter("singoee");
+		String product_num = request.getParameter("pn");
+		parameterMap.put("currentID", currentID);
+		parameterMap.put("product_num", product_num);
+		int singoCountingValue = productService.isAbledSingo(parameterMap);
+		
+		//현재 신고대상자랑 내 아이디랑 같으면
+		if(currentID.equals(singoee)) {
+			resultMap.put("statusCode", "0");
+			resultMap.put("msg", "자신의 글은 신고할 수 없습니다");
+			return resultMap;
+			//이미 신고를 했으면
+		}else if(singoCountingValue > 0) {
+			resultMap.put("statusCode", "1");
+			resultMap.put("msg", "이미 신고한 글입니다");
+			return resultMap;
+			//신고를 한적이 없으면
+		}else {
+			resultMap.put("statusCode", "2");
+			resultMap.put("msg", "정상");
+			return resultMap;
+		}
+	}
+	
+	@RequestMapping(value="/products/singoProc", method=RequestMethod.POST)
+	public String singoProc(CommandMap map, Model model) {
+		
+		String pn = map.getMap().get("product_num").toString();
+		String cn = map.getMap().get("category_num").toString();
+		
+		productService.singoProcess(map.getMap());
+		
+		return "redirect:/products/detail/"+cn+"/"+pn;
 	}
 		
 }

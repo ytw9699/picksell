@@ -87,6 +87,11 @@
 		<put-attribute name="body" value="/WEB-INF/views/client_free/freeDetail.jsp" />
 	</definition>
 	
+	<!-- 무료나눔 수정하기-->
+	<definition name="client_free/freeModify" extends="default">
+		<put-attribute name="body" value="/WEB-INF/views/client_free/freeModify.jsp" />
+	</definition>
+	
 	<!-- 판매하기(판매방식선택) -->
 	<definition name="howtosell" extends="default">
 		<put-attribute name="body" value="/WEB-INF/views/client_product/howtosell.jsp" />

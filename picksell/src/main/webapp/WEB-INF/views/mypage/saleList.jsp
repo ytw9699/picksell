@@ -10,83 +10,177 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>판매내역/배송조회</title>
 <style>
+
+.orderkind {
+    background-color: #7151fc;
+    color: white;
+    border-radius: 0px;
+    width: 180px;
+    height: 120px;
+    line-height: 21px;
+    display: inline-block;
+    text-align: center;
+    margin: -1px;
+}
+.my__stat__num-font {
+    color: #fff;
+    font-size: 50px;
+    line-height: 83px;
+}
+.my__i-stat1 {
+    font-size: 17px;
+    line-height: 28px;
+}
+.test {
+    border: 1px solid #cecece;
+    padding: 10px;
+    margin: 50px;
+    width: 700px;
+    height: 300px;
+}
+.test2 {
+    background: #f9f9f9;
+    border-bottom: 1px solid #e7e7e7;
+    padding: 2px;
+    line-height: 40px;
+    width: 700px;
+    height: 60px;
+}
+}
+.ddd{
+}
+#ddd {
+    margin-top: 13px;
+    border: 1px solid #cecece;
+    padding: 50px;
+    height: 110px;
+    width: 360px;
+}
+.test3 {
+    padding: 2px;
+    line-height: 60px;
+    width: 700px;
+    height: 60px;
+    font-size: 1.2rem;
+}
+.test4 {
+    padding: 2px;
+    line-height: 60px;
+    width: 700px;
+    height: 60px;
+    font-size: 1.2rem;
+    position: relative;
+    left:380px;
+}
+.test5 {
+    margin-top: 13px;
+    border: 1px solid #cecece;
+    padding: 12px;
+    height: 186px;
+    font-size: 1rem;
+    line-height: 180px;
+    width: 210px;
+    position: relative;
+    left: 467px;
+    bottom: 226px;
+}
+.paging {
+    margin-top: 40px;
+    text-align: center;
+}
+span.currentPaging {
+    width: 40px;
+    height: 40px;
+    display: inline-block;
+    background-color: #7151fc;
+    color: white;
+    border-radius: 30px;
+    font-size: 23px;
+}
+a.paging {
+    width: 40px;
+    height: 40px;
+    display: inline-block;
+    color: #666;
+    border-radius: 21px;
+    font-size: 23px;
+}
 </style>
 </head>
 <body>
-<table>
 
+<div>
 <a href="/picksell/mypage/saleList">
-전체보기[${saleCount.five}]/
-</a>
+<span class="orderkind"><div class="my__i-stat1">전체보기</div>
+<span class="my__stat__num-font">${saleCount.five}</span>개</span></a>
+
 <a href="/picksell/mypage/saleList?status=0">
-입금대기[${saleCount.zero}]/
-</a>
+<span class="orderkind" ><div class="my__i-stat1">입금대기</div>
+<span class="my__stat__num-font">${saleCount.zero}</span>개</span></a>
+
 <a href="/picksell/mypage/saleList?status=1">
-입금완료 및 배송대기중[${saleCount.one}]/
-</a>
+<span class="orderkind" ><div class="my__i-stat1">입금완료 및 배송대기중</div>
+<span class="my__stat__num-font">${saleCount.one}</span>개</span></a>
+
 <a href="/picksell/mypage/saleList?status=2">
-배송 및 인수확인 대기[${saleCount.two}]/
-</a>
+<span class="orderkind" ><div class="my__i-stat1">배송중 및 인수확인 대기</div>
+<span class="my__stat__num-font">${saleCount.two}</span>개</span></a>
+
 <a href="/picksell/mypage/saleList?status=3">
-인수확인 및 거래완료[${saleCount.three}]/
-</a>
+<span class="orderkind"><div class="my__i-stat1">인수확인 및 거래완료</div>
+<span class="my__stat__num-font">${saleCount.three}</span>개</span></a>
+
 <a href="/picksell/mypage/saleList?status=44">
-결제취소 및 반품[${saleCount.fourfour}]/
-</a>
+<span class="orderkind" ><div class="my__i-stat1">결제취소 및 반품</div>
+<span class="my__stat__num-font">${saleCount.fourfour}</span>개</span></a>
+
+</div>
+
 <c:if test="${fn:length(saleList) > 0}">
 <c:forEach var="ps_order" items="${saleList}" varStatus="saleListStatus">
-    <br><h3>주문일:<fmt:formatDate value="${ps_order.STEP1_DATE}" pattern="yy년 MM월 dd일 hh:mm" />
-	<a href="/picksell/mypage/saleDetail/${ps_order.ORDER_NUM }">
-		<font color = "red">-상세보기</font>
-		</a></h3>
-    	<c:if test="${ps_order.STATUS == '0'}">
-		거래상태:입금대기중
-		</c:if>
-		<c:if test="${ps_order.STATUS == '1'}">
-		거래상태:입금 완료 및 배송 대기중
-		</c:if>
-		<c:if test="${ps_order.STATUS == '2'}">
-		거래상태:배송 및 인수확인 대기
-		</c:if>
-		<c:if test="${ps_order.STATUS == '3'}">
-		거래상태:인수확인 및 거래완료
-		</c:if>
-		<c:if test="${ps_order.STATUS == '44'}">
-		거래상태:결제취소
-		</c:if>
-		<br>
-		<br>
+<div class="test">
+<div class="test2">
+<span class="test3">주문일 <fmt:formatDate value="${ps_order.STEP1_DATE}" pattern="yy. MM. dd. hh:mm" /></span>
+<span class="test4"><a href="/picksell/mypage/saleDetail/${ps_order.ORDER_NUM }">상세보기 > </a></span>
+</div>
+<div id="ddd">
 <c:forEach var="joinMap" items="${saleSubList[saleListStatus.index]}">
 <a href="/picksell/products/detail/${joinMap.CATEGORY_NUM }/${joinMap.PRODUCT_NUM }">
-<img src="/picksell/resources/productUpload/${joinMap.FIRST_IMG }" style="width: 200px;" />
+<img src="/picksell/resources/productUpload/${joinMap.FIRST_IMG }" style="width: 100px; onerror="this.src='/picksell/resources/img/imgready.gif'" />
  ${joinMap.SUBJECT }
 </a>
  /<fmt:formatNumber value="${joinMap.PRICE }" pattern="#,###.##" /> 원
  /${joinMap.ORDER_QUANTITY}개
  <br>
 </c:forEach>
+</div>
+<div class="test5">
+<c:if test="${ps_order.STATUS == '0'}">
+		입금대기중
+		</c:if>
+		<c:if test="${ps_order.STATUS == '1'}">
+		입금 완료 및 배송 대기중
+		</c:if>
+		<c:if test="${ps_order.STATUS == '2'}">
+		배송 및 인수확인 대기중
+		</c:if>
+		<c:if test="${ps_order.STATUS == '3'}">
+		인수확인 및 거래완료
+		</c:if>
+		<c:if test="${ps_order.STATUS == '44'}">
+		결제취소
+		</c:if>
+</div>
+</div>
 </c:forEach>
-
-	<%-- <c:forEach var="order" items="${saleList}">
-	<tr>
-		<br>${order.ORDER_NUM}</br>
-		<br>
-			<a href="/picksell/mypage/orderDetail/${order.PRODUCT_NUM }">
-			<img src="/picksell/resources/productUpload/${order.FIRST_IMG }" style="width: 200px;" />
-			</a>
-		</br>
-		<br><a href="/picksell/mypage/orderDetail/${order.PRODUCT_NUM }">${order.SUBJECT }</a></br>
-		<br><fmt:formatNumber value="${order.PRICE }" pattern="#,###.##" /> 원</br>
-		
-	</tr>
-	</c:forEach> --%>
 </c:if>
 <c:if test="${fn:length(saleList) < 1}">
 <p>내역이 없습니다</p>
 </c:if>
 <div class="paging">
-			${pagingHtml} 페이지
+${pagingHtml}
 </div>
-</table>
 </body>
 </html>
+
+
