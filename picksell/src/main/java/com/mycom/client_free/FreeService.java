@@ -55,8 +55,9 @@ public class FreeService implements FreeDAO {
 	}
 		
 	//게시글 삭제
-	public void freeDelete(Map<String, Object> map) {
-		
+	public void freeDelete(int fb_num) {
+		sqlSessionTemplate.delete("freeBoard.deleteBoard",fb_num);
+		sqlSessionTemplate.delete("freeBoard.deleteBoardComment",fb_num);
 	}
 	
 	//특정오더 검색 (글제목)

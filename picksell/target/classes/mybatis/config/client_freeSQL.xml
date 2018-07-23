@@ -45,20 +45,33 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 														0)
 	</insert>
 	
+<!-- 	무료나눔 게시글 삭제 + 해당코멘트 전체 삭제    -->
+	<delete id = "deleteBoard" parameterType="int">
+		delete from ps_free_comment 
+		where fb_num = {fb_num}
+	</delete>
+	
+	<delete id = "deleteBoardComment" parameterType="int">
+		delete from ps_free_comment
+		where fb_num = {fb_num}
+	</delete>
+	
 <!-- 	코멘트 삭제  -->
 	<delete id="deleteComment" parameterType="int">
 		delete from ps_free_comment 
 		where fc_num = #{FC_NUM} 
-	</delete>
-	
+	</delete>	
+<!-- 	디테일  -->
 	<select id="freeItem-detail" resultType="hashmap" parameterType="int">
 		select * from ps_free_board where fb_num = #{FB_NUM}
 	</select>
 	
+<!-- 	조회수 업데이트  -->
 	<update id="freeItem-hitUpdate" parameterType="int">
 		update ps_free_board set fb_hitcount = fb_hitcount + 1 where fb_num = #{FB_NUM}
 	</update>
 	
+<!-- 	수정  -->
 	<update id="freeItem-modify" parameterType="hashmap">
 		update ps_free_board set fb_subject = #{FB_SUBJECT}, fb_regdate = sysdate, fb_content = #{FB_CONTENT} 
 		 		where fb_num = #{FB_NUM}

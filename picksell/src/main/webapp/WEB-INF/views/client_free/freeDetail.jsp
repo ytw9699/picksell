@@ -23,7 +23,7 @@
 <%-- 	<input type="hidden"  name="FB_HITCOUNT" value="${map.FB_HITCOUNT}"/> --%>
     <input type="submit" value="수정하기" />
 </form>
-<form action="#">
+<form action="/picksell/free_board/deleteEverything/${map.FB_NUM}" method="post">
     <input type="submit" value="삭제하기" />
 </form><br/>
 </c:if>

@@ -175,6 +175,14 @@ public class FreeController {
 		return "redirect:/free_board/detail/"+fb_num;
 	}
 	
+	@RequestMapping("/deleteEverything/{fb_num}")
+	public String deleteEverything(@PathVariable("fb_num") int fb_num) {
+		
+		freeService.freeDelete(fb_num);
+		
+		return "redirect:/free_board/list";
+	}
+	
 	
 }
 
