@@ -47,13 +47,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 <!-- 	무료나눔 게시글 삭제 + 해당코멘트 전체 삭제    -->
 	<delete id = "deleteBoard" parameterType="int">
-		delete from ps_free_comment 
-		where fb_num = {fb_num}
+		delete from ps_free_board
+		where fb_num = #{FB_NUM}
 	</delete>
 	
 	<delete id = "deleteBoardComment" parameterType="int">
 		delete from ps_free_comment
-		where fb_num = {fb_num}
+		where fb_num = #{FB_NUM}
 	</delete>
 	
 <!-- 	코멘트 삭제  -->
