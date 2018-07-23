@@ -136,7 +136,7 @@ a.paging {
 <c:forEach var="ps_order" items="${orderList}" varStatus="orderListStatus">
 <div class="test">
 <div class="test2">
-<span class="test3">주문일<fmt:formatDate value="${ps_order.STEP1_DATE}" pattern="yy. MM. dd. hh:mm" /></span>
+<span class="test3">주문일 <fmt:formatDate value="${ps_order.STEP1_DATE}" pattern="yy. MM. dd. hh:mm" /></span>
 <span class="test4"><a href="/picksell/mypage/orderDetail/${ps_order.ORDER_NUM }">상세보기 > </a></span>
 </div>
 <div id="ddd">

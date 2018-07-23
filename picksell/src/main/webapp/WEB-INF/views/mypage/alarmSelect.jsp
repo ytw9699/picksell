@@ -54,10 +54,10 @@ a.paging {
 }
 .alarm1 {
     display: inline-block;
-    width: 28%;
+    width: 35%;
     text-align: left;
     margin: 1%;
-    margin-right: -13%;
+    margin-right: -14%;
 }
 .alarm2 {
     display: inline-block;
@@ -71,7 +71,7 @@ a.paging {
     width: 22%;
     text-align: center;
     margin: 1%;
-    margin-left: 7%;
+    margin-left: 16%;
 }
 .alarm4 {
     display: inline-block;
@@ -84,9 +84,9 @@ a.paging {
     font-size: 17px;
 }
 .next {
-    width: 86px;
+    width: 40%;
     margin: 0 auto;
-    margin-left: 42px;
+    margin-left: 52%;
     border: none;
     color: white;
     background-color: #7151fc;
@@ -94,7 +94,7 @@ a.paging {
     font-size: 12px;
 }
 #myAlarm2 {
-    margin-right: -180px;
+    margin-right: -18%;
     background-color: #e80935;
     color: white;
     font-size: 12px;
@@ -104,10 +104,11 @@ a.paging {
     line-height: 21px;
     display: inline-block;
     text-align: center;
-    margin-left: 178px;
+    margin-left: 15%;
 }
-#myAlarm3 {
-    margin-right: -180px;
+#myAlarm3{
+    margin-right: -18%;
+    background-color: white;
     color: white;
     font-size: 12px;
     border-radius: 203px;
@@ -116,7 +117,7 @@ a.paging {
     line-height: 21px;
     display: inline-block;
     text-align: center;
-    margin-left: 178px;
+    margin-left: 15%;
 }
 </style>
 </head>
