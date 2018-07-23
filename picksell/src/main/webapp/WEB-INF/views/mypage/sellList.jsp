@@ -10,6 +10,27 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>판매글 관리</title>
 <style>
+input.subQuanBtn {
+    width: 25px;
+    height: 25px;
+    border-radius: 33px;
+    background: url(/picksell/resources/img/sub.png) 50% 50% no-repeat;
+    background-size: 20px;
+    border: 1px solid #ececec;
+}
+input.addQuanBtn {
+    width: 25px;
+    height: 25px;
+    border-radius: 33px;
+    background: url(/picksell/resources/img/add.png) 50% 50% no-repeat;
+    background-size: 20px;
+    border: 1px solid #ececec;
+}
+.proquan {
+    font-size: 17px;
+    color: #726e6e;
+    margin: 0px 7px;
+}
 .paging {
     margin-top: 40px;
     text-align: center;
@@ -173,9 +194,9 @@ function minusStock(PRODUCT_NUM, index){
 		
 		<td class="tdtd">조회수<br> ${list.HITCOUNT }</td>
 	<td class="tdtd">재고량<br>
-	<input type="button" id="minusStock" value="-" onclick="minusStock(${list.PRODUCT_NUM},${Index.index})" />
-	    <span id="currentStock${Index.index}">${list.STOCK }</span>
-	<input type="button" id="pulsStock" value="+" onclick="pulsStock(${list.PRODUCT_NUM},${Index.index})" />
+	<input type="button" id="minusStock" class="subQuanBtn" onclick="minusStock(${list.PRODUCT_NUM},${Index.index})" />
+	    <span class="proquan" id="currentStock${Index.index}">${list.STOCK }</span>
+	<input type="button" id="pulsStock" class="addQuanBtn" onclick="pulsStock(${list.PRODUCT_NUM},${Index.index})" />
 	</td>
 	<td class="tdtd">등록일<br><fmt:formatDate value="${list.PRODUCT_REGDATE}" pattern="yy. MM. dd." /></td>
 	</tr>
