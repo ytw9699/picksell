@@ -24,6 +24,18 @@
     padding: 8%;
     font-size: 14px;
 }
+.next1 {
+    width: 32%;
+    margin: 0 auto;
+    margin-left: 0%;
+    border: none;
+    color: white;
+    background-color: #7151fc;
+    padding: 8%;
+    font-size: 14px;
+    height: 0px;
+    line-height: 0;
+   }
 #profile { /* 파일 필드 숨기기 */
 display:none;
 }
@@ -145,9 +157,9 @@ else if(NewPassword !== rePassword){//
 			</div>
 	        <label for="profile" id="profileSearch">프로필 이미지 찾기</label>
 			<input type="file" name="PROFILE_IMG" id="profile" /><br>
-			<input type="submit" class="profileButtons" id="profileConfirm" value="확인" />
-			<input type="button" class="profileButtons" value="기본이미지 사용하기" onclick="location.href='/picksell/mypage/defaultProfile'"/>
-			<input type="button" class="profileButtons" value="취소" onclick="javascript:closeProfileMod();" />
+			<input type="submit" class="next1" id="profileConfirm" value="확인" />
+			<input type="button" class="next1" value="기본이미지 사용하기" onclick="location.href='/picksell/mypage/defaultProfile'"/>
+			<input type="button" class="next1" value="취소" onclick="javascript:closeProfileMod();" />
 		</form>
 	</div>
 
