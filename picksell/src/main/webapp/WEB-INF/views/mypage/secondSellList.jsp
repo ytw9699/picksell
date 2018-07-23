@@ -141,14 +141,14 @@ function purchaseApproveCancel(eventElement, purchaseNumber, buyer, category_num
 		</td>
 		<td class="subjectTd"><a href="/picksell/products/detail/${purchase.CATEGORY_NUM }/${purchase.PRODUCT_NUM }">${purchase.SUBJECT }</a></td>
 		<td class="tdtd"><fmt:formatNumber value="${purchase.PRICE }" pattern="#,###.##" /> 원</td>
-		<td class="tdtd"><fmt:formatDate value="${purchase.REGDATE}" pattern="yy. MM. dd. hh:mm" /></td>
+		<td class="tdtd">요청일 <fmt:formatDate value="${purchase.REGDATE}" pattern="yy. MM. dd " /></td>
 		<c:if test="${purchase.STATUS == '0'}">
 		<td class="tdtd"><div id="watingAccept${status.index+1}">수락 대기중</div></td>
 		</c:if>
 		<c:if test="${purchase.STATUS == '1'}"> 
 		<td class="tdtd"><div id="completedAccept${status.index+1}">수락 완료</div></td>
 		</c:if>								
-		<td class="tdtd">${purchase.BUYER_ID}</td>
+		<td class="tdtd">구매자 ${purchase.BUYER_ID}</td>
 	<c:if test="${purchase.STATUS == 0 }">							
 	<td class="tdtd"><input type="button" value="요청 수락" class="next" id ="accept" onclick="purchaseApprove(this,'${purchase.PURCHASE_NUM}','${purchase.BUYER_ID }','${purchase.CATEGORY_NUM }','${purchase.PRODUCT_NUM }','${purchase.SELLER_ID }','watingAccept${status.index+1}','completedAccept${status.index+1}');" /></td>
 	</c:if>

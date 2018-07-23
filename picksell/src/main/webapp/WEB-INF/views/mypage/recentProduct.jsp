@@ -92,9 +92,9 @@ margin-top: 10%;
 		</td>
 		<td class="subjectTd"><a href="/picksell/products/detail/${recentProduct.RECENT_CATEGORY_NUM }/${recentProduct.RECENT_PRODUCT_NUM }">${recentProduct.SUBJECT }</a></td>
 		<td class="tdtd"><fmt:formatNumber value="${recentProduct.PRICE }" pattern="#,###.##" /> 원</td>
-		<td class="tdtd"><fmt:formatDate value="${recentProduct.RECENT_REGDATE}" pattern="yy. MM. dd. hh:mm" /></td>
+		<td class="tdtd">본 날짜 <fmt:formatDate value="${recentProduct.RECENT_REGDATE}" pattern="yy. MM. dd" /></td>
 		<td class="tdtd"><input type="button" class="next" id="recentProductDelete" value="삭제" onclick="location.href='/picksell/mypage/EachdeleteRecenPd?RECENT_NUM=${recentProduct.RECENT_NUM }'" /></td>
-	</tr> 													
+	</tr>									
 	</tbody>
 	</c:forEach>
 </c:if>
