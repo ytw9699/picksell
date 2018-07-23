@@ -169,11 +169,19 @@ public class FreeController {
 		
 	}
 	
-	@RequestMapping("/deleteComment/{fc_num}/{fb_num}")
-	public String deleteComment(@PathVariable("fc_num") int fc_num, @PathVariable("fb_num") int fb_num) {
-		freeService.commentDelete(fc_num);
+	@RequestMapping("/deleteComment")
+	public String deleteComment(HttpServletRequest request) {
+		String fc_num = request.getParameter("fc_num");
+		String fb_num = request.getParameter("fb_num");
+		freeService.commentDelete(Integer.parseInt(fc_num));
 		return "redirect:/free_board/detail/"+fb_num;
 	}
+	
+//	@RequestMapping("/deleteComment/{fc_num}/{fb_num}")
+//	public String deleteComment(@PathVariable("fc_num") int fc_num, @PathVariable("fb_num") int fb_num) {
+//		freeService.commentDelete(fc_num);
+//		return "redirect:/free_board/detail/"+fb_num;
+//	}
 	
 	@RequestMapping("/deleteEverything/{fb_num}")
 	public String deleteEverything(@PathVariable("fb_num") int fb_num) {

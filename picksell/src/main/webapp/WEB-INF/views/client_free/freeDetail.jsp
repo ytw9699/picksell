@@ -99,14 +99,17 @@ function dele(){
 
 function confirmDele(){
 	
+	var fc_num = document.getElementById('fc_num').value;
 	var fb_num = document.getElementById('fb_num').value;
+	
 	
 	var b = confirm("정말 댓글을 삭제할거죠?!");
 	
 	if(b == true){
 		
+		window.location.href="http://localhost:8080/picksell/free_board/deleteComment?fc_num="+fc_num+"&fb_num="+fb_num;
 	}else if(b == false){
-		alert("fc_num : "+fc_num+" fb_num : "+fb_num);
+		alert(fc_num);
 		window.location.href="http://localhost:8080/picksell/free_board/detail/"+fb_num;
 	}
 };
@@ -165,12 +168,13 @@ function listt(){
 		
 		
 		<td style="text-align:center;vertical-align:middle;" width="10%;">
-		
-		
+		${commentMap.FC_NUM}
+		<input type="hidden" id="fc_num" name="FC_NUM" value="${commentMap.FC_NUM}"/>
 		<c:if test="${commentMap.FC_WRITER == sessionScope.sessionId}">
-			<form action="/picksell/free_board/deleteComment/${commentMap.FC_NUM}/${commentMap.FB_NUM}">
-   			 <input type="submit" class="button1" value="삭제" onclick="confirmDele()" />
-			</form>
+<%-- 			<form action="/picksell/free_board/deleteComment/${commentMap.FC_NUM}/${commentMap.FB_NUM}" onsubmit="confirmDele()"> --%>
+				<button class="button1" onclick="confirmDele()">삭제</button>
+<!--    			 <input type="submit" class="button1" value="삭제" onclick="confirmDele()" /> -->
+<!-- 			</form> -->
 		</c:if>
 			
 		</td>
@@ -189,7 +193,7 @@ function listt(){
          <textarea  placeholder="댓글을 작성 하실 수 있습니다." name="FC_CONTENT" rows="20" style="width:100%;"></textarea>
  		<br/> <br/>       
          <input type="submit" class="button2"  value="작성"  />
-      </form>
+     </form>
 
 
 
