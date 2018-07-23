@@ -14,7 +14,13 @@
 body, table, div, p {font-family:'NotoSansLight';}
 body{margin:0;}
 .headerWrap{width:100%;}
-.bodyWrap {width: 80%;margin: 0 auto;/* display: inline-block; */}
+.bodyWrap {width: 80%;margin: 0 auto; display: inline-block; }
+.leftWrap{
+ display: inline-block;
+ border: 1px solid red;
+ 
+
+}
 .footerWrap {
     border-top: 2px solid #dbdbdb;
     width: 80%;
@@ -28,7 +34,7 @@ body{margin:0;}
 	<div class="headerWrap">
 		<tiles:insertAttribute name="header"/><!-- // header -->
 	</div>
-	<div class="leftWrap" style="float: left;">
+	<div class="leftWrap">
 		<tiles:insertAttribute name="left"/><!-- // left -->
 	</div>
 	<div class="bodyWrap">
