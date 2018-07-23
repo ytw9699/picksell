@@ -35,12 +35,12 @@ span.orderkind:hover {
     font-size: 14px;
     line-height: 28px;
 }
+
 span.my__i-stat1.i-stat1-title {
     display: block;
     margin-bottom: 10px;
     margin-top: 7px;
 }
-
 span.my__i-stat1.i-stat1-number {
     font-size: 40px;
 }
