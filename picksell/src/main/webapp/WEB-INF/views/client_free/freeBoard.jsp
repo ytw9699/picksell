@@ -85,7 +85,10 @@ p{
 	<tr><td colspan="9" style="text-align:center;">등록된 상품이 없습니다</td></tr>
 </c:if> 
 <br/>
+<c:if test="${sessionScope.sessionStatus eq 0}">
 <input type="button" class="button" value="글쓰기" onclick="javascript:location.href='writeForm'">
+</c:if>
+
 <br/>
 <div class="paging">
 		${pagingHtml}
