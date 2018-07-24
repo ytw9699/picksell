@@ -190,7 +190,7 @@ var subtotalPRICE = Number('${saleDetail.TOTAL_PRICE}');
 		<br>배송비: 2,500 원
 		<br>고객의 총 결제 금액:<fmt:formatNumber value="${saleDetail.TOTAL_PRICE }" pattern="#,###.##" /> 원 
 		<br>
-		<h4>받는사람 정보</h4>  
+		<h4>배송지 정보</h4>  
 		수령인 : ${saleDetail.ACCOUNT_NAME}<br>
 		연락처:  ${saleDetail.BUYER_PHONE}<br>
 		이메일:  ${saleDetail.BUYER_EMAIL}<br>

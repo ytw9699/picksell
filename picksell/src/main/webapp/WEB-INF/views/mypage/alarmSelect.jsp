@@ -16,7 +16,7 @@ a.deleteA {
     height: 50px;
     width: 40px;
     line-height: 80px;
-    background: url(/picksell/resources/img/cancel2.png) 50% 30% no-repeat;
+    background: url(/picksell/resources/img/cancel1.png) 50% 30% no-repeat;
     background-size: 15px;
     display: block;
     font-size: 15px;

@@ -11,39 +11,42 @@
 <title>개인정보 확인 및 수정</title>
 <style>
 .next {
-    width: 123px;
+    width: 50%;
     margin: 0 auto;
     margin-left: 0%;
     border: none;
     color: white;
     background-color: #7151fc;
-    padding: 8%;
+    padding: 4%;
     font-size: 14px;
 }
 .bigdiv {
-    width: 50%;
+    width: 100%;
     height: 200px;
+    
 }
 .signup-top-instr{
-   margin: 1%;
+	width: 100%
 }
 
 .information {
     font-size: 19px;
     padding: 1px;
     margin: 1px;
-    width: 125px;
+    width: 50%;
     margin: 0%;
-    text-align: center;
+    text-align: right;
     height: 29px;
+    padding-right: 0px;
 }
 .information2 {
     font-size: 20px;
     padding: 1px;
     margin: 1px;
-    width: 124px;
+    width: 50%;
     margin: 0%;
-    height: 29px;
+    height: 20px;
+    padding-left: 10px;
 }
 .information3 {
     font-size: 20px;
@@ -62,6 +65,11 @@
     margin: 0%;
     height: 26px;
 }
+.tableClass {
+    margin: 0 auto;
+    margin-top: 110px;
+    width: 50%;
+}
 
 </style>
 </head>
@@ -73,32 +81,35 @@ function mberValiCheck(){
    var loginForm = document.getElementById("memberCheckForm");
 	   
    if(PASSWORD == ""){
-	   $('#passwordCheckText').html('<b><font color=red size=2pt> 비밀번호를 입력해주세요. </font></b>');
+	   $('#passwordCheckText').html('비밀번호를 입력해주세요.');
    		loginForm.PASSWORD.focus();
    	  return false;
    	}
 }
 function passwordCheck(){
-	  $('#passwordCheckText').html('<b><font color=red size=2pt> 입력하신 아이디와 비밀번호가 일치하지 않습니다. </font></b>');
+	  $('#passwordCheckText').html('입력하신 아이디와 비밀번호가 일치하지 않습니다.');
 		 loginForm.PASSWORD.focus();
 }
 </script>
-<div class="signup-top-instr">*선택정보는 입력하지 않아도 아래 완료 버튼을 통해 가입하실 수 있습니다</div>	
+	
 	<form action="/picksell/mypage/memberCheck" name="memberCheckForm" id="memberCheckForm" method="post" onsubmit="return mberValiCheck()">
 	<div class="bigdiv">
-	<table>
+	<table class="tableClass" style="width: 50%;" cellspacing="0" cellpadding="0">
 	<tr>
-	<td class="information">아이디:</td>
-	<td class="information2">${sessionId}</td>
+	<td class="signup-top-instr" colspan="3">*정보를 안전하게 보호하기 위해 비밀번호를 다시 한번 확인합니다.</td>
+	</tr>
+	<tr>
+	<td class="information">아이디</td>
+	<td class="information2" colspan="2" >${sessionId}</td>
 	</tr>
 	<tr>
 	<td class="information">비밀번호</td>
 	<td class="information2"><input type="password" class="information4" name="PASSWORD" id="PASSWORD" value="${cookiePW}"/>&nbsp;</td>
-	<td class="information3"><div id="passwordCheckText"></div></td>
+	<td class="information3" id="passwordCheckText"></td>
 	</tr>
 	<tr>
 	<td class="information"><input type="submit" value="확인" class="next"/></td>
-	<td class="information2"><input type="button" value="취소" class="next" onclick="history.back()"/></td>
+	<td class="information2" colspan="2" ><input type="button" value="취소" class="next" onclick="history.back()"/></td>
 	</tr>
 	</table>
 	</div>
