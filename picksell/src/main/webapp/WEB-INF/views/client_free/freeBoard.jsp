@@ -47,7 +47,7 @@
     font-size: 16px;
     margin: 4px 2px;
     cursor: pointer;
-    margin-left : 440px;
+    margin-left : 1000px;
 }
 
 p{

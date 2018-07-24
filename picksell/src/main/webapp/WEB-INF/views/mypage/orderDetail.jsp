@@ -10,29 +10,29 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title></title>
 <style>
-.bigWrapper{
-    border: 1px solid gray;
+.bigWrapper {
     width: 100%;
-    height: 1500px;
+    height: 1000px;
     margin-bottom: 100px;
 }
+.paymentBinder {
+    display: inline-block;
+    width: 48%;
+    float: left;
+}
 .headerClass {
-    border: 1px solid gray;
     width: 97%;
-    height: 207px;
     margin: 1%;
 }
-.orderClass{
-	border: 1px solid gray;
-	width: 97%;
-	height: 30%;
-	margin: 1%;
+.orderClass {
+    width: 97%;
+    height: 30%;
+    margin: 1%;
 }
-.tradeIClass{
-	border: 1px solid gray;
-	width: 97%;
-	height: 25%;
-	margin: 1%;
+.tradeIClass {
+    width: 97%;
+    height: 25%;
+    margin: 1%;
 }
 .deliveryClass{
 	border: 1px solid gray;
@@ -41,18 +41,18 @@
 	margin: 1%;
 }
 .status {
-    /* float: right; */
     width: 98%;
-    border: 1px solid gray;
     margin: 1%;
     height: 53px;
 }
 .header {
-    width: 41%;
+    width: 80%;
     margin: 1%;
-    border: 1px solid gray;
-    height: 121px;
-    float: left;
+    display: block;
+    border-bottom: 3px solid #ececec;
+    color: #7151FC;
+    padding: 15px 0 15px 20px;
+    font-size: 20px;
 }
 .header2 {
     width: 41%;
@@ -62,21 +62,18 @@
     display: inline-block;
 }
 .line {
-    width: 50%;
+    width: 80%;
     margin: 1%;
     height: 23px;
-    /* border: 1px solid gray; */
     border-bottom: 3px solid #ececec;
     color: #7151FC;
     padding: 15px 0 15px 20px;
     font-size: 20px;
-    /* display: inline-block; */
 }
 .line2 {
-    width: 50%;
+    width: 90%;
     margin: 1%;
     height: 23px;
-    /* border: 1px solid gray; */
     border-bottom: 3px solid #ececec;
     color: #7151FC;
     padding: 15px 0 15px 20px;
@@ -94,20 +91,15 @@
 }
 
 .rightLineDeep {
-    margin-left: -30px;
-    margin-right: 20px;
+    display: block;
 }
-.orderSubDetail{
-	width: 80%;
-    height: 100px;
+.orderSubDetail {
+    width: 95%;
     margin: 1%;
-    border: 1px solid gray;
+    border-bottom: 2px solid #dedede;
 }
 .td1 {
     width: 5%;
-    height: 92px;
-    margin: 1%;
-    border: 1px solid gray;
 }
 
 .orderInfoWrap {
@@ -118,7 +110,7 @@
     border-radius: 5px;
 }
 .paymentInfoWrap {
-    width: 28%;
+    width: 80%;
     border: 1px solid #d8d8d8;
     border-radius: 5px;
     margin: 1%;
@@ -126,13 +118,10 @@
     display: inline-block;
 }
 .paymentInfoWrap2 {
-    width: 28%;
+    width: 100%;
     border: 1px solid #d8d8d8;
     border-radius: 5px;
     margin: 1%;
-    margin-left: 3%;
-    /* display: inline-block; */
-    float: right;
 }
 table.paytable {
     width: 100%;
@@ -168,6 +157,21 @@ td.product_total_valueTEXT {
     padding: 10px;
     padding-right: 35px;
     text-align: right;
+}
+.header.subheader {
+    border-bottom: none;
+}
+input.statusBtn {
+    transition: 0.3s;
+    border: 1px solid #7151fc;
+    background-color: white;
+    color: #7151fc;
+    padding: 10px;
+    margin-right: 10px;
+}
+input.statusBtn:hover {
+    background-color: #7151fc;
+    color: white;
 }
 
 </style>
@@ -225,7 +229,7 @@ td.product_total_valueTEXT {
 <div class="header">
 주문 내역 상세 및 배송 조회
 </div>
-	<div class="header">
+	<div class="header subheader">
 		<div class="status">거래상태:
         <c:if test="${orderDetail.STATUS == '0'}">
 		입금대기중
@@ -245,19 +249,19 @@ td.product_total_valueTEXT {
 		</c:if>
 		</div >
 	   <div class="status">
-			<input type ="button" value="입금완료" onclick="alarmInsert('admin','empty','empty','${sessionScope.sessionId}',12)"/>
+			<input type ="button" class="statusBtn" value="입금완료" onclick="alarmInsert('admin','empty','empty','${sessionScope.sessionId}',12)"/>
 			
 			<c:if test="${fn:length(orderSubDetail) > 0}">
 			<c:forEach var="joinMap" items="${orderSubDetail}" varStatus="status">
 			<c:if test="${status.last}">
 			 <c:if test="${orderDetail.STATUS == '0' || orderDetail.STATUS == '1'  || orderDetail.STATUS == '2'}">	
 			 <c:if test="${joinMap.HOWTOSELL != '2'}">																							
-			<input type ="button" value="결제취소" onclick="canclePs_order('${orderDetail.ORDER_NUM}','${orderDetail.BUYER_ID}','${joinMap.SELLER_ID}','${joinMap.PRODUCT_NUM}')"/>
+			<input type ="button" value="결제취소" class="statusBtn" onclick="canclePs_order('${orderDetail.ORDER_NUM}','${orderDetail.BUYER_ID}','${joinMap.SELLER_ID}','${joinMap.PRODUCT_NUM}')"/>
 			</c:if>
 			<c:if test="${joinMap.HOWTOSELL == '2'}">																							
-			<input type ="button" value="결제취소" onclick="canclePs_order2('${orderDetail.ORDER_NUM}','${orderDetail.BUYER_ID}','${joinMap.SELLER_ID}')"/>
+			<input type ="button" value="결제취소" class="statusBtn" onclick="canclePs_order2('${orderDetail.ORDER_NUM}','${orderDetail.BUYER_ID}','${joinMap.SELLER_ID}')"/>
 			</c:if>
-			<input type ="button" value="인수확인 및 거래완료" onclick="location.href ='/picksell/mypage/completing?ORDER_NUM=${orderDetail.ORDER_NUM}&BUYER_ID=${orderDetail.BUYER_ID}&SELLER_ID=${joinMap.SELLER_ID}'"/>
+			<input type ="button" value="인수확인 및 거래완료" class="statusBtn" onclick="location.href ='/picksell/mypage/completing?ORDER_NUM=${orderDetail.ORDER_NUM}&BUYER_ID=${orderDetail.BUYER_ID}&SELLER_ID=${joinMap.SELLER_ID}'"/>
 			</c:if>									
 			</c:if>
 			</c:forEach>
@@ -278,7 +282,7 @@ td.product_total_valueTEXT {
 		<tr>
 		<td class="td1">
 			<a href="/picksell/products/detail/${joinMap.CATEGORY_NUM }/${joinMap.PRODUCT_NUM }">
-				<img src="/picksell/resources/productUpload/${joinMap.FIRST_IMG }" style="width: 40%; margin: 1%;" onerror="this.src='/picksell/resources/img/imgready.gif'">
+				<img src="/picksell/resources/productUpload/${joinMap.FIRST_IMG }" style="width: 100%; margin: 1%;" onerror="this.src='/picksell/resources/img/imgready.gif'">
 			</a>
 		</td>
 		<td class="td1">
@@ -301,8 +305,10 @@ td.product_total_valueTEXT {
 		
 </div>
 <div class="tradeIClass">
+
+	
+	<div class="paymentBinder">
 		<div class="line">결제 정보</div>
-		
 		<div class="paymentInfoWrap">
 		<table class="paytable" cellpadding="0" cellspacing="0">
 			<tbody>
@@ -325,7 +331,7 @@ td.product_total_valueTEXT {
 				<td class="product_noticeTEXT">총 상품 금액</td>
 				<td class="product_valueTEXT"><fmt:formatNumber value="${orderDetail.TOTAL_PRICE - 2500}" pattern="#,###.##" /> 원</td>
 			</tr>
-			
+	
 			<tr>
 				<td class="product_noticeTEXT">배송비</td>
 				<td class="product_valueTEXT">
@@ -341,6 +347,9 @@ td.product_total_valueTEXT {
 			
 		</tbody></table>
 	</div>
+	</div><!-- paymentBinder end -->
+	
+	<div class="paymentBinder">
 	<div class="line2">배송지 정보</div>
 	<div class="paymentInfoWrap2">
 		<table class="paytable" cellpadding="0" cellspacing="0">
@@ -394,10 +403,11 @@ td.product_total_valueTEXT {
 			</tr>
 			
 		</tbody></table>
-	</div>
+		</div>
+	</div><!-- paymentBinder end -->
 </div>
 
-<div class="deliveryClass">
+<%-- <div class="deliveryClass">
 <div class="line">받는사람 정보</div>  
 <div>
 		수령인 : ${orderDetail.ACCOUNT_NAME}<br>
@@ -414,7 +424,9 @@ td.product_total_valueTEXT {
 		<br>
 		</c:if>	
 </div>
-</div>
+</div> --%>
+
+
 </c:if>
 </div>
 </body>

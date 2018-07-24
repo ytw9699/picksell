@@ -57,7 +57,7 @@ table {
     font-size: 12px;
     margin: 2px 1px;
     cursor: pointer;
-    margin-left : 930px;
+    margin-left : 1100px;
 }
 
 span.hi{
@@ -144,7 +144,7 @@ function listt(){
 
 
 </c:if>
-
+<br/>
 무료나눔 게시글 상세보기 <br/><br/><br/>
 
 글 번호 : ${map.FB_NUM}<br/>
