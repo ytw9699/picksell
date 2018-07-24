@@ -37,6 +37,9 @@ public class ProductController {
 	@Resource(name="basketService")
 	private BasketService basketService;
 	
+	@Resource(name="mypageService")
+	private mypageService mypageService;
+	
 	//페이징
 	//private int currentPage = 1; //안쓰는변수 어노테이션으로 해결함
 	private int totalCount; 		 
@@ -343,14 +346,23 @@ public class ProductController {
 		insertParameterMap.put("comment_content", contents);
 		productService.insertProductComment(insertParameterMap);
 		
+		//내글에 내가쓴 문의가 아니면 [상품문의알람] 시작
+		if(!insertParameterMap.get("seller_id").equals(insertParameterMap.get("comment_writer"))) {
+			
+			Map<String, Object> parameterMap = new HashMap<String, Object>();
+			
+			parameterMap.put("ALARM_TARGET", insertParameterMap.get("seller_id"));
+			parameterMap.put("ALARM_VARIABLE1", map.getMap().get("category_num").toString());
+			parameterMap.put("ALARM_VARIABLE2", map.getMap().get("product_num").toString());
+			parameterMap.put("ALARM_WRITER", insertParameterMap.get("comment_writer"));
+			parameterMap.put("ALARM_KIND", 1);
+			
+			mypageService.alarmInsert(parameterMap);
+		}
 		//상품문의후 리다이렉트
 		String pn = map.getMap().get("product_num").toString();
 		String cn = map.getMap().get("category_num").toString();
-		
-		/*model.addAttribute("redirect", 1);
-		model.addAttribute("category_num", map.getMap().get("category_num"));
-		model.addAttribute("product_num", map.getMap().get("product_num"));
-		model.addAttribute("currentPage", map.getMap().get("currentPage"));*/
+
 		return "redirect:/products/detail/"+cn+"/"+pn;
 	}
 	
@@ -362,6 +374,20 @@ public class ProductController {
 		String contents = insertParameterMap.get("comment_content").toString().replaceAll("\r\n", "<br />");
 		insertParameterMap.put("comment_content", contents);
 		productService.insertProductReComment(insertParameterMap);
+		
+		//내글에 내가쓴 문의가 아니면 [상품문의알람] 시작
+		if(!insertParameterMap.get("owner").equals(insertParameterMap.get("comment_writer"))) {
+			
+			Map<String, Object> parameterMap = new HashMap<String, Object>();
+			
+			parameterMap.put("ALARM_TARGET", insertParameterMap.get("owner"));
+			parameterMap.put("ALARM_VARIABLE1", map.getMap().get("category_num").toString());
+			parameterMap.put("ALARM_VARIABLE2", map.getMap().get("product_num").toString());
+			parameterMap.put("ALARM_WRITER", insertParameterMap.get("comment_writer"));
+			parameterMap.put("ALARM_KIND", 0);
+			
+			mypageService.alarmInsert(parameterMap);
+		}		
 		
 		//상품문의후 리다이렉트
 		String pn = map.getMap().get("product_num").toString();

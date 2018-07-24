@@ -155,6 +155,7 @@
 			<input type="hidden" name="category_num" value="${category_num }" />
 			<input type="hidden" name="comment_writer" value="${sessionScope.sessionId }" />
 			<input type="hidden" name="step_num" value="0" />
+			<input type="hidden" name="seller_id" value="${resultObject.SELLER_ID }" />
 			<textarea name="comment_content" class="comment_content" placeholder="상품문의를 작성하세요. 판매자 외에는 볼 수 없습니다."></textarea>
 			<!-- <input type="text" name="comment_content" /> -->
 			<input type="submit" class="commentSUBMIT" value="작성" />
