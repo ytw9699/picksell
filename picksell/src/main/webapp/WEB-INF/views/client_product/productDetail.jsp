@@ -155,6 +155,7 @@
 			<input type="hidden" name="category_num" value="${category_num }" />
 			<input type="hidden" name="comment_writer" value="${sessionScope.sessionId }" />
 			<input type="hidden" name="step_num" value="0" />
+			<input type="hidden" name="seller_id" value="${resultObject.SELLER_ID }" />
 			<textarea name="comment_content" class="comment_content" placeholder="상품문의를 작성하세요. 판매자 외에는 볼 수 없습니다."></textarea>
 			<!-- <input type="text" name="comment_content" /> -->
 			<input type="submit" class="commentSUBMIT" value="작성" />
@@ -406,6 +407,9 @@
 								<c:if test="${comment.COMMENT_WRITER == resultObject.SELLER_ID}">
 									<span class="commentOfSeller">판매자</span>
 								</c:if>
+								<c:if test="${sessionScope.sessionId == comment.COMMENT_WRITER }">
+									<input type="button" class="deleteCommentBTN" onclick="deleteProductComment('${comment.COMMENT_NUM }','${comment.GROUP_NUM }','${comment.STEP_NUM }','${resultObject.CATEGORY_NUM }','${resultObject.PRODUCT_NUM }')" />
+								</c:if>
 								<span class="commentRegdate">
 								<fmt:formatDate value="${comment.COMMENT_REGDATE }" pattern="YY.MM.dd" />
 								</span>
@@ -523,6 +527,15 @@
 				subBtn_ele.disabled = true;
 	}
 	
+	function deleteProductComment(cn, gn, sn, category, product){
+		var params = "?cn="+cn+"&gn="+gn+"&sn="+sn+"&category="+category+"&product="+product;
+		
+		if(confirm("상품문의를 삭제하시겠습니까?\n원글의경우 답변까지 삭제됩니다")){
+			location.href="/picksell/products/deleteCommentProc"+params;
+		}else{
+			return;
+		}
+	}
 </script>
 
 </body>

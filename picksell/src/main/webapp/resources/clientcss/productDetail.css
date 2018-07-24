@@ -11,6 +11,17 @@
     display: none;
 }
 /* 상품문의 */
+input.deleteCommentBTN {
+    background: url(/picksell/resources/img/cancel2.png) 50% 50% no-repeat;
+    background-size: 15px;
+    width: 15px;
+    height: 15px;
+    border: none;
+    line-height: 40px;
+    cursor: pointer;
+    margin-left: 10px;
+    outline: none;
+}
 .hiddenCommentForm {
     z-index: 10;
     display: none;
