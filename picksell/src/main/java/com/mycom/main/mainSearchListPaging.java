@@ -106,7 +106,7 @@ public class mainSearchListPaging {
 		}
 	}
 
-	// Search있는 생성자
+	// Search있는 생성자 
 	/*public ProductPaging(int currentPage, int totalCount, int blockCount, int blockPage,String dogName, int searchNum, String isSearch){
 		
 		this.blockCount = blockCount;
