@@ -54,6 +54,7 @@ span.product_category.active a {
 
 .categoryWrap {
     border: 1px solid #ececec;
+    margin-top: 40px;
 }
 
 .categoryTitle {

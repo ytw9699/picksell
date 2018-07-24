@@ -11,6 +11,7 @@
     border: 1px solid #ececec;
     height: 50px;
     padding: 20px;
+    margin-top: 40px;
 }
 span.product_category > a {
     border: 1px solid #dbdbdb;

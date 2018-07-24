@@ -47,7 +47,15 @@ public class ProductController {
 	
 	//상품등록 진입점 
 	@RequestMapping("/sell/howto")
-	public String howtosell() {
+	public String howtosell(
+			HttpServletRequest request,
+			Model model) {
+		
+		if(request.getSession().getAttribute("sessionStatus").toString().equals("1")) {
+			model.addAttribute("redierct","none");
+			return "redirect:/main";
+		}
+		
 		return "howtosell";
 	}
 	

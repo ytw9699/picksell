@@ -135,7 +135,7 @@ table td {
 			<tr>
 				<td>
 					<span class="orderInfoTEXT">전화번호</span>
-					<input class="orderInfoINPUT" type="text" name="buyer_phone" />
+					<input class="orderInfoINPUT" type="text" name="buyer_phone" placeholder="- 없이 입력해주세요" />
 				</td>
 				<td>
 					<span class="orderInfoTEXT">이메일</span>
@@ -165,7 +165,7 @@ table td {
 				</td>
 				<td>
 					<span class="orderInfoTEXT">계좌번호</span>
-					<input class="orderInfoINPUT" type="text" name="account" />
+					<input class="orderInfoINPUT" type="text" name="account" placeholder="- 없이 입력해주세요" />
 				</td>
 			</tr>
 			<tr>
