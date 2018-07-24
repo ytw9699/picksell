@@ -20,6 +20,8 @@
     background-color: #f2f2f3;
     background-size: 33%;
     padding-bottom: 40px;
+    margin-left: -13%;
+    width: 126%;
 }
 span.hotProductTopTEXT {
     display: block;
@@ -35,7 +37,7 @@ span.hotProductCenterTEXT {
     font-weight: 600;
 }
 .hotProductsBinder {
-    width: 90%;
+    width: 70%;
     margin: 0 auto;
 }
 a.hotProductANCHOR {
