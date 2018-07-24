@@ -17,7 +17,7 @@ public class mainSearchListPaging {
 
 	// 페이징 생성자
 	public mainSearchListPaging(int currentPage, int totalCount, int blockCount,
-			int blockPage, String MappingName, String HowToSell, String order,String searchKeyword ) {
+			int blockPage, String MappingName, String HowToSell, String order, String searchKeyword ) {
 		
 
 		this.blockCount = blockCount;
@@ -75,7 +75,7 @@ public class mainSearchListPaging {
 				pagingHtml.append("</span>");
 			} else {
 				if(!HowToSell.equals("3") || !order.equals("0") || !searchKeyword.equals("")) {
-					pagingHtml.append("<a class='paging' href=" + MappingName + "?HowToSell=\"+HowToSell+\"&order=\"+order+\"&searchKeyword=\"+searchKeyword+\"&p=");
+					pagingHtml.append("<a class='paging' href=" + MappingName + "?HowToSell="+HowToSell+"&order="+order+"&searchKeyword="+searchKeyword+"&p=");
 					pagingHtml.append(i);
 					pagingHtml.append(">");
 					pagingHtml.append(i);
@@ -94,7 +94,7 @@ public class mainSearchListPaging {
 		// 다음 block 페이지
 		if (totalPage - startPage >= blockPage) {
 			if(!HowToSell.equals("3") || !order.equals("0") || !searchKeyword.equals("")) {
-				pagingHtml.append("<a class='paging next' href=" + MappingName + "?HowToSell=\\\"+HowToSell+\\\"&order=\\\"+order+\\\"&searchKeyword=\\\"+searchKeyword+\\\"&p=" + (endPage + 1) + ">");
+				pagingHtml.append("<a class='paging next' href=" + MappingName + "?HowToSell="+HowToSell+"&order="+order+"&searchKeyword="+searchKeyword+"&p=" + (endPage + 1) + ">");
 				pagingHtml.append("&gt;");
 				pagingHtml.append("</a>");
 			}else {

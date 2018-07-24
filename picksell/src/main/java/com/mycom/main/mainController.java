@@ -117,28 +117,28 @@ public class mainController {
 			@RequestParam(value="order", required=false, defaultValue="0") String order,
 			@RequestParam(value="searchKeyword", required=false, defaultValue="") String searchKeyword,
 			@RequestParam(value="p", required=false, defaultValue="1") int currentPageNumber,
-			Model model) {	
+			Model model) {
 		Map<String, Object> parameterMap = new HashMap<String, Object>();
 		
 		parameterMap.put("HowToSell", HowToSell);
 		parameterMap.put("order", order);
 		parameterMap.put("searchKeyword", searchKeyword);
-		
+		System.out.println(1);
 		List<Map<String, Object>> mainSearchList = mainService.mainSearchList(parameterMap);
-		
+		System.out.println(2);
 		totalCount = mainSearchList.size();//페이징
-		
-		page2 = new mainSearchListPaging(currentPageNumber, totalCount, blockCount, blockPage, "/picksell/mypage/mainSearchList", HowToSell,
+		System.out.println(3);
+		page2 = new mainSearchListPaging(currentPageNumber, totalCount, blockCount, blockPage, "/picksell/mainSearchList", HowToSell,
 				order,searchKeyword);
-		
-		pagingHtml = page.getPagingHtml().toString();
+		System.out.println(4);
+		pagingHtml = page2.getPagingHtml().toString();
 		
 		int lastCount = totalCount;
 		
-		if(page.getEndCount() < totalCount)
-			lastCount = page.getEndCount() + 1;
-		
-		mainSearchList = mainSearchList.subList(page.getStartCount(), lastCount);
+		if(page2.getEndCount() < totalCount)
+			lastCount = page2.getEndCount() + 1;
+		System.out.println(5);
+		mainSearchList = mainSearchList.subList(page2.getStartCount(), lastCount);
 		
 		model.addAttribute("pagingHtml", pagingHtml);
 		model.addAttribute("currentPage", currentPageNumber);
