@@ -59,5 +59,9 @@ public class MemberService implements MemberDao {
 	public void resetPassword(Map<String, Object> map) {//새로운비밀번호 설정
 		 sqlMapper.update("member.resetPassword", map);
 	}
+
+	public String checkLogin(String name) {
+		return sqlMapper.selectOne("member.checkLogin",name);
+	}
 	
 }
