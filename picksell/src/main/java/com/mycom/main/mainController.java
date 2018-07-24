@@ -123,21 +123,22 @@ public class mainController {
 		parameterMap.put("HowToSell", HowToSell);
 		parameterMap.put("order", order);
 		parameterMap.put("searchKeyword", searchKeyword);
-		System.out.println(1);
+		
 		List<Map<String, Object>> mainSearchList = mainService.mainSearchList(parameterMap);
-		System.out.println(2);
+		
 		totalCount = mainSearchList.size();//페이징
-		System.out.println(3);
+		
 		page2 = new mainSearchListPaging(currentPageNumber, totalCount, blockCount, blockPage, "/picksell/mainSearchList", HowToSell,
 				order,searchKeyword);
-		System.out.println(4);
+		
 		pagingHtml = page2.getPagingHtml().toString();
 		
 		int lastCount = totalCount;
 		
 		if(page2.getEndCount() < totalCount)
+			
 			lastCount = page2.getEndCount() + 1;
-		System.out.println(5);
+		
 		mainSearchList = mainSearchList.subList(page2.getStartCount(), lastCount);
 		
 		model.addAttribute("pagingHtml", pagingHtml);
@@ -150,22 +151,3 @@ public class mainController {
 		return "mainSearchList";
 	}
 }
-	/*@RequestMapping("/game/AjaxHome")
-	public ModelAndView AjaxHome(HttpServletRequest request) throws Exception {
-	    ModelAndView mv = new ModelAndView("/main/test");
-	    // model.addAttribute("product", new Product());
-	    return mv;
-	}
-	 
-	@RequestMapping("/game/ajax")
-	@ResponseBody
-	public Map<String,Object> ajax(HttpServletRequest request) throws Exception {
-	    String firstArg = request.getParameter("test1");
-	    String secondArg = request.getParameter("test2");
-	     
-	    System.out.println(firstArg + " / "+ secondArg);
-	    Map<String,Object>  map = new HashMap<String,Object>();
-	    map.put("test1", firstArg);
-	    map.put("test2", secondArg);
-	    return map;
-	}*/

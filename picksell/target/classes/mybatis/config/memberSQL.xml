@@ -84,6 +84,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="checkJoinId" parameterType="String" resultType="int">
 			SELECT count(*) FROM PS_MEMBER WHERE ID = #{id}
 	</select>
+	
+	<select id="checkLogin" parameterType="String" resultType="int">
+			select status from ps_member where id = #{id}
+	</select>
 		
 	<select id="findId" parameterType="hashmap" resultType="String">
 			SELECT ID FROM PS_MEMBER WHERE NAME = #{name} and EMAIL = #{email}

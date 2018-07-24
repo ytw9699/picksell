@@ -83,6 +83,7 @@ import com.mycom.utils.FileUpload;
 			Model model
 			)throws IOException{
 		
+		
 		resultMap = MemberService.userCheck(map.getMap());
 		if(resultMap.get("LATESTLOGIN1") != null ) {
 		MemberService.changeDate(resultMap);// 날짜를 바꿔서입력
@@ -91,6 +92,8 @@ import com.mycom.utils.FileUpload;
 		//SELECT * FROM PS_MEMBER WHERE ID = #{ID}
 		String PASSWORD = request.getParameter("PASSWORD");
 		String ID = request.getParameter("ID");
+		
+		
 		
 		if (resultMap == null) {
 			model.addAttribute("resultID", "NULL");//아이디가 없다면
@@ -101,6 +104,12 @@ import com.mycom.utils.FileUpload;
 		if(!resultMap.get("PASSWORD").equals(PASSWORD)){
 			model.addAttribute("resultPW", "WRONG");//비밀번호가 틀리다면
 			model.addAttribute("formID", ID);//폼아이디값 넘겨주기
+			return "loginForm";
+		}
+		
+		int checkLoginValue = MemberService.checkLogin((String)resultMap.get("NAME")); //select status from ps_member where id = '2'
+		if(checkLoginValue == 2) {
+			model.addAttribute("loginCheck", checkLoginValue);
 			return "loginForm";
 		}
 		session.setAttribute("sessionId", ID);//세션에 값저장
@@ -277,13 +286,9 @@ import com.mycom.utils.FileUpload;
 	
 	@RequestMapping(value="/resetPassword",method=RequestMethod.POST)//비밀번호 재설정 결과
 	public String insertRePs(CommandMap map, Model model) {	
-	
 		
-	System.out.println(1);
-		
+		System.out.println(map.get("name"));
 	String selectRePs = MemberService.selectRePs(map.getMap());//해당하는 정보가있는지부터확인
-		
-	System.out.println(selectRePs);
 	
 	if(selectRePs == null) {
 		model.addAttribute("resetFail", "resetFail");//해당하는 정보를 못가져옴
