@@ -174,6 +174,7 @@
 			<input type="hidden" name="category_num" value="${category_num }" />
 			<input type="hidden" name="comment_writer" value="${sessionScope.sessionId }" />
 			<input type="hidden" name="step_num" value="0" />
+			<input type="hidden" name="owner" value="0" id="owner" />
 			<input type="hidden" name="group_num" value="0" id="group_num" />
 			<textarea name="comment_content" class="comment_content" placeholder="상품문의를 작성하세요. 판매자 외에는 볼 수 없습니다."></textarea>
 			<!-- <input type="text" name="comment_content" /> -->
@@ -383,19 +384,41 @@
 		</div>
 		<div class="commentWrap">
 			<span class="product_contentTEXT">상품 문의</span><span class="commentSumTEXT">${fn:length(resultCommentList) }</span>
+			<c:if test="${sessionScope.sessionId != null }">
 			<input type="button" class="commentBTN" value="상품 문의하기" onclick="openCommentForm()" />
+			</c:if>
 			<div class="commentListWrap">
 				<c:choose>
 					<c:when test="${empty resultCommentList }">
-						<span class="hasNoCommentTEXT">상품문의를 작성하세요</span>
-						<span class="hasNoCommentTEXT">내가쓴 상품문의는 판매자외의 다른사람이 볼 수 없습니다!</span>
+						<c:if test="${sessionScope.sessionId != null }">
+							<span class="hasNoCommentTEXT">상품문의를 작성하세요</span>
+							<span class="hasNoCommentTEXT">내가쓴 상품문의는 판매자외의 다른사람이 볼 수 없습니다!</span>
+						</c:if>
+						<c:if test="${sessionScope.sessionId == null }">
+							<span class="hasNoCommentTEXT">로그인 후에 상품문의를 작성할 수 있습니다</span>
+						</c:if>
 					</c:when>
 					<c:when test="${!empty resultCommentList }">
 						<c:forEach var="comment" items="${resultCommentList }">
-							<p>${comment.COMMENT_WRITER } .. ${comment.COMMENT_REGDATE } .. ${comment.COMMENT_CONTENT } 
-							<c:if test="${comment.STEP_NUM == 0 }">
-								<input type="button" class="replyBTN" value="답변달기" onclick="openRecommentForm('${comment.GROUP_NUM}');" />
-							</c:if>
+							<div class="commenttWrapper <c:if test="${comment.STEP_NUM > 0 }">repleWrap</c:if>">
+								<span class="commentWriter">${comment.COMMENT_WRITER }</span>
+								<!-- 판매자의 댓글이면 별도의 span 표시 -->
+								<c:if test="${comment.COMMENT_WRITER == resultObject.SELLER_ID}">
+									<span class="commentOfSeller">판매자</span>
+								</c:if>
+								<span class="commentRegdate">
+								<fmt:formatDate value="${comment.COMMENT_REGDATE }" pattern="YY.MM.dd" />
+								</span>
+								<span class="commentReBtnWrap">
+									<c:if test="${comment.STEP_NUM == 0 and comment.COMMENT_WRITER != resultObject.SELLER_ID }">
+										<input type="button" class="replyBTN" value="답변달기" onclick="openRecommentForm('${comment.GROUP_NUM}','${comment.COMMENT_WRITER }');" />
+									</c:if>
+								</span>
+								<div class="commentContentWrap">
+								${comment.COMMENT_CONTENT } 
+								</div>
+							</div>
+							
 						</c:forEach>
 					</c:when>
 				</c:choose>
@@ -425,10 +448,12 @@
 		$(".hiddenSingoForm").show();
 		$(".hiddenBackGround").show();
 	}
-	function openRecommentForm(group_num){
+	function openRecommentForm(group_num, owner){
 		$(".hiddenBackGround").show();
 		$(".hiddenReCommentForm").show();
 		$('#group_num').val(group_num);
+		$('#owner').val(owner);
+		
 	}
 	
 	

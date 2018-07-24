@@ -304,9 +304,11 @@ public class ProductController {
 			}
 		}
 		/*최근본상품 로직 누군가에 의해 지워졌었음ㅠㅠ이부분 삭제 ㄴㄴby태원*/
-		parameterMap.put("currentID", currentID);
-		parameterMap.put("category_num", category_num);
-		productService.insertRecentProduct(parameterMap);
+		if(currentID != null) {
+			parameterMap.put("currentID", currentID);
+			parameterMap.put("category_num", category_num);
+			productService.insertRecentProduct(parameterMap);
+		}
 		/*최근본상품 로직 누군가에 의해 지워졌었음ㅠㅠ이부분 삭제 ㄴㄴby태원*/
 		
 		//카테고리번호&상품글번호
@@ -317,6 +319,7 @@ public class ProductController {
 		model.addAttribute("resultObject", resultMap);
 		
 		//상품문의리스트(7월23일 기준 아직 냅둡니다)
+		
 		model.addAttribute("resultCommentList", resultCommentList);
 		
 		model.addAttribute("sessionId", currentID);
