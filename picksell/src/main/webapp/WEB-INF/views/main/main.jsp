@@ -10,6 +10,7 @@
 <title>메인</title>
 
 <style>
+
 body {
     overflow-x: hidden;
 }
@@ -132,15 +133,7 @@ img.newProductIMG {
     margin-top: 60px;
 }
 /* 픽셀로 팔아야 잘산다! */
-.bodyBottomContentWrapper {
-    width: 100%;
-    border: 2px solid #d7d7d7;
-    margin-top: 70px;
-    margin-bottom: 70px;
-    padding: 43px;
-    height: 170px;
-    box-sizing: border-box;
-}
+
 .bottomContents {
     display: inline-block;
     float: left;
@@ -156,21 +149,58 @@ span.bottomCenterTEXT {
     margin-top: 10px;
     font-size: 35px;
 }
-input.bottomSellBtn {
-    transition: 0.3s;
-    cursor: pointer;
-    border: 1px solid #7151fc;
-    background-color: #7151fc;
-    color: white;
-    font-weight: 600;
-    padding: 20px;
-    font-size: 18px;
-    margin-left: 20%;
-    margin-top: 12px;
-}
+
 input.bottomSellBtn:hover {
 	background-color: white;
 	color: #7151fc;
+}
+@media screen and (min-width:1191px) {
+	input.bottomSellBtn {
+	    transition: 0.3s;
+	    cursor: pointer;
+	    border: 1px solid #7151fc;
+	    background-color: #7151fc;
+	    color: white;
+	    font-weight: 600;
+	    padding: 20px;
+	    font-size: 18px;
+	    margin-left: 20%;
+	    margin-top: 12px;
+	}
+	.bodyBottomContentWrapper {
+	    width: 100%;
+	    border: 2px solid #d7d7d7;
+	    margin-top: 70px;
+	    margin-bottom: 70px;
+	    padding: 43px;
+	    height: 170px;
+	    box-sizing: border-box;
+	}
+}
+@media screen and (max-width:1190px) {
+	input.searchINPUT {width: 70%;}
+	.bodyBottomContentWrapper {
+	    width: 100%;
+	    border: 2px solid #d7d7d7;
+	    margin-top: 70px;
+	    margin-bottom: 70px;
+	    padding: 43px;
+	    padding-right: 0px;
+	    height: 170px;
+	    box-sizing: border-box;
+	}
+	input.bottomSellBtn {
+	    transition: 0.3s;
+	    cursor: pointer;
+	    border: 1px solid #7151fc;
+	    background-color: #7151fc;
+	    color: white;
+	    font-weight: 600;
+	    padding: 20px;
+	    font-size: 18px;
+	    margin-left: 5%;
+	    margin-top: 12px;
+	}
 }
 </style>
 </head>
