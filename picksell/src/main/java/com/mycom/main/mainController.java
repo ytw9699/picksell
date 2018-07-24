@@ -37,6 +37,7 @@ public class mainController {
 		private int blockPage = 5; 	 
 		private String pagingHtml;  
 		private ProductPaging page;
+		private mainSearchListPaging page2;
 		
 	Map<String, Object> resultMap = new HashMap<String, Object>();//공통사용
 	
@@ -115,15 +116,32 @@ public class mainController {
 			@RequestParam(value="HowToSell", required=false, defaultValue="3") String HowToSell,
 			@RequestParam(value="order", required=false, defaultValue="0") String order,
 			@RequestParam(value="searchKeyword", required=false, defaultValue="") String searchKeyword,
-			Model model) {	
-		
+			@RequestParam(value="p", required=false, defaultValue="1") int currentPageNumber,
+			Model model) {
 		Map<String, Object> parameterMap = new HashMap<String, Object>();
 		
 		parameterMap.put("HowToSell", HowToSell);
 		parameterMap.put("order", order);
 		parameterMap.put("searchKeyword", searchKeyword);
-		
+		System.out.println(1);
 		List<Map<String, Object>> mainSearchList = mainService.mainSearchList(parameterMap);
+		System.out.println(2);
+		totalCount = mainSearchList.size();//페이징
+		System.out.println(3);
+		page2 = new mainSearchListPaging(currentPageNumber, totalCount, blockCount, blockPage, "/picksell/mainSearchList", HowToSell,
+				order,searchKeyword);
+		System.out.println(4);
+		pagingHtml = page2.getPagingHtml().toString();
+		
+		int lastCount = totalCount;
+		
+		if(page2.getEndCount() < totalCount)
+			lastCount = page2.getEndCount() + 1;
+		System.out.println(5);
+		mainSearchList = mainSearchList.subList(page2.getStartCount(), lastCount);
+		
+		model.addAttribute("pagingHtml", pagingHtml);
+		model.addAttribute("currentPage", currentPageNumber);
 		
 		model.addAttribute("HowToSell", HowToSell);
 		model.addAttribute("searchKeyword", searchKeyword);
