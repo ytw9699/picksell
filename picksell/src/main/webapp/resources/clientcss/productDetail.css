@@ -73,6 +73,7 @@ a.closeAnchor {
 span.commentWriter {
     color: #666;
     font-size: 15px;
+    margin-left: 10px;
 }
 span.commentRegdate {
     float: right;
@@ -80,15 +81,37 @@ span.commentRegdate {
     margin-right: 20px;
     font-size: 13px;
 }
+span.commentOfSeller {
+    background-color: #999;
+    color: white;
+    padding: 3px;
+    font-size: 13px;
+    margin-left: 10px;
+}
 .commentContentWrap {
     margin-top: 10px;
     font-size: 14px;
+    margin-left: 10px;
+}
+input.replyBTN {
+    border: 1px solid #7151fc;
+    color: #7151fc;
+    background-color: white;
+    margin-left: 48px;
+    font-size: 13px;
+    /* padding: 5px; */
+    /* width: 90px; */
+}
+.commenttWrapper {
+    padding: 10px;
 }
 .commenttWrapper.repleWrap {
     background-color: #eaeef0;
     width: 90%;
     margin-left: 10%;
+    box-sizing: border-box;
 }
+
 
 /* 구매신청리스트 */
 span.purchaseHeaderTEXT {

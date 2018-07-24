@@ -402,6 +402,10 @@
 						<c:forEach var="comment" items="${resultCommentList }">
 							<div class="commenttWrapper <c:if test="${comment.STEP_NUM > 0 }">repleWrap</c:if>">
 								<span class="commentWriter">${comment.COMMENT_WRITER }</span>
+								<!-- 판매자의 댓글이면 별도의 span 표시 -->
+								<c:if test="${comment.COMMENT_WRITER == resultObject.SELLER_ID}">
+									<span class="commentOfSeller">판매자</span>
+								</c:if>
 								<span class="commentRegdate">
 								<fmt:formatDate value="${comment.COMMENT_REGDATE }" pattern="YY.MM.dd" />
 								</span>
