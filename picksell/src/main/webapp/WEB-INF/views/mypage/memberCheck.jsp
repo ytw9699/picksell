@@ -50,9 +50,9 @@
     padding-bottom: 35px;
     width: 119%;
 }
-* {
+/* * {
     box-sizing: border-box;
-}
+} */
 .alert {
     padding: 10px;
     margin-top: 23px;
