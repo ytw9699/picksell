@@ -225,7 +225,7 @@ li.mainCategoryLI:hover {
 #myAlarm-header {height: 32px;width: 20px;}
 #myAlarm-body {
     width: 360px;
-    height: 190px;
+   	max-height: 190px;
     border: 1px solid #c2c2c2;
     background-color: white;
     padding: 13px;
