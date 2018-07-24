@@ -21,6 +21,7 @@ body{margin:0;}
     width: 80%;
     margin: 0 auto;
     margin-top: 2%;
+    margin-bottom: 2%;
     padding-top: 2%;
 }
 </style>
