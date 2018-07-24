@@ -112,7 +112,9 @@ font-size: 18px;
     margin-right: 0px;
     width: 120px;
 }
-
+.mailCheck{
+ border: 1px solid white;
+}
 </style>
 </head>
 <body>
@@ -259,7 +261,7 @@ $(document).ready(function(){
 	<input type="email" name="email" id="email" class="inputclass"/>
 	<input type="hidden" name="email2" id="email2"/>
 	<input type="button" onclick="emailAuth(this.form)" value="본인 인증" class="pre2"/>
-	<input type="text" class ="mailCheck" name="mailCheck" placeholder="인증이 완료되지 않았습니다" readonly/>
+	<input type="text" class ="mailCheck" name="mailCheck" placeholder="이메일 인증을 해주세요." readonly/>
 	<br/>
 	<div class="information">주소(선택)</div>
 	<input type="text" name="address" class="inputclass"/>
@@ -336,17 +338,37 @@ function checkWhere(where){
 var idCheckNum = 0;//아이디 중복확인차 필요
 
 function check(){
-	
+	for (i = 0; i < document.commonForm.id.value.length; i++) {
+        ch = document.commonForm.id.value.charAt(i)
+        if (!(ch >= '0' && ch <= '9') && !(ch >= 'a' && ch <= 'z')) {
+            alert("아이디는 소문자와 숫자만 입력가능합니다.");
+            document.commonForm.id.focus();
+            document.commonForm.id.select();
+            return false;
+        }
+    }
 	if(document.commonForm.id.value == ''){
 		alert('아이디를 입력하세요');
 		document.commonForm.id.focus();
 		return false;
 	}
+	else if (document.commonForm.id.value.length<5 || document.commonForm.id.value.length>12) {
+         alert("아이디를 5~12자까지 입력해주세요.");
+        document.commonForm.id.focus();
+        document.commonForm.id.select();
+         return false;
+     }
 	else if(document.commonForm.password.value == ''){
 		alert('비밀번호를 입력하세요');
 		document.commonForm.password.focus();
 		return false;
 	}
+	else if(document.commonForm.password.value.length<4 || document.commonForm.password.value.length>13) {
+         alert("비밀번호를 4~13자까지 입력해주세요.")
+         document.commonForm.password.focus();
+         document.commonForm.password.select();
+         return false;
+     }
 	else if(document.commonForm.passwordCheck.value == ''){
 		alert('비밀번호를 재입력하세요')
 		document.commonForm.passwordCheck.focus();
