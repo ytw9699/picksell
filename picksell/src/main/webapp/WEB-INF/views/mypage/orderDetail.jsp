@@ -26,7 +26,6 @@
 }
 .orderClass {
     width: 97%;
-    height: 30%;
     margin: 1%;
 }
 .tradeIClass {
@@ -86,8 +85,7 @@
     margin: 1%;
     padding: 15px 0 15px 20px;
     font-size: 16px;
-    /* display: inline-block; */
-    float: right;
+    display: block;
 }
 
 .rightLineDeep {
