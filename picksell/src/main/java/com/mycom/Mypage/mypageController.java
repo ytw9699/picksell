@@ -649,8 +649,46 @@ public class mypageController {
 		      String currentID = request.getSession().getAttribute("sessionId").toString();
 		      String currentONOFF = request.getSession().getAttribute("sessionAlarm").toString();
 		      
+		      int SEC = 60;
+			  int MIN = 60;
+			  int HOUR = 24;
+			  int DAY = 30;
+			  int MONTH = 12;
+		      
 		      if(currentID != null && currentONOFF.equals("ON")) {
 		         resultHeaderAlarmList = mypageService.getMyAlarmHeaderList(currentID);
+		         
+		         for(int i = 0 ; i < resultHeaderAlarmList.size() ; i++) {
+		        	 Date gettingTime = (Date) resultHeaderAlarmList.get(i).get("ALARM_REGDATE");
+		        	 long curTime = System.currentTimeMillis();
+		        	 long regTime = gettingTime.getTime();
+			         long diffTime = (curTime - regTime) / 1000;
+			         if (diffTime < SEC) {
+				            // sec
+			        	 resultHeaderAlarmList.get(i).put("ALARM_REGDATE", "방금 전");
+			        	 //resultHeaderAlarmList.add("방금 전");
+				         } else if ((diffTime /= SEC) < MIN) {
+				            // min
+				            //regtimeTextList.add(diffTime + "분 전");
+				        	resultHeaderAlarmList.get(i).put("ALARM_REGDATE", diffTime+"분 전");
+				         } else if ((diffTime /= MIN) < HOUR) {
+				            // hour
+				            //regtimeTextList.add((diffTime) + "시간 전");
+				        	resultHeaderAlarmList.get(i).put("ALARM_REGDATE", diffTime+"시간 전");
+				         } else if ((diffTime /= HOUR) < DAY) {
+				            // day
+				           // regtimeTextList.add((diffTime) + "일 전");
+				        	 resultHeaderAlarmList.get(i).put("ALARM_REGDATE", diffTime+"일 전");
+				         } else if ((diffTime /= DAY) < MONTH) {
+				            // day
+				            //regtimeTextList.add((diffTime) + "달 전");
+				        	 resultHeaderAlarmList.get(i).put("ALARM_REGDATE", diffTime+"달 전");
+				         } else {
+				           // regtimeTextList.add((diffTime) + "년 전");
+				        	 resultHeaderAlarmList.get(i).put("ALARM_REGDATE", diffTime+"년 전");
+				         }
+		         }
+		         
 		         return resultHeaderAlarmList;
 		      }else {
 		         return new ArrayList<Map<String,Object>>();
