@@ -82,6 +82,7 @@ input.searchINPUT {
     padding: 10px;
     font-size: 14px;
     width: 80%;
+    outline: none;
 }
 .headerBottom {
     width: 100%;
@@ -393,7 +394,7 @@ function alarmReadOfHead(ALARM_NUM, kind, var1, var2){
 						$.each(data, function(key, value){
 							
 							if(value.ALARM_KIND == 0)
-								htmlstr += "<span class='myAlarmTEXT' onclick='alarmReadOfHead("+value.ALARM_NUM+","+value.ALARM_KIND+","+value.ALARM_VARIABLE1+","+value.ALARM_VARIABLE2+")'>"+value.ALARM_WRITER+" 판매자가 상품문의 답글을 작성했습니다</span>";
+								htmlstr += "<span class='myAlarmTEXT' onclick='alarmReadOfHead("+value.ALARM_NUM+","+value.ALARM_KIND+","+value.ALARM_VARIABLE1+","+value.ALARM_VARIABLE2+")'>"+value.ALARM_WRITER+" 님이 상품문의 답글을 작성했습니다</span>";
 							if(value.ALARM_KIND == 1)
 								htmlstr += "<span class='myAlarmTEXT' onclick='alarmReadOfHead("+value.ALARM_NUM+","+value.ALARM_KIND+","+value.ALARM_VARIABLE1+","+value.ALARM_VARIABLE2+")'>"+value.ALARM_WRITER+" 님이 상품문의를 작성했습니다</span>";
 							//kind2 > 나의글에 구매신청한경우
