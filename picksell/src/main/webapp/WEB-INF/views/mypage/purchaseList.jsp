@@ -11,7 +11,7 @@
 <title>구매내역</title>
 <style>
 table.purchaseTABLE {
-    width: 95%; 
+    width: 105%; 
 }
 .next {
     width: 80%;
@@ -92,7 +92,7 @@ margin-top: 10%;
 		<td class="tdtd">수락 완료</td>
 		</c:if>																	
 		<td class="tdtd">판매자 ${purchase.SELLER_ID }</td>
-		<td class="tdtd"><input type="button" value="취소" class="next" id ="cancel" onclick="deletePurchaseList('${purchase.PURCHASE_NUM }','${purchase.SELLER_ID }','${purchase.CATEGORY_NUM }','${purchase.PRODUCT_NUM }','${purchase.BUYER_ID}');" /></td>
+		<td class="tdtd"><input type="button" value="요청 취소" class="next" id ="cancel" onclick="deletePurchaseList('${purchase.PURCHASE_NUM }','${purchase.SELLER_ID }','${purchase.CATEGORY_NUM }','${purchase.PRODUCT_NUM }','${purchase.BUYER_ID}');" /></td>
 		<td class="tdtd"><input type="button" value="구매" class="next" id ="purchase${status.index+1}" disabled="disabled" onclick="location.href = '/picksell/products/detail/${purchase.CATEGORY_NUM }/${purchase.PRODUCT_NUM }'"/></td>
 	</tr> 
 	</tbody>
