@@ -12,6 +12,7 @@
 <style>
 .productWrap {
     display: inline-block;
+    width: 24%;
 }
 /* 인기상품 */
 .hotProductWrapper {
@@ -119,6 +120,53 @@ a.newProductANCHOR {
     display: inline-block;
     margin-right: 2%;
 }
+img.newProductIMG {
+    width: 100%;
+}
+.newNomalProductWrapper {
+    margin-top: 60px;
+}
+/* 픽셀로 팔아야 잘산다! */
+.bodyBottomContentWrapper {
+    width: 100%;
+    border: 2px solid #d7d7d7;
+    margin-top: 70px;
+    margin-bottom: 70px;
+    padding: 43px;
+    height: 170px;
+    box-sizing: border-box;
+}
+.bottomContents {
+    display: inline-block;
+    float: left;
+}
+span.bottomTopTEXT {
+    color: #7b7b7b;
+    display: block;
+}
+span.bottomCenterTEXT {
+    display: block;
+    color: #131913;
+    font-weight: 600;
+    margin-top: 10px;
+    font-size: 35px;
+}
+input.bottomSellBtn {
+    transition: 0.3s;
+    cursor: pointer;
+    border: 1px solid #7151fc;
+    background-color: #7151fc;
+    color: white;
+    font-weight: 600;
+    padding: 20px;
+    font-size: 18px;
+    margin-left: 20%;
+    margin-top: 12px;
+}
+input.bottomSellBtn:hover {
+	background-color: white;
+	color: #7151fc;
+}
 </style>
 </head>
 <body>
@@ -192,22 +240,41 @@ a.newProductANCHOR {
 	</div><!-- newProductsBinder end -->
 </div><!-- newProductWrapper end -->
 
-<h3>NEW 일반 상품  <a href="/picksell/products/goods"><font color="red" size="2">전체보기</font></a></h3>
-<c:forEach var="nomalProduct" items="${nomalProductList }" end="4">
-<div class="productWrap">
-<div class="firstImgWrap">
-	<a href="/picksell/products/detail/${nomalProduct.CATEGORY_NUM }/${nomalProduct.PRODUCT_NUM }">
-	<img src="/picksell/resources/productUpload/${nomalProduct.FIRST_IMG }" style="width: 200px;" onerror="this.src='/picksell/resources/img/imgready.gif'" />
-	</a>
+
+<div class="newNomalProductWrapper">
+	<div class="newProductTextBinder">
+		<span class="newProductNewTEXT">NEW</span>
+		<span class="newProductTEXT">새로 등록된 일반 상품</span>
+	</div>
+	
+	<a href="/picksell/products/goods" class="newProductANCHOR">전체보기 ></a>
+	<div class="newProductsBinder">
+		<c:forEach var="nomalProduct" items="${nomalProductList }" end="3">
+		<div class="productWrap">
+			<div class="firstImgWrap">
+				<a href="/picksell/products/detail/${nomalProduct.CATEGORY_NUM }/${nomalProduct.PRODUCT_NUM }">
+				<img src="/picksell/resources/productUpload/${nomalProduct.FIRST_IMG }" style="width: 200px;" onerror="this.src='/picksell/resources/img/imgready.gif'" />
+				</a>
+			</div>
+			<div class="infoWrap">
+				<span class="productSubject"><c:if test="${nomalProduct.PRODUCT_STATUS == '0'}"><font size="1">[미사용]</font></c:if>
+				<c:if test="${nomalProduct.PRODUCT_STATUS == '1'}"><font size="1">[새상품]</font></c:if> ${nomalProduct.SUBJECT }</span><br>
+				<span class="productPrice">
+				<fmt:formatNumber value="${nomalProduct.PRICE }" pattern="#,###.##" /> 원
+				</span>
+			</div>
+		</div><!-- productWrap end -->
+		</c:forEach>
+	</div><!-- newProductsBinder end -->
+</div><!-- newNomalProductWrapper end -->
+
+<div class="bodyBottomContentWrapper">
+	<div class="bottomContents">
+		<span class="bottomTopTEXT">이벤트 당첨되었는데 안쓰는 물건, 자리만 차지하고 있는 쓸모없는 물건...</span>
+		<span class="bottomCenterTEXT">픽셀로 팔아야 잘 산다!</span>
+	</div>
+	<input type="button" class="bottomSellBtn" value="픽셀로 물건 판매하기" onclick="location.href='/picksell/sell/howto'" />
 </div>
-<div class="infoWrap">
-	<span class="productSubject"><c:if test="${nomalProduct.PRODUCT_STATUS == '0'}"><font size="1">[미사용]</font></c:if>
-	<c:if test="${nomalProduct.PRODUCT_STATUS == '1'}"><font size="1">[새상품]</font></c:if> ${nomalProduct.SUBJECT }</span><br>
-	<span class="productPrice">
-	<fmt:formatNumber value="${nomalProduct.PRICE }" pattern="#,###.##" /> 원
-	</span>
-</div>
-</div>
-</c:forEach>
+
 </body>
 </html>
