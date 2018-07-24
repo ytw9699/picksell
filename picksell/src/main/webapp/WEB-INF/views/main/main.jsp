@@ -10,6 +10,9 @@
 <title>메인</title>
 
 <style>
+body {
+    overflow-x: hidden;
+}
 .productWrap {
     display: inline-block;
     width: 24%;
