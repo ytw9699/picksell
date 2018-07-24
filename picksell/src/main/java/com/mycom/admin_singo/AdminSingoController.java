@@ -117,4 +117,12 @@ public class AdminSingoController {
 		
 	}
 	
+	@RequestMapping("/doBlind")
+	public String adminSingoDoBlind(HttpServletRequest request) {
+		String product_num = request.getParameter("product_num");
+		adminSingoService.doBlind(Integer.parseInt(product_num));
+		
+		return "redirect:/admin_singo/list";
+	}
+	
 }

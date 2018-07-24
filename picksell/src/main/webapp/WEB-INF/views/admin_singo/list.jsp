@@ -39,7 +39,49 @@ tr:nth-child(even){background-color: #f2f2f2}
 .paging a:first-child{margin-left:0;}
 .paging strong{color:#fff;background:#337AB7;border:1px solid #337AB7;}
 .paging .page_arw{font-size:11px;line-height:30px;}
+
+.button {
+    background-color: #7151fc;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+.button9 {
+    background-color: #CEB6FE;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
 </style>
+
+<script>
+	function doBlind(product_num){
+		
+		var k = confirm("블라인드 처리 하시겠습니까?");
+		
+		
+		if(k==true){
+			window.location.href="http://localhost:8080/picksell/admin_singo/doBlind?product_num="+product_num;
+		}else if(k==false){
+			window.location.href="http://localhost:8080/picksell/admin_singo/list";
+		}
+		
+	}
+</script>
 </head>
 <body>
 <div class="main">
@@ -53,7 +95,8 @@ tr:nth-child(even){background-color: #f2f2f2}
 			<th style="text-align:center;">신고자</th>										
 			<th style="text-align:center;">신고일자</th>
 			<th style="text-align:center;">신고내용</th>
-			<th style="text-align:center;">게시글상태</th> <!-- board_status -->
+			<th style="text-align:center;">게시글상태</th> 
+			<th style="text-align:center;">블라인드처리</th> <!-- board_status -->
 		</tr>
 	</thead>
 	
@@ -66,8 +109,19 @@ tr:nth-child(even){background-color: #f2f2f2}
  				<td style="text-align:center;vertical-align:middle;">${singoList2.SINGO_WRITER}</td>
  				<td style="text-align:center;vertical-align:middle;">${singoList2.SINGO_REGDATE}</td>
  				<td style="text-align:center;vertical-align:middle;">${singoList2.SINGO_CONTENT}</td>
- 				<td style="text-align:center;vertical-align:middle;">${singoList2.BOARD_STATUS}</td>
- 				<br/>
+ 				<td style="text-align:center;vertical-align:middle;">
+ 				
+ 					<c:if test ="${singoList2.BOARD_STATUS eq 0}">정상</c:if>
+ 					<c:if test ="${singoList2.BOARD_STATUS eq 1}">블라인드</c:if>
+ 				</td>
+<%--  				<input type="hidden" id="product_num" value="${singoList2.BOARD_STATUS}"/> --%>
+ 				<td style="text-align:center;vertical-align:middle;">
+ 				<c:if test ="${singoList2.BOARD_STATUS eq 0}">
+ 					<button class="button" onclick="doBlind('${singoList2.PRODUCT_NUM}')">블라인드 처리</button>
+ 				</c:if>
+ 					<button class="button9">블라인드 처리</button>
+ 				</td>
+ 				
  			</tr>
  		</c:forEach>
  	</div>

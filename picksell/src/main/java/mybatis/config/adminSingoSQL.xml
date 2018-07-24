@@ -51,6 +51,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE singo_content LIKE #{isSearch}
 		ORDER BY singo_num DESC
 	</select>	
+	
+	<update id="doBlind" parameterType="int">
+		update ps_product set board_status = 1 where product_num = #{PRODUCT_NUM}
+	</update>
 		
 </mapper>
 

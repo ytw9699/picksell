@@ -97,10 +97,10 @@ function dele(){
 	
 };
 
-function confirmDele(){
+function confirmDele(fc_num){
 	
-	var fc_num = document.getElementById('fc_num').value;
-	var fb_num = document.getElementById('fb_num').value;
+// 	var fc_num = document.getElementById('fc_num').value;
+ 	var fb_num = document.getElementById('fb_num').value;
 	
 	
 	var b = confirm("정말 댓글을 삭제할거죠?!");
@@ -168,11 +168,11 @@ function listt(){
 		
 		
 		<td style="text-align:center;vertical-align:middle;" width="10%;">
-		${commentMap.FC_NUM}
-		<input type="hidden" id="fc_num" name="FC_NUM" value="${commentMap.FC_NUM}"/>
+		
+<%-- 		<input type="hidden" id="fc_num" name="FC_NUM" value="${commentMap.FC_NUM}"/> --%>
 		<c:if test="${commentMap.FC_WRITER == sessionScope.sessionId}">
 <%-- 			<form action="/picksell/free_board/deleteComment/${commentMap.FC_NUM}/${commentMap.FB_NUM}" onsubmit="confirmDele()"> --%>
-				<button class="button1" onclick="confirmDele()">삭제</button>
+				<button class="button1" onclick="confirmDele('${commentMap.FC_NUM}')">삭제</button>
 <!--    			 <input type="submit" class="button1" value="삭제" onclick="confirmDele()" /> -->
 <!-- 			</form> -->
 		</c:if>
