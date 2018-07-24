@@ -400,10 +400,10 @@
 					</c:when>
 					<c:when test="${!empty resultCommentList }">
 						<c:forEach var="comment" items="${resultCommentList }">
-							<div class="commenttWrapper">
+							<div class="commenttWrapper <c:if test="${comment.STEP_NUM > 0 }">repleWrap</c:if>">
 								<span class="commentWriter">${comment.COMMENT_WRITER }</span>
 								<span class="commentRegdate">
-								<fmt:formatDate value="${comment.COMMENT_REGDATE }" pattern="YY.MM.dd HH:mm" />
+								<fmt:formatDate value="${comment.COMMENT_REGDATE }" pattern="YY.MM.dd" />
 								</span>
 								<span class="commentReBtnWrap">
 									<c:if test="${comment.STEP_NUM == 0 and comment.COMMENT_WRITER != resultObject.SELLER_ID }">

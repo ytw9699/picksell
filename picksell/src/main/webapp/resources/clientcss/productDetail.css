@@ -70,6 +70,26 @@ a.closeAnchor {
     background: url(/picksell/resources/img/cancel_white.png) 50% 50% no-repeat;
     float: right;
 }
+span.commentWriter {
+    color: #666;
+    font-size: 15px;
+}
+span.commentRegdate {
+    float: right;
+    color: #666;
+    margin-right: 20px;
+    font-size: 13px;
+}
+.commentContentWrap {
+    margin-top: 10px;
+    font-size: 14px;
+}
+.commenttWrapper.repleWrap {
+    background-color: #eaeef0;
+    width: 90%;
+    margin-left: 10%;
+}
+
 /* 구매신청리스트 */
 span.purchaseHeaderTEXT {
     display: block;
