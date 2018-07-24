@@ -13,6 +13,10 @@ a:visited { color: black; text-decoration: none;}
 a:hover { color: black; text-decoration: none;}
 .headerTop_menu, .headerTop_menu a {color: #666;font-size: 13px;}
 
+::-webkit-scrollbar{width: 10px;}
+::-webkit-scrollbar-track {background-color: white;}
+::-webkit-scrollbar-thumb {background-color: #baaaff;border-radius: 20px;}
+::-webkit-scrollbar-thumb:hover {background: #977fff;}
 /* 마이페이지 메뉴 */
 
 #mypage_menuBox {position: absolute;display: none;}
@@ -200,7 +204,7 @@ li.mainCategoryLI:hover {
     width: 50px;
     height: 10px;
     padding: 5px;
-    margin-left: 80px;
+    margin-left: 20px;
     border-radius: 23px;
     transition: 0.3s;
     display: inline-block;
@@ -220,11 +224,13 @@ li.mainCategoryLI:hover {
 #myAlarm_listBox {position: absolute; display: none; z-index: 1; }
 #myAlarm-header {height: 32px;width: 20px;}
 #myAlarm-body {
-    width: 200px;
+    width: 360px;
+    height: 190px;
     border: 1px solid #c2c2c2;
     background-color: white;
     padding: 13px;
     margin-left: 12px;
+    overflow-y: scroll;
 }
 span.alarm-setTEXT {
     float: left;
@@ -237,10 +243,15 @@ span.alarm-setTEXT {
     border-bottom: 1px solid #dedede;
 }
 span.myAlarmTEXT {
+    transition: 0.1s;
     display: block;
     font-size: 14px;
     color: #333;
     cursor: pointer;
+    margin-top: 5px;
+}
+span.myAlarmTEXT:hover{
+color: #7151fc
 }
 span.myAlarmNoTEXT {
     text-align: center;
@@ -394,30 +405,30 @@ function alarmReadOfHead(ALARM_NUM, kind, var1, var2){
 						$.each(data, function(key, value){
 							
 							if(value.ALARM_KIND == 0)
-								htmlstr += "<span class='myAlarmTEXT' onclick='alarmReadOfHead("+value.ALARM_NUM+","+value.ALARM_KIND+","+value.ALARM_VARIABLE1+","+value.ALARM_VARIABLE2+")'>"+value.ALARM_WRITER+" 님이 상품문의 답글을 작성했습니다</span>";
+								htmlstr += "<span class='myAlarmTEXT' onclick='alarmReadOfHead("+value.ALARM_NUM+","+value.ALARM_KIND+","+value.ALARM_VARIABLE1+","+value.ALARM_VARIABLE2+")'>"+value.ALARM_WRITER+" 님이 상품문의 답글을 작성했습니다 -"+value.ALARM_REGDATE+"</span>";
 							if(value.ALARM_KIND == 1)
-								htmlstr += "<span class='myAlarmTEXT' onclick='alarmReadOfHead("+value.ALARM_NUM+","+value.ALARM_KIND+","+value.ALARM_VARIABLE1+","+value.ALARM_VARIABLE2+")'>"+value.ALARM_WRITER+" 님이 상품문의를 작성했습니다</span>";
+								htmlstr += "<span class='myAlarmTEXT' onclick='alarmReadOfHead("+value.ALARM_NUM+","+value.ALARM_KIND+","+value.ALARM_VARIABLE1+","+value.ALARM_VARIABLE2+")'>"+value.ALARM_WRITER+" 님이 상품문의를 작성했습니다 -"+value.ALARM_REGDATE+"</span>";
 							//kind2 > 나의글에 구매신청한경우
 							if(value.ALARM_KIND == 2)
-								htmlstr += "<span class='myAlarmTEXT' onclick='alarmReadOfHead("+value.ALARM_NUM+","+value.ALARM_KIND+","+value.ALARM_VARIABLE1+","+value.ALARM_VARIABLE2+")'>"+value.ALARM_WRITER+" 님께서 구매신청을 수락했습니다</span>";
+								htmlstr += "<span class='myAlarmTEXT' onclick='alarmReadOfHead("+value.ALARM_NUM+","+value.ALARM_KIND+","+value.ALARM_VARIABLE1+","+value.ALARM_VARIABLE2+")'>"+value.ALARM_WRITER+" 님께서 구매신청을 수락했습니다 -"+value.ALARM_REGDATE+"</span>";
 							if(value.ALARM_KIND == 3)
-								htmlstr += "<span class='myAlarmTEXT' onclick='alarmReadOfHead("+value.ALARM_NUM+","+value.ALARM_KIND+","+value.ALARM_VARIABLE1+","+value.ALARM_VARIABLE2+")'>"+value.ALARM_WRITER+" 님께서 구매신청을 하셨습니다</span>";
+								htmlstr += "<span class='myAlarmTEXT' onclick='alarmReadOfHead("+value.ALARM_NUM+","+value.ALARM_KIND+","+value.ALARM_VARIABLE1+","+value.ALARM_VARIABLE2+")'>"+value.ALARM_WRITER+" 님께서 구매신청을 하셨습니다 -"+value.ALARM_REGDATE+"</span>";
 							if(value.ALARM_KIND == 4)
-								htmlstr += "<span class='myAlarmTEXT' onclick='alarmReadOfHead("+value.ALARM_NUM+","+value.ALARM_KIND+","+value.ALARM_VARIABLE1+","+value.ALARM_VARIABLE2+")'>"+value.ALARM_VARIABLE2+" 주문에 대한 배송이 시작되었습니다</span>";
+								htmlstr += "<span class='myAlarmTEXT' onclick='alarmReadOfHead("+value.ALARM_NUM+","+value.ALARM_KIND+","+value.ALARM_VARIABLE1+","+value.ALARM_VARIABLE2+")'>"+value.ALARM_VARIABLE2+" 주문에 대한 배송이 시작되었습니다 -"+value.ALARM_REGDATE+"</span>";
 							//if(value.ALARM_KIND == 5)
 								//htmlstr += "<span class='myAlarmTEXT' onclick='alarmReadOfHead("+value.ALARM_NUM+","+value.ALARM_KIND+","+value.ALARM_VARIABLE1+","+value.ALARM_VARIABLE2+")'>"+value.ALARM_VARIABLE2+" 주문에 대한 배송이 시작되었습니다</span>";
 							if(value.ALARM_KIND == 6)
-								htmlstr += "<span class='myAlarmTEXT' onclick='alarmReadOfHead("+value.ALARM_NUM+","+value.ALARM_KIND+","+value.ALARM_VARIABLE1+","+value.ALARM_VARIABLE2+")'>"+value.ALARM_WRITER+" 님께서 인수확인 하셨습니다</span>";
+								htmlstr += "<span class='myAlarmTEXT' onclick='alarmReadOfHead("+value.ALARM_NUM+","+value.ALARM_KIND+","+value.ALARM_VARIABLE1+","+value.ALARM_VARIABLE2+")'>"+value.ALARM_WRITER+" 님께서 인수확인 하셨습니다 -"+value.ALARM_REGDATE+"</span>";
 							if(value.ALARM_KIND == 7)
-								htmlstr += "<span class='myAlarmTEXT' onclick='alarmReadOfHead("+value.ALARM_NUM+","+value.ALARM_KIND+","+value.ALARM_VARIABLE1+","+value.ALARM_VARIABLE2+")'>"+value.ALARM_WRITER+" 님께서 구매신청을 취소했습니다</span>";
+								htmlstr += "<span class='myAlarmTEXT' onclick='alarmReadOfHead("+value.ALARM_NUM+","+value.ALARM_KIND+","+value.ALARM_VARIABLE1+","+value.ALARM_VARIABLE2+")'>"+value.ALARM_WRITER+" 님께서 구매신청을 취소했습니다 -"+value.ALARM_REGDATE+"</span>";
 							if(value.ALARM_KIND == 8)
-								htmlstr += "<span class='myAlarmTEXT' onclick='alarmReadOfHead("+value.ALARM_NUM+","+value.ALARM_KIND+","+value.ALARM_VARIABLE1+","+value.ALARM_VARIABLE2+")'>"+value.ALARM_WRITER+" 판매자가 구매수락을 취소했습니다</span>";
+								htmlstr += "<span class='myAlarmTEXT' onclick='alarmReadOfHead("+value.ALARM_NUM+","+value.ALARM_KIND+","+value.ALARM_VARIABLE1+","+value.ALARM_VARIABLE2+")'>"+value.ALARM_WRITER+" 판매자가 구매수락을 취소했습니다 -"+value.ALARM_REGDATE+"</span>";
 							if(value.ALARM_KIND == 9)
-								htmlstr += "<span class='myAlarmTEXT' onclick='alarmReadOfHead("+value.ALARM_NUM+","+value.ALARM_KIND+","+value.ALARM_VARIABLE1+","+value.ALARM_VARIABLE2+")'>"+value.ALARM_WRITER+" 구매자가 주문신청을 했습니다</span>";
+								htmlstr += "<span class='myAlarmTEXT' onclick='alarmReadOfHead("+value.ALARM_NUM+","+value.ALARM_KIND+","+value.ALARM_VARIABLE1+","+value.ALARM_VARIABLE2+")'>"+value.ALARM_WRITER+" 구매자가 주문신청을 했습니다 -"+value.ALARM_REGDATE+"</span>";
 							if(value.ALARM_KIND == 10)
-								htmlstr += "<span class='myAlarmTEXT' onclick='alarmReadOfHead("+value.ALARM_NUM+","+value.ALARM_KIND+","+value.ALARM_VARIABLE1+","+value.ALARM_VARIABLE2+")'>"+value.ALARM_VARIABLE2+" 주문을 취소했습니다</span>";
+								htmlstr += "<span class='myAlarmTEXT' onclick='alarmReadOfHead("+value.ALARM_NUM+","+value.ALARM_KIND+","+value.ALARM_VARIABLE1+","+value.ALARM_VARIABLE2+")'>"+value.ALARM_VARIABLE2+" 주문을 취소했습니다 -"+value.ALARM_REGDATE+"</span>";
 							if(value.ALARM_KIND == 11)
-								htmlstr += "<span class='myAlarmTEXT' onclick='alarmReadOfHead("+value.ALARM_NUM+","+value.ALARM_KIND+","+value.ALARM_VARIABLE1+","+value.ALARM_VARIABLE2+")'>"+value.ALARM_VARIABLE2+" 주문을 취소했습니다</span>";
+								htmlstr += "<span class='myAlarmTEXT' onclick='alarmReadOfHead("+value.ALARM_NUM+","+value.ALARM_KIND+","+value.ALARM_VARIABLE1+","+value.ALARM_VARIABLE2+")'>"+value.ALARM_VARIABLE2+" 주문을 취소했습니다 -"+value.ALARM_REGDATE+"</span>";
 						});
 						$('.alarm-list').html(htmlstr);
 					}
