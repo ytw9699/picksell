@@ -8,41 +8,58 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>주문 내역 상세 및 배송 조회</title>
+<title></title>
 <style>
 .bigWrapper{
     border: 1px solid gray;
     width: 100%;
     height: 1000px;
+    margin-bottom: 100px;
 }
-.headerClass{
-	border: 1px solid gray;
-	width: 97%;
-	height: 10%
+.headerClass {
+    border: 1px solid gray;
+    width: 97%;
+    height: 207px;
+    margin: 1%;
 }
 .orderClass{
 	border: 1px solid gray;
 	width: 97%;
-	height: 30%
+	height: 25%;
+	margin: 1%;
 }
 .tradeIClass{
 	border: 1px solid gray;
 	width: 97%;
-	height: 30%
+	height: 25%;
+	margin: 1%;
 }
 .deliveryClass{
 	border: 1px solid gray;
 	width: 97%;
-	height: 30%
+	height: 25%;
+	margin: 1%;
 }
-.status{
-	 float: right;
-	 width: 50%;
-	 border: 1px solid gray;
+.status {
+    /* float: right; */
+    width: 98%;
+    border: 1px solid gray;
+    margin: 1%;
+    height: 53px;
 }
-.header{
-	width: 50%;
-	border: 1px solid gray;
+.header {
+    width: 41%;
+    margin: 1%;
+    border: 1px solid gray;
+    height: 121px;
+    display: inline-block;
+}
+.header2 {
+    width: 41%;
+    margin: 1%;
+    border: 1px solid gray;
+    height: 121px;
+    display: inline-block;
 }
 </style>
 </head>
@@ -96,8 +113,11 @@
 <div class="bigWrapper"> 
 <c:if test="${fn:length(orderDetail) > 0}">
 <div class="headerClass">
-<span class="header">주문 내역 상세 및 배송 조회</span>
-	<span class="status">거래상태:
+<div class="header">
+주문 내역 상세 및 배송 조회
+</div>
+	<div class="header">
+		<div class="status">거래상태:
         <c:if test="${orderDetail.STATUS == '0'}">
 		입금대기중
 		</c:if>
@@ -114,25 +134,26 @@
 		<c:if test="${orderDetail.STATUS == '44'}">
 		거래상태:결제취소  , 결제취소일: 		 <fmt:formatDate value="${orderDetail.CANCEL_DATE}" pattern="yy년 MM월 dd일 hh:mm" />  <br>
 		</c:if>
-	</span>
-	<div>
-		<input type ="button" value="입금완료" onclick="alarmInsert('admin','empty','empty','${sessionScope.sessionId}',12)"/>
-		
-		<c:if test="${fn:length(orderSubDetail) > 0}">
-		<c:forEach var="joinMap" items="${orderSubDetail}" varStatus="status">
-		<c:if test="${status.last}">
-		 <c:if test="${orderDetail.STATUS == '0' || orderDetail.STATUS == '1'  || orderDetail.STATUS == '2'}">	
-		 <c:if test="${joinMap.HOWTOSELL != '2'}">																							
-		<input type ="button" value="결제취소" onclick="canclePs_order('${orderDetail.ORDER_NUM}','${orderDetail.BUYER_ID}','${joinMap.SELLER_ID}','${joinMap.PRODUCT_NUM}')"/>
-		</c:if>
-		<c:if test="${joinMap.HOWTOSELL == '2'}">																							
-		<input type ="button" value="결제취소" onclick="canclePs_order2('${orderDetail.ORDER_NUM}','${orderDetail.BUYER_ID}','${joinMap.SELLER_ID}')"/>
-		</c:if>
-		<input type ="button" value="인수확인 및 거래완료" onclick="location.href ='/picksell/mypage/completing?ORDER_NUM=${orderDetail.ORDER_NUM}&BUYER_ID=${orderDetail.BUYER_ID}&SELLER_ID=${joinMap.SELLER_ID}'"/>
-		</c:if>									
-		</c:if>
-		</c:forEach>
-		</c:if>
+		</div >
+	   <div class="status">
+			<input type ="button" value="입금완료" onclick="alarmInsert('admin','empty','empty','${sessionScope.sessionId}',12)"/>
+			
+			<c:if test="${fn:length(orderSubDetail) > 0}">
+			<c:forEach var="joinMap" items="${orderSubDetail}" varStatus="status">
+			<c:if test="${status.last}">
+			 <c:if test="${orderDetail.STATUS == '0' || orderDetail.STATUS == '1'  || orderDetail.STATUS == '2'}">	
+			 <c:if test="${joinMap.HOWTOSELL != '2'}">																							
+			<input type ="button" value="결제취소" onclick="canclePs_order('${orderDetail.ORDER_NUM}','${orderDetail.BUYER_ID}','${joinMap.SELLER_ID}','${joinMap.PRODUCT_NUM}')"/>
+			</c:if>
+			<c:if test="${joinMap.HOWTOSELL == '2'}">																							
+			<input type ="button" value="결제취소" onclick="canclePs_order2('${orderDetail.ORDER_NUM}','${orderDetail.BUYER_ID}','${joinMap.SELLER_ID}')"/>
+			</c:if>
+			<input type ="button" value="인수확인 및 거래완료" onclick="location.href ='/picksell/mypage/completing?ORDER_NUM=${orderDetail.ORDER_NUM}&BUYER_ID=${orderDetail.BUYER_ID}&SELLER_ID=${joinMap.SELLER_ID}'"/>
+			</c:if>									
+			</c:if>
+			</c:forEach>
+			</c:if>
+	    </div >
 	</div>
 </div>
 <div class="orderClass">
@@ -182,7 +203,7 @@
 		연락처:  ${orderDetail.BUYER_PHONE}<br>
 		배송지:   ${orderDetail.DESTINATION}<br>
 
-
+</div>
 <div>
 		배송시 주의사항: ${orderDetail.PRECAUTIONS}<br>
 		택배사:  		${orderDetail.DELIVERY_COMPANY}<br>
