@@ -41,6 +41,9 @@ public class AdminSingoService implements AdminSingoDAO {
 		return sqlSessionTemplate.selectList("adminSingo.singoSearch2", "%"+search+"%");
 	}
 		
+	public void doBlind(int product_num) {
+		sqlSessionTemplate.update("adminSingo.doBlind", product_num);
+	}
 	
 	//신고 상세보기 
 	@Override
