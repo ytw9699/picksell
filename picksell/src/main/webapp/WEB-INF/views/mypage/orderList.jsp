@@ -149,7 +149,7 @@ a.paging {
 <span class="my__i-stat1 i-stat1-number">${orderCount.three}</span>개</span></a>
 
 <a href="/picksell/mypage/orderList?status=44">
-<span class="orderkind" ><span class="my__i-stat1 i-stat1-title">결제취소 및 반품</span>
+<span class="orderkind" ><span class="my__i-stat1 i-stat1-title">결제취소</span>
 <span class="my__i-stat1 i-stat1-number">${orderCount.fourfour}</span>개</span></a>
 </div>
 <c:if test="${fn:length(orderList) > 0}">
