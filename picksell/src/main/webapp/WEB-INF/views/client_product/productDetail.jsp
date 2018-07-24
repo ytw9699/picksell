@@ -174,6 +174,7 @@
 			<input type="hidden" name="category_num" value="${category_num }" />
 			<input type="hidden" name="comment_writer" value="${sessionScope.sessionId }" />
 			<input type="hidden" name="step_num" value="0" />
+			<input type="hidden" name="owner" value="0" id="owner" />
 			<input type="hidden" name="group_num" value="0" id="group_num" />
 			<textarea name="comment_content" class="comment_content" placeholder="상품문의를 작성하세요. 판매자 외에는 볼 수 없습니다."></textarea>
 			<!-- <input type="text" name="comment_content" /> -->
@@ -399,10 +400,19 @@
 					</c:when>
 					<c:when test="${!empty resultCommentList }">
 						<c:forEach var="comment" items="${resultCommentList }">
-							<p>${comment.COMMENT_WRITER } .. ${comment.COMMENT_REGDATE } .. ${comment.COMMENT_CONTENT } 
-							<c:if test="${comment.STEP_NUM == 0 }">
-								<input type="button" class="replyBTN" value="답변달기" onclick="openRecommentForm('${comment.GROUP_NUM}');" />
-							</c:if>
+							<div class="commenttWrapper">
+								<span class="commentWriter">${comment.COMMENT_WRITER }</span>
+								<span class="commentRegdate">${comment.COMMENT_REGDATE }</span>
+								<span class="commentReBtnWrap">
+									<c:if test="${comment.STEP_NUM == 0 and comment.COMMENT_WRITER != resultObject.SELLER_ID }">
+										<input type="button" class="replyBTN" value="답변달기" onclick="openRecommentForm('${comment.GROUP_NUM}','${comment.COMMENT_WRITER }');" />
+									</c:if>
+								</span>
+								<div class="commentContentWrap">
+								${comment.COMMENT_CONTENT } 
+								</div>
+							</div>
+							
 						</c:forEach>
 					</c:when>
 				</c:choose>
@@ -432,10 +442,12 @@
 		$(".hiddenSingoForm").show();
 		$(".hiddenBackGround").show();
 	}
-	function openRecommentForm(group_num){
+	function openRecommentForm(group_num, owner){
 		$(".hiddenBackGround").show();
 		$(".hiddenReCommentForm").show();
 		$('#group_num').val(group_num);
+		$('#owner').val(owner);
+		
 	}
 	
 	
