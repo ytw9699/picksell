@@ -13,6 +13,7 @@
 .productWrap {
     display: inline-block;
 }
+/* 인기상품 */
 .hotProductWrapper {
     background: url(/picksell/resources/img/mainhot_back.png) 27% 0% no-repeat;
     background-color: #f2f2f3;
@@ -87,13 +88,45 @@ span.productPriceTEXT {
     font-size: 14px;
     color: #777;
 }
+
+/* 새로등록된플러스상품 */
+.newProductWrapper {
+    margin-top: 50px;
+}
+span.newProductNewTEXT {
+    color: #7151fc;
+}
+span.newProductTEXT {
+    font-weight: 600;
+    font-size: 22px;
+    margin-left: 15px;
+}
+a.newProductANCHOR:hover {
+    text-decoration: underline;
+}
+a.newProductANCHOR {
+    display: block;
+    text-align: right;
+    color: #666;
+    margin-right: 10%;
+}
+.newProductsBinder {
+    width: 90%;
+    margin: 0 auto;
+}
+.newProductWrap {
+    width: 22%;
+    display: inline-block;
+    margin-right: 2%;
+}
 </style>
 </head>
 <body>
 
 <div class="hotProductWrapper">
 	<span class="hotProductTopTEXT">내가 제일 잘나가</span>
-	<span class="hotProductCenterTEXT">픽셀 플러스 인기상품</span>   <a href="/picksell/hotPlusProduct" class="hotProductANCHOR">전체보기 ></a>
+	<span class="hotProductCenterTEXT">픽셀 플러스 인기상품</span>
+	<a href="/picksell/hotPlusProduct" class="hotProductANCHOR">전체보기 ></a>
 	
 	<div class="hotProductsBinder">
 	<c:forEach var="hotProduct" items="${hotProductList}" end="2" varStatus="status">
@@ -132,22 +165,33 @@ span.productPriceTEXT {
 	</div>
 </div>
 </c:forEach>
-<h3>NEW 픽셀 플러스 상품  <a href="/picksell/products/plus"><font color="red" size="2">전체보기</font></a></h3>
-<c:forEach var="pulsProduct" items="${plusProductList }" end="3">
-	<div class="productWrap">
-	<div class="firstImgWrap">
-		<a href="/picksell/products/detail/${pulsProduct.CATEGORY_NUM }/${pulsProduct.PRODUCT_NUM }">
-		<img src="/picksell/resources/productUpload/${pulsProduct.FIRST_IMG }" style="width: 200px;" onerror="this.src='/picksell/resources/img/imgready.gif'" />
-		</a>
+
+<div class="newProductWrapper">
+	<div class="newProductTextBinder">
+		<span class="newProductNewTEXT">NEW</span>
+		<span class="newProductTEXT">새로 등록된 플러스 상품</span>
 	</div>
-	<div class="infoWrap">
-		<span class="productSubject">${pulsProduct.SUBJECT }</span><br>
-		<span class="productPrice">
-		<fmt:formatNumber value="${pulsProduct.PRICE }" pattern="#,###.##" /> 원
-		</span>
-	</div>
-</div>
-</c:forEach>
+	<a href="/picksell/products/plus" class="newProductANCHOR">전체보기 ></a>
+	
+	<div class="newProductsBinder">
+		<c:forEach var="pulsProduct" items="${plusProductList }" end="3">
+			<div class="newProductWrap">
+			<div class="firstImgWrap">
+				<a href="/picksell/products/detail/${pulsProduct.CATEGORY_NUM }/${pulsProduct.PRODUCT_NUM }">
+				<img src="/picksell/resources/productUpload/${pulsProduct.FIRST_IMG }" class="newProductIMG"  onerror="this.src='/picksell/resources/img/imgready.gif'" />
+				</a>
+			</div>
+			<div class="infoWrap">
+				<span class="productSubject">${pulsProduct.SUBJECT }</span>
+				<span class="productPrice">
+				<fmt:formatNumber value="${pulsProduct.PRICE }" pattern="#,###.##" /> 원
+				</span>
+			</div>
+		</div>
+		</c:forEach>
+	</div><!-- newProductsBinder end -->
+</div><!-- newProductWrapper end -->
+
 <h3>NEW 일반 상품  <a href="/picksell/products/goods"><font color="red" size="2">전체보기</font></a></h3>
 <c:forEach var="nomalProduct" items="${nomalProductList }" end="4">
 <div class="productWrap">
