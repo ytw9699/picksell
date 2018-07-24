@@ -119,7 +119,9 @@ tr:nth-child(even){background-color: #f2f2f2}
  				<c:if test ="${singoList2.BOARD_STATUS eq 0}">
  					<button class="button" onclick="doBlind('${singoList2.PRODUCT_NUM}')">블라인드 처리</button>
  				</c:if>
+ 				<c:if test ="${singoList2.BOARD_STATUS eq 1}">
  					<button class="button9">블라인드 처리</button>
+ 				</c:if>
  				</td>
  				
  			</tr>
