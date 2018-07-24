@@ -13,7 +13,7 @@
 .bigWrapper{
     border: 1px solid gray;
     width: 100%;
-    height: 1000px;
+    height: 1500px;
     margin-bottom: 100px;
 }
 .headerClass {
@@ -25,7 +25,7 @@
 .orderClass{
 	border: 1px solid gray;
 	width: 97%;
-	height: 25%;
+	height: 30%;
 	margin: 1%;
 }
 .tradeIClass{
@@ -52,7 +52,7 @@
     margin: 1%;
     border: 1px solid gray;
     height: 121px;
-    display: inline-block;
+    float: left;
 }
 .header2 {
     width: 41%;
@@ -61,6 +61,115 @@
     height: 121px;
     display: inline-block;
 }
+.line {
+    width: 50%;
+    margin: 1%;
+    height: 23px;
+    /* border: 1px solid gray; */
+    border-bottom: 3px solid #ececec;
+    color: #7151FC;
+    padding: 15px 0 15px 20px;
+    font-size: 20px;
+    /* display: inline-block; */
+}
+.line2 {
+    width: 50%;
+    margin: 1%;
+    height: 23px;
+    /* border: 1px solid gray; */
+    border-bottom: 3px solid #ececec;
+    color: #7151FC;
+    padding: 15px 0 15px 20px;
+    font-size: 20px;
+    display: inline-block;
+}
+.rightLine {
+    width: 23%;
+    height: 23px;
+    margin: 1%;
+    padding: 15px 0 15px 20px;
+    font-size: 16px;
+    /* display: inline-block; */
+    float: right;
+}
+
+.rightLineDeep {
+    margin-left: -30px;
+    margin-right: 20px;
+}
+.orderSubDetail{
+	width: 80%;
+    height: 100px;
+    margin: 1%;
+    border: 1px solid gray;
+}
+.td1 {
+    width: 5%;
+    height: 92px;
+    margin: 1%;
+    border: 1px solid gray;
+}
+
+.orderInfoWrap {
+    display: inline-block;
+    width: 68%;
+    border: 1px solid #d8d8d8;
+    box-sizing: border-box;
+    border-radius: 5px;
+}
+.paymentInfoWrap {
+    width: 28%;
+    border: 1px solid #d8d8d8;
+    border-radius: 5px;
+    margin: 1%;
+    margin-left: 3%;
+    display: inline-block;
+}
+.paymentInfoWrap2 {
+    width: 28%;
+    border: 1px solid #d8d8d8;
+    border-radius: 5px;
+    margin: 1%;
+    margin-left: 3%;
+    /* display: inline-block; */
+    float: right;
+}
+table.paytable {
+    width: 100%;
+}
+td.subHeader {
+    padding: 20px;
+    color: #333;
+    font-size: 20px;
+}
+td.product_noticeTEXT {
+    color: #333;
+    font-size: 18px;
+    padding: 10px;
+    padding-left: 20px;
+}
+td.product_valueTEXT {
+    color: #333;
+    font-size: 18px;
+    padding: 10px;
+    padding-right: 35px;
+    text-align: right;
+}
+td.product_totalTEXT {
+    color: #e31c1c;
+    font-size: 18px;
+    padding: 10px;
+    padding-left: 20px;
+    width: 45%;
+}
+td.product_total_valueTEXT {
+    color: #e31c1c;
+    font-size: 18px;
+    padding: 10px;
+    padding-right: 35px;
+    text-align: right;
+}
+
 </style>
 </head>
 <body>
@@ -158,46 +267,138 @@
 </div>
 <div class="orderClass">
 		<c:if test="${fn:length(orderSubDetail) > 0}">
-		<span>주문정보</span>
-		<div>
+		<div class="line">주문정보</div>
+		<div class="rightLine">
+		<span class="rightLineDeep">주문번호: ${orderDetail.ORDER_NUM}</span>
+		<span>주문일: <fmt:formatDate value="${orderDetail.STEP1_DATE}" pattern="yy년 MM월 dd일 hh:mm" /></span>
+		</div>
 		<c:forEach var="joinMap" items="${orderSubDetail}" varStatus="status">
-		<div>
-		<a href="/picksell/products/detail/${joinMap.CATEGORY_NUM }/${joinMap.PRODUCT_NUM }">
-	    <img src="/picksell/resources/productUpload/${joinMap.FIRST_IMG }" style="width: 200px;" />
-	    /${joinMap.SUBJECT }
-		</a>
-		/<fmt:formatNumber value="${joinMap.PRICE}" pattern="#,###.##" /> 원 
-		/${joinMap.ORDER_QUANTITY}개 
-		/	판매자 ${joinMap.SELLER_ID} 
-		 <br>
+		<div class="orderSubDetail">
+		<table>
+		<tr>
+		<td class="td1">
+			<a href="/picksell/products/detail/${joinMap.CATEGORY_NUM }/${joinMap.PRODUCT_NUM }">
+				<img src="/picksell/resources/productUpload/${joinMap.FIRST_IMG }" style="width: 40%; margin: 1%;" onerror="this.src='/picksell/resources/img/imgready.gif'">
+			</a>
+		</td>
+		<td class="td1">
+			${joinMap.SUBJECT}
+		</td>
+		<td class="td1">
+		    <fmt:formatNumber value="${joinMap.PRICE}" pattern="#,###.##" /> 원 
+		</td>
+		<td class="td1">
+		    ${joinMap.ORDER_QUANTITY}개 
+		</td>
+		<td class="td1">
+			판매자 ${joinMap.SELLER_ID} 
+		</td>
+		</tr>
+		</table>
 		 </div>
 		</c:forEach>
-		</div>
 		</c:if>
-		<span>
-		주문번호:    		${orderDetail.ORDER_NUM} <br>
-		주문일: 		     <fmt:formatDate value="${orderDetail.STEP1_DATE}" pattern="yy년 MM월 dd일 hh:mm" />  <br>
-		</span>
+		
 </div>
 <div class="tradeIClass">
-		<span>결제 정보</span>
-		<div>
-		<span>결제수단: 계좌이체</span>
-		<span>
-		<c:if test="${orderDetail.STATUS != '0'}">
-		<br>입금완료일: <fmt:formatDate value="${orderDetail.STEP2_DATE}" pattern="yy년 MM월 dd일 hh:mm" />  <br>
-		</c:if>
-		</span>
-		</div>
+		<div class="line">결제 정보</div>
 		
-		<div>
-		<br>총 상품 가격:<fmt:formatNumber value="${orderDetail.TOTAL_PRICE - 2500}" pattern="#,###.##" /> 원 
-		<br>배송비: 2,500 원
-		<br>총결제금액: <fmt:formatNumber value="${orderDetail.TOTAL_PRICE}" pattern="#,###.##" /> 원
-		</div> 
+		<div class="paymentInfoWrap">
+		<table class="paytable" cellpadding="0" cellspacing="0">
+			<tbody>
+			
+			<c:if test="${orderDetail.STATUS != '0'}">
+				<tr>
+					<td class="product_noticeTEXT">입금 완료일 </td>
+					<td class="product_valueTEXT"><fmt:formatDate value="${orderDetail.STEP2_DATE}" pattern="yy. MM. dd" />
+					</td>
+				</tr>
+			</c:if>
+					
+			<tr>
+				<td class="product_noticeTEXT">결제 수단 </td>
+				<td class="product_valueTEXT">
+				계좌 이체
+				</td> 
+			</tr>
+			<tr>
+				<td class="product_noticeTEXT">총 상품 금액</td>
+				<td class="product_valueTEXT"><fmt:formatNumber value="${orderDetail.TOTAL_PRICE - 2500}" pattern="#,###.##" /> 원</td>
+			</tr>
+			
+			<tr>
+				<td class="product_noticeTEXT">배송비</td>
+				<td class="product_valueTEXT">
+				2,500 원
+				</td>
+			</tr>
+			<tr>
+				<td class="product_totalTEXT">총 결제금액</td>
+				<td class="product_total_valueTEXT">
+					<fmt:formatNumber value="${orderDetail.TOTAL_PRICE}" pattern="#,###.##" /> 원
+				</td>
+			</tr>
+			
+		</tbody></table>
+	</div>
+	<div class="line2">배송지 정보</div>
+	<div class="paymentInfoWrap2">
+		<table class="paytable" cellpadding="0" cellspacing="0">
+			<tbody>
+			
+			<c:if test="${orderDetail.STATUS != '0' && orderDetail.STATUS != '1'}">
+				<tr>
+					<td class="product_noticeTEXT">배송시작일 </td>
+					<td class="product_valueTEXT"><fmt:formatDate value="${orderDetail.STEP3_DATE}" pattern="yy년 MM월 dd일 hh:mm" />
+					</td>
+				</tr>
+			</c:if>
+					
+			<tr>
+				<td class="product_noticeTEXT">수령인 </td>
+				<td class="product_valueTEXT">
+					${orderDetail.ACCOUNT_NAME}
+				</td> 
+			</tr>
+			<tr>
+				<td class="product_noticeTEXT">연락처</td>
+				<td class="product_valueTEXT">${orderDetail.BUYER_PHONE}</td>
+			</tr>
+			
+			<tr>
+				<td class="product_noticeTEXT">배송지</td>
+				<td class="product_valueTEXT">
+				 ${orderDetail.DESTINATION}
+				</td>
+			</tr>
+			
+			<tr>
+				<td class="product_noticeTEXT">택배사</td>
+				<td class="product_valueTEXT">
+					${orderDetail.DELIVERY_COMPANY}
+				</td>
+			</tr>
+			
+			<tr>
+				<td class="product_noticeTEXT">송장번호</td>
+				<td class="product_valueTEXT">
+					${orderDetail.INVOICE_NUM}
+				</td>
+			</tr>
+			
+			<tr>
+				<td class="product_totalTEXT">배송시 주의사항</td>
+				<td class="product_total_valueTEXT">
+					${orderDetail.PRECAUTIONS}
+				</td>
+			</tr>
+			
+		</tbody></table>
+	</div>
 </div>
+
 <div class="deliveryClass">
-<span>받는사람 정보</span>  
+<div class="line">받는사람 정보</div>  
 <div>
 		수령인 : ${orderDetail.ACCOUNT_NAME}<br>
 		연락처:  ${orderDetail.BUYER_PHONE}<br>
