@@ -10,67 +10,92 @@
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <title>개인정보 확인 및 수정</title>
 <style>
-.next {
-    width: 50%;
-    margin: 0 auto;
-    margin-left: 0%;
-    border: none;
-    color: white;
-    background-color: #7151fc;
-    padding: 4%;
-    font-size: 14px;
-}
 .bigdiv {
     width: 100%;
     height: 200px;
     
 }
-.signup-top-instr{
-	width: 100%
+.mp-container {
+    display: inline-block;
+    /* margin: 0 0 0px 0px; */
+    width: 880px;
 }
-
-.information {
-    font-size: 19px;
-    padding: 1px;
-    margin: 1px;
-    width: 50%;
-    margin: 0%;
-    text-align: right;
-    height: 29px;
-    padding-right: 0px;
+.row {
+    margin-left: -10px;
+    margin-right: -10px;
 }
-.information2 {
-    font-size: 20px;
-    padding: 1px;
-    margin: 1px;
-    width: 50%;
-    margin: 0%;
-    height: 20px;
-    padding-left: 10px;
+.col-sm-offset-3 {
+    margin-left: 15%;
 }
-.information3 {
-    font-size: 20px;
-    padding: 1px;
-    margin: 1px;
-    width: 275px;
-    margin: 11%;
-    height: 60px;
+.confirm-auth-box {
+    /*  border: 1px solid #d8d8d8; */
+    border-radius: 5px; 
+    margin-top: 63px;
+    margin-right: 243px;
 }
-.information4 {
-    line-height: 65px;
-    font-size: 20px;
-    padding: 1px;
-    margin: 1px;
-    width: 101px;
-    margin: 0%;
-    height: 26px;
+.confirm-auth-box h3 {
+    color: #7151FC;
+    border-bottom: 2px solid #ececec;
+    padding: 15px 0 15px 20px;
+    font-size: 26px;
+    margin: 0;
 }
-.tableClass {
-    margin: 0 auto;
-    margin-top: 110px;
-    width: 50%;
+.confirm-auth-box-content {
+    padding: 20px;
+    width: 104%;
 }
-
+.confirm-auth-desc {
+    font-size: 17px;
+    color: #191919;
+    padding-bottom: 35px;
+    width: 119%;
+}
+* {
+    box-sizing: border-box;
+}
+.alert {
+    padding: 10px;
+    margin-top: 23px;
+    color: #7151fc;
+}
+.confirm-auth-input {
+    height: 46px;
+    border: 1px solid gray;
+    display: block;
+    width: 83%;
+    height: 55px;
+    border-radius: 9px;
+}
+.form-group {
+    margin-bottom: 3px;
+    width: 80%;
+    height: 50px;
+}
+.confirm-auth-btn {
+    margin-top: 10px;
+}
+.btn-primary {
+    color: #fff;
+    background-color: #7151FC;
+    border-color: #7151FC;
+    width: 83%;
+    margin-top: 10px;
+    height: 56px;
+    padding: 16px 60px;
+    font-size: 16px;
+    line-height: 1.33;
+    border-radius: 9px;
+    display: inline-block;
+    margin-bottom: 0;
+    font-weight: normal;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    background-image: none;
+    border: 1px solid transparent;
+    white-space: nowrap;
+    user-select: none;
+    }
 </style>
 </head>
 <body>
@@ -91,29 +116,27 @@ function passwordCheck(){
 		 loginForm.PASSWORD.focus();
 }
 </script>
-	
-	<form action="/picksell/mypage/memberCheck" name="memberCheckForm" id="memberCheckForm" method="post" onsubmit="return mberValiCheck()">
-	<div class="bigdiv">
-	<table class="tableClass" style="width: 50%;" cellspacing="0" cellpadding="0">
-	<tr>
-	<td class="signup-top-instr" colspan="3">*정보를 안전하게 보호하기 위해 비밀번호를 다시 한번 확인합니다.</td>
-	</tr>
-	<tr>
-	<td class="information">아이디</td>
-	<td class="information2" colspan="2" >${sessionId}</td>
-	</tr>
-	<tr>
-	<td class="information">비밀번호</td>
-	<td class="information2"><input type="password" class="information4" name="PASSWORD" id="PASSWORD" value="${cookiePW}"/>&nbsp;</td>
-	<td class="information3" id="passwordCheckText"></td>
-	</tr>
-	<tr>
-	<td class="information"><input type="submit" value="확인" class="next"/></td>
-	<td class="information2" colspan="2" ><input type="button" value="취소" class="next" onclick="history.back()"/></td>
-	</tr>
-	</table>
-	</div>
-	</form>
+	<div class="mp-container">
+	<div class="row">
+	<div class="col-sm-6 col-sm-offset-3">
+	<div class="confirm-auth-box">
+	<h3>회원정보 확인</h3>
+	<div class="confirm-auth-box-content">
+		 <div class="confirm-auth-desc">${sessionId} 님의 정보를 안전하게 보호하기 위해 비밀번호를 다시 한번 확인합니다.
+		 </div>
+	<div></div>
+	  <form action="/picksell/mypage/memberCheck" name="memberCheckForm" id="memberCheckForm" method="post" onsubmit="return mberValiCheck()">
+	  <div class="form-group">
+		<input class="confirm-auth-input" placeholder=" 비밀번호를 입력해주세요" name="PASSWORD" id="PASSWORD" type="password">
+	  </div>
+	  <div class="form-group">
+	  <input type="submit" class="btn-primary" value="확인" />
+	  </form>
+	  </div>
+	 	   <div id="passwordCheckText" class="alert alert-danger">
+	 	   
+		  </div>
+	  </div></div></div></div></div>
 <c:if test="${resultPW == 'WRONG'}">
 	<script>
 	 passwordCheck();
