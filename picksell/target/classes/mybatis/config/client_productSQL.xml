@@ -302,21 +302,32 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</delete>
 	
 	<!-- 알람읽기 -->
-<update id="alarmRead" parameterType="int">
-		update PS_ALARM set ALARM_CHECK = 'YES' where ALARM_NUM = #{ALARM_NUM}
-</update>
-<!-- 최근본상품 로직 by태원 -->
-<insert id="insertRecentProduct" parameterType="hashmap">
-		insert into PS_RECENT_PRODUCT(RECENT_NUM,
-								RECENT_PRODUCT_NUM,
-								RECENT_CATEGORY_NUM,
-								RECENT_REGDATE,
-								RECENT_ID) values(RECENT_PRODUCT_SEQ.NEXTVAL,
-												#{product_num},
-												#{category_num},
-												sysdate,
-												#{currentID}
-												)
-</insert>
-<!-- 최근본상품 로직 by태원 -->
+	<update id="alarmRead" parameterType="int">
+			update PS_ALARM set ALARM_CHECK = 'YES' where ALARM_NUM = #{ALARM_NUM}
+	</update>
+	<!-- 최근본상품 로직 by태원 -->
+	<insert id="insertRecentProduct" parameterType="hashmap">
+			insert into PS_RECENT_PRODUCT(RECENT_NUM,
+									RECENT_PRODUCT_NUM,
+									RECENT_CATEGORY_NUM,
+									RECENT_REGDATE,
+									RECENT_ID) values(RECENT_PRODUCT_SEQ.NEXTVAL,
+													#{product_num},
+													#{category_num},
+													sysdate,
+													#{currentID}
+													)
+	</insert>
+	<!-- 최근본상품 로직 by태원 -->
+	
+	<!-- 문의삭제(원글삭제) -->
+	<delete id="deleteProductComment" parameterType="int">
+		delete from ps_pro_comment where group_num = #{parameterNumber}
+	</delete>
+	
+	<!-- 문의삭제(대댓삭제) -->
+	<delete id="deleteProductReple" parameterType="int">
+		delete from ps_pro_comment where comment_num = #{parameterNumber}
+	</delete>
+	
 </mapper>

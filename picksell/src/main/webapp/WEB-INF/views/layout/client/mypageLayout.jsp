@@ -18,6 +18,7 @@ body{margin:0;}
     width: 70%;
     display: inline-block;
     margin-left: 25px;
+    margin-top: 20px;
     min-height: 500px;
 }
 .footerWrap {
@@ -28,6 +29,7 @@ body{margin:0;}
     padding-top: 2%;
 }
 .leftWrap {
+    margin-top: 20px;
     margin-left: 10%;
     display: inline-block;
     float: left;

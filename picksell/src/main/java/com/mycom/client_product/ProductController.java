@@ -395,6 +395,30 @@ public class ProductController {
 		
 		return "redirect:/products/detail/"+cn+"/"+pn;
 	}
+	
+	//상품문의 삭제하기
+	@RequestMapping("/products/deleteCommentProc")
+	public String deleteProductComment(
+			HttpServletRequest request) {
+		
+		int stepNumber = Integer.parseInt(request.getParameter("sn"));
+		int groupNumber = Integer.parseInt(request.getParameter("gn"));
+		int commentNumber = Integer.parseInt(request.getParameter("cn"));
+		
+		if(stepNumber == 0) {
+			//System.out.println("원글이에요");
+			productService.deleteProductComment(groupNumber, "comment");
+		}else if(stepNumber > 0) {
+			//System.out.println("대댓이에요");
+			productService.deleteProductComment(commentNumber, "reple");
+		}
+		//삭제후 리다이렉트용
+		String pn = request.getParameter("product");
+		String cn = request.getParameter("category");
+		
+		return "redirect:/products/detail/"+cn+"/"+pn;
+	}
+	
 	//구매신청하기
 	@RequestMapping("/products/purchseRequest/{pn}/{sessionID}")
 	public String purchaseRequest(
@@ -557,5 +581,7 @@ public class ProductController {
 		
 		return "redirect:/products/detail/"+cn+"/"+pn;
 	}
+	
+	
 		
 }

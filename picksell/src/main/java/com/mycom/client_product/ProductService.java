@@ -76,6 +76,14 @@ public class ProductService implements ProductDao {
 	public List<Map<String, Object>> getProductCommentListOfBuyer(Map<String, Object> map){
 		return sqlMapper.selectList("client_product.selectProductCommentOfBuyer", map);
 	}
+	//판매글 문의삭제
+	public void deleteProductComment(int parameterNumber, String howToDelete) {
+		if(howToDelete.equals("comment")) {
+			sqlMapper.delete("client_product.deleteProductComment", parameterNumber);
+		}else if(howToDelete.equals("reple")) {
+			sqlMapper.delete("client_product.deleteProductReple", parameterNumber);
+		}
+	}
 	
 	//판매글 구매신청
 	public void insertProductPurchaseList(Map<String, Object> map) {
