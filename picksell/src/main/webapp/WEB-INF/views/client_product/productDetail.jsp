@@ -402,7 +402,9 @@
 						<c:forEach var="comment" items="${resultCommentList }">
 							<div class="commenttWrapper">
 								<span class="commentWriter">${comment.COMMENT_WRITER }</span>
-								<span class="commentRegdate">${comment.COMMENT_REGDATE }</span>
+								<span class="commentRegdate">
+								<fmt:formatDate value="${comment.COMMENT_REGDATE }" pattern="YY.MM.dd HH:mm" />
+								</span>
 								<span class="commentReBtnWrap">
 									<c:if test="${comment.STEP_NUM == 0 and comment.COMMENT_WRITER != resultObject.SELLER_ID }">
 										<input type="button" class="replyBTN" value="답변달기" onclick="openRecommentForm('${comment.GROUP_NUM}','${comment.COMMENT_WRITER }');" />
