@@ -66,6 +66,7 @@ span.cancel {
     font-size: 15px;
 }
 .hiddenPurchaseListForm {
+	z-index: 10;
     display: none;
     width: 40%;
     background-color: white;
