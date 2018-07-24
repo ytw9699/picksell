@@ -69,7 +69,7 @@ setInterval(function(){
 <div class="main">
 <c:choose>
 	<c:when test="${ 0 eq total }">
-	 판매 중인 상품이 없습니다.
+	<h3>판매 중인 상품이 없습니다.</h3>
 	 
 	</c:when>
 	<c:when test="${0 lt total }">

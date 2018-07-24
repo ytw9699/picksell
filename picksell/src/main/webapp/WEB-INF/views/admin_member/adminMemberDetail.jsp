@@ -97,7 +97,7 @@ $(document).ready(function(){
 <div class="memberInfo">
 <div class="profile" style="background-color:#e8e7e7;border-radius:25px;">
 <div class="d" style="display:inline;">
-<div class="id" style="float:right;"><img src="/picksell/resources/profileImgUpload/freeprofileimg.jpg" style="width:220px; height:200px;border:1px solid white;"/></div>
+<div class="id" style="float:right;"><img src="/picksell/resources/profileImgUpload/katalkprofile.png" style="width:220px; height:200px;border:1px solid white;"/></div>
 아이디 : ${map.ID }</div>
 <div class="name">
 이름 : ${map.NAME }
@@ -145,10 +145,10 @@ $(document).ready(function(){
 알람 동의 여부 :
 <c:choose>
 <c:when test="${ map.ALARM_CONSENT eq 'ON'  }">
-<img src="/picksell/resources/img/Alram1.png" width="20px" height="18px" >
+<img src="/picksell/resources/img/onbell.png" width="20px" height="18px" >
 </c:when>
 <c:when test="${map.ALARM_CONSENT  eq 'OFF'}">
-<img src="/picksell/resources/img/noAlarm.png" width="20px" height="18px">
+<img src="/picksell/resources/img/silent.png" width="20px" height="18px">
 </c:when>
 </c:choose>
 </div>

@@ -105,16 +105,16 @@ function drawChart() {
 
 </div>
 
-
+<div id="chartContainer" style="height: 500px; width: 90%;border:2px solid #eee;margin-left: 20px;margin-top: 27px;"></div>
 
  <div id="chart_div" style="border: 2px solid #eee;
-    width: 95%;
+    width: 90%;
     margin-top: 27px;
     height: 400px;
     margin-left: 20px;"></div>
 
 
-<div id="chartContainer" style="height: 500px; width: 95%;border:2px solid #eee;margin-left: 20px;margin-top: 27px;"></div>
+
 
 
 <%-- <canvas id="myChart" width="400" height="300"></canvas>  <br/> --%>
