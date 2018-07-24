@@ -256,7 +256,7 @@ $(document).ready(function(){
 	<input type="text" name="name" class="inputclass" />
 	<br/>
 	<div class="information">이메일</div>
-	<input type="text" name="email" id="email" class="inputclass"/>
+	<input type="email" name="email" id="email" class="inputclass"/>
 	<input type="hidden" name="email2" id="email2"/>
 	<input type="button" onclick="emailAuth(this.form)" value="본인 인증" class="pre2"/>
 	<input type="text" class ="mailCheck" name="mailCheck" placeholder="인증이 완료되지 않았습니다" readonly/>
