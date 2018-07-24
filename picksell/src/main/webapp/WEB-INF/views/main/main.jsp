@@ -280,6 +280,13 @@ input.bottomSellBtn:hover {
 	</div>
 	<input type="button" class="bottomSellBtn" value="픽셀로 물건 판매하기" onclick="location.href='/picksell/sell/howto'" />
 </div>
-
+<script>
+	$(document).ready(function(){
+		var isBannedSelling = '${param.redierct}';
+		if(isBannedSelling == 'none'){
+			alert('판매가 제한된 계정입니다! \n관리자에게 문의하세요 ');
+		}
+	});
+</script>
 </body>
 </html>
