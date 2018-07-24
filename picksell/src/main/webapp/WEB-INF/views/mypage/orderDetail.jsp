@@ -186,7 +186,7 @@ input.statusBtn:hover {
 				data : allData,
 				success : function(data){
 					if(ALARM_KIND == "12"){
-						alert("곧 관리자가 확인 후 입금완료 해드립니다");
+						alert("감사합니다 관리자가 확인 후 입금완료 해드리겠습니다.");
 					}
 				}
 			});

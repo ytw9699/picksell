@@ -106,9 +106,7 @@ import com.mycom.utils.FileUpload;
 			model.addAttribute("formID", ID);//폼아이디값 넘겨주기
 			return "loginForm";
 		}
-		System.out.println(resultMap.get("NAME"));
 		String checkLoginValue = MemberService.checkLogin((String)resultMap.get("ID")); //select status from ps_member where id = '2'
-		System.out.println(checkLoginValue);
 		if(checkLoginValue.equals("2")) {
 			model.addAttribute("loginCheck", checkLoginValue);
 			return "loginForm";
@@ -288,7 +286,6 @@ import com.mycom.utils.FileUpload;
 	@RequestMapping(value="/resetPassword",method=RequestMethod.POST)//비밀번호 재설정 결과
 	public String insertRePs(CommandMap map, Model model) {	
 		
-		System.out.println(map.get("name"));
 	String selectRePs = MemberService.selectRePs(map.getMap());//해당하는 정보가있는지부터확인
 	
 	if(selectRePs == null) {

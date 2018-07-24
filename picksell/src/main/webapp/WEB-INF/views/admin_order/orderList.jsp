@@ -81,7 +81,20 @@ tr:nth-child(even){background-color: #f2f2f2}
 .paging .page_arw{font-size:11px;line-height:30px;}
 </style>
 <script>
-
+/* 알람부분 by태원 */
+function alarmInsert(ALARM_TARGET, ALARM_VARIABLE1, ALARM_VARIABLE2, ALARM_WRITER,ALARM_KIND){
+	var allData = "ALARM_TARGET="+ALARM_TARGET+"&ALARM_VARIABLE1="+ALARM_VARIABLE1+"&ALARM_VARIABLE2="+ALARM_VARIABLE2+"&ALARM_WRITER="+ALARM_WRITER+"&ALARM_KIND="+ALARM_KIND;
+			$.ajax({
+				type : "GET",
+				url : "/picksell/mypage/alarmInsert",
+				dataType : 'json',
+				data : allData,
+				success : function(data){
+					alert("알람입력완료");
+				}
+			});	
+	}
+/* 알람부분 by태원 */
 // $(document).ready(function () {
 // 	$(‘body’).on(‘click’, ‘.feed-id’,function(){
 // 	document.getElementById(“feed_id”).value = $(this).attr(‘data-id’);
@@ -173,9 +186,9 @@ $(document).on("click", ".open-AddBookDialog", function () {
  				</td>
  				<td style="text-align:center;vertical-align:middle;">
 <%--  				<c:url var="status1" value="/admin_order/confirmProc" > --%>
-<%-- 					<c:param name="order_num" value="${orderList.order_num}" />							 --%>
-<%-- 				</c:url> --%>
-				 <a href="/picksell/admin_order/confirmProc?order_num=${orderList.order_num}"><input type="button" value="입금완료"></a>
+<%-- 					<c:param name="order_num" value="${orderList.order_num}" />				 --%>  
+<%-- 				</c:url> --%>																	<%-- ALARM_TARGET, ALARM_VARIABLE1, ALARM_VARIABLE2, ALARM_WRITER,ALARM_KIND) alarmInsert('admin','empty','empty','${sessionScope.sessionId}',12)"/> --%>
+				 <a href="/picksell/admin_order/confirmProc?order_num=${orderList.order_num}"><input type="button" value="입금완료" onclick="alarmInsert('${orderList.buyer_id}','${orderList.order_num}','empty','픽셀 관리자','16')"></a>
 <%-- 				 <a href="${status1}"><input type="button" value="입금완료"></a> --%>
 
  				</td>

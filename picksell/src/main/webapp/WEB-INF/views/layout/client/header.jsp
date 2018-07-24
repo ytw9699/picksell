@@ -453,6 +453,9 @@ function alarmReadOfHead(ALARM_NUM, kind, var1, var2){
 
 <div class="headerTop">
   <span class="headerTop_menu">
+  	<c:if test="${sessionId != null}">
+  	${sessionId} |
+  	</c:if>
 	<c:if test="${sessionId != null}">
 	<a href="#" id="linkOfMypage" class="menu_el">마이페이지 ▼</a>|<a href="/picksell/logout" class="menu_el">로그아웃</a>
 		
