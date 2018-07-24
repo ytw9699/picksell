@@ -60,7 +60,7 @@ public class MemberService implements MemberDao {
 		 sqlMapper.update("member.resetPassword", map);
 	}
 
-	public int checkLogin(String name) {
+	public String checkLogin(String name) {
 		return sqlMapper.selectOne("member.checkLogin",name);
 	}
 	

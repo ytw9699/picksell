@@ -106,9 +106,10 @@ import com.mycom.utils.FileUpload;
 			model.addAttribute("formID", ID);//폼아이디값 넘겨주기
 			return "loginForm";
 		}
-		
-		int checkLoginValue = MemberService.checkLogin((String)resultMap.get("NAME")); //select status from ps_member where id = '2'
-		if(checkLoginValue == 2) {
+		System.out.println(resultMap.get("NAME"));
+		String checkLoginValue = MemberService.checkLogin((String)resultMap.get("ID")); //select status from ps_member where id = '2'
+		System.out.println(checkLoginValue);
+		if(checkLoginValue.equals("2")) {
 			model.addAttribute("loginCheck", checkLoginValue);
 			return "loginForm";
 		}

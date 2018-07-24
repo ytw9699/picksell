@@ -85,7 +85,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			SELECT count(*) FROM PS_MEMBER WHERE ID = #{id}
 	</select>
 	
-	<select id="checkLogin" parameterType="String" resultType="int">
+	<select id="checkLogin" parameterType="String" resultType="String">
 			select status from ps_member where id = #{id}
 	</select>
 		

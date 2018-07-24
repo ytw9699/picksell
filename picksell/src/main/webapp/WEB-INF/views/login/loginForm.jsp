@@ -116,7 +116,7 @@ function formIdSave(){
    </script>
 </c:if>
 
-<c:if test="${loginCheck == 2}">
+<c:if test="${loginCheck == '2'}">
 	<script>
 	alert("로그인이 제한된 아이디입니다. 관리자에게 문의해주세요 ")
    </script>
