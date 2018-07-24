@@ -51,9 +51,9 @@ span.product_category.active a {
     width: 12%;
     box-sizing: border-box;
 }
-
 .categoryWrap {
     border: 1px solid #ececec;
+    margin-top: 40px;
 }
 .categoryTitle {
     float: left;

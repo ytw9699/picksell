@@ -50,12 +50,10 @@ span.product_category.active a {
     width: 12%;
     box-sizing: border-box;
 }
-
 .categoryWrap {
     border: 1px solid #ececec;
-    /* height: 150px; */
+    margin-top: 40px;
 }
-
 .categoryTitle {
     float: left;
     color: #999999;
@@ -65,7 +63,6 @@ span.product_category.active a {
     width: 10%;
     box-sizing: border-box;
 }
-/*  */
 .orderMethodWrap {
     height: 50px;
     margin-top: 40px;
