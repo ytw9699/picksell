@@ -546,8 +546,6 @@ function alarmReadOfHead(ALARM_NUM, kind, var1, var2){
 		</div>
 	</div>
 </div>
-
-<p>
 </body>
 
 </html>

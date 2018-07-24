@@ -16,12 +16,13 @@ a.deleteA {
     height: 50px;
     width: 40px;
     line-height: 80px;
-    background: url(/picksell/resources/img/cancel2.png) 50% 30% no-repeat;
+    background: url(/picksell/resources/img/cancel1.png) 50% 30% no-repeat;
     background-size: 15px;
     display: block;
     font-size: 15px;
     text-align: center;
     margin: 0 auto;
+    margin-left: 126px;
 }
 .paging {
     margin-top: 40px;
@@ -44,29 +45,44 @@ a.paging {
     border-radius: 21px;
     font-size: 23px;
 }
+
 .orderkind {
-    background-color: #7151fc;
-    color: white;
+    background-color: white;
+    color: #7151fc;
     border-radius: 0px;
-    width: 180px;
-    height: 120px;
+    width: 15%;
+    border: 1px solid #7151fc;
     line-height: 21px;
     display: inline-block;
     text-align: center;
-    margin: -1px;
+    transition: 0.3s;
+    height: 100px;
+}
+span.orderkind:hover {
+    background-color: #7151fc;
+    color: white;
 }
 .my__stat__num-font {
-    color: #fff;
+    color: #7151fc;
     font-size: 50px;
     line-height: 83px;
-}
+} 
 .my__i-stat1 {
-    font-size: 17px;
+    font-size: 14px;
     line-height: 28px;
+}
+
+span.my__i-stat1.i-stat1-title {
+    display: block;
+    margin-bottom: 10px;
+    margin-top: 7px;
+}
+span.my__i-stat1.i-stat1-number {
+    font-size: 40px;
 }
 .alarm1 {
     display: inline-block;
-    width: 35%;
+    width: 37%;
     text-align: left;
     margin: 1%;
     margin-right: -14%;
@@ -134,23 +150,31 @@ a.paging {
 </style>
 </head>
 <body>
-<div>
+
+<div class="orderWrapper">
 <a href="/picksell/mypage/alarmSelect">
-<span class="orderkind"><div class="my__i-stat1">알림 전체</div>
-<span class="my__stat__num-font">${alarmCountKind.one}</span>개</span></a>
+<span class="orderkind">
+	<span class="my__i-stat1 i-stat1-title">알림 전체</span>
+	<span class="my__i-stat1 i-stat1-number">${alarmCountKind.one}</span>개
+</span></a>
 
 <a href="/picksell/mypage/alarmSelect?ALARM_CHECK=YES">
-<span class="orderkind"><div class="my__i-stat1">읽음</div>
-<span class="my__stat__num-font">${alarmCountKind.three}</span>개</span></a>
+<span class="orderkind">
+	<span class="my__i-stat1 i-stat1-title">읽음</span>
+	<span class="my__i-stat1 i-stat1-number">${alarmCountKind.three}</span>개
+</span></a>
 
 <a href="/picksell/mypage/alarmSelect?ALARM_CHECK=NO">
-<span class="orderkind"><div class="my__i-stat1">읽지 않음</div>
-<span class="my__stat__num-font">${alarmCountKind.two}</span>개</span></a>
+<span class="orderkind">
+	<span class="my__i-stat1 i-stat1-title">읽지 않음</span>
+	<span class="my__i-stat1 i-stat1-number">${alarmCountKind.two}</span>개
+</span></a>
 
 <a href="#" onclick="AllAlarmDelete()"/>
-<span class="orderkind"><div class="my__i-stat1">알림 전체 삭제</div>
-<span class="my__stat__num-font">${alarmCountKind.one}</span>개</span></a>
-</div>
+<span class="orderkind">
+	<span class="my__i-stat1 i-stat1-title">전체 삭제</span>
+	<span class="my__i-stat1 i-stat1-number">${alarmCountKind.one}</span>개
+</span></a>
 
 <script>
 function AllAlarmDelete(){

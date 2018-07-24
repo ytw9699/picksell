@@ -21,4 +21,5 @@ public interface AdminSingoDAO {
 	
 	public List<Map<String,Object>> singoList2();
 	
+	
 }

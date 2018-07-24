@@ -37,6 +37,7 @@ public class mainController {
 		private int blockPage = 5; 	 
 		private String pagingHtml;  
 		private ProductPaging page;
+		private mainSearchListPaging page2;
 		
 	Map<String, Object> resultMap = new HashMap<String, Object>();//공통사용
 	
@@ -115,8 +116,8 @@ public class mainController {
 			@RequestParam(value="HowToSell", required=false, defaultValue="3") String HowToSell,
 			@RequestParam(value="order", required=false, defaultValue="0") String order,
 			@RequestParam(value="searchKeyword", required=false, defaultValue="") String searchKeyword,
-			Model model) {	
-		
+			@RequestParam(value="p", required=false, defaultValue="1") int currentPageNumber,
+			Model model) {
 		Map<String, Object> parameterMap = new HashMap<String, Object>();
 		
 		parameterMap.put("HowToSell", HowToSell);
@@ -125,6 +126,24 @@ public class mainController {
 		
 		List<Map<String, Object>> mainSearchList = mainService.mainSearchList(parameterMap);
 		
+		totalCount = mainSearchList.size();//페이징
+		
+		page2 = new mainSearchListPaging(currentPageNumber, totalCount, blockCount, blockPage, "/picksell/mainSearchList", HowToSell,
+				order,searchKeyword);
+		
+		pagingHtml = page2.getPagingHtml().toString();
+		
+		int lastCount = totalCount;
+		
+		if(page2.getEndCount() < totalCount)
+			
+			lastCount = page2.getEndCount() + 1;
+		
+		mainSearchList = mainSearchList.subList(page2.getStartCount(), lastCount);
+		
+		model.addAttribute("pagingHtml", pagingHtml);
+		model.addAttribute("currentPage", currentPageNumber);
+		
 		model.addAttribute("HowToSell", HowToSell);
 		model.addAttribute("searchKeyword", searchKeyword);
 		model.addAttribute("mainSearchList", mainSearchList);
@@ -132,22 +151,3 @@ public class mainController {
 		return "mainSearchList";
 	}
 }
-	/*@RequestMapping("/game/AjaxHome")
-	public ModelAndView AjaxHome(HttpServletRequest request) throws Exception {
-	    ModelAndView mv = new ModelAndView("/main/test");
-	    // model.addAttribute("product", new Product());
-	    return mv;
-	}
-	 
-	@RequestMapping("/game/ajax")
-	@ResponseBody
-	public Map<String,Object> ajax(HttpServletRequest request) throws Exception {
-	    String firstArg = request.getParameter("test1");
-	    String secondArg = request.getParameter("test2");
-	     
-	    System.out.println(firstArg + " / "+ secondArg);
-	    Map<String,Object>  map = new HashMap<String,Object>();
-	    map.put("test1", firstArg);
-	    map.put("test2", secondArg);
-	    return map;
-	}*/

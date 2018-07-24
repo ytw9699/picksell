@@ -115,5 +115,12 @@ function formIdSave(){
 	alert("비밀번호를 변경하였습니다.")
    </script>
 </c:if>
+
+<c:if test="${loginCheck == '2'}">
+	<script>
+	alert("로그인이 제한된 아이디입니다. 관리자에게 문의해주세요 ")
+   </script>
+</c:if>
+
 </body>
 </html>

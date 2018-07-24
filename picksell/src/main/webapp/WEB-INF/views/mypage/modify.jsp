@@ -230,7 +230,7 @@ else if(NewPassword !== rePassword){//
 	</tr>
 	
 	<tr>
-	<td class="information">예금주:</td>
+	<td class="information">예금주</td>
 	<td class="information2"><input type="text" value="${resultMap.ACCOUNT_NAME}" name="account_name" /></td>
 	</tr>
 	<!-- 사업자회원일 경우 보여주기-->

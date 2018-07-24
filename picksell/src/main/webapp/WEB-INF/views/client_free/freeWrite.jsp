@@ -12,6 +12,21 @@
 <script type="text/javascript" src="/picksell/resources/js/forEditer/cc.js"></script>
 
 <title>Insert title here</title>
+<style>
+.button2{
+    background-color: #7151fc;
+    border: none;
+    color: white;
+    padding: 8px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    margin: 2px 1px;
+    cursor: pointer;
+    margin-left : 1100px;
+}
+</style>
 </head>
 <body>
 무료나눔 글쓰기 <br/>
@@ -22,8 +37,8 @@
 		내용 
 		<div class="contentDiv">
 		<textarea id="FB_CONTENT" name="FB_CONTENT" rows="20" style="width:100%;"></textarea><br/>
-		</div>
-		<input type="button"  onclick="onWrite()" value="등록"  />
+		</div><br/>
+		<input type="button"  onclick="onWrite()" class="button2" value="등록"  />
 		
 	</form>
 

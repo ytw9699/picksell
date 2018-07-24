@@ -36,19 +36,37 @@
 .paging strong{color:#fff;background:#337AB7;border:1px solid #337AB7;}
 .paging .page_arw{font-size:11px;line-height:30px;}
 
+.button {
+    background-color: #7151fc;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    margin-left : 1000px;
+}
+
+p{
+	color : #7151fc;
+}
+
 </style>
 </head>
 <body>
-무료나눔 게시판 
+<p>무료나눔 게시판 </p>
 
 <table>
 	<thead>
 	<tr>
-		<th style="text-align:center;">글번호</th>
-		<th style="text-align:center;">제목</th>
-		<th style="text-align:center;">기부자</th>
-		<th style="text-align:center;">작성시간</th>
-		<th style="text-align:center;">조회수</th>
+		<th style="text-align:center;" width="10%;">글번호</th>
+		<th style="text-align:center;" width="50%;">제목</th>
+		<th style="text-align:center;" width="10%;">기부자</th>
+		<th style="text-align:center;" width="20%;">작성시간</th>
+		<th style="text-align:center;" width="10%;">조회수</th>
 	</tr>
 	</thead>
 	
@@ -67,8 +85,11 @@
 	<tr><td colspan="9" style="text-align:center;">등록된 상품이 없습니다</td></tr>
 </c:if> 
 <br/>
-<input type="button" value="글쓰기" onclick="javascript:location.href='writeForm'">
+<c:if test="${sessionScope.sessionStatus eq 0}">
+<input type="button" class="button" value="글쓰기" onclick="javascript:location.href='writeForm'">
+</c:if>
 
+<br/>
 <div class="paging">
 		${pagingHtml}
 </div>

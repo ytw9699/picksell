@@ -8,6 +8,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 </head>
+<style>
+.mailcheck {
+   border: 0px solid white;
+   }
+</style>
 <body>
 <script>
 function emailAuth(){
@@ -113,7 +118,7 @@ function check(){
 	<p>이메일: <input type="text" name="email"  />
 	<input type="hidden" name="email2" id="email2"/>
 	<input type="button" onclick="emailAuth()" value="본인 인증"/>
-	<input type="text" name="mailCheck" placeholder="인증을 해주세요" readonly/>
+	<input type="text" class="mailcheck" name="mailCheck" placeholder="인증을 해주세요" readonly/>
 	<p>새로운 비밀번호:<input type="password" name="password1" id="passwordOne" onkeyup="passwordsCheck()" />
 	<p>비밀번호 다시 입력:<input type="password" name="password2" id="passwordTwo" onkeyup="passwordsCheck()"/>&nbsp;<span id="Innerpassword"></span>
 	<p><input type="submit" value="재설정" />

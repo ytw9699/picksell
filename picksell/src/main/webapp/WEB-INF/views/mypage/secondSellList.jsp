@@ -11,7 +11,7 @@
 <title></title>
 <style>
 table.purchaseTABLE {
-    width: 95%; 
+    width: 105%;  
 }
 .next {
     width: 80%;
@@ -155,7 +155,7 @@ function purchaseApproveCancel(eventElement, purchaseNumber, buyer, category_num
 	<c:if test="${purchase.STATUS == 1 }">																		
 	<td class="tdtd"><input type="button" value="수락 취소" class="next" onclick="purchaseApproveCancel(this,'${purchase.PURCHASE_NUM}','${purchase.BUYER_ID }','${purchase.CATEGORY_NUM }','${purchase.PRODUCT_NUM }','${purchase.SELLER_ID }','completedAccept${status.index+1}','watingAccept${status.index+1}');" /></td>
 	</c:if>  										
-	<td class="tdtd"><input type="button" value="수락 거부" class="next" id="refusal" onclick="refusalApprove('${purchase.SELLER_ID }','${purchase.CATEGORY_NUM }','${purchase.PRODUCT_NUM }','${purchase.BUYER_ID}');" /></td>
+	<td class="tdtd"><input type="button" value="요청 거부" class="next" id="refusal" onclick="refusalApprove('${purchase.SELLER_ID }','${purchase.CATEGORY_NUM }','${purchase.PRODUCT_NUM }','${purchase.BUYER_ID}');" /></td>
 	</tr>
 	</tbody>														
 	</c:forEach>

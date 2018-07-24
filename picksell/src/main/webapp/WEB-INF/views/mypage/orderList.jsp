@@ -35,12 +35,12 @@ span.orderkind:hover {
     font-size: 14px;
     line-height: 28px;
 }
+
 span.my__i-stat1.i-stat1-title {
     display: block;
     margin-bottom: 10px;
     margin-top: 7px;
 }
-
 span.my__i-stat1.i-stat1-number {
     font-size: 40px;
 }
@@ -149,7 +149,7 @@ a.paging {
 <span class="my__i-stat1 i-stat1-number">${orderCount.three}</span>개</span></a>
 
 <a href="/picksell/mypage/orderList?status=44">
-<span class="orderkind" ><span class="my__i-stat1 i-stat1-title">결제취소 및 반품</span>
+<span class="orderkind" ><span class="my__i-stat1 i-stat1-title">결제취소</span>
 <span class="my__i-stat1 i-stat1-number">${orderCount.fourfour}</span>개</span></a>
 </div>
 <c:if test="${fn:length(orderList) > 0}">

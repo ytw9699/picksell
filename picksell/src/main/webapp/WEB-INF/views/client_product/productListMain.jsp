@@ -11,6 +11,7 @@
     border: 1px solid #ececec;
     height: 50px;
     padding: 20px;
+    margin-top: 40px;
 }
 span.product_category > a {
     border: 1px solid #dbdbdb;
@@ -135,6 +136,35 @@ a.paging {
     color: #666;
     border-radius: 21px;
     font-size: 23px;
+} 
+.mainCategoryHasNoProduct{
+    display: block;
+    margin: 100px auto;
+    width: 70%;
+    font-size: 20px;
+    text-align: center;
+    box-sizing: border-box;
+    color: #999; 
+}
+/* 판매중인지 */
+.productStatusWrap {
+    position: absolute;
+    width: 248.203px;
+    background-color: white;
+    opacity: 0.8;
+    height: 260px;
+}
+span.productStatusTEXT {
+    font-size: 25px;
+    margin: 0 auto;
+    margin-top: 30%;
+    text-align: center;
+    font-weight: 600;
+    color: #840000;
+    display: block;
+    width: 40%;
+    border: 2px solid #840000;
+    border-radius: 6px;
 }
 </style>
 </head>
@@ -175,6 +205,12 @@ a.paging {
 					</div>
 					<div class="firstImgWrap">
 						<a href="/picksell/products/detail/${product.CATEGORY_NUM }/${product.PRODUCT_NUM }">
+						<!-- 만약 거래중이면 -->
+						<c:if test="${product.PRODUCT_STATUS == 1 }">
+							<div class="productStatusWrap">
+								<span class="productStatusTEXT">거래중</span>
+							</div>
+						</c:if>
 						<img src="/picksell/resources/productUpload/${product.FIRST_IMG }" style="width: 200px;" onerror="this.src='/picksell/resources/img/imgready.gif'" />
 						</a>
 					</div>
@@ -193,9 +229,16 @@ a.paging {
 			</div>
 			</c:when>
 			<c:when test="${empty resultProductList }">
-				등록된 상품이 없습니다!
+				<span class="mainCategoryHasNoProduct">등록된 상품이 없습니다!</span>
 			</c:when>
 		</c:choose>
 	</div>
+	<script>
+	//일반상품이면판매중인지
+	$(document).ready(function(){
+		$('.productStatusWrap').width($('.productStatusWrap').parents('.firstImgWrap').width());
+		$('.productStatusWrap').height($('.productStatusWrap').parents('.firstImgWrap').height());
+	});
+	</script>
 </body>
 </html>
