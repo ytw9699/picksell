@@ -9,13 +9,38 @@
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 </head>
 <style>
+.good {
+    width: 126px;
+    height: 30px;
+    margin-bottom: 5px;
+    color: #fff;
+    background-color: #7151FC;
+    border-color: #7151FC;
+    border-radius: 7px;
+}
+}
+.button22{
+    width: 32%;
+    height: 30px;
+    margin: 0px;
+    border: none;
+    color: white;
+    background-color: #7151FC;
+    padding: 2px;
+    font-size: 15px;
+    border-radius: 10px;
+    /* display: inline-block; */
+    /* float: left; */
+}
+
 .bigdiv {
     width: 100%;
     height: 200px;
     
 }
 .button2{
-	display: inline-block;
+	    height: 35px;
+}
 }
 .mp-container {
     display: inline-block;
@@ -43,8 +68,8 @@
     margin: 0;
 }
 .confirm-auth-box-content {
-    padding: 20px;
-    width: 104%;
+    padding: 20px; 
+    width: 48%;
 }
 .confirm-auth-desc {
     font-size: 17px;
@@ -208,7 +233,7 @@ function check(){
 	  	 <input type="text" name="email" class="confirm-auth-input" placeholder="이메일을 입력해주세요" />
 	  </div>
 	  <div class="button2">
-	  <input type="button" onclick="emailAuth()" value="본인 인증"/>
+	  <input type="button" onclick="emailAuth()" class="good" value="본인 인증"/>
 	  <input type="text" class="mailcheck" name="mailCheck" placeholder="인증을 해주세요" readonly/>
 	  </div>
 	  <div class="form-group">
