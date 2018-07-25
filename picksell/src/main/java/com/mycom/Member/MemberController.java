@@ -280,7 +280,7 @@ import com.mycom.utils.FileUpload;
 	
 	@RequestMapping("/resetPasswordForm")//비밀번호 재설정폼
 	public String resetPasswordForm() throws IOException{
-		return "/join/resetPasswordForm";
+		return "resetPasswordForm";
 	}
 	
 	@RequestMapping(value="/resetPassword",method=RequestMethod.POST)//비밀번호 재설정 결과

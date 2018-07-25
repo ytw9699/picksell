@@ -9,6 +9,103 @@
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 </head>
 <style>
+.bigdiv {
+    width: 100%;
+    height: 200px;
+    
+}
+.button2{
+	display: inline-block;
+}
+.mp-container {
+    display: inline-block;
+    /* margin: 0 0 0px 0px; */
+    width: 880px;
+}
+.row {
+    margin-left: -10px;
+    margin-right: -10px;
+}
+.col-sm-offset-3 {
+    margin-left: 15%;
+}
+.confirm-auth-box {
+    /*  border: 1px solid #d8d8d8; */
+    border-radius: 5px; 
+    margin-top: 63px;
+    margin-right: 243px;
+}
+.confirm-auth-box h3 {
+    color: #7151FC;
+    border-bottom: 2px solid #ececec;
+    padding: 15px 0 15px 20px;
+    font-size: 26px;
+    margin: 0;
+}
+.confirm-auth-box-content {
+    padding: 20px;
+    width: 104%;
+}
+.confirm-auth-desc {
+    font-size: 17px;
+    color: #191919;
+    padding-bottom: 35px;
+    width: 119%;
+}
+/* * {
+    box-sizing: border-box;
+} */
+.alert {
+    padding: 10px;
+    margin-top: 23px;
+    color: #7151fc;
+}
+.confirm-auth-input {
+    height: 46px;
+    border: 1px solid gray;
+    display: block;
+    width: 83%;
+    height: 55px;
+    font-size: 15px;
+    padding-left: 11px;
+    box-sizing: border-box;
+    border-radius: 9px;
+}
+.form-group {
+    margin-bottom: 3px;
+    width: 80%;
+    height: 61px;
+}
+.form-group2 {
+    margin-bottom: 3px;
+    width: 80%;
+    height: 61px;
+}
+.confirm-auth-btn {
+    margin-top: 10px;
+}
+.btn-primary {
+    color: #fff;
+    background-color: #7151FC;
+    border-color: #7151FC;
+    width: 83%;
+    /* margin-top: 10px; */
+    height: 56px;
+    padding: 16px 60px;
+    font-size: 16px;
+    line-height: 1.33;
+    border-radius: 9px;
+    display: inline-block;
+    margin-bottom: 0;
+    font-weight: normal;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    background-image: none;
+    border: 1px solid transparent;
+    white-space: nowrap;
+    user-select: none;
+    }
 .mailcheck {
    border: 0px solid white;
    }
@@ -87,47 +184,54 @@ function check(){
 	 	//alert('비밀번호를 변경하였습니다');
 		return true;
 }
-/* function findPss(){
-	findPsvali();
-	
-	var email = document.findingPs.email.value
-	var name = document.findingPs.name.value
-	var id = document.findingPs.id.value
-	
-	if(email != "" && name != "" && id != ""){
-	var allData ="email="+email+"&name="+name+"&id="+id;
-	$.ajax({
-		type : "GET",
-		url : "/picksell/join/findPassword",
-		dataType : 'json',
-		data : allData,
-		success : function(data){
-			alert("입력하신 이메일로 비밀번호 재설정 URL을 전송하였습니다");
-		}
-	});
-	}
-}  */
-
 </script>
 
-<div><h3>비밀번호 재설정</h3></div>
-<div><h3>이메일 인증후  비밀번호를 재설정 해주세요.</h3></div>
-<form action="/picksell/resetPassword" name="commonForm" method="POST" onsubmit="return check()">
-	<p>아이디: <input type="text" name="id" />
-	<p>이름:  <input type="text" name="name"  />
-	<p>이메일: <input type="text" name="email"  />
-	<input type="hidden" name="email2" id="email2"/>
-	<input type="button" onclick="emailAuth()" value="본인 인증"/>
-	<input type="text" class="mailcheck" name="mailCheck" placeholder="인증을 해주세요" readonly/>
-	<p>새로운 비밀번호:<input type="password" name="password1" id="passwordOne" onkeyup="passwordsCheck()" />
-	<p>비밀번호 다시 입력:<input type="password" name="password2" id="passwordTwo" onkeyup="passwordsCheck()"/>&nbsp;<span id="Innerpassword"></span>
-	<p><input type="submit" value="재설정" />
-</form>
+<div class="mp-container">
+	<div class="row">
+	<div class="col-sm-6 col-sm-offset-3">
+	<div class="confirm-auth-box">
+	<h3>비밀번호 재설정</h3>
+	<div class="confirm-auth-box-content">
+		 <div class="confirm-auth-desc">
+		  이메일 인증후  비밀번호를 재설정 해주세요.
+		 </div>
+	<div></div>
+	  <form action="/picksell/resetPassword" name="commonForm" method="POST" onsubmit="return check()">
+	  <input type="hidden" name="email2" id="email2"/>
+	   <div class="form-group">
+	  	  <input type="text" name="name" class="confirm-auth-input" placeholder="이름을 입력해주세요" />
+	  </div>
+	  <div class="form-group">
+	  	 <input type="text" name="id" class="confirm-auth-input" placeholder="아이디를 입력해주세요" />
+	  </div>
+	  <div class="form-group">
+	  	 <input type="text" name="email" class="confirm-auth-input" placeholder="이메일을 입력해주세요" />
+	  </div>
+	  <div class="button2">
+	  <input type="button" onclick="emailAuth()" value="본인 인증"/>
+	  <input type="text" class="mailcheck" name="mailCheck" placeholder="인증을 해주세요" readonly/>
+	  </div>
+	  <div class="form-group">
+		  <input type="password" name="password1" id="passwordOne" onkeyup="passwordsCheck()" class="confirm-auth-input" placeholder="새로운 비밀번호를 입력해주세요"/>
+	  </div>
+	  <div class="form-group">
+	  	<input type="password" name="password2" id="passwordTwo" class="confirm-auth-input" onkeyup="passwordsCheck()" placeholder="비밀번호를 다시 입력해주세요"/>&nbsp;
+	  	<span id="Innerpassword"></span>
+	  </div>
+	  <div class="form-group2">
+	 <input type="submit"  class="btn-primary" value="재설정" />
+	  </div>
+	   </form>
+	 	   <div id="passwordCheckText" class="alert alert-danger">
+		  </div>
+	  </div></div></div></div></div>
+<div><h3></h3></div>
 
 <c:if test="${resetFail != null}">
 	<script>
 	alert("해당하는 정보가 없어 비밀번호 변경에 실패하였습니다.입력정보를 다시 확인해주세요.");
    </script> 
 </c:if>
+
 </body>
 </html>
