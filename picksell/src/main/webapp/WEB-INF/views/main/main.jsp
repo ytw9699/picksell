@@ -77,9 +77,10 @@ img.hotProductIMG {
     font-size: 35px;
     float: left;
     margin-left: 17px;
+    margin-right: 20px;
 }
 .hotProductInformation {
-    display: inline-block;
+    /* display: inline-block; */
     margin-left: 20px;
 }
 span.productSubject {
@@ -155,7 +156,9 @@ span.bottomCenterTEXT {
     margin-top: 10px;
     font-size: 35px;
 }
-
+.newProductTextBinder {
+    margin-bottom: 35px;
+}
 input.bottomSellBtn:hover {
 	background-color: white;
 	color: #7151fc;
