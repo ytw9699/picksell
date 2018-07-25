@@ -17,7 +17,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<select id="hotCategory"  resultType="hashmap">
 			<![CDATA[
-		select r, b.total, b.category_num, c.category_name from(
+		select r, b.total, b.category_num, c.category_name, c.category_img from(
 
 		select rownum r, a.total, a.category_num from(
 		
