@@ -335,10 +335,3 @@ ${pagingHtml}
 </div>
 </body>
 </html>
-
-<%-- <c:if test="${alarmMap.ALARM_CHECK == 'YES'}">
-		읽음
-		</c:if>
-		<c:if test="${alarmMap.ALARM_CHECK == 'NO'}">
-		안읽음
-		</c:if> --%>
