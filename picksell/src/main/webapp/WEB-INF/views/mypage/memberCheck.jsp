@@ -65,6 +65,9 @@
     width: 83%;
     height: 55px;
     border-radius: 9px;
+    outline: none;
+    padding-left: 10px;
+    box-sizing: border-box;
 }
 .form-group {
     margin-bottom: 3px;
