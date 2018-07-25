@@ -13,7 +13,7 @@ a:visited { color: black; text-decoration: none;}
 a:hover { color: black; text-decoration: none;}
 .headerTop_menu, .headerTop_menu a {color: #666;font-size: 13px;}
 
-::-webkit-scrollbar{width: 10px;}
+::-webkit-scrollbar{width: 15px;}
 ::-webkit-scrollbar-track {background-color: white;}
 ::-webkit-scrollbar-thumb {background-color: #baaaff;border-radius: 20px;}
 ::-webkit-scrollbar-thumb:hover {background: #977fff;}

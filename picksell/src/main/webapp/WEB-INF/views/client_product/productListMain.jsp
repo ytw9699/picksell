@@ -206,7 +206,7 @@ span.productStatusTEXT {
 					<div class="firstImgWrap">
 						<a href="/picksell/products/detail/${product.CATEGORY_NUM }/${product.PRODUCT_NUM }">
 						<!-- 만약 거래중이면 -->
-						<c:if test="${product.PRODUCT_STATUS == 1 }">
+						<c:if test="${product.DEAL_STATUS == 1 }">
 							<div class="productStatusWrap">
 								<span class="productStatusTEXT">거래중</span>
 							</div>
