@@ -25,7 +25,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			a.category_num, a.howtosell, a.hitcount, a.stock, a.deal_status, a.board_status, 
 			a.content, a.first_img, a.product_status, a.price, b.profile_img
 			from ps_product a, ps_member b 
-			where howtosell != 2 and a.seller_id = b.id
+			<!-- where howtosell != 2 and a.seller_id = b.id -->
 			<choose>
 				<when test='ls == "0" '>
 				<!-- where category_num = #{ca}) a left outer join ps_orderlist b on a.seller_id = b.seller_id 
@@ -39,14 +39,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				group by b.seller_id, a.subject, a.product_regdate, a.product_num, a.category_num, a.howtosell, a.hitcount, 
 				a.stock, a.deal_status, a.board_status, a.content, a.first_img, a.product_status, a.price) c, ps_member d 
 				where c.seller_id = d.id  -->
-				where howtosell = 2 and a.category_num = #{ca} and a.seller_id = b.id
+				where a.howtosell = 2 and a.category_num = #{ca} and a.seller_id = b.id
 				</when>
 				<when test='ls == "2" '>
 				<!-- where howtosell != 2 and category_num = #{ca}) a left outer join ps_orderlist b on a.seller_id = b.seller_id 
 				group by b.seller_id, a.subject, a.product_regdate, a.product_num, a.category_num, a.howtosell, a.hitcount, 
 				a.stock, a.deal_status, a.board_status, a.content, a.first_img, a.product_status, a.price) c, ps_member d 
 				where c.seller_id = d.id  -->
-				where howtosell != 2 and a.category_num = #{ca} and a.seller_id = b.id
+				where a.howtosell != 2 and a.category_num = #{ca} and a.seller_id = b.id
 				</when>
 			</choose> 
 			<choose>
