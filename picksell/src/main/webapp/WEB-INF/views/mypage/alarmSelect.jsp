@@ -327,9 +327,6 @@ function alarmDelete(ALARM_NUM){
 	</c:forEach>
 </c:if>
 </div>
-<c:if test="${fn:length(alarmList) < 1}">
-<div>알람이 없습니다</div>
-</c:if>
 <div class="paging">
 ${pagingHtml}
 </div>

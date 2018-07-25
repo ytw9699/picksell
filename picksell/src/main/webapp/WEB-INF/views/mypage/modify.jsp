@@ -247,11 +247,6 @@ else if(NewPassword !== rePassword){//
 	</c:if>
 	
 	<tr>
-	<td class="information">상호명</td>
-	<td class="information2"><input type="text" value="${resultMap.BUSINESS_NAME}" name="business_name" /></td>
-	</tr>
-	
-	<tr>
 	<td class="information">가입일</td>
 	<td class="information2"><fmt:formatDate value="${resultMap.REGDATE}" pattern="yy.MM.dd. hh:mm" /></td>
 	</tr>
