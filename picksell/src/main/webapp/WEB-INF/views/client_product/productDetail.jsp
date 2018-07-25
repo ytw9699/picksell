@@ -16,7 +16,7 @@
 	//일반상품이면판매중인지
 	$(document).ready(function(){
 		
-		var thisHowToSell = '${resultObject.PRODUCT_STATUS}';
+		var thisHowToSell = '${resultObject.DEAL_STATUS}';
 		if(thisHowToSell == '1'){
 			$('.status_on').width($('.status_on').parents('.product_info').width());
 			$('.status_on').height($('.status_on').parents('.product_info').height());
@@ -324,7 +324,7 @@
 					<c:when test="${resultObject.HOWTOSELL != 2 }">
 						<input type="button" class="basket_disabled" value="장바구니" disabled="disabled" />
 					</c:when>
-					<c:when test="${resultObject.HOWTOSELL == 2 and alreadyBasket == false }">
+					<c:when test="${resultObject.HOWTOSELL == 2 and alreadyBasket == false and resultObject.SELLER_ID != sessionScope.sessionId }">
 						<input type="button" class="basket_abled" value="장바구니" onclick="intoBasket();" />
 					</c:when>
 					<c:when test="${resultObject.HOWTOSELL == 2 and alreadyBasket == true }">
@@ -351,7 +351,7 @@
 						<input type="button" class="purchase_cancel" value="구매신청 취소하기" onclick="purchaseCancel('${resultObject.SELLER_ID}','${category_num}','${product_num}','${sessionId}');" />
 						</div>
 					</c:when>
-					<c:when test="${isMyProducts == 'yes' }">
+					<c:when test="${isMyProducts == 'yes' and resultObject.HOWTOSELL != 2 }">
 						<div class="purchaseWrap" id="purchaseWrap">
 						<input type="button" class="purchase_confirm" value="구매신청 확인하기" onclick="openPurchaseList();" />
 						</div>
@@ -361,7 +361,7 @@
 			
 			<!-- 구매하기 + 구매수락일때를 생각해야함 -->
 			<c:choose>
-				<c:when test="${resultObject.HOWTOSELL == 2 }">
+				<c:when test="${resultObject.HOWTOSELL == 2 and resultObject.SELLER_ID != sessionScope.sessionId }">
 					<input type="submit" class="purchase_go" value="구매하기" />
 				</c:when>
 			</c:choose>
