@@ -73,14 +73,15 @@
     border-bottom: 3px solid #ececec;
     color: #7151FC;
     padding: 15px 0 15px 20px;
-    font-size: 20px;
+    font-size: 19px;
 }
 .header2 {
-    width: 41%;
+    width: 80%;
     margin: 1%;
-    border: 1px solid gray;
-    height: 121px;
-    display: inline-block;
+    display: block;
+    border-bottom: 3px solid #ececec;
+    padding: 15px 0 15px 20px;
+    font-size: 20px;
 }
 .line {
     width: 80%;
@@ -178,7 +179,7 @@ td.product_total_valueTEXT {
     padding-right: 35px;
     text-align: right;
 }
-.header.subheader {
+.header2.subheader {
     border-bottom: none;
 }
 input.statusBtn {
@@ -268,8 +269,8 @@ var totalPRICE = Number(0);
 <div class="header">
 판매내역 상세 및 배송 조회
 </div>
-	<div class="header subheader">
-		<div class="status">거래상태:
+	<div class="header2 subheader">
+		<div class="status">거래상태 : 
 		<c:if test="${saleDetail.STATUS == '0'}">
 		입금대기중
 		</c:if>
@@ -280,7 +281,7 @@ var totalPRICE = Number(0);
 		배송중 및 인수확인 대기
 		</c:if>
 		<c:if test="${saleDetail.STATUS == '3'}">
-		인수확인 및 거래완료 -
+		인수확인 및 거래완료  
 		<fmt:formatDate value="${saleDetail.STEP4_DATE}" pattern="yy. MM. dd일 hh:mm" />  <br>
 		</c:if>
 		<c:if test="${saleDetail.STATUS == '44'}">
@@ -321,7 +322,7 @@ var totalPRICE = Number(0);
 		</div>
 <div class="orderClass">	
 	<c:if test="${fn:length(saleSubDetail) > 0}">
-		<div class="line">주문 받은 정보</div>
+		<div class="line">받은 주문 정보</div>
 		<div class="rightLine">
 		<span class="rightLineDeep">주문번호: ${saleDetail.ORDER_NUM}</span>
 		<span>고객의 주문일: <fmt:formatDate value="${saleDetail.STEP1_DATE}" pattern="yy. MM. dd일 hh:mm" /> </span>
