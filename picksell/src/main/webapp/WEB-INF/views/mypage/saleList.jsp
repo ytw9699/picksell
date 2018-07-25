@@ -162,7 +162,7 @@ a.paging {
 
 <a href="/picksell/mypage/saleList?status=44">
 	<span class="orderkind" >
-		<span class="my__i-stat1 i-stat1-title">결제취소 및 반품</span>
+		<span class="my__i-stat1 i-stat1-title">결제취소</span>
 		<span class="my__i-stat1 i-stat1-number">${saleCount.fourfour}</span>개
 	</span>
 </a>
