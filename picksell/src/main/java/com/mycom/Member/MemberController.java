@@ -114,6 +114,7 @@ import com.mycom.utils.FileUpload;
 		session.setAttribute("sessionId", ID);//세션에 값저장
 		session.setAttribute("sessionName", (String)resultMap.get("NAME"));
 		session.setAttribute("sessionKind", (String)resultMap.get("KIND"));
+	System.out.println((String)resultMap.get("KIND"));
 		session.setAttribute("sessionPorfile_Img", (String)resultMap.get("PROFILE_IMG"));
 		session.setAttribute("sessionStatus", (String)resultMap.get("STATUS"));
 		session.setAttribute("sessionAlarm", (String)resultMap.get("ALARM_CONSENT"));
