@@ -252,7 +252,7 @@ import com.mycom.utils.FileUpload;
 	
 	@RequestMapping("/findIdForm")
 	public String findId() throws IOException{
-		return "/join/findIdForm";//아이디 찾기폼
+		return "findIdForm";//아이디 찾기폼
 	}
 	
 	@RequestMapping("/findIdResult")//아이디 찾기 결과
@@ -280,7 +280,7 @@ import com.mycom.utils.FileUpload;
 	
 	@RequestMapping("/resetPasswordForm")//비밀번호 재설정폼
 	public String resetPasswordForm() throws IOException{
-		return "/join/resetPasswordForm";
+		return "resetPasswordForm";
 	}
 	
 	@RequestMapping(value="/resetPassword",method=RequestMethod.POST)//비밀번호 재설정 결과
