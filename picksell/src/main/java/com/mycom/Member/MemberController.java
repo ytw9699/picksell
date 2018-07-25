@@ -252,7 +252,7 @@ import com.mycom.utils.FileUpload;
 	
 	@RequestMapping("/findIdForm")
 	public String findId() throws IOException{
-		return "/join/findIdForm";//아이디 찾기폼
+		return "findIdForm";//아이디 찾기폼
 	}
 	
 	@RequestMapping("/findIdResult")//아이디 찾기 결과

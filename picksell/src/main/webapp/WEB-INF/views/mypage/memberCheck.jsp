@@ -131,8 +131,8 @@ function passwordCheck(){
 	  </div>
 	  <div class="form-group">
 	  <input type="submit" class="btn-primary" value="확인" />
-	  </form>
 	  </div>
+	   </form>
 	 	   <div id="passwordCheckText" class="alert alert-danger">
 	 	   
 		  </div>
