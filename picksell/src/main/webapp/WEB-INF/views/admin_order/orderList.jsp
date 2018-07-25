@@ -142,12 +142,16 @@ $(document).on("click", ".open-AddBookDialog", function () {
 			<th style="text-align:center;">인수시각</th>
 			<th style="text-align:center;">인수확인</th>
 			<th style="text-align:center;">상세보기</th>
+			<th style="text-align:center;">판매자</th>
 		</tr>
 	</thead>
 
 	<div class="orderList">
  		<c:forEach var="orderList" items="${orderList}" varStatus="stat">
  			<tr class="orderListContents" role="row">
+ 			
+ 			<c:if test="${status.first}">
+ 			
  				<td style="text-align:center;vertical-align:middle;">${orderList.order_num}</td>
  				<td style="text-align:center;vertical-align:middle;">${orderList.buyer_id}</td>
  				<td style="text-align:center;vertical-align:middle;">
@@ -263,6 +267,10 @@ $(document).on("click", ".open-AddBookDialog", function () {
 					<a href="/picksell/admin_order/orderDetail/${orderList.order_num}"><button class="button button1">상세보기</button></a>
 <!--  				<a href="#" class="button button1"><input type="button" value="상세보기"></a> -->
  				</td>
+ 				
+ 			</c:if>
+ 				
+ 				<td style="text-align:center;vertical-align:middle;">${orderList.SELLER_ID}</td>
  			</tr>
  			
  		</c:forEach>

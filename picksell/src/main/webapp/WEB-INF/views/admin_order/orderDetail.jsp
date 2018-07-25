@@ -95,11 +95,11 @@
 
 <p>주문개수 : ${orderDetail.ORDER_QUANTITY}</p>
 
-<c:if test="${status.first}">
+<%-- <c:if test="${status.first}"> --%>
 
 <p>판매자 ID : ${orderDetail.SELLER_ID}</p>
 	
-</c:if>
+<%-- </c:if> --%>
 
 </c:forEach>
 </div>

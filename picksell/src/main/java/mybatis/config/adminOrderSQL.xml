@@ -24,13 +24,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="step3_date" column="step3_date"/>
 		<result property="step4_date" column="step4_date"/>
 		<result property="cancel_date" column="cancel_date"/>
+		<result property="seller_id" column="seller_id"/>
 		
 	</resultMap>
-	
 	<!-- 전체 주문리스트 -->
 	<select id="orderList-all" resultMap="orderRes">
-		SELECT * FROM ps_order ORDER BY order_num desc
+		SELECT *
+		FROM ps_order a INNER JOIN ps_orderlist b
+		ON a.order_num = b.order_num ORDER BY a.order_num desc
 	</select>
+	
+	<!-- 전체 주문리스트 -->
+<!-- 	<select id="orderList-all" resultMap="orderRes"> -->
+<!-- 		SELECT * FROM ps_order ORDER BY order_num desc -->
+<!-- 	</select> -->
 	
 	<!-- 주문상세보기 -->
 	<select id="orderDetail" resultType="hashmap" parameterType="int">
