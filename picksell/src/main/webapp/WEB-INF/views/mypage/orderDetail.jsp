@@ -240,10 +240,10 @@ input.statusBtn:hover {
 		</c:if>
 		<c:if test="${orderDetail.STATUS == '3'}">
 		인수확인 및 거래완료
-		인수확인 및 거래 완료일:<fmt:formatDate value="${orderDetail.STEP4_DATE}" pattern="yy년 MM월 dd일 hh:mm" />  <br>
+		<fmt:formatDate value="${orderDetail.STEP4_DATE}" pattern="yy년 MM월 dd일 hh:mm" />  <br>
 		</c:if>
 		<c:if test="${orderDetail.STATUS == '44'}">
-		거래상태:결제취소  , 결제취소일: 		 <fmt:formatDate value="${orderDetail.CANCEL_DATE}" pattern="yy년 MM월 dd일 hh:mm" />  <br>
+		결제취소  , 결제취소일: 		 <fmt:formatDate value="${orderDetail.CANCEL_DATE}" pattern="yy년 MM월 dd일 hh:mm" />  <br>
 		</c:if>
 		</div >
 	   <div class="status">
