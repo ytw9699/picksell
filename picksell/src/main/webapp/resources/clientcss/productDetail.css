@@ -445,9 +445,10 @@ span.status_onTEXT {
     color: #840000;
 }
 /* ½Å°í */
-.hiddenSingoForm{
+.hiddenSingoForm {
+	z-index: 10;
 	display: none;
-    width: 40%;
+    width: 40%; 
     background-color: white;
     position: fixed;
     top: 10%;

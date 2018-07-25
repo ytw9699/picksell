@@ -487,7 +487,7 @@ input.nextDisabled {
 			$(this).css('border-bottom', '1px solid #7151fc').val("");
 			$('#contentPRICE_HIDDEN').val("");
 		},
-		blur : function(){
+		keyup : function(){
 			$(this).css('border-bottom', '1px solid #d8d8d8');
 			var regExp = /^[0-9]+$/;
 			if(!regExp.test($(this).val())){
@@ -495,9 +495,12 @@ input.nextDisabled {
 				$('#total_submitINPUT').addClass("nextDisabled").attr("disabled", "disabled");
 			}else{
 				$('#contentPRICE_HIDDEN').val($(this).val());
-				$(this).val(addComma($(this).val()+" 원"));
+				//$(this).val(addComma($(this).val()+" 원"));
 				$('#total_submitINPUT').removeClass("nextDisabled").removeAttr("disabled");
 			}
+		},
+		blur : function(){
+			$(this).val(addComma($(this).val()+" 원"));
 		}
 	}); 
 	
