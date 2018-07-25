@@ -7,6 +7,18 @@
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <title></title>
 <style>
+}
+.bigbig{
+    width: 100%;
+    margin-left: 69px;
+    /* border: 1px solid gray; */
+	}
+.injeung {
+    margin-left: 220px;
+    width: 100%;
+    height: 6px;
+    margin-top: -6px;
+}
 body{ 
 	overflow-x:hidden;
 	}
@@ -18,8 +30,14 @@ body{
 	min-height: 500px;
 	} 
 .inputclass {
-    width: 200px;
-    margin: 12px;
+    width: 13%;
+    margin: 6px;
+    border-radius: 9px;
+    font-size: 15px;
+    height: 40px;
+    border: 0.5px solid gray;
+    box-sizing: border-box;
+    padding-left: 11px;
 }
 .mailCheck {
     width: 176px;
@@ -33,11 +51,11 @@ body{
     width: 80%;
 }
 .nextWrap {
- 	display: inline-block;
+    display: inline-block;
     right: 200px;
     width: 30%;
     margin: 0;
-    margin-top: 60px;
+    margin-top: 39px;
 }
 .next {
     width: 30%;
@@ -58,13 +76,16 @@ body{
     font-size: 15px;
 }
 .pre2 {
-    width: 7%;
+    width: 8%;
+    height: 30px;
     margin: 0px;
+    /* margin-top: -5px; */
     border: none;
     color: white;
     background-color: #7151FC;
     padding: 2px;
     font-size: 15px;
+    border-radius: 10px;
 }
 .terms{
 overflow-y: scroll;
@@ -99,7 +120,7 @@ font-size: 18px;
 .join {
     margin: 0px 0px 0px;
     font-size: 35px;
-    color: #1f1f1f;
+    color: #7151FC;
 }
 .signup-top-instr {
     color: #666666;
@@ -108,12 +129,22 @@ font-size: 18px;
     margin-top: 40px;
 }
 .information {
+    /* border: 1px solid gray; */
     display: inline-block;
     margin-right: 0px;
-    width: 120px;
+    width: 11%;
+    height: 30px;
+    font-size: 19px;
 }
 .mailCheck{
  border: 1px solid white;
+}
+.checkcheck{
+    display: inline-block;
+    margin-left: 217px;
+    width: 100%;
+    margin-top: -3px;
+    margin-bottom: 0px;
 }
 </style>
 </head>
@@ -244,9 +275,12 @@ $(document).ready(function(){
 	<br/>
 	<div class="signup-top-instr">*선택정보는 입력하지 않아도 아래 완료 버튼을 통해 가입하실 수 있습니다</div>	
 	<br/>
+	<div class="bigbig">
 	<div class="information">아이디</div>
 	<input type="text" name="id" class="inputclass"/>
+	<div class="checkcheck">
     <input type="button" value="중복확인" onclick="openCheckID(this.form);" class="pre2"/>
+    </div>
 	<br/>
     <div class="information">비밀번호</div>
     <input type="password" name="password" id="password2"  onkeyup="passwordsCheck2()" class="inputclass"/>
@@ -259,9 +293,11 @@ $(document).ready(function(){
 	<br/>
 	<div class="information">이메일</div>
 	<input type="email" name="email" id="email" class="inputclass"/>
+	<div class="injeung">
 	<input type="hidden" name="email2" id="email2"/>
 	<input type="button" onclick="emailAuth(this.form)" value="본인 인증" class="pre2"/>
-	<input type="text" class ="mailCheck" name="mailCheck" placeholder="이메일 인증을 해주세요." readonly/>
+	<input type="text" class ="mailCheck" name="mailCheck" placeholder=" 인증을 해주세요." readonly/>
+	</div>
 	<br/>
 	<div class="information">주소(선택)</div>
 	<input type="text" name="address" class="inputclass"/>
@@ -285,6 +321,7 @@ $(document).ready(function(){
 	<div class="information">상호명</div>
 	<input type="text" name="business_name" class="inputclass"/>
 	<br/>
+	</div>
 	</div>
 	<div class="nextWrap">
 	<input type="button" class="pre" value="이전" onclick="AnimateForm('#c2'); return false" />
