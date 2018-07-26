@@ -83,7 +83,12 @@ import com.mycom.utils.FileUpload;
 			Model model
 			)throws IOException{
 		
-		
+		int resultNumber = MemberService.checkJoinId((String)map.get("ID"));//해당아이디의 카운트를 구해옴
+		//int의 기본값은 0
+		if(resultNumber == 0) {//해당하는 아이디가 없으면 얼럿창띄우기위해
+			model.addAttribute("resultNumber", resultNumber);//0을 넘기면 아이디가 없는것 //1이면 있고
+			return "loginForm";
+		}
 		resultMap = MemberService.userCheck(map.getMap());
 		if(resultMap.get("LATESTLOGIN1") != null ) {
 		MemberService.changeDate(resultMap);// 날짜를 바꿔서입력
@@ -92,8 +97,6 @@ import com.mycom.utils.FileUpload;
 		//SELECT * FROM PS_MEMBER WHERE ID = #{ID}
 		String PASSWORD = request.getParameter("PASSWORD");
 		String ID = request.getParameter("ID");
-		
-		
 		
 		if (resultMap == null) {
 			model.addAttribute("resultID", "NULL");//아이디가 없다면
@@ -114,7 +117,7 @@ import com.mycom.utils.FileUpload;
 		session.setAttribute("sessionId", ID);//세션에 값저장
 		session.setAttribute("sessionName", (String)resultMap.get("NAME"));
 		session.setAttribute("sessionKind", (String)resultMap.get("KIND"));
-	System.out.println((String)resultMap.get("KIND"));
+		//System.out.println((String)resultMap.get("KIND"));
 		session.setAttribute("sessionPorfile_Img", (String)resultMap.get("PROFILE_IMG"));
 		session.setAttribute("sessionStatus", (String)resultMap.get("STATUS"));
 		session.setAttribute("sessionAlarm", (String)resultMap.get("ALARM_CONSENT"));
