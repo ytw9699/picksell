@@ -107,8 +107,8 @@ function minusStock(PRODUCT_NUM, index){
 }
 </script>
 <h4>
-<a href="/picksell/mypage/sellList">모든 종류의 글</a>/
-<a href="/picksell/mypage/sellList?HowToSell=0">중고 안전 상품글</a>/
+<a href="/picksell/mypage/sellList?HowToSell=3" class="test1 <c:if test="${param.HowToSell == '3'}">test2</c:if>">모든 종류의 글</a>/
+<a href="/picksell/mypage/sellList?HowToSell=0">중고 안전 상품글</a>/ 
 <a href="/picksell/mypage/sellList?HowToSell=1">중고 안전 상품+직거래글</a>/
 <a href="/picksell/mypage/sellList?HowToSell=2">픽셀플러스 상품글</a>/
 </h4>

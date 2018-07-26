@@ -7,6 +7,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>신고 리스트</title>
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <style type="text/css">
 
 table {
@@ -69,14 +70,34 @@ tr:nth-child(even){background-color: #f2f2f2}
 </style>
 
 <script>
-	function doBlind(product_num){
+
+function alarmInsert(ALARM_TARGET, ALARM_VARIABLE1, ALARM_VARIABLE2, ALARM_WRITER,ALARM_KIND){
+	var allData = "ALARM_TARGET="+ALARM_TARGET+"&ALARM_VARIABLE1="+ALARM_VARIABLE1+"&ALARM_VARIABLE2="+ALARM_VARIABLE2+"&ALARM_WRITER="+ALARM_WRITER+"&ALARM_KIND="+ALARM_KIND;
+			$.ajax({
+				type : "GET",
+				url : "/picksell/mypage/alarmInsert",
+				dataType : 'json',
+				data : allData,
+				success : function(data){
+				}
+			});	
+	}
+	function doBlind(product_num,singoee,subject){
 		
 		var k = confirm("블라인드 처리 하시겠습니까?");
 		
-		
 		if(k==true){
-			window.location.href="http://localhost:8080/picksell/admin_singo/doBlind?product_num="+product_num;
-		}else if(k==false){
+			
+		  var str = '';
+		  var content;
+		  content = prompt('블라인드 사유를 입력해주세요' , str);
+		
+		  alarmInsert(singoee, subject, content, 'admin','13');
+		  
+		  alert('블라인드 처리되었습니다');
+			
+		window.location.href="http://localhost:8080/picksell/admin_singo/doBlind?product_num="+product_num;
+		}else if(k==false){ 
 			window.location.href="http://localhost:8080/picksell/admin_singo/list";
 		}
 		
@@ -117,7 +138,7 @@ tr:nth-child(even){background-color: #f2f2f2}
 <%--  				<input type="hidden" id="product_num" value="${singoList2.BOARD_STATUS}"/> --%>
  				<td style="text-align:center;vertical-align:middle;">
  				<c:if test ="${singoList2.BOARD_STATUS eq 0}">
- 					<button class="button" onclick="doBlind('${singoList2.PRODUCT_NUM}')">블라인드 처리</button>
+<button class="button" onclick="doBlind('${singoList2.PRODUCT_NUM}','${singoList2.SINGOEE}','${singoList2.SUBJECT}')">블라인드 처리</button>
  				</c:if>
  				<c:if test ="${singoList2.BOARD_STATUS eq 1}">
  					<button class="button9">블라인드 처리</button>
