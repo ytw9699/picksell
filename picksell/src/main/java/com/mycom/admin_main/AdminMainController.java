@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 @RequestMapping("/admin")
 public class AdminMainController {
-	//관리자페이지 or 로고가 있다면 선택 redirect
+	//관리자메인페이지
 	ModelAndView mv = new ModelAndView();
 	
 	@Resource
