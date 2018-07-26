@@ -68,7 +68,73 @@ table.purchaseTABLE {
 .purchaseList {
     width: 110%;
 }
-   
+.categoryList {
+    width: 55%;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    display: inline-block;
+    box-sizing: border-box;
+/*     border: 1px solid #ececec; */
+    height: 71px;
+}
+
+span.product_category > a {
+    border: 1px solid #dbdbdb;
+    padding: 8px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-radius: 19px;
+    float: left;
+    margin-left: 15px;
+    margin-bottom: 11px;
+}
+span.product_category.active > a {
+    background-color: #7151fc;
+    border: 1px solid #7151fc;
+}
+.product_category:hover > a{
+	border: 1px solid #7151fc;
+	color: #7151fc;
+}
+span.product_category a {
+    color: #b5b5b5;
+    font-size: 15px;
+}
+
+
+span.product_category.active a {
+    color: white;
+}
+.orderMethodWrap {
+    height: 50px;
+    margin-top: 40px;
+    border-bottom: 2px solid #ececec;
+}
+ul.orderMethodUL {
+    margin: 0;
+    padding: 0;
+    height: 50px;
+    line-height: 50px;
+}
+
+ul.orderMethodUL {
+    margin: 0;
+    padding: 0;
+    height: 50px;
+     line-height: 38px;
+}
+
+li.orderMethodLI > a {
+    float: left;
+    width: 100px;
+    text-align: center;
+    font-size: 15px;
+    color: #9f9f9f;
+}
+li.orderMethodLI.active > a {
+    color: #7151fc;
+    border-bottom: 2px solid #7151fc;
+}
 </style>
 </head>
 <body>
@@ -106,19 +172,38 @@ function minusStock(PRODUCT_NUM, index){
 			});	
 }
 </script>
-<h4>
-<a href="/picksell/mypage/sellList?HowToSell=3" class="test1 <c:if test="${param.HowToSell == '3'}">test2</c:if>">모든 종류의 글</a>/
-<a href="/picksell/mypage/sellList?HowToSell=0">중고 안전 상품글</a>/ 
-<a href="/picksell/mypage/sellList?HowToSell=1">중고 안전 상품+직거래글</a>/
-<a href="/picksell/mypage/sellList?HowToSell=2">픽셀플러스 상품글</a>/
-</h4>
-<h4>
-<a href="/picksell/mypage/sellList?HowToSell=${HowToSell}">모든 상태의 글</a>/
-<a href="/picksell/mypage/sellList?HowToSell=${HowToSell}&deal_status=0">판매중 글</a>/
-<a href="/picksell/mypage/sellList?HowToSell=${HowToSell}&deal_status=1">거래중 글</a>/
-<a href="/picksell/mypage/sellList?HowToSell=${HowToSell}&deal_status=2">종료된 글</a>/
-	
-</h4>
+
+<div class="categoryList">
+		<span class="product_category <c:if test="${param.HowToSell == '3'}">active</c:if>">
+			<a href="/picksell/mypage/sellList?HowToSell=3&deal_status=3">모든 종류의 글</a>
+		</span>
+		<span class="product_category <c:if test="${param.HowToSell == '0'}">active</c:if>">
+			<a href="/picksell/mypage/sellList?HowToSell=0&deal_status=3">중고 안전 상품글</a>
+		</span>
+		<span class="product_category <c:if test="${param.HowToSell == '1'}">active</c:if>">
+			<a href="/picksell/mypage/sellList?HowToSell=1&deal_status=3">중고 안전 상품+직거래글</a>
+		</span>
+		<span class="product_category <c:if test="${param.HowToSell == '2'}">active</c:if>">
+			<a href="/picksell/mypage/sellList?HowToSell=2&deal_status=3">픽셀플러스 상품글</a>
+		</span>
+</div>
+
+<div class="orderMethodWrap">
+	<ul class="orderMethodUL">
+		<li class="orderMethodLI <c:if test="${param.deal_status == '3'}">active</c:if>">
+			<a href="/picksell/mypage/sellList?HowToSell=${HowToSell}&deal_status=3">모든 상태의 글</a>
+		</li>
+		<li class="orderMethodLI <c:if test="${param.deal_status == '0'}">active</c:if>">
+			<a href="/picksell/mypage/sellList?HowToSell=${HowToSell}&deal_status=0">판매중 글</a>
+		</li>
+		<li class="orderMethodLI <c:if test="${param.deal_status == '1'}">active</c:if>">
+			<a href="/picksell/mypage/sellList?HowToSell=${HowToSell}&deal_status=1">거래중 글</a>
+		</li>
+			<li class="orderMethodLI <c:if test="${param.deal_status == '2'}">active</c:if>">
+			<a href="/picksell/mypage/sellList?HowToSell=${HowToSell}&deal_status=2">종료된 글</a>
+		</li>
+	</ul>
+	</div>
 <div class="purchaseList">
 <table class="purchaseTABLE" cellpadding="0" cellspacing="0">
 <c:if test="${fn:length(sellList) > 0}">
