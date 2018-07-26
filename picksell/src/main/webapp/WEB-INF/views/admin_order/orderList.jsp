@@ -228,18 +228,26 @@ $(document).on("click", ".open-AddBookDialog", function () {
 				</c:url>
 				
 				<input type="button" data-toggle="modal" class="open-AddBookDialog btn btn-primary" data-target="#myModal" data-id="${ps_order.ORDER_NUM}" value="배송중">
-				 
+				  ${ps_order.BUYER_ID} 
 				 <!-- Modal -->
   				<div class="modal fade" id="myModal" role="dialog">
+  				 ${ps_order.BUYER_ID} 
    				 <div class="modal-dialog">
     
     			  <!-- Modal content-->
      			 <div class="modal-content">
+     			  ${ps_order.BUYER_ID} 
       			  <div class="modal-header">
+      			  	 ${ps_order.BUYER_ID} 
       	  			  <button type="button" class="close" data-dismiss="modal">&times;</button>
-      		   		 <h4 class="modal-title">택배사 / 송장번호 입력 </h4>
+      		   		 <h4 class="modal-title">택배사 / 송장번호 입력   ${ps_order.BUYER_ID}</h4>
       			  </div>
      		    <form action="/picksell/admin_order/deliveryProc" method="post">
+     		  	  ${ps_order.BUYER_ID} 
+     		     	<input type="hidden" name="ALARM_TARGET" value="${ps_order.BUYER_ID}" />
+					<input type="hidden" name="ALARM_WRITER" value="${sessionId}" />
+					<input type="hidden" name="ALARM_VARIABLE1" value="${ps_order.ORDER_NUM}" />
+					<input type="hidden" name="ALARM_VARIABLE2" value="${ps_order.ORDER_NUM}" />
    				 	<div class="form-group">
     				  <label for="delivery">택배사</label>
     				  <input type="text" name="delivery_company" value="Please type in a delivery company name"class="form-control" id="delivery">
