@@ -10,7 +10,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 </select>
 
 <select id="orderSearch0" resultType="hashmap" parameterType="String">
-	SELECT * FROM ps_order
+	SELECT * FROM ps_order 
 			WHERE buyer_id LIKE #{isSearch}
 			ORDER BY order_num DESC
 </select>	

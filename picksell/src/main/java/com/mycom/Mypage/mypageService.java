@@ -187,12 +187,12 @@ public class mypageService implements mypageDao {
 		return sqlMapper.selectList("mypage.adminOrderList");
 	}
 	public List<Map<String, Object>> orderSearch0(String isSearch) {
-		return sqlMapper.selectList("mypage.orderSearch0");
+		return sqlMapper.selectList("mypage.orderSearch0", "%"+isSearch+"%");
 	}
 	public List<Map<String, Object>> orderSearch1(String isSearch) {
-		return sqlMapper.selectList("mypage.orderSearch1");
+		return sqlMapper.selectList("mypage.orderSearch1", "%"+isSearch+"%");
 	}
 	public List<Map<String, Object>> orderSearch2(String isSearch) {
-		return sqlMapper.selectList("mypage.orderSearch2");
+		return sqlMapper.selectList("mypage.orderSearch2", "%"+isSearch+"%");
 	}
 	}
