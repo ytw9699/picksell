@@ -55,6 +55,9 @@ public class AdminPaymentController {
 	@RequestMapping("/list")
 	public ModelAndView adminOrderList(HttpServletRequest request) {
 		
+		Map<String, Object> parameterMap = new HashMap<String, Object>();
+		
+	    List orderSubList = new ArrayList();
 		//String order_num = request.getParameter("order_num");
 		
 		if(request.getParameter("currentPage") == null || request.getParameter("currentPage").trim().isEmpty() || request.getParameter("currentPage").equals("0")) {
@@ -63,18 +66,19 @@ public class AdminPaymentController {
             currentPage = Integer.parseInt(request.getParameter("currentPage"));
         }
 		
-		List<AdminPaymentModel> orderList = adminPaymentService.orderList();
+		List<Map<String, Object>> orderList = adminPaymentService.orderList();//PS_ORDER
+		//List<AdminPaymentModel> orderList = adminPaymentService.orderList();
 		
 		isSearch = request.getParameter("isSearch");
 		if(isSearch != null) {
 			searchNum = Integer.parseInt(request.getParameter("searchNum"));
 			
-			if(searchNum==0) //구매자 
+			/*if(searchNum==0) //구매자 
 				orderList = adminPaymentService.orderSearch0(isSearch);
 			else if(searchNum == 1) // 상태 
 				orderList = adminPaymentService.orderSearch1(isSearch);
 			else if(searchNum == 2) // 택배사 
-				orderList = adminPaymentService.orderSearch2(isSearch);
+				orderList = adminPaymentService.orderSearch2(isSearch);*/
 			
 			totalCount = orderList.size();
 			page = new Paging(currentPage, totalCount, blockCount, blockPage, "orderList", searchNum, isSearch);
@@ -85,6 +89,11 @@ public class AdminPaymentController {
 			
 			orderList = orderList.subList(page.getStartCount(), lastCount);
 			
+			for(int i = 0 ; i < orderList.size() ; i++) {
+		    	parameterMap.put("ORDER_NUM",String.valueOf(orderList.get(i).get("ORDER_NUM")));
+		    	
+		    	orderSubList.add(adminPaymentService.orderList3(parameterMap));//리스트하나를 GET하고 다시 맵에서 GET
+		    }
 			
 			mav.addObject("isSearch", isSearch);
 			mav.addObject("searchNum",searchNum);
@@ -92,6 +101,7 @@ public class AdminPaymentController {
 			mav.addObject("pagingHtml", pagingHtml);
 			mav.addObject("currentPage", currentPage);
 			mav.addObject("orderList",orderList);
+			mav.addObject("orderSubList",orderSubList);
 			mav.setViewName("admin_order/orderList");
 			return mav;
 			

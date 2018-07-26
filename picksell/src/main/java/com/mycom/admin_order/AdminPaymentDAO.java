@@ -10,7 +10,7 @@ import com.mycom.admin_order.AdminPaymentListModel;
 public interface AdminPaymentDAO {
 	
 	// 오더 리스트 (ps_order)
-	public List<AdminPaymentModel> orderList();
+	//public List<AdminPaymentModel> orderList();
 	// 오더 상세보기 
 	public AdminPaymentModel orderView(int order_num);
 	// 특정 오더 검색 

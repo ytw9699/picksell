@@ -150,7 +150,7 @@ $(document).on("click", ".open-AddBookDialog", function () {
  		<c:forEach var="orderList" items="${orderList}" varStatus="stat">
  			<tr class="orderListContents" role="row">
  			
- 			<c:if test="${status.first}">
+ 			<%-- <c:if test="${status.first}"> --%>
  			
  				<td style="text-align:center;vertical-align:middle;">${orderList.order_num}</td>
  				<td style="text-align:center;vertical-align:middle;">${orderList.buyer_id}</td>
@@ -268,9 +268,11 @@ $(document).on("click", ".open-AddBookDialog", function () {
 <!--  				<a href="#" class="button button1"><input type="button" value="상세보기"></a> -->
  				</td>
  				
- 			</c:if>
- 				
- 				<td style="text-align:center;vertical-align:middle;">${orderList.SELLER_ID}</td>
+ 			<%-- </c:if> --%>
+ 			   <c:forEach var="paramMap" items="${orderSubList}" varStatus="stat">
+ 				<td style="text-align:center;vertical-align:middle;">${paramMap.SELLER_ID}</td>
+ 		    	</c:forEach>
+ 				<%-- <td style="text-align:center;vertical-align:middle;">${orderList.seller_id}</td> --%>
  			</tr>
  			
  		</c:forEach>
