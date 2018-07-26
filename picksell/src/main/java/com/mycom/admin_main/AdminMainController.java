@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 @RequestMapping("/admin")
 public class AdminMainController {
-	//관리자페이지 or 로고가 있다면 선택 redirect
+	//관리자메인페이지
 	ModelAndView mv = new ModelAndView();
 	
 	@Resource
@@ -43,6 +43,8 @@ public class AdminMainController {
 		  countlist.add(Integer.valueOf(tempValue.toString()));  
 		  
 		}
+		
+	
 		model.addAttribute("daylist",daylist);
 	    model.addAttribute("countlist",countlist);
 		return "adminMain";

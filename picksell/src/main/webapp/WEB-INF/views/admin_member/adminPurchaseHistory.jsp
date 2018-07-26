@@ -7,7 +7,7 @@
 <html>
 <style>
 .main{
-  margin-left : 250px;
+  margin-left : 230px;
 }
 table.PurchaseHistory{
  border-collaspe : separate;
@@ -46,7 +46,7 @@ table.PurchaseHistory td {
     text-align: center;">구매 내역 리스트</h1>
 <c:choose>
 <c:when test="${0 eq total }">
-구매 내역이 없습니다.
+<h3>구매 내역이 없습니다.</h3>
 </c:when>
 <c:when test="${0 lt total }">
 <table  class="PurchaseHistory">

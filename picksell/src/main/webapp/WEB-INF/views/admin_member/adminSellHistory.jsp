@@ -7,7 +7,7 @@
 <html>
 <style>
 .main{
-   margin-left: 250px; /* Same as the width of the sidenav */
+   margin-left: 230px; /* Same as the width of the sidenav */
 }
 table.sellHistory{
  border-collaspe : separate;

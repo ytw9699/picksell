@@ -7,12 +7,15 @@
 <html>
 <style>
 .main {
-   margin-left: 250px; /* Same as the width of the sidenav */
+   margin-left: 230px; /* Same as the width of the sidenav */
    
 }
 .oneline{
 	padding : 1px;
 	border : 1px;
+}
+p{
+ margin-left : 20px;
 }
 
 </style>
@@ -41,39 +44,39 @@
 </div>
 
 <c:forEach var="orderList" items="${orderList}" varStatus="orderListStatus">
-<div class="oneLine" id="oneLine" style="padding:8px;background-color:#fbfbfb;border-radius:25px;">
+<div class="oneLine" id="oneLine" style="padding:8px;background-color:#eee;border-radius:25px;">
 <p>주문번호  : ${orderList.ORDER_NUM }
 <p>전체 주문 금액 : ${orderList.TOTAL_PRICE} (원)
  
     <c:forEach items="${adminOrderSubList[orderListStatus.index]}" var="i" varStatus="Sub" begin="0" end="0" >
 	
   	 <!-- 상품 주문번호 -->
-<p>제품명 : ${i.SUBJECT }
+<p>제품명 : <u>${i.SUBJECT }
  <c:if test="${(fn:length(adminOrderSubList[orderListStatus.index])-1) > 0 }">
  			외 ${fn:length(adminOrderSubList[orderListStatus.index])-1}건
  		</c:if>
-    </c:forEach>
+    </c:forEach></u>
    <p>거래 상태 :
       <c:choose>
 	  <c:when test="${orderList.STATUS eq '0' }">
 	<font color="red">입금대기</font>
-	<fmt:formatDate value="${orderList.STEP1_DATE }" pattern="yy/MM/dd HH:mm:ss"/>
+	<p>시간 :<fmt:formatDate value="${orderList.STEP1_DATE }" pattern="yy/MM/dd HH:mm:ss"/>
 	  </c:when>
 	  <c:when test="${orderList.STATUS eq '1' }">
 	<font color="red">입금완료 및 배송대기중</font> 
 	  <fmt:formatDate value="${orderList.STEP2_DATE }" pattern="yy/MM/dd HH:mm:ss"/>
-	  </c:when> 
+	 <p> 시간 :</c:when> 
 	  <c:when test="${orderList.STATUS eq '2' }">
 	  <font color="red"> 배송 및 인수확인 대기</font>
-	   <fmt:formatDate value="${orderList.STEP3_DATE }" pattern="yy/MM/dd HH:mm:ss"/>
+	 <p>  시간 : <fmt:formatDate value="${orderList.STEP3_DATE }" pattern="yy/MM/dd HH:mm:ss"/>
 	  </c:when>
 	   <c:when test="${orderList.STATUS eq '3' }">
 	 <font color="red">인수확인 및 거래완료</font>
-	  <fmt:formatDate value="${orderList.STEP4_DATE }" pattern="yy/MM/dd HH:mm:ss"/>
+	 <p> 시간 : <fmt:formatDate value="${orderList.STEP4_DATE }" pattern="yy/MM/dd HH:mm:ss"/>
 	  </c:when>
 	   <c:when test="${orderList.STATUS eq '44' }">
 	 <font color="red">결제 취소</font>
-	 <fmt:formatDate value="${orderList.CANCEL_DATE }" pattern="yy/MM/dd HH:mm:ss"/>
+	<p>  시간 : <fmt:formatDate value="${orderList.CANCEL_DATE }" pattern="yy/MM/dd HH:mm:ss"/>
 	  </c:when>
 	  </c:choose>	  	 
 	

@@ -91,9 +91,6 @@ function drawChart() {
 </head>
 <body>
 <div class="main">
-
-
-
 <div class="subject" style="padding:50px;">
 <h1 style="display:inline;text-shadow:5px 10px 1px #eee;">오늘의 PICKSELL</h1>
 
@@ -103,14 +100,21 @@ function drawChart() {
 <font style="color:red;"><fmt:formatDate value="${toDay }" pattern="dd"/></font>일</h2>
 </div>
 
+<div class="board" style="border=:1px;">
+
+
+</div>
+
+<div id="chartContainer" style="height: 500px; width: 90%;border:2px solid #eee;margin-left: 20px;margin-top: 27px;"></div>
+
  <div id="chart_div" style="border: 2px solid #eee;
-    width: 95%;
+    width: 90%;
     margin-top: 27px;
     height: 400px;
     margin-left: 20px;"></div>
 
 
-<div id="chartContainer" style="height: 500px; width: 95%;border:2px solid #eee;margin-left: 20px;margin-top: 27px;"></div>
+
 
 
 <%-- <canvas id="myChart" width="400" height="300"></canvas>  <br/> --%>

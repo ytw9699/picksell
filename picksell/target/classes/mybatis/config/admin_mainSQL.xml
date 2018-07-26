@@ -6,6 +6,6 @@ PUBLIC " - //mybatis.org//DTD Config 3.0//EN"
   <select id="today" resultType="hashmap" parameterType="string">
    select count(*) as COUNT from ps_member where to_char(regdate,'mmdd') = #{day} 
   </select>
-  
+ 
  
  </mapper>
