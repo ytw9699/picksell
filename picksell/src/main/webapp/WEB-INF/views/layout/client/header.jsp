@@ -308,6 +308,10 @@ function alarmReadOfHead(ALARM_NUM, kind, var1, var2){
 					if(kind == '4' || kind == '5' || kind == '6' || kind == '10' || kind == '11'){
 						location.href='/picksell/mypage/orderDetail/'+var1;
 					}
+					if(kind == '12' || kind == '13' || kind == '14' || kind == '15' || kind == '16' || kind == '17' || kind == '18'){
+						//location.href='/picksell/mypage/orderDetail/'+var1;
+						location.reload();
+					}
 						//alert('주문상세보기');
 						
 				}
@@ -429,6 +433,20 @@ function alarmReadOfHead(ALARM_NUM, kind, var1, var2){
 								htmlstr += "<span class='myAlarmTEXT' onclick='alarmReadOfHead("+value.ALARM_NUM+","+value.ALARM_KIND+","+value.ALARM_VARIABLE1+","+value.ALARM_VARIABLE2+")'>"+value.ALARM_VARIABLE2+" 주문을 취소했습니다 -"+value.ALARM_REGDATE+"</span>";
 							if(value.ALARM_KIND == 11)
 								htmlstr += "<span class='myAlarmTEXT' onclick='alarmReadOfHead("+value.ALARM_NUM+","+value.ALARM_KIND+","+value.ALARM_VARIABLE1+","+value.ALARM_VARIABLE2+")'>"+value.ALARM_VARIABLE2+" 주문을 취소했습니다 -"+value.ALARM_REGDATE+"</span>";
+							if(value.ALARM_KIND == 12)
+								htmlstr += "<span class='myAlarmTEXT' onclick='alarmReadOfHead("+value.ALARM_NUM+","+value.ALARM_KIND+","+value.ALARM_VARIABLE1+","+value.ALARM_VARIABLE2+")'>"+value.ALARM_WRITER+" 구매자가 입금을 완료했습니다 -"+value.ALARM_REGDATE+"</span>";
+							if(value.ALARM_KIND == 13)
+								htmlstr += "<span class='myAlarmTEXT' onclick='alarmReadOfHead("+value.ALARM_NUM+","+value.ALARM_KIND+","+value.ALARM_VARIABLE1+","+value.ALARM_VARIABLE2+")'>"+value.ALARM_VARIABLE2+" 사유로 게시글이 블라인드처리되었습니다 -"+value.ALARM_REGDATE+"</span>";
+							if(value.ALARM_KIND == 14)
+								htmlstr += "<span class='myAlarmTEXT' onclick=alarmReadOfHead("+value.ALARM_NUM+","+value.ALARM_KIND+",'"+value.ALARM_VARIABLE1+"','"+value.ALARM_VARIABLE2+"')>관리자가 회원님의 계정상태를 변경했습니다 -"+value.ALARM_REGDATE+"</span>";	
+							if(value.ALARM_KIND == 15)
+								htmlstr += "<span class='myAlarmTEXT' onclick=alarmReadOfHead("+value.ALARM_NUM+","+value.ALARM_KIND+",'"+value.ALARM_VARIABLE1+"','"+value.ALARM_VARIABLE2+"')>관리자가 입금확인처리 했습니다 -"+value.ALARM_REGDATE+"</span>";
+							if(value.ALARM_KIND == 16)
+								htmlstr += "<span class='myAlarmTEXT' onclick=alarmReadOfHead("+value.ALARM_NUM+","+value.ALARM_KIND+",'"+value.ALARM_VARIABLE1+"','"+value.ALARM_VARIABLE2+"')>관리자가 인수확인처리 했습니다 -"+value.ALARM_REGDATE+"</span>";
+							if(value.ALARM_KIND == 17)
+								htmlstr += "<span class='myAlarmTEXT' onclick=alarmReadOfHead("+value.ALARM_NUM+","+value.ALARM_KIND+",'"+value.ALARM_VARIABLE1+"','"+value.ALARM_VARIABLE2+"')>관리자가 배송을 시작했습니다 -"+value.ALARM_REGDATE+"</span>";
+							if(value.ALARM_KIND == 18)
+								htmlstr += "<span class='myAlarmTEXT' onclick=alarmReadOfHead("+value.ALARM_NUM+","+value.ALARM_KIND+",'"+value.ALARM_VARIABLE1+"','"+value.ALARM_VARIABLE2+"')>무료나눔게시판의 댓글이 작성되었습니다 -"+value.ALARM_REGDATE+"</span>";
 						});
 						$('.alarm-list').html(htmlstr);
 					}
