@@ -532,6 +532,7 @@ input#singoOPEN {
 
 /* 블라인드처리폼 */
 .blindProcessBackGround {
+	display: none;
     position: absolute;
     background-color: white;
     top: 0; 
@@ -542,8 +543,10 @@ input#singoOPEN {
 }
 
 .blindProcessForm {
+	display: none;
     position: fixed;
-    width: 60%; 
+    width: 80%;
+    margin-top: 5%;
 }
 
 span.blindTEXT {
