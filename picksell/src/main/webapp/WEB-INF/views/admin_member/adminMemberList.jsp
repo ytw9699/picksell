@@ -156,10 +156,10 @@ button:hover:before,button:hover:after{
 	 <td>${memberslist.name }</td>
 	 <c:choose>
 	 <c:when test="${memberslist.profile_img != '' || memberslist.profile_img ne null }">
-	 <td><img src="/picksell/resources/profileImgUpload/freeprofileimg.jpg" style="width:32px; height:30px;"/></td>
+	 <td><img src="/picksell/resources/img/katalkprofile.png" style="width:32px; height:30px;"/></td>
 	 </c:when>
 	 <c:when test="${memberslist.profile_img eq null }">
-	  <td><img src="/picksell/resources/profileImgUpload/freeprofileimg.jpg" style="width:32px; height:30px;"/></td>
+	  <td><img src="/picksell/resources/profileImgUpload/${memberslist.profile_img}" style="width:32px; height:30px;"/></td>
 	 </c:when>
 	 </c:choose>
 	 <td>${memberslist.email }</td>
