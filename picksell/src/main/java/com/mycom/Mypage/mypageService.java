@@ -48,6 +48,9 @@ public class mypageService implements mypageDao {
 	public List<Map<String, Object>> orderSubList(Map<String, Object> parameterMap) {
 		return sqlMapper.selectList("mypage.orderSubList", parameterMap);
 	}
+	public List<Map<String, Object>> orderSubList2(Map<String, Object> parameterMap) {
+		return sqlMapper.selectList("mypage.orderSubList2", parameterMap);
+	}
 	public Map<String, Object> orderDetail(int ORDER_NUM) {
 		return sqlMapper.selectOne("mypage.orderDetail", ORDER_NUM);
 	}
@@ -180,4 +183,16 @@ public class mypageService implements mypageDao {
 		return sqlMapper.delete("mypage.AllAlarmDelete",sessionId);
 	}
 
+	public List<Map<String, Object>> adminOrderList() {
+		return sqlMapper.selectList("mypage.adminOrderList");
+	}
+	public List<Map<String, Object>> orderSearch0(String isSearch) {
+		return sqlMapper.selectList("mypage.orderSearch0");
+	}
+	public List<Map<String, Object>> orderSearch1(String isSearch) {
+		return sqlMapper.selectList("mypage.orderSearch1");
+	}
+	public List<Map<String, Object>> orderSearch2(String isSearch) {
+		return sqlMapper.selectList("mypage.orderSearch2");
+	}
 	}

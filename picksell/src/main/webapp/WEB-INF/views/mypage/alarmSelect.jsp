@@ -323,7 +323,7 @@ function alarmDelete(ALARM_NUM){
 	     <c:if test="${alarmMap.ALARM_KIND == '16'}">
 				<div class="alarm1">
 				<a href="/picksell/mypage/orderDetail/${alarmMap.ALARM_VARIABLE1}" onclick="alarmRead('${alarmMap.ALARM_NUM}')">
-					${alarmMap.ALARM_WRITER}가 입금을 완료 하였습니다.
+					${alarmMap.ALARM_WRITER}님이 입금을 완료 하였습니다.
 				</a>
 				</div>
 	     </c:if>

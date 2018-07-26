@@ -209,6 +209,27 @@ public class mypageController {
 	}
 	
 	
+	@RequestMapping(value="/admin_order/list2",method=RequestMethod.GET)
+	public String adminOrderList(Model model, HttpSession session
+	) {	
+ 	Map<String, Object> parameterMap = new HashMap<String, Object>();
+
+    List orderSubList = new ArrayList();
+    
+    List<Map<String, Object>> adminOrderList = mypageService.adminOrderList();
+    
+    for(int i = 0 ; i < adminOrderList.size() ; i++) {
+    	parameterMap.put("ORDER_NUM",String.valueOf(adminOrderList.get(i).get("ORDER_NUM")));
+    	orderSubList.add(mypageService.orderSubList2(parameterMap));
+    }
+    
+    model.addAttribute("orderList", adminOrderList);
+    model.addAttribute("orderSubList", orderSubList);
+    
+	return "/admin_order/orderList";
+	}
+	
+	
 	@RequestMapping(value="/mypage/orderList",method=RequestMethod.GET)
 	public String orderList(Model model, HttpSession session,
 	@RequestParam(value="status", required=false, defaultValue="5") String status,//기본값 5는 전체보기
