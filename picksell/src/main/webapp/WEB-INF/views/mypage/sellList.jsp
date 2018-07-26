@@ -66,7 +66,18 @@ table.purchaseTABLE {
     text-align: center;
 }
 .purchaseList {
-    width: 110%;
+    width: 100%;
+}
+span.hasNoOrderList {
+    display: block;
+    /* border: 1px solid #999; */
+    width: 22%;
+    margin: 0 auto;
+    margin-top: 50px;
+    text-align: center;
+    color: #999;
+    font-size: 22px;
+    padding-bottom: 11px;
 }
 .categoryList {
     width: 55%;
@@ -289,7 +300,7 @@ function minusStock(PRODUCT_NUM, index){
 </c:forEach>
 </c:if>
 	<c:if test="${fn:length(sellList) < 1}">
-	<p>판매 상품이 없습니다</p>
+	<span class="hasNoOrderList">판매 상품이 없습니다</span>
 	</c:if>
 </table>
 </div>

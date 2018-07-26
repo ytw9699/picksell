@@ -49,7 +49,6 @@ span.my__i-stat1.i-stat1-number {
     padding: 10px;
     margin: 50px;
     width: 700px;
-    height: 300px;
 }
 .test2 {
     background: #f9f9f9;
@@ -62,40 +61,45 @@ span.my__i-stat1.i-stat1-number {
 }
 .ddd{
 }
+span.hasNoOrderList {
+    display: block;
+    /* border: 1px solid #999; */
+    width: 22%;
+    margin: 0 auto;
+    margin-top: 50px;
+    text-align: center;
+    color: #999;
+    font-size: 22px;
+    padding-bottom: 11px;
+}
 #ddd {
     margin-top: 13px;
     border: 1px solid #cecece;
-    padding: 50px;
-    height: 110px;
-    width: 360px;
+    padding: 30px;
+    width: 65%;
+    display: inline-block;
+    box-sizing: border-box;
 }
 .test3 {
-    padding: 2px;
     line-height: 60px;
-    width: 700px;
     height: 60px;
-    font-size: 1.2rem;
+    color: #666;
+    font-size: 17px;
+    margin-left: 20px;
 }
 .test4 {
-    padding: 2px;
-    line-height: 60px;
-    width: 700px;
-    height: 60px;
-    font-size: 1.2rem;
-    position: relative;
-    left:380px;
+    font-size: 16px;
+    float: right;
+    margin-top: 10px;
+    margin-right: 20px;
 }
 .test5 {
     margin-top: 13px;
-    border: 1px solid #cecece;
-    padding: 12px;
-    height: 186px;
-    font-size: 1rem;
-    line-height: 180px;
-    width: 210px;
-    position: relative;
-    left: 467px;
-    bottom: 226px;
+    color: #7151fc;
+    float: right;
+    font-size: 22px;
+    width: 34%;
+    text-align: right;
 }
 .paging {margin-top: 40px;text-align: center;}
 span.currentPaging {
@@ -156,7 +160,7 @@ a.paging {
 <c:forEach var="ps_order" items="${orderList}" varStatus="orderListStatus">
 <div class="test">
 <div class="test2">
-<span class="test3">주문일 <fmt:formatDate value="${ps_order.STEP1_DATE}" pattern="yy. MM. dd. hh:mm" /></span>
+<span class="test3">주문일 <fmt:formatDate value="${ps_order.STEP1_DATE}" pattern="yyyy년 MM월 dd일 hh:mm" /></span>
 <span class="test4"><a href="/picksell/mypage/orderDetail/${ps_order.ORDER_NUM }">상세보기 > </a></span>
 </div>
 <div id="ddd">
@@ -191,7 +195,7 @@ a.paging {
 </c:forEach>
 </c:if>
 <c:if test="${fn:length(orderList) < 1}">
-<p>내역이 없습니다</p>
+<span class="hasNoOrderList">내역이 없습니다</span>
 </c:if>
 <div class="paging">
 			${pagingHtml}
