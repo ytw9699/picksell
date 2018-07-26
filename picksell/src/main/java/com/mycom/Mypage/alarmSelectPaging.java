@@ -192,6 +192,5 @@ public class alarmSelectPaging {
 	public void setMappingName(String mappingName) {
 		MappingName = mappingName;
 	}
-
-	
 }
+//주석테스트
