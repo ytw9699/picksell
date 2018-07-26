@@ -82,10 +82,11 @@ span.my__i-stat1.i-stat1-number {
 }
 .alarm1 {
     display: inline-block;
-    width: 37%;
-    text-align: left;
+    width: 46%;
     margin: 1%;
-    margin-right: -14%;
+    font-size: 15px;
+    box-sizing: border-box;
+    padding-left: 10px;
 }
 .alarm2 {
     display: inline-block;
@@ -96,20 +97,20 @@ span.my__i-stat1.i-stat1-number {
 }
 .alarm3 {
     display: inline-block;
-    width: 22%;
     text-align: center;
     margin: 1%;
-    margin-left: 16%;
+    color: #666;
+    font-size: 15px;
 }
 .alarm4 {
     display: inline-block;
-    width: 22%;
-    text-align: center;
-    margin: 1%;
-    margin-left: -15%;
+    box-sizing: border-box;
+    float: right;	
+    margin-right: 15px;
 }
 .alarm0 {
     font-size: 17px;
+    margin-top: 63px;
 }
 .next {
     width: 40%;
@@ -122,7 +123,6 @@ span.my__i-stat1.i-stat1-number {
     font-size: 12px;
 }
 #myAlarm2 {
-    margin-right: -18%;
     background-color: #e80935;
     color: white;
     font-size: 12px;
@@ -132,7 +132,6 @@ span.my__i-stat1.i-stat1-number {
     line-height: 21px;
     display: inline-block;
     text-align: center;
-    margin-left: 15%;
 }
 #myAlarm3{
     margin-right: -18%;
@@ -151,8 +150,11 @@ span.my__i-stat1.i-stat1-number {
     background-color: #dedede;
     width: 61.4%;
 }
-.alarmWrapper{
-	width: 61.4%;
+.alarmWrapper {
+    width: 71%;
+    box-sizing: border-box;
+    padding-bottom: 20px;
+    padding-top: 10px;
 }
 
 </style>
@@ -343,6 +345,7 @@ function alarmDelete(ALARM_NUM){
 		</div>
 	</c:forEach>
 </c:if>
+</div>
 </div>
 <div class="paging">
 ${pagingHtml}
