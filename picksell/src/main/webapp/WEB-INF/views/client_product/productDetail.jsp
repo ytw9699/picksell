@@ -23,6 +23,11 @@
 			$('.status_on').show();
 		}
 		
+		var isBlind = '${resultObject.BOARD_STATUS}';
+		if(thisHowToSell == '1'){
+			
+			
+		}
 	});
 
 	//알람입력
@@ -140,7 +145,12 @@
 	}
 	
 </script>
-
+<!-- 블라인드처리div -->
+<div class="blindProcessBackGround"></div>
+<div class="blindProcessForm">
+	<span class="blindTEXT">관리자에 의해 블라인드 처리된 판매글입니다</span>
+	<input type="button" class="historyBTN" value="뒤로가기" onclick="javascript:history.back();" />
+</div>
 <!-- 모달div background -->
 <div class="hiddenBackGround" onclick="closeCommentForm()"></div>
 <!-- 문의댓글 모달div -->
