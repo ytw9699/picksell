@@ -87,6 +87,7 @@ span.productSubject {
     color: #333;
     font-size: 17px;
     display: block;
+    height: 70px;
 }
 span.productPriceWon {
     color: #333;
