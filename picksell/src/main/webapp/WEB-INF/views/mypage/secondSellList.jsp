@@ -163,7 +163,7 @@ function purchaseApproveCancel(eventElement, purchaseNumber, buyer, category_num
 </table>
 </div>
 <c:if test="${fn:length(secondSellList) < 1}">
-<p>내역이 없습니다.</p>
+<span class="hasNoOrderList">내역이 없습니다.</span>
 </c:if>
 </body>
 </html>

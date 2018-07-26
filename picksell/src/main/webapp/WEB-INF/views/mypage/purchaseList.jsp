@@ -37,6 +37,17 @@ table.purchaseTABLE {
 width: 10%;
 margin-top: 10%;
 }
+span.hasNoOrderList {
+    display: block;
+    /* border: 1px solid #999; */
+    width: 22%;
+    margin: 0 auto;
+    margin-top: 50px;
+    text-align: center;
+    color: #999;
+    font-size: 22px;
+    padding-bottom: 11px;
+}
 </style>
 </head>
 <body>
@@ -111,7 +122,7 @@ margin-top: 10%;
 </table>
 </div>
 <c:if test="${fn:length(purchaseList) < 1}">
-<p>내역이 없습니다.</p>
+<span class="hasNoOrderList">내역이 없습니다</span>
 </c:if>
 </body>
 </html>

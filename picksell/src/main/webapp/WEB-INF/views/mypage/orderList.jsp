@@ -61,6 +61,17 @@ span.my__i-stat1.i-stat1-number {
 }
 .ddd{
 }
+span.hasNoOrderList {
+    display: block;
+    /* border: 1px solid #999; */
+    width: 22%;
+    margin: 0 auto;
+    margin-top: 50px;
+    text-align: center;
+    color: #999;
+    font-size: 22px;
+    padding-bottom: 11px;
+}
 #ddd {
     margin-top: 13px;
     border: 1px solid #cecece;
@@ -184,7 +195,7 @@ a.paging {
 </c:forEach>
 </c:if>
 <c:if test="${fn:length(orderList) < 1}">
-<p>내역이 없습니다</p>
+<span class="hasNoOrderList">내역이 없습니다</span>
 </c:if>
 <div class="paging">
 			${pagingHtml}
