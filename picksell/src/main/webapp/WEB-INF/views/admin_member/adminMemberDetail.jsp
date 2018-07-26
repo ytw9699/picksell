@@ -93,11 +93,18 @@ $(document).ready(function(){
 <body>
 <div class="main">
 <div class="pageSubject" >
- <h1 style="margin-left:17px;margin-right:17px;">회원 페이지</h1></div>
+ <h1 style="margin-left:17px;margin-right:17px;">회원 상세 페이지</h1></div>
 <div class="memberInfo">
 <div class="profile" style="background-color:#e8e7e7;border-radius:25px;">
 <div class="d" style="display:inline;">
-<div class="id" style="float:right;"><img src="/picksell/resources/profileImgUpload/katalkprofile.png" style="width:220px; height:200px;border:1px solid white;"/></div>
+ <c:choose>
+	 <c:when test="${map.PROFILE_IMG != '' || map.PROFILE_IMG ne null }">
+	<div class="id" style="float:right;"><img src="/picksell/resources/profileImgUpload/${map.PROFILE_IMG }" style="width:220px; height:200px;border:1px solid white;"/></div>
+	 </c:when>
+	 <c:when test="${map.PROFILE_IMG eq null }">
+	 <div class="id" style="float:right;"><img src="/picksell/resources/profileImgUpload/katalkprofile.png" style="width:220px; height:200px;border:1px solid white;"/></div>
+	 </c:when>
+	 </c:choose>
 아이디 : ${map.ID }</div>
 <div class="name">
 이름 : ${map.NAME }
