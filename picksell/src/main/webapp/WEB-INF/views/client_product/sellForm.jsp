@@ -16,6 +16,9 @@
 #ex_file1 { /* 파일 필드 숨기기 */
 position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0);
 border: 0; left: 140px; top: 292px;}
+body{
+overflow-x: hidden;
+}
 .profileButtons {
     background-color: white;
     border: 1px solid #7151fc;
@@ -484,7 +487,7 @@ input.nextDisabled {
 			$(this).css('border-bottom', '1px solid #7151fc').val("");
 			$('#contentPRICE_HIDDEN').val("");
 		},
-		blur : function(){
+		keyup : function(){
 			$(this).css('border-bottom', '1px solid #d8d8d8');
 			var regExp = /^[0-9]+$/;
 			if(!regExp.test($(this).val())){
@@ -492,9 +495,12 @@ input.nextDisabled {
 				$('#total_submitINPUT').addClass("nextDisabled").attr("disabled", "disabled");
 			}else{
 				$('#contentPRICE_HIDDEN').val($(this).val());
-				$(this).val(addComma($(this).val()+" 원"));
+				//$(this).val(addComma($(this).val()+" 원"));
 				$('#total_submitINPUT').removeClass("nextDisabled").removeAttr("disabled");
 			}
+		},
+		blur : function(){
+			$(this).val(addComma($(this).val()+" 원"));
 		}
 	}); 
 	

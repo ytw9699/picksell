@@ -54,11 +54,12 @@
     font-size: 20px;
 }
 .header2 {
-    width: 41%;
+    width: 80%;
     margin: 1%;
-    border: 1px solid gray;
-    height: 121px;
-    display: inline-block;
+    display: block;
+    border-bottom: 3px solid #ececec;
+    padding: 15px 0 15px 20px;
+    font-size: 19px;
 }
 .line {
     width: 80%;
@@ -156,7 +157,7 @@ td.product_total_valueTEXT {
     padding-right: 35px;
     text-align: right;
 }
-.header.subheader {
+.header2.subheader {
     border-bottom: none;
 }
 input.statusBtn {
@@ -186,13 +187,13 @@ input.statusBtn:hover {
 				data : allData,
 				success : function(data){
 					if(ALARM_KIND == "12"){
-						alert("곧 관리자가 확인 후 입금완료 해드립니다");
+						alert("감사합니다 관리자가 확인 후 입금완료 해드리겠습니다.");
 					}
 				}
 			});
 	}   
 	function canclePs_order(ORDER_NUM, BUYER_ID, SELLER_ID, PRODUCT_NUM){
-		//alert("1");
+		 if(confirm('정말 결제 취소하시겠습니까?')){
 		var allData = "ORDER_NUM="+ORDER_NUM+"&PRODUCT_NUM="+PRODUCT_NUM;
 				$.ajax({
 					type : "GET",
@@ -201,13 +202,15 @@ input.statusBtn:hover {
 					data : allData,
 					success : function(data){
 						alarmInsert(SELLER_ID, ORDER_NUM, ORDER_NUM, BUYER_ID, "10");
-						//location.reload();
+						alert("결제 취소 되었습니다");
+						location.reload();
 					}
-				});	
+				});
+	}
 	}
 	
 	function canclePs_order2(ORDER_NUM, BUYER_ID, SELLER_ID){
-		//alert("2");
+		 if(confirm('정말 결제 취소하시겠습니까?')){
 		var allData = "ORDER_NUM="+ORDER_NUM;
 				$.ajax({
 					type : "GET",
@@ -216,9 +219,11 @@ input.statusBtn:hover {
 					data : allData,
 					success : function(data){
 						alarmInsert(SELLER_ID, ORDER_NUM, ORDER_NUM, BUYER_ID, "10");
-						//location.reload();
+						alert("결제 취소 되었습니다");
+						location.reload();
 					}
 				});	
+	}
 	}
 </script>
 <div class="bigWrapper"> 
@@ -227,7 +232,7 @@ input.statusBtn:hover {
 <div class="header">
 주문 내역 상세 및 배송 조회
 </div>
-	<div class="header subheader">
+	<div class="header2 subheader">
 		<div class="status">거래상태:
         <c:if test="${orderDetail.STATUS == '0'}">
 		입금대기중
@@ -240,15 +245,16 @@ input.statusBtn:hover {
 		</c:if>
 		<c:if test="${orderDetail.STATUS == '3'}">
 		인수확인 및 거래완료
-		인수확인 및 거래 완료일:<fmt:formatDate value="${orderDetail.STEP4_DATE}" pattern="yy년 MM월 dd일 hh:mm" />  <br>
+		<fmt:formatDate value="${orderDetail.STEP4_DATE}" pattern="yy년 MM월 dd일 hh:mm" />  <br>
 		</c:if>
 		<c:if test="${orderDetail.STATUS == '44'}">
-		거래상태:결제취소  , 결제취소일: 		 <fmt:formatDate value="${orderDetail.CANCEL_DATE}" pattern="yy년 MM월 dd일 hh:mm" />  <br>
+		결제취소 - <fmt:formatDate value="${orderDetail.CANCEL_DATE}" pattern="yy. MM. dd. hh:mm" />  <br>
 		</c:if>
 		</div >
 	   <div class="status">
+	   		 <c:if test="${orderDetail.STATUS == '0'}">
 			<input type ="button" class="statusBtn" value="입금완료" onclick="alarmInsert('admin','empty','empty','${sessionScope.sessionId}',12)"/>
-			
+			</c:if>
 			<c:if test="${fn:length(orderSubDetail) > 0}">
 			<c:forEach var="joinMap" items="${orderSubDetail}" varStatus="status">
 			<c:if test="${status.last}">

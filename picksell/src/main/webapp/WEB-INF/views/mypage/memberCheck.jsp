@@ -65,6 +65,9 @@
     width: 83%;
     height: 55px;
     border-radius: 9px;
+    outline: none;
+    padding-left: 10px;
+    box-sizing: border-box;
 }
 .form-group {
     margin-bottom: 3px;
@@ -131,8 +134,8 @@ function passwordCheck(){
 	  </div>
 	  <div class="form-group">
 	  <input type="submit" class="btn-primary" value="확인" />
-	  </form>
 	  </div>
+	   </form>
 	 	   <div id="passwordCheckText" class="alert alert-danger">
 	 	   
 		  </div>

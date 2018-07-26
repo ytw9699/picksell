@@ -147,6 +147,14 @@ span.my__i-stat1.i-stat1-number {
     text-align: center;
     margin-left: 15%;
 }
+.holsoo {
+    background-color: #dedede;
+    width: 61.4%;
+}
+.alarmWrapper{
+	width: 61.4%;
+}
+
 </style>
 </head>
 <body>
@@ -212,7 +220,7 @@ function alarmDelete(ALARM_NUM){
 <div class="alarm0">
 <c:if test="${fn:length(alarmList) > 0}" >
 	<c:forEach var="alarmMap" items="${alarmList}" varStatus="Index">
-	<div class="alarm2"> ${Index.index+1} </div>
+	<div class="alarmWrapper <c:if test="${(Index.index + 3) % 2 == 1 }">holsoo</c:if>">
 			 
 		<c:if test="${alarmMap.ALARM_KIND == '2'}">
 			<div class="alarm1">
@@ -303,6 +311,15 @@ function alarmDelete(ALARM_NUM){
 				</a>
 				</div>
 	     </c:if>
+	     
+	     <c:if test="${alarmMap.ALARM_KIND == '16'}">
+				<div class="alarm1">
+				<a href="/picksell/mypage/orderDetail/${alarmMap.ALARM_VARIABLE1}" onclick="alarmRead('${alarmMap.ALARM_NUM}')">
+					${alarmMap.ALARM_WRITER}가 입금을 완료 하였습니다.
+				</a>
+				</div>
+	     </c:if>
+	     
 	     		<c:if test="${alarmMap.ALARM_CHECK == 'NO'}">
 	     		<span class="myAlarm2" id="myAlarm2">1</span>
 	     		</c:if>
@@ -315,21 +332,12 @@ function alarmDelete(ALARM_NUM){
 	     		<%-- <input type="button" class="next" id="alarmDelete" value="삭제" onclick="alarmDelete('${alarmMap.ALARM_NUM}')" /> --%>
 	     		</div>
 		<br>
+		</div>
 	</c:forEach>
 </c:if>
 </div>
-<c:if test="${fn:length(alarmList) < 1}">
-<div>알람이 없습니다</div>
-</c:if>
 <div class="paging">
 ${pagingHtml}
 </div>
 </body>
 </html>
-
-<%-- <c:if test="${alarmMap.ALARM_CHECK == 'YES'}">
-		읽음
-		</c:if>
-		<c:if test="${alarmMap.ALARM_CHECK == 'NO'}">
-		안읽음
-		</c:if> --%>

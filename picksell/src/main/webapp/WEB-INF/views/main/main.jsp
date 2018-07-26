@@ -10,6 +10,7 @@
 <title>메인</title>
 
 <style>
+
 body {
     overflow-x: hidden;
 }
@@ -76,9 +77,10 @@ img.hotProductIMG {
     font-size: 35px;
     float: left;
     margin-left: 17px;
+    margin-right: 20px;
 }
 .hotProductInformation {
-    display: inline-block;
+    /* display: inline-block; */
     margin-left: 20px;
 }
 span.productSubject {
@@ -89,6 +91,7 @@ span.productSubject {
 span.productPriceWon {
     color: #333;
     font-size: 20px;
+    font-weight: 600;
 }
 span.productPriceTEXT {
     font-size: 14px;
@@ -97,7 +100,7 @@ span.productPriceTEXT {
 
 /* 새로등록된플러스상품 */
 .newProductWrapper {
-    margin-top: 50px;
+    margin-top: 70px;
 }
 span.newProductNewTEXT {
     color: #7151fc;
@@ -111,10 +114,8 @@ a.newProductANCHOR:hover {
     text-decoration: underline;
 }
 a.newProductANCHOR {
-    display: block;
-    text-align: right;
     color: #666;
-    margin-right: 10%;
+    margin-left: 25px;
 }
 .newProductsBinder {
     width: 90%;
@@ -129,18 +130,17 @@ img.newProductIMG {
     width: 100%;
 }
 .newNomalProductWrapper {
-    margin-top: 60px;
+    margin-top: 80px;
 }
+span.newProductSubject {
+    color: #333;
+    font-size: 17px;
+    display: block;
+    min-height: 70px;
+}
+
 /* 픽셀로 팔아야 잘산다! */
-.bodyBottomContentWrapper {
-    width: 100%;
-    border: 2px solid #d7d7d7;
-    margin-top: 70px;
-    margin-bottom: 70px;
-    padding: 43px;
-    height: 170px;
-    box-sizing: border-box;
-}
+
 .bottomContents {
     display: inline-block;
     float: left;
@@ -156,21 +156,95 @@ span.bottomCenterTEXT {
     margin-top: 10px;
     font-size: 35px;
 }
-input.bottomSellBtn {
-    transition: 0.3s;
-    cursor: pointer;
-    border: 1px solid #7151fc;
-    background-color: #7151fc;
-    color: white;
-    font-weight: 600;
-    padding: 20px;
-    font-size: 18px;
-    margin-left: 20%;
-    margin-top: 12px;
+.newProductTextBinder {
+    margin-bottom: 35px;
 }
 input.bottomSellBtn:hover {
 	background-color: white;
 	color: #7151fc;
+}
+@media screen and (min-width:1191px) {
+	input.bottomSellBtn {
+	    transition: 0.3s;
+	    cursor: pointer;
+	    border: 1px solid #7151fc;
+	    background-color: #7151fc;
+	    color: white;
+	    font-weight: 600;
+	    padding: 20px;
+	    font-size: 18px;
+	    margin-left: 20%;
+	    margin-top: 12px;
+	}
+	.bodyBottomContentWrapper {
+	    width: 100%;
+	    border: 2px solid #d7d7d7;
+	    margin-top: 140px;
+	    margin-bottom: 70px;
+	    padding: 43px;
+	    height: 170px;
+	    box-sizing: border-box;
+	}
+}
+@media screen and (max-width:1190px) {
+	input.searchINPUT {width: 70%;}
+	.bodyBottomContentWrapper {
+	    width: 100%;
+	    border: 2px solid #d7d7d7;
+	    margin-top: 70px;
+	    margin-bottom: 70px;
+	    padding: 43px;
+	    padding-right: 0px;
+	    height: 170px;
+	    box-sizing: border-box;
+	}
+	input.bottomSellBtn {
+	    transition: 0.3s;
+	    cursor: pointer;
+	    border: 1px solid #7151fc;
+	    background-color: #7151fc;
+	    color: white;
+	    font-weight: 600;
+	    padding: 20px;
+	    font-size: 18px;
+	    margin-left: 5%;
+	    margin-top: 12px;
+	}
+}
+/* 핫카테고리 */
+.hotCategoryWrap {
+    display: inline-block;
+    width: 16%;
+}
+.hotCategoryFirstImgWrap {
+    width: 50%;
+    margin: 0 auto;
+}
+img.bestCategoryIMG {
+    width: 100%;
+}
+.hotCategoryWrapper {
+    margin-top: 70px;
+}
+span.hotCategoryTEXT {
+    font-weight: 600;
+    font-size: 22px;
+    margin-left: 15px;
+}
+a.hotCategoryANCHOR {
+    color: #666;
+    margin-left: 15px;
+}
+a.hotCategoryANCHOR:hover {
+    text-decoration: underline;
+}
+span.hotCategorySubject {
+    display: block;
+    text-align: center;
+    margin-top: 30px;
+}
+.hotCategoryTextBinder {
+    margin-bottom: 30px;
 }
 </style>
 </head>
@@ -202,29 +276,35 @@ input.bottomSellBtn:hover {
 	</div>
 </div>
 
+<div class="hotCategoryWrapper">
 
-<h3>픽셀 플러스<font color="red">BEST</font> 카테고리 <a href="/picksell/products/plus"><font color="red" size="2">전체보기</font></a></h3>
-<c:forEach var="hotCategory" items="${hotCategoryList }" varStatus="status" end="3">
-	<div class="productWrap">
-	<div class="firstImgWrap">
-		<a href="/picksell/products/plus?ca=${hotCategory.CATEGORY_NUM }">
-		<img src="/picksell/" style="width: 200px;" onerror="this.src='/picksell/resources/img/imgready.gif'" />
-		</a>
+	<div class="hotCategoryTextBinder">
+		<span class="hotCategoryTEXT">인기 카테고리</span>
+		<a href="/picksell/products/plus" class="hotCategoryANCHOR">전체보기 ></a>
 	</div>
-	<div class="infoWrap">
-		<a href="/picksell/products/plus?ca=${hotCategory.CATEGORY_NUM }">
-		<span class="productSubject"><font color="red" size="4">${status.index+1}.</font>[#${hotCategory.CATEGORY_NAME }]</span><br>
-		</a>
+	<c:forEach var="hotCategory" items="${hotCategoryList }" varStatus="status" end="5">
+		<div class="hotCategoryWrap">
+		<div class="hotCategoryFirstImgWrap">
+			<a href="/picksell/products/plus?ca=${hotCategory.CATEGORY_NUM }">
+			<img src="/picksell/resources/img/category_img/${hotCategory.CATEGORY_IMG }" class="bestCategoryIMG" onerror="this.src='/picksell/resources/img/imgready.gif'" />
+			</a>
+		</div>
+		<div class="infoWrap">
+			<a href="/picksell/products/plus?ca=${hotCategory.CATEGORY_NUM }">
+			<span class="hotCategorySubject">${hotCategory.CATEGORY_NAME }</span>
+			</a>
+		</div>
 	</div>
+	</c:forEach>
 </div>
-</c:forEach>
 
 <div class="newProductWrapper">
 	<div class="newProductTextBinder">
 		<span class="newProductNewTEXT">NEW</span>
 		<span class="newProductTEXT">새로 등록된 플러스 상품</span>
+		<a href="/picksell/products/plus" class="newProductANCHOR">전체보기 ></a>
 	</div>
-	<a href="/picksell/products/plus" class="newProductANCHOR">전체보기 ></a>
+	
 	
 	<div class="newProductsBinder">
 		<c:forEach var="pulsProduct" items="${plusProductList }" end="3">
@@ -235,10 +315,9 @@ input.bottomSellBtn:hover {
 				</a>
 			</div>
 			<div class="infoWrap">
-				<span class="productSubject">${pulsProduct.SUBJECT }</span>
-				<span class="productPrice">
-				<fmt:formatNumber value="${pulsProduct.PRICE }" pattern="#,###.##" /> 원
-				</span>
+				<span class="newProductSubject">${pulsProduct.SUBJECT }</span>
+				<span class="productPriceWon"><fmt:formatNumber value="${pulsProduct.PRICE }" pattern="#,###.##" /></span>
+				<span class="productPriceTEXT">원</span>
 			</div>
 		</div>
 		</c:forEach>
@@ -250,9 +329,10 @@ input.bottomSellBtn:hover {
 	<div class="newProductTextBinder">
 		<span class="newProductNewTEXT">NEW</span>
 		<span class="newProductTEXT">새로 등록된 일반 상품</span>
+		<a href="/picksell/products/goods" class="newProductANCHOR">전체보기 ></a>
 	</div>
 	
-	<a href="/picksell/products/goods" class="newProductANCHOR">전체보기 ></a>
+	
 	<div class="newProductsBinder">
 		<c:forEach var="nomalProduct" items="${nomalProductList }" end="3">
 		<div class="productWrap">
@@ -262,11 +342,10 @@ input.bottomSellBtn:hover {
 				</a>
 			</div>
 			<div class="infoWrap">
-				<span class="productSubject"><c:if test="${nomalProduct.PRODUCT_STATUS == '0'}"><font size="1">[미사용]</font></c:if>
+				<span class="newProductSubject"><c:if test="${nomalProduct.PRODUCT_STATUS == '0'}"><font size="1">[미사용]</font></c:if>
 				<c:if test="${nomalProduct.PRODUCT_STATUS == '1'}"><font size="1">[새상품]</font></c:if> ${nomalProduct.SUBJECT }</span><br>
-				<span class="productPrice">
-				<fmt:formatNumber value="${nomalProduct.PRICE }" pattern="#,###.##" /> 원
-				</span>
+				<span class="productPriceWon"><fmt:formatNumber value="${nomalProduct.PRICE }" pattern="#,###.##" /></span>
+				<span class="productPriceTEXT">원</span>
 			</div>
 		</div><!-- productWrap end -->
 		</c:forEach>

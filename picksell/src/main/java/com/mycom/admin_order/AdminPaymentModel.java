@@ -20,7 +20,15 @@ public class AdminPaymentModel {
 	private Date step3_date;
 	private Date step4_date;
 	private Date cancel_date;
+	private String seller_id;
 	
+	
+	public String getSeller_id() {
+		return seller_id;
+	}
+	public void setSeller_id(String seller_id) {
+		this.seller_id = seller_id;
+	}
 	public int getOrder_num() {
 		return order_num;
 	}

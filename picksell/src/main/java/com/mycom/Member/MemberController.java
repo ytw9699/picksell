@@ -106,9 +106,7 @@ import com.mycom.utils.FileUpload;
 			model.addAttribute("formID", ID);//폼아이디값 넘겨주기
 			return "loginForm";
 		}
-		System.out.println(resultMap.get("NAME"));
 		String checkLoginValue = MemberService.checkLogin((String)resultMap.get("ID")); //select status from ps_member where id = '2'
-		System.out.println(checkLoginValue);
 		if(checkLoginValue.equals("2")) {
 			model.addAttribute("loginCheck", checkLoginValue);
 			return "loginForm";
@@ -116,6 +114,7 @@ import com.mycom.utils.FileUpload;
 		session.setAttribute("sessionId", ID);//세션에 값저장
 		session.setAttribute("sessionName", (String)resultMap.get("NAME"));
 		session.setAttribute("sessionKind", (String)resultMap.get("KIND"));
+	System.out.println((String)resultMap.get("KIND"));
 		session.setAttribute("sessionPorfile_Img", (String)resultMap.get("PROFILE_IMG"));
 		session.setAttribute("sessionStatus", (String)resultMap.get("STATUS"));
 		session.setAttribute("sessionAlarm", (String)resultMap.get("ALARM_CONSENT"));
@@ -254,7 +253,7 @@ import com.mycom.utils.FileUpload;
 	
 	@RequestMapping("/findIdForm")
 	public String findId() throws IOException{
-		return "/join/findIdForm";//아이디 찾기폼
+		return "findIdForm";//아이디 찾기폼
 	}
 	
 	@RequestMapping("/findIdResult")//아이디 찾기 결과
@@ -282,13 +281,12 @@ import com.mycom.utils.FileUpload;
 	
 	@RequestMapping("/resetPasswordForm")//비밀번호 재설정폼
 	public String resetPasswordForm() throws IOException{
-		return "/join/resetPasswordForm";
+		return "resetPasswordForm";
 	}
 	
 	@RequestMapping(value="/resetPassword",method=RequestMethod.POST)//비밀번호 재설정 결과
 	public String insertRePs(CommandMap map, Model model) {	
 		
-		System.out.println(map.get("name"));
 	String selectRePs = MemberService.selectRePs(map.getMap());//해당하는 정보가있는지부터확인
 	
 	if(selectRePs == null) {

@@ -50,6 +50,9 @@ public interface ProductDao {
 	//판매글 문의리스트(구매자용)
 	public List<Map<String, Object>> getProductCommentListOfBuyer(Map<String, Object> map);
 	
+	//판매글 문의삭제
+	public void deleteProductComment(int parameterNumber, String howToDelete);
+	
 	//판매글 구매신청
 	public void insertProductPurchaseList(Map<String, Object> map);
 	

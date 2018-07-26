@@ -230,6 +230,17 @@
 		<put-attribute name="body" value="/WEB-INF/views/mypage/recentProduct.jsp" />
 	</definition>
 	
+	<!-- 아이디 찾기 -->
+	<definition name="findIdForm" extends="default">
+		<put-attribute name="header" value="/WEB-INF/views/layout/client/loginFormHeader.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/join/findIdForm.jsp" />
+	</definition>
+	
+		<!-- 비밀번호 찾기 -->
+	<definition name="resetPasswordForm" extends="default">
+		<put-attribute name="header" value="/WEB-INF/views/layout/client/loginFormHeader.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/join/resetPasswordForm.jsp" />
+	</definition>
 	
 </tiles-definitions>
 	

@@ -203,7 +203,7 @@ function minusStock(PRODUCT_NUM, index){
 </c:forEach>
 </c:if>
 	<c:if test="${fn:length(sellList) < 1}">
-	<p>세션 아이디에 해당하는 판매 상품이 없습니다</p>
+	<p>판매 상품이 없습니다</p>
 	</c:if>
 </table>
 </div>

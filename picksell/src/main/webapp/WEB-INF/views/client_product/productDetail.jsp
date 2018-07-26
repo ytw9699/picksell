@@ -16,7 +16,7 @@
 	//일반상품이면판매중인지
 	$(document).ready(function(){
 		
-		var thisHowToSell = '${resultObject.PRODUCT_STATUS}';
+		var thisHowToSell = '${resultObject.DEAL_STATUS}';
 		if(thisHowToSell == '1'){
 			$('.status_on').width($('.status_on').parents('.product_info').width());
 			$('.status_on').height($('.status_on').parents('.product_info').height());
@@ -155,6 +155,7 @@
 			<input type="hidden" name="category_num" value="${category_num }" />
 			<input type="hidden" name="comment_writer" value="${sessionScope.sessionId }" />
 			<input type="hidden" name="step_num" value="0" />
+			<input type="hidden" name="seller_id" value="${resultObject.SELLER_ID }" />
 			<textarea name="comment_content" class="comment_content" placeholder="상품문의를 작성하세요. 판매자 외에는 볼 수 없습니다."></textarea>
 			<!-- <input type="text" name="comment_content" /> -->
 			<input type="submit" class="commentSUBMIT" value="작성" />
@@ -323,7 +324,7 @@
 					<c:when test="${resultObject.HOWTOSELL != 2 }">
 						<input type="button" class="basket_disabled" value="장바구니" disabled="disabled" />
 					</c:when>
-					<c:when test="${resultObject.HOWTOSELL == 2 and alreadyBasket == false }">
+					<c:when test="${resultObject.HOWTOSELL == 2 and alreadyBasket == false and resultObject.SELLER_ID != sessionScope.sessionId }">
 						<input type="button" class="basket_abled" value="장바구니" onclick="intoBasket();" />
 					</c:when>
 					<c:when test="${resultObject.HOWTOSELL == 2 and alreadyBasket == true }">
@@ -350,7 +351,7 @@
 						<input type="button" class="purchase_cancel" value="구매신청 취소하기" onclick="purchaseCancel('${resultObject.SELLER_ID}','${category_num}','${product_num}','${sessionId}');" />
 						</div>
 					</c:when>
-					<c:when test="${isMyProducts == 'yes' }">
+					<c:when test="${isMyProducts == 'yes' and resultObject.HOWTOSELL != 2 }">
 						<div class="purchaseWrap" id="purchaseWrap">
 						<input type="button" class="purchase_confirm" value="구매신청 확인하기" onclick="openPurchaseList();" />
 						</div>
@@ -360,7 +361,7 @@
 			
 			<!-- 구매하기 + 구매수락일때를 생각해야함 -->
 			<c:choose>
-				<c:when test="${resultObject.HOWTOSELL == 2 }">
+				<c:when test="${resultObject.HOWTOSELL == 2 and resultObject.SELLER_ID != sessionScope.sessionId }">
 					<input type="submit" class="purchase_go" value="구매하기" />
 				</c:when>
 			</c:choose>
@@ -405,6 +406,9 @@
 								<!-- 판매자의 댓글이면 별도의 span 표시 -->
 								<c:if test="${comment.COMMENT_WRITER == resultObject.SELLER_ID}">
 									<span class="commentOfSeller">판매자</span>
+								</c:if>
+								<c:if test="${sessionScope.sessionId == comment.COMMENT_WRITER }">
+									<input type="button" class="deleteCommentBTN" onclick="deleteProductComment('${comment.COMMENT_NUM }','${comment.GROUP_NUM }','${comment.STEP_NUM }','${resultObject.CATEGORY_NUM }','${resultObject.PRODUCT_NUM }')" />
 								</c:if>
 								<span class="commentRegdate">
 								<fmt:formatDate value="${comment.COMMENT_REGDATE }" pattern="YY.MM.dd" />
@@ -523,6 +527,15 @@
 				subBtn_ele.disabled = true;
 	}
 	
+	function deleteProductComment(cn, gn, sn, category, product){
+		var params = "?cn="+cn+"&gn="+gn+"&sn="+sn+"&category="+category+"&product="+product;
+		
+		if(confirm("상품문의를 삭제하시겠습니까?\n원글의경우 답변까지 삭제됩니다")){
+			location.href="/picksell/products/deleteCommentProc"+params;
+		}else{
+			return;
+		}
+	}
 </script>
 
 </body>

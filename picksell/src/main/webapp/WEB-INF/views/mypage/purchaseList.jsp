@@ -111,7 +111,7 @@ margin-top: 10%;
 </table>
 </div>
 <c:if test="${fn:length(purchaseList) < 1}">
-<p>구매 요청 내역이 없습니다.</p>
+<p>내역이 없습니다.</p>
 </c:if>
 </body>
 </html>
