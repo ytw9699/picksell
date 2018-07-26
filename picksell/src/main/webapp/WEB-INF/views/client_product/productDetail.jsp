@@ -24,7 +24,7 @@
 		}
 		
 		var isBlind = '${resultObject.BOARD_STATUS}';
-		if(thisHowToSell == '1'){
+		if(isBlind == '1'){
 			$('.blindProcessBackGround').show();
 			$('.blindProcessForm').show();
 			$('.blindProcessBackGround').offset({top:$('.bodyWrap').offset().top})
