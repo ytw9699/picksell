@@ -209,14 +209,24 @@ public class AdminPaymentController {
 	
 	@RequestMapping(value="/deliveryProc" , method=RequestMethod.POST ) // 배송 및 인수확인대기 
 	public ModelAndView adminDeliveryConfirm(HttpServletRequest request) {
-		
+		System.out.println(1);
+		Map<String, Object> parameterMap = new HashMap<String, Object>();
+		parameterMap.put("ALARM_TARGET",request.getParameter("ALARM_TARGET"));
+		parameterMap.put("ALARM_WRITER","admin");
+		parameterMap.put("ALARM_VARIABLE1",request.getParameter("ALARM_VARIABLE1"));
+		parameterMap.put("ALARM_VARIABLE2",request.getParameter("ALARM_VARIABLE1"));
+		parameterMap.put("ALARM_KIND","4");
+		System.out.println(parameterMap);
+		System.out.println(8);
+		mypageService.alarmInsert(parameterMap);
+		System.out.println(9);
 		adminPaymentModel = adminPaymentService.orderGetOne(request.getParameter("order_num"));
 		adminPaymentModel.setDelivery_company(request.getParameter("delivery_company"));
 		adminPaymentModel.setInvoice_num(request.getParameter("invoice_num"));
-		System.out.println(adminPaymentModel.getDelivery_company());
+		//System.out.println(adminPaymentModel.getDelivery_company());
 		adminPaymentService.updateStatus2(adminPaymentModel);
 		mav.setViewName("redirect:/admin_order/list");
-		System.out.println(request.getParameter("order_num"));
+		//System.out.println(request.getParameter("order_num"));
 		return mav;
 		
 	}
