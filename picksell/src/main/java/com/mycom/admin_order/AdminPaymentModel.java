@@ -23,6 +23,8 @@ public class AdminPaymentModel {
 	private String seller_id;
 	
 	
+	
+	
 	public String getSeller_id() {
 		return seller_id;
 	}

@@ -150,7 +150,7 @@ $(document).on("click", ".open-AddBookDialog", function () {
  		<c:forEach var="orderList" items="${orderList}" varStatus="stat">
  			<tr class="orderListContents" role="row">
  			
- 			<c:if test="${status.first}">
+<%--  			<c:if test="${status.first}"> --%>
  			
  				<td style="text-align:center;vertical-align:middle;">${orderList.order_num}</td>
  				<td style="text-align:center;vertical-align:middle;">${orderList.buyer_id}</td>
@@ -188,11 +188,12 @@ $(document).on("click", ".open-AddBookDialog", function () {
 					<i class="fa fa-check"></i>
 					</c:if>
  				</td>
+ 				
  				<td style="text-align:center;vertical-align:middle;">
 <%--  				<c:url var="status1" value="/admin_order/confirmProc" > --%>
 <%-- 					<c:param name="order_num" value="${orderList.order_num}" />				 --%>  
 <%-- 				</c:url> --%>																	<%-- ALARM_TARGET, ALARM_VARIABLE1, ALARM_VARIABLE2, ALARM_WRITER,ALARM_KIND) alarmInsert('admin','empty','empty','${sessionScope.sessionId}',12)"/> --%>
-				 <a href="/picksell/admin_order/confirmProc?order_num=${orderList.order_num}"><input type="button" value="입금완료" onclick="alarmInsert('${orderList.buyer_id}','${orderList.order_num}','empty','픽셀 관리자','16')"></a>
+				 <a href="/picksell/admin_order/confirmProc?order_num=${orderList.order_num}"><input type="button" value="입금완료" onclick="alarmInsert('${orderList.seller_id}','${orderList.order_num}','empty','픽셀 관리자','16')"></a>
 <%-- 				 <a href="${status1}"><input type="button" value="입금완료"></a> --%>
 
  				</td>
@@ -268,11 +269,13 @@ $(document).on("click", ".open-AddBookDialog", function () {
 <!--  				<a href="#" class="button button1"><input type="button" value="상세보기"></a> -->
  				</td>
  				
- 			</c:if>
+<%--  			</c:if> --%>
  				
- 				<td style="text-align:center;vertical-align:middle;">${orderList.SELLER_ID}</td>
+<%--  				<c:forEach var="i" begin="1" end="${fn:length(orderList.seller_id)}" step="1">	 --%>
+ 				<td style="text-align:center;vertical-align:middle;">${orderList.seller_id}</td>
+<%--  				</c:forEach> --%>
  			</tr>
- 			
+ 		
  		</c:forEach>
  	</div>
 </table> 
