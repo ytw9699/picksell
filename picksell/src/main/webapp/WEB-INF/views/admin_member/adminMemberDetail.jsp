@@ -97,7 +97,16 @@ $(document).ready(function(){
 <div class="memberInfo">
 <div class="profile" style="background-color:#e8e7e7;border-radius:25px;">
 <div class="d" style="display:inline;">
-<div class="id" style="float:right;"><img src="/picksell/resources/profileImgUpload/freeprofileimg.jpg" style="width:150px; height:130px;"/></div>
+<c:choose>
+	 <c:when test="${map.PROFILE_IMG != '' || map.PROFILE_IMG ne null }">
+	<div class="id" style="float:right;"><img src="/picksell/resources/profileImgUpload/${map.PROFILE_IMG }" style="width:150px; height:130px;"/></div>
+	 </c:when>
+	 <c:when test="${map.PROFILE_IMG eq null }">
+	<div class="id" style="float:right;"><img src="/picksell/resources/profileImgUpload/freeprofileimg.jpg" style="width:150px; height:130px;"/></div>
+	 </c:when>
+	 </c:choose>
+
+
 아이디 : ${map.ID }</div>
 <div class="name">
 이름 : ${map.NAME }
