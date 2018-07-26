@@ -65,6 +65,7 @@ public class AdminPaymentController {
 		
 		List<AdminPaymentModel> orderList = adminPaymentService.orderList();
 		
+		
 		isSearch = request.getParameter("isSearch");
 		if(isSearch != null) {
 			searchNum = Integer.parseInt(request.getParameter("searchNum"));
@@ -105,6 +106,8 @@ public class AdminPaymentController {
 			lastCount = page.getEndCount() + 1;
 		
 		orderList = orderList.subList(page.getStartCount(), lastCount);
+		
+		//orderList 로부터 order_num 얻기 
 		
 		
 //		System.out.println(totalCount);

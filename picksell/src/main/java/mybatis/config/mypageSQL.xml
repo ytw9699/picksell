@@ -189,7 +189,7 @@ select * from ps_order where ORDER_NUM = #{ORDER_NUM}
 <!-- 판매조회 상세보기 안에 관련 상품글 리스트 -->
 <select id="saleSubDetail" parameterType="hashmap" resultType="hashmap">
 
-select * from ps_product a, PS_ORDERLIST b where b.ORDER_NUM = #{ORDER_NUM} and b.PRODUCT_NUM = a.PRODUCT_NUM and b.SELLER_ID = #{sessionId}
+select * from ps_product a, PS_ORDERLIST b where b.ORDER_NUM = #{ORDER_NUM} and b.PRODUCT_NUM = a.PRODUCT_NUM 
 
 </select>
 <!-- 주문조회 상세보기 안에 관련 상품글 리스트 -->
