@@ -89,6 +89,13 @@ function formIdSave(){
 		<h4><a href="/picksell/findIdForm">아이디 찾기</a>/<a href="/picksell/resetPasswordForm">비밀번호 찾기</a></h4>
 	</form>
 </center>
+
+<c:if test="${resultNumber == 0}">
+	<script>
+	alert("해당하는 아이디가 없습니다.")
+   </script>
+</c:if>
+
 <c:if test="${formID != null}">
 	<script>
 	formIdSave();
@@ -110,6 +117,7 @@ function formIdSave(){
 	idSaveCheck();
    </script>
 </c:if>
+
 <c:if test="${resetSuccess != null}">
 	<script>
 	alert("비밀번호를 변경하였습니다.")
@@ -121,6 +129,8 @@ function formIdSave(){
 	alert("로그인이 제한된 아이디입니다. 관리자에게 문의해주세요 ")
    </script>
 </c:if>
+
+
 
 </body>
 </html>
