@@ -212,9 +212,9 @@ public class AdminPaymentController {
 		System.out.println(1);
 		Map<String, Object> parameterMap = new HashMap<String, Object>();
 		parameterMap.put("ALARM_TARGET",request.getParameter("ALARM_TARGET"));
-		parameterMap.put("ALARM_WRITER",request.getParameter("ALARM_WRITER"));
+		parameterMap.put("ALARM_WRITER","admin");
 		parameterMap.put("ALARM_VARIABLE1",request.getParameter("ALARM_VARIABLE1"));
-		parameterMap.put("ALARM_VARIABLE2",request.getParameter("ALARM_VARIABLE2"));
+		parameterMap.put("ALARM_VARIABLE2",request.getParameter("ALARM_VARIABLE1"));
 		parameterMap.put("ALARM_KIND","4");
 		System.out.println(parameterMap);
 		System.out.println(8);

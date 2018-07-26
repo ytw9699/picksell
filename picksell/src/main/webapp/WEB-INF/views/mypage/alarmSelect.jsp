@@ -224,6 +224,23 @@ function alarmDelete(ALARM_NUM){
 	<c:forEach var="alarmMap" items="${alarmList}" varStatus="Index">
 	<div class="alarmWrapper <c:if test="${(Index.index + 3) % 2 == 1 }">holsoo</c:if>">
 			 
+	
+		<c:if test="${alarmMap.ALARM_KIND == '0'}">
+			<div class="alarm1">
+			<a href="/picksell/products/detail/${alarmMap.ALARM_VARIABLE1}/${alarmMap.ALARM_VARIABLE2}" onclick="alarmRead('${alarmMap.ALARM_NUM}')">
+			 		${alarmMap.ALARM_WRITER}님이 상품문의 답글을 작성했습니다
+			</a>
+			</div>
+		</c:if>
+		
+		<c:if test="${alarmMap.ALARM_KIND == '1'}">
+			<div class="alarm1">
+			<a href="/picksell/products/detail/${alarmMap.ALARM_VARIABLE1}/${alarmMap.ALARM_VARIABLE2}" onclick="alarmRead('${alarmMap.ALARM_NUM}')">
+			 		${alarmMap.ALARM_WRITER}님이 상품문의를 작성했습니다 
+			</a>
+			</div>
+		</c:if>
+		
 		<c:if test="${alarmMap.ALARM_KIND == '2'}">
 			<div class="alarm1">
 			<a href="/picksell/products/detail/${alarmMap.ALARM_VARIABLE1}/${alarmMap.ALARM_VARIABLE2}" onclick="alarmRead('${alarmMap.ALARM_NUM}')">
@@ -244,7 +261,7 @@ function alarmDelete(ALARM_NUM){
 	      <c:if test="${alarmMap.ALARM_KIND == '4'}"> 
 				<div class="alarm1">
 				<a href="/picksell/mypage/orderDetail/${alarmMap.ALARM_VARIABLE1}" onclick="alarmRead('${alarmMap.ALARM_NUM}')">
-					${alarmMap.ALARM_WRITER}님께서 배송을 시작하셨습니다.
+					구매하신 제품의 배송이 출발하였습니다.
 					
 				</a>
 				</div>
