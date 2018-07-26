@@ -312,6 +312,14 @@ function alarmDelete(ALARM_NUM){
 				</div>
 	     </c:if>
 	     
+	      <c:if test="${alarmMap.ALARM_KIND == '13'}">
+				<div class="alarm1">
+				<a href="/picksell/mypage/alarmSelect" onclick="alarmRead('${alarmMap.ALARM_NUM}')">
+					관리자에 의해 "${alarmMap.ALARM_VARIABLE1}" 글이 ${alarmMap.ALARM_VARIABLE2}사유로 블라인드 처리 되었습니다. 
+				</a>
+				</div>
+	     </c:if>
+	     
 	     <c:if test="${alarmMap.ALARM_KIND == '16'}">
 				<div class="alarm1">
 				<a href="/picksell/mypage/orderDetail/${alarmMap.ALARM_VARIABLE1}" onclick="alarmRead('${alarmMap.ALARM_NUM}')">
