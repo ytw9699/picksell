@@ -85,4 +85,8 @@ public class AdminPaymentService implements AdminPaymentDAO {
 		return sqlSessionTemplate.selectList("adminOrder.orderList3", parameterMap);
 	}
 	
+	public List<Map<String, Object>> orderSubList2(String string) {
+		return sqlSessionTemplate.selectList("mypage.orderSubList2", string);
+	}
+	
 }
