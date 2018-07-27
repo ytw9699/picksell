@@ -519,6 +519,7 @@ function alarmReadOfHead(ALARM_NUM, kind, var1, var2){
 		<form action="/picksell/mainSearchList" method="GET">
 			<input type="text" name="searchKeyword" placeholder="상품명으로 검색해보세요" class="searchINPUT" />
 			<input type="hidden" name="HowToSell" value="3"/>
+			<input type="hidden" name="order" value="0"/>
 			<input type="submit" value="" class="searchSUBMIT" />
 		</form>
 	</div>
