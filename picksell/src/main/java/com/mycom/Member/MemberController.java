@@ -274,12 +274,12 @@ import com.mycom.utils.FileUpload;
 		String findId = MemberService.findId(paramMap);
 		
 		if(findId == null) {
-			return "/join/findIdResult";
+			return "findIdResult";
 		}
 		else {
 		model.addAttribute("findIdResult", findId);
 		}
-		return "/join/findIdResult";
+		return "findIdResult";
 	}
 	
 	@RequestMapping("/resetPasswordForm")//비밀번호 재설정폼
