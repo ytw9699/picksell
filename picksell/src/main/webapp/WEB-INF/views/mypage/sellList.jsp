@@ -120,6 +120,7 @@ span.product_category.active a {
     height: 50px;
     margin-top: 40px;
     border-bottom: 2px solid #ececec;
+        margin-bottom: 21px;
 }
 ul.orderMethodUL {
     margin: 0;
