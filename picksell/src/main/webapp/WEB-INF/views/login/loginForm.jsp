@@ -11,14 +11,57 @@
 <title>로그인1</title>
 <style>
 .next {
-    width:150px;
-    margin: 0 auto; 
-    margin-left: 10px;
+    width: 12%;
+    margin: 0 auto;
+    margin-left: 6px;
     border: none;
     color: white;
     background-color: #7151fc;
     padding: 15px;
     font-size: 15px;
+    border-radius: 9px;
+}
+.confirm-auth-box { 
+    /* border: 1px solid #d8d8d8; */
+    border-radius: 5px;
+    margin-top: 80px;
+    margin-right: 30px;
+}
+.confirm-auth-box h3 {
+    color: #7151FC;
+    border-bottom: 2px solid #ececec;
+    padding: 15px 0 15px 20px;
+    font-size: 26px;
+    margin: 0;
+}
+.bigbig {
+    width: 100%;
+    margin-left: -8px;
+    /* border: 1px solid gray; */
+    margin-top: 55px;
+}
+.information {
+    /* border: 1px solid gray; */
+    display: inline-block;
+    margin-right: 12px;
+    margin-left: -21px;
+    width: 11%;
+    height: 30px;
+    font-size: 19px;
+}
+.inputclass {
+    width: 17%;
+    margin: 6px;
+    margin-left: -40px;
+    border-radius: 9px;
+    font-size: 15px;
+    height: 49px;
+    border: 0.5px solid gray;
+    box-sizing: border-box;
+    padding-left: 11px;
+}
+.test8{
+    margin: 17px;
 }
 </style>
 </head>
@@ -79,15 +122,22 @@ function formIdSave(){
 }	
 </script>
 <center>
-	<h2>로그인 하기</h2>
+<div class="confirm-auth-box">
+	<h3>로그인 하기</h3>
+	</div>
+	<div class="bigbig">
 	<form action="login" name="loginForm" id="loginForm" method="post" onsubmit="return mberValiCheck('${resultID}')">
 	     <input type="hidden" name=formID id="formID" value="${formID}"/>
-		<h4>아이디 <input type="text" name="ID" id="ID" value="${cookieID}"/>&nbsp;<span id="userIdCheckText"></span></h4>
-		<h4>비밀번호 <input type="password" name="PASSWORD" id="PASSWORD" value="${cookiePW}"/>&nbsp;<span id="passwordCheckText"></span></h4>
-		<h4><input type="checkbox" name="idSave" id="idSave" value="save" />아이디/비밀번호 유지</h4>
-		<h4><input type="submit" class="next" value="로그인" /><input type="button" class="next" value="회원가입" onclick="location.href='/picksell/joinForm'"/></h4>
-		<h4><a href="/picksell/findIdForm">아이디 찾기</a>/<a href="/picksell/resetPasswordForm">비밀번호 찾기</a></h4>
+		<div class="information">아이디</div><input type="text" class="inputclass" name="ID" id="ID" value="${cookieID}"/>&nbsp;
+		<span id="userIdCheckText"></span><br>
+		<div class="information">비밀번호 </div><input type="password" class="inputclass" name="PASSWORD" id="PASSWORD" value="${cookiePW}"/>&nbsp;<span id="passwordCheckText"></span>
+		<div class="test8"><input type="checkbox" name="idSave" id="idSave" value="save" />아이디/비밀번호 유지</div>
+		<div class="test9">
+		<input type="submit" class="next" value="로그인" /><input type="button" class="next" value="회원가입" onclick="location.href='/picksell/joinForm'"/>
+		</div>
+		<div class="test8"><a href="/picksell/findIdForm">아이디 찾기</a>/<a href="/picksell/resetPasswordForm">비밀번호 찾기</a></div>
 	</form>
+	</div>
 </center>
 
 <c:if test="${resultNumber == 0}">
