@@ -236,6 +236,11 @@
 		<put-attribute name="body" value="/WEB-INF/views/join/findIdForm.jsp" />
 	</definition>
 	
+	<definition name="findIdResult" extends="default">
+		<put-attribute name="header" value="/WEB-INF/views/layout/client/loginFormHeader.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/join/findIdResult.jsp" />
+	</definition>
+	
 		<!-- 비밀번호 찾기 -->
 	<definition name="resetPasswordForm" extends="default">
 		<put-attribute name="header" value="/WEB-INF/views/layout/client/loginFormHeader.jsp" />
