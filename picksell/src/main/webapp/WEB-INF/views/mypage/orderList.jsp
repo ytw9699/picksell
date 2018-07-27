@@ -48,18 +48,15 @@ span.my__i-stat1.i-stat1-number {
     border: 1px solid #cecece;
     padding: 10px;
     margin: 50px;
-    width: 700px;
+    width: 63%;
 }
 .test2 {
     background: #f9f9f9;
     border-bottom: 1px solid #e7e7e7;
     padding: 2px;
     line-height: 40px;
-    width: 700px;
+    width: 846px;
     height: 60px;
-}
-}
-.ddd{
 }
 span.hasNoOrderList {
     display: block;
@@ -74,9 +71,9 @@ span.hasNoOrderList {
 }
 #ddd {
     margin-top: 13px;
-    border: 1px solid #cecece;
+    border: 0.5px solid #cecece;
     padding: 30px;
-    width: 65%;
+    width: 72%;
     display: inline-block;
     box-sizing: border-box;
 }
@@ -98,8 +95,12 @@ span.hasNoOrderList {
     color: #7151fc;
     float: right;
     font-size: 22px;
-    width: 34%;
-    text-align: right;
+    margin-right: 113px;
+    width: 27%;
+    /* margin-top: 8%; */
+    line-height: 9;
+    /* border: 1px solid gray; */
+    margin-right: 5px;
 }
 .paging {margin-top: 40px;text-align: center;}
 span.currentPaging {

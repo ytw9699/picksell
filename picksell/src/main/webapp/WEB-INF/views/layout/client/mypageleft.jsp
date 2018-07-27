@@ -36,7 +36,7 @@
 <div class="mypage"><a href="/picksell/mypage/memberCheck">회원정보 확인/수정</a></div>
 <div class="mypage"><a href="/picksell/mypage/orderList">주문 내역/배송 조회</a></div>
 <div class="mypage"><a href="/picksell/mypage/saleList">판매 내역/배송 조회</a></div>
-<div class="mypage"><a href="/picksell/mypage/sellList">판매글 조회</a></div>
+<div class="mypage"><a href="/picksell/mypage/sellList?HowToSell=3&deal_status=3">판매글 조회</a></div>
 <div class="mypage"><a href="/picksell/mypage/purchaseList">중고구매 요청 리스트</a></div>
 <div class="mypage"><a href="/picksell/mypage/secondSellList">중고판매 요청 리스트</a></div>
 <div class="mypage"><a href="/picksell/mypage/recentProduct">최근 본 상품</a></div>
