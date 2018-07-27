@@ -309,7 +309,7 @@ input.basket_go {
 }
 
 input.purchase_go {
-    width: 48%;
+    width: 100%;
     border: none;
     color: white;
     box-sizing: border-box;
