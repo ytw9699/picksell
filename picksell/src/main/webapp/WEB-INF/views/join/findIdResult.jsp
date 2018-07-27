@@ -7,25 +7,189 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-<title></title>
-<style>
-</style>
 </head>
+<style>
+.bigdiv {
+    width: 100%;
+    height: 200px;
+    
+}
+.mp-container {
+    display: inline-block;
+    /* margin: 0 0 0px 0px; */
+    width: 880px;
+}
+.row {
+    margin-left: -10px;
+    margin-right: -10px;
+}
+.col-sm-offset-3 {
+    margin-left: 15%;
+}
+.confirm-auth-box {
+    /*  border: 1px solid #d8d8d8; */
+    border-radius: 5px; 
+    margin-top: 63px;
+    margin-right: 243px;
+}
+.confirm-auth-box h3 {
+    color: #7151FC;
+    border-bottom: 2px solid #ececec;
+    padding: 15px 0 15px 20px;
+    font-size: 26px;
+    margin: 0;
+}
+.confirm-auth-box-content {
+    padding: 20px;
+    width: 104%;
+}
+.confirm-auth-desc {
+    font-size: 17px;
+    color: #191919;
+    padding-bottom: 35px;
+    width: 119%;
+}
+/* * {
+    box-sizing: border-box;
+} */
+.alert {
+    padding: 10px;
+    margin-top: 23px;
+    color: #7151fc;
+}
+.confirm-auth-input {
+    height: 46px;
+    border: 1px solid gray;
+    display: block;
+    width: 83%;
+    height: 55px;
+    font-size: 15px;
+    padding-left: 11px;
+    box-sizing: border-box;
+    border-radius: 9px;
+}
+.form-group {
+    margin-bottom: 3px;
+    width: 80%;
+    height: 61px;
+}
+.form-group2 {
+    margin-bottom: 3px;
+    width: 80%;
+    height: 121px;
+}
+.form-group3 {
+    margin-top: 45px;
+    margin-bottom: 3px;
+    width: 70%;
+    height: 121px;
+}
+.confirm-auth-btn {
+    margin-top: 10px;
+}
+.btn-primary {
+    color: #fff;
+    background-color: #7151FC;
+    border-color: #7151FC;
+    width: 83%;
+    /* margin-top: 10px; */
+    height: 56px;
+    padding: 16px 60px;
+    font-size: 16px;
+    line-height: 1.33;
+    border-radius: 9px;
+    display: inline-block;
+    margin-bottom: 0;
+    font-weight: normal;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    background-image: none;
+    border: 1px solid transparent;
+    white-space: nowrap;
+    user-select: none;
+}
+.btn-primary2 {
+    color: #fff;
+    background-color: #7151FC;
+    border-color: #7151FC;
+    width: 83%;
+    margin-top: 5px;
+    height: 56px;
+    padding: 16px 60px;
+    font-size: 16px;
+    line-height: 1.33;
+    border-radius: 9px;
+    display: inline-block;
+    margin-bottom: -2px;
+    font-weight: normal;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    background-image: none;
+    border: 1px solid transparent;
+    white-space: nowrap;
+    user-select: none;
+}
+</style>
 <body>
-<h3>
-<div>아이디찾기 결과</div>
-<c:if test="${findIdResult == null}">
-	아이디가 없습니다
-</c:if>
+<script>
+function findIdvali(){
+	if(document.findingId.email.value == ''){
+		alert('이메일을 입력하세요');
+		document.findingId.email.focus();
+		return false;
+	}
+	else if(document.findingId.name.value == ''){
+		alert('이름을 입력하세요');
+		document.findingId.name.focus();
+		return false;
+	}
+	return true;
+}
+</script>
 
-<c:if test="${findIdResult != null}">
-	<p>아이디는 ${findIdResult}입니다</p>
-</c:if>
-<p><a href="/picksell/loginForm" >로그인 </a></p>
-<p><a href="/picksell/resetPasswordForm" >비밀번호 찾기 </a></p>
-</h3>
+<div class="mp-container">
+	<div class="row">
+	<div class="col-sm-6 col-sm-offset-3">
+	<div class="confirm-auth-box">
+	<h3>아이디찾기 결과</h3>
+	<div class="confirm-auth-box-content">
+		 <div class="confirm-auth-desc">
+		 <c:if test="${findIdResult == null}">
+		<h4>찾으시는 아이디가 없습니다.</h4>
+		</c:if>
+		<c:if test="${findIdResult != null}">
+		<h4>찾으시는 아이디는 ${findIdResult}입니다.</h4>
+		 <div class="form-group3">
+	 <input type="button" onclick="location.href='/picksell/loginForm'" class="btn-primary2" value="로그인"/>
+	 <input type="button" onclick="location.href='/picksell/resetPasswordForm'" class="btn-primary2" value="비밀번호 찾기"/>
+	 	</div>
+	   </c:if>
+		 </div>
+	<div></div>
+	<c:if test="${findIdResult == null}">
+	  <form action="findIdResult" name="findingId" method="GET" onsubmit="return findIdvali()">
+	  <div class="form-group">
+	  	 <input type="text" name="email" class="confirm-auth-input" placeholder="이메일을 입력해주세요" />
+	  </div>
+	  <div class="form-group">
+	  	  <input type="text" name="name" class="confirm-auth-input" placeholder="이름을 입력해주세요" />
+	  </div>
+	  <div class="form-group2">
+	 <input type="submit"  class="btn-primary" value="찾기" />
+	 <input type="button" onclick="location.href='/picksell/loginForm'" class="btn-primary2" value="로그인"/>
+	 <input type="button" onclick="location.href='/picksell/resetPasswordForm'" class="btn-primary2" value="비밀번호 찾기"/>
+	  </div>
+	   </form>
+	 	   <div id="passwordCheckText" class="alert alert-danger">
+		  </div>
+		 </c:if>
+	  </div></div></div></div></div>
 </body>
 </html>
+
+
 
 
 

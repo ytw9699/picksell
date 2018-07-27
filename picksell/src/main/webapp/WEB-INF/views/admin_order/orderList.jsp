@@ -47,9 +47,11 @@
     color: red;
 }
 
-.main{ 
- 	 margin-left: 200px;  
- 	} 
+.main {
+    margin-left: 74px;
+    margin-top: 96px;
+    width: 103%;
+}
 
 table {
     border-collapse: collapse;
@@ -104,9 +106,14 @@ function alarmInsert(ALARM_TARGET, ALARM_VARIABLE1, ALARM_VARIABLE2, ALARM_WRITE
 
 $(document).on("click", ".open-AddBookDialog", function () {
     var myBookId = $(this).data('id');
+    var var1 = $(this).data('var1');
+    var var2 = $(this).data('var2');
+    
 //     $(".form-group #usr").val( myBookId );
 //     $(".form-group #pwd").val( myBookId ); 
     $("#haha").val(myBookId);
+    $("#haha2").val(var1);
+    $("#haha3").val(var2);
     // As pointed out in comments, 
     // it is superfluous to have to manually call the modal.
     // $('#addBookDialog').modal('show');
@@ -124,7 +131,6 @@ $(document).on("click", ".open-AddBookDialog", function () {
 
 	<thead>
 		<tr role="row">
-			<th style="text-align:center;">번호</th>
 			<th style="text-align:center;">구매자</th>
 			<th style="text-align:center;">배송상태</th>
 			<th style="text-align:center;">총 가격</th>										
@@ -147,44 +153,43 @@ $(document).on("click", ".open-AddBookDialog", function () {
 	</thead>
 
 	<div class="orderList">
- 		<c:forEach var="orderList" items="${orderList}" varStatus="stat">
+		<c:forEach var="ps_order" items="${orderList}" varStatus="orderListStatus">
  			<tr class="orderListContents" role="row">
  			
- 			<c:if test="${status.first}">
+ 			<%-- <c:if test="${status.first}"> --%>
  			
- 				<td style="text-align:center;vertical-align:middle;">${orderList.order_num}</td>
- 				<td style="text-align:center;vertical-align:middle;">${orderList.buyer_id}</td>
+ 				<td style="text-align:center;vertical-align:middle;">${ps_order.BUYER_ID}</td>
  				<td style="text-align:center;vertical-align:middle;">
- 					<c:if test="${orderList.status eq 0}">
+ 					<c:if test="${ps_order.STATUS eq 0}">
 					입금대기
 					</c:if>
-					<c:if test="${orderList.status eq 1}">
+					<c:if test="${ps_order.STATUS eq 1}">
 					입금완료 및 배송대기중
 					</c:if>
-					<c:if test="${orderList.status eq 2}">
+					<c:if test="${ps_order.STATUS eq 2}">
 					배송 및 인수확인 대기
 					</c:if>
-					<c:if test="${orderList.status eq 3}">
+					<c:if test="${ps_order.STATUS eq 3}">
 					인수확인 및 거래완료 
 					</c:if>
-					<c:if test="${orderList.status eq 4}">
+					<c:if test="${ps_order.STATUS eq 4}">
 					결제취소
 					</c:if>
  				</td>
- 				<td style="text-align:center;vertical-align:middle;">${orderList.total_price}</td>
- 				<td style="text-align:center;vertical-align:middle;">${orderList.destination}</td>
+ 				<td style="text-align:center;vertical-align:middle;">${ps_order.TOTAL_PRICE}</td>
+ 				<td style="text-align:center;vertical-align:middle;">${ps_order.DESTINATION}</td>
 <%--  				<td style="text-align:center;vertical-align:middle;">${orderList.account}</td> --%>
 <%--  				<td style="text-align:center;vertical-align:middle;">${orderList.account_name}</td> --%>
 <%--  				<td style="text-align:center;vertical-align:middle;">${orderList.bank}</td> --%>
- 				<td style="text-align:center;vertical-align:middle;">${orderList.purchase_num}</td>
+ 				<td style="text-align:center;vertical-align:middle;">${ps_order.ORDER_NUM}</td>
 <%--  				<td style="text-align:center;vertical-align:middle;">${orderList.delivery_company}</td> --%>
 <%--  				<td style="text-align:center;vertical-align:middle;">${orderList.invoice_num}</td> --%>
  				
  				<td style="text-align:center;vertical-align:middle;">
- 					<c:if test="${empty orderList.step2_date}">
+ 					<c:if test="${empty ps_order.STEP2_DATE}">
 					<i class="fa fa-remove"></i>
 					</c:if>
-					<c:if test="${not empty orderList.step2_date}">
+					<c:if test="${not empty ps_order.STEP2_DATE}">
 					<i class="fa fa-check"></i>
 					</c:if>
  				</td>
@@ -192,16 +197,28 @@ $(document).on("click", ".open-AddBookDialog", function () {
 <%--  				<c:url var="status1" value="/admin_order/confirmProc" > --%>
 <%-- 					<c:param name="order_num" value="${orderList.order_num}" />				 --%>  
 <%-- 				</c:url> --%>																	<%-- ALARM_TARGET, ALARM_VARIABLE1, ALARM_VARIABLE2, ALARM_WRITER,ALARM_KIND) alarmInsert('admin','empty','empty','${sessionScope.sessionId}',12)"/> --%>
-				 <a href="/picksell/admin_order/confirmProc?order_num=${orderList.order_num}"><input type="button" value="입금완료" onclick="alarmInsert('${orderList.buyer_id}','${orderList.order_num}','empty','픽셀 관리자','16')"></a>
-<%-- 				 <a href="${status1}"><input type="button" value="입금완료"></a> --%>
-
+				 <a href="/picksell/admin_order/confirmProc?order_num=${ps_order.ORDER_NUM}"><input type="button" value="입금완료" onclick="alert('완료되었습니다')"></a>
+				 <%-- ('${ps_order.BUYER_ID}','${ps_order.ORDER_NUM}','empty','픽셀 관리자','16') --%> 
+<%-- 				 <a href="${status1}"><input type="button" value="입금완료"></a>
  				</td>
- 				
+ 				  <%--  <c:forEach var="joinMap" items="${orderSubList[orderListStatus.index]}">
+ 				<script>
+ 				function alarmInsert2(){
+ 					alert(1);
+ 					alert('${joinMap.SELLER_ID}');
+ 					alert('${joinMap.SELLER_ID}');
+ 					//(ALARM_TARGET, ALARM_VARIABLE1, ALARM_VARIABLE2, ALARM_WRITER,ALARM_KIND){
+ 					//alarmInsert('${ps_order.BUYER_ID}','${ps_order.ORDER_NUM}','empty','픽셀 관리자','16');
+ 					alert(1);
+ 					} 
+ 				</script>
+ 				${joinMap.SELLER_ID}
+ 		    	</c:forEach> --%>
  				<td style="text-align:center;vertical-align:middle;">
- 					<c:if test="${empty orderList.step3_date}">
+ 					<c:if test="${empty ps_order.STEP3_DATE}">
 					<i class="fa fa-remove"></i>
 					</c:if>
-					<c:if test="${not empty orderList.step3_date}">
+					<c:if test="${not empty ps_order.STEP3_DATE}">
 					<i class="fa fa-check"></i>
 					</c:if>
  				</td>
@@ -209,20 +226,18 @@ $(document).on("click", ".open-AddBookDialog", function () {
  				<td style="text-align:center;vertical-align:middle;">
  				
  				<c:url var="status2" value="/admin_order/deliveryProc" >
-					<c:param name="order_num" value="${orderList.order_num}" />							
+					<c:param name="order_num" value="${ps_order.ORDER_NUM}" />							
 				</c:url>
 				
-				<input type="button" data-toggle="modal" class="open-AddBookDialog btn btn-primary" data-target="#myModal" data-id="${orderList.order_num}" value="배송중">
-				 
+				<input type="button" data-toggle="modal" class="open-AddBookDialog btn btn-primary" data-target="#myModal" data-id="${ps_order.ORDER_NUM}" data-var1="${ps_order.BUYER_ID}" data-var2="${ps_order.ORDER_NUM}" value="배송중">
 				 <!-- Modal -->
   				<div class="modal fade" id="myModal" role="dialog">
    				 <div class="modal-dialog">
-    
     			  <!-- Modal content-->
      			 <div class="modal-content">
       			  <div class="modal-header">
       	  			  <button type="button" class="close" data-dismiss="modal">&times;</button>
-      		   		 <h4 class="modal-title">택배사 / 송장번호 입력 </h4>
+      		   		 <h4 class="modal-title">택배사 / 송장번호 입력   ${ps_order.BUYER_ID}</h4>
       			  </div>
      		    <form action="/picksell/admin_order/deliveryProc" method="post">
    				 	<div class="form-group">
@@ -234,7 +249,9 @@ $(document).on("click", ".open-AddBookDialog", function () {
     				  <input type="text" name="invoice_num" value="Please type in a invoice number"class="form-control" id="invoice">
   		  			</div>
   		  			<input type="hidden" id="haha" name="order_num" value=""/>
-  		  			<input type="submit" class="btn btn-default" value="입력완료"/>
+  		  			<input type="hidden" id="haha2" name="ALARM_TARGET" value=""/>
+  		  			<input type="hidden" id="haha3" name="ALARM_VARIABLE1" value=""/>
+  		  			<input type="submit" class="btn btn-default" value="입력완료" onclick="test()"/>
  		 		</form>
 <!--        			 <div class="modal-footer"> -->
 <%--          			<a href="${status2}">  <button type="button" class="btn btn-default" >입력완료</button> </a> --%>
@@ -248,29 +265,33 @@ $(document).on("click", ".open-AddBookDialog", function () {
  				</td>
  				
  				<td style="text-align:center;vertical-align:middle;">
- 					<c:if test="${empty orderList.step4_date}">
+ 					<c:if test="${empty ps_order.STEP4_DATE}">
 					<i class="fa fa-remove"></i>
 					</c:if>
-					<c:if test="${not empty orderList.step4_date}">
+					<c:if test="${not empty ps_order.STEP4_DATE}">
 					<i class="fa fa-check"></i>
 					</c:if>
  				</td>
  				<td style="text-align:center;vertical-align:middle;">
  				<c:url var="status3" value="/admin_order/orderTerminate" >
-					<c:param name="order_num" value="${orderList.order_num}" />							
+					<c:param name="order_num" value="${ps_order.ORDER_NUM}" />							
 				</c:url>
-				 <a href="${status3}"><input type="button" value="인수확인"></a>
+				 <a href="${status3}"><input type="button" value="인수확인" onclick="alarmInsert()"></a>
  				</td>
  				
  				<td style="text-align:center;vertical-align:middle;">
 
-					<a href="/picksell/admin_order/orderDetail/${orderList.order_num}"><button class="button button1">상세보기</button></a>
+					<a href="/picksell/admin_order/orderDetail/${ps_order.ORDER_NUM}"><button class="button button1">상세보기</button></a>
 <!--  				<a href="#" class="button button1"><input type="button" value="상세보기"></a> -->
  				</td>
  				
- 			</c:if>
- 				
- 				<td style="text-align:center;vertical-align:middle;">${orderList.SELLER_ID}</td>
+ 			<%-- </c:if> --%>
+ 				<td style="text-align:center;vertical-align:middle;">
+ 			   <c:forEach var="joinMap" items="${orderSubList[orderListStatus.index]}">
+ 				<div>${joinMap.SELLER_ID}</div>
+ 		    	</c:forEach>
+ 		    	</td>
+ 				<%-- <td style="text-align:center;vertical-align:middle;">${orderList.seller_id}</td> --%>
  			</tr>
  			
  		</c:forEach>

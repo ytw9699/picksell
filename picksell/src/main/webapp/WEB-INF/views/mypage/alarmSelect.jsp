@@ -82,10 +82,11 @@ span.my__i-stat1.i-stat1-number {
 }
 .alarm1 {
     display: inline-block;
-    width: 37%;
-    text-align: left;
+    width: 46%;
     margin: 1%;
-    margin-right: -14%;
+    font-size: 15px;
+    box-sizing: border-box;
+    padding-left: 10px;
 }
 .alarm2 {
     display: inline-block;
@@ -96,20 +97,20 @@ span.my__i-stat1.i-stat1-number {
 }
 .alarm3 {
     display: inline-block;
-    width: 22%;
     text-align: center;
     margin: 1%;
-    margin-left: 16%;
+    color: #666;
+    font-size: 15px;
 }
 .alarm4 {
     display: inline-block;
-    width: 22%;
-    text-align: center;
-    margin: 1%;
-    margin-left: -15%;
+    box-sizing: border-box;
+    float: right;	
+    margin-right: 15px;
 }
 .alarm0 {
     font-size: 17px;
+    margin-top: 63px;
 }
 .next {
     width: 40%;
@@ -122,7 +123,6 @@ span.my__i-stat1.i-stat1-number {
     font-size: 12px;
 }
 #myAlarm2 {
-    margin-right: -18%;
     background-color: #e80935;
     color: white;
     font-size: 12px;
@@ -132,7 +132,6 @@ span.my__i-stat1.i-stat1-number {
     line-height: 21px;
     display: inline-block;
     text-align: center;
-    margin-left: 15%;
 }
 #myAlarm3{
     margin-right: -18%;
@@ -151,8 +150,11 @@ span.my__i-stat1.i-stat1-number {
     background-color: #dedede;
     width: 61.4%;
 }
-.alarmWrapper{
-	width: 61.4%;
+.alarmWrapper {
+    width: 71%;
+    box-sizing: border-box;
+    padding-bottom: 20px;
+    padding-top: 10px;
 }
 
 </style>
@@ -222,6 +224,23 @@ function alarmDelete(ALARM_NUM){
 	<c:forEach var="alarmMap" items="${alarmList}" varStatus="Index">
 	<div class="alarmWrapper <c:if test="${(Index.index + 3) % 2 == 1 }">holsoo</c:if>">
 			 
+	
+		<c:if test="${alarmMap.ALARM_KIND == '0'}">
+			<div class="alarm1">
+			<a href="/picksell/products/detail/${alarmMap.ALARM_VARIABLE1}/${alarmMap.ALARM_VARIABLE2}" onclick="alarmRead('${alarmMap.ALARM_NUM}')">
+			 		${alarmMap.ALARM_WRITER}님이 상품문의 답글을 작성했습니다
+			</a>
+			</div>
+		</c:if>
+		
+		<c:if test="${alarmMap.ALARM_KIND == '1'}">
+			<div class="alarm1">
+			<a href="/picksell/products/detail/${alarmMap.ALARM_VARIABLE1}/${alarmMap.ALARM_VARIABLE2}" onclick="alarmRead('${alarmMap.ALARM_NUM}')">
+			 		${alarmMap.ALARM_WRITER}님이 상품문의를 작성했습니다 
+			</a>
+			</div>
+		</c:if>
+		
 		<c:if test="${alarmMap.ALARM_KIND == '2'}">
 			<div class="alarm1">
 			<a href="/picksell/products/detail/${alarmMap.ALARM_VARIABLE1}/${alarmMap.ALARM_VARIABLE2}" onclick="alarmRead('${alarmMap.ALARM_NUM}')">
@@ -242,7 +261,7 @@ function alarmDelete(ALARM_NUM){
 	      <c:if test="${alarmMap.ALARM_KIND == '4'}"> 
 				<div class="alarm1">
 				<a href="/picksell/mypage/orderDetail/${alarmMap.ALARM_VARIABLE1}" onclick="alarmRead('${alarmMap.ALARM_NUM}')">
-					${alarmMap.ALARM_WRITER}님께서 배송을 시작하셨습니다.
+					구매하신 제품의 배송이 출발하였습니다.
 					
 				</a>
 				</div>
@@ -323,7 +342,7 @@ function alarmDelete(ALARM_NUM){
 	     <c:if test="${alarmMap.ALARM_KIND == '16'}">
 				<div class="alarm1">
 				<a href="/picksell/mypage/orderDetail/${alarmMap.ALARM_VARIABLE1}" onclick="alarmRead('${alarmMap.ALARM_NUM}')">
-					${alarmMap.ALARM_WRITER}가 입금을 완료 하였습니다.
+					${alarmMap.ALARM_WRITER}님이 입금을 완료 하였습니다.
 				</a>
 				</div>
 	     </c:if>
@@ -343,6 +362,7 @@ function alarmDelete(ALARM_NUM){
 		</div>
 	</c:forEach>
 </c:if>
+</div>
 </div>
 <div class="paging">
 ${pagingHtml}

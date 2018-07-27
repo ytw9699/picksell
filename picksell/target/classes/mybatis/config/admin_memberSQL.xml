@@ -38,7 +38,7 @@ PUBLIC " - //mybatis.org//DTD Config 3.0//EN"
    </select>
    
     <select id="selectOneMember" resultType="hashmap" parameterType="string">
-       SELECT ID,NAME,EMAIL,ADDRESS,STATUS,ALARM_CONSENT,REGDATE,KIND
+       SELECT ID,PROFILE_IMG,NAME,EMAIL,ADDRESS,STATUS,ALARM_CONSENT,REGDATE,KIND
        FROM PS_MEMBER WHERE id = #{id}
     </select>
     

@@ -96,6 +96,8 @@ img#mainPic {
 img#mainPic2 {
     width: 100%;
     max-height: 360px;
+    /* height: 9px; */
+    margin-top: 47px;
 }
 .bigdiv {
     width: 50%;
@@ -158,7 +160,7 @@ else if(NewPassword !== rePassword){//
 	        <label for="profile" id="profileSearch">프로필 이미지 찾기</label>
 			<input type="file" name="PROFILE_IMG" id="profile" /><br>
 			<input type="submit" class="next1" id="profileConfirm" value="확인" />
-			<input type="button" class="next1" value="기본이미지 사용하기" onclick="location.href='/picksell/mypage/defaultProfile'"/>
+			<input type="button" class="next1" value="기본이미지" onclick="location.href='/picksell/mypage/defaultProfile'"/>
 			<input type="button" class="next1" value="취소" onclick="javascript:closeProfileMod();" />
 		</form>
 	</div>

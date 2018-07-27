@@ -69,10 +69,29 @@ table.purchaseTABLE {
 width: 10%;
 margin-top: 10%;
 }
+span.hasNoOrderList {
+    display: block;
+    /* border: 1px solid #999; */
+    width: 30%;
+    margin: 0 auto;
+    margin-top: 50px;
+    text-align: center;
+    color: #999;
+    font-size: 22px;
+    padding-bottom: 11px;
+}
+.confirm-auth-box {
+    color: #7151FC;
+    border-bottom: 2px solid #ececec;
+    padding: 15px 0 15px 20px;
+    font-size: 26px;
+    margin: 0;
+    width: 25%;
+}
 </style>
 </head>
 <body>
-<h2>최근 본 상품</h2>
+<div class="confirm-auth-box">최근 본 상품</div>
 최근 본 상품을 기준으로 최대 50개까지 저장됩니다.
 
 
@@ -99,7 +118,7 @@ margin-top: 10%;
 	</c:forEach>
 </c:if>
 <c:if test="${fn:length(recentlist) < 1}">
-<p>최근 본 상품이 없습니다.</p>
+<span class="hasNoOrderList">최근 본 상품이 없습니다</span>
 </c:if>
 </table>
 </div>

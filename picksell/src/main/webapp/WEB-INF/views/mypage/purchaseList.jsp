@@ -13,6 +13,15 @@
 table.purchaseTABLE {
     width: 105%; 
 }
+.confirm-auth-box {
+    color: #7151FC;
+    border-bottom: 2px solid #ececec;
+    padding: 15px 0 15px 20px;
+    font-size: 26px;
+    margin: 0;
+        margin-bottom: 21px;
+    width: 25%;
+}
 .next {
     width: 80%;
     margin: 0 auto;
@@ -36,6 +45,17 @@ table.purchaseTABLE {
 .tbodys{
 width: 10%;
 margin-top: 10%;
+}
+span.hasNoOrderList {
+    display: block;
+    /* border: 1px solid #999; */
+    width: 22%;
+    margin: 0 auto;
+    margin-top: 50px;
+    text-align: center;
+    color: #999;
+    font-size: 22px;
+    padding-bottom: 11px;
 }
 </style>
 </head>
@@ -69,7 +89,7 @@ margin-top: 10%;
 	}
 	
 </script>
-<h2>중고 구매 요청 리스트</h2> 
+<div class="confirm-auth-box">중고 구매 요청 리스트</div>
 
 <div class="purchaseList">	
 <table class="purchaseTABLE" cellpadding="0" cellspacing="0">
@@ -111,7 +131,7 @@ margin-top: 10%;
 </table>
 </div>
 <c:if test="${fn:length(purchaseList) < 1}">
-<p>내역이 없습니다.</p>
+<span class="hasNoOrderList">내역이 없습니다</span>
 </c:if>
 </body>
 </html>

@@ -15,10 +15,15 @@ public class AdminPaymentService implements AdminPaymentDAO {
 	private SqlSessionTemplate sqlSessionTemplate;
 	
 	// 오더 리스트 
-	@Override
+	/*@Override
 	public List<AdminPaymentModel> orderList(){
 		return sqlSessionTemplate.selectList("adminOrder.orderList-all");
+	}*/
+	
+	public List<Map<String, Object>> orderList() {
+		return sqlSessionTemplate.selectList("adminOrder.orderList-all");
 	}
+	
 	// 오더 상세보기 
 	public Map<String,Object> orderDetail(int order_num){
 		return sqlSessionTemplate.selectOne("adminOrder.orderDetail",order_num);
@@ -75,6 +80,13 @@ public class AdminPaymentService implements AdminPaymentDAO {
 	// to pick up some colums from ps_orderlist
 	public AdminPaymentModel orderGetOne(String order_num) {
 		return sqlSessionTemplate.selectOne("adminOrder.orderGetOne", order_num);
+	}
+	public List<Map<String, Object>> orderList3(Map<String, Object> parameterMap) {//by태원
+		return sqlSessionTemplate.selectList("adminOrder.orderList3", parameterMap);
+	}
+	
+	public List<Map<String, Object>> orderSubList2(String string) {
+		return sqlSessionTemplate.selectList("mypage.orderSubList2", string);
 	}
 	
 }

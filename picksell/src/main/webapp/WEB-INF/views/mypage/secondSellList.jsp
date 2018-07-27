@@ -37,6 +37,16 @@ table.purchaseTABLE {
 width: 10%;
 margin-top: 10%;
 }
+.confirm-auth-box {
+    color: #7151FC;
+    border-bottom: 2px solid #ececec;
+    padding: 15px 0 15px 20px;
+    font-size: 26px;
+    margin: 0;
+    width: 25%;
+        margin-bottom: 21px;
+}
+}
 </style>
 </head>
 <body>
@@ -126,8 +136,7 @@ function purchaseApproveCancel(eventElement, purchaseNumber, buyer, category_num
 	});
 }
 </script>
-<h2>중고 판매 요청 리스트</h2> 
-
+<div class="confirm-auth-box">중고 판매 요청 리스트</div>
 <div class="purchaseList">	
 <table class="purchaseTABLE" cellpadding="0" cellspacing="0">
 <c:if test="${fn:length(secondSellList) > 0}">
@@ -163,7 +172,7 @@ function purchaseApproveCancel(eventElement, purchaseNumber, buyer, category_num
 </table>
 </div>
 <c:if test="${fn:length(secondSellList) < 1}">
-<p>내역이 없습니다.</p>
+<span class="hasNoOrderList">내역이 없습니다.</span>
 </c:if>
 </body>
 </html>
