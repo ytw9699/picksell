@@ -64,7 +64,7 @@ public class BasketController {
 	}
 	
 	//장바구니담기
-	@RequestMapping("/cart/into/{pn}/{currentID}")
+	@RequestMapping("/cart/into/{pn}/{currentID}") //제품 넘버와 현재 아이디(세션값)을 넣는다 
 	public String putBasket(
 			@PathVariable("pn") int product_num,
 			@PathVariable("currentID") String currentID,

@@ -26,19 +26,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="cancel_date" column="cancel_date"/>
 		<result property="seller_id" column="seller_id"/>
 		
+		
+		
 	</resultMap>
 	<!-- 전체 주문리스트 -->
-	
-	<select id="orderList-all" resultType="hashmap">
-			SELECT * FROM ps_order a INNER JOIN ps_orderlist b
+	<select id="orderList-all" resultMap="orderRes">
+		SELECT a.order_num, a.buyer_id, a.status, a.total_price, 
+        a.destination, a.account, a.account_name, a.bank, a.purchase_num,
+        a.delivery_company, a.invoice_num, a.step1_date, a.step2_date, 
+        a.step3_date, a.step4_date, a.cancel_date, b.seller_id
+		FROM ps_order a INNER JOIN ps_orderlist b
 		ON a.order_num = b.order_num ORDER BY a.order_num desc
 	</select>
 	
-	<select id="orderList3" resultType="hashmap" parameterType="hashmap">
-	SELECT *FROM ps_order a INNER JOIN ps_orderlist b
-			ON a.order_num = b.order_num and a.ORDER_NUM = #{ORDER_NUM} ORDER BY a.order_num desc
+	<select id="orderList-all2" resultType="hashmap">
+		SELECT a.order_num, b.seller_id
+		FROM ps_order a INNER JOIN ps_orderlist b
+		ON a.order_num = b.order_num ORDER BY a.order_num desc
 	</select>
-
+	
 	<!-- 전체 주문리스트 -->
 <!-- 	<select id="orderList-all" resultMap="orderRes"> -->
 <!-- 		SELECT * FROM ps_order ORDER BY order_num desc -->
