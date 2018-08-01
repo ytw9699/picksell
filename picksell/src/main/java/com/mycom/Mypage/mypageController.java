@@ -7,71 +7,20 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Properties;
-
 import javax.annotation.Resource;
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.PasswordAuthentication;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
-import javax.mail.internet.MimeUtility;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartRequest;
-import org.springframework.web.servlet.ModelAndView;
-
-import com.mycom.Member.CookieBox;
 import com.mycom.client_product.ProductService;
 import com.mycom.config.CommandMap;
-import com.mycom.utils.FileUpload;
-
-
-//
-import java.io.File;
-import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Properties;
-import java.util.UUID;
-
-import javax.annotation.Resource;
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.PasswordAuthentication;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
-import javax.mail.internet.MimeUtility;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class mypageController {
@@ -186,6 +135,7 @@ public class mypageController {
 		
 		return "purchaseList";
 	}
+	
 	//중고구매 판매리스트
 	@RequestMapping("/mypage/secondSellList")
 	public String secondSellList(Model model, HttpSession session) {
@@ -202,16 +152,19 @@ public class mypageController {
 	@ResponseBody
 	@RequestMapping(value="/mypage/deletePurchaseList", method=RequestMethod.GET)
 	public int deletePurchaseList(@RequestParam(value="PURCHASE_NUM") String PURCHASE_NUM) {
+		
 		Map<String, Object> parameterMap = new HashMap<String, Object>();
+		
 		parameterMap.put("PURCHASE_NUM",PURCHASE_NUM);
+		
 		int deleteReturn = mypageService.deletePurchaseList(parameterMap);//삭제되면 1리턴
+		
 		return deleteReturn;
 	}
 	
-	
 	@RequestMapping(value="/admin_order/list2",method=RequestMethod.GET)
-	public String adminOrderList(Model model, HttpSession session
-	) {	
+	public String adminOrderList(Model model, HttpSession session ) {	
+		
  	Map<String, Object> parameterMap = new HashMap<String, Object>();
 
     List orderSubList = new ArrayList();
@@ -229,12 +182,12 @@ public class mypageController {
 	return "/admin_order/orderList";
 	}
 	
-	
 	@RequestMapping(value="/mypage/orderList",method=RequestMethod.GET)
 	public String orderList(Model model, HttpSession session,
 	@RequestParam(value="status", required=false, defaultValue="5") String status,//기본값 5는 전체보기
 	@RequestParam(value="p", required=false, defaultValue="1") int currentPageNumber
 	) {	
+		
 	Map<String, Object> parameterMap = new HashMap<String, Object>();
 	
 	parameterMap.put("status", status);
@@ -244,10 +197,12 @@ public class mypageController {
     String sessionId =(String)session.getAttribute("sessionId");
     
     parameterMap.put("sessionId", sessionId);
+    
     List<Map<String, Object>> orderList = mypageService.orderList(parameterMap);//PS_ORDER
     //select * from ps_order where buyer_id = #{sessionId}
    
     totalCount = orderList.size();
+    
     page2 = new orderListPaging(currentPageNumber, totalCount, blockCount, blockPage, "/picksell/mypage/orderList", status);
 	
 	pagingHtml = page2.getPagingHtml().toString();
@@ -273,9 +228,8 @@ public class mypageController {
     model.addAttribute("pagingHtml", pagingHtml);
 
 	return "orderList";
-	
-	
 }
+	
 	@RequestMapping("/mypage/saleList")
 	public String saleList(Model model, HttpSession session	,
 	@RequestParam(value="status", required=false, defaultValue="5") String status,//기본값 5는 전체보기
@@ -315,10 +269,10 @@ public class mypageController {
 		Map<String, Object> saleCount =  mypageService.saleCount(sessionId);
 		  
 	    model.addAttribute("saleCount", saleCount);
+	    model.addAttribute("saleList", saleList);
+	    model.addAttribute("saleSubList", saleSubList);
+	    model.addAttribute("pagingHtml", pagingHtml);
 	    
-	model.addAttribute("saleList", saleList);
-	model.addAttribute("saleSubList", saleSubList);
-	model.addAttribute("pagingHtml", pagingHtml);
 	return "saleList";
 }
 	@RequestMapping(value="/mypage/orderDetail/{ORDER_NUM}", method=RequestMethod.GET)
@@ -334,6 +288,7 @@ public class mypageController {
 			
 		return "orderDetail";
 	}
+			
 	@RequestMapping(value="/mypage/saleDetail/{ORDER_NUM}", method=RequestMethod.GET)
 	public String sailDetail(Model model, @PathVariable("ORDER_NUM") int ORDER_NUM, HttpSession session,
 			@RequestParam(value="ALARM_NUM",required=false, defaultValue="0") int ALARM_NUM
@@ -357,23 +312,30 @@ public class mypageController {
 			if(ALARM_NUM != 0) {
 			mypageService.alarmRead(ALARM_NUM);//알람읽기	
 			}
-			
 		return "saleDetail";
 	}
+	
 	@ResponseBody
 	@RequestMapping(value="/mypage/pulsStock", method=RequestMethod.GET)
 	public String pulsStock(HttpServletRequest Request) {//재고 1 증가
+		
 		String PRODUCT_NUM = Request.getParameter("PRODUCT_NUM");
+		
 		mypageService.pulsStock(PRODUCT_NUM);
 		
 		return "String";//ajax에서 json이 아니라 text여야함
 	}	
+	
 	@ResponseBody//이렇게 선언하고
 	@RequestMapping(value="/mypage/minusStock", method=RequestMethod.GET)
 	public Map minusStock(HttpServletRequest Request) {//재고 1감소
+		
 		String PRODUCT_NUM = Request.getParameter("PRODUCT_NUM");
+		
 		mypageService.minusStock(PRODUCT_NUM);
-			Map<String, Object> parameterMap = new HashMap<String, Object>();
+		
+		Map<String, Object> parameterMap = new HashMap<String, Object>();
+		
 		return parameterMap;//값을 이렇게 걍 아무거나 넘겨줘야 dataType : 'json',과 연관되서
 		//success : function(data) 안의 값이 실행됨
 }
@@ -397,8 +359,10 @@ public class mypageController {
 		parameterMap.put("ALARM_KIND",ALARM_KIND);
 		
 		mypageService.alarmInsert(parameterMap);//알람 입력
+		
 		return parameterMap;
 }
+	
 	@RequestMapping("/mypage/alarmSelect")//알람을 허용한 사람만 리스트 가져오기
 	public String alarmSelect(HttpSession session, Model model, 
 	@RequestParam(value="ALARM_CHECK", required=false, defaultValue="ALL") String ALARM_CHECK,//기본값 ALL 은 전체보기
@@ -409,6 +373,7 @@ public class mypageController {
 		
 		String sessionId =(String)session.getAttribute("sessionId");//세션아이디값
 		String sessionAlarm =(String)session.getAttribute("sessionAlarm");//세션알람값
+		
 		parameterMap.put("ALARM_CHECK", ALARM_CHECK);
 		parameterMap.put("sessionId", sessionId);
 	
@@ -417,8 +382,10 @@ public class mypageController {
 	}
 	else {//알림이 ON일때만 리스트 가져오자
 		List<Map<String, Object>> alarmList = mypageService.alarmSelect(parameterMap);//세션아이디에 해당하는 알람 가져옴
+		
 		totalCount = alarmList.size();
-	    page3 = new alarmSelectPaging(currentPageNumber, totalCount, blockCount, blockPage, "/picksell/mypage/alarmSelect", ALARM_CHECK);
+	  
+		page3 = new alarmSelectPaging(currentPageNumber, totalCount, blockCount, blockPage, "/picksell/mypage/alarmSelect", ALARM_CHECK);
 		
 		pagingHtml = page3.getPagingHtml().toString();
 		
@@ -430,35 +397,14 @@ public class mypageController {
 		alarmList = alarmList.subList(page3.getStartCount(), lastCount);
 		
 		Map<String, Object> alarmCountKind =  mypageService.alarmCountKind(sessionId);
-	    System.out.println(alarmCountKind);
-	    model.addAttribute("pagingHtml", pagingHtml);
-		 
+
+		model.addAttribute("pagingHtml", pagingHtml);
 		model.addAttribute("alarmList", alarmList);
-		
 		model.addAttribute("alarmCountKind", alarmCountKind);
 		
 		return "alarmSelect";
     } 
 }
-/*	@RequestMapping("/mypage/alarmCount")
-	public String alarmCount(HttpSession session, Model model) {//알람을 허용한 사람만 리스트 가져오기
-		
-	String sessionId =(String)session.getAttribute("sessionId");//세션아이디값
-	String sessionAlarm =(String)session.getAttribute("sessionAlarm");//세션알람값
-	
-	if(!sessionAlarm.equals("ON")){
-	 return "alarmCount";
-	}
-	else {//알림이 ON일때만 리스트 가져오자
-		
-		int alarmCount = mypageService.alarmCount(sessionId);//세션아이디에 해당하는 알람 가져옴
-		//select count(*) from ps_alarm where ALARM_TARGET = '2' and alarm_check = 'NO'
-		model.addAttribute("alarmCount", alarmCount);
-		
-		return "alarmCount";
-    } 
-}*/
-	//알람 하나삭제
 	@ResponseBody
 	@RequestMapping(value="/mypage/alarmDelete", method=RequestMethod.GET)
 	public int alarmDelete(@RequestParam(value="ALARM_NUM") String ALARM_NUM) {
@@ -530,6 +476,7 @@ public class mypageController {
 			}
 			return "completing";//인수확인 및 거래 완료가 정상적으로 안됬을때
 	}
+	
 	@RequestMapping("/mypage/recentProduct")
 	public String recentProduct(HttpSession session,Model model,
 			@RequestParam(value="p", required=false, defaultValue="1") int currentPageNumber) {
@@ -557,6 +504,7 @@ public class mypageController {
 		
 		return "recentProduct";
 	}
+	
 	/*최근본상품 전체삭제*/
 	@RequestMapping("/mypage/deleteRecenPd")
 	public String deleteRecenPd(HttpSession session,Model model) {
@@ -567,12 +515,15 @@ public class mypageController {
 		
 		return "redirect:/mypage/recentProduct";
 	}
+	
 	@RequestMapping("/mypage/EachdeleteRecenPd")
 	public String EachdeleteRecenPd(@RequestParam(value="RECENT_NUM",required=false, defaultValue="0") int RECENT_NUM
 			) {
 		mypageService.EachdeleteRecenPd(RECENT_NUM);
+		
 		return "redirect:/mypage/recentProduct";
 	}
+	
 	@RequestMapping("/mypage/alarmCount")
 	@ResponseBody
 	public Map<String, Object> alarmCount(HttpSession session){
@@ -589,6 +540,7 @@ public class mypageController {
 	}
 		return resultMap;
 }
+	
 	@RequestMapping("/mypage/deliveryInsert")
 	public String deliveryInsert(Model model,//배송사항 입력
 	@RequestParam(value="ORDER_NUM",required=false, defaultValue="0") String ORDER_NUM,
@@ -623,10 +575,11 @@ public class mypageController {
 	public Map<String, Object> alarmRead(
 			@RequestParam(value="ALARM_NUM",required=false, defaultValue="0") int ALARM_NUM
 			){
+		
 		productService.alarmRead(ALARM_NUM);
+		
 		return resultMap;
 }
-	
 	//프로필 이미지 업로
 		@RequestMapping(value="/mypage/profile", method=RequestMethod.POST)
 		public String profile(
@@ -638,15 +591,21 @@ public class mypageController {
 			
 			//자신의아이디+현재시간+타입
 			String imgFileName = file.getOriginalFilename();
+			
 			String imgFileType = imgFileName.substring(imgFileName.lastIndexOf("."), imgFileName.length());
+			
 			Calendar cal = Calendar.getInstance();
+			
 			String replaceName = sessionId+cal.getTimeInMillis()+imgFileType;
 			
 			//이미지 업로드
 			String path = request.getSession().getServletContext().getRealPath("/")+File.separator+"resources/profileImgUpload";
+		
 			File uploadPROFILE_IMG = new File(path, replaceName);
+			
 			file.transferTo(uploadPROFILE_IMG);
-			System.out.println(path); //경로확인
+			//System.out.println(path); //경로확인
+			
 			map.put("PROFILE_IMG", replaceName);
 			map.put("sessionId", sessionId);
 			
@@ -654,11 +613,14 @@ public class mypageController {
 			
 			return "redirect:/mypage/modify";
 		}
+		
 		@RequestMapping("/mypage/defaultProfile")
 		public String profile(HttpSession session){
+			
 			String sessionId = (String) session.getAttribute("sessionId");
 			
 			mypageService.defaultProfile(sessionId);
+			
 			return "redirect:/mypage/modify";
 		}
 		
@@ -666,7 +628,9 @@ public class mypageController {
 		@ResponseBody
 		  public List<Map<String, Object>> getMyAlarmHeaderList(
 		         HttpServletRequest request){
+			
 		      List<Map<String, Object>> resultHeaderAlarmList;
+		      
 		      String currentID = request.getSession().getAttribute("sessionId").toString();
 		      String currentONOFF = request.getSession().getAttribute("sessionAlarm").toString();
 		      

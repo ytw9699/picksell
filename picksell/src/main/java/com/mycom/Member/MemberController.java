@@ -1,13 +1,9 @@
 package com.mycom.Member;
 
-import java.io.File;
 import java.io.IOException;
-import java.util.Calendar;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Properties;
-
 import javax.annotation.Resource;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -20,22 +16,14 @@ import javax.mail.internet.MimeUtility;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartRequest;
 import org.springframework.web.servlet.ModelAndView;
-
 import com.mycom.config.CommandMap;
-import com.mycom.utils.FileUpload;
 
 	@Controller
 	public class MemberController {
@@ -147,10 +135,6 @@ import com.mycom.utils.FileUpload;
 		Map<String, Object> parameterMap = new HashMap<String, Object>();
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		
-	/*	System.out.println(request.getSession().getAttribute("sessionId"));
-		System.out.println(request.getSession().getAttribute("sessionAlarm"));
-		System.out.println(request.getParameter("currentAlarm"));*/
-		
 		//디비 알람상태 바꾸는 로직
 		parameterMap.put("sessionId", request.getSession().getAttribute("sessionId").toString());
 		parameterMap.put("currentAlarm", request.getParameter("currentAlarm"));
@@ -188,10 +172,11 @@ import com.mycom.utils.FileUpload;
     	 //int check = 0;
     	 
     	 authNum = RandomNum();
-    	 //System.out.println(email);
+    	 
     	 sendEmail(email.toString(), authNum);
     	 
     	 ModelAndView mv = new ModelAndView();
+    	 
     	 mv.setViewName("/join/emailAuth");
     	 mv.addObject("email",email);
     	 mv.addObject("authNum",authNum);
@@ -268,7 +253,6 @@ import com.mycom.utils.FileUpload;
 		Map<String, Object> paramMap = new HashMap<String, Object>();
 		
 		paramMap.put("email", email);
-		
 		paramMap.put("name", name);
 		
 		String findId = MemberService.findId(paramMap);
@@ -303,6 +287,3 @@ import com.mycom.utils.FileUpload;
 	}
 	}
 	}	
-   	 
-	
-	

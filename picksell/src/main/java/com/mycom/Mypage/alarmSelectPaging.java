@@ -193,4 +193,3 @@ public class alarmSelectPaging {
 		MappingName = mappingName;
 	}
 }
-//주석테스트
