@@ -48,7 +48,7 @@ span.my__i-stat1.i-stat1-number {
     border: 1px solid #cecece;
     padding: 10px;
     margin: 50px;
-    width: 63%;
+    width: 87%;
 }
 .test2 {
     background: #f9f9f9;
@@ -161,7 +161,7 @@ a.paging {
 <c:forEach var="ps_order" items="${orderList}" varStatus="orderListStatus">
 <div class="test">
 <div class="test2">
-<span class="test3">주문일 <fmt:formatDate value="${ps_order.STEP1_DATE}" pattern="yyyy년 MM월 dd일 hh:mm" /></span>
+<span class="test3">주문일 <fmt:formatDate value="${ps_order.STEP1_DATE}" pattern="yy년 MM월 dd일 hh:mm" /></span>
 <span class="test4"><a href="/picksell/mypage/orderDetail/${ps_order.ORDER_NUM }">상세보기 > </a></span>
 </div>
 <div id="ddd">

@@ -89,7 +89,7 @@
     height: 46px;
     border: 1px solid gray;
     display: block;
-    width: 83%;
+    width: 109%;
     height: 55px;
     font-size: 15px;
     padding-left: 11px;

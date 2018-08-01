@@ -99,6 +99,7 @@ span.hasNoOrderList {
     left:380px;
 }
 .test5 {
+	color: #7151fc;
     margin-top: 13px;
     border: 1px solid #cecece;
     padding: 12px;

@@ -30,7 +30,7 @@ body{
 	min-height: 500px;
 	} 
 .inputclass {
-    width: 13%;
+    width: 19%;
     margin: 6px;
     border-radius: 9px;
     font-size: 15px;
@@ -86,6 +86,7 @@ body{
     padding: 2px;
     font-size: 15px;
     border-radius: 10px;
+    margin-left: -4%;
 }
 .terms{
 overflow-y: scroll;

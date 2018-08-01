@@ -50,9 +50,9 @@
     font-size: 19px;
 }
 .inputclass {
-    width: 17%;
+    width: 20%;
     margin: 6px;
-    margin-left: -40px;
+    margin-left: -28px;
     border-radius: 9px;
     font-size: 15px;
     height: 49px;

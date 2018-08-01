@@ -44,17 +44,15 @@ table.purchaseTABLE {
     font-size: 17px;
     text-align: center;
 }
-
 .categoryList {
-    width: 55%;
+    width: 65%;
     padding-top: 25px;
     padding-bottom: 25px;
     display: inline-block;
     box-sizing: border-box;
-/*     border: 1px solid #ececec; */
+    /* border: 1px solid #ececec; */
     height: 71px;
 }
-
 span.product_category > a {
     border: 1px solid #dbdbdb;
     padding: 8px;

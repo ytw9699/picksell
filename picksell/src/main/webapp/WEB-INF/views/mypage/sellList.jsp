@@ -80,12 +80,12 @@ span.hasNoOrderList {
     padding-bottom: 11px;
 }
 .categoryList {
-    width: 55%;
+    width: 70%;
     padding-top: 25px;
     padding-bottom: 25px;
     display: inline-block;
     box-sizing: border-box;
-/*     border: 1px solid #ececec; */
+    /* border: 1px solid #ececec; */
     height: 71px;
 }
 

@@ -82,7 +82,7 @@ span.my__i-stat1.i-stat1-number {
 }
 .alarm1 {
     display: inline-block;
-    width: 46%;
+    width: 47%;
     margin: 1%;
     font-size: 15px;
     box-sizing: border-box;
@@ -96,9 +96,10 @@ span.my__i-stat1.i-stat1-number {
     margin-right: 0%;
 }
 .alarm3 {
-    display: inline-block;
+        display: inline-block;
     text-align: center;
     margin: 1%;
+    margin-left: 5%;
     color: #666;
     font-size: 15px;
 }
@@ -134,8 +135,7 @@ span.my__i-stat1.i-stat1-number {
     text-align: center;
 }
 #myAlarm3{
-    margin-right: -18%;
-    background-color: white;
+     margin-right: 0%;
     color: white;
     font-size: 12px;
     border-radius: 203px;
@@ -144,8 +144,10 @@ span.my__i-stat1.i-stat1-number {
     line-height: 21px;
     display: inline-block;
     text-align: center;
-    margin-left: 15%;
+    margin-left: 0%;
+   /*  border: 1px solid gray; */
 }
+
 .holsoo {
     background-color: #dedede;
     width: 61.4%;
