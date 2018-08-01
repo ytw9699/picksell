@@ -6,7 +6,15 @@
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Insert title here</title>
 </head>
-
+<style>
+.path{
+    color: #7151FC;
+    border-bottom: 2px solid #ececec;
+    padding: 15px 0 15px 20px;
+    font-size: 15px;
+    margin: 0;
+}
+</style>
 <script type="text/javascript">
 function windowclose(){
 	//opener.document.commonForm.mailCheck.value="인증완료";
@@ -40,7 +48,7 @@ function check(){
 
 <body>
 
-<h5>인증 번호 7자리를 입력하세요</h5>
+<div class="path">인증 번호 7자리를 입력하세요</div>
 
 <form method="post" name="authenform" onSubmit="return check();">
 	<input type="text" name="authnum"><br /><br />
