@@ -1,37 +1,19 @@
 package com.mycom.main;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartRequest;
-import org.springframework.web.servlet.ModelAndView;
-
 import com.mycom.client_product.ProductPaging;
 import com.mycom.client_product.ProductService;
-import com.mycom.config.CommandMap;
-import com.mycom.utils.FileUpload;
 
 @Controller
 public class mainController {
-	//페이징
-		//private int currentPage = 1; //안쓰는변수 어노테이션으로 해결함
+	    //페이징
 		private int totalCount; 		 
 		private int blockCount = 10;	 
 		private int blockPage = 5; 	 
@@ -40,7 +22,6 @@ public class mainController {
 		private mainSearchListPaging page2;
 		
 	Map<String, Object> resultMap = new HashMap<String, Object>();//공통사용
-	
 	
 	@Resource(name="mainService")
 	private mainService mainService;
@@ -60,8 +41,8 @@ public class mainController {
 		model.addAttribute("plusProductList", plusProductList);
 		model.addAttribute("hotProductList", hotProductList);
 		model.addAttribute("hotCategoryList", hotCategoryList);
-		return "main";
 		
+		return "main";
 	}
 	@RequestMapping("/hotPlusProduct/main")
 	public String hotPlusProductMain(Model model) {	
@@ -79,19 +60,20 @@ public class mainController {
 				@RequestParam(value="p", required=false, defaultValue="1") int currentPageNumber,
 				Model model) {
 			
-			//정렬은 0 > 최신순, 1 > 낮은가격순, 2 > 높은가격순
-			
-			//카테고리0 일때 전체상품카테고리 / 카테고리0 아닐때 해당 카테고리리스트
-			//카테고리가0이 아니면 해당카테고리에 대한 모든 상품
 			Map<String, Object> parameterMap = new HashMap<String, Object>();
+			
 			parameterMap.put("category", category_num);
 			parameterMap.put("orderMethod", orderMethod);
+			
 			List<Map<String, Object>> resultList = mainService.hotPlusProduct(parameterMap);
 			List<Map<String, Object>> categoryList = productService.getCategoryList();
 			
 		    totalCount = resultList.size();
+		    
 			page = new ProductPaging(currentPageNumber, totalCount, blockCount, blockPage, "/picksell/hotPlusProduct", category_num, orderMethod);
+			
 			pagingHtml = page.getPagingHtml().toString();
+			
 			int lastCount = totalCount;
 			
 			if(page.getEndCount() < totalCount)
@@ -118,6 +100,7 @@ public class mainController {
 			@RequestParam(value="searchKeyword", required=false, defaultValue="") String searchKeyword,
 			@RequestParam(value="p", required=false, defaultValue="1") int currentPageNumber,
 			Model model) {
+		
 		Map<String, Object> parameterMap = new HashMap<String, Object>();
 		
 		parameterMap.put("HowToSell", HowToSell);
@@ -143,7 +126,6 @@ public class mainController {
 		
 		model.addAttribute("pagingHtml", pagingHtml);
 		model.addAttribute("currentPage", currentPageNumber);
-		
 		model.addAttribute("HowToSell", HowToSell);
 		model.addAttribute("searchKeyword", searchKeyword);
 		model.addAttribute("mainSearchList", mainSearchList);
