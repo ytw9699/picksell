@@ -94,7 +94,7 @@ span.hasNoOrderList {
     margin-top: 13px;
     color: #7151fc;
     float: right;
-    font-size: 22px;
+    font-size: 20px;
     margin-right: 113px;
     width: 27%;
     /* margin-top: 8%; */

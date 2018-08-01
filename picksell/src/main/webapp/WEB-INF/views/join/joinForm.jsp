@@ -304,10 +304,10 @@ $(document).ready(function(){
 	<input type="text" name="address" class="inputclass"/>
 	<br/>
 	<div class="information">핸드폰 번호(선택)</div>
-	<input type="text" name="phoneNum" placeholder=" -를 빼고 입력해주세요" class="inputclass"/>
+	<input type="text" name="phoneNum" class="inputclass"/>
 	<br/>
 	<div class="information">계좌번호(선택)</div>
-	<input type="text" name="account" placeholder=" -를 빼고 입력해주세요" class="inputclass"/>
+	<input type="text" name="account" class="inputclass"/>
 	<br/>
 	<div class="information">예금주(선택)</div>
 	<input type="text" name="account_name" class="inputclass"/>

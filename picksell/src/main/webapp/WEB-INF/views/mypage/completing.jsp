@@ -9,11 +9,23 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-<title>인수확인 및 거래종료</title>
 <style>
+.confirm-auth-box{
+    color: #7151FC;
+    border-bottom: 2px solid #ececec;
+    padding: 15px 0 15px 20px;
+    font-size: 26px;
+    margin: 4%;
+    width: 29%;
+}
+.confirm-auth-box2{
+    margin: 5%;
+    margin-top: -2%;
+}
 </style>
 </head>
 <body>
-<h2>정상적으로 인수확인 및 거래종료가 되었습니다. 감사합니다</h2>
+<div class="confirm-auth-box">거래종료</div>
+<div class="confirm-auth-box2">정상적으로 인수확인 되었습니다. 감사합니다.</div>
 </body>
 </html>
