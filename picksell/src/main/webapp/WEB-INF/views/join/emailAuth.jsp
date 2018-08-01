@@ -14,6 +14,23 @@
     font-size: 15px;
     margin: 0;
 }
+.next {
+    width: 22%;
+    margin: 0;
+    border: none;
+    color: white;
+    background-color: #7151FC;
+    padding: 9px;
+    font-size: 15px;
+    height: -1px;
+}
+.inputt{
+    border-radius: 10px;
+    padding: 9px;
+    margin-left: 3%;
+    margin-top: 2%;
+}
+
 </style>
 <script type="text/javascript">
 function windowclose(){
@@ -51,9 +68,9 @@ function check(){
 <div class="path">인증 번호 7자리를 입력하세요</div>
 
 <form method="post" name="authenform" onSubmit="return check();">
-	<input type="text" name="authnum"><br /><br />
-	<input type="submit" value="완료">
-	<input type="button" value="닫기" onclick="javascript:windowclose();"/></td>
+	<input type="text" name="authnum" class="inputt"><br /><br />
+	<input type="submit" value="완료" class="next">
+	<input type="button" value="닫기" class="next" onclick="javascript:windowclose();"/></td>
 </form>
 
 

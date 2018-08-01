@@ -148,7 +148,7 @@ function emailAuth(){
 		return false;
 	}
 	
-	open(url,"confirm","toolbar=no,location=no,status=no,menubar=no,scrollbars=no,resizable=no,width=300,height=400");
+	open(url,"confirm","toolbar=no,location=no,status=no,menubar=no,scrollbars=no,resizable=no,width=600,height=400");
 }
 
 function passwordsCheck(){
