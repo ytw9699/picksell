@@ -145,7 +145,6 @@ span.my__i-stat1.i-stat1-number {
     display: inline-block;
     text-align: center;
     margin-left: 0%;
-   /*  border: 1px solid gray; */
 }
 
 .holsoo {

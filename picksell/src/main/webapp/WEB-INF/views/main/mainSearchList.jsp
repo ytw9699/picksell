@@ -50,7 +50,6 @@ table.purchaseTABLE {
     padding-bottom: 25px;
     display: inline-block;
     box-sizing: border-box;
-    /* border: 1px solid #ececec; */
     height: 71px;
 }
 span.product_category > a {
@@ -112,7 +111,6 @@ li.orderMethodLI.active > a {
     color: #7151fc;
     border-bottom: 2px solid #7151fc;
 }
-
 </style>
 </head>
 <body>

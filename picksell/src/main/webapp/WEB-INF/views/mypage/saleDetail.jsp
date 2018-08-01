@@ -377,12 +377,6 @@ var totalPRICE = Number(0);
 				<td class="product_noticeTEXT">총 상품 금액</td>
 				<td class="product_valueTEXT" id="myPrice"></td>
 			</tr>
-		  <!--  <tr>
-				<td class="product_noticeTEXT">배송비</td>
-				<td class="product_valueTEXT">
-				2,500 원
-				</td>
-			</tr> -->
 			<tr>
 				<td class="product_totalTEXT">총 판매 금액</td>
 				<td class="product_total_valueTEXT" id="myPrice2">

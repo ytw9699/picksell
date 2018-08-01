@@ -410,27 +410,6 @@ input.statusBtn:hover {
 		</div>
 	</div><!-- paymentBinder end -->
 </div>
-
-<%-- <div class="deliveryClass">
-<div class="line">받는사람 정보</div>  
-<div>
-		수령인 : ${orderDetail.ACCOUNT_NAME}<br>
-		연락처:  ${orderDetail.BUYER_PHONE}<br>
-		배송지:   ${orderDetail.DESTINATION}<br>
-
-</div>
-<div>
-		배송시 주의사항: ${orderDetail.PRECAUTIONS}<br>
-		택배사:  		${orderDetail.DELIVERY_COMPANY}<br>
-		송장번호:  	${orderDetail.INVOICE_NUM}<br>
-		<c:if test="${orderDetail.STATUS != '0' && orderDetail.STATUS != '1'}">
-		배송시작일: 		 <fmt:formatDate value="${orderDetail.STEP3_DATE}" pattern="yy년 MM월 dd일 hh:mm" />  <br>
-		<br>
-		</c:if>	
-</div>
-</div> --%>
-
-
 </c:if>
 </div>
 </body>

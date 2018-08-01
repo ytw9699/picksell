@@ -49,9 +49,6 @@
     padding-bottom: 35px;
     width: 119%;
 }
-/* * {
-    box-sizing: border-box;
-} */
 .alert {
     padding: 10px;
     margin-top: 23px;
@@ -92,7 +89,6 @@
     background-color: #7151FC;
     border-color: #7151FC;
     width: 83%;
-    /* margin-top: 10px; */
     height: 56px;
     padding: 16px 60px;
     font-size: 16px;
@@ -188,20 +184,3 @@ function findIdvali(){
 	  </div></div></div></div></div>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

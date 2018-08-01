@@ -22,7 +22,6 @@
     border-radius: 9px;
 }
 .confirm-auth-box { 
-    /* border: 1px solid #d8d8d8; */
     border-radius: 5px;
     margin-top: 80px;
     margin-right: 30px;
@@ -37,11 +36,9 @@
 .bigbig {
     width: 100%;
     margin-left: -8px;
-    /* border: 1px solid gray; */
     margin-top: 55px;
 }
 .information {
-    /* border: 1px solid gray; */
     display: inline-block;
     margin-right: 12px;
     margin-left: -21px;
@@ -70,14 +67,12 @@
     height: 34px;
     line-height: 3;
     display: inline-block;
-   /*  border: 2px solid #ececec; */
-    /* font-size: 23px; */
 }
 </style>
 </head>
 <body>
 <script>
-function mberValiCheck(resultID){//2.밸리데이터를 했을때 아이디와 비밀번호가 밀리지않게끔 못할까?
+function mberValiCheck(resultID){
    var ID = $('#ID').val();
    var PASSWORD = $('#PASSWORD').val();
    var loginForm = document.getElementById("loginForm");//$('#loginForm');이거는 왜안되는지..
@@ -194,8 +189,5 @@ function formIdSave(){
 	alert("로그인이 제한된 아이디입니다. 관리자에게 문의해주세요 ")
    </script>
 </c:if>
-
-
-
 </body>
 </html>

@@ -70,8 +70,6 @@ img.hotProductIMG {
     padding-bottom: 10px;
 }
 .hotProductIndexWrap {
-    /* display: inline-block; */
-    /* padding: 14px; */
     box-sizing: border-box;
     color: #7151fc;
     font-size: 35px;
@@ -80,7 +78,6 @@ img.hotProductIMG {
     margin-right: 20px;
 }
 .hotProductInformation {
-    /* display: inline-block; */
     margin-left: 20px;
 }
 span.productSubject {
@@ -98,7 +95,6 @@ span.productPriceTEXT {
     font-size: 14px;
     color: #777;
 }
-
 /* 새로등록된플러스상품 */
 .newProductWrapper {
     margin-top: 70px;
@@ -141,7 +137,6 @@ span.newProductSubject {
 }
 
 /* 픽셀로 팔아야 잘산다! */
-
 .bottomContents {
     display: inline-block;
     float: left;
