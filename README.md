@@ -1,2 +1,2 @@
-# picksell
-picksell 스프링 
+# picksell 스프링 프로젝트
+
